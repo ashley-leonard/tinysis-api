@@ -34,6 +34,10 @@ RSpec.describe 'Students API', type: :request do
       expect(json.size).to eq(3)
     end
 
+    it 'returns a 400 with bad status param' do
+      get "/students?status=boo"
+      expect(json).not_to be_empty
+      expect(json['message']).not_to be_empty
+    end
   end
-
 end
