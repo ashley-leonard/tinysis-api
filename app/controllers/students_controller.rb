@@ -14,12 +14,18 @@ class StudentsController < ApplicationController
         1
       when 'inactive'
         2
+      when 'all'
+        nil
+      else
+        return render json: { message: 'invalid status parameter' }, status: 400
       end
     end
 
     if params[:coordinator_id]
       conditions[:coordinator_id] = params[:coordinator_id]
     end
+
+    conditions.delete :status if conditions[:status].nil?
 
     @result = User
       .where(conditions)
@@ -30,3 +36,4 @@ class StudentsController < ApplicationController
     render json: @result, status: 200
   end
 end
+ 

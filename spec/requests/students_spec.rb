@@ -28,6 +28,12 @@ RSpec.describe 'Students API', type: :request do
       expect(json.size).to eq(1)
     end
 
+    it 'returns students all students including inactive' do
+      get "/students?status=all"
+      expect(json).not_to be_empty
+      expect(json.size).to eq(3)
+    end
+
   end
 
 end
