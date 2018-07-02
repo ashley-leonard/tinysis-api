@@ -1,24 +1,9 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
 
-Things you may want to cover:
+GRANT CREATE ON nova_test.* TO nova_test@localhost;
+GRANT ALL PRIVILEGES ON nova_test.* to `nova_test`@`localhost`;
 
-* Ruby version
+rake db:test:prepare
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+bundle exec rspec

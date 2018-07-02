@@ -5,6 +5,8 @@ ENV['RAILS_ENV'] ||= 'test'
 
 require File.expand_path('../../config/environment', __FILE__)
 
+Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
+
 # Prevent database truncation if the environment is production
 abort("The Rails environment is running in production mode!") if Rails.env.production?
 
@@ -76,10 +78,6 @@ RSpec.configure do |config|
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
 
-  # add `FactoryBot` methods
-  #
-  config.include FactoryBot::Syntax::Methods
-
   # start by truncating all the tables but then use the faster transaction strategy the rest of the time.
   #
   config.before(:suite) do
@@ -94,6 +92,9 @@ RSpec.configure do |config|
       example.run
     end
   end
+
+
+  config.include RequestSpecHelper, type: :request
 
   # [...]
 

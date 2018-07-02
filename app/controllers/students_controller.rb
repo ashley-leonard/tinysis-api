@@ -24,8 +24,9 @@ class StudentsController < ApplicationController
     @result = User
       .where(conditions)
       .limit(limit)
+
     @count = User.where(conditions).count
-logger.info "#{@count} is count"
+
     render json: @result, status: 200
   end
 end

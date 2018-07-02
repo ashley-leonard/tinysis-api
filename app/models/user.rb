@@ -35,6 +35,8 @@ class User < ApplicationRecord
     STATUS_INACTIVE => "Inactive"
   }
 
-  belongs_to :coordinator, class_name: 'User'
+  belongs_to :coordinator, class_name: 'User', optional: true
   has_many :coordinatees, class_name: 'User', foreign_key: 'coordinator_id'
+
+  validates_presence_of :coordinator, :if => Proc.new{|user| user.privilege == PRIVILEGE_STUDENT}, :message => 'student accounts must have an assigned coordinator.'
 end
