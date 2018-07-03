@@ -27,13 +27,15 @@ class StudentsController < ApplicationController
 
     conditions.delete :status if conditions[:status].nil?
 
-    @result = User
+    result = User
       .where(conditions)
       .limit(limit)
 
-    @count = User.where(conditions).count
+    count = User.where(conditions).count
 
-    render json: @result, status: 200
+    options = { meta: { count: count }}
+
+    render json: StudentSerializer.new(result, options), status: 200
   end
 end
  
