@@ -1,7 +1,7 @@
-class StudentSerializer < ApplicationSerializer
+class StudentSerializer < UserSerializer
   set_type :student
 
-  attributes :first_name, :last_name, :nickname, :district_id, :district_grade, :date_active, :date_inactive
+  attributes :district_id, :district_grade
 
   belongs_to :coordinator, record_type: :staff
 

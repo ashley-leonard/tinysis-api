@@ -1,9 +1,12 @@
 class Contract < ApplicationRecord
 
+  MIN_TITLE = Rails.configuration.constants[:MIN_TITLE]
+  MAX_TITLE = Rails.configuration.constants[:MAX_TITLE]
+
   include StripTagsValidator
   
-  has_many :meetings, :order => "meeting_date", :dependent => :destroy
-  has_many :assignments, :order =>  "due_date, CONVERT(name,decimal), name", :dependent => :destroy do
+  has_many :meetings, -> { order(:meeting_date) }, :dependent => :destroy
+  has_many :assignments, -> { order("due_date, CONVERT(name,decimal), name") }, :dependent => :destroy do
     
     def weight_total
       sum(:weighting)
@@ -15,7 +18,7 @@ class Contract < ApplicationRecord
 
   end
 
-  has_many :enrollments, :include => :participant, :dependent => :destroy do
+  has_many :enrollments, -> { includes :participant }, :dependent => :destroy do
 
     # returns a list of all non-facilitator participants ever 
     # with active enrollments in this class  
@@ -34,7 +37,6 @@ class Contract < ApplicationRecord
   has_many :absences, :through => :enrollments
   has_many :statuses, :through => :enrollments
   belongs_to :facilitator, :foreign_key => 'facilitator_id', :class_name => 'User'
-  attr_protected :facilitator
 
   has_and_belongs_to_many :ealrs, :join_table => 'contract_ealrs'
   
@@ -51,7 +53,11 @@ class Contract < ApplicationRecord
   validates_presence_of :term,  :message => "must be specified."
   validates_presence_of :category, :message => "must be specified."
   
-  acts_as_textiled :learning_objectives, :competencies, :evaluation_methods, :instructional_materials
+  # handle markdown in client
+  # acts_as_textiled :learning_objectives, :competencies, :evaluation_methods, :instructional_materials
+
+  scope :active, -> { where "contract_status < #{Contract::STATUS_CLOSED}" }
+  scope :closed, -> { where "contract_status = #{Contract::STATUS_CLOSED}" }
 
   STATUS_PROPOSED = 0
   STATUS_ACTIVE = 1

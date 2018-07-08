@@ -17,10 +17,6 @@ class Category < ApplicationRecord
     Category.find(:all, :conditions => "statusable != #{STATUSABLE_NONE}", :order => 'name')
   end
   
-  def self.all
-    Category.all_query
-  end
-  
   def self.all_public
     Category.all_query(:public => true)
   end

@@ -477,7 +477,7 @@ END
   DEFAULTPASSWORDLENGTH = 6
   MAXPASSWORDLENGTH = 40
   REGEX_EMAIL = /\A.+\@.+\z/i
-  REGEX_VALIDLOGIN =  /\A[\w\-]{5,40}\z/
+  REGEX_VALIDLOGIN =  /\A[\w\-_\.]{5,40}\z/
   REGEX_CLEANLOGIN =  /[^\w\-]/
   
   validates_presence_of :email, :if => Proc.new { |user| user.can_login? }
@@ -485,7 +485,7 @@ END
   validates_uniqueness_of :email, :if => Proc.new { |user| !user.email.blank? }
 
   validates_uniqueness_of :login
-  validates_format_of :login, :with => REGEX_VALIDLOGIN, :message => ': please enter a login name at least 5 characters long, consisting only of letters and numbers.'
+  validates_format_of :login, :with => REGEX_VALIDLOGIN, :message => ': please enter a login name at least 5 characters long, consisting only of letters,  and numbers.'
 
   validates_presence_of :login_status
 
@@ -632,96 +632,5 @@ END
       self.date_inactive = nil
     end
   end
-  
-  
-  # Update the student roster with a CSV import
-  
-  def self.merge_students(csv_file, active_date, inactive_date)
-  
-    raise(ArgumentError, "specify FILE=filename") unless ENV['FILE']
-    raise(ArgumentError, "specify ACTIVE=date") unless ENV['ACTIVE']
-    raise(ArgumentError, "specify INACTIVE=date") unless ENV['INACTIVE']
 
-    puts "merging students"
-
-    coor_inactive = User.find(:first, :conditions => ["privilege = ? and last_name = 'Inactive'", User::PRIVILEGE_STAFF])
-    coor_bucket = User.find(:first, :conditions => ["privilege = ? and last_name = 'Bucket'", User::PRIVILEGE_STAFF])
-
-    # mark all students inactive first
-    User.update_all(["status = ?, coordinator_id = ?", User::STATUS_INACTIVE, coor_inactive.id], ["privilege = ?", User::PRIVILEGE_STUDENT])
-    User.update_all(["date_inactive = ?", Time.mktime(2007,7,1)], "date_inactive is null")
-
-    coordinators = {
-      '11' => 'Anderson',
-      '7' => 'Barth',
-      'P2' => 'Bergquist',
-      '10' => 'Brown',
-      '4' => 'Cherniak',
-      '12' => 'Condrea',
-      '12' => 'Croft',
-      '6' => 'Franklin',
-      'P1' => 'McKittrick',
-      '5' => 'Merrell',
-      '11' => 'Murphy',
-      '2' => 'Osborne',
-      '1' => 'Park',
-      '14' => 'Perry',
-      '5' => 'Robertson',
-      'B1' => 'Szwaja',
-      '3' => 'Winet',
-    }
-
-    coordinators.each do |k,v|
-      coor = User.find(:first, :conditions => ["privilege >= ? and last_name = ?", User::PRIVILEGE_STAFF, v])
-      raise(ArgumentError, "could not find coor #{v}") unless coor
-      coordinators[k] = coor
-    end
-    coordinators.default = coor_bucket
-
-    line = 0
-    raise(ArgumentError, "failed to open #{ENV['FILE']}") unless students = File.open(ENV['FILE'])
-
-    FasterCSV.foreach(ENV['FILE']) do |s|
-      line += 1
-      unless s.length == 9
-        raise(ArgumentError, "CSV parse failed on line #{line} of students.csv:\nFound: #{s}\nNeeds: last_name,first_name,DistrictID,Gender,Race,DOB,Age,Grade,Homeroom")
-      end
-
-      last_name = s[0].strip
-      first_name = s[1].strip
-      district_id = s[2].strip
-      district_grade = s[7].strip.to_i
-      homeroom = s[8].strip
-
-      # try to find by district ID
-
-      user = User.find_by_district_id district_id
-      user ||= User.find_by_last_name_and_first_name last_name, first_name
-
-      unless user
-        user = User.new
-        user.login = User.unique_login(last_name, first_name)
-        user.password = User.random_password
-        user.login_status = User::LOGIN_NONE
-        user.privilege = User::PRIVILEGE_STUDENT
-
-        # user active date should be day before first reporting month
-        user.date_active = Time.mktime(2007,8,31)
-      end
-
-      # set active new / existing students
-      user.last_name = last_name
-      user.first_name = first_name
-      user.district_id = district_id
-      user.district_grade = district_grade
-      user.status = User::STATUS_ACTIVE
-      user.date_inactive = nil
-
-      user.coordinator = coordinators[homeroom]
-      puts "User #{last_name} line #{line} homeroom #{homeroom} into the bucket" if user.coordinator.last_name == "Bucket"
-      puts "Error saving user #{last_name}, #{first_name}; line #{line}; errors:\n#{user.errors.inspect}" if !user.save
-    end
-  
-  end
-  
 end

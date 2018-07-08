@@ -33,5 +33,11 @@ module TinysisApi
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
+
+    config.constants = {
+      MAX_TITLE: 255,
+      MIN_TITLE: 4,
+      DEFAULT_LIMIT: 100,
+    }
   end
 end

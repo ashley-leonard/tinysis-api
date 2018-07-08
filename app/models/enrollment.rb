@@ -9,7 +9,7 @@ class Enrollment < ApplicationRecord
   # Finalized - cannot change state
 
   belongs_to :participant, :foreign_key => 'participant_id', :class_name => 'User'
-  belongs_to :contract, :include => :category
+  belongs_to :contract, -> { include(:category) }
   belongs_to :creator, :foreign_key => 'creator_id', :class_name => 'User'
 
   has_many :notes, :as => :notable, :dependent => :destroy
@@ -19,7 +19,7 @@ class Enrollment < ApplicationRecord
     end
   end
   
-  has_many :turnins, :dependent => :destroy, :order => 'assignments.due_date', :include => :assignment do 
+  has_many :turnins, -> { order('assignments.due_date'); include(:assignment) }, :dependent => :destroy do 
 
     def weight_total
       inject(0){|sum, turnin| sum + (turnin.complete? ? turnin.assignment.weighting : 0)}
@@ -88,7 +88,7 @@ class Enrollment < ApplicationRecord
     
   end
   
-  has_many :credit_assignments, :dependent => :destroy, :conditions => " ((user_id IS NOT NULL) OR ((user_id IS NULL) AND (enrollment_finalized_on IS NULL)))"
+  has_many :credit_assignments, -> { conditions(" ((user_id IS NOT NULL) OR ((user_id IS NULL) AND (enrollment_finalized_on IS NULL)))") }, :dependent => :destroy
   
   # so contract timeslots can be set on enrollment report queries
   attr_accessor :timeslots
@@ -137,9 +137,9 @@ public
     COMPLETION_CANCELED => "Canceled",
     COMPLETION_FULFILLED => "Fulfilled" }
 
-  named_scope :uncanceled, :conditions => "completion_status != #{COMPLETION_CANCELED}"
-  named_scope :unfinalized, :conditions => "enrollment_status != #{STATUS_FINALIZED}"
-  
+  scope :uncanceled, -> { conditions("completion_status != #{COMPLETION_CANCELED}") }
+  scope :unfinalized, -> { conditions("enrollment_status != #{STATUS_FINALIZED}") }
+
   # status methods
   
   def enrolled?

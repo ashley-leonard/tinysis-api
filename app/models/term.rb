@@ -5,12 +5,12 @@ class Term < ApplicationRecord
   serialize :months, Array
 
   has_many :contracts
-  has_many :contracts_active, :class_name => 'Contract', :foreign_key => 'term_id', :conditions => "contracts.contract_status < #{Contract::STATUS_CLOSED}"
-  has_many :contracts_closed, :class_name => 'Contract', :foreign_key => 'term_id', :conditions => "contracts.contract_status = #{Contract::STATUS_CLOSED}"
+  # has_many :contracts_active, :class_name => 'Contract', :foreign_key => 'term_id', :conditions => "contracts.contract_status < #{Contract::STATUS_CLOSED}"
+  # has_many :contracts_closed, :class_name => 'Contract', :foreign_key => 'term_id', :conditions => "contracts.contract_status = #{Contract::STATUS_CLOSED}"
   has_many :credit_assignments, :class_name => 'CreditAssignment', :foreign_key => 'contract_term_id'
   
   
-  validates_length_of :name, :in=>5..50
+  validates_length_of :name, :in=>5..255
   
   attr_accessor :base_month
   attr_accessor :end_month
@@ -74,11 +74,11 @@ class Term < ApplicationRecord
         
   end
 
-  def self.all
-    find_by_sql "SELECT terms.*, COALESCE(contracts.contract_count,0) AS contract_count FROM terms
-      LEFT OUTER JOIN (SELECT term_id, COUNT(id) AS contract_count FROM contracts GROUP BY term_id) AS contracts ON contracts.term_id = terms.id
-      ORDER BY terms.active DESC, terms.school_year DESC, terms.credit_date"
-  end
+  # def self.all
+  #   find_by_sql "SELECT terms.*, COALESCE(contracts.contract_count,0) AS contract_count FROM terms
+  #     LEFT OUTER JOIN (SELECT term_id, COUNT(id) AS contract_count FROM contracts GROUP BY term_id) AS contracts ON contracts.term_id = terms.id
+  #     ORDER BY terms.active DESC, terms.school_year DESC, terms.credit_date"
+  # end
   
   def self.active
     find_all_by_active(true, :order => 'school_year DESC, credit_date ASC')
