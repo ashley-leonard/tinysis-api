@@ -42,11 +42,9 @@ class StatusController < ApplicationController
     result = Status
       .where(conditions)
       .limit(limit)
-Rails.logger.info conditions
     count = Status.where(conditions).count
 
     options = { meta: { count: count }}
-Rails.logger.info result.size
 
     render json: StatusSerializer.new(result, options), status: 200
   end
