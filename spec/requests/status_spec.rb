@@ -37,5 +37,18 @@ RSpec.describe 'Statuses API', type: :request do
       expect(json['meta']['count']).to eq(12)
     end
 
+    it 'returns all status records for a given month' do
+      get '/statuses?months=2018-01-01,2018-02-01'
+      expect(response).to have_http_status(200)
+      expect(json).not_to be_empty
+      expect(json['data'].size).to eq(8)
+      expect(json['meta']['count']).to eq(8)
+
+      january = json['data'].find_all{|status| status['attributes']['month'] == '2018-01-01'}
+      february = json['data'].find_all{|status| status['attributes']['month'] == '2018-02-01'}
+
+      expect(january.size).to eq(4)
+      expect(february.size).to eq(4)
+    end
   end
 end
