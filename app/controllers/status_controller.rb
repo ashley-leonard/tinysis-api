@@ -5,7 +5,9 @@ class StatusController < ApplicationController
     conditions = {}
 
     if params[:months]
-      conditions[:month] = params[:months].split(',')
+      conditions[:month] = params[:months]
+        .split(',')
+        .collect{|month| expand_month(month) }
     end
 
     if params[:enrollment_ids] && params[:student_ids]

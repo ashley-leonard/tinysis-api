@@ -31,6 +31,7 @@ RSpec.describe 'Statuses API', type: :request do
   describe 'GET /statuses ' do
     it 'returns all status records in the system' do
       get '/statuses'
+
       expect(response).to have_http_status(200)
       expect(json).not_to be_empty
       expect(json['data'].size).to eq(12)
@@ -39,6 +40,7 @@ RSpec.describe 'Statuses API', type: :request do
 
     it 'returns all status records for a given month' do
       get '/statuses?months=2018-01-01,2018-02-01'
+
       expect(response).to have_http_status(200)
       expect(json).not_to be_empty
       expect(json['data'].size).to eq(8)
@@ -50,5 +52,57 @@ RSpec.describe 'Statuses API', type: :request do
       expect(january.size).to eq(4)
       expect(february.size).to eq(4)
     end
+
+   it 'returns status records for given enrollments' do
+      get "/statuses?enrollment_ids=#{@enrollment1.id},#{@enrollment2.id}"
+
+      expect(response).to have_http_status(200)
+      expect(json).not_to be_empty
+      expect(json['data'].size).to eq(6)
+      expect(json['meta']['count']).to eq(6)
+
+      enrollment1 = json['data'].find_all{|status| status['attributes']['enrollmentId'] == @enrollment1.id}
+      enrollment2 = json['data'].find_all{|status| status['attributes']['enrollmentId'] == @enrollment2.id}
+
+      expect(enrollment1.size).to eq(3)
+      expect(enrollment2.size).to eq(3)
+
+      expect(enrollment1.first['attributes']['author_id'] == @staff1.id)
+      expect(enrollment2.first['attributes']['author_id'] == @staff2.id)
+    end
+
+   it 'returns status records for given students' do
+      get "/statuses?student_ids=#{@student1.id},#{@student2.id}"
+
+      expect(response).to have_http_status(200)
+      expect(json).not_to be_empty
+      expect(json['data'].size).to eq(6)
+      expect(json['meta']['count']).to eq(6)
+
+      student1 = json['data'].find_all{|status| status['attributes']['studentId'] == @student1.id}
+      student2 = json['data'].find_all{|status| status['attributes']['studentId'] == @student2.id}
+
+      expect(student1.size).to eq(3)
+      expect(student2.size).to eq(3)
+
+      expect(student1.first['attributes']['author_id'] == @staff1.id)
+      expect(student2.first['attributes']['author_id'] == @staff2.id)
+    end
+
+   it 'returns status records by type and by month utilizing abbreviated months syntax' do
+      get "/statuses?type=student&months=2018-01,2018-02"
+
+      expect(response).to have_http_status(200)
+      expect(json).not_to be_empty
+      expect(json['data'].size).to eq(4)
+      expect(json['meta']['count']).to eq(4)
+
+      student1 = json['data'].find_all{|status| status['attributes']['studentId'] == @student1.id}
+      student2 = json['data'].find_all{|status| status['attributes']['studentId'] == @student2.id}
+
+      expect(student1.size).to eq(2)
+      expect(student2.size).to eq(2)
+    end
+
   end
 end
