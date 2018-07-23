@@ -4,28 +4,27 @@ class StudentsController < ApplicationController
     limit = params[:limit] || 100
 
     conditions = {
-      privilege: 1,
-      status: 1
+      privilege: User::PRIVILEGE_STUDENT,
+      status: User::STATUS_ACTIVE
     }
 
     if params[:status]
       conditions[:status] = case params[:status]
       when 'active'
-        1
+        User::STATUS_ACTIVE
       when 'inactive'
-        2
+        User::STATUS_INACTIVE
       when 'all'
         nil
       else
         return render json: { message: 'invalid status parameter' }, status: 400
       end
     end
+    conditions.delete :status if conditions[:status].nil?
 
     if params[:coordinator_id]
       conditions[:coordinator_id] = params[:coordinator_id]
     end
-
-    conditions.delete :status if conditions[:status].nil?
 
     result = User
       .where(conditions)
@@ -38,4 +37,3 @@ class StudentsController < ApplicationController
     render json: StudentSerializer.new(result, options), status: 200
   end
 end
- 
