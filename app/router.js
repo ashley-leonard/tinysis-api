@@ -7,6 +7,14 @@ const Router = EmberRouter.extend({
 });
 
 Router.map(function() {
+  this.route('t', function () {
+    this.route('status-by-coordinator', {
+      path: '/status/coor/:coordinator_id',
+      resetNamespace: true,
+    }, function () {
+      this.route('index', { path: '/'})
+    });
+  });
 });
 
 export default Router;

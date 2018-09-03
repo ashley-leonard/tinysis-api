@@ -1,0 +1,21 @@
+{{count-paragraph result=students typeName='coordinatees'}}
+<table>
+  <thead>
+    <tr>
+      <td>Name</td>
+      <td>Status</td>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each students.data as |student|}}
+      <tr>
+        <td>{{full-name student}}</td>
+        <td>{{student.attributes.status}}</td>
+      </tr>
+    {{else}}
+      <tr class='no-results'>
+        <td>No coordinatees</td>
+      </tr>
+    {{/each}}
+  </tbody>
+</table>
