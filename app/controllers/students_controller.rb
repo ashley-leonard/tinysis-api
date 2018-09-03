@@ -3,24 +3,35 @@ class StudentsController < ApplicationController
 
     limit = params[:limit] || 100
 
+    order = (params[:order] || '').split(',').map(&:underscore).join(',')
+
     conditions = {
       privilege: User::PRIVILEGE_STUDENT,
-      status: User::STATUS_ACTIVE
     }
 
-    if params[:status]
-      conditions[:status] = case params[:status]
+    additional_conditions = nil
+
+    conditions[:status] = case params[:status]
       when 'active'
         User::STATUS_ACTIVE
       when 'inactive'
         User::STATUS_INACTIVE
+      when 'reportable'
       when 'all'
+      when nil
         nil
       else
         return render json: { message: 'invalid status parameter' }, status: 400
-      end
     end
-    conditions.delete :status if conditions[:status].nil?
+
+    case params[:status]
+      when nil
+        conditions.delete :status
+      when 'reportable'
+        conditions.delete :status
+        term = Term.coor
+        additional_conditions = ["(status = #{User::STATUS_ACTIVE}) OR (status = #{User::STATUS_INACTIVE} AND date_active >= ? AND date_inactive <= ?)", term.months.first, term.months.last.end_of_month]
+    end
 
     if params[:coordinator_id]
       conditions[:coordinator_id] = params[:coordinator_id]
@@ -28,9 +39,14 @@ class StudentsController < ApplicationController
 
     result = User
       .where(conditions)
+      .where(additional_conditions)
       .limit(limit)
+      .order(Arel.sql(order))
 
-    count = User.where(conditions).count
+    count = User
+      .where(conditions)
+      .where(additional_conditions)
+      .count
 
     options = { meta: { count: count }}
 

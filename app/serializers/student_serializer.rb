@@ -6,4 +6,5 @@ class StudentSerializer < UserSerializer
   belongs_to :coordinator, record_type: :staff
 
   # has_many :statuses, record_type: :status
+
 end

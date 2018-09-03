@@ -14,6 +14,9 @@ class User < ApplicationRecord
   include Statusable
   include UnassignedCredits
 
+  attribute :first_name
+  attribute :last_name
+
   PRIVILEGE_NONE = 0
   PRIVILEGE_STUDENT = 1
   PRIVILEGE_STAFF = 2
