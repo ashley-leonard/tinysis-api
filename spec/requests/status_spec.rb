@@ -28,9 +28,9 @@ RSpec.describe 'Statuses API', type: :request do
     @statusContract02Mar = create :status, statusable: @enrollment2, month: '2018-03-01', author: @staff2
   end
 
-  describe 'GET /statuses ' do
+  describe 'GET /api/statuses ' do
     it 'returns all status records in the system' do
-      get '/statuses'
+      get '/api/statuses'
 
       expect(response).to have_http_status(200)
       expect(json).not_to be_empty
@@ -39,7 +39,7 @@ RSpec.describe 'Statuses API', type: :request do
     end
 
     it 'returns all status records for a given month' do
-      get '/statuses?months=2018-01-01,2018-02-01'
+      get '/api/statuses?months=2018-01-01,2018-02-01'
 
       expect(response).to have_http_status(200)
       expect(json).not_to be_empty
@@ -54,7 +54,7 @@ RSpec.describe 'Statuses API', type: :request do
     end
 
    it 'returns status records for given enrollments' do
-      get "/statuses?enrollment_ids=#{@enrollment1.id},#{@enrollment2.id}"
+      get "/api/statuses?enrollment_ids=#{@enrollment1.id},#{@enrollment2.id}"
 
       expect(response).to have_http_status(200)
       expect(json).not_to be_empty
@@ -72,7 +72,7 @@ RSpec.describe 'Statuses API', type: :request do
     end
 
    it 'returns status records for given students' do
-      get "/statuses?student_ids=#{@student1.id},#{@student2.id}"
+      get "/api/statuses?student_ids=#{@student1.id},#{@student2.id}"
 
       expect(response).to have_http_status(200)
       expect(json).not_to be_empty
@@ -90,7 +90,7 @@ RSpec.describe 'Statuses API', type: :request do
     end
 
    it 'returns status records by type and by month utilizing abbreviated months syntax' do
-      get "/statuses?type=student&months=2018-01,2018-02"
+      get "/api/statuses?type=student&months=2018-01,2018-02"
 
       expect(response).to have_http_status(200)
       expect(json).not_to be_empty

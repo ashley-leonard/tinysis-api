@@ -1,6 +1,6 @@
 class StaffSerializer < UserSerializer
   set_type :staff
-  attributes :email, :login
+  attributes :email
 
   has_many :coordinatees, record_type: :student
 end

@@ -33,14 +33,14 @@ RSpec.describe 'Contracts API', type: :request do
 
   describe 'GET /contracts ' do
     it 'returns all contract records in the system' do
-      get '/contracts'
+      get '/api/contracts'
 
       expect(response).to have_http_status(200)
       expect(json).not_to be_empty
       expect(json['data'].size).to eq(2)
       expect(json['meta']['count']).to eq(2)
 
-      get '/contracts?status=all'
+      get '/api/contracts?status=all'
       expect(json['data'].size).to eq(4)
       expect(json['meta']['count']).to eq(4)
     end

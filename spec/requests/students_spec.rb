@@ -23,7 +23,7 @@ RSpec.describe 'Students API', type: :request do
       get '/api/students'
       expect(response).to have_http_status(200)
       expect(json).not_to be_empty
-      Rails.logger.info json
+
       expect(json['data'].size).to eq(3)
       expect(json['meta']['count']).to eq(3)
     end
@@ -32,7 +32,7 @@ RSpec.describe 'Students API', type: :request do
       get '/api/students?status=active'
       expect(response).to have_http_status(200)
       expect(json).not_to be_empty
-      Rails.logger.info json
+
       expect(json['data'].size).to eq(2)
       expect(json['meta']['count']).to eq(2)
     end
