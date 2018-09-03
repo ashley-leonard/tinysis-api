@@ -12,6 +12,14 @@ This project will provide an API server that serves JSON data feeds and basic CR
 
 A future project will implement a modern, single-page UX consuming these APIs.
 
+## Running the server
+
+    rails s
+
+Running only some tests (filter by name)
+
+    bundle exec rspec --example "Statuses"
+
 ## Running tests
 
     bundle exec rspec
