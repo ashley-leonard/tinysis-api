@@ -12,6 +12,7 @@ RSpec.describe 'Students API', type: :request do
   end
 
   describe 'GET /api/staff' do
+
     it 'returns all staff by default' do
       get '/api/staff'
       expect(response).to have_http_status(200)
