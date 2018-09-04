@@ -30,7 +30,7 @@ class StudentsController < ApplicationController
       when 'reportable'
         conditions.delete :status
         term = Term.coor
-        additional_conditions = ["(status = #{User::STATUS_ACTIVE}) OR (status = #{User::STATUS_INACTIVE} AND date_active >= ? AND date_inactive <= ?)", term.months.first, term.months.last.end_of_month]
+        additional_conditions = ["(status = #{User::STATUS_ACTIVE}) OR (status = #{User::STATUS_INACTIVE} AND date_inactive >= ? AND date_inactive <= ?)", term.months.first, term.months.last.end_of_month]
     end
 
     if params[:coordinator_id]
