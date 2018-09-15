@@ -14,10 +14,6 @@ class StatusController < ApplicationController
       return render json: { message: 'conflicting request; must fetch enrollment or student status separately', }, status: 400
     end
 
-    if (params[:enrollment_ids] || params[:student_ids]) && params[:type]
-      return render json: { message: 'conflicting request; combination of a type AND enrollment or student IDs can cause illogical results', }, status: 400
-    end
-
     if params[:type]
       type = params[:type].downcase
 
