@@ -8,7 +8,7 @@ gem 'rails', '~> 5.2.0'
 
 gem 'mysql2'
 
-gem 'fast_jsonapi', :require => true
+gem 'fast_jsonapi', require: true
 
 # Use Puma as the app server
 gem 'puma', '~> 3.11'

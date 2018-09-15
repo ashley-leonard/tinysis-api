@@ -12,7 +12,8 @@ class Status < ApplicationRecord
   STATUS_NAMES = {
     STATUS_ACCEPTABLE => "Satisfactory",
     STATUS_UNACCEPTABLE => "Unsatisfactory",
-    STATUS_PARTICIPATING => "Participating" }
+    STATUS_PARTICIPATING => "Participating"
+  }
     
   def self.make(month, statusable, user)
     raise ArgumentError, "Invalid date value for status report" unless month.day == 1
