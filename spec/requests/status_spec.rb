@@ -26,6 +26,13 @@ RSpec.describe 'Statuses API', type: :request do
     @statusContract02Feb = create :status, statusable: @enrollment2, month: '2018-02-01', author: @staff2
     @statusContract01Mar = create :status, statusable: @enrollment1, month: '2018-03-01', author: @staff1
     @statusContract02Mar = create :status, statusable: @enrollment2, month: '2018-03-01', author: @staff2
+
+
+    Timecop.freeze(Date.new(2018, 10, 15))
+  end
+
+  after do
+    Timecop.return
   end
 
   describe 'GET /api/statuses ' do
