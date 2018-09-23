@@ -34,7 +34,7 @@ class StudentsController < ApplicationController
     end
 
     if params[:coordinator_id]
-      conditions[:coordinator_id] = params[:coordinator_id]
+      conditions[:coordinator_id] = params[:coordinator_id].split(',')
     end
 
     result = User
