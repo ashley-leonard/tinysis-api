@@ -2,8 +2,12 @@ class StatusController < ApplicationController
   def index
     limit = params[:limit] || Rails.configuration.constants[:DEFAULT_LIMIT]
 
-    conditions = {}
+    limit = nil if limit == "-1"
 
+    joins = []
+
+    conditions = {}
+    selects = ['statuses.*']
     if params[:months]
       conditions[:month] = params[:months]
         .split(',')
@@ -17,14 +21,17 @@ class StatusController < ApplicationController
     if params[:type]
       type = params[:type].downcase
 
-      conditions[:statusable_type] = case type
+      case type
       when 'enrollment'
-        'Enrollment'
+        conditions[:statusable_type] = 'Enrollment'
       when 'student'
-        'User'
+        conditions[:statusable_type] = 'User'
+        joins.push('INNER JOIN users AS students ON students.id = statuses.statusable_id')
+        selects.push('students.coordinator_id as coordinator_id')
       else
         return render json: { message: 'unknown status type' }, status: 400
       end
+
     end
 
     if params[:student_ids]
@@ -39,6 +46,8 @@ class StatusController < ApplicationController
 
     result = Status
       .where(conditions)
+      .joins(joins.join(' '))
+      .select(selects.join(','))
       .limit(limit)
     count = Status.where(conditions).count
 

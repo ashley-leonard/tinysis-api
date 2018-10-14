@@ -1,7 +1,11 @@
 class StaffController < ApplicationController
   def index
 
-    limit = params[:limit] || 100
+    limit = params[:limit] || Rails.configuration.constants[:DEFAULT_LIMIT]
+
+    limit = nil if limit == "-1"
+
+    order = (params[:order] || '').split(',').map(&:underscore).join(',')
 
     conditions = {
       privilege: [User::PRIVILEGE_STAFF, User::PRIVILEGE_ADMIN],
@@ -21,8 +25,13 @@ class StaffController < ApplicationController
     end
     conditions.delete :status if conditions[:status].nil?
 
+    if params[:coordinators] == 'true'
+      conditions[:id] = User.coordinators.map(&:id)
+    end
+
     result = User
       .where(conditions)
+      .order(Arel.sql(order))
       .limit(limit)
 
     count = User.where(conditions).count

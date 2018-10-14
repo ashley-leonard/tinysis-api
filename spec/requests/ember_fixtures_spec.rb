@@ -1,3 +1,7 @@
+#
+# bundle exec rspec --example "Ember"
+#
+
 require 'rails_helper'
 
 def writeFixture(file, fixture)
@@ -105,20 +109,38 @@ RSpec.describe 'Ember fixtures script', type: :request do
   describe 'write' do
     it 'all' do
       travel_to Date.new(current_year, 11, 15) do
+
+        # general
+        #
         %w{contracts students staff terms settings}.each do |fixture|
           get "/api/#{fixture}"
 
           writeFixture "#{fixture}.js", response.body
         end
 
-        get("/api/students?coordinator_id=#{@staff2.id}&status=reportable&order=lastName,firstName");
-        writeFixture "coor-students.js", response.body
-
         get('/api/terms?type=coor&status=active')
         writeFixture "coor-terms.js", response.body
 
+        # coor
+        #
+        get("/api/students?coordinator_id=#{@staff2.id}&status=reportable&order=lastName,firstName");
+        writeFixture "coor-students.js", response.body
+
         get("/api/statuses?student_ids=#{@staff2.coordinatees.map{|student| student.id}.join(',')}&months=#{@term_coor_current.months.join(',')}&type=student")
         writeFixture "coor-statuses.js", response.body
+
+        # all-coor
+        #
+        get("/api/students?status=reportable&order=lastName,firstName&limit=-1");
+        writeFixture "all-coor-students.js", response.body
+
+        get("/api/staff?status=active&coordinators=true&order=lastName,firstName")
+        writeFixture "all-coor-staff.js", response.body
+
+        studentIds = [@student1.id, @student2.id, @student3.id]
+        query = {studentIds: studentIds.join(','), months: @term_coor_current.months.join(','), type: 'student', limit: -1}.to_query
+        get("/api/statuses?#{query}")
+        writeFixture "all-coor-statuses.js", response.body
       end
     end
   end
