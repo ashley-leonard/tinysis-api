@@ -9,7 +9,7 @@ class Enrollment < ApplicationRecord
   # Finalized - cannot change state
 
   belongs_to :participant, :foreign_key => 'participant_id', :class_name => 'User'
-  belongs_to :contract, -> { include(:category) }
+  belongs_to :contract
   belongs_to :creator, :foreign_key => 'creator_id', :class_name => 'User'
 
   has_many :notes, :as => :notable, :dependent => :destroy
@@ -88,7 +88,7 @@ class Enrollment < ApplicationRecord
     
   end
   
-  has_many :credit_assignments, -> { conditions(" ((user_id IS NOT NULL) OR ((user_id IS NULL) AND (enrollment_finalized_on IS NULL)))") }, :dependent => :destroy
+  has_many :credit_assignments, -> { where(" ((user_id IS NOT NULL) OR ((user_id IS NULL) AND (enrollment_finalized_on IS NULL)))") }, :dependent => :destroy
   
   # so contract timeslots can be set on enrollment report queries
   attr_accessor :timeslots
@@ -121,7 +121,7 @@ public
   STATUS_NAMES = { STATUS_PROPOSED => "Pending",
     STATUS_ENROLLED => "Enrolled",
     STATUS_CLOSED => "Closed",
-    STATUS_FINALIZED => "Finalized" }    
+    STATUS_FINALIZED => "Finalized" }
 
   # enrollment not complete yet
   COMPLETION_UNKNOWN = 0

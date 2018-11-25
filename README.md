@@ -1,3 +1,6 @@
+- notion of inactive staff member - why is Inactive Inactive, and Nova Graduated, inactive?
+- 
+
 # README
 
 This is an API server meant to provide the foundation of a V2 of TinySIS.

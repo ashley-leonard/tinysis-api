@@ -1,0 +1,2 @@
+class CreatorSerializer < UserSerializer
+end

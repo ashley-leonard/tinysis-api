@@ -2,7 +2,8 @@ class Note < ApplicationRecord
   include StripTagsValidator
 
   belongs_to :notable, :polymorphic => true
-  belongs_to :author, :foreign_key => 'creator_id', :class_name => 'User'
+  # belongs_to :author, :foreign_key => 'creator_id', :class_name => 'User'
+  belongs_to :creator, class_name: 'User'
 
   PRIVILEGE_NONE = 0
   PRIVILEGE_VIEW = 1

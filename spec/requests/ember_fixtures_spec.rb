@@ -62,23 +62,39 @@ RSpec.describe 'Ember fixtures script', type: :request do
     @contract1_current = create :contract, term: @term1_current, facilitator: @staff1, category: @category1, creator: @staff1
     @contract2_current = create :contract, term: @term2_current, facilitator: @staff2, category: @category2, creator: @staff2
 
+    @credit1 = create :credit, course_name: 'Course 1'
+    @credit2 = create :credit, course_name: 'Course 2'
+
+    [@contract1_last, @contract1_current].each do |contract|
+      ca = create :credit_assignment, credit: @credit1, contract: contract, credit_hours: 1
+      Rails.logger.info ca.errors
+    end
+
+    [@contract2_last, @contract2_current].each do |contract|
+      create :credit_assignment, credit: @credit2, contract: contract, credit_hours: 2
+    end
+
     @student1 = create :user, privilege: User::PRIVILEGE_STUDENT, coordinator: @staff1, date_active: Date.new(last_year, 8, 1)
     @student2 = create :user, privilege: User::PRIVILEGE_STUDENT, coordinator: @staff2, date_active: Date.new(last_year, 8, 1)
     @student3 = create :user, privilege: User::PRIVILEGE_STUDENT, coordinator: @staff2, status: User::STATUS_INACTIVE, date_active: Date.new(last_year, 8, 1), date_inactive: Date.new(current_year, 10, 1)
 
     [@contract1_last, @contract1_current].each do |contract|
-      create :enrollment, participant: @student1, contract: contract, creator: @staff1
-      create :enrollment, participant: @student3, contract: contract, creator: @staff1
+      enrollment = create :enrollment, participant: @student1, contract: contract, creator: @staff1
+      create :credit_assignment, enrollment: enrollment, credit: @credit1, credit_hours: 1, contract: contract
+
+      enrollment = create :enrollment, participant: @student3, contract: contract, creator: @staff1
+      create :credit_assignment, enrollment: enrollment, credit: @credit1, credit_hours: 1, contract: contract
     end
 
     [@contract2_last, @contract2_current].each do |contract|
-      create :enrollment, participant: @student2, contract: contract, creator: @staff2
+      enrollment = create :enrollment, participant: @student2, contract: contract, creator: @staff2
+      create :credit_assignment, enrollment: enrollment, credit: @credit2, credit_hours: 2, contract: contract
     end
 
     [@contract1_last, @contract2_last].each do |contract|
       contract.enrollments.each do |enrollment|
         contract.term.months.each do |month|
-          create :status, statusable: enrollment, month: month, author: contract.facilitator
+          create :status, statusable: enrollment, month: month, creator: contract.facilitator
         end
       end
     end
@@ -87,21 +103,21 @@ RSpec.describe 'Ember fixtures script', type: :request do
       contract.enrollments.each do |enrollment|
         months = *(contract.term.months[0]..contract.term.months[2])
         months.each do |month|
-          create :status, statusable: enrollment, month: month, author: contract.facilitator
+          create :status, statusable: enrollment, month: month, creator: contract.facilitator
         end
       end
     end
 
     @term_coor_last.months.each do |month|
       [@student1, @student2, @student3].each do |student|
-        create :status, statusable: student, month: month, author: student.coordinator
+        create :status, statusable: student, month: month, creator: student.coordinator
       end
     end
 
     months = *(@term_coor_current.months[0]..@term_coor_current.months[1])
     months.each do |month|
       [@student1, @student2, @student3].each do |student|
-        create :status, statusable: student, month: month, author: student.coordinator
+        create :status, statusable: student, month: month, creator: student.coordinator
       end
     end
   end

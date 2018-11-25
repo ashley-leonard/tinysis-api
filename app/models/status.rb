@@ -1,5 +1,5 @@
 class Status < ApplicationRecord
-  belongs_to :author, :foreign_key => 'creator_id', :class_name => 'User'
+  belongs_to :creator, :class_name => 'User'
   belongs_to :statusable, :polymorphic => true
   has_many :notes, :as => :notable
   

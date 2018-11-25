@@ -17,6 +17,10 @@ class TermsController < ApplicationController
       end
     end
 
+    if params[:ids]
+      conditions[:id] = params[:ids].split(',')
+    end
+
     type_conditions = nil
     case params[:type]
     when 'coor'

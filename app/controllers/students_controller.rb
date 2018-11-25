@@ -54,4 +54,18 @@ class StudentsController < ApplicationController
 
     render json: StudentSerializer.new(result, options), status: 200
   end
+
+  def show
+    result = User
+      .where({
+        id: params[:id],
+        privilege: User::PRIVILEGE_STUDENT,
+      });
+
+    if result.size == 0
+      return render json: { message: 'Student not found'}, status: 404
+    end
+
+    render json: StudentSerializer.new(result.first)
+  end
 end

@@ -6,15 +6,19 @@ class ContractsController < ApplicationController
       contract_status: Contract::STATUS_ACTIVE
     }
 
-    if params[:school_year]
+    if params[:schoolYear]
       conditions[:term_id] = Term
-        .where(school_year: params[:school_year])
+        .where(school_year: params[:schoolYear])
         .select(:id)
         .collect(&:id)
     end
 
-    conditions[:facilitator_id] = params[:facilitator_id] if params[:facilitator_id]
-    conditions[:term_id] = params[:term_id] if params[:term_id]
+    if params[:contractIds]
+      conditions[:contract_id] = params[:contractIds]
+    end
+
+    conditions[:facilitator_id] = params[:facilitatorId] if params[:facilitatorId]
+    conditions[:term_id] = params[:termId] if params[:termId]
     if params[:status]
       conditions[:contract_status] = case params[:status]
       when 'proposed'

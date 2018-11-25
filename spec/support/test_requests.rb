@@ -1,0 +1,35 @@
+module TestRequests
+
+  def setupEnrollments
+    @staff1 = create :user, privilege: 2
+    @staff2 = create :user, privilege: 2
+    @student1 = create :user, coordinator: @staff1
+    @student2 = create :user, coordinator: @staff2
+    @term = create :term
+    @category = create :category
+    @contract = create :contract, term: @term, facilitator: @staff1, category: @category, creator: @staff1
+    @enrollment1 = create :enrollment, participant: @student1, contract: @contract, creator: @staff1
+    @enrollment2 = create :enrollment, participant: @student2, contract: @contract, creator: @staff1
+
+    @credit = create :credit, course_name: 'Boo'
+
+    @statusCoor01Jan = create :status, statusable: @student1, month: '2018-01-01', creator: @staff1
+    @statusCoor02Jan = create :status, statusable: @student2, month: '2018-01-01', creator: @staff1
+    @statusCoor01Feb = create :status, statusable: @student1, month: '2018-02-01', creator: @staff1
+    @statusCoor02Feb = create :status, statusable: @student2, month: '2018-02-01', creator: @staff1
+    @statusCoor01Mar = create :status, statusable: @student1, month: '2018-03-01', creator: @staff1
+    @statusCoor02Mar = create :status, statusable: @student2, month: '2018-03-01', creator: @staff1
+
+    @statusContract01Jan = create :status, statusable: @enrollment1, month: '2018-01-01', creator: @staff1
+    @statusContract02Jan = create :status, statusable: @enrollment2, month: '2018-01-01', creator: @staff2
+    @statusContract01Feb = create :status, statusable: @enrollment1, month: '2018-02-01', creator: @staff1
+    @statusContract02Feb = create :status, statusable: @enrollment2, month: '2018-02-01', creator: @staff2
+    @statusContract01Mar = create :status, statusable: @enrollment1, month: '2018-03-01', creator: @staff1
+    @statusContract02Mar = create :status, statusable: @enrollment2, month: '2018-03-01', creator: @staff2
+  end
+
+end
+
+RSpec.configure do |config|
+  config.include TestRequests
+end

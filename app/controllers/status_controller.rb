@@ -14,7 +14,7 @@ class StatusController < ApplicationController
         .collect{|month| expand_month(month) }
     end
 
-    if params[:enrollment_ids] && params[:student_ids]
+    if params[:enrollmentIds] && params[:studentIds]
       return render json: { message: 'conflicting request; must fetch enrollment or student status separately', }, status: 400
     end
 
@@ -26,22 +26,25 @@ class StatusController < ApplicationController
         conditions[:statusable_type] = 'Enrollment'
       when 'student'
         conditions[:statusable_type] = 'User'
-        joins.push('INNER JOIN users AS students ON students.id = statuses.statusable_id')
-        selects.push('students.coordinator_id as coordinator_id')
       else
         return render json: { message: 'unknown status type' }, status: 400
       end
 
     end
 
-    if params[:student_ids]
-      conditions[:statusable_id] = params[:student_ids].split(',')
+    if params[:studentIds]
+      conditions[:statusable_id] = params[:studentIds].split(',')
       conditions[:statusable_type] = 'User'
     end
 
-    if params[:enrollment_ids]
-      conditions[:statusable_id] = params[:enrollment_ids].split(',')
+    if params[:enrollmentIds]
+      conditions[:statusable_id] = params[:enrollmentIds].split(',')
       conditions[:statusable_type] = 'Enrollment'
+    end
+
+    if conditions[:statusable_type] == 'User'
+      joins.push('INNER JOIN users AS students ON students.id = statuses.statusable_id')
+      selects.push('students.coordinator_id as coordinator_id')
     end
 
     result = Status
@@ -51,7 +54,12 @@ class StatusController < ApplicationController
       .limit(limit)
     count = Status.where(conditions).count
 
-    options = { meta: { count: count }}
+    options = {
+      meta: {
+        count: count,
+      },
+      include: [:creator]
+    }
 
     render json: StatusSerializer.new(result, options), status: 200
   end

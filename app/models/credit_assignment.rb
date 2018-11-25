@@ -1,28 +1,28 @@
 class CreditAssignment < ApplicationRecord
   
   belongs_to :credit
-  belongs_to :legacy_creditable, :polymorphic => true
+  belongs_to :legacy_creditable, :polymorphic => true, optional: true
   
-  belongs_to :enrollment
-  belongs_to :user
+  belongs_to :enrollment, optional: true
+  belongs_to :user, optional: true
   belongs_to :contract
   
-  belongs_to :credit_transmittal_batch
-  belongs_to :contract_term, :class_name => 'Term', :foreign_key => :contract_term_id
-  belongs_to :contract_facilitator, :class_name => 'User', :foreign_key => :contract_facilitator_id
+  belongs_to :credit_transmittal_batch, optional: true
+  belongs_to :contract_term, :class_name => 'Term', :foreign_key => :contract_term_id, optional: true
+  belongs_to :contract_facilitator, :class_name => 'User', :foreign_key => :contract_facilitator_id, optional: true
   
   has_many :notes, :as => :notable, :dependent => :destroy
   
   validates_presence_of :credit_id
-  belongs_to :parent_credit_assignment, :class_name => 'CreditAssignment', :foreign_key => :parent_credit_assignment_id
+  belongs_to :parent_credit_assignment, :class_name => 'CreditAssignment', :foreign_key => :parent_credit_assignment_id, optional: true
   has_many :child_credit_assignments, :class_name  => 'CreditAssignment', :foreign_key => :parent_credit_assignment_id
   
   has_one :graduation_plan_mapping, :dependent => :destroy
   
-  named_scope :user, :conditions => "user_id IS NOT NULL"
-  named_scope :nonzero, :conditions => "credit_hours > 0"
-  named_scope :uncombined, :conditions => "parent_credit_assignment_id IS NULL"
-  named_scope :district_finalize_approved, :conditions => "district_finalize_approved_on IS NOT NULL"
+  scope :user, -> { where("user_id IS NOT NULL") }
+  scope :nonzero, -> { where("credit_hours > 0")}
+  scope :uncombined, -> { where("parent_credit_assignment_id IS NULL")}
+  scope :district_finalize_approved, -> { where("district_finalize_approved_on IS NOT NULL")}
   
   def privileges(user)
     primary_parent.privileges(user)
