@@ -1,5 +1,5 @@
 class StudentSerializer < UserSerializer
-  set_type :student
+  set_type :user
 
   attributes :district_id, :district_grade
 

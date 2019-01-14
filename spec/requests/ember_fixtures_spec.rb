@@ -128,7 +128,7 @@ RSpec.describe 'Ember fixtures script', type: :request do
 
         # general
         #
-        %w{contracts students staff terms settings}.each do |fixture|
+        %w{contracts students staff terms settings categories}.each do |fixture|
           get "/api/#{fixture}"
 
           writeFixture "#{fixture}.js", response.body
@@ -150,13 +150,16 @@ RSpec.describe 'Ember fixtures script', type: :request do
         get("/api/students?status=reportable&order=lastName,firstName&limit=-1");
         writeFixture "all-coor-students.js", response.body
 
-        get("/api/staff?status=active&coordinators=true&order=lastName,firstName")
+        get("/api/staff?status=Active&coordinators=true&order=lastName,firstName")
         writeFixture "all-coor-staff.js", response.body
 
         studentIds = [@student1.id, @student2.id, @student3.id]
         query = {studentIds: studentIds.join(','), months: @term_coor_current.months.join(','), type: 'student', limit: -1}.to_query
         get("/api/statuses?#{query}")
         writeFixture "all-coor-statuses.js", response.body
+
+        get("/api/enrollments?participantIds=#{@student1.id},#{@student2.id}&status=enrolled")
+        writeFixture "enrollments.js", response.body
       end
     end
   end

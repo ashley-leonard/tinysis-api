@@ -14,6 +14,8 @@ class TermsController < ApplicationController
         true
       when 'inactive'
         false
+      else
+        render json: { message: 'Invalid status parameter'}, status: 400 and return
       end
     end
 

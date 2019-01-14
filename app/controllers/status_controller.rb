@@ -29,15 +29,27 @@ class StatusController < ApplicationController
       else
         return render json: { message: 'unknown status type' }, status: 400
       end
-
     end
 
+    emptyResult = {
+      data: [],
+      meta: {
+        count: 0,
+      }
+    }
+
     if params[:studentIds]
-      conditions[:statusable_id] = params[:studentIds].split(',')
+      studentIds = params[:studentIds]
+      return render json: emptyResult, status: 200 if studentIds.blank?
+
+      conditions[:statusable_id] = studentIds.split(',')
       conditions[:statusable_type] = 'User'
     end
 
     if params[:enrollmentIds]
+      enrollmentIds = params[:enrollmentIds]
+      return render json: emptyResult, status: 200 if enrollmentIds.blank?
+
       conditions[:statusable_id] = params[:enrollmentIds].split(',')
       conditions[:statusable_type] = 'Enrollment'
     end

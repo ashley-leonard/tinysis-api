@@ -2,9 +2,9 @@ class ContractsController < ApplicationController
   def index
     limit = params[:limit] || Rails.configuration.constants[:DEFAULT_LIMIT]
 
-    conditions = {
-      contract_status: Contract::STATUS_ACTIVE
-    }
+    order = (params[:order] || '').split(',').map(&:underscore).join(',')
+
+    conditions = {}
 
     if params[:schoolYear]
       conditions[:term_id] = Term
@@ -17,8 +17,13 @@ class ContractsController < ApplicationController
       conditions[:contract_id] = params[:contractIds]
     end
 
-    conditions[:facilitator_id] = params[:facilitatorId] if params[:facilitatorId]
-    conditions[:term_id] = params[:termId] if params[:termId]
+    if params[:categoryIds]
+      conditions[:category_id] = params[:categoryIds]
+    end
+
+    conditions[:facilitator_id] = params[:facilitatorIds] if params[:facilitatorIds]
+    conditions[:term_id] = params[:termIds] if params[:termIds]
+
     if params[:status]
       conditions[:contract_status] = case params[:status]
       when 'proposed'
@@ -37,10 +42,16 @@ class ContractsController < ApplicationController
 
     result = Contract
       .where(conditions)
+      .order(Arel.sql(order))
       .limit(limit)
     count = Contract.where(conditions).count
 
-    options = { meta: { count: count }}
+    options = {
+      meta: {
+        count: count
+      },
+      include: ["category", "facilitator"]
+    }
 
     render json: ContractSerializer.new(result, options), status: 200
   end

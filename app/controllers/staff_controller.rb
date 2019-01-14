@@ -11,13 +11,22 @@ class StaffController < ApplicationController
       privilege: [User::PRIVILEGE_STAFF, User::PRIVILEGE_ADMIN],
     }
 
+    schoolYearConditions = nil
+    if params[:schoolYear]
+      schoolYear = params[:schoolYear]
+      coorTerm = Term.coor(schoolYear)
+      firstActiveDate = coorTerm.months.first
+      lastActiveDate = coorTerm.months.last.end_of_month
+      schoolYearConditions = ["(date_inactive IS NULL OR date_inactive > ?) AND (date_active <= ?)", firstActiveDate, lastActiveDate]
+    end
+
     if params[:status]
       conditions[:status] = case params[:status]
-      when 'active'
+      when 'Active'
         User::STATUS_ACTIVE
-      when 'inactive'
+      when 'Inactive'
         User::STATUS_INACTIVE
-      when 'all'
+      when 'All'
         nil
       else
         return render json: { message: 'invalid status parameter' }, status: 400
@@ -31,10 +40,14 @@ class StaffController < ApplicationController
 
     result = User
       .where(conditions)
+      .where(schoolYearConditions)
       .order(Arel.sql(order))
       .limit(limit)
 
-    count = User.where(conditions).count
+    count = User
+      .where(conditions)
+      .where(schoolYearConditions)
+      .count
 
     options = { meta: { count: count }}
 
