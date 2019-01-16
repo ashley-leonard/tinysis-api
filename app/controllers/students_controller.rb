@@ -35,8 +35,8 @@ class StudentsController < ApplicationController
         additional_conditions = ["(status = #{User::STATUS_ACTIVE}) OR ((status = #{User::STATUS_INACTIVE}) AND ((date_inactive >= ?) AND (date_inactive <= ?)))", term.months.first, term.months.last.end_of_month]
     end
 
-    if params[:coordinator_id]
-      conditions[:coordinator_id] = params[:coordinator_id].split(',')
+    if params[:coordinatorId]
+      conditions[:coordinator_id] = params[:coordinatorId].split(',')
     end
 
     result = User

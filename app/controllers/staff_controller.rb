@@ -22,11 +22,11 @@ class StaffController < ApplicationController
 
     if params[:status]
       conditions[:status] = case params[:status]
-      when 'Active'
+      when 'active'
         User::STATUS_ACTIVE
-      when 'Inactive'
+      when 'inactive'
         User::STATUS_INACTIVE
-      when 'All'
+      when 'all'
         nil
       else
         return render json: { message: 'invalid status parameter' }, status: 400

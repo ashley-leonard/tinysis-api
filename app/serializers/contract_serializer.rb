@@ -2,7 +2,7 @@ class ContractSerializer < ApplicationSerializer
   set_type :contract
   attributes :name
   attribute :status do |contract|
-    contract.status_name
+    contract.status_name.downcase
   end
 
   has_many :enrollments

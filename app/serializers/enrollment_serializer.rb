@@ -8,10 +8,10 @@ class EnrollmentSerializer < ApplicationSerializer
   has_many :credit_assignments
 
   attribute :enrollment_status do |object|
-    Enrollment::STATUS_NAMES[object.enrollment_status]
+    Enrollment::STATUS_NAMES[object.enrollment_status].downcase
   end
 
   attribute :completion_status do |object|
-    Enrollment::COMPLETION_NAMES[object.completion_status]
+    Enrollment::COMPLETION_NAMES[object.completion_status].downcase
   end
 end
