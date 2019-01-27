@@ -25,7 +25,7 @@ class ContractsController < ApplicationController
     conditions[:term_id] = params[:termIds] if params[:termIds]
 
     if params[:status]
-      conditions[:contract_status] = case params[:status]
+      conditions[:contract_status] = case params[:status].downcase
       when 'proposed'
         Contract::STATUS_PROPOSED
       when 'active'

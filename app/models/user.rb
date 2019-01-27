@@ -92,6 +92,8 @@ class User < ApplicationRecord
   # deprec , :conditions => 'credit_assignments.parent_credit_assignment_id IS NULL'
   has_many :credit_assignments
   has_many :facilitated_credit_assignments, :class_name => 'CreditAssignment', :foreign_key => :contract_facilitator_id
+  has_many :notes, :as => :notable
+
 
 #########################################################
 # Helper functions for getting lists of enrollments for

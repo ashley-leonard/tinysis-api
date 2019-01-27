@@ -4,4 +4,8 @@ class UserSerializer < ApplicationSerializer
   attribute :status do |object|
     User::STATUS_NAMES[object.status].downcase
   end
+
+  attribute :role do |object|
+    User::PRIVILEGE_NAMES[object.privilege].downcase
+  end
 end

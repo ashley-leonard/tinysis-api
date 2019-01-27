@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 #
 # bundle exec rspec --example "Ember"
 #
@@ -5,19 +7,17 @@
 require 'rails_helper'
 
 def writeFixture(file, fixture)
-
-  pathName =  Rails.root.join('tmp', file)
+  pathName = Rails.root.join('tmp', file)
   pretty = JSON.pretty_generate(JSON.parse(fixture))
-  output = <<END
-export default #{pretty};
-END
+  output = <<~END
+    export default #{pretty};
+  END
   File.open(pathName, 'w') do |f|
     f.write(output)
   end
 end
 
 RSpec.describe 'Ember fixtures script', type: :request do
-
   current_year = 2019
 
   before(:each) do
@@ -77,6 +77,7 @@ RSpec.describe 'Ember fixtures script', type: :request do
     @student1 = create :user, privilege: User::PRIVILEGE_STUDENT, coordinator: @staff1, date_active: Date.new(last_year, 8, 1)
     @student2 = create :user, privilege: User::PRIVILEGE_STUDENT, coordinator: @staff2, date_active: Date.new(last_year, 8, 1)
     @student3 = create :user, privilege: User::PRIVILEGE_STUDENT, coordinator: @staff2, status: User::STATUS_INACTIVE, date_active: Date.new(last_year, 8, 1), date_inactive: Date.new(current_year, 10, 1)
+    @students = [@student1, @student2, @student3]
 
     [@contract1_last, @contract1_current].each do |contract|
       enrollment = create :enrollment, participant: @student1, contract: contract, creator: @staff1
@@ -109,15 +110,17 @@ RSpec.describe 'Ember fixtures script', type: :request do
     end
 
     @term_coor_last.months.each do |month|
-      [@student1, @student2, @student3].each do |student|
-        create :status, statusable: student, month: month, creator: student.coordinator
+      @students.each do |student|
+        status = create :status, statusable: student, month: month, creator: student.coordinator
+        create :note, creator: student.coordinator, notable: status, note: "Note by #{student.coordinator.last_name} for #{student.last_name} on #{month}"
       end
     end
 
     months = *(@term_coor_current.months[0]..@term_coor_current.months[1])
     months.each do |month|
-      [@student1, @student2, @student3].each do |student|
-        create :status, statusable: student, month: month, creator: student.coordinator
+      @students.each do |student|
+        status = create :status, statusable: student, month: month, creator: student.coordinator
+        create :note, creator: student.coordinator, notable: status, note: "Note by #{student.coordinator.last_name} for #{student.last_name} on #{month}"
       end
     end
   end
@@ -125,43 +128,46 @@ RSpec.describe 'Ember fixtures script', type: :request do
   describe 'write' do
     it 'all' do
       travel_to Date.new(current_year, 11, 15) do
-
         # general
         #
-        %w{contracts students staff terms settings categories}.each do |fixture|
+        %w[contracts students staff terms settings categories].each do |fixture|
           get "/api/#{fixture}"
 
           writeFixture "#{fixture}.js", response.body
         end
 
         get('/api/terms?type=coor&status=active')
-        writeFixture "coor-terms.js", response.body
+        writeFixture 'coor-terms.js', response.body
 
         # coor
         #
-        get("/api/students?coordinator_id=#{@staff2.id}&status=reportable&order=lastName,firstName");
-        writeFixture "coor-students.js", response.body
+        get("/api/students?coordinator_id=#{@staff2.id}&status=reportable&order=lastName,firstName")
+        writeFixture 'coor-students.js', response.body
 
-        get("/api/statuses?student_ids=#{@staff2.coordinatees.map{|student| student.id}.join(',')}&months=#{@term_coor_current.months.join(',')}&type=student")
-        writeFixture "coor-statuses.js", response.body
+        get("/api/statuses?student_ids=#{@staff2.coordinatees.map(&:id).join(',')}&months=#{@term_coor_current.months.join(',')}&type=student")
+        writeFixture 'coor-statuses.js', response.body
 
         # all-coor
         #
-        get("/api/students?status=reportable&order=lastName,firstName&limit=-1");
-        writeFixture "all-coor-students.js", response.body
+        get('/api/students?status=reportable&order=lastName,firstName&limit=-1')
+        writeFixture 'all-coor-students.js', response.body
 
-        get("/api/staff?status=Active&coordinators=true&order=lastName,firstName")
-        writeFixture "all-coor-staff.js", response.body
+        get('/api/staff?status=Actie&coordinators=true&order=lastName,firstName')
+        writeFixture 'all-coor-staff.js', response.body
 
-        studentIds = [@student1.id, @student2.id, @student3.id]
-        query = {studentIds: studentIds.join(','), months: @term_coor_current.months.join(','), type: 'student', limit: -1}.to_query
+        student_ids = @students.map(&:id).join(',')
+        query = { studentIds: student_ids, months: @term_coor_current.months.join(','), type: 'student', limit: -1 }.to_query
         get("/api/statuses?#{query}")
-        writeFixture "all-coor-statuses.js", response.body
+        writeFixture 'all-coor-statuses.js', response.body
 
         get("/api/enrollments?participantIds=#{@student1.id},#{@student2.id}&status=enrolled")
-        writeFixture "enrollments.js", response.body
+        writeFixture 'enrollments.js', response.body
+
+        statuses = @student1.statuses
+
+        get("/api/notes?notableType=Status&notableIds=#{statuses.map(&:id)}")
+        writeFixture 'notes-coor-statuses.js', response.body
       end
     end
   end
-
 end

@@ -1,3 +1,3 @@
 class FacilitatorSerializer < UserSerializer
-  set_type :facilitator
+  set_type :user
 end
