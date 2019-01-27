@@ -159,14 +159,15 @@ RSpec.describe 'Ember fixtures script', type: :request do
         query = { studentIds: student_ids, months: @term_coor_current.months.join(','), type: 'student', limit: -1 }.to_query
         get("/api/statuses?#{query}")
         writeFixture 'all-coor-statuses.js', response.body
+        
+        coorStatusesResponse = JSON.parse(response.body)
+        statusableIds = coorStatusesResponse["data"].map{|status| status["id"]}
+
+        get("/api/notes?notableType=Status&notableIds=#{statusableIds.join(',')}")
+        writeFixture 'notes-coor-statuses.js', response.body
 
         get("/api/enrollments?participantIds=#{@student1.id},#{@student2.id}&status=enrolled")
         writeFixture 'enrollments.js', response.body
-
-        statuses = @student1.statuses
-
-        get("/api/notes?notableType=Status&notableIds=#{statuses.map(&:id)}")
-        writeFixture 'notes-coor-statuses.js', response.body
       end
     end
   end
