@@ -21,7 +21,7 @@ class StaffController < ApplicationController
     end
 
     if params[:status]
-      conditions[:status] = case params[:status]
+      conditions[:status] = case params[:status].downcase
       when 'active'
         User::STATUS_ACTIVE
       when 'inactive'
