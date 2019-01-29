@@ -1,0 +1,8 @@
+{{#if showStatus}}
+  {{#link-to "status-by-student" student.id
+    (query-params schoolYear=schoolYear)
+    title=academicStatusName
+  }}
+    {{statusAbbreviation}}
+  {{/link-to}}
+{{/if}}

@@ -1,0 +1,50 @@
+<li class="filter-item">
+  {{t-select
+    options=schoolYears
+    value=queryParams.schoolYear
+    name="schoolYear"
+    onchange=(action "onSelect")
+  }}
+</li>
+<li class="filter-item">
+  {{t-select
+    options=terms
+    value=queryParams.term
+    name="term"
+    prompt=termsPrompt
+    optionValuePath="id"
+    optionNamePath="attributes.name"
+    onchange=(action "onSelect")
+  }}
+</li>
+<li class="filter-item">
+  {{t-select
+    options=facilitatorOptions
+    value=queryParams.facilitator
+    name="facilitator"
+    prompt="All facilitators"
+    optionValuePath="id"
+    optionNamePath="name"
+    onchange=(action "onSelect")
+  }}
+</li>
+<li class="filter-item">
+  {{t-select
+    options=categories
+    value=queryParams.category
+    name="category"
+    prompt="All categories"
+    optionValuePath="id"
+    optionNamePath="attributes.name"
+    onchange=(action "onSelect")
+  }}
+</li>
+<li class="filter-item">
+  {{t-select
+    options=statuses
+    value=queryParams.status
+    name="status"
+    prompt="Any status"
+    onchange=(action "onSelect")
+  }}
+</li>

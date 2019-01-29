@@ -1,0 +1,24 @@
+<h2>
+  {{full-name student "first-last"}}
+  &ndash;
+  Status for
+  {{schoolYear}}
+</h2>
+<p>
+  As of
+  {{t-date today "ddd, D MMM YYYY"}}
+</p>
+<p>
+  Grade
+  {{student.attributes.districtGrade}};
+  active since {{t-date student.attributes.dateActive "M/YYYY"}}
+</p>
+
+{{status/by-student
+  student=student
+  statuses=statuses
+  term=term
+  getNotes=(route-action "getNotes")
+}}
+
+{{outlet}}

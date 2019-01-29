@@ -1,0 +1,41 @@
+<tr>
+  <td class="contract"> 
+    {{!-- put this as a component and reuse it in the notes table --}}
+    <p class="contract-name">
+      {{#link-to "status-by-enrollment" enrollment.id}}
+        {{contract.attributes.name}}
+      {{/link-to}}
+    </p>
+    <p class="full-name">
+      {{full-name facilitator "first-last"}}
+      /
+      {{term.attributes.name}}
+    </p>
+    <p class="credit-assignments">
+      {{#each creditAssignments.data as |creditAssignment|}}
+        {{credit-assignment
+          creditAssignment=creditAssignment
+        }}
+      {{/each}}
+    </p>
+  </td>
+
+  <td class="enrollment-status">
+    {{enrollmentStatus}}
+  </td>
+
+  {{#each months as |month|}}
+    {{status/student-enrollments/status-column
+      month=month
+      statusHash=statusHash
+      enrollment=enrollment
+    }}
+  {{/each}}
+  
+</tr>
+
+<tr class="notes-row {{loadingNotes}}">
+  <td colspan={{columnsCount}}>
+    {{notes-list notes=notes notable=enrollment}}
+  </td>
+</tr>

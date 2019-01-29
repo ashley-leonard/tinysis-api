@@ -1,40 +1,43 @@
 import Route from '@ember/routing/route';
 import { all } from 'rsvp';
-import fetch from '../../utils/fetch';
+import { inject as service } from '@ember/service';
 
 export default Route.extend({
+  tinyData: service(),
+
   beforeModel() {
-    const coordinator = this.modelFor('status-by-coordinator');
+    const coordinator = this.getCoordinator();
     return all([
-      fetch('/api/students', {
+      this.tinyData.fetch('/api/students', {
         params: {
-          coordinator_id: coordinator.data.id,
+          coordinatorId: coordinator.id,
           status: 'reportable',
-          order: 'lastName, firstName'
+          order: 'lastName, firstName',
         },
       }),
-      fetch('/api/terms', {
+      this.tinyData.fetch('/api/terms', {
         params: {
           type: 'coor',
           status: 'active',
+          schoolYear: this.tinyData.getSchoolYear(),
         },
       }),
     ]).then((results) => {
-      const [students, terms] = results
+      const [students, terms] = results;
 
-      Object.assign(this, { students, terms })
+      Object.assign(this, { students, terms });
     });
   },
 
-  model(params) {
-    const coordinator = this.modelFor('status-by-coordinator');
-    const term = this.terms.data[0];
+  model() {
+    const [term] = this.terms.data;
+    this.term = term;
 
-    return fetch('/api/statuses', {
+    return this.tinyData.fetch('/api/statuses', {
       params: {
-        coordinator_id: coordinator.data.id,
-        student_ids: this.students.data.map(student => student.id),
-        months: term.attributes.months,
+        studentIds: this.students.data.map(student => student.id),
+        months: this.term.attributes.months,
+        type: 'student',
         limit: 10000,
       },
     });
@@ -47,6 +50,11 @@ export default Route.extend({
     controller.setProperties({
       statuses,
       students: this.students,
-    })
-  }
+      term: this.term,
+    });
+  },
+
+  getCoordinator() {
+    return this.modelFor('status-by-coordinator').data;
+  },
 });

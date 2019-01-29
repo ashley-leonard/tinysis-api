@@ -1,13 +1,20 @@
 import { helper } from '@ember/component/helper';
 
-export function fullName(params/*, hash*/) {
+export function fullName(params/* , hash */) {
   const [user, style] = params;
-console.log(user)
+  let name;
+
   if (style === 'first-last') {
-    return `${user.attributes.firstName} ${user.attributes.lastName}`;
+    name = `${user.attributes.firstName} ${user.attributes.lastName}`;
+  } else {
+    name = `${user.attributes.lastName}, ${user.attributes.firstName}`;
   }
 
-  return `${user.attributes.lastName}, ${user.attributes.firstName}`;
+  if (user.attributes.nickname) {
+    name = `${name} (${user.attributes.nickname})`;
+  }
+
+  return name;
 }
 
 export default helper(fullName);

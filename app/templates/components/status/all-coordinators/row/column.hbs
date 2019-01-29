@@ -1,0 +1,7 @@
+{{#if showStatus}}
+  {{#link-to "status-by-coordinator" coordinator.id
+    title=academicStatusName
+  }}
+    {{statusAbbreviation}}
+  {{/link-to}}
+{{/if}}
