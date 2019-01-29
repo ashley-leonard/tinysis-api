@@ -3,15 +3,34 @@ import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 
-module('Integration | Helper | full-name', function(hooks) {
+module('Integration | Helper | full-name', (hooks) => {
   setupRenderingTest(hooks);
 
-  // Replace this with your real tests.
-  test('it renders', async function(assert) {
-    this.set('inputValue', '1234');
+  test('it functions properly', async function (assert) {
+    this.setProperties({
+      beebo: {
+        attributes: {
+          firstName: 'Bee',
+          lastName: 'Bo',
+          nickname: 'Beebo!',
+        },
+      },
+      style: null,
+    });
 
-    await render(hbs`{{full-name inputValue}}`);
+    await render(hbs`{{full-name beebo style}}`);
 
-    assert.equal(this.element.textContent.trim(), '1234');
+    assert.dom(this.element).hasText('Bo, Bee (Beebo!)', 'lastName, firstName (nickname)');
+
+    this.set('beebo', {
+      attributes: {
+        firstName: 'Bee',
+        lastName: 'Bo',
+      },
+    });
+    assert.dom(this.element).hasText('Bo, Bee', 'lastName, firstName');
+
+    this.set('style', 'first-last');
+    assert.dom(this.element).hasText('Bee Bo', 'firstName lastName');
   });
 });

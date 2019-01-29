@@ -1,0 +1,23 @@
+<thead>
+  <tr>
+    <th>Name</th>
+    <th>Status</th>
+    {{#each months as |month|}}
+      <th class="m-head" title={{t-date month "compactTermMonth"}}>{{t-date month "MMM"}}</th>
+    {{/each}}
+  </tr>
+</thead>
+<tbody>
+  {{#each students.data as |student|}}
+    {{status/by-coordinator/row
+      student=student
+      statusHash=statusHash
+      months=months
+      term=term
+    }}
+  {{else}}
+    <tr class="no-results">
+      <td>No coordinatees</td>
+    </tr>
+  {{/each}}
+</tbody>

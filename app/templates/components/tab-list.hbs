@@ -1,0 +1,10 @@
+{{#each tabs as |tab|}}
+  {{#tab-list/tab
+    classNames=tab.classNames
+    currentTab=currentTab
+    tab=tab
+    setTab=(action "setTab" tab.name)
+  }}
+    {{tab.name}}
+  {{/tab-list/tab}}
+{{/each}}

@@ -1,0 +1,18 @@
+<h2>Enrollments</h2>
+
+{{#pages/enrollments-page
+  enrollments=enrollments
+  enrollmentStatuses=enrollmentStatuses
+  term=term
+  as |enrollmentsPage|
+}}
+
+  {{status/student-enrollments
+    student=student
+    enrollmentsList=enrollmentsPage.enrollmentsList
+    enrollmentStatuses=enrollmentStatuses
+    term=term
+    getNotes=(route-action "getNotes")
+  }}
+
+{{/pages/enrollments-page}}

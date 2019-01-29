@@ -1,0 +1,22 @@
+{{#if hasBlock}}
+  {{yield
+    (hash
+      option=(component "t-select-option" select=this)
+    )
+  }}
+{{else}}
+  {{#if prompt}}
+    {{t-select-option
+      name=prompt
+      currentValue=value
+      value=""
+    }}
+  {{/if}}
+  {{#each optionSelections as |opt|}}
+    {{t-select-option
+      name=opt.name
+      value=opt.value
+      currentValue=value
+    }}
+  {{/each}}
+{{/if}}
