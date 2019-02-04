@@ -4,36 +4,12 @@ export default {
       id: '5',
       type: 'user',
       attributes: {
-        firstName: 'Divina',
-        lastName: 'Cassin',
+        firstName: 'Emile',
+        lastName: 'Hane',
         nickname: null,
         dateActive: '2018-08-01',
         dateInactive: null,
         status: 'active',
-        role: 'student',
-        districtId: null,
-        districtGrade: null,
-        coordinatorId: '2',
-      },
-      relationships: {
-        coordinator: {
-          data: {
-            id: '2',
-            type: 'coordinator',
-          },
-        },
-      },
-    },
-    {
-      id: '6',
-      type: 'user',
-      attributes: {
-        firstName: 'Melvin',
-        lastName: 'Powlowski',
-        nickname: null,
-        dateActive: '2018-08-01',
-        dateInactive: '2019-10-01',
-        status: 'inactive',
         role: 'student',
         districtId: null,
         districtGrade: null,
@@ -52,8 +28,8 @@ export default {
       id: '4',
       type: 'user',
       attributes: {
-        firstName: 'Senaida',
-        lastName: 'Robel',
+        firstName: 'Norris',
+        lastName: 'Kemmer',
         nickname: null,
         dateActive: '2018-08-01',
         dateInactive: null,
@@ -67,6 +43,30 @@ export default {
         coordinator: {
           data: {
             id: '1',
+            type: 'coordinator',
+          },
+        },
+      },
+    },
+    {
+      id: '6',
+      type: 'user',
+      attributes: {
+        firstName: 'Hilma',
+        lastName: 'Strosin',
+        nickname: null,
+        dateActive: '2018-08-01',
+        dateInactive: '2019-10-01',
+        status: 'inactive',
+        role: 'student',
+        districtId: null,
+        districtGrade: null,
+        coordinatorId: '2',
+      },
+      relationships: {
+        coordinator: {
+          data: {
+            id: '2',
             type: 'coordinator',
           },
         },

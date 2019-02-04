@@ -52,3 +52,14 @@ html, button, input, select, textarea, .pure-g [class *= "pure-u"] {
   list-style-type: none;
   margin: 0 1rem 0 0;
 }
+
+.no-bullet li {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.compact {
+  margin: 0;
+  padding: 0;
+}

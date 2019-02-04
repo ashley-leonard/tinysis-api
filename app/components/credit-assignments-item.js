@@ -4,6 +4,7 @@ import { get } from '@ember/object';
 
 export default Component.extend({
   tinyData: service(),
+  tagName: 'li',
 
   didReceiveAttrs() {
     if (this.credit) return;

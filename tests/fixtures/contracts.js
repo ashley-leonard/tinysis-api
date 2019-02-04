@@ -4,10 +4,28 @@ export default {
       id: '1',
       type: 'contract',
       attributes: {
-        name: 'Non cunae voluptas dignissimos cuppedia.',
+        name: 'Tamen absorbeo demitto vinco qui.',
         status: 'closed',
       },
       relationships: {
+        category: {
+          data: {
+            id: '1',
+            type: 'category',
+          },
+        },
+        facilitator: {
+          data: {
+            id: '1',
+            type: 'User',
+          },
+        },
+        term: {
+          data: {
+            id: '1',
+            type: 'term',
+          },
+        },
         enrollments: {
           data: [
             {
@@ -20,34 +38,34 @@ export default {
             },
           ],
         },
-        facilitator: {
-          data: {
-            id: '1',
-            type: 'User',
-          },
-        },
-        term: {
-          data: {
-            id: '1',
-            type: 'term',
-          },
-        },
-        category: {
-          data: {
-            id: '1',
-            type: 'category',
-          },
-        },
       },
     },
     {
       id: '2',
       type: 'contract',
       attributes: {
-        name: 'Subnecto civis uterque denego acceptus.',
+        name: 'Cura deleniti ventosus curso tertius.',
         status: 'closed',
       },
       relationships: {
+        category: {
+          data: {
+            id: '2',
+            type: 'category',
+          },
+        },
+        facilitator: {
+          data: {
+            id: '2',
+            type: 'User',
+          },
+        },
+        term: {
+          data: {
+            id: '2',
+            type: 'term',
+          },
+        },
         enrollments: {
           data: [
             {
@@ -56,45 +74,21 @@ export default {
             },
           ],
         },
-        facilitator: {
-          data: {
-            id: '2',
-            type: 'User',
-          },
-        },
-        term: {
-          data: {
-            id: '2',
-            type: 'term',
-          },
-        },
-        category: {
-          data: {
-            id: '2',
-            type: 'category',
-          },
-        },
       },
     },
     {
       id: '3',
       type: 'contract',
       attributes: {
-        name: 'Sed sit audio terminatio blandior.',
+        name: 'Animus omnis spargo decet varietas.',
         status: 'approved',
       },
       relationships: {
-        enrollments: {
-          data: [
-            {
-              id: '3',
-              type: 'enrollment',
-            },
-            {
-              id: '4',
-              type: 'enrollment',
-            },
-          ],
+        category: {
+          data: {
+            id: '1',
+            type: 'category',
+          },
         },
         facilitator: {
           data: {
@@ -108,11 +102,17 @@ export default {
             type: 'term',
           },
         },
-        category: {
-          data: {
-            id: '1',
-            type: 'category',
-          },
+        enrollments: {
+          data: [
+            {
+              id: '3',
+              type: 'enrollment',
+            },
+            {
+              id: '4',
+              type: 'enrollment',
+            },
+          ],
         },
       },
     },
@@ -120,17 +120,15 @@ export default {
       id: '4',
       type: 'contract',
       attributes: {
-        name: 'Accendo coadunatio unus strenuus dolores.',
+        name: 'Dedico torrens calcar odio et.',
         status: 'approved',
       },
       relationships: {
-        enrollments: {
-          data: [
-            {
-              id: '6',
-              type: 'enrollment',
-            },
-          ],
+        category: {
+          data: {
+            id: '2',
+            type: 'category',
+          },
         },
         facilitator: {
           data: {
@@ -144,11 +142,13 @@ export default {
             type: 'term',
           },
         },
-        category: {
-          data: {
-            id: '2',
-            type: 'category',
-          },
+        enrollments: {
+          data: [
+            {
+              id: '6',
+              type: 'enrollment',
+            },
+          ],
         },
       },
     },
@@ -169,8 +169,8 @@ export default {
       id: '1',
       type: 'user',
       attributes: {
-        firstName: 'Joanne',
-        lastName: 'Dicki',
+        firstName: 'Ed',
+        lastName: 'Okuneva',
         nickname: null,
         dateActive: null,
         dateInactive: null,
@@ -193,8 +193,8 @@ export default {
       id: '2',
       type: 'user',
       attributes: {
-        firstName: 'Bella',
-        lastName: 'Schowalter',
+        firstName: 'Rayford',
+        lastName: 'Koss',
         nickname: null,
         dateActive: null,
         dateInactive: null,

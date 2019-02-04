@@ -1,0 +1,42 @@
+<hr>
+<dl class="summary">
+  <dt>Status</dt>
+  <dd>{{contract.attributes.status}}</dd>
+  <dt>Facilitator</dt>
+  <dd>{{full-name facilitator "first-last"}}</dd>
+  <dt>Category</dt>
+  <dd>{{category.attributes.name}}</dd>
+  <dt>Credits</dt>
+  <dd class="credit-assignments">
+    {{credit-assignments creditAssignments=creditAssignments}}
+  </dd>
+  <dt>Term</dt>
+  <dd>{{term.attributes.name}}</dd>
+  <dt>Location</dt>
+  <dd>{{contract.attributes.location}}</dd>
+  <dt>Schedule</dt>
+  <dd>
+    {{contracts/time-slots timeslots=contract.attributes.timeslots}}
+  </dd>
+</dl>
+<hr>
+
+<h2>Details</h2>
+
+<h3>Learning Objectives</h3>
+
+{{contract.attributes.learningObjectives}}
+
+<h3>Competencies</h3>
+
+{{contract.attributes.competencies}}
+
+<h3>Learning Requirements</h3>
+
+{{contract.attributes.evaluationMethods}}
+
+<h2>Assignments</h2>
+
+{{contracts/assignments-summary assignments=assignments}}
+
+

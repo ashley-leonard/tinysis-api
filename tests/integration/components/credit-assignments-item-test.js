@@ -9,16 +9,16 @@ let tinyData;
 let credit;
 let creditAssignment;
 
-module('Integration | Component | credit-assignment', (hooks) => {
+module('Integration | Component | credit-assignments-item', (hooks) => {
   setupRenderingTest(hooks);
 
   hooks.beforeEach(function () {
     tinyData = stubTinyData();
     tinyData.addResult(enrollmentsFixture);
 
+    // pluck one credit assignment
     [creditAssignment] = tinyData.get('creditAssignment');
     credit = tinyData.get('credit', creditAssignment.relationships.credit.data.id);
-
     this.setProperties({
       creditAssignment,
     });
@@ -26,7 +26,7 @@ module('Integration | Component | credit-assignment', (hooks) => {
 
   test('it renders', async function (assert) {
     await render(hbs`
-      {{credit-assignment
+      {{credit-assignments-item
         creditAssignment=creditAssignment
       }}
     `);

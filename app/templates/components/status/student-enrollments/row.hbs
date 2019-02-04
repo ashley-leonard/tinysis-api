@@ -1,6 +1,5 @@
 <tr>
   <td class="contract"> 
-    {{!-- put this as a component and reuse it in the notes table --}}
     <p class="contract-name">
       {{#link-to "status-by-enrollment" enrollment.id}}
         {{contract.attributes.name}}
@@ -12,11 +11,7 @@
       {{term.attributes.name}}
     </p>
     <p class="credit-assignments">
-      {{#each creditAssignments.data as |creditAssignment|}}
-        {{credit-assignment
-          creditAssignment=creditAssignment
-        }}
-      {{/each}}
+      {{credit-assignments creditAssignments=creditAssignments}}
     </p>
   </td>
 
