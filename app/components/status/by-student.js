@@ -18,7 +18,6 @@ export default Component.extend({
     const { statuses } = this;
 
     return statuses
-      .data
       .reduce((memo, status) => {
         memo[status.attributes.month] = status;
         return memo;

@@ -1,12 +1,12 @@
 export default {
   data: [
     {
-      id: '35',
+      id: '3',
       type: 'note',
       attributes: {
-        note: 'Note by Watsica for Funk on 2019-09-01',
+        note: 'Note for Funk',
         updatedAt: '2019-02-07T02:36:45.000Z',
-        notableId: '230',
+        notableId: '3',
       },
       relationships: {
         creator: {
@@ -18,12 +18,12 @@ export default {
       },
     },
     {
-      id: '125',
+      id: '4',
       type: 'note',
       attributes: {
-        note: 'Note by Watsica for Funk on 2019-10-01',
-        updatedAt: '2019-02-07T02:36:46.000Z',
-        notableId: '320',
+        note: 'Note for Howell',
+        updatedAt: '2019-02-07T02:36:45.000Z',
+        notableId: '4',
       },
       relationships: {
         creator: {

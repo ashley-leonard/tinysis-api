@@ -4,7 +4,7 @@ import { notesResult, statusResult } from '../../fixtures/notes';
 
 module('Unit | Utility | note-utils', (/* hooks */) => {
   test('it hashes a notes result', (assert) => {
-    const result = generateNotableHash(notesResult, statusResult, 'enrollmentId');
+    const result = generateNotableHash(notesResult, statusResult.data, 'enrollmentId');
     assert.equal(typeof result, 'object', 'a hash was returned');
 
     const [sampleNote] = notesResult.data;

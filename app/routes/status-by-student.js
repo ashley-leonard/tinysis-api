@@ -63,7 +63,7 @@ export default Route.extend({
       student,
       coordinator,
       term,
-      statuses,
+      statuses: statuses.data,
       schoolYear,
       today: new Date(),
     });

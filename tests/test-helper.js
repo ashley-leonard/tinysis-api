@@ -10,10 +10,14 @@ QUnit.extend(QUnit.assert, {
   matches(actual, regex, message) {
     let result;
 
-    if (typeof regex === 'string') {
-      result = actual === regex;
+    const _actual = (actual || '').toString();
+
+    if (regex === undefined || regex === null) throw new Error('a regex or string to match is required');
+
+    if (regex instanceof RegExp) {
+      result = regex.test(_actual);
     } else {
-      result = regex.test(actual);
+      result = _actual.includes(regex.toString());
     }
 
     const expected = `String matching /${regex.toString()}/`;

@@ -1,7 +1,33 @@
 # tinysis-ui
 
-This README outlines the details of collaborating on this Ember application.
-A short introduction of this app could easily go here.
+This is the UI client meant to supercede a Rails 1.x front-end implementation
+for the Alternative Learning Environment (ALE) tracking application,
+[tinysis](github://artzte/tinysis).
+
+This client, written in [EmberJS](https://emberjs.com), consumes API feeds
+from a [Rails API server](github://artzte/tinysis-api). These API feeds are served
+using REST and JSONAPI.
+
+The intent of this client implementation is to keep it as light and simple as
+possible. Its data flows are handled internally using lean plain-JSON models
+stored in a central JSONAPI resource.
+
+## Internal data flows
+
+Follow these conventions:
+
+* The model of the page is the raw, root API response. In the case of multi-resource
+  fetches performed within the model hook, the model would be the resolved
+  array from same
+* The controller should be populated with semantically logical names such as
+  "enrollments" or "contract". These semantically named variables should point
+  to the actual data resource, i.e. the data attribute of the JSONAPI response.
+* Components should lean on the tinyData store to retrieve sideloaded related entities.
+  each route should populate all data needed by the page. In most cases the data fetch
+  will block rendering, so components can synchronously retrieve the related data
+  items from the store.
+* In some cases, lazy loading might occur, which is fine... in this case the affected
+  components need to guard against loading states.
 
 ## Prerequisites
 
@@ -14,15 +40,15 @@ You will need the following things properly installed on your computer.
 
 ## Installation
 
-* `git clone <repository-url>` this repository
+* `git clone github://artzte/tinysis-ui`
 * `cd tinysis-ui`
 * `npm install`
 
 ## Running / Development
 
-* `ember serve`
-* Visit your app at [http://localhost:4200](http://localhost:4200).
-* Visit your tests at [http://localhost:4200/tests](http://localhost:4200/tests).
+* `npm start`
+* Visit your app at [http://localhost:3100](http://localhost:3100).
+* Visit your tests at [http://localhost:3100/tests](http://localhost:3100/tests)
 
 ### Code Generators
 
@@ -30,13 +56,16 @@ Make use of the many generators for code, try `ember help generate` for more det
 
 ### Running Tests
 
-* `ember test`
-* `ember test --server`
+* Run the test suite using `npm test`
+* Run the full build checks using `npm run pr`
 
 ### Linting
 
-* `npm run lint:js`
-* `npm run lint:js -- --fix`
+This project uses a customized linting scheme leaning on 
+[airbnb](https://www.npmjs.com/package/eslint-config-airbnb) and 
+[ember-cli-eslint](https://www.npmjs.com/package/ember-cli-eslint)
+
+* Run the linter using `npm run lint` or `npm run lint:fix`
 
 ### Building
 

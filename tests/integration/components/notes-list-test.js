@@ -20,7 +20,7 @@ module('Integration | Component | notes-list', (hooks) => {
     tinyData = stubTinyData();
     tinyData.addResult(staffFixture);
 
-    notableHash = generateNotableHash(notesCoorStatuses, coorStatuses, 'id');
+    notableHash = generateNotableHash(notesCoorStatuses, coorStatuses.data, 'id');
 
     [this.notable] = coorStatuses.data;
     this.notes = notableHash[this.notable.id];

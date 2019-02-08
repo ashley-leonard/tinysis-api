@@ -1,0 +1,17 @@
+<h2>Enrollments</h2>
+
+{{contracts/default-credit-assignments contract=contract}}
+
+{{#check-empty
+  count=model.meta.count
+  noResultsMessage="No enrollments as of yet"
+}}
+  {{count-paragraph
+    result=model
+    name="enrollment"
+  }}
+  {{contracts/enrollments-list
+    enrollments=enrollments
+    getNotes=(route-action "getNotes" model)
+  }}
+{{/check-empty}}

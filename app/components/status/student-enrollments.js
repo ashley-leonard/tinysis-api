@@ -22,7 +22,7 @@ export default Component.extend({
   statusHash: computed('enrollmentStatuses', function () {
     const { enrollmentStatuses } = this;
 
-    return enrollmentStatuses.data.reduce((memo, status) => {
+    return enrollmentStatuses.reduce((memo, status) => {
       const { enrollmentId } = status.attributes;
       const statuses = memo[enrollmentId] || {};
       statuses[status.attributes.month] = status;

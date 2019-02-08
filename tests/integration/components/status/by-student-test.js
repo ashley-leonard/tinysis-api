@@ -20,7 +20,7 @@ module('Integration | Component | status/by-student', (hooks) => {
 
     this.getNotes = () => resolve(notesStudentStatuses);
     [this.term] = coorTerms.data;
-    this.statuses = studentStatuses;
+    this.statuses = studentStatuses.data;
     this.student = student.data;
   });
 

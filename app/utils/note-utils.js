@@ -3,7 +3,7 @@
  the note records for that status.
  */
 export function generateNotableHash(result, notables, hashKey) {
-  const notablesHash = notables.data.reduce((memo, notable) => {
+  const notablesHash = notables.reduce((memo, notable) => {
     memo[notable.id] = notable;
     return memo;
   }, {});

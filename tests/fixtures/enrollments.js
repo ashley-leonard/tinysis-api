@@ -4,7 +4,6 @@ export default {
       id: '1',
       type: 'enrollment',
       attributes: {
-        participantId: 4,
         finalizedOn: null,
         enrollmentStatus: 'enrolled',
         completionStatus: 'incomplete',
@@ -14,6 +13,12 @@ export default {
           data: {
             id: '1',
             type: 'contract',
+          },
+        },
+        participant: {
+          data: {
+            id: '4',
+            type: 'participant',
           },
         },
         creditAssignments: {
@@ -30,7 +35,6 @@ export default {
       id: '3',
       type: 'enrollment',
       attributes: {
-        participantId: 4,
         finalizedOn: null,
         enrollmentStatus: 'enrolled',
         completionStatus: 'incomplete',
@@ -40,6 +44,12 @@ export default {
           data: {
             id: '3',
             type: 'contract',
+          },
+        },
+        participant: {
+          data: {
+            id: '4',
+            type: 'participant',
           },
         },
         creditAssignments: {
@@ -56,7 +66,6 @@ export default {
       id: '5',
       type: 'enrollment',
       attributes: {
-        participantId: 5,
         finalizedOn: null,
         enrollmentStatus: 'enrolled',
         completionStatus: 'incomplete',
@@ -66,6 +75,12 @@ export default {
           data: {
             id: '2',
             type: 'contract',
+          },
+        },
+        participant: {
+          data: {
+            id: '5',
+            type: 'participant',
           },
         },
         creditAssignments: {
@@ -82,7 +97,6 @@ export default {
       id: '6',
       type: 'enrollment',
       attributes: {
-        participantId: 5,
         finalizedOn: null,
         enrollmentStatus: 'enrolled',
         completionStatus: 'incomplete',
@@ -92,6 +106,12 @@ export default {
           data: {
             id: '4',
             type: 'contract',
+          },
+        },
+        participant: {
+          data: {
+            id: '5',
+            type: 'participant',
           },
         },
         creditAssignments: {
@@ -110,13 +130,13 @@ export default {
       id: '1',
       type: 'contract',
       attributes: {
-        name: 'Tamen absorbeo demitto vinco qui.',
+        name: 'Corroboro tamquam arcus vulgaris eum.',
         status: 'closed',
-        learningObjectives: 'In ducimus audio admitto vulgivagus.',
-        competencies: 'Speciosus caste thorax modi qui.',
-        evaluationMethods: 'Caelestis bonus recusandae ullus synagoga.',
-        instructionalMaterials: 'Tenax attero atqui sublime sursum.',
-        location: 'Qui vel necessitatibus umbra conculco.',
+        learningObjectives: 'Commemoro adopto calculus comptus deripio.',
+        competencies: 'Titulus stella copia censura audacia.',
+        evaluationMethods: 'Trado id timor ancilla dens.',
+        instructionalMaterials: 'Solus strenuus cupressus utrimque laboriosam.',
+        location: 'Tricesimus velum uter comminor accendo.',
         timeslots: [
           {
             start: '8:45',
@@ -175,8 +195,8 @@ export default {
       id: '1',
       type: 'user',
       attributes: {
-        firstName: 'Ed',
-        lastName: 'Okuneva',
+        firstName: 'Kami',
+        lastName: 'Watsica',
         nickname: null,
         dateActive: null,
         dateInactive: null,
@@ -226,16 +246,40 @@ export default {
       },
     },
     {
+      id: '4',
+      type: 'user',
+      attributes: {
+        firstName: 'Lu',
+        lastName: 'Funk',
+        nickname: null,
+        dateActive: '2018-08-01',
+        dateInactive: null,
+        status: 'active',
+        role: 'student',
+        districtId: null,
+        districtGrade: null,
+        coordinatorId: '1',
+      },
+      relationships: {
+        coordinator: {
+          data: {
+            id: '1',
+            type: 'coordinator',
+          },
+        },
+      },
+    },
+    {
       id: '3',
       type: 'contract',
       attributes: {
-        name: 'Animus omnis spargo decet varietas.',
+        name: 'Autem iste vacuus vinco caveo.',
         status: 'approved',
-        learningObjectives: 'Vox tam iure beneficium odio.',
-        competencies: 'Conatus magnam nihil tersus comis.',
-        evaluationMethods: 'Nihil accusantium et consequuntur angulus.',
-        instructionalMaterials: 'Altus alter inventore viriliter adsidue.',
-        location: 'Pauci dolores tamdiu vigilo enim.',
+        learningObjectives: 'Succurro soleo socius adinventitias corrupti.',
+        competencies: 'Caute rerum summa contra vulgaris.',
+        evaluationMethods: 'Stillicidium cum pecco studio tactus.',
+        instructionalMaterials: 'Deporto absens viduata sint nemo.',
+        location: 'In aut cuppedia ut urbs.',
         timeslots: [
           {
             start: '8:45',
@@ -345,13 +389,13 @@ export default {
       id: '2',
       type: 'contract',
       attributes: {
-        name: 'Cura deleniti ventosus curso tertius.',
+        name: 'Contego suppono temeritas adflicto denuo.',
         status: 'closed',
-        learningObjectives: 'Catena ut audentia verbera unde.',
-        competencies: 'Velociter tredecim teneo verbera aliquid.',
-        evaluationMethods: 'Et vorax thorax rerum vinculum.',
-        instructionalMaterials: 'Aeneus cuppedia cras vulnero absum.',
-        location: 'Odit super acervus communis cum.',
+        learningObjectives: 'Voluptatem valetudo audax curriculum fugiat.',
+        competencies: 'Vulpes aestas crur est deinde.',
+        evaluationMethods: 'Accendo turpis uterque vito vomica.',
+        instructionalMaterials: 'Avoco creo et eveniet alter.',
+        location: 'Deporto tempore quasi tantillus comes.',
         timeslots: [
           {
             start: '8:45',
@@ -406,8 +450,8 @@ export default {
       id: '2',
       type: 'user',
       attributes: {
-        firstName: 'Rayford',
-        lastName: 'Koss',
+        firstName: 'Lulu',
+        lastName: 'Rau',
         nickname: null,
         dateActive: null,
         dateInactive: null,
@@ -457,16 +501,40 @@ export default {
       },
     },
     {
+      id: '5',
+      type: 'user',
+      attributes: {
+        firstName: 'Maximo',
+        lastName: 'Powlowski',
+        nickname: null,
+        dateActive: '2018-08-01',
+        dateInactive: null,
+        status: 'active',
+        role: 'student',
+        districtId: null,
+        districtGrade: null,
+        coordinatorId: '2',
+      },
+      relationships: {
+        coordinator: {
+          data: {
+            id: '2',
+            type: 'coordinator',
+          },
+        },
+      },
+    },
+    {
       id: '4',
       type: 'contract',
       attributes: {
-        name: 'Dedico torrens calcar odio et.',
+        name: 'Aut optio comedo quos defleo.',
         status: 'approved',
-        learningObjectives: 'Solium contabesco despecto adfero accusantium.',
-        competencies: 'Vigor ut crudelis vergo usque.',
-        evaluationMethods: 'Arbor velut suppono theologus capitulus.',
-        instructionalMaterials: 'Quis adimpleo et thesaurus tres.',
-        location: 'Paulatim deludo crur valde delectatio.',
+        learningObjectives: 'Trans synagoga ultio eligendi tum.',
+        competencies: 'Condico amissio tollo veniam vacuus.',
+        evaluationMethods: 'Talio acquiro adficio aggredior minima.',
+        instructionalMaterials: 'Velit tepidus auris adipiscor perferendis.',
+        location: 'Error cogito dolore coadunatio tripudio.',
         timeslots: [
           {
             start: '8:45',

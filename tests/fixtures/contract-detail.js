@@ -3,13 +3,13 @@ export default {
     id: '3',
     type: 'contract',
     attributes: {
-      name: 'Animus omnis spargo decet varietas.',
+      name: 'Autem iste vacuus vinco caveo.',
       status: 'approved',
-      learningObjectives: 'Vox tam iure beneficium odio.',
-      competencies: 'Conatus magnam nihil tersus comis.',
-      evaluationMethods: 'Nihil accusantium et consequuntur angulus.',
-      instructionalMaterials: 'Altus alter inventore viriliter adsidue.',
-      location: 'Pauci dolores tamdiu vigilo enim.',
+      learningObjectives: 'Succurro soleo socius adinventitias corrupti.',
+      competencies: 'Caute rerum summa contra vulgaris.',
+      evaluationMethods: 'Stillicidium cum pecco studio tactus.',
+      instructionalMaterials: 'Deporto absens viduata sint nemo.',
+      location: 'In aut cuppedia ut urbs.',
       timeslots: [
         {
           start: '8:45',
@@ -168,8 +168,8 @@ export default {
       id: '1',
       type: 'user',
       attributes: {
-        firstName: 'Ed',
-        lastName: 'Okuneva',
+        firstName: 'Kami',
+        lastName: 'Watsica',
         nickname: null,
         dateActive: null,
         dateInactive: null,

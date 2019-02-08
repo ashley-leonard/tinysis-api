@@ -25,15 +25,15 @@ export default Route.extend({
       });
   },
 
-  setupController(controller, enrollments) {
+  setupController(controller, model) {
     const statusByStudentController = this.controllerFor('status-by-student');
     const currentTab = statusByStudentController.get('currentTab');
 
-    this._super(controller, enrollments);
+    this._super(controller, model);
     controller.setProperties({
       currentTab: currentTab === 'Notes' ? currentTab : 'Enrollments',
-      enrollments,
-      enrollmentStatuses: this.enrollmentStatuses,
+      enrollments: model.data,
+      enrollmentStatuses: this.enrollmentStatuses.data,
       term: statusByStudentController.get('term'),
     });
   },
