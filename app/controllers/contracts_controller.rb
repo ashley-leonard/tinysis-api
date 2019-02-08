@@ -50,15 +50,18 @@ class ContractsController < ApplicationController
       meta: {
         count: count
       },
-      include: ["category", "facilitator"]
+      include: [ :category, :facilitator ],
+      fields: { contract: [:name, :status, :category, :facilitator, :term, :enrollments] },
     }
 
-    render json: ContractSerializer.new(result, options), status: 200
+    render json: ContractSerializer.new(result, options)
   end
 
   def show
     contract = Contract.find params[:id]
 
-    render json: ContractSerializer.new(contract), status: 200
+    render json: ContractSerializer.new(contract, {
+      include: [ :category, :facilitator, :assignments, :'credit_assignments.credit', :term ],
+    })
   end
 end

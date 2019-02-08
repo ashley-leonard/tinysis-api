@@ -5,8 +5,8 @@ class Contract < ApplicationRecord
 
   include StripTagsValidator
   
-  has_many :meetings, -> { order(:meeting_date) }, :dependent => :destroy
-  has_many :assignments, -> { order("due_date, CONVERT(name,decimal), name") }, :dependent => :destroy do
+  has_many :meetings, :dependent => :destroy
+  has_many :assignments, :dependent => :destroy do
     
     def weight_total
       sum(:weighting)

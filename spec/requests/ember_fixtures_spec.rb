@@ -6,13 +6,17 @@
 
 require 'rails_helper'
 
-def writeFixture(file, fixture)
-  pathName = Rails.root.join('tmp', file)
+def write_fixture(file, response)
+  raise 'Invalid request' if response.status > 200
+
+  fixture = response.body
+  path_name = Rails.root.join('tmp', file)
   pretty = JSON.pretty_generate(JSON.parse(fixture))
   output = <<~END
     export default #{pretty};
   END
-  File.open(pathName, 'w') do |f|
+
+  File.open(path_name, 'w') do |f|
     f.write(output)
   end
 end
@@ -81,15 +85,17 @@ RSpec.describe 'Ember fixtures script', type: :request do
 
     [@contract1_last, @contract1_current].each do |contract|
       enrollment = create :enrollment, participant: @student1, contract: contract, creator: @staff1
-      create :credit_assignment, enrollment: enrollment, credit: @credit1, credit_hours: 1, contract: contract
+      create :credit_assignment, enrollment: enrollment, credit: @credit1, credit_hours: 1
+      create :note, note: "Note for #{@student1.last_name}", notable: enrollment, creator: @staff1
 
       enrollment = create :enrollment, participant: @student3, contract: contract, creator: @staff1
-      create :credit_assignment, enrollment: enrollment, credit: @credit1, credit_hours: 1, contract: contract
+      create :credit_assignment, enrollment: enrollment, credit: @credit1, credit_hours: 1
+      create :note, note: "Note for #{@student3.last_name}", notable: enrollment, creator: @staff1
     end
 
     [@contract2_last, @contract2_current].each do |contract|
       enrollment = create :enrollment, participant: @student2, contract: contract, creator: @staff2
-      create :credit_assignment, enrollment: enrollment, credit: @credit2, credit_hours: 2, contract: contract
+      create :credit_assignment, enrollment: enrollment, credit: @credit2, credit_hours: 2
     end
 
     [@contract1_last, @contract2_last].each do |contract|
@@ -123,6 +129,10 @@ RSpec.describe 'Ember fixtures script', type: :request do
         create :note, creator: student.coordinator, notable: status, note: "Note by #{student.coordinator.last_name} for #{student.last_name} on #{month}"
       end
     end
+
+    (1..5).each do |assignment_number|
+      create :assignment, contract: @contract1_current, creator: @contract1_current.facilitator, name: "Assignment #{assignment_number}", description: "Here is assignment number #{assignment_number}", due_date: @term1_current.months[0] + assignment_number.days
+    end
   end
 
   describe 'write' do
@@ -133,41 +143,72 @@ RSpec.describe 'Ember fixtures script', type: :request do
         %w[contracts students staff terms settings categories].each do |fixture|
           get "/api/#{fixture}"
 
-          writeFixture "#{fixture}.js", response.body
+          write_fixture "#{fixture}.js", response
         end
 
         get('/api/terms?type=coor&status=active')
-        writeFixture 'coor-terms.js', response.body
+        write_fixture 'coor-terms.js', response
+
+        # contract detail
+        get("/api/contracts/#{@contract1_current.id}")
+        write_fixture 'contract-detail.js', response
+
+        # enrollments by contract
+        get("/api/enrollments?contractIds=#{@contract1_current.id}")
+        write_fixture 'contract-enrollments.js', response
+
+        contract_enrollments_response = JSON.parse(response.body)
+        enrollment_ids = contract_enrollments_response["data"].map{|enrollment| enrollment["id"]}
+
+        get("/api/notes?notableType=Enrollment&notableIds=#{enrollment_ids.join(',')}")
+        write_fixture 'notes-contract-enrollments.js', response
 
         # coor
         #
         get("/api/students?coordinator_id=#{@staff2.id}&status=reportable&order=lastName,firstName")
-        writeFixture 'coor-students.js', response.body
+        write_fixture 'coor-students.js', response
 
         get("/api/statuses?student_ids=#{@staff2.coordinatees.map(&:id).join(',')}&months=#{@term_coor_current.months.join(',')}&type=student")
-        writeFixture 'coor-statuses.js', response.body
+        write_fixture 'coor-statuses.js', response
 
         # all-coor
         #
         get('/api/students?status=reportable&order=lastName,firstName&limit=-1')
-        writeFixture 'all-coor-students.js', response.body
+        write_fixture 'all-coor-students.js', response
 
         get('/api/staff?status=active&coordinators=true&order=lastName,firstName')
-        writeFixture 'all-coor-staff.js', response.body
+        write_fixture 'all-coor-staff.js', response
 
         student_ids = @students.map(&:id).join(',')
         query = { studentIds: student_ids, months: @term_coor_current.months.join(','), type: 'student', limit: -1 }.to_query
         get("/api/statuses?#{query}")
-        writeFixture 'all-coor-statuses.js', response.body
+        write_fixture 'all-coor-statuses.js', response
 
-        coorStatusesResponse = JSON.parse(response.body)
-        statusableIds = coorStatusesResponse["data"].map{|status| status["id"]}
+        coor_status_response = JSON.parse(response.body)
+        statusable_ids = coor_status_response["data"].map{|status| status["id"]}
 
-        get("/api/notes?notableType=Status&notableIds=#{statusableIds.join(',')}")
-        writeFixture 'notes-coor-statuses.js', response.body
+        get("/api/notes?notableType=Status&notableIds=#{statusable_ids.join(',')}")
+        write_fixture 'notes-coor-statuses.js', response
 
+        # status by student
+        #
         get("/api/enrollments?participantIds=#{@student1.id},#{@student2.id}&status=enrolled")
-        writeFixture 'enrollments.js', response.body
+        write_fixture 'enrollments.js', response
+
+        # status by student
+        #
+        get("/api/students/#{@student1.id}")
+        write_fixture('student.js', response)
+
+        query = { studentIds: @student1.id, months: @term_coor_current.months.join(','), type: 'student', limit: -1 }.to_query
+        get("/api/statuses?#{query}")
+        write_fixture 'student-statuses.js', response
+
+        student_status_response = JSON.parse(response.body)
+        statusable_ids = student_status_response["data"].map{|status| status["id"]}
+
+        get("/api/notes?notableType=Status&notableIds=#{statusable_ids.join(',')}")
+        write_fixture 'notes-student-statuses.js', response
       end
     end
   end

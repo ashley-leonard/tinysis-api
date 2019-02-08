@@ -5,7 +5,7 @@ class CreditAssignment < ApplicationRecord
   
   belongs_to :enrollment, optional: true
   belongs_to :user, optional: true
-  belongs_to :contract
+  belongs_to :contract, optional: true
   
   belongs_to :credit_transmittal_batch, optional: true
   belongs_to :contract_term, :class_name => 'Term', :foreign_key => :contract_term_id, optional: true

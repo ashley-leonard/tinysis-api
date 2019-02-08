@@ -1,17 +1,17 @@
 class Assignment < ApplicationRecord
-  include StripTagsValidator
+  # include StripTagsValidator
 
   belongs_to :contract
-  has_many :notes, :as => :notable, :dependent => :destroy
+  has_many :notes, as: :notable, dependent: :destroy
 
-  has_many :turnins, :include => [:enrollment, {:enrollment => :participant}, :notes], :order => "users.last_name, users.first_name", :dependent => :destroy
+  has_many :turnins, dependent: :destroy
 
   validates_presence_of :name, :due_date
   validates_numericality_of :weighting, :less_than => 256, :greater_than => 0, :message => "must be a number from 1-255"
   
   belongs_to :creator, :foreign_key => 'creator_id', :class_name => 'User'
   
-  acts_as_textiled :description
+  # acts_as_textiled :description
   
   # Return a hash describing privileges of the specified user
   # on this assignment

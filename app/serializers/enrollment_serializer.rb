@@ -1,9 +1,10 @@
 class EnrollmentSerializer < ApplicationSerializer
   set_type :enrollment
 
-  attributes :participant_id, :finalized_on
+  attributes :finalized_on
 
   belongs_to :contract
+  belongs_to :participant
 
   has_many :credit_assignments
 

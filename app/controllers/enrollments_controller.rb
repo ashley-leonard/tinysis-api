@@ -32,13 +32,16 @@ class EnrollmentsController < ApplicationController
     result = Enrollment
       .where(conditions)
       .limit(limit)
+      .joins('LEFT OUTER JOIN users AS participants ON participants.id = enrollments.participant_id')
+      .order('participants.last_name, participants.first_name');
+
     count = Enrollment.where(conditions).count
 
     options = {
       meta: {
         count: count,
       },
-      include: [:contract, :'contract.facilitator', :'contract.term', :credit_assignments, :'credit_assignments.credit'],
+      include: [:contract, :'contract.facilitator', :'contract.term', :credit_assignments, :'credit_assignments.credit', :participant],
     }
 
     render json: EnrollmentSerializer.new(result, options), status: 200

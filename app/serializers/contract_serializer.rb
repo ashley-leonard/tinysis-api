@@ -4,6 +4,12 @@ class ContractSerializer < ApplicationSerializer
   attribute :status do |contract|
     contract.status_name.downcase
   end
+  attribute :learning_objectives
+  attribute :competencies
+  attribute :evaluation_methods
+  attribute :instructional_materials
+  attribute :location
+  attribute :timeslots
 
   has_many :enrollments
 
@@ -14,4 +20,7 @@ class ContractSerializer < ApplicationSerializer
   belongs_to :facilitator, record_type: 'User'
   belongs_to :term
   belongs_to :category
+
+  has_many :assignments
+  has_many :credit_assignments
 end
