@@ -130,8 +130,11 @@ RSpec.describe 'Ember fixtures script', type: :request do
       end
     end
 
+    enrollment = @contract1_current.enrollments.find{|e| e.participant == @student1}
     (1..5).each do |assignment_number|
-      create :assignment, contract: @contract1_current, creator: @contract1_current.facilitator, name: "Assignment #{assignment_number}", description: "Here is assignment number #{assignment_number}", due_date: @term1_current.months[0] + assignment_number.days
+      assignment = create :assignment, contract: @contract1_current, creator: @contract1_current.facilitator, name: "Assignment #{assignment_number}", description: "Here is assignment number #{assignment_number}", due_date: @term1_current.months[0] + assignment_number.days
+      turnin = create :turnin, enrollment: enrollment, assignment: assignment, status: :complete
+      create :note, notable: turnin, creator: @contract1_current.facilitator, note: "Note by #{@contract1_current.facilitator.last_name} for assignment #{assignment_number}"
     end
   end
 
@@ -153,8 +156,23 @@ RSpec.describe 'Ember fixtures script', type: :request do
         get("/api/contracts/#{@contract1_current.id}")
         write_fixture 'contract-detail.js', response
 
+        # contract assignments
+        get("/api/assignments?contractIds=#{@contract1_current.id}")
+        write_fixture 'contract-assignments.js', response
+
+        get("/api/enrollments?contractIds=#{@contract1_current.id}&include=turnins,participant")
+        write_fixture 'contract-assignment-enrollments.js', response
+
+        contract_enrollments_response = JSON.parse(response.body)
+        turnin_ids = contract_enrollments_response['included']
+          .select{ |include| include['type'] == 'turnin' }
+          .map{ |include| include['id'] }
+
+        get("/api/notes?notableType=Turnin&notableIds=#{turnin_ids.join(',')}")
+        write_fixture 'notes-contract-assignments.js', response
+
         # enrollments by contract
-        get("/api/enrollments?contractIds=#{@contract1_current.id}")
+        get("/api/enrollments?contractIds=#{@contract1_current.id}&include=credit_assignments,credit_assignments.credit,participant")
         write_fixture 'contract-enrollments.js', response
 
         contract_enrollments_response = JSON.parse(response.body)

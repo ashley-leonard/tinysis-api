@@ -7,6 +7,7 @@ class EnrollmentSerializer < ApplicationSerializer
   belongs_to :participant
 
   has_many :credit_assignments
+  has_many :turnins
 
   attribute :enrollment_status do |object|
     Enrollment::STATUS_NAMES[object.enrollment_status].downcase

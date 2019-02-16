@@ -1,16 +1,10 @@
 class Turnin < ApplicationRecord
   
-  STATUS_TYPES = [
-    :missing,
-    :incomplete,
-    :complete,
-    :late,
-    :exceptional
-  ]
+  STATUS_TYPES = %w[missing incomplete complete late exceptional].freeze
 
-  has_many :notes, :as => :notable, :dependent => :destroy
+  has_many :notes, as: :notable, dependent: :destroy
   belongs_to :enrollment
-  belongs_to :assignment, :include => :contract
+  belongs_to :assignment
   
   validates_inclusion_of :status, :in => STATUS_TYPES
   

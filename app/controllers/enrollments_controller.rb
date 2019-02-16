@@ -1,3 +1,5 @@
+PERMITTED_INCLUDES = %w{contract contract.facilitator contract.term credit_assignments credit_assignments.credit participant turnins}
+
 class EnrollmentsController < ApplicationController
 
   def index
@@ -13,6 +15,12 @@ class EnrollmentsController < ApplicationController
 
     if params[:contractIds]
       conditions[:contract_id] = params[:contractIds].split(',')
+    end
+
+    included_models = nil
+    Rails.logger.info params
+    if params[:include]
+      included_models = params[:include].split(',') & PERMITTED_INCLUDES
     end
 
     case params[:status]
@@ -39,9 +47,9 @@ class EnrollmentsController < ApplicationController
 
     options = {
       meta: {
-        count: count,
+        count: count
       },
-      include: [:contract, :'contract.facilitator', :'contract.term', :credit_assignments, :'credit_assignments.credit', :participant],
+      include: included_models || []
     }
 
     render json: EnrollmentSerializer.new(result, options), status: 200

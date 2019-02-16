@@ -19,74 +19,9 @@ class Enrollment < ApplicationRecord
     end
   end
   
-  has_many :turnins, -> { order('assignments.due_date'); include(:assignment) }, :dependent => :destroy do 
-
-    def weight_total
-      inject(0){|sum, turnin| sum + (turnin.complete? ? turnin.assignment.weighting : 0)}
-    end
-
-    def weight_current
-      inject(0){|sum, turnin| sum + ((turnin.complete? && turnin.assignment.due_date <= Date.today) ? turnin.assignment.weighting : 0)}
-    end
-    
-    def stats
-      assignments = Assignment.find_by_sql(%{
-        SELECT assignments.due_date, assignments.weighting, IF(turnins.status, assignments.weighting, 0) AS present FROM assignments
-        LEFT JOIN turnins ON turnins.assignment_id = assignments.id AND turnins.enrollment_id = #{proxy_owner.id} AND status IN ('complete','late','exceptional')
-        WHERE assignments.contract_id = #{proxy_owner.contract_id} AND assignments.active
-        ORDER BY due_date
-      })
-      return {} if assignments.empty?
-
-      today = Date.today
-      due_assignments = assignments.select{|a| a.due_date <= today}
-
-      points_possible = assignments.inject(0){|sum,assignment| sum + assignment.weighting}
-      current_points_possible = due_assignments.inject(0){|sum,assignment| sum + assignment.weighting}
-      points_completed = assignments.inject(0){|sum,assignment| sum + assignment.present.to_i}
-      current_points_completed = due_assignments.inject(0){|sum,assignment| sum + assignment.present.to_i}
-
-      {
-        :points_possible => points_possible, 
-        :current_points_possible => current_points_possible, 
-        :points_completed => points_completed, 
-        :current_points_completed => current_points_completed, 
-        :percent_complete => points_possible==0 ? 0 : ((points_completed.to_f / points_possible) * 100),
-        :current_percent_complete => current_points_possible==0 ? 0 : ((current_points_completed.to_f / current_points_possible) * 100),
-      }
-    end
-    
-    def make(assignments = nil)
-      assignments ||= proxy_owner.contract.assignments
-      values = assignments.collect{|a| "(#{proxy_owner.id}, #{a.id}, NOW(), NOW())"}
-      sql = "INSERT IGNORE INTO turnins(enrollment_id, assignment_id, created_at, updated_at) VALUES #{values.join(',')}"
-      ApplicationRecord.connection.execute(sql)
-    end
-
-  end
+  has_many :turnins, :dependent => :destroy
   
-  has_many :meeting_participants, :dependent => :destroy do 
-    
-    def stats
-      stats_results = Meeting.connection.select_all(%{
-        SELECT participation, COUNT(mp.id) AS count
-        FROM meetings
-        LEFT OUTER JOIN meeting_participants mp ON mp.meeting_id = meetings.id AND mp.enrollment_id = #{proxy_owner.id}
-        WHERE meetings.contract_id = #{proxy_owner.contract_id}
-        GROUP BY participation
-        ORDER BY participation
-      })
-      meetings_count = Meeting.count(:conditions => "contract_id = #{proxy_owner.contract_id}")
-      stats_hash = Hash[ *stats_results.collect{|v| v["participation"] ? [ v["participation"].to_i, v["count"].to_i] : nil }.reject(&:nil?).flatten ]
-      
-      stats_hash[ MeetingParticipant::ABSENT ] ||= 0
-      stats_hash[ MeetingParticipant::ABSENT ] += (meetings_count - stats_hash.values.sum)
-      stats_hash[ :total_meetings ] = meetings_count
-      stats_hash[ :total_attended ] = meetings_count - stats_hash[ MeetingParticipant::ABSENT ]
-      stats_hash
-   end
-    
-  end
+  has_many :meeting_participants, :dependent => :destroy
   
   has_many :credit_assignments, -> { where(" ((user_id IS NOT NULL) OR ((user_id IS NULL) AND (enrollment_finalized_on IS NULL)))") }, :dependent => :destroy
   
