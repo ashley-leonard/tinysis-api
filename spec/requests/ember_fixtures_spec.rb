@@ -210,7 +210,7 @@ RSpec.describe 'Ember fixtures script', type: :request do
 
         # status by student
         #
-        get("/api/enrollments?participantIds=#{@student1.id},#{@student2.id}&status=enrolled")
+        get("/api/enrollments?participantIds=#{@student1.id},#{@student2.id}&status=enrolled&status=enrolled&include=contract,contract.facilitator,contract.term,credit_assignments,credit_assignments.credit,participant")
         write_fixture 'enrollments.js', response
 
         # status by student
