@@ -71,7 +71,6 @@ RSpec.describe 'Ember fixtures script', type: :request do
 
     [@contract1_last, @contract1_current].each do |contract|
       ca = create :credit_assignment, credit: @credit1, contract: contract, credit_hours: 1
-      Rails.logger.info ca.errors
     end
 
     [@contract2_last, @contract2_current].each do |contract|
@@ -134,7 +133,7 @@ RSpec.describe 'Ember fixtures script', type: :request do
     (1..5).each do |assignment_number|
       assignment = create :assignment, contract: @contract1_current, creator: @contract1_current.facilitator, name: "Assignment #{assignment_number}", description: "Here is assignment number #{assignment_number}", due_date: @term1_current.months[0] + assignment_number.days
       turnin = create :turnin, enrollment: enrollment, assignment: assignment, status: :complete
-      create :note, notable: turnin, creator: @contract1_current.facilitator, note: "Note by #{@contract1_current.facilitator.last_name} for assignment #{assignment_number}"
+      create :note, notable: turnin, creator: @contract1_current.facilitator, note: "Note by #{@contract1_current.facilitator.last_name} for student #{@student1.last_name} / assignment #{assignment_number}"
     end
   end
 
