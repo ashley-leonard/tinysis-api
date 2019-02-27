@@ -4,7 +4,7 @@ export default {
       id: '1',
       type: 'contract',
       attributes: {
-        name: 'Corroboro tamquam arcus vulgaris eum.',
+        name: 'Carcer tactus auris vitiosus viriliter.',
         status: 'closed',
       },
       relationships: {
@@ -44,7 +44,7 @@ export default {
       id: '2',
       type: 'contract',
       attributes: {
-        name: 'Contego suppono temeritas adflicto denuo.',
+        name: 'Abscido vere surgo eos deripio.',
         status: 'closed',
       },
       relationships: {
@@ -80,7 +80,7 @@ export default {
       id: '3',
       type: 'contract',
       attributes: {
-        name: 'Autem iste vacuus vinco caveo.',
+        name: 'Contego uterque defendo accedo fugit.',
         status: 'approved',
       },
       relationships: {
@@ -120,7 +120,7 @@ export default {
       id: '4',
       type: 'contract',
       attributes: {
-        name: 'Aut optio comedo quos defleo.',
+        name: 'Acquiro terminatio rerum tactus ventosus.',
         status: 'approved',
       },
       relationships: {
@@ -169,8 +169,8 @@ export default {
       id: '1',
       type: 'user',
       attributes: {
-        firstName: 'Kami',
-        lastName: 'Watsica',
+        firstName: 'Jaime',
+        lastName: 'Frami',
         nickname: null,
         dateActive: null,
         dateInactive: null,
@@ -193,8 +193,8 @@ export default {
       id: '2',
       type: 'user',
       attributes: {
-        firstName: 'Lulu',
-        lastName: 'Rau',
+        firstName: 'Reagan',
+        lastName: 'Cartwright',
         nickname: null,
         dateActive: null,
         dateInactive: null,

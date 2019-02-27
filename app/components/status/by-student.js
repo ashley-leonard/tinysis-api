@@ -27,10 +27,12 @@ export default Component.extend({
     const { getNotes, notableHash, statuses } = this;
     if (notableHash) return;
 
-    const notesResult = await getNotes(statuses);
+    this.set('loadingNotes', 'loading');
+    const notes = await getNotes(statuses);
 
     this.setProperties({
-      notablesHash: generateNotableHash(notesResult, statuses, 'id'),
+      notablesHash: generateNotableHash(notes, statuses, 'id'),
+      loadingNotes: null,
     });
   },
 });

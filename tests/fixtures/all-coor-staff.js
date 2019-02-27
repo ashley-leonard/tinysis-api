@@ -4,8 +4,8 @@ export default {
       id: '2',
       type: 'user',
       attributes: {
-        firstName: 'Lulu',
-        lastName: 'Rau',
+        firstName: 'Reagan',
+        lastName: 'Cartwright',
         nickname: null,
         dateActive: null,
         dateInactive: null,
@@ -32,8 +32,8 @@ export default {
       id: '1',
       type: 'user',
       attributes: {
-        firstName: 'Kami',
-        lastName: 'Watsica',
+        firstName: 'Jaime',
+        lastName: 'Frami',
         nickname: null,
         dateActive: null,
         dateInactive: null,

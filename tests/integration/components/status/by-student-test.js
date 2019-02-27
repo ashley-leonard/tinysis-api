@@ -1,6 +1,6 @@
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { render } from '@ember/test-helpers';
+import { render, findAll } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 import { resolve } from 'rsvp';
 import { stubTinyData } from '../../../helpers/stub-tiny-data';
@@ -24,7 +24,7 @@ module('Integration | Component | status/by-student', (hooks) => {
     this.student = student.data;
   });
 
-  test('it renders with two current status months', async function (assert) {
+  test('it renders with two current status months', async (assert) => {
     tinyDataServiceMock.setToday(new Date(2019, 9, 15));
     tinyDataServiceMock.addResult(notesStudentStatuses);
 
@@ -37,12 +37,13 @@ module('Integration | Component | status/by-student', (hooks) => {
       }}
     `);
 
-    const rows = this.element.querySelectorAll('tbody');
+    const rows = findAll('tbody');
     assert.equal(rows.length, studentStatuses.data.length, 'expected number of months rendered');
-    assert.equal(this.element.querySelectorAll('ul.notes-list li').length, 2, 'expected count of notes rows rendered');
+
+    assert.equal(findAll('.expand-notes').length, 2, 'expected count of populated notes rows rendered');
   });
 
-  test('it renders with two current status months and two pending status months', async function (assert) {
+  test('it renders with two current status months and two pending status months', async (assert) => {
     tinyDataServiceMock.setToday(new Date(2019, 11, 15));
     tinyDataServiceMock.addResult(notesStudentStatuses);
 
@@ -55,7 +56,7 @@ module('Integration | Component | status/by-student', (hooks) => {
       }}
     `);
 
-    const rows = this.element.querySelectorAll('tbody');
+    const rows = findAll('tbody');
     assert.equal(rows.length, studentStatuses.data.length + 2, 'expected number of months rendered');
   });
 });

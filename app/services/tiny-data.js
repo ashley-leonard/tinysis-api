@@ -1,6 +1,6 @@
 import Service from '@ember/service';
 import moment from 'moment';
-import Logger from '../utils/logger';
+import { warn } from '../utils/logger';
 import fetch from '../utils/fetch';
 
 function clone(fixture) {
@@ -113,9 +113,13 @@ export const tinyDataService = {
 
       return clone(Object.keys(records).map(key => clone(records[key])));
     } catch (e) {
-      Logger.warn('JSON-API-STORE', 'no entity matching', type, id);
+      warn('JSON-API-STORE', 'no entity matching', type, id);
       return null;
     }
+  },
+
+  addRecord(data) {
+    this.addResult({ data });
   },
 };
 

@@ -8,9 +8,11 @@ export default Component.extend({
     const { notablesHash, getNotes, enrollments } = this;
     if (notablesHash) return;
 
+    this.set('loadingNotes', true);
     const notes = await getNotes();
     this.setProperties({
       notablesHash: generateNotableHash(notes, enrollments, 'id'),
+      loadingNotes: false,
     });
   },
 });

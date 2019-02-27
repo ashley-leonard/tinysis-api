@@ -41,17 +41,22 @@ export function fteRequirementsStatusName(status) {
 }
 
 export function isUnacceptable(status) {
-  const s = status.attributes;
+  const {
+    academicStatus,
+    attendanceStatus,
+    heldPeriodicCheckins,
+    metFteRequirements,
+  } = status.attributes;
 
-  if (s.academicStatus === STATUS_UNACCEPTABLE) return true;
+  if (academicStatus === STATUS_UNACCEPTABLE) return true;
 
-  if (s.attendanceStatus === STATUS_UNACCEPTABLE) return true;
+  if (attendanceStatus === STATUS_UNACCEPTABLE) return true;
 
-  if (s.studentId) {
-    return !s.heldPeriodicCheckins;
+  if (status.relationships.statusable.data.type === 'user') {
+    return !heldPeriodicCheckins;
   }
 
-  return s.metFteRequirements;
+  return metFteRequirements;
 }
 
 export function activeMonths(term, momentToday) {

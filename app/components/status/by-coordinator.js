@@ -13,7 +13,7 @@ export default Component.extend({
     const { statuses } = this;
 
     return statuses.data.reduce((hash, status) => {
-      const key = status.attributes.studentId.toString();
+      const key = status.relationships.statusable.data.id;
 
       const h = hash[key] || {};
 

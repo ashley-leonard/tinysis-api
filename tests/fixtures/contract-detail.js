@@ -3,13 +3,13 @@ export default {
     id: '3',
     type: 'contract',
     attributes: {
-      name: 'Autem iste vacuus vinco caveo.',
+      name: 'Contego uterque defendo accedo fugit.',
       status: 'approved',
-      learningObjectives: 'Succurro soleo socius adinventitias corrupti.',
-      competencies: 'Caute rerum summa contra vulgaris.',
-      evaluationMethods: 'Stillicidium cum pecco studio tactus.',
-      instructionalMaterials: 'Deporto absens viduata sint nemo.',
-      location: 'In aut cuppedia ut urbs.',
+      learningObjectives: 'Tergum expedita ocer apparatus creptio.',
+      competencies: 'Vitiosus tracto derideo thema non.',
+      evaluationMethods: 'Vigilo odit ultio copiose campana.',
+      instructionalMaterials: 'Delicate qui antepono occaecati ter.',
+      location: 'Qui tutis cras charisma paulatim.',
       timeslots: [
         {
           start: '8:45',
@@ -92,6 +92,16 @@ export default {
         description: 'Here is assignment number 1',
         dueDate: '2018-09-02',
       },
+      relationships: {
+        turnins: {
+          data: [
+            {
+              id: '1',
+              type: 'turnin',
+            },
+          ],
+        },
+      },
     },
     {
       id: '2',
@@ -100,6 +110,16 @@ export default {
         name: 'Assignment 2',
         description: 'Here is assignment number 2',
         dueDate: '2018-09-03',
+      },
+      relationships: {
+        turnins: {
+          data: [
+            {
+              id: '2',
+              type: 'turnin',
+            },
+          ],
+        },
       },
     },
     {
@@ -110,6 +130,16 @@ export default {
         description: 'Here is assignment number 3',
         dueDate: '2018-09-04',
       },
+      relationships: {
+        turnins: {
+          data: [
+            {
+              id: '3',
+              type: 'turnin',
+            },
+          ],
+        },
+      },
     },
     {
       id: '4',
@@ -119,6 +149,16 @@ export default {
         description: 'Here is assignment number 4',
         dueDate: '2018-09-05',
       },
+      relationships: {
+        turnins: {
+          data: [
+            {
+              id: '4',
+              type: 'turnin',
+            },
+          ],
+        },
+      },
     },
     {
       id: '5',
@@ -127,6 +167,16 @@ export default {
         name: 'Assignment 5',
         description: 'Here is assignment number 5',
         dueDate: '2018-09-06',
+      },
+      relationships: {
+        turnins: {
+          data: [
+            {
+              id: '5',
+              type: 'turnin',
+            },
+          ],
+        },
       },
     },
     {
@@ -168,8 +218,8 @@ export default {
       id: '1',
       type: 'user',
       attributes: {
-        firstName: 'Kami',
-        lastName: 'Watsica',
+        firstName: 'Jaime',
+        lastName: 'Frami',
         nickname: null,
         dateActive: null,
         dateInactive: null,

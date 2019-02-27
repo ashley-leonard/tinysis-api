@@ -5,6 +5,7 @@ import { assert } from '@ember/debug';
 
 export default Component.extend({
   tagName: 'td',
+  classNames: 'center',
   classNameBindings: ['showStatus:active', 'isIncomplete:incomplete'],
   showStatus: bool('entry'),
   entry: computed('coordinator', 'coordinatorsHash', 'month', function () {

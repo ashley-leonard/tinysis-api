@@ -7,7 +7,7 @@ import coorStatus from '../../../fixtures/coor-statuses';
 import coorStudents from '../../../fixtures/coor-students';
 import coorTerms from '../../../fixtures/coor-terms';
 
-const term = coorTerms.data[0];
+const [term] = coorTerms.data;
 let tinyDataServiceMock;
 
 module('Integration | Component | status/by-coordinator', (hooks) => {
@@ -34,7 +34,7 @@ module('Integration | Component | status/by-coordinator', (hooks) => {
     assert.equal(rows.length, coorStudents.data.length, 'expected number of student rows were rendered');
 
     const activeStudent = coorStudents.data.find(student => student.attributes.status === 'active');
-    const activeStudentStati = coorStatus.data.filter(status => status.attributes.studentId === activeStudent.id);
+    const activeStudentStati = coorStatus.data.filter(status => status.relationships.statusable.data.id === activeStudent.id);
     const activeStudentStatiCels = findAll(`tbody tr[data-test-student-id="${activeStudent.id}"] td[data-test-has-status]`);
     const activeStudentExceptionCels = findAll(`tbody tr[data-test-student-id="${activeStudent.id}"] td.status-cel-exception`);
 
@@ -42,7 +42,7 @@ module('Integration | Component | status/by-coordinator', (hooks) => {
     assert.equal(activeStudentExceptionCels.length, 0, 'expect all status reporting caught up for active student');
 
     const inactiveStudent = coorStudents.data.find(student => student.attributes.status === 'inactive');
-    const inactiveStudentStati = coorStatus.data.filter(status => status.attributes.studentId === activeStudent.id);
+    const inactiveStudentStati = coorStatus.data.filter(status => status.relationships.statusable.data.id === inactiveStudent.id);
     const inactiveStudentStatiCels = findAll(`tbody tr[data-test-student-id="${inactiveStudent.id}"] td[data-test-has-status]`);
     const inactiveStudentExceptionCels = findAll(`tbody tr[data-test-student-id="${inactiveStudent.id}"] td.status-cel-exception`);
 
@@ -62,7 +62,7 @@ module('Integration | Component | status/by-coordinator', (hooks) => {
     assert.equal(rows.length, coorStudents.data.length, 'expected number of student rows were rendered');
 
     const activeStudent = coorStudents.data.find(student => student.attributes.status === 'active');
-    const activeStudentStati = coorStatus.data.filter(status => status.attributes.studentId === activeStudent.id);
+    const activeStudentStati = coorStatus.data.filter(status => status.relationships.statusable.data.id === activeStudent.id);
     const activeStudentStatiCels = findAll(`tbody tr[data-test-student-id="${activeStudent.id}"] td[data-test-has-status]`);
     const activeStudentExceptionCels = findAll(`tbody tr[data-test-student-id="${activeStudent.id}"] td.status-cel-exception`);
 
@@ -70,7 +70,7 @@ module('Integration | Component | status/by-coordinator', (hooks) => {
     assert.equal(activeStudentExceptionCels.length, 2, 'expected two exception cels for active student; it is Dec and Nov/Dec reports are missing');
 
     const inactiveStudent = coorStudents.data.find(student => student.attributes.status === 'inactive');
-    const inactiveStudentStati = coorStatus.data.filter(status => status.attributes.studentId === activeStudent.id);
+    const inactiveStudentStati = coorStatus.data.filter(status => status.relationships.statusable.data.id === activeStudent.id);
     const inactiveStudentStatiCels = findAll(`tbody tr[data-test-student-id="${inactiveStudent.id}"] td[data-test-has-status]`);
     const inactiveStudentExceptionCels = findAll(`tbody tr[data-test-student-id="${inactiveStudent.id}"] td.status-cel-exception`);
 

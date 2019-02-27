@@ -1,6 +1,5 @@
 import Route from '@ember/routing/route';
 import { inject as service } from '@ember/service';
-import { all } from 'rsvp';
 import { get } from '@ember/object';
 
 export default Route.extend({
@@ -9,20 +8,12 @@ export default Route.extend({
   model(params, transition) {
     const studentId = get(transition, 'to.parent.params.student_id');
 
-    return all([
-      this.tinyData.fetch(`/api/enrollments?participantIds=${studentId}&status=enrolled`),
-    ]).then((result) => {
-      const [enrollments] = result;
-      return enrollments;
-    });
+    return this.tinyData.fetch(`/api/enrollments?participantIds=${studentId}&status=enrolled&include=contract,contract.facilitator,contract.term,credit_assignments,credit_assignments.credit,participant`);
   },
 
-  afterModel(enrollments) {
+  async afterModel(enrollments) {
     const enrollmentIds = enrollments.data.map(e => e.id).join(',');
-    return this.tinyData.fetch(`/api/statuses?enrollmentIds=${enrollmentIds}`)
-      .then((enrollmentStatuses) => {
-        this.enrollmentStatuses = enrollmentStatuses;
-      });
+    this.enrollmentStatuses = await this.tinyData.fetch(`/api/statuses?enrollmentIds=${enrollmentIds}`);
   },
 
   setupController(controller, model) {

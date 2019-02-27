@@ -15,6 +15,7 @@ module('Integration | Component | contracts/enrollments-list-item', (hooks) => {
   hooks.beforeEach(function () {
     tinyData = stubTinyData();
     tinyData.addResult(contractEnrollments);
+    tinyData.addResult(contractEnrollmentsNotes);
 
     [this.enrollment] = contractEnrollments.data;
     this.notablesHash = generateNotableHash(contractEnrollmentsNotes, contractEnrollments.data, 'id');

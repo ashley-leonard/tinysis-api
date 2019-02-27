@@ -7,19 +7,23 @@ export default {
         month: '2019-09-01',
         academicStatus: 0,
         attendanceStatus: 0,
-        createdAt: '2019-02-07T02:36:45.000Z',
-        updatedAt: '2019-02-07T02:36:45.000Z',
+        createdAt: '2019-02-25T04:39:06.000Z',
+        updatedAt: '2019-02-25T04:39:06.000Z',
         fteHours: 25,
         metFteRequirements: true,
         heldPeriodicCheckins: true,
-        studentId: '4',
-        enrollmentId: null,
       },
       relationships: {
         creator: {
           data: {
             id: '1',
             type: 'creator',
+          },
+        },
+        statusable: {
+          data: {
+            id: '4',
+            type: 'user',
           },
         },
       },
@@ -31,19 +35,23 @@ export default {
         month: '2019-10-01',
         academicStatus: 0,
         attendanceStatus: 0,
-        createdAt: '2019-02-07T02:36:46.000Z',
-        updatedAt: '2019-02-07T02:36:46.000Z',
+        createdAt: '2019-02-25T04:39:07.000Z',
+        updatedAt: '2019-02-25T04:39:07.000Z',
         fteHours: 25,
         metFteRequirements: true,
         heldPeriodicCheckins: true,
-        studentId: '4',
-        enrollmentId: null,
       },
       relationships: {
         creator: {
           data: {
             id: '1',
             type: 'creator',
+          },
+        },
+        statusable: {
+          data: {
+            id: '4',
+            type: 'user',
           },
         },
       },
@@ -55,19 +63,23 @@ export default {
         month: '2019-09-01',
         academicStatus: 0,
         attendanceStatus: 0,
-        createdAt: '2019-02-07T02:36:45.000Z',
-        updatedAt: '2019-02-07T02:36:45.000Z',
+        createdAt: '2019-02-25T04:39:06.000Z',
+        updatedAt: '2019-02-25T04:39:06.000Z',
         fteHours: 25,
         metFteRequirements: true,
         heldPeriodicCheckins: true,
-        studentId: '5',
-        enrollmentId: null,
       },
       relationships: {
         creator: {
           data: {
             id: '2',
             type: 'creator',
+          },
+        },
+        statusable: {
+          data: {
+            id: '5',
+            type: 'user',
           },
         },
       },
@@ -79,19 +91,23 @@ export default {
         month: '2019-10-01',
         academicStatus: 0,
         attendanceStatus: 0,
-        createdAt: '2019-02-07T02:36:46.000Z',
-        updatedAt: '2019-02-07T02:36:46.000Z',
+        createdAt: '2019-02-25T04:39:07.000Z',
+        updatedAt: '2019-02-25T04:39:07.000Z',
         fteHours: 25,
         metFteRequirements: true,
         heldPeriodicCheckins: true,
-        studentId: '5',
-        enrollmentId: null,
       },
       relationships: {
         creator: {
           data: {
             id: '2',
             type: 'creator',
+          },
+        },
+        statusable: {
+          data: {
+            id: '5',
+            type: 'user',
           },
         },
       },
@@ -103,19 +119,23 @@ export default {
         month: '2019-09-01',
         academicStatus: 0,
         attendanceStatus: 0,
-        createdAt: '2019-02-07T02:36:45.000Z',
-        updatedAt: '2019-02-07T02:36:45.000Z',
+        createdAt: '2019-02-25T04:39:06.000Z',
+        updatedAt: '2019-02-25T04:39:06.000Z',
         fteHours: 25,
         metFteRequirements: true,
         heldPeriodicCheckins: true,
-        studentId: '6',
-        enrollmentId: null,
       },
       relationships: {
         creator: {
           data: {
             id: '2',
             type: 'creator',
+          },
+        },
+        statusable: {
+          data: {
+            id: '6',
+            type: 'user',
           },
         },
       },
@@ -127,19 +147,23 @@ export default {
         month: '2019-10-01',
         academicStatus: 0,
         attendanceStatus: 0,
-        createdAt: '2019-02-07T02:36:46.000Z',
-        updatedAt: '2019-02-07T02:36:46.000Z',
+        createdAt: '2019-02-25T04:39:07.000Z',
+        updatedAt: '2019-02-25T04:39:07.000Z',
         fteHours: 25,
         metFteRequirements: true,
         heldPeriodicCheckins: true,
-        studentId: '6',
-        enrollmentId: null,
       },
       relationships: {
         creator: {
           data: {
             id: '2',
             type: 'creator',
+          },
+        },
+        statusable: {
+          data: {
+            id: '6',
+            type: 'user',
           },
         },
       },
@@ -150,8 +174,8 @@ export default {
       id: '1',
       type: 'user',
       attributes: {
-        firstName: 'Kami',
-        lastName: 'Watsica',
+        firstName: 'Jaime',
+        lastName: 'Frami',
         nickname: null,
         dateActive: null,
         dateInactive: null,
@@ -163,8 +187,8 @@ export default {
       id: '2',
       type: 'user',
       attributes: {
-        firstName: 'Lulu',
-        lastName: 'Rau',
+        firstName: 'Reagan',
+        lastName: 'Cartwright',
         nickname: null,
         dateActive: null,
         dateInactive: null,

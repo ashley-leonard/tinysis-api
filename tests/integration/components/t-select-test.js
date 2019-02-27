@@ -1,6 +1,6 @@
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { render } from '@ember/test-helpers';
+import { render, findAll } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 import { Interactor } from '@bigtest/interactor';
 
@@ -121,13 +121,13 @@ module('Integration | Component | t-select', (hooks) => {
       }}
     `);
 
-    options = Array.prototype.slice.call(this.element.querySelectorAll('option'));
+    options = findAll('option');
     selectedOptions = options.filter(option => option.selected);
 
     assert.equal(selectedOptions.length, 1, 'expect one selected option');
     assert.equal(selectedOptions.pop().value, 'red', 'the option valued "red" is expected to be selected');
 
-    const selectValue = this.objectOptions[1];
+    const [selectValue] = this.objectOptions;
 
     await new Interactor('select[name="test"]').select(selectValue.name);
 

@@ -17,6 +17,7 @@ export default Component.extend({
 
   participant: computed('enrollment', function () {
     const { enrollment, tinyData } = this;
+
     return tinyData.get('user', enrollment.relationships.participant.data.id);
   }),
 

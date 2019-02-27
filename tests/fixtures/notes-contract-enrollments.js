@@ -4,11 +4,16 @@ export default {
       id: '3',
       type: 'note',
       attributes: {
-        note: 'Note for Funk',
-        updatedAt: '2019-02-07T02:36:45.000Z',
-        notableId: '3',
+        note: 'Note for Zemlak',
+        updatedAt: '2019-02-25T04:39:05.000Z',
       },
       relationships: {
+        notable: {
+          data: {
+            id: '3',
+            type: 'enrollment',
+          },
+        },
         creator: {
           data: {
             id: '1',
@@ -21,11 +26,16 @@ export default {
       id: '4',
       type: 'note',
       attributes: {
-        note: 'Note for Howell',
-        updatedAt: '2019-02-07T02:36:45.000Z',
-        notableId: '4',
+        note: 'Note for Lueilwitz',
+        updatedAt: '2019-02-25T04:39:05.000Z',
       },
       relationships: {
+        notable: {
+          data: {
+            id: '4',
+            type: 'enrollment',
+          },
+        },
         creator: {
           data: {
             id: '1',
@@ -40,8 +50,8 @@ export default {
       id: '1',
       type: 'user',
       attributes: {
-        firstName: 'Kami',
-        lastName: 'Watsica',
+        firstName: 'Jaime',
+        lastName: 'Frami',
         nickname: null,
         dateActive: null,
         dateInactive: null,

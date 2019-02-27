@@ -12,6 +12,6 @@
   }}
   {{contracts/enrollments-list
     enrollments=enrollments
-    getNotes=(route-action "getNotes" model)
+    getNotes=(route-action "getNotes" enrollments)
   }}
 {{/check-empty}}

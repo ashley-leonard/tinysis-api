@@ -23,7 +23,7 @@ export default Component.extend({
     const { enrollmentStatuses } = this;
 
     return enrollmentStatuses.reduce((memo, status) => {
-      const { enrollmentId } = status.attributes;
+      const enrollmentId = status.relationships.statusable.data.id;
       const statuses = memo[enrollmentId] || {};
       statuses[status.attributes.month] = status;
       memo[enrollmentId] = statuses;
@@ -39,11 +39,12 @@ export default Component.extend({
     const { getNotes, notableHash, enrollmentStatuses } = this;
     if (notableHash) return;
 
-    const notesResult = await getNotes(enrollmentStatuses);
+    this.set('loadingNotes', 'loading');
+    const notes = await getNotes(enrollmentStatuses);
 
     this.setProperties({
-      notablesHash: generateNotableHash(notesResult, enrollmentStatuses, 'enrollmentId'),
+      notablesHash: generateNotableHash(notes, enrollmentStatuses, 'relationships.enrollment.data.id'),
+      loadingNotes: null,
     });
   },
-
 });

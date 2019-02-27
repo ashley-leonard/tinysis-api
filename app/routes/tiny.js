@@ -18,11 +18,11 @@ export default Route.extend({
 
   actions: {
     getNotes(notables) {
-      const [firstNotable] = notables.data;
+      const [firstNotable] = notables;
       if (!firstNotable) return Promise.resolve({ data: [], meta: { count: 0 } });
 
       const notableType = firstNotable.type;
-      const notableIds = notables.data.map(notable => notable.id);
+      const notableIds = notables.map(notable => notable.id);
       return this.tinyData.fetch('/api/notes', {
         params: {
           notableType,

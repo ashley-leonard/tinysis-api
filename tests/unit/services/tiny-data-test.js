@@ -1,6 +1,6 @@
 import { module, test } from 'qunit';
 import { setupTest } from 'ember-qunit';
-import { notesResult } from '../../fixtures/notes';
+import notesResult from '../../fixtures/notes-contract-enrollments';
 
 module('Unit | Service | tiny-data', (hooks) => {
   setupTest(hooks);
@@ -15,14 +15,14 @@ module('Unit | Service | tiny-data', (hooks) => {
     const service = this.owner.lookup('service:tiny-data');
     service.addResult(notesResult);
 
-    const fixture = notesResult.data[0];
+    const [fixture] = notesResult.data;
     const note = service.get('note', fixture.id);
     assert.ok(note, 'object exists');
     assert.notEqual(note, fixture, 'object is not the same as the original');
     assert.equal(note.id, fixture.id, 'correct fixture was retrieved');
     assert.equal(note.attributes.note, fixture.attributes.note, 'attributes were retrieved');
 
-    const creator = service.get('creator', note.relationships.creator.data.id);
+    const creator = service.get('user', note.relationships.creator.data.id);
     assert.ok(creator, 'included object was stored as well');
     assert.equal(note.relationships.creator.data.id, creator.id);
   });

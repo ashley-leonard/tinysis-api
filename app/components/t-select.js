@@ -43,7 +43,7 @@ export default Component.extend({
   change(event) {
     const select = event.target;
     const { name } = select;
-    const option = select.selectedOptions[0];
+    const [option] = select.selectedOptions;
     const value = option && option.value;
 
     this.onchange(value, name, event);

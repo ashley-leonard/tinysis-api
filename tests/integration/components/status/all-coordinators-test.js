@@ -9,7 +9,7 @@ import coorStatus from '../../../fixtures/all-coor-statuses';
 import coorStudents from '../../../fixtures/all-coor-students';
 import coorTerms from '../../../fixtures/coor-terms';
 
-const term = coorTerms.data[0];
+const [term] = coorTerms.data;
 let tinyDataServiceMock;
 
 module('Integration | Component | status/all-coordinators', (hooks) => {
@@ -45,7 +45,7 @@ module('Integration | Component | status/all-coordinators', (hooks) => {
     const rows = findAll('tbody tr');
     assert.equal(rows.length, coorStaff.data.length, 'expected number of staff rows were rendered');
 
-    const coor1 = coorStaff.data[0];
+    const [coor1] = coorStaff.data;
     const coorRow = find(`tr[data-test-coordinator-id="${coor1.id}"]`);
 
     assert.ok(coorRow, 'expected coordinator row was rendered');
@@ -63,7 +63,7 @@ module('Integration | Component | status/all-coordinators', (hooks) => {
     assert.equal(coorActiveLink.title, 'Complete', 'expected title rendered for active');
     assert.equal(coorActiveLink.text.trim(), 'C', 'first month is marked as complete');
 
-    const firstMonth = this.get('term').attributes.months[0];
+    const [firstMonth] = this.get('term').attributes.months;
 
     // drop the first status month for coor1
     //
@@ -98,7 +98,7 @@ module('Integration | Component | status/all-coordinators', (hooks) => {
     const rows = findAll('tbody tr');
     assert.equal(rows.length, coorStaff.data.length, 'expected number of staff rows were rendered');
 
-    const coor1 = coorStaff.data[0];
+    const [coor1] = coorStaff.data;
     const coorRow = find(`tr[data-test-coordinator-id="${coor1.id}"]`);
 
     assert.ok(coorRow, 'expected coordinator row was rendered');

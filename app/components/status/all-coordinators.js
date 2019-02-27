@@ -76,7 +76,7 @@ export default Component.extend({
     statuses.data.forEach((status) => {
       // skip inactive student
       //
-      const student = tinyData.get('user', status.attributes.studentId);
+      const student = tinyData.get('user', status.relationships.statusable.data.id);
       assert('expected student', student);
 
       const coordinatorHash = result[student.relationships.coordinator.data.id];

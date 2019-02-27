@@ -12,13 +12,18 @@
   width: 100%;
 }
 
-html, button, input, select, textarea, .pure-g [class *= "pure-u"] {
-    /* Set your content font stack here: */
-    font-family: sans-serif;
-    font-size: 14px;
+.pure-table-collapsed {
+  width: auto;
 }
 
-.notes-list, .actions-list {
+html, button, input, select, textarea, .pure-g [class *= "pure-u"] {
+    /* Set your content font stack here: */
+    font-family: Roboto, sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.notes-list ul, .actions-list {
   padding: 0;
   margin: 0;
 }
@@ -64,6 +69,14 @@ html, button, input, select, textarea, .pure-g [class *= "pure-u"] {
   padding: 0;
 }
 
+.center {
+  text-align: center;
+}
+
+.pure-table td.compact, .pure-table th.compact {
+  padding: 0;
+}
+
 .callout-box {
 	background-color: #444;
 	background-image: -moz-linear-gradient(top, #444, #444);
@@ -76,4 +89,26 @@ html, button, input, select, textarea, .pure-g [class *= "pure-u"] {
 	min-height: 50px;
 	border: 1px solid #333;
 	text-shadow: 0 0 1px #000;
+}
+
+.assignments-list th.assignment-list-header {
+  vertical-align: bottom;
+  text-align: center;
+}
+
+.assignments-list th .svg-cnt {
+  display: inline-block;
+  width: 20px;
+  height: 200px;
+  margin: 0;
+}
+
+.notes-row td {
+  padding: 0 14px;
+}
+
+.action-icon {
+  text-decoration: none;
+  cursor: hand;
+  color: black;
 }

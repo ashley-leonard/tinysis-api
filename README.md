@@ -83,3 +83,32 @@ Specify what it takes to deploy your app.
 * Development Browser Extensions
   * [ember inspector for chrome](https://chrome.google.com/webstore/detail/ember-inspector/bmdblncegkenkacieihfhpjfppoconhi)
   * [ember inspector for firefox](https://addons.mozilla.org/en-US/firefox/addon/ember-inspector/)
+
+### SVG generation for assignments table
+
+I abandoned this approach when I realized I could just generate
+the tags using handlebars. but SVG.js was very useful in prototyping.
+
+    didInsertElement() 
+      const svgContainer = this.element.children[0];
+      const draw = SVG(svgContainer)
+      const name = this.assignment.attributes.name
+      const label = name;
+
+      draw
+        .rect(20, 200)
+        .fill('#eee');
+      draw
+        .text(label)
+        .y(195)
+        .x(10)
+        .font({
+          family: 'Roboto',
+          size: 12,
+          weight: 300,
+          'writing-mode': 'tb',
+          'text-anchor': 'end'
+          
+        })
+        .transform( { rotation: 180 });
+    },

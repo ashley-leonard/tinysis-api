@@ -3,7 +3,7 @@
 module.exports = {
   root: true,
   parserOptions: {
-    ecmaVersion: 2017,
+    ecmaVersion: 2018,
     sourceType: 'module',
   },
   plugins: [
@@ -55,6 +55,13 @@ module.exports = {
     // I generally don't do this but for reduce operations this is just
     // a painful rule
     'no-param-reassign': 0,
+
+    'prefer-destructuring': ['error', {
+      array: true,
+      object: true,
+    }, {
+      enforceForRenamedProperties: false,
+    }],
   },
   overrides: [
     // node files
