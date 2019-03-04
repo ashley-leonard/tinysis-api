@@ -1,18 +1,18 @@
 <tr>
-  <td class="contract"> 
-    <p class="contract-name">
-      {{#link-to "status-by-enrollment" enrollment.id}}
-        {{contract.attributes.name}}
-      {{/link-to}}
-    </p>
-    <p class="full-name">
-      {{full-name facilitator "first-last"}}
-      /
-      {{term.attributes.name}}
-    </p>
-    <p class="credit-assignments">
+  <td class="contract">  
+    <div class="compact-paragraphs">
+      <p class="contract-name">
+        {{#link-to "status-by-enrollment" enrollment.id}}
+          {{contract.attributes.name}}
+        {{/link-to}}
+      </p>
+      <p class="full-name">
+        {{full-name facilitator "first-last"}}
+        /
+        {{term.attributes.name}}
+      </p>
       {{credit-assignments creditAssignments=creditAssignments}}
-    </p>
+    </div>
   </td>
 
   <td class="enrollment-status">

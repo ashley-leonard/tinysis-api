@@ -4,8 +4,8 @@ export default {
       id: '128',
       type: 'note',
       attributes: {
-        note: 'Note by Frami for student Zemlak / assignment 1',
-        updatedAt: '2019-02-25T04:39:07.000Z',
+        note: 'Note by Gleichner for student Okuneva / assignment 1',
+        updatedAt: '2019-03-04T03:01:37.000Z',
       },
       relationships: {
         notable: {
@@ -26,8 +26,8 @@ export default {
       id: '129',
       type: 'note',
       attributes: {
-        note: 'Note by Frami for student Zemlak / assignment 2',
-        updatedAt: '2019-02-25T04:39:07.000Z',
+        note: 'Note by Gleichner for student Okuneva / assignment 2',
+        updatedAt: '2019-03-04T03:01:37.000Z',
       },
       relationships: {
         notable: {
@@ -48,8 +48,8 @@ export default {
       id: '130',
       type: 'note',
       attributes: {
-        note: 'Note by Frami for student Zemlak / assignment 3',
-        updatedAt: '2019-02-25T04:39:07.000Z',
+        note: 'Note by Gleichner for student Okuneva / assignment 3',
+        updatedAt: '2019-03-04T03:01:37.000Z',
       },
       relationships: {
         notable: {
@@ -70,8 +70,8 @@ export default {
       id: '131',
       type: 'note',
       attributes: {
-        note: 'Note by Frami for student Zemlak / assignment 4',
-        updatedAt: '2019-02-25T04:39:07.000Z',
+        note: 'Note by Gleichner for student Okuneva / assignment 4',
+        updatedAt: '2019-03-04T03:01:37.000Z',
       },
       relationships: {
         notable: {
@@ -92,8 +92,8 @@ export default {
       id: '132',
       type: 'note',
       attributes: {
-        note: 'Note by Frami for student Zemlak / assignment 5',
-        updatedAt: '2019-02-25T04:39:07.000Z',
+        note: 'Note by Gleichner for student Okuneva / assignment 5',
+        updatedAt: '2019-03-04T03:01:37.000Z',
       },
       relationships: {
         notable: {
@@ -116,8 +116,8 @@ export default {
       id: '1',
       type: 'user',
       attributes: {
-        firstName: 'Jaime',
-        lastName: 'Frami',
+        firstName: 'Sharonda',
+        lastName: 'Gleichner',
         nickname: null,
         dateActive: null,
         dateInactive: null,

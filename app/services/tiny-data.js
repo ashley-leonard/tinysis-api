@@ -3,7 +3,7 @@ import moment from 'moment';
 import { warn } from '../utils/logger';
 import fetch from '../utils/fetch';
 
-function clone(fixture) {
+export function clone(fixture) {
   return JSON.parse(JSON.stringify(fixture));
 }
 
@@ -12,6 +12,14 @@ export const tinyDataService = {
     this.flush();
     this._super(...args);
     this.setToday(new Date());
+  },
+
+  setYears(years) {
+    this._data.years = years.map(year => parseInt(year, 10));
+  },
+
+  getYears() {
+    return this._data.years.concat([]);
   },
 
   getToday() {

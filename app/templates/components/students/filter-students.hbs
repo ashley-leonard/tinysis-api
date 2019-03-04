@@ -1,0 +1,47 @@
+<ul class="filter">
+  <li class="filter-item" data-test-name>
+    {{input
+      name="name"
+      placeholder="Name"
+      value=queryParams.name
+      autocomplete="off"
+      enter=(action "onInput"  value="target.value")
+      change=(action "onInput" value="target.value")
+    }}
+  </li>
+  <li class="filter-item" data-test-coordinator>
+    {{t-select
+      options=coordinatorOptions
+      value=queryParams.coordinator
+      name="coordinator"
+      prompt="All coordinators"
+      optionValuePath="id"
+      optionNamePath="name"
+      onchange=(action "onSelect")
+    }}
+  </li>
+  <li class="filter-item" data-test-grade>
+    {{t-select
+      options=grades
+      value=queryParams.grade
+      name="grade"
+      prompt="Any grade"
+      optionValuePath="value"
+      optionNamePath="name"
+      onchange=(action "onSelect")
+    }}
+  </li>
+  <li class="filter-item" data-test-year>
+    {{t-select
+      options=schoolYearOptions
+      value=queryParams.schoolYear
+      optionNamePath="name"
+      optionValuePath="value"
+      name="schoolYear"
+      onchange=(action "onSelect")
+    }}
+  </li>
+  <li class="filter-item" data-test-submit>
+    <button type="submit">Find</button>
+  </li>
+</ul>

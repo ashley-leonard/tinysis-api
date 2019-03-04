@@ -4,8 +4,8 @@ export default {
       id: '1',
       type: 'user',
       attributes: {
-        firstName: 'Jaime',
-        lastName: 'Frami',
+        firstName: 'Sharonda',
+        lastName: 'Gleichner',
         nickname: null,
         dateActive: null,
         dateInactive: null,
@@ -28,8 +28,8 @@ export default {
       id: '2',
       type: 'user',
       attributes: {
-        firstName: 'Reagan',
-        lastName: 'Cartwright',
+        firstName: 'Marty',
+        lastName: 'Ledner',
         nickname: null,
         dateActive: null,
         dateInactive: null,
@@ -56,8 +56,8 @@ export default {
       id: '3',
       type: 'user',
       attributes: {
-        firstName: 'Phil',
-        lastName: 'Cruickshank',
+        firstName: 'Bennie',
+        lastName: 'Cronin',
         nickname: null,
         dateActive: null,
         dateInactive: '2018-01-01',

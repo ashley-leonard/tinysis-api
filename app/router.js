@@ -46,12 +46,6 @@ Router.map(function () {
       this.route('index', { path: '/' });
     });
 
-    this.route('students', {
-      resetNamespace: true,
-    }, function () {
-      this.route('index', { path: '/' });
-    });
-
     this.route('contract', {
       path: 'contract/:id',
       resetNamespace: true,
@@ -76,6 +70,34 @@ Router.map(function () {
       });
       this.route('status-by-contract', {
         path: '/status',
+        resetNamespace: true,
+      });
+    });
+
+    this.route('students', {
+      resetNamespace: true,
+    }, function () {
+      this.route('index', { path: '/' });
+    });
+
+    this.route('student', {
+      path: 'student/:id',
+      resetNamespace: true,
+    }, function () {
+      this.route('student-transcript', {
+        path: '/transcript',
+        resetNamespace: true,
+      });
+      this.route('student-learning-plan', {
+        path: '/learning',
+        resetNamespace: true,
+      });
+      this.route('student-credits', {
+        path: '/credits',
+        resetNamespace: true,
+      });
+      this.route('student-graduation-plan', {
+        path: '/graduation',
         resetNamespace: true,
       });
     });

@@ -23,6 +23,10 @@ html, button, input, select, textarea, .pure-g [class *= "pure-u"] {
     font-weight: 400;
 }
 
+.compact-paragraphs p {
+  margin: 0;
+}
+
 .notes-list ul, .actions-list {
   padding: 0;
   margin: 0;
@@ -33,8 +37,12 @@ html, button, input, select, textarea, .pure-g [class *= "pure-u"] {
   margin-bottom: 1rem;
 }
 
+.actions-list {
+  display: inline-block;
+}
 .actions-list-item {
-  margin-bottom: 0;
+  display: inline-block;
+  margin: 0 1rem 0 0;
 }
 
 .notes-list-item:last-child {
@@ -75,6 +83,10 @@ html, button, input, select, textarea, .pure-g [class *= "pure-u"] {
 
 .pure-table td.compact, .pure-table th.compact {
   padding: 0;
+}
+
+.pure-table-bordered tbody {
+  border-bottom: 1px solid #cbcbcb;
 }
 
 .callout-box {

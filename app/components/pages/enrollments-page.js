@@ -8,7 +8,7 @@ export default Component.extend({
   enrollmentsList: computed('enrollments', function () {
     const { enrollments, tinyData } = this;
 
-    return enrollments.data
+    return enrollments
       .sort((enrollment1, enrollment2) => {
         const contract1 = tinyData.get('contract', enrollment1.relationships.contract.data.id);
         const contract2 = tinyData.get('contract', enrollment2.relationships.contract.data.id);

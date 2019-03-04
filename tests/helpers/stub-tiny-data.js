@@ -1,6 +1,6 @@
 import Service from '@ember/service';
 import { getContext } from '@ember/test-helpers';
-import { tinyDataService } from 'tinysis-ui/services/tiny-data';
+import { tinyDataService, clone as _clone } from 'tinysis-ui/services/tiny-data';
 
 export function getTinyData() {
   const { owner } = getContext();
@@ -17,3 +17,5 @@ export function stubTinyData(overrides = {}) {
 
   return getTinyData();
 }
+
+export const clone = _clone;

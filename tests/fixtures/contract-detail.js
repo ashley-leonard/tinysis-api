@@ -3,13 +3,13 @@ export default {
     id: '3',
     type: 'contract',
     attributes: {
-      name: 'Contego uterque defendo accedo fugit.',
+      name: 'Curia stella decet commodi velum.',
       status: 'approved',
-      learningObjectives: 'Tergum expedita ocer apparatus creptio.',
-      competencies: 'Vitiosus tracto derideo thema non.',
-      evaluationMethods: 'Vigilo odit ultio copiose campana.',
-      instructionalMaterials: 'Delicate qui antepono occaecati ter.',
-      location: 'Qui tutis cras charisma paulatim.',
+      learningObjectives: 'Celo sophismata dolore tracto terror.',
+      competencies: 'Et articulus armarium valens vereor.',
+      evaluationMethods: 'Subvenio venio tubineus sopor anser.',
+      instructionalMaterials: 'Baiulus cultura vinco optio adflicto.',
+      location: 'Thymbra triginta deinde avarus comminor.',
       timeslots: [
         {
           start: '8:45',
@@ -218,8 +218,8 @@ export default {
       id: '1',
       type: 'user',
       attributes: {
-        firstName: 'Jaime',
-        lastName: 'Frami',
+        firstName: 'Sharonda',
+        lastName: 'Gleichner',
         nickname: null,
         dateActive: null,
         dateInactive: null,
