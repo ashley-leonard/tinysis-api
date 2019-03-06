@@ -61,7 +61,7 @@ class ContractsController < ApplicationController
     contract = Contract.find params[:id]
 
     render json: ContractSerializer.new(contract, {
-      include: [ :category, :facilitator, :assignments, :'credit_assignments.credit', :term ],
+      include: [ :category, :facilitator, :assignments, :'credit_assignments.credit', :term, :ealrs ],
     })
   end
 end
