@@ -13,6 +13,7 @@ Rails.application.routes.draw do
     get '/categories', to: 'categories#index'
     get '/terms', to: 'terms#index'
     get '/settings', to: 'settings#index'
+    get '/settings/years', to: 'settings#years'
     resources :staff
     resources :statuses, controller: 'status'
   end
