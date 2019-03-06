@@ -130,6 +130,14 @@ END
     
     self.base_month ||= @@reporting_base_month
     self.end_month ||= @@reporting_end_month
+
+    self.months
   end
-  
+
+  def self.reporting_dates_for_year(year)
+    coor = self.coor(year)
+    months = coor.get_reporting_months
+    base_month, *, end_month = months
+    [base_month, end_month]
+  end
 end
