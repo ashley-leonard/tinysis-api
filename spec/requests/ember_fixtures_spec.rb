@@ -121,7 +121,7 @@ RSpec.describe 'Ember fixtures script', type: :request do
 
     [@contract1_current, @contract2_current].each do |contract|
       contract.enrollments.each do |enrollment|
-        months = *(contract.term.months[0]..contract.term.months[2])
+        months = [contract.term.months[0], contract.term.months[1], contract.term.months[2]]
         months.each do |month|
           status = create :status, statusable: enrollment, month: month, creator: contract.facilitator
           create :note, creator: contract.facilitator, notable: status, note: "Note by #{contract.facilitator.last_name} for #{month} enrollment of #{enrollment.participant.last_name}"
@@ -136,7 +136,7 @@ RSpec.describe 'Ember fixtures script', type: :request do
       end
     end
 
-    months = *(@term_coor_current.months[0]..@term_coor_current.months[1])
+    months = [@term_coor_current.months[0], @term_coor_current.months[1]]
     months.each do |month|
       @students.each do |student|
         status = create :status, statusable: student, month: month, creator: student.coordinator
@@ -195,6 +195,16 @@ RSpec.describe 'Ember fixtures script', type: :request do
         get("/api/notes?notableType=Enrollment&notableIds=#{enrollment_ids.join(',')}")
         write_fixture 'notes-contract-enrollments.js', response
 
+        # status by contract enrollments
+        get("/api/statuses?enrollmentIds=#{enrollment_ids.join(',')}")
+        write_fixture('contract-statuses.js', response)
+
+        contract_status_response = JSON.parse(response.body)
+        status_ids = contract_status_response["data"].map{|status| status["id"]}
+
+        get("/api/notes?notableType=Status&notableIds=#{status_ids.join(',')}")
+        write_fixture 'notes-contract-statuses.js', response
+
         # coor
         #
         get("/api/students?coordinator_id=#{@staff2.id}&status=reportable&order=lastName,firstName")
@@ -226,16 +236,6 @@ RSpec.describe 'Ember fixtures script', type: :request do
         #
         get("/api/enrollments?participantIds=#{@student1.id},#{@student2.id}&status=enrolled&status=enrolled&include=contract,contract.facilitator,contract.term,credit_assignments,credit_assignments.credit,participant")
         write_fixture 'enrollments.js', response
-
-        # status by contract enrollments
-        get("/api/statuses?enrollmentIds=#{@contract1_current.enrollments.map(&:id)}")
-        write_fixture('contract-statuses.js', response)
-
-        contract_status_response = JSON.parse(response.body)
-        status_ids = contract_status_response["data"].map{|status| status["id"]}
-
-        get("/api/notes?notableType=Status&notableIds=#{status_ids.join(',')}")
-        write_fixture 'notes-contract-status.js', response
 
         # status by student
         #
