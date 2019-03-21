@@ -3,13 +3,13 @@ export default {
     id: '3',
     type: 'contract',
     attributes: {
-      name: 'Curia stella decet commodi velum.',
+      name: 'Doloribus eos viduo ducimus viduata.',
       status: 'approved',
-      learningObjectives: 'Celo sophismata dolore tracto terror.',
-      competencies: 'Et articulus armarium valens vereor.',
-      evaluationMethods: 'Subvenio venio tubineus sopor anser.',
-      instructionalMaterials: 'Baiulus cultura vinco optio adflicto.',
-      location: 'Thymbra triginta deinde avarus comminor.',
+      learningObjectives: 'Tandem thema iste quaerat voco.',
+      competencies: 'Vix accipio caecus cras patruus.',
+      evaluationMethods: 'Amitto suppono minima caterva delectatio.',
+      instructionalMaterials: 'Harum provident audentia voluptate et.',
+      location: 'Adeptio suspendo demoror impedit ulciscor.',
       timeslots: [
         {
           start: '8:45',
@@ -78,6 +78,50 @@ export default {
           {
             id: '2',
             type: 'creditAssignment',
+          },
+        ],
+      },
+      meetings: {
+        data: [
+          {
+            id: '1',
+            type: 'meeting',
+          },
+          {
+            id: '2',
+            type: 'meeting',
+          },
+          {
+            id: '3',
+            type: 'meeting',
+          },
+          {
+            id: '4',
+            type: 'meeting',
+          },
+          {
+            id: '5',
+            type: 'meeting',
+          },
+        ],
+      },
+      ealrs: {
+        data: [
+          {
+            id: '1',
+            type: 'ealr',
+          },
+          {
+            id: '2',
+            type: 'ealr',
+          },
+          {
+            id: '3',
+            type: 'ealr',
+          },
+          {
+            id: '4',
+            type: 'ealr',
           },
         ],
       },
@@ -191,15 +235,6 @@ export default {
       },
     },
     {
-      id: '1',
-      type: 'credit',
-      attributes: {
-        courseId: '0',
-        courseName: 'Course 1',
-        courseType: 0,
-      },
-    },
-    {
       id: '2',
       type: 'creditAssignment',
       attributes: {
@@ -216,15 +251,170 @@ export default {
     },
     {
       id: '1',
+      type: 'credit',
+      attributes: {
+        courseId: '0',
+        courseName: 'Course 1',
+        courseType: 0,
+      },
+    },
+    {
+      id: '1',
+      type: 'ealr',
+      attributes: {
+        ealr: 'Temporibus usque quia acervus velum.',
+        seq: '1.1',
+        category: 'Category 1',
+      },
+    },
+    {
+      id: '2',
+      type: 'ealr',
+      attributes: {
+        ealr: 'Tandem adulescens accedo aliquam subito.',
+        seq: '1.2',
+        category: 'Category 1',
+      },
+    },
+    {
+      id: '3',
+      type: 'ealr',
+      attributes: {
+        ealr: 'Defluo sint timor clibanus placeat.',
+        seq: '2.1',
+        category: 'Category 2',
+      },
+    },
+    {
+      id: '4',
+      type: 'ealr',
+      attributes: {
+        ealr: 'Brevis unde aggredior curis adopto.',
+        seq: '2.2',
+        category: 'Category 2',
+      },
+    },
+    {
+      id: '1',
       type: 'user',
       attributes: {
-        firstName: 'Sharonda',
-        lastName: 'Gleichner',
+        firstName: 'Darci',
+        lastName: 'Kuhic',
         nickname: null,
         dateActive: null,
         dateInactive: null,
         status: 'active',
         role: 'staff',
+      },
+    },
+    {
+      id: '1',
+      type: 'meeting',
+      attributes: {
+        title: 'Attendance for Sunday, 02 September 2018',
+        meetingDate: '2018-09-02',
+      },
+      relationships: {
+        meetingParticipants: {
+          data: [
+            {
+              id: '1',
+              type: 'meetingParticipant',
+            },
+            {
+              id: '2',
+              type: 'meetingParticipant',
+            },
+          ],
+        },
+      },
+    },
+    {
+      id: '2',
+      type: 'meeting',
+      attributes: {
+        title: 'Attendance for Monday, 03 September 2018',
+        meetingDate: '2018-09-03',
+      },
+      relationships: {
+        meetingParticipants: {
+          data: [
+            {
+              id: '3',
+              type: 'meetingParticipant',
+            },
+            {
+              id: '4',
+              type: 'meetingParticipant',
+            },
+          ],
+        },
+      },
+    },
+    {
+      id: '3',
+      type: 'meeting',
+      attributes: {
+        title: 'Attendance for Tuesday, 04 September 2018',
+        meetingDate: '2018-09-04',
+      },
+      relationships: {
+        meetingParticipants: {
+          data: [
+            {
+              id: '5',
+              type: 'meetingParticipant',
+            },
+            {
+              id: '6',
+              type: 'meetingParticipant',
+            },
+          ],
+        },
+      },
+    },
+    {
+      id: '4',
+      type: 'meeting',
+      attributes: {
+        title: 'Attendance for Wednesday, 05 September 2018',
+        meetingDate: '2018-09-05',
+      },
+      relationships: {
+        meetingParticipants: {
+          data: [
+            {
+              id: '7',
+              type: 'meetingParticipant',
+            },
+            {
+              id: '8',
+              type: 'meetingParticipant',
+            },
+          ],
+        },
+      },
+    },
+    {
+      id: '5',
+      type: 'meeting',
+      attributes: {
+        title: 'Attendance for Thursday, 06 September 2018',
+        meetingDate: '2018-09-06',
+      },
+      relationships: {
+        meetingParticipants: {
+          data: [
+            {
+              id: '9',
+              type: 'meetingParticipant',
+            },
+            {
+              id: '10',
+              type: 'meetingParticipant',
+            },
+          ],
+        },
       },
     },
     {

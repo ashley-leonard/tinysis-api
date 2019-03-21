@@ -1,8 +1,10 @@
-export const STATUS_ACCEPTABLE = 0;
-export const STATUS_UNACCEPTABLE = 1;
-export const STATUS_PARTICIPATING = 2;
+import dayjs from 'dayjs';
 
-export function academicStatusName(status) {
+export const STATUS_ACCEPTABLE = 'satisfactory';
+export const STATUS_UNACCEPTABLE = 'unsatisfactory';
+export const STATUS_PARTICIPATING = 'participating';
+
+export function getAcademicStatusName(status) {
   const { academicStatus } = status.attributes;
 
   switch (academicStatus) {
@@ -59,12 +61,39 @@ export function isUnacceptable(status) {
   return metFteRequirements;
 }
 
-export function activeMonths(term, momentToday) {
+export function activeMonths(term, dayjsToday) {
   const termMonths = term.attributes.months;
-  const currentMonth = momentToday
+  const currentMonth = dayjsToday
     .endOf('month')
     .format('YYYY-MM-DD');
 
   return termMonths
     .filter(month => month <= currentMonth);
+}
+
+export function hashByMonth(statuses) {
+  return statuses.reduce((hash, status) => {
+    hash[status.attributes.month] = status;
+    return hash;
+  }, {});
+}
+
+export function hashByStatusableIdAndMonth(statuses) {
+  return statuses.reduce((hash, status) => {
+    const key = status.relationships.statusable.data.id;
+
+    const h = hash[key] || {};
+
+    h[status.attributes.month] = status;
+    hash[key] = h;
+    return hash;
+  }, {});
+}
+
+export function isMonthActiveForStatusReporting(month, today) {
+  if (!(month && today)) throw new Error('reporting month and current date is required');
+  if (!(today instanceof dayjs)) throw new Error('for safety, provide today in dayjs format only');
+
+  const todayString = dayjs(today).endOf('month').format('YYYY-MM-DD');
+  return todayString >= month;
 }

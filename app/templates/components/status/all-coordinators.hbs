@@ -2,7 +2,7 @@
   <tr>
     <th>Coordinator</th>
     {{#each term.attributes.months as |month|}}
-      <th class="m-head center" title={{t-date month "compactTermMonth"}}>{{t-date month "MMM"}}</th>
+      <th data-test-term-month class="center" title={{t-date month "compactTermMonth"}}>{{t-date month "MMM"}}</th>
     {{/each}}
   </tr>
 </thead>

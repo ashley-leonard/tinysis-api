@@ -1,17 +1,17 @@
 export default {
   data: [
     {
-      id: '230',
+      id: '55',
       type: 'status',
       attributes: {
         month: '2019-09-01',
-        academicStatus: 0,
-        attendanceStatus: 0,
-        createdAt: '2019-03-04T03:01:37.000Z',
-        updatedAt: '2019-03-04T03:01:37.000Z',
+        createdAt: '2019-03-18T05:19:16.000Z',
+        updatedAt: '2019-03-18T05:19:16.000Z',
         fteHours: 25,
         metFteRequirements: true,
         heldPeriodicCheckins: true,
+        academicStatus: 'satisfactory',
+        attendanceStatus: 'satisfactory',
       },
       relationships: {
         creator: {
@@ -29,17 +29,17 @@ export default {
       },
     },
     {
-      id: '320',
+      id: '58',
       type: 'status',
       attributes: {
         month: '2019-10-01',
-        academicStatus: 0,
-        attendanceStatus: 0,
-        createdAt: '2019-03-04T03:01:37.000Z',
-        updatedAt: '2019-03-04T03:01:37.000Z',
+        createdAt: '2019-03-18T05:19:16.000Z',
+        updatedAt: '2019-03-18T05:19:16.000Z',
         fteHours: 25,
         metFteRequirements: true,
         heldPeriodicCheckins: true,
+        academicStatus: 'satisfactory',
+        attendanceStatus: 'satisfactory',
       },
       relationships: {
         creator: {
@@ -62,8 +62,8 @@ export default {
       id: '1',
       type: 'user',
       attributes: {
-        firstName: 'Sharonda',
-        lastName: 'Gleichner',
+        firstName: 'Darci',
+        lastName: 'Kuhic',
         nickname: null,
         dateActive: null,
         dateInactive: null,

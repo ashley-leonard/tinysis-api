@@ -1,0 +1,18 @@
+<thead>
+  <tr>
+    <th>Assignment</th>
+    <th>Due</th>
+    <th>Status</th>
+    <th>Notes</th>
+  </tr>
+</thead>
+<tbody>
+  {{#each sortedAssignments as |assignment|}}
+    {{status/by-enrollment/assignments-item
+      enrollment=enrollment
+      assignment=assignment
+      notesHash=notesHash
+      turninsByAssignment=turninsByAssignment
+    }}
+  {{/each}}
+</tbody>

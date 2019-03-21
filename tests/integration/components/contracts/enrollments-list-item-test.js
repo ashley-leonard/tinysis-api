@@ -37,7 +37,7 @@ module('Integration | Component | contracts/enrollments-list-item', (hooks) => {
     assert.matches(nameTd.textContent, participant.attributes.firstName, 'contains first name');
 
     const statusTd = this.element.querySelector('tr td:nth-of-type(2)');
-    assert.matches(statusTd.textContent, 'enrolled', 'contains a status');
+    assert.matches(statusTd.textContent, 'Active', 'contains a status');
 
     const creditsTd = this.element.querySelector('tr td:nth-of-type(3)');
     const creditAssignment = tinyData.get('creditAssignment', this.enrollment.relationships.creditAssignments.data[0].id);

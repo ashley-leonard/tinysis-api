@@ -1,5 +1,5 @@
 import Service from '@ember/service';
-import moment from 'moment';
+import dayjs from 'dayjs';
 import { warn } from '../utils/logger';
 import fetch from '../utils/fetch';
 
@@ -9,8 +9,12 @@ export function clone(fixture) {
 
 export const tinyDataService = {
   init(...args) {
-    this.flush();
     this._super(...args);
+    this._init();
+  },
+
+  _init() {
+    this.flush();
     this.setToday(new Date());
   },
 
@@ -23,11 +27,11 @@ export const tinyDataService = {
   },
 
   getToday() {
-    return this._data.today;
+    return dayjs(this._data.today);
   },
 
   setToday(date) {
-    this._data.today = date && moment(date);
+    this._data.today = date;
   },
 
   getUser() {

@@ -1,6 +1,6 @@
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { render } from '@ember/test-helpers';
+import { render, find, findAll } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 import { stubTinyData } from '../../../helpers/stub-tiny-data';
 import contractDetail from '../../../fixtures/contract-detail';
@@ -22,9 +22,11 @@ module('Integration | Component | contracts/view-detail', (hooks) => {
     });
   });
 
-  test('it renders', async function (assert) {
+  test('it renders', async (assert) => {
     await render(hbs`{{contracts/view-detail contract=contract}}`);
 
-    assert.ok(this.element.querySelector('.contract-detail'), 'the containing div rendered');
+    assert.ok(find('.contract-detail'), 'the containing div rendered');
+
+    assert.equal(findAll('dl[data-test-ealrs] dt').length, contract.relationships.ealrs.data.length, 'expected EALR entries rendered');
   });
 });

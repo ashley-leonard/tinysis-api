@@ -1,7 +1,7 @@
 import Component from '@ember/component';
 import { computed } from '@ember/object';
 import {
-  academicStatusName,
+  getAcademicStatusName,
   attendanceStatusName,
   fteRequirementsStatusName,
 } from 'tinysis-ui/utils/status-utils';
@@ -22,7 +22,7 @@ export default Component.extend({
     }
 
     const statusAbbreviation = [
-      academicStatusName(status),
+      getAcademicStatusName(status),
       attendanceStatusName(status),
       fteRequirementsStatusName(status),
     ];

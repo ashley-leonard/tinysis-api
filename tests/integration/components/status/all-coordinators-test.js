@@ -39,7 +39,7 @@ module('Integration | Component | status/all-coordinators', (hooks) => {
       }}
     `);
 
-    const cols = findAll('thead th.m-head');
+    const cols = findAll('thead th[data-test-term-month]');
     assert.equal(cols.length, term.attributes.months.length, 'expected number of month columns were rendered');
 
     const rows = findAll('tbody tr');
@@ -61,6 +61,7 @@ module('Integration | Component | status/all-coordinators', (hooks) => {
 
     const coorActiveLink = find(`tr[data-test-coordinator-id="${coor1.id}"] td.active a`);
     assert.equal(coorActiveLink.title, 'Complete', 'expected title rendered for active');
+
     assert.equal(coorActiveLink.text.trim(), 'C', 'first month is marked as complete');
 
     const [firstMonth] = this.get('term').attributes.months;
@@ -76,7 +77,7 @@ module('Integration | Component | status/all-coordinators', (hooks) => {
 
     const coorActiveIncompleteLink = find(`tr[data-test-coordinator-id="${coor1.id}"] td.active a`);
     assert.equal(coorActiveIncompleteLink.title, 'Incomplete', 'expected title rendered for active');
-    assert.equal(coorActiveIncompleteLink.text.trim(), 'I', 'first month is now marked as complete');
+    assert.equal(coorActiveIncompleteLink.text.trim(), 'I', 'first month is now marked as incomplete');
   });
 
 
@@ -92,7 +93,7 @@ module('Integration | Component | status/all-coordinators', (hooks) => {
       }}
     `);
 
-    const cols = findAll('thead th.m-head');
+    const cols = findAll('thead th[data-test-term-month]');
     assert.equal(cols.length, term.attributes.months.length, 'expected number of month columns were rendered');
 
     const rows = findAll('tbody tr');

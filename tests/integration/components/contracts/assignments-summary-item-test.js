@@ -2,7 +2,7 @@ import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
-import moment from 'moment';
+import dayjs from 'dayjs';
 import { stubTinyData } from '../../../helpers/stub-tiny-data';
 import contractDetailFixture from '../../../fixtures/contract-detail';
 
@@ -41,6 +41,6 @@ module('Integration | Component | contracts/assignments-summary-item', (hooks) =
 
     const dueDate = renderedLi.querySelector('span.summary-date');
     assert.ok(dueDate, 'due date block was rendered');
-    assert.matches(dueDate.textContent.trim(), moment(assignment.attributes.dueDate).format('L'), 'due date matches');
+    assert.matches(dueDate.textContent.trim(), dayjs(assignment.attributes.dueDate).format('L'), 'due date matches');
   });
 });

@@ -2,7 +2,7 @@ import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { render, findAll } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
-import { stubTinyData } from '../../../helpers/stub-tiny-data';
+import { stubTinyData, clone } from '../../../helpers/stub-tiny-data';
 import coorStatus from '../../../fixtures/coor-statuses';
 import coorStudents from '../../../fixtures/coor-students';
 import coorTerms from '../../../fixtures/coor-terms';
@@ -15,10 +15,14 @@ module('Integration | Component | status/by-coordinator', (hooks) => {
 
   hooks.beforeEach(function () {
     tinyDataServiceMock = stubTinyData();
+    tinyDataServiceMock.addResult(coorStatus);
+    tinyDataServiceMock.addResult(coorStudents);
+    tinyDataServiceMock.addResult(coorTerms);
+
     this.setProperties({
-      students: coorStudents,
-      term,
-      statuses: coorStatus,
+      students: clone(coorStudents),
+      term: clone(term),
+      statuses: tinyDataServiceMock.get('status'),
     });
   });
 
@@ -27,7 +31,7 @@ module('Integration | Component | status/by-coordinator', (hooks) => {
 
     await render(hbs`{{status/by-coordinator students=students term=term statuses=statuses}}`);
 
-    const cols = findAll('thead th.m-head');
+    const cols = findAll('thead th[data-test-term-month]');
     assert.equal(cols.length, term.attributes.months.length, 'expected number of month columns were rendered');
 
     const rows = findAll('tbody tr');
@@ -55,7 +59,7 @@ module('Integration | Component | status/by-coordinator', (hooks) => {
 
     await render(hbs`{{status/by-coordinator students=students term=term statuses=statuses}}`);
 
-    const cols = findAll('thead th.m-head');
+    const cols = findAll('thead th[data-test-term-month]');
     assert.equal(cols.length, term.attributes.months.length, 'expected number of month columns were rendered');
 
     const rows = findAll('tbody tr');

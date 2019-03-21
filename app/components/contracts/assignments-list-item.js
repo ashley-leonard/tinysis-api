@@ -2,27 +2,15 @@ import Component from '@ember/component';
 import { computed } from '@ember/object';
 import { inject as service } from '@ember/service';
 import { alias } from '@ember/object/computed';
+import EnrollmentRelations from '../../mixins/enrollment-relations';
 
-export default Component.extend({
+export default Component.extend(EnrollmentRelations, {
   tinyData: service(),
   tagName: 'tbody',
   classNames: 'assignments-list-item',
   attributeBindings: 'studentId:data-student-id',
 
   studentId: alias('student.id'),
-
-  turnins: computed('enrollment', function () {
-    const {
-      enrollment,
-      tinyData,
-    } = this;
-
-    return enrollment
-      .relationships
-      .turnins
-      .data
-      .map(turninRelation => tinyData.get('turnin', turninRelation.id));
-  }),
 
   /*
    * returns a hash of turnins indexed by assignment ID

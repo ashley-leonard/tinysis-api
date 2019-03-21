@@ -2,18 +2,31 @@
   margin: 0 5rem;
 }
 
+.app-container footer {
+  margin: 2rem 0;
+}
+
+.app-container .app-container-inner {
+  min-height: 80vh;
+}
+
+section {
+  display: block;
+  margin: 2rem 0;
+}
+
+section h3:first-of-type {
+  margin-top: 0;
+}
+
 .notes-row {
   border-top: none;
   background: lightgray;
   font-size: 13px;
 }
 
-.pure-table {
+.full-width {
   width: 100%;
-}
-
-.pure-table-collapsed {
-  width: auto;
 }
 
 html, button, input, select, textarea, .pure-g [class *= "pure-u"] {
@@ -21,6 +34,10 @@ html, button, input, select, textarea, .pure-g [class *= "pure-u"] {
     font-family: Roboto, sans-serif;
     font-size: 14px;
     font-weight: 400;
+}
+
+tbody th {
+  text-align: left;
 }
 
 .compact-paragraphs p {
@@ -66,9 +83,16 @@ html, button, input, select, textarea, .pure-g [class *= "pure-u"] {
   margin: 0 1rem 0 0;
 }
 
-.no-bullet li {
+ul.no-bullet {
+  padding-left: 0;
+}
+
+ul.no-bullet li {
   list-style-type: none;
-  padding: 0;
+  margin: 1rem 0;
+}
+
+ul.no-bullet.compact li {
   margin: 0;
 }
 
@@ -123,4 +147,17 @@ html, button, input, select, textarea, .pure-g [class *= "pure-u"] {
   text-decoration: none;
   cursor: hand;
   color: black;
+}
+
+dl.aligned dt {
+  width: 2rem;
+  float: left;
+}
+
+dl.aligned dt.indented {
+  padding-left: 3rem;
+}
+
+.color-red {
+  color: 'red';
 }

@@ -1,7 +1,7 @@
-import moment from 'moment';
+import dayjs from 'dayjs';
 
 export function wasActive(student, month) {
-  const m = moment(month);
+  const m = dayjs(month);
   const endOfMonth = m.endOf('month').format('YYYY-MM-DD');
 
   if (endOfMonth < student.attributes.dateActive) {

@@ -7,12 +7,16 @@ export function getTinyData() {
   return owner.lookup('service:tiny-service-mock');
 }
 
+export function buildTinyData(overrides = {}) {
+  return { ...tinyDataService, ...overrides };
+}
+
 export function stubTinyData(overrides = {}) {
   const { owner } = getContext();
 
-  const TinyDataServiceMock = { ...tinyDataService, ...overrides };
+  const tinyDataServiceMock = buildTinyData(overrides);
 
-  owner.register('service:tiny-service-mock', Service.extend(TinyDataServiceMock));
+  owner.register('service:tiny-service-mock', Service.extend(tinyDataServiceMock));
   owner.inject('component', 'tinyData', 'service:tiny-service-mock');
 
   return getTinyData();

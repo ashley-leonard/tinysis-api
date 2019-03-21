@@ -2,5 +2,5 @@ import Component from '@ember/component';
 
 export default Component.extend({
   tagName: 'ul',
-  classNames: ['no-bullet', 'compact', 'assignments-summary'],
+  classNames: ['no-bullet', 'assignments-summary'],
 });

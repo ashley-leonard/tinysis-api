@@ -1,5 +1,5 @@
 import Component from '@ember/component';
-import { bool } from '@ember/object/computed';
+import { bool, equal } from '@ember/object/computed';
 import { computed } from '@ember/object';
 import { assert } from '@ember/debug';
 
@@ -8,36 +8,45 @@ export default Component.extend({
   classNames: 'center',
   classNameBindings: ['showStatus:active', 'isIncomplete:incomplete'],
   showStatus: bool('entry'),
+  isIncomplete: equal('entryIsComplete', false),
   entry: computed('coordinator', 'coordinatorsHash', 'month', function () {
     const { coordinator, coordinatorsHash, month } = this;
 
     return coordinatorsHash[coordinator.id][month];
   }),
-  academicStatusName: computed('entry', function () {
-    const { entry } = this;
+
+  entryIsComplete: computed('entry', function () {
+    const { entry, showStatus } = this;
+
+    if (!showStatus) return false;
+
     const remaining = entry.expectedCount - entry.actualCount;
 
     if (remaining === 0) {
-      return 'Complete';
+      return true;
     }
 
     if (remaining > 0) {
-      return 'Incomplete';
+      return false;
     }
 
     assert('There is a count mismatch bug here', true);
 
-    return 'Error';
+    return false;
   }),
 
-  statusAbbreviation: computed('academicStatusName', function () {
-    return this.academicStatusName.substr(0, 1);
+  entryStatusText: computed('entryIsComplete', function () {
+    const { entryIsComplete } = this;
+
+    if (entryIsComplete) {
+      return 'Complete';
+    }
+
+    return 'Incomplete';
   }),
 
-
-  isIncomplete: computed('showStatus', 'academicStatusName', function () {
-    if (!this.showStatus) return false;
-
-    return this.academicStatusName !== 'Complete';
+  entryStatusAbbreviation: computed('entryStatusText', function () {
+    return this.entryStatusText.substr(0, 1);
   }),
+
 });

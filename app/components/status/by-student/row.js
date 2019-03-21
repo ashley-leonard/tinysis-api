@@ -1,6 +1,6 @@
 import Component from '@ember/component';
 import { computed } from '@ember/object';
-import { academicStatusName } from 'tinysis-ui/utils/status-utils';
+import { getAcademicStatusName } from 'tinysis-ui/utils/status-utils';
 
 export default Component.extend({
   tagName: 'tbody',
@@ -13,7 +13,7 @@ export default Component.extend({
     const { status } = this;
     if (!status) return '';
 
-    return academicStatusName(status);
+    return getAcademicStatusName(status);
   }),
   heldPeriodicCheckins: computed('status', function () {
     const { status } = this;

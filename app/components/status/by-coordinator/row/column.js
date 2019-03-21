@@ -3,7 +3,7 @@ import { inject as service } from '@ember/service';
 import { computed } from '@ember/object';
 import { alias, and } from '@ember/object/computed';
 import { wasActive } from 'tinysis-ui/utils/user-utils';
-import { isUnacceptable, academicStatusName } from 'tinysis-ui/utils/status-utils';
+import { isUnacceptable, getAcademicStatusName } from 'tinysis-ui/utils/status-utils';
 
 export default Component.extend({
   tinyData: service(),
@@ -43,13 +43,13 @@ export default Component.extend({
     let showHours = true;
 
     switch (academicStatus) {
-      case 0:
+      case 'satisfactory':
         statusText.push('A');
         break;
-      case 1:
+      case 'unsatisfactory':
         statusText.push('U');
         break;
-      case 2:
+      case 'participating':
         statusText.push('P');
         break;
       default:
@@ -79,6 +79,6 @@ export default Component.extend({
       return '?';
     }
 
-    return academicStatusName(status);
+    return getAcademicStatusName(status);
   }),
 });

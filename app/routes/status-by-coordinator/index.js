@@ -43,12 +43,11 @@ export default Route.extend({
     });
   },
 
-  setupController(controller, model) {
-    this._super(controller, model);
-    const statuses = model;
+  setupController(controller, statuses) {
+    this._super(controller, statuses);
 
     controller.setProperties({
-      statuses,
+      statuses: statuses.data,
       students: this.students,
       term: this.term,
     });

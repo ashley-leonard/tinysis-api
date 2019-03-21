@@ -14,29 +14,30 @@
   <dd>{{term.attributes.name}}</dd>
   <dt>Location</dt>
   <dd>{{contract.attributes.location}}</dd>
-  <dt>Schedule</dt>
-  <dd>
-    {{contracts/time-slots timeslots=contract.attributes.timeslots}}
-  </dd>
 </dl>
 <hr>
 
 <h2>Details</h2>
 
-<h3>Learning Objectives</h3>
-
-{{contract.attributes.learningObjectives}}
-
-<h3>Competencies</h3>
-
-{{contract.attributes.competencies}}
+{{#if hasDetails}}
+  {{#each detailSections as |section|}}
+    <h3>{{titleize section.name}}</h3>
+    <p>
+      {{section.content}}
+    </p>
+  {{/each}}
+{{else}}
+  <p>No details specified.</p>
+{{/if}}
 
 <h3>Learning Requirements</h3>
 
-{{contract.attributes.evaluationMethods}}
+{{contracts/learning-requirements ealrs=contract.relationships.ealrs.data}}
 
 <h2>Assignments</h2>
 
-{{contracts/assignments-summary assignments=assignments}}
+{{contracts/assignments-summary
+  assignments=assignments
+}}
 
 

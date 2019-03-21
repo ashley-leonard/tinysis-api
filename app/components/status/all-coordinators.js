@@ -1,5 +1,5 @@
 import Component from '@ember/component';
-import moment from 'moment';
+import dayjs from 'dayjs';
 import { inject as service } from '@ember/service';
 import { computed } from '@ember/object';
 import { assert } from '@ember/debug';
@@ -16,7 +16,7 @@ export default Component.extend({
     const { term } = this;
     const { months } = term.attributes;
     const today = this.tinyData.getToday();
-    const lastDay = moment(today).endOf('month').format('YYYY-MM-DD');
+    const lastDay = dayjs(today).endOf('month').format('YYYY-MM-DD');
 
     return months.filter(month => month < lastDay);
   }),

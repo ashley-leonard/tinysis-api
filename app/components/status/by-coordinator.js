@@ -1,6 +1,7 @@
 import Component from '@ember/component';
 import { computed } from '@ember/object';
 import { alias } from '@ember/object/computed';
+import { hashByStatusableIdAndMonth } from '../../utils/status-utils';
 
 export default Component.extend({
   tagName: 'table',
@@ -12,14 +13,6 @@ export default Component.extend({
   statusHash: computed('statuses', function () {
     const { statuses } = this;
 
-    return statuses.data.reduce((hash, status) => {
-      const key = status.relationships.statusable.data.id;
-
-      const h = hash[key] || {};
-
-      h[status.attributes.month] = status;
-      hash[key] = h;
-      return hash;
-    }, {});
+    return hashByStatusableIdAndMonth(statuses);
   }),
 });

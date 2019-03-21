@@ -34,6 +34,30 @@ export default {
 
           ],
         },
+        meetingParticipants: {
+          data: [
+            {
+              id: '2',
+              type: 'meetingParticipant',
+            },
+            {
+              id: '4',
+              type: 'meetingParticipant',
+            },
+            {
+              id: '6',
+              type: 'meetingParticipant',
+            },
+            {
+              id: '8',
+              type: 'meetingParticipant',
+            },
+            {
+              id: '10',
+              type: 'meetingParticipant',
+            },
+          ],
+        },
       },
     },
     {
@@ -89,6 +113,30 @@ export default {
             },
           ],
         },
+        meetingParticipants: {
+          data: [
+            {
+              id: '1',
+              type: 'meetingParticipant',
+            },
+            {
+              id: '3',
+              type: 'meetingParticipant',
+            },
+            {
+              id: '5',
+              type: 'meetingParticipant',
+            },
+            {
+              id: '7',
+              type: 'meetingParticipant',
+            },
+            {
+              id: '9',
+              type: 'meetingParticipant',
+            },
+          ],
+        },
       },
     },
   ],
@@ -97,8 +145,8 @@ export default {
       id: '6',
       type: 'user',
       attributes: {
-        firstName: 'Nicki',
-        lastName: 'Boyle',
+        firstName: 'Brandon',
+        lastName: 'Beer',
         nickname: null,
         dateActive: '2018-08-01',
         dateInactive: '2019-10-01',
@@ -121,8 +169,8 @@ export default {
       id: '4',
       type: 'user',
       attributes: {
-        firstName: 'Velva',
-        lastName: 'Okuneva',
+        firstName: 'Kevin',
+        lastName: 'Ferry',
         nickname: null,
         dateActive: '2018-08-01',
         dateInactive: null,

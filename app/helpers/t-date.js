@@ -1,5 +1,5 @@
 import { helper } from '@ember/component/helper';
-import moment from 'moment';
+import dayjs from 'dayjs';
 
 export function tDate([date, _format]) {
   let format;
@@ -14,7 +14,7 @@ export function tDate([date, _format]) {
     default:
       format = _format || 'D MMMM, YYYY';
   }
-  return moment(date)
+  return dayjs(date)
     .format(format);
 }
 
