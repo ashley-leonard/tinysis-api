@@ -150,6 +150,18 @@ RSpec.describe 'Ember fixtures script', type: :request do
       turnin = create :turnin, enrollment: enrollment, assignment: assignment, status: :complete
       create :note, notable: turnin, creator: @contract1_current.facilitator, note: "Note by #{@contract1_current.facilitator.last_name} for student #{@student1.last_name} / assignment #{assignment_number}"
     end
+
+    # for contract 1, define 5 meetings which are attended only by student 1
+    enrollment3 = @contract1_current.enrollments.find{|e| e.participant == @student3}
+    (1..5).each do |meeting_number|
+      meeting = create :meeting, contract: @contract1_current, meeting_date: @contract1_current.term.months.first + meeting_number.days
+      meeting_participant = create :meeting_participant, meeting: meeting, enrollment: enrollment, participation: MeetingParticipant::PRESENT
+      create :note, notable: meeting_participant, creator: @contract1_current.facilitator, note: "Note by #{@contract1_current.facilitator.last_name} for student #{@student1.last_name} / meeting #{meeting_number}"
+
+      meeting_participant = create :meeting_participant, meeting: meeting, enrollment: enrollment3, participation: MeetingParticipant::ABSENT
+      create :note, notable: meeting_participant, creator: @contract1_current.facilitator, note: "Note by #{@contract1_current.facilitator.last_name} for student #{@student3.last_name} / assignment #{meeting_number}"
+    end
+
   end
 
   describe 'write' do
@@ -167,7 +179,7 @@ RSpec.describe 'Ember fixtures script', type: :request do
         write_fixture 'coor-terms.js', response
 
         # contract detail
-        get("/api/contracts/#{@contract1_current.id}")
+        get("/api/contracts/#{@contract1_current.id}?include=category,facilitator,assignments,meetings,creditAssignments,creditAssignments.credit,term,ealrs")
         write_fixture 'contract-detail.js', response
 
         # contract assignments
@@ -185,8 +197,13 @@ RSpec.describe 'Ember fixtures script', type: :request do
         get("/api/notes?notableType=Turnin&notableIds=#{turnin_ids.join(',')}")
         write_fixture 'notes-contract-assignments.js', response
 
+        # contract enrollment status detail
+        enrollment = @contract1_current.enrollments.first
+        get("/api/enrollments/#{enrollment.id}?include=participant,turnins,meetingParticipants,creditAssignments,creditAssignments.credit")
+        write_fixture 'contract-enrollment-detail.js', response
+
         # enrollments by contract
-        get("/api/enrollments?contractIds=#{@contract1_current.id}&include=credit_assignments,credit_assignments.credit,participant")
+        get("/api/enrollments?contractIds=#{@contract1_current.id}&include=creditAssignments,creditAssignments.credit,participant")
         write_fixture 'contract-enrollments.js', response
 
         contract_enrollments_response = JSON.parse(response.body)

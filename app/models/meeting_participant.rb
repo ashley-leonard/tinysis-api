@@ -37,6 +37,9 @@ class MeetingParticipant < ApplicationRecord
   def privileges(user)
     return meeting.privileges(user)
   end
-  
+
+  def participation_name
+    PARTICIPATION_NAMES[participation]
+  end
 
 end

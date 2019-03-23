@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     get '/students', to: 'students#index'
     get '/students/:id', to: 'students#show'
     get '/enrollments', to: 'enrollments#index'
+    get '/enrollments/:id', to: 'enrollments#show'
     get '/credit-assignments', to: 'credit_assignments#index'
     get '/notes', to: 'notes#index'
     get '/contracts', to: 'contracts#index'

@@ -1,11 +1,9 @@
 class Meeting < ApplicationRecord
   
-  has_many :meeting_participants, :dependent => :destroy
+  has_many :meeting_participants, dependent: :destroy
   belongs_to :contract
-  has_many :notes, :as => :notable, :dependent => :destroy
+  has_many :notes, as: :notable, dependent: :destroy
  
-  named_scope :reverse_chrono, :order => 'meeting_date DESC' 
-
   # Return a hash describing privileges of the specified user
   # on this meeting
 

@@ -23,6 +23,7 @@ class ContractSerializer < ApplicationSerializer
 
   has_many :assignments
   has_many :credit_assignments
+  has_many :meetings
 
   has_many :ealrs
 end

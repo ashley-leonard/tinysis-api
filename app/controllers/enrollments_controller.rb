@@ -1,5 +1,3 @@
-PERMITTED_INCLUDES = %w{contract contract.facilitator contract.term credit_assignments credit_assignments.credit participant turnins}
-
 class EnrollmentsController < ApplicationController
 
   def index
@@ -17,11 +15,7 @@ class EnrollmentsController < ApplicationController
       conditions[:contract_id] = params[:contractIds].split(',')
     end
 
-    included_models = nil
-    Rails.logger.info params
-    if params[:include]
-      included_models = params[:include].split(',') & PERMITTED_INCLUDES
-    end
+    included_models = self.get_includes params[:include]
 
     case params[:status]
       when 'enrolled'
@@ -55,4 +49,34 @@ class EnrollmentsController < ApplicationController
     render json: EnrollmentSerializer.new(result, options), status: 200
   end
 
+  def show
+    enrollment = Enrollment.find(params[:id])
+
+    included_models = self.get_includes params[:include]
+
+    options = {
+      include: included_models || []
+    }
+
+    render json: EnrollmentSerializer.new(enrollment, options), status: 200
+  end
+
+  protected
+
+    PERMITTED_INCLUDES = %w{contract contract.facilitator contract.term credit_assignments credit_assignments.credit participant turnins turnins.assignment meeting_participants meeting_participants.meeting}
+
+    def get_includes include_params
+      return nil if include_params.nil?
+
+      val = include_params
+        .split(',')
+        .map(&:underscore) & EnrollmentsController::PERMITTED_INCLUDES
+Rails.logger.info "**************************************************************"
+Rails.logger.info include_params
+Rails.logger.info include_params.split(',')
+Rails.logger.info include_params.split(',').map(&:underscore)
+Rails.logger.info val
+Rails.logger.info "**************************************************************"
+      val
+    end
 end

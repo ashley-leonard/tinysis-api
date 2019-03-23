@@ -1,4 +1,6 @@
 class ContractsController < ApplicationController
+  PERMITTED_INCLUDES = %w{category facilitator assignments meetings credit_assignments credit_assignments.credit term ealrs}
+
   def index
     limit = params[:limit] || Rails.configuration.constants[:DEFAULT_LIMIT]
 
@@ -60,8 +62,14 @@ class ContractsController < ApplicationController
   def show
     contract = Contract.find params[:id]
 
+    included_models = nil
+
+    if params[:include]
+      included_models = params[:include].split(',').map(&:underscore) & ContractsController::PERMITTED_INCLUDES
+    end
+
     render json: ContractSerializer.new(contract, {
-      include: [ :category, :facilitator, :assignments, :'credit_assignments.credit', :term, :ealrs ],
+      include: included_models,
     })
   end
 end
