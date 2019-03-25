@@ -3,7 +3,7 @@ import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 import { stubTinyData } from '../../helpers/stub-tiny-data';
-import enrollmentsFixture from '../../fixtures/enrollments';
+import enrollmentsFixture from '../../fixtures/student-enrollments';
 
 let tinyData;
 let creditAssignments;

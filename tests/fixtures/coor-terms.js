@@ -1,3 +1,4 @@
+// GET /api/terms?type=coor&status=active
 export default {
   data: [
     {

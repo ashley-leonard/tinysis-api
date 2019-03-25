@@ -1,10 +1,11 @@
+// GET /api/contracts
 export default {
   data: [
     {
       id: '1',
       type: 'contract',
       attributes: {
-        name: 'Tonsor dolorem excepturi cubo vitium.',
+        name: 'Depraedor nisi absorbeo temeritas termes.',
         status: 'closed',
       },
       relationships: {
@@ -29,11 +30,11 @@ export default {
         enrollments: {
           data: [
             {
-              id: '1',
+              id: '5',
               type: 'enrollment',
             },
             {
-              id: '2',
+              id: '6',
               type: 'enrollment',
             },
           ],
@@ -44,7 +45,7 @@ export default {
       id: '2',
       type: 'contract',
       attributes: {
-        name: 'Valde conatus adeo tempus tenax.',
+        name: 'Ut benigne aureus vox sono.',
         status: 'closed',
       },
       relationships: {
@@ -69,7 +70,11 @@ export default {
         enrollments: {
           data: [
             {
-              id: '5',
+              id: '7',
+              type: 'enrollment',
+            },
+            {
+              id: '8',
               type: 'enrollment',
             },
           ],
@@ -80,7 +85,7 @@ export default {
       id: '3',
       type: 'contract',
       attributes: {
-        name: 'Doloribus eos viduo ducimus viduata.',
+        name: 'Unus exercitationem harum coruscus quo.',
         status: 'approved',
       },
       relationships: {
@@ -105,11 +110,11 @@ export default {
         enrollments: {
           data: [
             {
-              id: '3',
+              id: '1',
               type: 'enrollment',
             },
             {
-              id: '4',
+              id: '2',
               type: 'enrollment',
             },
           ],
@@ -120,7 +125,7 @@ export default {
       id: '4',
       type: 'contract',
       attributes: {
-        name: 'Trucido dolor basium alo sit.',
+        name: 'Nam coepi dolorem deputo cras.',
         status: 'approved',
       },
       relationships: {
@@ -138,14 +143,18 @@ export default {
         },
         term: {
           data: {
-            id: '4',
+            id: '3',
             type: 'term',
           },
         },
         enrollments: {
           data: [
             {
-              id: '6',
+              id: '3',
+              type: 'enrollment',
+            },
+            {
+              id: '4',
               type: 'enrollment',
             },
           ],
@@ -169,8 +178,8 @@ export default {
       id: '1',
       type: 'user',
       attributes: {
-        firstName: 'Darci',
-        lastName: 'Kuhic',
+        firstName: 'Trinh',
+        lastName: 'Reilly',
         nickname: null,
         dateActive: null,
         dateInactive: null,
@@ -193,8 +202,8 @@ export default {
       id: '2',
       type: 'user',
       attributes: {
-        firstName: 'Bennett',
-        lastName: 'Kshlerin',
+        firstName: 'Scott',
+        lastName: 'Rau',
         nickname: null,
         dateActive: null,
         dateInactive: null,

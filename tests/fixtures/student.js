@@ -1,10 +1,11 @@
+// GET /api/students/5
 export default {
   data: {
-    id: '4',
+    id: '5',
     type: 'user',
     attributes: {
-      firstName: 'Kevin',
-      lastName: 'Ferry',
+      firstName: 'Haydee',
+      lastName: 'Welch',
       nickname: null,
       dateActive: '2018-08-01',
       dateInactive: null,

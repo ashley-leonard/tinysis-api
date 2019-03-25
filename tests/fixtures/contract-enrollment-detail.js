@@ -1,6 +1,7 @@
+// GET /api/enrollments/1?include=participant,turnins,meetingParticipants,creditAssignments,creditAssignments.credit
 export default {
   data: {
-    id: '3',
+    id: '1',
     type: 'enrollment',
     attributes: {
       finalizedOn: null,
@@ -16,14 +17,14 @@ export default {
       },
       participant: {
         data: {
-          id: '4',
+          id: '5',
           type: 'participant',
         },
       },
       creditAssignments: {
         data: [
           {
-            id: '7',
+            id: '5',
             type: 'creditAssignment',
           },
         ],
@@ -80,7 +81,7 @@ export default {
   },
   included: [
     {
-      id: '7',
+      id: '5',
       type: 'creditAssignment',
       attributes: {
         creditHours: 1.0,
@@ -119,7 +120,7 @@ export default {
         },
         enrollment: {
           data: {
-            id: '3',
+            id: '1',
             type: 'enrollment',
           },
         },
@@ -141,7 +142,7 @@ export default {
         },
         enrollment: {
           data: {
-            id: '3',
+            id: '1',
             type: 'enrollment',
           },
         },
@@ -163,7 +164,7 @@ export default {
         },
         enrollment: {
           data: {
-            id: '3',
+            id: '1',
             type: 'enrollment',
           },
         },
@@ -185,7 +186,7 @@ export default {
         },
         enrollment: {
           data: {
-            id: '3',
+            id: '1',
             type: 'enrollment',
           },
         },
@@ -207,18 +208,18 @@ export default {
         },
         enrollment: {
           data: {
-            id: '3',
+            id: '1',
             type: 'enrollment',
           },
         },
       },
     },
     {
-      id: '4',
+      id: '5',
       type: 'user',
       attributes: {
-        firstName: 'Kevin',
-        lastName: 'Ferry',
+        firstName: 'Haydee',
+        lastName: 'Welch',
         nickname: null,
         dateActive: '2018-08-01',
         dateInactive: null,
@@ -252,7 +253,7 @@ export default {
         },
         enrollment: {
           data: {
-            id: '3',
+            id: '1',
             type: 'enrollment',
           },
         },
@@ -273,7 +274,7 @@ export default {
         },
         enrollment: {
           data: {
-            id: '3',
+            id: '1',
             type: 'enrollment',
           },
         },
@@ -294,7 +295,7 @@ export default {
         },
         enrollment: {
           data: {
-            id: '3',
+            id: '1',
             type: 'enrollment',
           },
         },
@@ -315,7 +316,7 @@ export default {
         },
         enrollment: {
           data: {
-            id: '3',
+            id: '1',
             type: 'enrollment',
           },
         },
@@ -336,7 +337,7 @@ export default {
         },
         enrollment: {
           data: {
-            id: '3',
+            id: '1',
             type: 'enrollment',
           },
         },

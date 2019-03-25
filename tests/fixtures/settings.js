@@ -1,10 +1,11 @@
+// GET /api/settings
 export default {
   data: [
     {
       id: '3',
       type: 'setting',
       attributes: {
-        name: 'current_year',
+        name: 'CURRENT_YEAR',
         value: '2019',
       },
     },

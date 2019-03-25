@@ -10,7 +10,7 @@ export default Route.extend({
     return all([
       this.tinyData.fetch('/api/students', {
         params: {
-          coordinatorId: coordinator.id,
+          coordinatorIds: coordinator.id,
           status: 'reportable',
           order: 'lastName, firstName',
         },

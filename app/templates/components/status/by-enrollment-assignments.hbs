@@ -1,18 +1,23 @@
-<thead>
-  <tr>
-    <th>Assignment</th>
-    <th>Due</th>
-    <th>Status</th>
-    <th>Notes</th>
-  </tr>
-</thead>
-<tbody>
-  {{#each sortedAssignments as |assignment|}}
-    {{status/by-enrollment/assignments-item
-      enrollment=enrollment
-      assignment=assignment
-      notesHash=notesHash
-      turninsByAssignment=turninsByAssignment
-    }}
-  {{/each}}
-</tbody>
+{{#check-empty count=assignments.length noResultsMessage="No assignments defined for this contract."}}
+  <table class="pure-table pure-table-bordered">
+    <thead>
+      <tr>
+        <th>Assignment</th>
+        <th>Due</th>
+        <th>Status</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each sortedAssignments as |assignment|}}
+        {{status/by-enrollment/assignments-item
+          enrollment=enrollment
+          assignment=assignment
+          notesHash=notesHash
+          turninsByAssignment=turninsByAssignment
+        }}
+      {{/each}}
+    </tbody>
+  </table>
+{{/check-empty}}
+

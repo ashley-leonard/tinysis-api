@@ -1,4 +1,4 @@
-// GET /api/statuses?enrollmentIds=2,1
+// GET /api/statuses?enrollmentIds=1,3
 export default {
   data: [
     {
@@ -86,12 +86,12 @@ export default {
       },
     },
     {
-      id: '4',
+      id: '7',
       type: 'status',
       attributes: {
         month: '2019-09-01',
-        createdAt: '2019-03-24T20:19:21.000Z',
-        updatedAt: '2019-03-24T20:19:21.000Z',
+        createdAt: '2019-03-24T20:19:22.000Z',
+        updatedAt: '2019-03-24T20:19:22.000Z',
         fteHours: 25,
         metFteRequirements: true,
         heldPeriodicCheckins: true,
@@ -101,20 +101,20 @@ export default {
       relationships: {
         creator: {
           data: {
-            id: '1',
+            id: '2',
             type: 'creator',
           },
         },
         statusable: {
           data: {
-            id: '2',
+            id: '3',
             type: 'enrollment',
           },
         },
       },
     },
     {
-      id: '5',
+      id: '8',
       type: 'status',
       attributes: {
         month: '2019-10-01',
@@ -129,20 +129,20 @@ export default {
       relationships: {
         creator: {
           data: {
-            id: '1',
+            id: '2',
             type: 'creator',
           },
         },
         statusable: {
           data: {
-            id: '2',
+            id: '3',
             type: 'enrollment',
           },
         },
       },
     },
     {
-      id: '6',
+      id: '9',
       type: 'status',
       attributes: {
         month: '2019-11-01',
@@ -157,13 +157,13 @@ export default {
       relationships: {
         creator: {
           data: {
-            id: '1',
+            id: '2',
             type: 'creator',
           },
         },
         statusable: {
           data: {
-            id: '2',
+            id: '3',
             type: 'enrollment',
           },
         },
@@ -177,6 +177,19 @@ export default {
       attributes: {
         firstName: 'Trinh',
         lastName: 'Reilly',
+        nickname: null,
+        dateActive: null,
+        dateInactive: null,
+        status: 'active',
+        role: 'staff',
+      },
+    },
+    {
+      id: '2',
+      type: 'user',
+      attributes: {
+        firstName: 'Scott',
+        lastName: 'Rau',
         nickname: null,
         dateActive: null,
         dateInactive: null,

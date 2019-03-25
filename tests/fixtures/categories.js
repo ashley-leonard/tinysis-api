@@ -1,3 +1,4 @@
+// GET /api/categories
 export default {
   data: [
     {

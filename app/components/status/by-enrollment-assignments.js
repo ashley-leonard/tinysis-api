@@ -5,8 +5,6 @@ import ContractRelations from '../../mixins/contract-relations';
 import { generateNotableHash } from '../../utils/note-utils';
 
 export default Component.extend(ContractRelations, EnrollmentRelations, {
-  tagName: 'table',
-  classNames: ['pure-table', 'pure-table-bordered'],
   sortedAssignments: computed('assignments', function () {
     return this.assignments.sort((a1, a2) => a1.attributes.dueDate.localeCompare(a2.attributes.dueDate));
   }),

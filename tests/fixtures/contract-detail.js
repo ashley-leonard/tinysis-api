@@ -1,15 +1,16 @@
+// GET /api/contracts/3?include=category,facilitator,assignments,meetings,creditAssignments,creditAssignments.credit,term,ealrs
 export default {
   data: {
     id: '3',
     type: 'contract',
     attributes: {
-      name: 'Doloribus eos viduo ducimus viduata.',
+      name: 'Unus exercitationem harum coruscus quo.',
       status: 'approved',
-      learningObjectives: 'Tandem thema iste quaerat voco.',
-      competencies: 'Vix accipio caecus cras patruus.',
-      evaluationMethods: 'Amitto suppono minima caterva delectatio.',
-      instructionalMaterials: 'Harum provident audentia voluptate et.',
-      location: 'Adeptio suspendo demoror impedit ulciscor.',
+      learningObjectives: 'Et cumque qui defigo officiis.',
+      competencies: 'Velit caelestis suffragium artificiose vere.',
+      evaluationMethods: 'Pecto cursim ut denuo corona.',
+      instructionalMaterials: 'Claro adstringo pecus sollicito repellat.',
+      location: 'Tot adfero abbas utrum curtus.',
       timeslots: [
         {
           start: '8:45',
@@ -22,11 +23,11 @@ export default {
       enrollments: {
         data: [
           {
-            id: '3',
+            id: '1',
             type: 'enrollment',
           },
           {
-            id: '4',
+            id: '2',
             type: 'enrollment',
           },
         ],
@@ -134,7 +135,7 @@ export default {
       attributes: {
         name: 'Assignment 1',
         description: 'Here is assignment number 1',
-        dueDate: '2018-09-02',
+        dueDate: '2019-09-02',
       },
       relationships: {
         turnins: {
@@ -153,7 +154,7 @@ export default {
       attributes: {
         name: 'Assignment 2',
         description: 'Here is assignment number 2',
-        dueDate: '2018-09-03',
+        dueDate: '2019-09-03',
       },
       relationships: {
         turnins: {
@@ -172,7 +173,7 @@ export default {
       attributes: {
         name: 'Assignment 3',
         description: 'Here is assignment number 3',
-        dueDate: '2018-09-04',
+        dueDate: '2019-09-04',
       },
       relationships: {
         turnins: {
@@ -191,7 +192,7 @@ export default {
       attributes: {
         name: 'Assignment 4',
         description: 'Here is assignment number 4',
-        dueDate: '2018-09-05',
+        dueDate: '2019-09-05',
       },
       relationships: {
         turnins: {
@@ -210,7 +211,7 @@ export default {
       attributes: {
         name: 'Assignment 5',
         description: 'Here is assignment number 5',
-        dueDate: '2018-09-06',
+        dueDate: '2019-09-06',
       },
       relationships: {
         turnins: {
@@ -262,7 +263,7 @@ export default {
       id: '1',
       type: 'ealr',
       attributes: {
-        ealr: 'Temporibus usque quia acervus velum.',
+        ealr: 'Alo vado sed amplexus acer.',
         seq: '1.1',
         category: 'Category 1',
       },
@@ -271,7 +272,7 @@ export default {
       id: '2',
       type: 'ealr',
       attributes: {
-        ealr: 'Tandem adulescens accedo aliquam subito.',
+        ealr: 'Viridis cibus ait sit et.',
         seq: '1.2',
         category: 'Category 1',
       },
@@ -280,7 +281,7 @@ export default {
       id: '3',
       type: 'ealr',
       attributes: {
-        ealr: 'Defluo sint timor clibanus placeat.',
+        ealr: 'Adnuo defessus sumptus officiis odio.',
         seq: '2.1',
         category: 'Category 2',
       },
@@ -289,7 +290,7 @@ export default {
       id: '4',
       type: 'ealr',
       attributes: {
-        ealr: 'Brevis unde aggredior curis adopto.',
+        ealr: 'Sublime curatio quas cotidie somniculosus.',
         seq: '2.2',
         category: 'Category 2',
       },
@@ -298,8 +299,8 @@ export default {
       id: '1',
       type: 'user',
       attributes: {
-        firstName: 'Darci',
-        lastName: 'Kuhic',
+        firstName: 'Trinh',
+        lastName: 'Reilly',
         nickname: null,
         dateActive: null,
         dateInactive: null,
@@ -311,8 +312,8 @@ export default {
       id: '1',
       type: 'meeting',
       attributes: {
-        title: 'Attendance for Sunday, 02 September 2018',
-        meetingDate: '2018-09-02',
+        title: 'Attendance for Monday, 02 September 2019',
+        meetingDate: '2019-09-02',
       },
       relationships: {
         meetingParticipants: {
@@ -333,8 +334,8 @@ export default {
       id: '2',
       type: 'meeting',
       attributes: {
-        title: 'Attendance for Monday, 03 September 2018',
-        meetingDate: '2018-09-03',
+        title: 'Attendance for Tuesday, 03 September 2019',
+        meetingDate: '2019-09-03',
       },
       relationships: {
         meetingParticipants: {
@@ -355,8 +356,8 @@ export default {
       id: '3',
       type: 'meeting',
       attributes: {
-        title: 'Attendance for Tuesday, 04 September 2018',
-        meetingDate: '2018-09-04',
+        title: 'Attendance for Wednesday, 04 September 2019',
+        meetingDate: '2019-09-04',
       },
       relationships: {
         meetingParticipants: {
@@ -377,8 +378,8 @@ export default {
       id: '4',
       type: 'meeting',
       attributes: {
-        title: 'Attendance for Wednesday, 05 September 2018',
-        meetingDate: '2018-09-05',
+        title: 'Attendance for Thursday, 05 September 2019',
+        meetingDate: '2019-09-05',
       },
       relationships: {
         meetingParticipants: {
@@ -399,8 +400,8 @@ export default {
       id: '5',
       type: 'meeting',
       attributes: {
-        title: 'Attendance for Thursday, 06 September 2018',
-        meetingDate: '2018-09-06',
+        title: 'Attendance for Friday, 06 September 2019',
+        meetingDate: '2019-09-06',
       },
       relationships: {
         meetingParticipants: {
@@ -422,14 +423,14 @@ export default {
       type: 'term',
       attributes: {
         name: 'Current One',
-        schoolYear: 2018,
+        schoolYear: 2019,
         creditDate: null,
         months: [
-          '2018-09-01',
-          '2018-10-01',
-          '2018-11-01',
-          '2018-12-01',
-          '2019-01-01',
+          '2019-09-01',
+          '2019-10-01',
+          '2019-11-01',
+          '2019-12-01',
+          '2020-01-01',
         ],
         status: 'active',
       },

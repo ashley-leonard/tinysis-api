@@ -1,16 +1,17 @@
+// GET /api/notes?notableType=Status&notableIds=43,46
 export default {
   data: [
     {
-      id: '44',
+      id: '51',
       type: 'note',
       attributes: {
-        note: 'Note by Kuhic for Ferry on 2019-09-01',
-        updatedAt: '2019-03-18T05:19:16.000Z',
+        note: 'Note by Reilly for Welch on 2019-09-01',
+        updatedAt: '2019-03-24T20:19:22.000Z',
       },
       relationships: {
         notable: {
           data: {
-            id: '55',
+            id: '43',
             type: 'status',
           },
         },
@@ -23,16 +24,16 @@ export default {
       },
     },
     {
-      id: '47',
+      id: '54',
       type: 'note',
       attributes: {
-        note: 'Note by Kuhic for Ferry on 2019-10-01',
-        updatedAt: '2019-03-18T05:19:16.000Z',
+        note: 'Note by Reilly for Welch on 2019-10-01',
+        updatedAt: '2019-03-24T20:19:22.000Z',
       },
       relationships: {
         notable: {
           data: {
-            id: '58',
+            id: '46',
             type: 'status',
           },
         },
@@ -50,8 +51,8 @@ export default {
       id: '1',
       type: 'user',
       attributes: {
-        firstName: 'Darci',
-        lastName: 'Kuhic',
+        firstName: 'Trinh',
+        lastName: 'Reilly',
         nickname: null,
         dateActive: null,
         dateInactive: null,

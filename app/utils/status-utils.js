@@ -58,7 +58,7 @@ export function isUnacceptable(status) {
     return !heldPeriodicCheckins;
   }
 
-  return metFteRequirements;
+  return !metFteRequirements;
 }
 
 export function activeMonths(term, dayjsToday) {

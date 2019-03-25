@@ -1,8 +1,8 @@
-<tr>
+<tr data-test-enrollment-id={{enrollment.id}}>
   <td class="contract">  
     <div class="compact-paragraphs">
       <p class="contract-name">
-        {{#link-to "status-by-enrollment" enrollment.id}}
+        {{#link-to "status-by-enrollment" contract.id enrollment.id}}
           {{contract.attributes.name}}
         {{/link-to}}
       </p>

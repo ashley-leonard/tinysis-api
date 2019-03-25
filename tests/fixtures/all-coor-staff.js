@@ -1,11 +1,40 @@
+// GET /api/staff?status=active&coordinators=true&order=lastName,firstName
 export default {
   data: [
     {
       id: '2',
       type: 'user',
       attributes: {
-        firstName: 'Bennett',
-        lastName: 'Kshlerin',
+        firstName: 'Scott',
+        lastName: 'Rau',
+        nickname: null,
+        dateActive: null,
+        dateInactive: null,
+        status: 'active',
+        role: 'staff',
+        email: null,
+      },
+      relationships: {
+        coordinatees: {
+          data: [
+            {
+              id: '6',
+              type: 'student',
+            },
+            {
+              id: '7',
+              type: 'student',
+            },
+          ],
+        },
+      },
+    },
+    {
+      id: '1',
+      type: 'user',
+      attributes: {
+        firstName: 'Trinh',
+        lastName: 'Reilly',
         nickname: null,
         dateActive: null,
         dateInactive: null,
@@ -18,34 +47,6 @@ export default {
           data: [
             {
               id: '5',
-              type: 'student',
-            },
-            {
-              id: '6',
-              type: 'student',
-            },
-          ],
-        },
-      },
-    },
-    {
-      id: '1',
-      type: 'user',
-      attributes: {
-        firstName: 'Darci',
-        lastName: 'Kuhic',
-        nickname: null,
-        dateActive: null,
-        dateInactive: null,
-        status: 'active',
-        role: 'staff',
-        email: null,
-      },
-      relationships: {
-        coordinatees: {
-          data: [
-            {
-              id: '4',
               type: 'student',
             },
           ],

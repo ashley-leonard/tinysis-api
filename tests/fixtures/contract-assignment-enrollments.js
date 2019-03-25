@@ -1,7 +1,8 @@
+// GET /api/enrollments?contractIds=3&include=turnins,participant
 export default {
   data: [
     {
-      id: '4',
+      id: '2',
       type: 'enrollment',
       attributes: {
         finalizedOn: null,
@@ -17,14 +18,14 @@ export default {
         },
         participant: {
           data: {
-            id: '6',
+            id: '7',
             type: 'participant',
           },
         },
         creditAssignments: {
           data: [
             {
-              id: '8',
+              id: '6',
               type: 'creditAssignment',
             },
           ],
@@ -61,7 +62,7 @@ export default {
       },
     },
     {
-      id: '3',
+      id: '1',
       type: 'enrollment',
       attributes: {
         finalizedOn: null,
@@ -77,14 +78,14 @@ export default {
         },
         participant: {
           data: {
-            id: '4',
+            id: '5',
             type: 'participant',
           },
         },
         creditAssignments: {
           data: [
             {
-              id: '7',
+              id: '5',
               type: 'creditAssignment',
             },
           ],
@@ -142,11 +143,11 @@ export default {
   ],
   included: [
     {
-      id: '6',
+      id: '7',
       type: 'user',
       attributes: {
-        firstName: 'Brandon',
-        lastName: 'Beer',
+        firstName: 'Era',
+        lastName: 'Schneider',
         nickname: null,
         dateActive: '2018-08-01',
         dateInactive: '2019-10-01',
@@ -166,11 +167,11 @@ export default {
       },
     },
     {
-      id: '4',
+      id: '5',
       type: 'user',
       attributes: {
-        firstName: 'Kevin',
-        lastName: 'Ferry',
+        firstName: 'Haydee',
+        lastName: 'Welch',
         nickname: null,
         dateActive: '2018-08-01',
         dateInactive: null,
@@ -204,7 +205,7 @@ export default {
         },
         enrollment: {
           data: {
-            id: '3',
+            id: '1',
             type: 'enrollment',
           },
         },
@@ -225,7 +226,7 @@ export default {
         },
         enrollment: {
           data: {
-            id: '3',
+            id: '1',
             type: 'enrollment',
           },
         },
@@ -246,7 +247,7 @@ export default {
         },
         enrollment: {
           data: {
-            id: '3',
+            id: '1',
             type: 'enrollment',
           },
         },
@@ -267,7 +268,7 @@ export default {
         },
         enrollment: {
           data: {
-            id: '3',
+            id: '1',
             type: 'enrollment',
           },
         },
@@ -288,7 +289,7 @@ export default {
         },
         enrollment: {
           data: {
-            id: '3',
+            id: '1',
             type: 'enrollment',
           },
         },

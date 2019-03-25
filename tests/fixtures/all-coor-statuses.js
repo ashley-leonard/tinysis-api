@@ -1,12 +1,13 @@
+// GET /api/statuses?limit=-1&months=2019-09-01%2C2019-10-01%2C2019-11-01%2C2019-12-01%2C2020-01-01%2C2020-02-01%2C2020-03-01%2C2020-04-01%2C2020-05-01%2C2020-06-01&studentIds=5%2C6%2C7&type=student
 export default {
   data: [
     {
-      id: '55',
+      id: '43',
       type: 'status',
       attributes: {
         month: '2019-09-01',
-        createdAt: '2019-03-18T05:19:16.000Z',
-        updatedAt: '2019-03-18T05:19:16.000Z',
+        createdAt: '2019-03-24T20:19:22.000Z',
+        updatedAt: '2019-03-24T20:19:22.000Z',
         fteHours: 25,
         metFteRequirements: true,
         heldPeriodicCheckins: true,
@@ -22,19 +23,19 @@ export default {
         },
         statusable: {
           data: {
-            id: '4',
+            id: '5',
             type: 'user',
           },
         },
       },
     },
     {
-      id: '58',
+      id: '46',
       type: 'status',
       attributes: {
         month: '2019-10-01',
-        createdAt: '2019-03-18T05:19:16.000Z',
-        updatedAt: '2019-03-18T05:19:16.000Z',
+        createdAt: '2019-03-24T20:19:22.000Z',
+        updatedAt: '2019-03-24T20:19:22.000Z',
         fteHours: 25,
         metFteRequirements: true,
         heldPeriodicCheckins: true,
@@ -50,34 +51,6 @@ export default {
         },
         statusable: {
           data: {
-            id: '4',
-            type: 'user',
-          },
-        },
-      },
-    },
-    {
-      id: '56',
-      type: 'status',
-      attributes: {
-        month: '2019-09-01',
-        createdAt: '2019-03-18T05:19:16.000Z',
-        updatedAt: '2019-03-18T05:19:16.000Z',
-        fteHours: 25,
-        metFteRequirements: true,
-        heldPeriodicCheckins: true,
-        academicStatus: 'satisfactory',
-        attendanceStatus: 'satisfactory',
-      },
-      relationships: {
-        creator: {
-          data: {
-            id: '2',
-            type: 'creator',
-          },
-        },
-        statusable: {
-          data: {
             id: '5',
             type: 'user',
           },
@@ -85,40 +58,12 @@ export default {
       },
     },
     {
-      id: '59',
-      type: 'status',
-      attributes: {
-        month: '2019-10-01',
-        createdAt: '2019-03-18T05:19:16.000Z',
-        updatedAt: '2019-03-18T05:19:16.000Z',
-        fteHours: 25,
-        metFteRequirements: true,
-        heldPeriodicCheckins: true,
-        academicStatus: 'satisfactory',
-        attendanceStatus: 'satisfactory',
-      },
-      relationships: {
-        creator: {
-          data: {
-            id: '2',
-            type: 'creator',
-          },
-        },
-        statusable: {
-          data: {
-            id: '5',
-            type: 'user',
-          },
-        },
-      },
-    },
-    {
-      id: '57',
+      id: '44',
       type: 'status',
       attributes: {
         month: '2019-09-01',
-        createdAt: '2019-03-18T05:19:16.000Z',
-        updatedAt: '2019-03-18T05:19:16.000Z',
+        createdAt: '2019-03-24T20:19:22.000Z',
+        updatedAt: '2019-03-24T20:19:22.000Z',
         fteHours: 25,
         metFteRequirements: true,
         heldPeriodicCheckins: true,
@@ -141,12 +86,12 @@ export default {
       },
     },
     {
-      id: '60',
+      id: '47',
       type: 'status',
       attributes: {
         month: '2019-10-01',
-        createdAt: '2019-03-18T05:19:16.000Z',
-        updatedAt: '2019-03-18T05:19:16.000Z',
+        createdAt: '2019-03-24T20:19:22.000Z',
+        updatedAt: '2019-03-24T20:19:22.000Z',
         fteHours: 25,
         metFteRequirements: true,
         heldPeriodicCheckins: true,
@@ -163,6 +108,62 @@ export default {
         statusable: {
           data: {
             id: '6',
+            type: 'user',
+          },
+        },
+      },
+    },
+    {
+      id: '45',
+      type: 'status',
+      attributes: {
+        month: '2019-09-01',
+        createdAt: '2019-03-24T20:19:22.000Z',
+        updatedAt: '2019-03-24T20:19:22.000Z',
+        fteHours: 25,
+        metFteRequirements: true,
+        heldPeriodicCheckins: true,
+        academicStatus: 'satisfactory',
+        attendanceStatus: 'satisfactory',
+      },
+      relationships: {
+        creator: {
+          data: {
+            id: '2',
+            type: 'creator',
+          },
+        },
+        statusable: {
+          data: {
+            id: '7',
+            type: 'user',
+          },
+        },
+      },
+    },
+    {
+      id: '48',
+      type: 'status',
+      attributes: {
+        month: '2019-10-01',
+        createdAt: '2019-03-24T20:19:22.000Z',
+        updatedAt: '2019-03-24T20:19:22.000Z',
+        fteHours: 25,
+        metFteRequirements: true,
+        heldPeriodicCheckins: true,
+        academicStatus: 'satisfactory',
+        attendanceStatus: 'satisfactory',
+      },
+      relationships: {
+        creator: {
+          data: {
+            id: '2',
+            type: 'creator',
+          },
+        },
+        statusable: {
+          data: {
+            id: '7',
             type: 'user',
           },
         },
@@ -174,8 +175,8 @@ export default {
       id: '1',
       type: 'user',
       attributes: {
-        firstName: 'Darci',
-        lastName: 'Kuhic',
+        firstName: 'Trinh',
+        lastName: 'Reilly',
         nickname: null,
         dateActive: null,
         dateInactive: null,
@@ -187,8 +188,8 @@ export default {
       id: '2',
       type: 'user',
       attributes: {
-        firstName: 'Bennett',
-        lastName: 'Kshlerin',
+        firstName: 'Scott',
+        lastName: 'Rau',
         nickname: null,
         dateActive: null,
         dateInactive: null,

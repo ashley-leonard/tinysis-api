@@ -1,16 +1,17 @@
+// GET /api/notes?notableType=Enrollment&notableIds=2,1
 export default {
   data: [
     {
-      id: '3',
+      id: '1',
       type: 'note',
       attributes: {
-        note: 'Note for Ferry',
-        updatedAt: '2019-03-18T05:19:16.000Z',
+        note: 'Note for Welch for enrollment in Unus exercitationem harum coruscus quo.',
+        updatedAt: '2019-03-24T20:19:21.000Z',
       },
       relationships: {
         notable: {
           data: {
-            id: '3',
+            id: '1',
             type: 'enrollment',
           },
         },
@@ -23,16 +24,16 @@ export default {
       },
     },
     {
-      id: '4',
+      id: '2',
       type: 'note',
       attributes: {
-        note: 'Note for Beer',
-        updatedAt: '2019-03-18T05:19:16.000Z',
+        note: 'Note for Schneider for enrollment in Unus exercitationem harum coruscus quo.',
+        updatedAt: '2019-03-24T20:19:21.000Z',
       },
       relationships: {
         notable: {
           data: {
-            id: '4',
+            id: '2',
             type: 'enrollment',
           },
         },
@@ -50,8 +51,8 @@ export default {
       id: '1',
       type: 'user',
       attributes: {
-        firstName: 'Darci',
-        lastName: 'Kuhic',
+        firstName: 'Trinh',
+        lastName: 'Reilly',
         nickname: null,
         dateActive: null,
         dateInactive: null,

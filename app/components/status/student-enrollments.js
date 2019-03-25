@@ -19,6 +19,18 @@ export default Component.extend({
   tagName: 'table',
   classNames: ['pure-table', 'pure-table-bordered'],
 
+  enrollmentsList: computed('enrollments', function () {
+    const { enrollments, tinyData } = this;
+
+    return enrollments
+      .sort((enrollment1, enrollment2) => {
+        const contract1 = tinyData.get('contract', enrollment1.relationships.contract.data.id);
+        const contract2 = tinyData.get('contract', enrollment2.relationships.contract.data.id);
+
+        return contract1.attributes.name.localeCompare(contract2.attributes.name);
+      });
+  }),
+
   statusHash: computed('enrollmentStatuses', function () {
     const { enrollmentStatuses } = this;
 
@@ -43,7 +55,7 @@ export default Component.extend({
     const notes = await getNotes(enrollmentStatuses);
 
     this.setProperties({
-      notablesHash: generateNotableHash(notes, enrollmentStatuses, 'relationships.enrollment.data.id'),
+      notablesHash: generateNotableHash(notes, enrollmentStatuses, 'relationships.statusable.data.id'),
       loadingNotes: null,
     });
   },

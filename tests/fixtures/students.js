@@ -1,11 +1,12 @@
+// GET /api/students
 export default {
   data: [
     {
-      id: '4',
+      id: '5',
       type: 'user',
       attributes: {
-        firstName: 'Kevin',
-        lastName: 'Ferry',
+        firstName: 'Haydee',
+        lastName: 'Welch',
         nickname: null,
         dateActive: '2018-08-01',
         dateInactive: null,
@@ -25,11 +26,11 @@ export default {
       },
     },
     {
-      id: '5',
+      id: '6',
       type: 'user',
       attributes: {
-        firstName: 'Cristine',
-        lastName: "O'Hara",
+        firstName: 'Rodrick',
+        lastName: 'Runte',
         nickname: null,
         dateActive: '2018-08-01',
         dateInactive: null,
@@ -49,11 +50,11 @@ export default {
       },
     },
     {
-      id: '6',
+      id: '7',
       type: 'user',
       attributes: {
-        firstName: 'Brandon',
-        lastName: 'Beer',
+        firstName: 'Era',
+        lastName: 'Schneider',
         nickname: null,
         dateActive: '2018-08-01',
         dateInactive: '2019-10-01',

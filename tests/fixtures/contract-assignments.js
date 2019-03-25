@@ -1,3 +1,4 @@
+// GET /api/assignments?contractIds=3
 export default {
   data: [
     {
@@ -6,7 +7,7 @@ export default {
       attributes: {
         name: 'Assignment 1',
         description: 'Here is assignment number 1',
-        dueDate: '2018-09-02',
+        dueDate: '2019-09-02',
       },
       relationships: {
         turnins: {
@@ -25,7 +26,7 @@ export default {
       attributes: {
         name: 'Assignment 2',
         description: 'Here is assignment number 2',
-        dueDate: '2018-09-03',
+        dueDate: '2019-09-03',
       },
       relationships: {
         turnins: {
@@ -44,7 +45,7 @@ export default {
       attributes: {
         name: 'Assignment 3',
         description: 'Here is assignment number 3',
-        dueDate: '2018-09-04',
+        dueDate: '2019-09-04',
       },
       relationships: {
         turnins: {
@@ -63,7 +64,7 @@ export default {
       attributes: {
         name: 'Assignment 4',
         description: 'Here is assignment number 4',
-        dueDate: '2018-09-05',
+        dueDate: '2019-09-05',
       },
       relationships: {
         turnins: {
@@ -82,7 +83,7 @@ export default {
       attributes: {
         name: 'Assignment 5',
         description: 'Here is assignment number 5',
-        dueDate: '2018-09-06',
+        dueDate: '2019-09-06',
       },
       relationships: {
         turnins: {
