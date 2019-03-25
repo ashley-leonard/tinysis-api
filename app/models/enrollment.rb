@@ -1,6 +1,7 @@
 class Enrollment < ApplicationRecord
   
-  
+  require './lib/tiny_privileges'
+
   # Enrollments have four possible states. The state transitions are as follows.
   #
   # Proposed - Active, Drop (destroy)

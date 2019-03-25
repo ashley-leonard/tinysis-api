@@ -26,41 +26,42 @@ def write_fixture(request, file)
   response
 end
 
+CURRENT_YEAR = 2019
+LAST_YEAR = CURRENT_YEAR - 1
+
 RSpec.describe 'Ember fixtures script', type: :request do
-  current_year = 2019
-
   before(:each) do
-    last_year = current_year - 1
-
     create :setting, name: 'reporting_base_month', value: 9
     create :setting, name: 'reporting_end_month', value: 6
-    create :setting, name: 'current_year', value: current_year
+    create :setting, name: 'CURRENT_YEAR', value: CURRENT_YEAR
 
-    @staff1 = create :user, privilege: 2
-    @staff2 = create :user, privilege: 2
-    @staff3 = create :user, privilege: 2, status: User::STATUS_INACTIVE, date_inactive: Date.new(2018, 1, 1)
+    @staff1 = create :user, privilege: User::PRIVILEGE_STAFF
+    @staff2 = create :user, privilege: User::PRIVILEGE_STAFF
+    @staff3 = create :user, privilege: User::PRIVILEGE_STAFF, status: User::STATUS_INACTIVE, date_inactive: Date.new(2018, 1, 1)
 
-    @term1_last = create :term, name: 'Last One', school_year: last_year
-    @term2_last = create :term, name: 'Last Two', school_year: last_year
-    @term1_current = create :term, name: 'Current One', school_year: current_year
-    @term2_current = create :term, name: 'Current Two', school_year: current_year
+    @admin1 = create :user, privilege: User::PRIVILEGE_ADMIN
 
-    @term1_last.set_dates(last_year, [0, 1, 2, 3, 4])
-    @term2_last.set_dates(last_year, [5, 6, 7, 8, 9])
+    @term1_last = create :term, name: 'Last One', school_year: LAST_YEAR
+    @term2_last = create :term, name: 'Last Two', school_year: LAST_YEAR
+    @term1_current = create :term, name: 'Current One', school_year: CURRENT_YEAR
+    @term2_current = create :term, name: 'Current Two', school_year: CURRENT_YEAR
+
+    @term1_last.set_dates(LAST_YEAR, [0, 1, 2, 3, 4])
+    @term2_last.set_dates(LAST_YEAR, [5, 6, 7, 8, 9])
     @term1_last.save!
     @term2_last.save!
 
-    @term1_current.set_dates(last_year, [0, 1, 2, 3, 4])
-    @term2_current.set_dates(last_year, [5, 6, 7, 8, 9])
+    @term1_current.set_dates(CURRENT_YEAR, [0, 1, 2, 3, 4])
+    @term2_current.set_dates(CURRENT_YEAR, [5, 6, 7, 8, 9])
     @term1_current.save!
     @term2_current.save!
 
-    @term_coor_last = create :term, name: 'COOR Last', school_year: current_year, active: false
-    @term_coor_last.set_dates last_year, [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+    @term_coor_last = create :term, name: 'COOR Last', active: false
+    @term_coor_last.set_dates LAST_YEAR, [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
     @term_coor_last.save!
 
-    @term_coor_current = create :term, name: 'COOR Current', school_year: current_year
-    @term_coor_current.set_dates current_year, [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+    @term_coor_current = create :term, name: 'COOR Current'
+    @term_coor_current.set_dates CURRENT_YEAR, [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
     @term_coor_current.save!
 
     @category1 = create :category, name: 'Category 1'
@@ -69,7 +70,7 @@ RSpec.describe 'Ember fixtures script', type: :request do
     @contract1_last = create :contract, term: @term1_last, facilitator: @staff1, category: @category1, creator: @staff1, contract_status: Contract::STATUS_CLOSED
     @contract2_last = create :contract, term: @term2_last, facilitator: @staff2, category: @category2, creator: @staff2, contract_status: Contract::STATUS_CLOSED
     @contract1_current = create :contract, term: @term1_current, facilitator: @staff1, category: @category1, creator: @staff1
-    @contract2_current = create :contract, term: @term2_current, facilitator: @staff2, category: @category2, creator: @staff2
+    @contract2_current = create :contract, term: @term1_current, facilitator: @staff2, category: @category2, creator: @staff2
 
     @credit1 = create :credit, course_name: 'Course 1'
     @credit2 = create :credit, course_name: 'Course 2'
@@ -95,47 +96,38 @@ RSpec.describe 'Ember fixtures script', type: :request do
     end
     @contract1_current.save!
 
-    @student1 = create :user, privilege: User::PRIVILEGE_STUDENT, coordinator: @staff1, date_active: Date.new(last_year, 8, 1)
-    @student2 = create :user, privilege: User::PRIVILEGE_STUDENT, coordinator: @staff2, date_active: Date.new(last_year, 8, 1)
-    @student3 = create :user, privilege: User::PRIVILEGE_STUDENT, coordinator: @staff2, status: User::STATUS_INACTIVE, date_active: Date.new(last_year, 8, 1), date_inactive: Date.new(current_year, 10, 1)
+    @student1 = create :user, privilege: User::PRIVILEGE_STUDENT, coordinator: @staff1, date_active: Date.new(LAST_YEAR, 8, 1)
+    @student2 = create :user, privilege: User::PRIVILEGE_STUDENT, coordinator: @staff2, date_active: Date.new(LAST_YEAR, 8, 1)
+    @student3 = create :user, privilege: User::PRIVILEGE_STUDENT, coordinator: @staff2, status: User::STATUS_INACTIVE, date_active: Date.new(LAST_YEAR, 8, 1), date_inactive: Date.new(CURRENT_YEAR, 10, 1)
     @students = [@student1, @student2, @student3]
     
-    # current contracts should have active enrollments.
-
-    # closed contracts should have fulfilled enrollments.
-    # their credits should be transferred to the students.
-    [@contract1_last, @contract1_current].each do |contract|
-      enrollment = create :enrollment, participant: @student1, contract: contract, creator: contract.facilitator
-      create :credit_assignment, enrollment: enrollment, credit: @credit1, credit_hours: 1
-      create :note, note: "Note for #{@student1.last_name}", notable: enrollment, creator: contract.facilitator
-
-      enrollment = create :enrollment, participant: @student3, contract: contract, creator: contract.facilitator
-      create :credit_assignment, enrollment: enrollment, credit: @credit1, credit_hours: 1
-      create :note, note: "Note for #{@student3.last_name}", notable: enrollment, creator: contract.facilitator
-    end
-
-    [@contract2_last, @contract2_current].each do |contract|
-      enrollment = create :enrollment, participant: @student2, contract: contract, creator: contract.facilitator
-      create :credit_assignment, enrollment: enrollment, credit: @credit2, credit_hours: 2
-    end
-
-    # statuses for all months of the previous contracts
-    [@contract1_last, @contract2_last].each do |contract|
-      contract.enrollments.each do |enrollment|
-        contract.term.months.each do |month|
-          create :status, statusable: enrollment, month: month, creator: contract.facilitator
-        end
-      end
-    end
-
-    # statuses for the first three months of the current contracts
+    # current contracts should have active enrollments. reporting as if we are three months into
+    # the current contracts.
     [@contract1_current, @contract2_current].each do |contract|
+      [@student1, @student3].each do |student|
+        enrollment = create :enrollment, participant: student, contract: contract, creator: contract.facilitator
+        create :credit_assignment, enrollment: enrollment, credit: @credit1, credit_hours: 1
+        create :note, note: "Note for #{student.last_name} for enrollment in #{contract.name}", notable: enrollment, creator: contract.facilitator
+      end
+
       contract.enrollments.each do |enrollment|
         months = [contract.term.months[0], contract.term.months[1], contract.term.months[2]]
         months.each do |month|
           status = create :status, statusable: enrollment, month: month, creator: contract.facilitator
           create :note, creator: contract.facilitator, notable: status, note: "Note by #{contract.facilitator.last_name} for #{month} enrollment of #{enrollment.participant.last_name} in #{contract.name}"
         end
+      end
+    end
+  
+    # closed contracts should have fulfilled enrollments and finalized credits
+    [@contract1_last, @contract2_last].each do |contract|
+      [@student2, @student3].each do |student|
+        enrollment = create :enrollment, participant: student, contract: contract, creator: contract.facilitator
+        create :credit_assignment, enrollment: enrollment, credit: @credit2, credit_hours: 2
+        create :note, note: "Note for #{student.last_name} for enrollment in #{contract.name}", notable: enrollment, creator: contract.facilitator
+
+        enrollment.set_closed Enrollment::COMPLETION_FULFILLED, contract.facilitator
+        enrollment.set_finalized @admin1
       end
     end
 
@@ -178,7 +170,7 @@ RSpec.describe 'Ember fixtures script', type: :request do
 
   describe 'write' do
     it 'all' do
-      travel_to Date.new(current_year, 11, 15) do
+      travel_to Date.new(CURRENT_YEAR, 11, 15) do
         # general
         #
         %w[contracts students staff terms settings categories].each do |fixture|
@@ -250,17 +242,11 @@ RSpec.describe 'Ember fixtures script', type: :request do
         write_fixture "/api/students/#{@student1.id}", 'student.js'
 
         # student enrollments
-        Rails.logger.info "*********"
-        Rails.logger.info "GENERATING CONTRACT ENROLLMENTS"
-        Rails.logger.info "*********"
         response = write_fixture "/api/enrollments?participantIds=#{@student1.id}&status=enrolled&include=contract,contract.facilitator,contract.term,credit_assignments,credit_assignments.credit,participant", 'student-enrollments.js'
 
         # statuses for enrollments
         student_enrollments_response = JSON.parse(response.body)
         student_enrollment_ids = student_enrollments_response['data'].map{|enrollment| enrollment["id"]}
-        Rails.logger.info "*********"
-        Rails.logger.info student_enrollment_ids
-        Rails.logger.info "*********"
         response = write_fixture "/api/statuses?enrollmentIds=#{student_enrollment_ids.join(',')}", 'student-enrollments-statuses.js'
 
         # notes for statuses for enrollments
