@@ -1,0 +1,18 @@
+<thead>
+  <tr>
+    <th class="class">Class</th>
+    <th class="status">Status</th>
+    {{#each months as |month|}}
+      <th class="month">{{t-date month "compactTermMonth"}}</th>
+    {{/each}}
+  </tr>
+</thead>
+
+{{#each enrollmentsList as |enrollment|}}
+  {{status-by-student-enrollments/row
+    enrollment=enrollment
+    statusHash=statusHash
+    notablesHash=notablesHash
+    months=months
+  }}
+{{/each}}

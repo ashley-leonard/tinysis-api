@@ -1,0 +1,11 @@
+<thead>
+  <th>Participant</th>
+  <th>Enrollment status</th>
+  <th>Credit assignments</th>
+</thead>
+{{#each enrollments as |enrollment|}}
+  {{contract-enrollments-list/row
+    enrollment=enrollment
+    notablesHash=notablesHash
+  }}
+{{/each}}

@@ -1,0 +1,39 @@
+<tr data-test-enrollment-id={{enrollment.id}}>
+  <td class="contract">  
+    <div class="compact-paragraphs">
+      <p class="contract-name">
+        {{#link-to "status-by-enrollment" contract.id enrollment.id}}
+          {{contract.attributes.name}}
+        {{/link-to}}
+      </p>
+      <p class="full-name">
+        {{full-name facilitator "first-last"}}
+        /
+        {{term.attributes.name}}
+      </p>
+      {{credit-assignments creditAssignments=creditAssignments}}
+    </div>
+  </td>
+
+  <td class="enrollment-status">
+    {{enrollmentStatus}}
+  </td>
+
+  {{#each months as |month|}}
+    {{status-by-student-enrollments/status-column
+      month=month
+      statusHash=statusHash
+      enrollment=enrollment
+    }}
+  {{/each}}
+  
+</tr>
+
+<tr class="notes-row {{loadingNotes}}">
+  <td colspan={{columnsCount}}>
+    {{notes-list
+      notes=notes
+      notable=enrollment
+    }}
+  </td>
+</tr>

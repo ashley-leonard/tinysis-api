@@ -1,0 +1,43 @@
+<hr>
+<dl class="summary">
+  <dt>Status</dt>
+  <dd>{{contract.attributes.status}}</dd>
+  <dt>Facilitator</dt>
+  <dd>{{full-name facilitator "first-last"}}</dd>
+  <dt>Category</dt>
+  <dd>{{category.attributes.name}}</dd>
+  <dt>Credits</dt>
+  <dd class="credit-assignments">
+    {{credit-assignments creditAssignments=creditAssignments}}
+  </dd>
+  <dt>Term</dt>
+  <dd>{{term.attributes.name}}</dd>
+  <dt>Location</dt>
+  <dd>{{contract.attributes.location}}</dd>
+</dl>
+<hr>
+
+<h2>Details</h2>
+
+{{#if hasDetails}}
+  {{#each detailSections as |section|}}
+    <h3>{{titleize section.name}}</h3>
+    <p>
+      {{section.content}}
+    </p>
+  {{/each}}
+{{else}}
+  <p>No details specified.</p>
+{{/if}}
+
+<h3>Learning Requirements</h3>
+
+{{contract-learning-requirements ealrs=contract.relationships.ealrs.data}}
+
+<h2>Assignments</h2>
+
+{{contract-assignments-summary
+  assignments=assignments
+}}
+
+

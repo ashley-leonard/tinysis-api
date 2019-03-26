@@ -1,14 +1,14 @@
 <h2>{{full-name participant}}</h2>
 
 <section>
-  {{status/by-enrollment-summary
+  {{status-by-enrollment-summary
     enrollment=enrollment
     contract=contract
   }}
 </section>
 
 <section>
-  {{status/by-enrollment
+  {{status-by-enrollment
     contract=contract
     enrollment=enrollment
     statuses=statuses
@@ -18,7 +18,7 @@
 
 <section>
   <h3>Assignments</h3>
-  {{status/by-enrollment-assignments
+  {{status-by-enrollment-assignments
     contract=contract
     enrollment=enrollment
     getNotes=(route-action "getNotes")

@@ -1,0 +1,11 @@
+<thead>
+  <tr>
+    <th>Student</th>
+    <th>Coordinator</th>
+    <th class="grade">Grade</th>
+    <th>Links</th>
+  </tr>
+</thead>
+{{#each students as |student|}}
+  {{students-list/row student=student}}
+{{/each}}
