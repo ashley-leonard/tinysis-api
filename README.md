@@ -12,6 +12,14 @@ The intent of this client implementation is to keep it as light and simple as
 possible. Its data flows are handled internally using lean plain-JSON models
 stored in a central JSONAPI resource.
 
+## Component structure
+
+Using a flat organization scheme here.
+
+Component names should group under prefixes related to the plural or singular
+topic (e.g., student or students). Subcomponents of components should be stored
+in a folder - no more than one level of nesting.
+
 ## Internal data flows
 
 Follow these conventions:
