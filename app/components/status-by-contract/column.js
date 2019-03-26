@@ -2,8 +2,8 @@ import Component from '@ember/component';
 import { inject as service } from '@ember/service';
 import { computed } from '@ember/object';
 import { alias } from '@ember/object/computed';
-import { wasActive } from 'tinysis-ui/utils/user-utils';
-import { isUnacceptable, getAcademicStatusName } from 'tinysis-ui/utils/status-utils';
+import { wasActive } from '../../utils/user-utils';
+import { isUnacceptable, getAcademicStatusName } from '../../utils/status-utils';
 
 export default Component.extend({
   tinyData: service(),
