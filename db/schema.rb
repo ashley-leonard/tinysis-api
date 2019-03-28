@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2011_09_01_125026) do
+ActiveRecord::Schema.define(version: 2019_03_26_143335) do
 
   create_table "assignments", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.integer "contract_id"
@@ -32,12 +32,16 @@ ActiveRecord::Schema.define(version: 2011_09_01_125026) do
     t.boolean "public", default: false
     t.integer "statusable", limit: 1, default: 0, unsigned: true
     t.integer "homeroom", limit: 1, default: 0
+    t.datetime "created_at", default: "1900-01-01 00:00:00", null: false
+    t.datetime "updated_at", default: "1900-01-01 00:00:00", null: false
     t.index ["public"], name: "index_categories_on_public"
   end
 
   create_table "contract_ealrs", id: false, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.integer "contract_id"
     t.integer "ealr_id"
+    t.datetime "created_at", default: "1900-01-01 00:00:00", null: false
+    t.datetime "updated_at", default: "1900-01-01 00:00:00", null: false
     t.index ["contract_id"], name: "index_contract_ealrs_on_contract_id"
     t.index ["ealr_id"], name: "index_contract_ealrs_on_ealr_id"
   end
@@ -102,6 +106,8 @@ ActiveRecord::Schema.define(version: 2011_09_01_125026) do
     t.date "transmitted_on"
     t.string "transmitted_by"
     t.string "transmitted_signature"
+    t.datetime "created_at", default: "1900-01-01 00:00:00", null: false
+    t.datetime "updated_at", default: "1900-01-01 00:00:00", null: false
   end
 
   create_table "credits", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
@@ -109,6 +115,8 @@ ActiveRecord::Schema.define(version: 2011_09_01_125026) do
     t.string "course_id", default: "0", null: false
     t.integer "course_type", default: 0, null: false
     t.float "required_hours", default: 0.0, null: false
+    t.datetime "created_at", default: "1900-01-01 00:00:00", null: false
+    t.datetime "updated_at", default: "1900-01-01 00:00:00", null: false
   end
 
   create_table "ealrs", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
@@ -116,6 +124,8 @@ ActiveRecord::Schema.define(version: 2011_09_01_125026) do
     t.string "seq"
     t.text "ealr"
     t.date "version"
+    t.datetime "created_at", default: "1900-01-01 00:00:00", null: false
+    t.datetime "updated_at", default: "1900-01-01 00:00:00", null: false
   end
 
   create_table "enrollments", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
@@ -141,6 +151,8 @@ ActiveRecord::Schema.define(version: 2011_09_01_125026) do
     t.string "name"
     t.date "date_completed"
     t.integer "quantity", default: 0
+    t.datetime "created_at", default: "1900-01-01 00:00:00", null: false
+    t.datetime "updated_at", default: "1900-01-01 00:00:00", null: false
     t.index ["credit_assignment_id"], name: "index_graduation_plan_mappings_on_credit_assignment_id"
     t.index ["graduation_plan_id"], name: "index_graduation_plan_mappings_on_graduation_plan_id"
     t.index ["graduation_plan_requirement_id"], name: "index_graduation_plan_mappings_on_graduation_plan_requirement_id"
@@ -152,6 +164,8 @@ ActiveRecord::Schema.define(version: 2011_09_01_125026) do
     t.integer "position", default: 0
     t.integer "parent_id"
     t.string "requirement_type", limit: 7, default: "credit", null: false
+    t.datetime "created_at", default: "1900-01-01 00:00:00", null: false
+    t.datetime "updated_at", default: "1900-01-01 00:00:00", null: false
     t.index ["parent_id"], name: "index_graduation_plan_requirements_on_parent_id"
     t.index ["requirement_type"], name: "index_graduation_plan_requirements_on_requirement_type"
   end
@@ -159,6 +173,8 @@ ActiveRecord::Schema.define(version: 2011_09_01_125026) do
   create_table "graduation_plans", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.integer "user_id"
     t.string "class_of"
+    t.datetime "created_at", default: "1900-01-01 00:00:00", null: false
+    t.datetime "updated_at", default: "1900-01-01 00:00:00", null: false
   end
 
   create_table "learning_plan_goals", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
@@ -166,6 +182,8 @@ ActiveRecord::Schema.define(version: 2011_09_01_125026) do
     t.boolean "required", default: false
     t.boolean "active", default: true
     t.integer "position"
+    t.datetime "created_at", default: "1900-01-01 00:00:00", null: false
+    t.datetime "updated_at", default: "1900-01-01 00:00:00", null: false
   end
 
   create_table "learning_plans", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
@@ -173,12 +191,16 @@ ActiveRecord::Schema.define(version: 2011_09_01_125026) do
     t.integer "year", default: 0, null: false
     t.text "user_goals"
     t.integer "weekly_hours", default: 0, null: false
+    t.datetime "created_at", default: "1900-01-01 00:00:00", null: false
+    t.datetime "updated_at", default: "1900-01-01 00:00:00", null: false
     t.index ["user_id", "year"], name: "index_learning_plans_on_user_id_and_year"
   end
 
   create_table "learning_plans_to_goals", id: false, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.integer "learning_plan_id"
     t.integer "learning_plan_goal_id"
+    t.datetime "created_at", default: "1900-01-01 00:00:00", null: false
+    t.datetime "updated_at", default: "1900-01-01 00:00:00", null: false
     t.index ["learning_plan_goal_id"], name: "index_lp_to_goals_on_goal_id"
     t.index ["learning_plan_id"], name: "index_lp_to_goals_on_lp_id"
   end
@@ -188,6 +210,8 @@ ActiveRecord::Schema.define(version: 2011_09_01_125026) do
     t.integer "enrollment_id"
     t.integer "participation"
     t.string "contact_type", limit: 8, default: "class"
+    t.datetime "created_at", default: "1900-01-01 00:00:00", null: false
+    t.datetime "updated_at", default: "1900-01-01 00:00:00", null: false
     t.index ["enrollment_id"], name: "index_meeting_participants_on_enrollment_id"
     t.index ["meeting_id"], name: "index_meeting_participants_on_meeting_id"
   end
@@ -196,6 +220,8 @@ ActiveRecord::Schema.define(version: 2011_09_01_125026) do
     t.integer "contract_id"
     t.date "meeting_date"
     t.string "title"
+    t.datetime "created_at", default: "1900-01-01 00:00:00", null: false
+    t.datetime "updated_at", default: "1900-01-01 00:00:00", null: false
     t.index ["contract_id"], name: "index_meetings_on_contract_id"
   end
 
@@ -205,6 +231,7 @@ ActiveRecord::Schema.define(version: 2011_09_01_125026) do
     t.datetime "updated_at"
     t.integer "notable_id"
     t.string "notable_type"
+    t.datetime "created_at", default: "1900-01-01 00:00:00"
     t.index ["notable_type", "notable_id"], name: "index_notes_on_notable"
     t.index ["notable_type"], name: "index_notes_on_notable_type"
   end
@@ -219,6 +246,8 @@ ActiveRecord::Schema.define(version: 2011_09_01_125026) do
   create_table "settings", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.string "name"
     t.text "value"
+    t.datetime "created_at", default: "1900-01-01 00:00:00", null: false
+    t.datetime "updated_at", default: "1900-01-01 00:00:00", null: false
     t.index ["name"], name: "index_settings_on_name"
     t.index ["name"], name: "index_settings_on_setting_name"
   end
@@ -245,6 +274,8 @@ ActiveRecord::Schema.define(version: 2011_09_01_125026) do
     t.boolean "active", default: true, null: false
     t.text "months"
     t.date "credit_date"
+    t.datetime "created_at", default: "1900-01-01 00:00:00", null: false
+    t.datetime "updated_at", default: "1900-01-01 00:00:00", null: false
     t.index ["active"], name: "index_terms_on_active"
   end
 
@@ -275,6 +306,8 @@ ActiveRecord::Schema.define(version: 2011_09_01_125026) do
     t.integer "coordinator_id"
     t.date "date_active"
     t.date "date_inactive"
+    t.datetime "created_at", default: "1900-01-01 00:00:00", null: false
+    t.datetime "updated_at", default: "1900-01-01 00:00:00", null: false
     t.index ["coordinator_id"], name: "index_users_on_coordinator_id"
     t.index ["date_active", "date_inactive"], name: "index_users_on_active_dates"
     t.index ["date_active"], name: "index_users_on_date_active"
