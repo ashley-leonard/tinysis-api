@@ -33,7 +33,7 @@ RSpec.describe 'Ember fixtures script', type: :request do
   before(:each) do
     create :setting, name: 'reporting_base_month', value: 9
     create :setting, name: 'reporting_end_month', value: 6
-    create :setting, name: 'CURRENT_YEAR', value: CURRENT_YEAR
+    create :setting, name: 'current_year', value: CURRENT_YEAR
 
     @staff1 = create :user, privilege: User::PRIVILEGE_STAFF
     @staff2 = create :user, privilege: User::PRIVILEGE_STAFF
@@ -173,9 +173,12 @@ RSpec.describe 'Ember fixtures script', type: :request do
       travel_to Date.new(CURRENT_YEAR, 11, 15) do
         # general
         #
-        %w[contracts students staff terms settings categories].each do |fixture|
+        %w[contracts students staff terms settings categories profile].each do |fixture|
          write_fixture "/api/#{fixture}", "#{fixture}.js"
         end
+
+        # years
+        write_fixture '/api/settings/years', 'years.js'
 
         # active coor terms
         write_fixture '/api/terms?type=coor&status=active', 'coor-terms.js'
