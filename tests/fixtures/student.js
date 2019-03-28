@@ -4,8 +4,8 @@ export default {
     id: '5',
     type: 'user',
     attributes: {
-      firstName: 'Haydee',
-      lastName: 'Welch',
+      firstName: 'Mauro',
+      lastName: 'Ebert',
       nickname: null,
       dateActive: '2018-08-01',
       dateInactive: null,

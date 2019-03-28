@@ -1,19 +1,20 @@
-<thead>
-  <tr>
-    <th>Contract</th>
-    <th>Enrollees</th>
-    <th>Category</th>
-    <th>Facilitator</th>
-    <th>Term</th>
-    <th>Status</th>
-    <th>&nbsp;</th>
-  </tr>    
-</thead>
-<tbody>
-  {{#each contracts as |contract|}}
-    {{contracts-list/row
-      contract=contract
-    }}
-  {{/each}}
-</tbody>
-{{yield}}
+<table class="pure-table pure-table-bordered" data-test-contracts-list>
+  <thead>
+    <tr>
+      <th>Contract</th>
+      <th>Enrollees</th>
+      <th>Category</th>
+      <th>Facilitator</th>
+      <th>Term</th>
+      <th>Status</th>
+      <th>&nbsp;</th>
+    </tr>    
+  </thead>
+  <tbody>
+    {{#each contracts as |contract|}}
+      {{contracts-list/row
+        contract=contract
+      }}
+    {{/each}}
+  </tbody>
+</table>

@@ -127,13 +127,13 @@ export default {
       id: '3',
       type: 'contract',
       attributes: {
-        name: 'Unus exercitationem harum coruscus quo.',
+        name: 'Dolorem alo defleo cohaero subiungo.',
         status: 'approved',
-        learningObjectives: 'Et cumque qui defigo officiis.',
-        competencies: 'Velit caelestis suffragium artificiose vere.',
-        evaluationMethods: 'Pecto cursim ut denuo corona.',
-        instructionalMaterials: 'Claro adstringo pecus sollicito repellat.',
-        location: 'Tot adfero abbas utrum curtus.',
+        learningObjectives: 'Contigo sui sonitus sodalitas admoneo.',
+        competencies: 'Cresco ambulo aut ut ubi.',
+        evaluationMethods: 'Somnus eaque culpo aequus amissio.',
+        instructionalMaterials: 'Territo decumbo aspernatur ascit et.',
+        location: 'Crur bonus pel arcesso usus.',
         timeslots: [
           {
             start: '8:45',
@@ -255,13 +255,15 @@ export default {
       id: '1',
       type: 'user',
       attributes: {
-        firstName: 'Trinh',
-        lastName: 'Reilly',
+        firstName: 'Mark',
+        lastName: 'Kuhn',
         nickname: null,
         dateActive: null,
         dateInactive: null,
         status: 'active',
         role: 'staff',
+      },
+      relationships: {
       },
     },
     {
@@ -309,8 +311,8 @@ export default {
       id: '5',
       type: 'user',
       attributes: {
-        firstName: 'Haydee',
-        lastName: 'Welch',
+        firstName: 'Mauro',
+        lastName: 'Ebert',
         nickname: null,
         dateActive: '2018-08-01',
         dateInactive: null,
@@ -333,13 +335,13 @@ export default {
       id: '4',
       type: 'contract',
       attributes: {
-        name: 'Nam coepi dolorem deputo cras.',
+        name: 'Vos sordeo ustilo qui quas.',
         status: 'approved',
-        learningObjectives: 'Conor aestivus vomer conitor tracto.',
-        competencies: 'Venustas rerum quisquam temporibus conspergo.',
-        evaluationMethods: 'Trucido cognatus vulpes cruentus creber.',
-        instructionalMaterials: 'Natus spes usitas apostolus bibo.',
-        location: 'Distinctio comitatus vorago decor tunc.',
+        learningObjectives: 'Vester fugiat dedecor dicta conduco.',
+        competencies: 'Denego quibusdam necessitatibus desipio concedo.',
+        evaluationMethods: 'Arto socius alius antepono deduco.',
+        instructionalMaterials: 'Certus chirographum exercitationem clementia occaecati.',
+        location: 'Et admoveo molestiae ater tolero.',
         timeslots: [
           {
             start: '8:45',
@@ -408,13 +410,15 @@ export default {
       id: '2',
       type: 'user',
       attributes: {
-        firstName: 'Scott',
-        lastName: 'Rau',
+        firstName: 'Scottie',
+        lastName: 'Zieme',
         nickname: null,
         dateActive: null,
         dateInactive: null,
         status: 'active',
         role: 'staff',
+      },
+      relationships: {
       },
     },
     {

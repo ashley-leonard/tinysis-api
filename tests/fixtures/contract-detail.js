@@ -4,13 +4,13 @@ export default {
     id: '3',
     type: 'contract',
     attributes: {
-      name: 'Unus exercitationem harum coruscus quo.',
+      name: 'Dolorem alo defleo cohaero subiungo.',
       status: 'approved',
-      learningObjectives: 'Et cumque qui defigo officiis.',
-      competencies: 'Velit caelestis suffragium artificiose vere.',
-      evaluationMethods: 'Pecto cursim ut denuo corona.',
-      instructionalMaterials: 'Claro adstringo pecus sollicito repellat.',
-      location: 'Tot adfero abbas utrum curtus.',
+      learningObjectives: 'Contigo sui sonitus sodalitas admoneo.',
+      competencies: 'Cresco ambulo aut ut ubi.',
+      evaluationMethods: 'Somnus eaque culpo aequus amissio.',
+      instructionalMaterials: 'Territo decumbo aspernatur ascit et.',
+      location: 'Crur bonus pel arcesso usus.',
       timeslots: [
         {
           start: '8:45',
@@ -263,7 +263,7 @@ export default {
       id: '1',
       type: 'ealr',
       attributes: {
-        ealr: 'Alo vado sed amplexus acer.',
+        ealr: 'Totidem attero cogito fugiat ceno.',
         seq: '1.1',
         category: 'Category 1',
       },
@@ -272,7 +272,7 @@ export default {
       id: '2',
       type: 'ealr',
       attributes: {
-        ealr: 'Viridis cibus ait sit et.',
+        ealr: 'Candidus rem velit tremo conservo.',
         seq: '1.2',
         category: 'Category 1',
       },
@@ -281,7 +281,7 @@ export default {
       id: '3',
       type: 'ealr',
       attributes: {
-        ealr: 'Adnuo defessus sumptus officiis odio.',
+        ealr: 'Rem vero bellicus vorago curvo.',
         seq: '2.1',
         category: 'Category 2',
       },
@@ -290,7 +290,7 @@ export default {
       id: '4',
       type: 'ealr',
       attributes: {
-        ealr: 'Sublime curatio quas cotidie somniculosus.',
+        ealr: 'Arbitro aperiam barba spargo vulnus.',
         seq: '2.2',
         category: 'Category 2',
       },
@@ -299,13 +299,15 @@ export default {
       id: '1',
       type: 'user',
       attributes: {
-        firstName: 'Trinh',
-        lastName: 'Reilly',
+        firstName: 'Mark',
+        lastName: 'Kuhn',
         nickname: null,
         dateActive: null,
         dateInactive: null,
         status: 'active',
         role: 'staff',
+      },
+      relationships: {
       },
     },
     {

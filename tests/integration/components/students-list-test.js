@@ -29,7 +29,7 @@ module('Integration | Component | students-list', (hooks) => {
       }}
     `);
 
-    assert.ok(find('table.all-students'), 'Table rendered');
-    assert.equal(this.students.length, findAll('tbody').length, 'expected count of student rows rendered');
+    assert.ok(find('table[data-test-students-list]'), 'Table rendered');
+    assert.equal(this.students.length, findAll('[data-test-students-list-row]').length, 'expected count of student rows rendered');
   });
 });

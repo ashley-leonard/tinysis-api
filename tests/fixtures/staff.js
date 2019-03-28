@@ -5,14 +5,13 @@ export default {
       id: '1',
       type: 'user',
       attributes: {
-        firstName: 'Trinh',
-        lastName: 'Reilly',
+        firstName: 'Mark',
+        lastName: 'Kuhn',
         nickname: null,
         dateActive: null,
         dateInactive: null,
         status: 'active',
         role: 'staff',
-        email: null,
       },
       relationships: {
         coordinatees: {
@@ -29,14 +28,13 @@ export default {
       id: '2',
       type: 'user',
       attributes: {
-        firstName: 'Scott',
-        lastName: 'Rau',
+        firstName: 'Scottie',
+        lastName: 'Zieme',
         nickname: null,
         dateActive: null,
         dateInactive: null,
         status: 'active',
         role: 'staff',
-        email: null,
       },
       relationships: {
         coordinatees: {
@@ -57,8 +55,8 @@ export default {
       id: '3',
       type: 'user',
       attributes: {
-        firstName: 'Lewis',
-        lastName: 'Brakus',
+        firstName: 'Kum',
+        lastName: 'Monahan',
         nickname: null,
         dateActive: null,
         dateInactive: '2018-01-01',
@@ -78,8 +76,8 @@ export default {
       id: '4',
       type: 'user',
       attributes: {
-        firstName: 'Vinita',
-        lastName: 'Keebler',
+        firstName: 'Alec',
+        lastName: 'Kuvalis',
         nickname: null,
         dateActive: null,
         dateInactive: null,

@@ -1,4 +1,4 @@
-// GET /api/statuses?enrollmentIds=2,1
+// GET /api/statuses?enrollmentIds=1,2
 export default {
   data: [
     {
@@ -6,8 +6,8 @@ export default {
       type: 'status',
       attributes: {
         month: '2019-09-01',
-        createdAt: '2019-03-24T20:19:21.000Z',
-        updatedAt: '2019-03-24T20:19:21.000Z',
+        createdAt: '2019-03-27T15:15:04.000Z',
+        updatedAt: '2019-03-27T15:15:04.000Z',
         fteHours: 25,
         metFteRequirements: true,
         heldPeriodicCheckins: true,
@@ -34,8 +34,8 @@ export default {
       type: 'status',
       attributes: {
         month: '2019-10-01',
-        createdAt: '2019-03-24T20:19:21.000Z',
-        updatedAt: '2019-03-24T20:19:21.000Z',
+        createdAt: '2019-03-27T15:15:04.000Z',
+        updatedAt: '2019-03-27T15:15:04.000Z',
         fteHours: 25,
         metFteRequirements: true,
         heldPeriodicCheckins: true,
@@ -62,8 +62,8 @@ export default {
       type: 'status',
       attributes: {
         month: '2019-11-01',
-        createdAt: '2019-03-24T20:19:21.000Z',
-        updatedAt: '2019-03-24T20:19:21.000Z',
+        createdAt: '2019-03-27T15:15:04.000Z',
+        updatedAt: '2019-03-27T15:15:04.000Z',
         fteHours: 25,
         metFteRequirements: true,
         heldPeriodicCheckins: true,
@@ -90,8 +90,8 @@ export default {
       type: 'status',
       attributes: {
         month: '2019-09-01',
-        createdAt: '2019-03-24T20:19:21.000Z',
-        updatedAt: '2019-03-24T20:19:21.000Z',
+        createdAt: '2019-03-27T15:15:04.000Z',
+        updatedAt: '2019-03-27T15:15:04.000Z',
         fteHours: 25,
         metFteRequirements: true,
         heldPeriodicCheckins: true,
@@ -118,8 +118,8 @@ export default {
       type: 'status',
       attributes: {
         month: '2019-10-01',
-        createdAt: '2019-03-24T20:19:22.000Z',
-        updatedAt: '2019-03-24T20:19:22.000Z',
+        createdAt: '2019-03-27T15:15:04.000Z',
+        updatedAt: '2019-03-27T15:15:04.000Z',
         fteHours: 25,
         metFteRequirements: true,
         heldPeriodicCheckins: true,
@@ -146,8 +146,8 @@ export default {
       type: 'status',
       attributes: {
         month: '2019-11-01',
-        createdAt: '2019-03-24T20:19:22.000Z',
-        updatedAt: '2019-03-24T20:19:22.000Z',
+        createdAt: '2019-03-27T15:15:04.000Z',
+        updatedAt: '2019-03-27T15:15:04.000Z',
         fteHours: 25,
         metFteRequirements: true,
         heldPeriodicCheckins: true,
@@ -175,13 +175,15 @@ export default {
       id: '1',
       type: 'user',
       attributes: {
-        firstName: 'Trinh',
-        lastName: 'Reilly',
+        firstName: 'Mark',
+        lastName: 'Kuhn',
         nickname: null,
         dateActive: null,
         dateInactive: null,
         status: 'active',
         role: 'staff',
+      },
+      relationships: {
       },
     },
   ],

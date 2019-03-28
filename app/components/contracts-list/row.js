@@ -4,7 +4,7 @@ import { computed } from '@ember/object';
 
 export default Component.extend({
   tinyData: service(),
-  tagName: 'tr',
+  tagName: '',
   facilitator: computed('contract', function () {
     const { tinyData } = this;
     const { facilitator } = this.contract.relationships;

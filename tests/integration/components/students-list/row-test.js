@@ -27,13 +27,15 @@ module('Integration | Component | students-list/row', (hooks) => {
   test('it renders', async (assert) => {
     await render(hbs`
       <table>
-        {{students-list/row
-          student=student
-        }}
+        <tbody>
+          {{students-list/row
+            student=student
+          }}
+        </tbody>
       </table>
     `);
 
-    assert.ok(find('tbody'), 'table body successfully rendered');
+    assert.ok(find('tr[data-test-students-list-row]'), 'row successfully rendered');
 
     const coordinator = tinyDataServiceMock.get('user', student.relationships.coordinator.data.id);
     assert.ok(coordinator, 'coordinator retrieved');

@@ -5,8 +5,8 @@ export default {
       id: '57',
       type: 'note',
       attributes: {
-        note: 'Note by Reilly for student Welch / assignment 1',
-        updatedAt: '2019-03-24T20:19:22.000Z',
+        note: 'Note by Bauch for student Greenholt / assignment 1',
+        updatedAt: '2019-03-27T15:15:04.000Z',
       },
       relationships: {
         notable: {
@@ -27,8 +27,8 @@ export default {
       id: '58',
       type: 'note',
       attributes: {
-        note: 'Note by Reilly for student Welch / assignment 2',
-        updatedAt: '2019-03-24T20:19:22.000Z',
+        note: 'Note by Bauch for student Greenholt / assignment 2',
+        updatedAt: '2019-03-27T15:15:04.000Z',
       },
       relationships: {
         notable: {
@@ -49,8 +49,8 @@ export default {
       id: '59',
       type: 'note',
       attributes: {
-        note: 'Note by Reilly for student Welch / assignment 3',
-        updatedAt: '2019-03-24T20:19:22.000Z',
+        note: 'Note by Bauch for student Greenholt / assignment 3',
+        updatedAt: '2019-03-27T15:15:04.000Z',
       },
       relationships: {
         notable: {
@@ -71,8 +71,8 @@ export default {
       id: '60',
       type: 'note',
       attributes: {
-        note: 'Note by Reilly for student Welch / assignment 4',
-        updatedAt: '2019-03-24T20:19:22.000Z',
+        note: 'Note by Bauch for student Greenholt / assignment 4',
+        updatedAt: '2019-03-27T15:15:04.000Z',
       },
       relationships: {
         notable: {
@@ -93,8 +93,8 @@ export default {
       id: '61',
       type: 'note',
       attributes: {
-        note: 'Note by Reilly for student Welch / assignment 5',
-        updatedAt: '2019-03-24T20:19:22.000Z',
+        note: 'Note by Bauch for student Greenholt / assignment 5',
+        updatedAt: '2019-03-27T15:15:04.000Z',
       },
       relationships: {
         notable: {
@@ -117,13 +117,15 @@ export default {
       id: '1',
       type: 'user',
       attributes: {
-        firstName: 'Trinh',
-        lastName: 'Reilly',
+        firstName: 'Mark',
+        lastName: 'Kuhn',
         nickname: null,
         dateActive: null,
         dateInactive: null,
         status: 'active',
         role: 'staff',
+      },
+      relationships: {
       },
     },
   ],

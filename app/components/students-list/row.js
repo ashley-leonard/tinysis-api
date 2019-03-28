@@ -4,7 +4,7 @@ import { computed } from '@ember/object';
 
 export default Component.extend({
   tinyData: service(),
-  tagName: 'tbody',
+  tagName: '',
   coordinator: computed('student', function () {
     const {
       tinyData,

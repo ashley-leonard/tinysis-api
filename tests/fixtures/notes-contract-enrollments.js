@@ -1,12 +1,12 @@
-// GET /api/notes?notableType=Enrollment&notableIds=2,1
+// GET /api/notes?notableType=Enrollment&notableIds=1,2
 export default {
   data: [
     {
       id: '1',
       type: 'note',
       attributes: {
-        note: 'Note for Welch for enrollment in Unus exercitationem harum coruscus quo.',
-        updatedAt: '2019-03-24T20:19:21.000Z',
+        note: 'Note for Greenholt for enrollment in Dolorem alo defleo cohaero subiungo.',
+        updatedAt: '2019-03-27T15:15:04.000Z',
       },
       relationships: {
         notable: {
@@ -27,8 +27,8 @@ export default {
       id: '2',
       type: 'note',
       attributes: {
-        note: 'Note for Schneider for enrollment in Unus exercitationem harum coruscus quo.',
-        updatedAt: '2019-03-24T20:19:21.000Z',
+        note: 'Note for Mills for enrollment in Dolorem alo defleo cohaero subiungo.',
+        updatedAt: '2019-03-27T15:15:04.000Z',
       },
       relationships: {
         notable: {
@@ -51,13 +51,15 @@ export default {
       id: '1',
       type: 'user',
       attributes: {
-        firstName: 'Trinh',
-        lastName: 'Reilly',
+        firstName: 'Mark',
+        lastName: 'Kuhn',
         nickname: null,
         dateActive: null,
         dateInactive: null,
         status: 'active',
         role: 'staff',
+      },
+      relationships: {
       },
     },
   ],

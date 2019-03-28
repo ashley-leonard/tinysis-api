@@ -5,7 +5,7 @@ export default {
       id: '3',
       type: 'setting',
       attributes: {
-        name: 'CURRENT_YEAR',
+        name: 'current_year',
         value: '2019',
       },
     },
