@@ -2,7 +2,7 @@ import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { render, find, findAll } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
-import { deepClone } from '../../helpers/test-utils';
+import { clone } from '../../helpers/test-utils';
 import { stubTinyData } from '../../helpers/stub-tiny-data';
 import coorStaff from '../../fixtures/all-coor-staff';
 import coorStatus from '../../fixtures/all-coor-statuses';
@@ -20,10 +20,10 @@ module('Integration | Component | status-all-coordinators', (hooks) => {
     tinyDataServiceMock.addResult(coorStudents);
 
     this.setProperties({
-      coordinators: deepClone(coorStaff),
-      students: deepClone(coorStudents),
-      term: deepClone(term),
-      statuses: deepClone(coorStatus),
+      coordinators: clone(coorStaff),
+      students: clone(coorStudents),
+      term: clone(term),
+      statuses: clone(coorStatus),
     });
   });
 

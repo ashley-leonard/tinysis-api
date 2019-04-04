@@ -3,7 +3,7 @@ import { module, test } from 'qunit';
 import dayjs from 'dayjs';
 import coorStatusFixtures from '../../fixtures/coor-statuses';
 import studentEnrollmentsStatuses from '../../fixtures/student-enrollments-statuses';
-import { clone } from '../../helpers/stub-tiny-data';
+import { clone } from '../../helpers/test-utils';
 
 let coorStatus;
 let enrollmentStatus;

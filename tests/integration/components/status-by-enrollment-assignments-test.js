@@ -4,7 +4,8 @@ import { render, find } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 import dayjs from 'dayjs';
 
-import { stubTinyData, clone } from '../../helpers/stub-tiny-data';
+import { stubTinyData } from '../../helpers/stub-tiny-data';
+import { clone } from '../../helpers/test-utils';
 import contractDetailFixture from '../../fixtures/contract-detail';
 import contractEnrollmentDetail from '../../fixtures/contract-enrollment-detail';
 import notesContractAssignments from '../../fixtures/notes-contract-assignments';

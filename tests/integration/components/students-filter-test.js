@@ -4,7 +4,8 @@ import { render, find, fillIn } from '@ember/test-helpers';
 import { Interactor } from '@bigtest/interactor';
 import hbs from 'htmlbars-inline-precompile';
 
-import { stubTinyData, clone } from '../../helpers/stub-tiny-data';
+import { stubTinyData } from '../../helpers/stub-tiny-data';
+import { clone } from '../../helpers/test-utils';
 import staffFixture from '../../fixtures/staff';
 import studentsFixture from '../../fixtures/students';
 

@@ -2,10 +2,7 @@ import Service from '@ember/service';
 import dayjs from 'dayjs';
 import { warn } from '../utils/logger';
 import fetch from '../utils/fetch';
-
-export function clone(fixture) {
-  return JSON.parse(JSON.stringify(fixture));
-}
+import clone from '../utils/clone';
 
 export const tinyDataService = {
   init(...args) {
@@ -116,6 +113,8 @@ export const tinyDataService = {
   },
 
   get(type, id) {
+    if (!id && arguments.length === 2) throw new Error('null ID passed');
+
     try {
       const records = this._store[type];
 

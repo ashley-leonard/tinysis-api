@@ -1,3 +1,3 @@
-export function deepClone(object) {
-  return JSON.parse(JSON.stringify(object));
-}
+import clone from 'tinysis-ui/utils/clone';
+
+export { clone };

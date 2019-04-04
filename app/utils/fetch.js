@@ -1,13 +1,21 @@
 import _fetch from 'fetch';
 import { Promise } from 'rsvp';
 
-export default function fetch(_url, options = {}) {
+export default function fetch(_url, callerOptions = {}) {
   const urlObj = new URL(`${window.location.origin}${_url}`);
-  const params = options.params || {};
+  const params = callerOptions.params || {};
+  const headers = callerOptions.headers || {};
 
   Object.keys(params).forEach(key => urlObj.searchParams.append(key, params[key]));
-
   const url = `${urlObj.pathname}${urlObj.search}`;
+
+  headers['Content-Type'] = 'application/json';
+
+  const options = {
+    ...callerOptions,
+    headers,
+  };
+
   return new Promise((resolve, reject) => {
     _fetch(url, options)
       .then((response) => {
