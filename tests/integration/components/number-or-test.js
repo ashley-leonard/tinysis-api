@@ -8,17 +8,17 @@ module('Integration | Component | number-or', (hooks) => {
 
   test('it renders', async function (assert) {
     this.set('number', 225);
-    await render(hbs`{{number-or number=number}}`);
+    await render(hbs`{{number-or number}}`);
 
     assert.dom(this.element).hasText(/225/);
 
     this.set('number', 0);
 
-    await render(hbs`{{number-or number=number}}`);
+    await render(hbs`{{number-or number}}`);
 
     assert.dom(this.element).hasText('-');
 
-    await render(hbs`{{number-or number=number or='nothing gained'}}`);
+    await render(hbs`{{number-or number 'nothing gained'}}`);
 
     assert.dom(this.element).hasText('nothing gained');
   });

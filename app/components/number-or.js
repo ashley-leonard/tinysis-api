@@ -1,7 +1,7 @@
 import Component from '@ember/component';
 import { computed } from '@ember/object';
 
-export default Component.extend({
+const NumberOr = Component.extend({
   or: '-',
   renderedNumber: computed('number', function () {
     const { number } = this;
@@ -12,3 +12,9 @@ export default Component.extend({
     return this.or;
   }),
 });
+
+NumberOr.reopenClass({
+  positionalParams: ['number', 'or'],
+});
+
+export default NumberOr;
