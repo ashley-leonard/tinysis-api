@@ -51,6 +51,7 @@
     "eslint-plugin-jsx-a11y": "~6.1.2",
     "eslint-plugin-react": "~7.12.4",
     "loader.js": "~4.7.0",
+    "pikaday": "^1.8.0",
     "pretender": "~2.1.1",
     "qunit-dom": "~0.8.4"
   },
