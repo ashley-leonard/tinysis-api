@@ -6,8 +6,8 @@ export default {
       type: 'status',
       attributes: {
         month: '2019-09-01',
-        createdAt: '2019-03-27T15:15:04.000Z',
-        updatedAt: '2019-03-27T15:15:04.000Z',
+        createdAt: '2019-04-08T03:42:21.000Z',
+        updatedAt: '2019-04-08T03:42:21.000Z',
         fteHours: 25,
         metFteRequirements: true,
         heldPeriodicCheckins: true,
@@ -34,8 +34,8 @@ export default {
       type: 'status',
       attributes: {
         month: '2019-10-01',
-        createdAt: '2019-03-27T15:15:04.000Z',
-        updatedAt: '2019-03-27T15:15:04.000Z',
+        createdAt: '2019-04-08T03:42:21.000Z',
+        updatedAt: '2019-04-08T03:42:21.000Z',
         fteHours: 25,
         metFteRequirements: true,
         heldPeriodicCheckins: true,

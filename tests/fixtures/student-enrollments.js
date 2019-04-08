@@ -127,13 +127,13 @@ export default {
       id: '3',
       type: 'contract',
       attributes: {
-        name: 'Dolorem alo defleo cohaero subiungo.',
+        name: 'Cenaculum tabgo deorsum tergum conculco.',
         status: 'approved',
-        learningObjectives: 'Contigo sui sonitus sodalitas admoneo.',
-        competencies: 'Cresco ambulo aut ut ubi.',
-        evaluationMethods: 'Somnus eaque culpo aequus amissio.',
-        instructionalMaterials: 'Territo decumbo aspernatur ascit et.',
-        location: 'Crur bonus pel arcesso usus.',
+        learningObjectives: 'Sordeo accusamus appositus maxime villa.',
+        competencies: 'Quos civis officia causa vilitas.',
+        evaluationMethods: 'Quod corpus defetiscor barba asperiores.',
+        instructionalMaterials: 'Theologus aduro vomito vorax talio.',
+        location: 'Deserunt comprehendo spiculum concido stabilis.',
         timeslots: [
           {
             start: '8:45',
@@ -335,13 +335,13 @@ export default {
       id: '4',
       type: 'contract',
       attributes: {
-        name: 'Vos sordeo ustilo qui quas.',
+        name: 'Canonicus commodo eum aut angustus.',
         status: 'approved',
-        learningObjectives: 'Vester fugiat dedecor dicta conduco.',
-        competencies: 'Denego quibusdam necessitatibus desipio concedo.',
-        evaluationMethods: 'Arto socius alius antepono deduco.',
-        instructionalMaterials: 'Certus chirographum exercitationem clementia occaecati.',
-        location: 'Et admoveo molestiae ater tolero.',
+        learningObjectives: 'Thorax cognomen attollo labore cupio.',
+        competencies: 'Aspernatur venio mollitia veniam custodia.',
+        evaluationMethods: 'Non aperiam auctor modi subseco.',
+        instructionalMaterials: 'Inflammatio claustrum tabgo asper confugo.',
+        location: 'Nesciunt similique attollo vetus amet.',
         timeslots: [
           {
             start: '8:45',

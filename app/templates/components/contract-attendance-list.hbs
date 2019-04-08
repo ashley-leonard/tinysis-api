@@ -1,0 +1,26 @@
+<table class="pure-table pure-table-border pure-table-collapsed" data-test-attendance-list>
+  <thead>
+    <tr>
+      <th>Student</th>
+      <th>Present</th>
+      <th>Absent</th>
+      <th>Tardy</th>
+      {{#each sortedMeetings as |meeting|}}
+        <th>
+          {{#link-to "contract-attendance-roll" meeting.id}}
+            {{t-date meeting.attributes.meetingDate "M/D"}}
+          {{/link-to}}
+        </th>
+      {{/each}}
+    </tr>
+  </thead>
+  {{#each participants as |participant i|}}
+    {{contract-attendance-list/row
+      meetings=sortedMeetings
+      row=i
+      enrollment=participant.enrollment
+      student=participant.student
+      attendanceHash=attendanceHash
+    }}
+  {{/each}}
+</table>

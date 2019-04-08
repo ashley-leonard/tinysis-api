@@ -4,13 +4,13 @@ export default {
     id: '3',
     type: 'contract',
     attributes: {
-      name: 'Dolorem alo defleo cohaero subiungo.',
+      name: 'Cenaculum tabgo deorsum tergum conculco.',
       status: 'approved',
-      learningObjectives: 'Contigo sui sonitus sodalitas admoneo.',
-      competencies: 'Cresco ambulo aut ut ubi.',
-      evaluationMethods: 'Somnus eaque culpo aequus amissio.',
-      instructionalMaterials: 'Territo decumbo aspernatur ascit et.',
-      location: 'Crur bonus pel arcesso usus.',
+      learningObjectives: 'Sordeo accusamus appositus maxime villa.',
+      competencies: 'Quos civis officia causa vilitas.',
+      evaluationMethods: 'Quod corpus defetiscor barba asperiores.',
+      instructionalMaterials: 'Theologus aduro vomito vorax talio.',
+      location: 'Deserunt comprehendo spiculum concido stabilis.',
       timeslots: [
         {
           start: '8:45',
@@ -263,7 +263,7 @@ export default {
       id: '1',
       type: 'ealr',
       attributes: {
-        ealr: 'Totidem attero cogito fugiat ceno.',
+        ealr: 'Voluptatem ab ventus et considero.',
         seq: '1.1',
         category: 'Category 1',
       },
@@ -272,7 +272,7 @@ export default {
       id: '2',
       type: 'ealr',
       attributes: {
-        ealr: 'Candidus rem velit tremo conservo.',
+        ealr: 'Cura corporis auris depono illo.',
         seq: '1.2',
         category: 'Category 1',
       },
@@ -281,7 +281,7 @@ export default {
       id: '3',
       type: 'ealr',
       attributes: {
-        ealr: 'Rem vero bellicus vorago curvo.',
+        ealr: 'Avoco et taedium vulgus creptio.',
         seq: '2.1',
         category: 'Category 2',
       },
@@ -290,7 +290,7 @@ export default {
       id: '4',
       type: 'ealr',
       attributes: {
-        ealr: 'Arbitro aperiam barba spargo vulnus.',
+        ealr: 'Accusator teneo eum tardus rem.',
         seq: '2.2',
         category: 'Category 2',
       },
