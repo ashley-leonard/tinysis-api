@@ -31,6 +31,8 @@ export const contactTypeOptions = [
 export function attendanceDisplay(meetingParticipant) {
   if (!meetingParticipant) return '-';
 
+  if (!meetingParticipant.attributes.participation) return '-';
+
   return meetingParticipant.attributes.participation.charAt(0).toUpperCase();
 }
 
