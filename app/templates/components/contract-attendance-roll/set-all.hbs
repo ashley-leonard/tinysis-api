@@ -1,0 +1,27 @@
+<t-contract-attendance-roll-set-all>
+  <form {{action "onSubmit" on="submit"}}>
+    <ul class="filter">
+      <li class="filter-item">
+        <label>Mark all enrollees:</label>
+        {{t-select
+          name="participation"
+          value=participation
+          options=participationOptions
+          onchange=(action (mut participation))
+        }}
+      </li>
+      <li class="filter-item">
+        <label>Contact type:</label>
+        {{t-select
+          name="contactType"
+          value=contactType
+          options=contactTypeOptions
+          onchange=(action (mut contactType))
+        }}
+      </li>
+      <li class="filter-item" data-test-submit>
+        <button type="submit">Update all</button>
+      </li>
+    </ul>
+  </form>
+</t-contract-attendance-roll-set-all>
