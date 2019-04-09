@@ -5,7 +5,7 @@ export default {
       id: '1',
       type: 'contract',
       attributes: {
-        name: 'Ambulo delectatio vomica ad truculenter.',
+        name: 'Tepesco corrupti tam non aureus.',
         status: 'closed',
       },
       relationships: {
@@ -45,7 +45,7 @@ export default {
       id: '2',
       type: 'contract',
       attributes: {
-        name: 'Autem alioqui victus admoneo cur.',
+        name: 'Copiose sumo tonsor certus aperte.',
         status: 'closed',
       },
       relationships: {
@@ -85,7 +85,7 @@ export default {
       id: '3',
       type: 'contract',
       attributes: {
-        name: 'Cenaculum tabgo deorsum tergum conculco.',
+        name: 'Pel crapula venustas repellat tametsi.',
         status: 'approved',
       },
       relationships: {
@@ -125,7 +125,7 @@ export default {
       id: '4',
       type: 'contract',
       attributes: {
-        name: 'Canonicus commodo eum aut angustus.',
+        name: 'Tepesco nobis beatae thema vos.',
         status: 'approved',
       },
       relationships: {

@@ -4,13 +4,13 @@ export default {
     id: '3',
     type: 'contract',
     attributes: {
-      name: 'Cenaculum tabgo deorsum tergum conculco.',
+      name: 'Pel crapula venustas repellat tametsi.',
       status: 'approved',
-      learningObjectives: 'Sordeo accusamus appositus maxime villa.',
-      competencies: 'Quos civis officia causa vilitas.',
-      evaluationMethods: 'Quod corpus defetiscor barba asperiores.',
-      instructionalMaterials: 'Theologus aduro vomito vorax talio.',
-      location: 'Deserunt comprehendo spiculum concido stabilis.',
+      learningObjectives: 'Utor taceo sonitus ut thema.',
+      competencies: 'Delibero torrens aut beatus curriculum.',
+      evaluationMethods: 'Contra conor laboriosam vesco amitto.',
+      instructionalMaterials: 'Pax libero acer umbra calamitas.',
+      location: 'Caute defaeco contego video itaque.',
       timeslots: [
         {
           start: '8:45',
@@ -263,7 +263,7 @@ export default {
       id: '1',
       type: 'ealr',
       attributes: {
-        ealr: 'Voluptatem ab ventus et considero.',
+        ealr: 'Curo thalassinus eius apto totus.',
         seq: '1.1',
         category: 'Category 1',
       },
@@ -272,7 +272,7 @@ export default {
       id: '2',
       type: 'ealr',
       attributes: {
-        ealr: 'Cura corporis auris depono illo.',
+        ealr: 'Communis candidus veniam cras incidunt.',
         seq: '1.2',
         category: 'Category 1',
       },
@@ -281,7 +281,7 @@ export default {
       id: '3',
       type: 'ealr',
       attributes: {
-        ealr: 'Avoco et taedium vulgus creptio.',
+        ealr: 'Vindico accedo succedo ducimus ventosus.',
         seq: '2.1',
         category: 'Category 2',
       },
@@ -290,7 +290,7 @@ export default {
       id: '4',
       type: 'ealr',
       attributes: {
-        ealr: 'Accusator teneo eum tardus rem.',
+        ealr: 'Et aggredior tersus sordeo adaugeo.',
         seq: '2.2',
         category: 'Category 2',
       },

@@ -5,8 +5,8 @@ export default {
       id: '62',
       type: 'note',
       attributes: {
-        note: 'Note by Macejkovic for student Haley / meeting 1',
-        updatedAt: '2019-04-08T03:42:22.000Z',
+        note: 'Note by Boyle for student Buckridge / meeting 1',
+        updatedAt: '2019-04-09T04:38:09.000Z',
       },
       relationships: {
         notable: {
@@ -27,8 +27,8 @@ export default {
       id: '63',
       type: 'note',
       attributes: {
-        note: 'Note by Macejkovic for student Hilll / assignment 1',
-        updatedAt: '2019-04-08T03:42:22.000Z',
+        note: 'Note by Boyle for student Doyle / assignment 1',
+        updatedAt: '2019-04-09T04:38:09.000Z',
       },
       relationships: {
         notable: {

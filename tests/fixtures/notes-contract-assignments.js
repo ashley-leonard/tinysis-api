@@ -5,8 +5,8 @@ export default {
       id: '57',
       type: 'note',
       attributes: {
-        note: 'Note by Macejkovic for student Haley / assignment 1',
-        updatedAt: '2019-04-08T03:42:21.000Z',
+        note: 'Note by Boyle for student Buckridge / assignment 1',
+        updatedAt: '2019-04-09T04:38:09.000Z',
       },
       relationships: {
         notable: {
@@ -27,8 +27,8 @@ export default {
       id: '58',
       type: 'note',
       attributes: {
-        note: 'Note by Macejkovic for student Haley / assignment 2',
-        updatedAt: '2019-04-08T03:42:21.000Z',
+        note: 'Note by Boyle for student Buckridge / assignment 2',
+        updatedAt: '2019-04-09T04:38:09.000Z',
       },
       relationships: {
         notable: {
@@ -49,8 +49,8 @@ export default {
       id: '59',
       type: 'note',
       attributes: {
-        note: 'Note by Macejkovic for student Haley / assignment 3',
-        updatedAt: '2019-04-08T03:42:21.000Z',
+        note: 'Note by Boyle for student Buckridge / assignment 3',
+        updatedAt: '2019-04-09T04:38:09.000Z',
       },
       relationships: {
         notable: {
@@ -71,8 +71,8 @@ export default {
       id: '60',
       type: 'note',
       attributes: {
-        note: 'Note by Macejkovic for student Haley / assignment 4',
-        updatedAt: '2019-04-08T03:42:21.000Z',
+        note: 'Note by Boyle for student Buckridge / assignment 4',
+        updatedAt: '2019-04-09T04:38:09.000Z',
       },
       relationships: {
         notable: {
@@ -93,8 +93,8 @@ export default {
       id: '61',
       type: 'note',
       attributes: {
-        note: 'Note by Macejkovic for student Haley / assignment 5',
-        updatedAt: '2019-04-08T03:42:21.000Z',
+        note: 'Note by Boyle for student Buckridge / assignment 5',
+        updatedAt: '2019-04-09T04:38:09.000Z',
       },
       relationships: {
         notable: {
