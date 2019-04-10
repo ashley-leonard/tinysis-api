@@ -37,7 +37,7 @@ module('Unit | Utility | meeting-utils', () => {
 
   test('it yields correct participation code for keystroke', (assert) => {
     const participation = participationByKey('p');
-    
+
     assert.equal(participation, 'present', 'the letter p generates a present status');
   });
 });
