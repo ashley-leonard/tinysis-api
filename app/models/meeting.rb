@@ -3,6 +3,8 @@ class Meeting < ApplicationRecord
   has_many :meeting_participants, dependent: :destroy
   belongs_to :contract
   has_many :notes, as: :notable, dependent: :destroy
+
+  validates :meeting_date, presence: true
  
   # Return a hash describing privileges of the specified user
   # on this meeting

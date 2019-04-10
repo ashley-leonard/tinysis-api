@@ -153,7 +153,10 @@ RSpec.describe 'Ember fixtures script', type: :request do
     (1..5).each do |assignment_number|
       assignment = create :assignment, contract: @contract1_current, creator: @contract1_current.facilitator, name: "Assignment #{assignment_number}", description: "Here is assignment number #{assignment_number}", due_date: @term1_current.months[0] + assignment_number.days
       turnin = create :turnin, enrollment: enrollment, assignment: assignment, status: :complete
-      create :note, notable: turnin, creator: @contract1_current.facilitator, note: "Note by #{@contract1_current.facilitator.last_name} for student #{@student1.last_name} / assignment #{assignment_number}"
+      create :note,
+        notable: turnin,
+        creator: @contract1_current.facilitator,
+        note: "Note by #{@contract1_current.facilitator.last_name} for student #{@student1.last_name} / assignment #{assignment_number}"
     end
 
     # for contract 1, define 5 meetings which are attended only by student 3
@@ -161,7 +164,10 @@ RSpec.describe 'Ember fixtures script', type: :request do
     (1..5).each do |meeting_number|
       meeting = create :meeting, contract: @contract1_current, meeting_date: @contract1_current.term.months.first + meeting_number.days
       meeting_participant = create :meeting_participant, meeting: meeting, enrollment: enrollment, participation: MeetingParticipant::PRESENT
-      create :note, notable: meeting_participant, creator: @contract1_current.facilitator, note: "Note by #{@contract1_current.facilitator.last_name} for student #{@student1.last_name} / meeting #{meeting_number}"
+      create :note,
+        notable: meeting_participant,
+        creator: @contract1_current.facilitator,
+        note: "Note by #{@contract1_current.facilitator.last_name} for student #{@student1.last_name} / meeting #{meeting_number}"
 
       meeting_participant = create :meeting_participant, meeting: meeting, enrollment: enrollment3, participation: MeetingParticipant::ABSENT
       create :note, notable: meeting_participant, creator: @contract1_current.facilitator, note: "Note by #{@contract1_current.facilitator.last_name} for student #{@student3.last_name} / assignment #{meeting_number}"
@@ -198,6 +204,25 @@ RSpec.describe 'Ember fixtures script', type: :request do
           .select{ |include| include['type'] == 'turnin' }
           .map{ |include| include['id'] }
         write_fixture "/api/notes?notableType=Turnin&notableIds=#{turnin_ids.join(',')}", 'notes-contract-assignments.js'
+
+        # contract attendance roll page
+        response = write_fixture "/api/meetings/#{@contract1_current.meetings.first.id}?include=meetingParticipants", 'contract-attendance-roll-meeting.js'
+        write_fixture "/api/enrollments?contractIds=#{@contract1_current.id}&include=participant", 'contract-attendance-roll-enrollments.js'
+        meeting_response = JSON.parse(response.body)
+        meeting_participants = meeting_response['data']['relationships']['meetingParticipants']['data']
+          .map{|record| record['id']}
+        write_fixture "/api/notes?notableType=meetingParticipant&notableIds=#{meeting_participants.join(',')}", 'contract-attendance-roll-notes.js'
+
+        # contract attendance list page
+        write_fixture "/api/meetings?contractIds=#{@contract1_current.id}", 'contract-attendance.js'
+        response = write_fixture "/api/enrollments?contractIds=#{@contract1_current.id}&include=meetingParticipants,participant", 'contract-attendance-enrollments.js'
+        enrollments_response = JSON.parse(response.body)
+        Rails.logger.info response.body
+
+        meeting_participants = enrollments_response['included']
+          .filter{|record| record['type'] == "meetingParticipant"}
+          .map{|record| record['id']}
+        write_fixture "/api/notes?notableType=meetingParticipant&notableIds=#{meeting_participants.join(',')}", 'contract-attendance-notes.js'
 
         # contract enrollment status detail
         enrollment = @contract1_current.enrollments.first

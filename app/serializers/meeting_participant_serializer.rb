@@ -5,8 +5,10 @@ class MeetingParticipantSerializer < ApplicationSerializer
   belongs_to :enrollment
 
   attribute :participation do |meeting_participant|
-    meeting_participant.participation_name.downcase
+    meeting_participant.participation_name
   end
 
-  attributes :contact_type
+  attributes :contact_type do |meeting_participant|
+    meeting_participant.contact_type.downcase
+  end
 end

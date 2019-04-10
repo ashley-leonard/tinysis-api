@@ -71,12 +71,7 @@ class EnrollmentsController < ApplicationController
       val = include_params
         .split(',')
         .map(&:underscore) & EnrollmentsController::PERMITTED_INCLUDES
-Rails.logger.info "**************************************************************"
-Rails.logger.info include_params
-Rails.logger.info include_params.split(',')
-Rails.logger.info include_params.split(',').map(&:underscore)
-Rails.logger.info val
-Rails.logger.info "**************************************************************"
+
       val
     end
 end

@@ -1,33 +1,19 @@
 class MeetingParticipant < ApplicationRecord
-
   OPTIONAL = 0
   PRESENT = 1
   ABSENT = 2
   TARDY = 3
-
-  PARTICIPATION_STATUSES = [
-  # deprecated
-  #  {:name => "Optional", :value => OPTIONAL},
-    {:name => "Present", :value => PRESENT},
-    {:name => "Tardy", :value => TARDY},
-    {:name => "Absent", :value => ABSENT},
-  ]
-
-  PARTICIPATION_STRINGS = {
-    OPTIONAL => 'O',
-    PRESENT => 'P',
-    ABSENT => 'A',
-    TARDY => 'T'
-  }
+  EXCUSED = 4
 
   PARTICIPATION_NAMES = {
-    OPTIONAL => 'Optional',
-    PRESENT => 'Present',
-    ABSENT => 'Absent',
-    TARDY => 'Tardy'
+    OPTIONAL => 'optional',
+    PRESENT => 'present',
+    ABSENT => 'absent',
+    TARDY => 'tardy',
+    EXCUSED => 'excused',
   }
 
-  CONTACT_TYPES = %w{Class COOR Other}
+  CONTACT_TYPES = %w{class coor other}
 
   belongs_to :enrollment
   belongs_to :meeting
@@ -42,4 +28,20 @@ class MeetingParticipant < ApplicationRecord
     PARTICIPATION_NAMES[participation]
   end
 
+  def participation=(participation)
+    write_attribute :participation, participation and return if participation.is_a? Integer
+
+    write_attribute :participation, case participation
+      when PARTICIPATION_NAMES[OPTIONAL]
+        OPTIONAL
+      when PARTICIPATION_NAMES[PRESENT]
+        PRESENT
+      when PARTICIPATION_NAMES[ABSENT]
+        ABSENT
+      when PARTICIPATION_NAMES[TARDY]
+        TARDY
+      when PARTICIPATION_NAMES[EXCUSED]
+        EXCUSED
+      end
+  end
 end
