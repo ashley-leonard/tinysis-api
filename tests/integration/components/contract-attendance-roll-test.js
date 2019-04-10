@@ -1,6 +1,8 @@
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { render, find, findAll, click } from '@ember/test-helpers';
+import {
+  render, find, findAll, click,
+} from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 import contractDetailFixture from '../../fixtures/contract-detail';
 import contractAttendanceRollMeeting from '../../fixtures/contract-attendance-roll-meeting';
@@ -67,5 +69,35 @@ module('Integration | Component | contract-attendance-roll', (hooks) => {
 
     assert.ok(absentRow, 'rendered row for present participant');
     assert.ok(absentRow.querySelector('[data-test-participation="absent"] value-button[data-test-is-checked="checked"]'), 'rendered absent indicator in proper column');
+  });
+
+  test('it renders with four participants, two of whom has no meeting participant', async (assert) => {
+    const payload = {
+      data: clone(enrollments).map((enrollment) => {
+        enrollment.id = `1${enrollment.id}`;
+        enrollment.relationships.meetingParticipants.data = [];
+        return enrollment;
+      }),
+    };
+
+    tinyData.addResult(payload);
+    contract.relationships.enrollments.data = tinyData.get('enrollment');
+
+    await render(hbs`
+      {{contract-attendance-roll
+        contract=contract
+        meeting=meeting
+        updateRoll=updateRoll
+        updateAllRolls=updateAllRolls
+        getNotes=getNotes
+      }}
+    `);
+
+    assert.ok(find('t-contract-attendance-roll'), 'container element rendered');
+    assert.equal(findAll('tbody tr').length, enrollments.length * 2, 'one row rendered for each participant');
+
+    const presentRow = find(`tr[data-test-enrollment-id="1${presentParticipant.relationships.enrollment.data.id}"]`);
+    assert.ok(presentRow, 'rendered row for cloned participant');
+    assert.notOk(presentRow.querySelector('value-button[data-test-is-checked="checked"]'), 'no indicator is checked for missing meeting participant');
   });
 });
