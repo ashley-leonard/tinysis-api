@@ -1,3 +1,7 @@
+@import '../../vendor/pikaday/css/pikaday.css';
+@import './ember-modal-dialog/ember-modal-structure.scss';
+@import './ember-modal-dialog/ember-modal-appearance.scss';
+
 .app-container {
   margin: 0 5rem;
 }
@@ -34,6 +38,11 @@ html, button, input, select, textarea, .pure-g [class *= "pure-u"] {
     font-family: Roboto, sans-serif;
     font-size: 14px;
     font-weight: 400;
+}
+
+value-button {
+  padding: .5rem;
+  cursor: pointer;
 }
 
 tbody th {
@@ -160,4 +169,20 @@ dl.aligned dt.indented {
 
 .color-red {
   color: 'red';
+}
+
+.contract-attendance-new {
+  display: flex;
+  flex-direction: column;
+  align-content: flex-start;
+  height: 21rem;
+
+  footer {
+    position: absolute;
+    bottom: 0.5rem;
+  }
+}
+
+.ember-modal-dialog h3 {
+  margin: 0 0 1rem 0;
 }
