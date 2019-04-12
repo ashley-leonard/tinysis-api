@@ -14,6 +14,8 @@ import contractAttendanceEnrollmentsFixture from '../fixtures/contract-attendanc
 import contractAttendanceNotesFixture from '../fixtures/contract-attendance-notes';
 
 let server;
+let meetings;
+let enrollments;
 
 module('Acceptance | contract attendance index', (hooks) => {
   setupApplicationTest(hooks);
@@ -25,6 +27,9 @@ module('Acceptance | contract attendance index', (hooks) => {
     server.addRequest('get', '/api/meetings', contractAttendanceMeetingFixture);
     server.addRequest('get', '/api/enrollments', contractAttendanceEnrollmentsFixture);
     server.addRequest('get', '/api/notes', contractAttendanceNotesFixture);
+
+    enrollments = server.getFixture('/api/enrollments');
+    meetings = server.getFixture('/api/meetings');
 
     assert.timeout(200);
   });
@@ -38,6 +43,7 @@ module('Acceptance | contract attendance index', (hooks) => {
     await visit(attendanceListRoute);
 
     assert.equal(currentURL(), attendanceListRoute, 'page navigated to successfully');
-    assert.ok(find(`.count-paragraph[data-test-count-paragraph="${contractAttendanceMeetingFixture.data.length}"]`), 'expected count of meetings seen');
+    assert.ok(find(`.count-paragraph[data-test-count-paragraph="${meetings.data.length}"]`), 'expected count of meetings seen');
+    assert.equal(findAll('tbody').length, enrollments.data.length, 'expected number of enrollment rows appeared');
   });
 });

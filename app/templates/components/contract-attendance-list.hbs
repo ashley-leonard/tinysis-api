@@ -6,7 +6,7 @@
       <th>Absent</th>
       <th>Tardy</th>
       {{#each sortedMeetings as |meeting|}}
-        <th>
+        <th data-test-meeting data-test-meeting-date={{meeting.attributes.meetingDate}}>
           {{#link-to "contract-attendance-roll" meeting.id}}
             {{t-date meeting.attributes.meetingDate "M/D"}}
           {{/link-to}}

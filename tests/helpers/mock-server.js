@@ -9,7 +9,21 @@ export default class MockServer {
     this.fixtures = {};
     this.requests = [];
     this.monitors = [];
+    this.log = [];
     this.server = new Pretender();
+
+    this.addMonitor((verb, path, request) => {
+      let body;
+      try {
+        body = request.requestBody && JSON.parse(request.requestBody);
+      } catch (e) {
+        body = null;
+      }
+
+      this.log.push({
+        verb, path, body, request,
+      });
+    });
   }
 
   /*
@@ -26,6 +40,13 @@ export default class MockServer {
    */
   addLogger() {
     this.addMonitor(Logger.info);
+  }
+
+  /*
+   * Retrieves a log of web requests.
+   */
+  getLog() {
+    return this.log;
   }
 
   /*
