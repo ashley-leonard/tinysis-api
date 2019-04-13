@@ -71,6 +71,12 @@ module('Integration | Component | contract-attendance-roll', (hooks) => {
 
     assert.ok(absentRow, 'rendered row for present participant');
     assert.ok(absentRow.querySelector('[data-test-participation="absent"] value-button[data-test-is-checked="checked"]'), 'rendered absent indicator in proper column');
+
+    assert.ok(contractAttendanceRollNotes.data.find(note => note.relationships.notable.data.id === presentParticipant.id), 'verify note for present participant');
+    assert.ok(contractAttendanceRollNotes.data.find(note => note.relationships.notable.data.id === absentParticipant.id), 'verify note for absent participant');
+
+    assert.ok(presentRow.querySelector('.notes-list-item'), 'a note item was rendered for present participant');
+    assert.ok(absentRow.querySelector('.notes-list-item'), 'note rendered for absent participant');
   });
 
   test('it renders with four participants, two of whom has no meeting participant', async (assert) => {

@@ -19,6 +19,8 @@ export default Component.extend({
   participationOptions,
   contactTypeOptions,
 
+  notesHash: computed(() => ({})),
+
   hasRoll: bool('meetingParticipant.id'),
 
   meetingParticipant: computed('meetingParticipantHash', 'enrollment', function () {
@@ -34,6 +36,10 @@ export default Component.extend({
     const attributes = { participationType: CONTACT_TYPE_CLASS };
     const newMeetingParticipant = createEntity('meetingParticipant', attributes, this.meeting, this.enrollment);
     return newMeetingParticipant;
+  }),
+
+  notes: computed('notesHash', 'enrollment', function () {
+    return this.notesHash[this.enrollment.id];
   }),
 
   didReceiveAttrs() {

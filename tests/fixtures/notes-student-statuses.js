@@ -5,8 +5,8 @@ export default {
       id: '51',
       type: 'note',
       attributes: {
-        note: 'Note by Boyle for Buckridge on 2019-09-01',
-        updatedAt: '2019-04-09T04:38:09.000Z',
+        note: 'Note by Hegmann for DuBuque on 2019-09-01',
+        updatedAt: '2019-04-12T23:43:35.000Z',
       },
       relationships: {
         notable: {
@@ -27,8 +27,8 @@ export default {
       id: '54',
       type: 'note',
       attributes: {
-        note: 'Note by Boyle for Buckridge on 2019-10-01',
-        updatedAt: '2019-04-09T04:38:09.000Z',
+        note: 'Note by Hegmann for DuBuque on 2019-10-01',
+        updatedAt: '2019-04-12T23:43:35.000Z',
       },
       relationships: {
         notable: {
@@ -51,8 +51,8 @@ export default {
       id: '1',
       type: 'user',
       attributes: {
-        firstName: 'Mark',
-        lastName: 'Kuhn',
+        firstName: 'Gabriella',
+        lastName: 'Hegmann',
         nickname: null,
         dateActive: null,
         dateInactive: null,

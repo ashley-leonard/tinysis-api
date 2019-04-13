@@ -5,7 +5,7 @@ export default {
       id: '1',
       type: 'contract',
       attributes: {
-        name: 'Tepesco corrupti tam non aureus.',
+        name: 'Tamdiu comprehendo neque ulciscor cervus.',
         status: 'closed',
       },
       relationships: {
@@ -45,7 +45,7 @@ export default {
       id: '2',
       type: 'contract',
       attributes: {
-        name: 'Copiose sumo tonsor certus aperte.',
+        name: 'Teres auris aliquam capillus attonbitus.',
         status: 'closed',
       },
       relationships: {
@@ -85,7 +85,7 @@ export default {
       id: '3',
       type: 'contract',
       attributes: {
-        name: 'Pel crapula venustas repellat tametsi.',
+        name: 'Atque deorsum textus occaecati ascit.',
         status: 'approved',
       },
       relationships: {
@@ -125,7 +125,7 @@ export default {
       id: '4',
       type: 'contract',
       attributes: {
-        name: 'Tepesco nobis beatae thema vos.',
+        name: 'Non calculus decimus et deleo.',
         status: 'approved',
       },
       relationships: {
@@ -178,8 +178,8 @@ export default {
       id: '1',
       type: 'user',
       attributes: {
-        firstName: 'Mark',
-        lastName: 'Kuhn',
+        firstName: 'Gabriella',
+        lastName: 'Hegmann',
         nickname: null,
         dateActive: null,
         dateInactive: null,
@@ -204,8 +204,8 @@ export default {
       id: '2',
       type: 'user',
       attributes: {
-        firstName: 'Scottie',
-        lastName: 'Zieme',
+        firstName: 'Evita',
+        lastName: 'Haley',
         nickname: null,
         dateActive: null,
         dateInactive: null,

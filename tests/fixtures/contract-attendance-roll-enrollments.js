@@ -2,6 +2,66 @@
 export default {
   data: [
     {
+      id: '2',
+      type: 'enrollment',
+      attributes: {
+        finalizedOn: null,
+        enrollmentStatus: 'enrolled',
+        completionStatus: 'incomplete',
+      },
+      relationships: {
+        contract: {
+          data: {
+            id: '3',
+            type: 'contract',
+          },
+        },
+        participant: {
+          data: {
+            id: '7',
+            type: 'participant',
+          },
+        },
+        creditAssignments: {
+          data: [
+            {
+              id: '6',
+              type: 'creditAssignment',
+            },
+          ],
+        },
+        turnins: {
+          data: [
+
+          ],
+        },
+        meetingParticipants: {
+          data: [
+            {
+              id: '2',
+              type: 'meetingParticipant',
+            },
+            {
+              id: '4',
+              type: 'meetingParticipant',
+            },
+            {
+              id: '6',
+              type: 'meetingParticipant',
+            },
+            {
+              id: '8',
+              type: 'meetingParticipant',
+            },
+            {
+              id: '10',
+              type: 'meetingParticipant',
+            },
+          ],
+        },
+      },
+    },
+    {
       id: '1',
       type: 'enrollment',
       attributes: {
@@ -80,98 +140,14 @@ export default {
         },
       },
     },
-    {
-      id: '2',
-      type: 'enrollment',
-      attributes: {
-        finalizedOn: null,
-        enrollmentStatus: 'enrolled',
-        completionStatus: 'incomplete',
-      },
-      relationships: {
-        contract: {
-          data: {
-            id: '3',
-            type: 'contract',
-          },
-        },
-        participant: {
-          data: {
-            id: '7',
-            type: 'participant',
-          },
-        },
-        creditAssignments: {
-          data: [
-            {
-              id: '6',
-              type: 'creditAssignment',
-            },
-          ],
-        },
-        turnins: {
-          data: [
-
-          ],
-        },
-        meetingParticipants: {
-          data: [
-            {
-              id: '2',
-              type: 'meetingParticipant',
-            },
-            {
-              id: '4',
-              type: 'meetingParticipant',
-            },
-            {
-              id: '6',
-              type: 'meetingParticipant',
-            },
-            {
-              id: '8',
-              type: 'meetingParticipant',
-            },
-            {
-              id: '10',
-              type: 'meetingParticipant',
-            },
-          ],
-        },
-      },
-    },
   ],
   included: [
-    {
-      id: '5',
-      type: 'user',
-      attributes: {
-        firstName: 'Mauro',
-        lastName: 'Ebert',
-        nickname: null,
-        dateActive: '2018-08-01',
-        dateInactive: null,
-        status: 'active',
-        role: 'student',
-        districtId: null,
-        districtGrade: 12,
-        coordinatorId: '1',
-      },
-      relationships: {
-        coordinator: {
-          data: {
-            id: '1',
-            type: 'coordinator',
-          },
-        },
-      },
-    },
     {
       id: '7',
       type: 'user',
       attributes: {
-        firstName: 'Emery',
-        lastName: 'Bruen',
+        firstName: 'Cyril',
+        lastName: 'Collins',
         nickname: null,
         dateActive: '2018-08-01',
         dateInactive: '2019-10-01',
@@ -185,6 +161,30 @@ export default {
         coordinator: {
           data: {
             id: '2',
+            type: 'coordinator',
+          },
+        },
+      },
+    },
+    {
+      id: '5',
+      type: 'user',
+      attributes: {
+        firstName: 'Sean',
+        lastName: 'DuBuque',
+        nickname: null,
+        dateActive: '2018-08-01',
+        dateInactive: null,
+        status: 'active',
+        role: 'student',
+        districtId: null,
+        districtGrade: 12,
+        coordinatorId: '1',
+      },
+      relationships: {
+        coordinator: {
+          data: {
+            id: '1',
             type: 'coordinator',
           },
         },
