@@ -1,6 +1,7 @@
 import Component from '@ember/component';
 import { computed } from '@ember/object';
 import { not } from '@ember/object/computed';
+import { inject as service } from '@ember/service';
 
 import {
   getAcademicStatusName,
@@ -11,6 +12,7 @@ import {
 } from '../../utils/status-utils';
 
 export default Component.extend({
+  tinyData: service(),
   tagName: '',
 
   statusIsMissing: not('status'),

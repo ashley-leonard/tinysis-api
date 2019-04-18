@@ -1,18 +1,23 @@
-<a href="/" class="pure-menu-heading pure-menu-link">Nova</a>
-<ul class="pure-menu-list">
-  {{tiny-toolbar/item
-    currentRoute=currentRoute
-    route="status-all-coordinators.index"
-    label="Coordinators"
-  }}
-  {{tiny-toolbar/item
-    currentRoute=currentRoute
-    route="contracts.index"
-    label="Contracts"
-  }}
-  {{tiny-toolbar/item
-    currentRoute=currentRoute
-    route="students.index"
-    label="Students"
-  }}
-</ul>
+<nav class="toolbar flex items-center mb-4">
+  {{#link-to "tiny" class="block no-underline pr-8"}}
+    Nova
+  {{/link-to}}
+  <ul class="flex list-reset">
+    {{tiny-toolbar/item
+      currentRoute=currentRoute
+      route="status-all-coordinators.index"
+      label="Coordinators"
+    }}
+    {{tiny-toolbar/item
+      currentRoute=currentRoute
+      route="contracts.index"
+      label="Contracts"
+    }}
+    {{tiny-toolbar/item
+      currentRoute=currentRoute
+      route="students.index"
+      label="Students"
+    }}
+  </ul>
+
+</nav>

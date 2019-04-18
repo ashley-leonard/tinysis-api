@@ -6,7 +6,7 @@ import { hashByStatusableIdAndMonth } from '../utils/status-utils';
 export default Component.extend({
   tagName: 'table',
 
-  classNames: ['pure-table', 'pure-table-bordered'],
+  classNames: ['t-table', 't-table-bordered'],
 
   months: alias('term.attributes.months'),
 

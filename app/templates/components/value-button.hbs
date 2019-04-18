@@ -1,0 +1,12 @@
+<value-button
+ tabindex="0"
+ data-test-is-checked={{if isChecked "checked"}}
+ onkeydown={{action "onKeyDown" preventDefault=false}}
+ onclick={{action "onClick"}}
+>
+  {{#if isChecked}}
+    <span class="fas fa-times" />
+  {{else}}
+    -
+  {{/if}}
+</value-button>

@@ -1,0 +1,31 @@
+<tr data-test-contract-attendance-roll-row data-test-enrollment-id={{enrollment.id}}>
+  <td>
+    {{full-name student}}
+  </td>
+  <td>
+    {{t-select
+      value=meetingParticipant.attributes.contactType
+      name="contactType"
+      options=contactTypeOptions
+      onchange=(action "setMeetingType")
+    }}
+  </td>
+  {{#each participationOptions as |option|}}
+    <td class="center" data-test-participation={{option.value}}>
+      {{value-button
+        name="participation"
+        optionValue=option.value
+        value=meetingParticipant.attributes.participation
+        onchange=(action "setParticipation" option.value)
+        onkeydown=(action "setParticipationByKey" option.value)
+      }}
+    </td>
+  {{/each}}
+  <td>
+    {{notes-list
+      notes=notes
+      notable=meetingParticipant
+      expanded=true
+    }}
+  </td>
+</tr>

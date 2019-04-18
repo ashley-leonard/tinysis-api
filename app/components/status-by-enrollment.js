@@ -9,7 +9,7 @@ export default Component.extend(ContractRelations, {
   tinyData: service(),
 
   tagName: 'table',
-  classNames: ['pure-table', 'pure-table-bordered'],
+  classNames: ['t-table', 't-table-bordered'],
 
   months: computed('term', 'statuses', function () {
     return activeMonths(this.term, this.tinyData.getToday()).sort();

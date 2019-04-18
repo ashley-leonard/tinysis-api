@@ -2,7 +2,8 @@ import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { render, findAll } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
-import { stubTinyData, clone } from '../../helpers/stub-tiny-data';
+import { stubTinyData } from '../../helpers/stub-tiny-data';
+import { clone } from '../../helpers/test-utils';
 import coorStatus from '../../fixtures/coor-statuses';
 import coorStudents from '../../fixtures/coor-students';
 import coorTerms from '../../fixtures/coor-terms';
@@ -68,7 +69,7 @@ module('Integration | Component | status-by-coordinator', (hooks) => {
     const activeStudent = coorStudents.data.find(student => student.attributes.status === 'active');
     const activeStudentStati = coorStatus.data.filter(status => status.relationships.statusable.data.id === activeStudent.id);
     const activeStudentStatiCels = findAll(`tbody tr[data-test-student-id="${activeStudent.id}"] td[data-test-has-status]`);
-    const activeStudentExceptionCels = findAll(`tbody tr[data-test-student-id="${activeStudent.id}"] td.status-cel-exception`);
+    const activeStudentExceptionCels = findAll(`tbody tr[data-test-student-id="${activeStudent.id}"] td[data-test-has-exception]`);
 
     assert.equal(activeStudentStatiCels.length, activeStudentStati.filter(status => status.attributes.month < '2019-12-15').length, 'expected number of status cels were rendered for active student');
     assert.equal(activeStudentExceptionCels.length, 2, 'expected two exception cels for active student; it is Dec and Nov/Dec reports are missing');

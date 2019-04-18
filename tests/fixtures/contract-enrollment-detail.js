@@ -218,8 +218,8 @@ export default {
       id: '5',
       type: 'user',
       attributes: {
-        firstName: 'Mauro',
-        lastName: 'Ebert',
+        firstName: 'Sean',
+        lastName: 'DuBuque',
         nickname: null,
         dateActive: '2018-08-01',
         dateInactive: null,

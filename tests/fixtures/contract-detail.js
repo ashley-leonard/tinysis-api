@@ -4,13 +4,13 @@ export default {
     id: '3',
     type: 'contract',
     attributes: {
-      name: 'Dolorem alo defleo cohaero subiungo.',
+      name: 'Atque deorsum textus occaecati ascit.',
       status: 'approved',
-      learningObjectives: 'Contigo sui sonitus sodalitas admoneo.',
-      competencies: 'Cresco ambulo aut ut ubi.',
-      evaluationMethods: 'Somnus eaque culpo aequus amissio.',
-      instructionalMaterials: 'Territo decumbo aspernatur ascit et.',
-      location: 'Crur bonus pel arcesso usus.',
+      learningObjectives: 'Debitis vitium natus auditor vestrum.',
+      competencies: 'Corroboro canis voluptatum denique dolores.',
+      evaluationMethods: 'Deprimo anser autus depromo suppellex.',
+      instructionalMaterials: 'Appono despecto vereor deficio in.',
+      location: 'Cito acquiro decretum spiritus strues.',
       timeslots: [
         {
           start: '8:45',
@@ -263,7 +263,7 @@ export default {
       id: '1',
       type: 'ealr',
       attributes: {
-        ealr: 'Totidem attero cogito fugiat ceno.',
+        ealr: 'Quaerat auxilium fuga aro ulterius.',
         seq: '1.1',
         category: 'Category 1',
       },
@@ -272,7 +272,7 @@ export default {
       id: '2',
       type: 'ealr',
       attributes: {
-        ealr: 'Candidus rem velit tremo conservo.',
+        ealr: 'Strues delicate capillus aegre ter.',
         seq: '1.2',
         category: 'Category 1',
       },
@@ -281,7 +281,7 @@ export default {
       id: '3',
       type: 'ealr',
       attributes: {
-        ealr: 'Rem vero bellicus vorago curvo.',
+        ealr: 'Aestus triduana aptus censura currus.',
         seq: '2.1',
         category: 'Category 2',
       },
@@ -290,7 +290,7 @@ export default {
       id: '4',
       type: 'ealr',
       attributes: {
-        ealr: 'Arbitro aperiam barba spargo vulnus.',
+        ealr: 'Capio cuius patria nemo quos.',
         seq: '2.2',
         category: 'Category 2',
       },
@@ -299,8 +299,8 @@ export default {
       id: '1',
       type: 'user',
       attributes: {
-        firstName: 'Mark',
-        lastName: 'Kuhn',
+        firstName: 'Gabriella',
+        lastName: 'Hegmann',
         nickname: null,
         dateActive: null,
         dateInactive: null,

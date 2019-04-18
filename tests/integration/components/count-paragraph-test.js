@@ -1,6 +1,6 @@
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { render } from '@ember/test-helpers';
+import { render, find } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 import students from '../../fixtures/coor-students';
 
@@ -14,6 +14,8 @@ module('Integration | Component | count-paragraph', (hooks) => {
     });
 
     await render(hbs`{{count-paragraph result=students name=name pluralName=pluralName}}`);
+
+    assert.ok(find(`p[data-test-count-paragraph="${students.meta.count}"]`), 'expected counter rendered');
 
     assert.dom(this.element).hasText(`Found ${students.meta.count} coordinatees`, 'Found expected count of coordinatees');
 

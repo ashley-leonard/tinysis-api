@@ -60,6 +60,14 @@ Router.map(function () {
       this.route('contract-attendance', {
         path: '/attendance',
         resetNamespace: true,
+      }, function () {
+        this.route('index', {
+          path: '/',
+        });
+        this.route('contract-attendance-roll', {
+          path: '/:meeting_id',
+          resetNamespace: true,
+        });
       });
       this.route('status-by-contract', {
         path: '/status',

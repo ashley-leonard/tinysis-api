@@ -4,6 +4,8 @@ import { alias } from '@ember/object/computed';
 import { pluralize } from 'ember-inflector';
 
 export default Component.extend({
+  tagName: '',
+
   count: alias('result.meta.count'),
 
   countName: computed('count', function () {

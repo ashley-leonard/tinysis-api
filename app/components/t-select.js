@@ -3,8 +3,8 @@ import { get, computed } from '@ember/object';
 
 export default Component.extend({
   tagName: 'select',
-  optionValuePath: null,
-  optionNamePath: null,
+  optionValuePath: 'value',
+  optionNamePath: 'name',
   attributeBindings: ['name'],
   onchange: () => {},
 

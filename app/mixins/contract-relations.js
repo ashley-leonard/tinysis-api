@@ -1,6 +1,8 @@
 import Mixin from '@ember/object/mixin';
 import { inject as service } from '@ember/service';
 import { computed } from '@ember/object';
+import { compareUsers } from '../utils/user-utils';
+import { ENROLLMENT_STATUS_ENROLLED } from '../utils/enrollment-utils';
 
 export default Mixin.create({
   tinyData: service(),
@@ -8,6 +10,28 @@ export default Mixin.create({
   facilitator: computed('contract.relationships.facilitator', function () {
     const { tinyData, contract } = this;
     return tinyData.get('user', contract.relationships.facilitator.data.id);
+  }),
+
+  enrollments: computed('contract.relationships.enrollments', function () {
+    const { tinyData, contract } = this;
+
+    return contract.relationships.enrollments.data
+      .map(ref => tinyData.get('enrollment', ref.id));
+  }),
+
+  participants: computed('enrollments', function () {
+    const { enrollments, tinyData } = this;
+
+    return enrollments
+      .map(enrollment => ({
+        enrollment,
+        student: tinyData.get('user', enrollment.relationships.participant.data.id),
+      }))
+      .sort((e1, e2) => compareUsers(e1.student, e2.student));
+  }),
+
+  activeParticipants: computed('participants', function () {
+    return this.participants.filter(participant => participant.enrollment.attributes.enrollmentStatus === ENROLLMENT_STATUS_ENROLLED);
   }),
 
   assignments: computed('contract.relationships.assignments', function () {

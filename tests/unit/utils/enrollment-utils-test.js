@@ -1,7 +1,7 @@
 import { getEnrollmentStatusString } from 'tinysis-ui/utils/enrollment-utils';
 import { module, test } from 'qunit';
 import contractEnrollments from '../../fixtures/contract-enrollments';
-import { clone } from '../../helpers/stub-tiny-data';
+import { clone } from '../../helpers/test-utils';
 
 let enrollment;
 module('Unit | Utility | enrollment-utils', (hooks) => {

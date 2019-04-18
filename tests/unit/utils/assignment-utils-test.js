@@ -1,7 +1,7 @@
 import { isAssignmentDue } from 'tinysis-ui/utils/assignment-utils';
 import { module, test } from 'qunit';
 import dayjs from 'dayjs';
-import { clone } from '../../helpers/stub-tiny-data';
+import { clone } from '../../helpers/test-utils';
 import assignmentsFixture from '../../fixtures/contract-assignments';
 
 let assignments;

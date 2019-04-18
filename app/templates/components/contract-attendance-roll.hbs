@@ -1,0 +1,26 @@
+{{contract-attendance-roll/set-all
+  updateAllRolls=(action "updateAllRolls")
+}}
+<table class="t-table t-table-bordered" data-contract-attendance-roll>
+  <thead>
+    <th>Student</th>
+    <th>Meeting type</th>
+    <th>Present</th>
+    <th>Tardy</th>
+    <th>Absent</th>
+    <th>Excused</th>
+    <th>Notes</th>
+  </thead>
+  <tbody>
+    {{#each activeParticipants as |participant|}}
+      {{contract-attendance-roll/row
+        enrollment=participant.enrollment
+        meeting=meeting
+        notesHash=notesHash
+        meetingParticipantHash=meetingParticipantHash
+        student=participant.student
+        updateRoll=updateRoll
+      }}
+    {{/each}}
+  </tbody>
+</table>

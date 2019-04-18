@@ -28,11 +28,6 @@ export default Component.extend({
     return isUnacceptable(status);
   }),
 
-  warningClass: computed('isException', function () {
-    const { isException } = this;
-    return isException ? 'color-red' : null;
-  }),
-
   statusAbbreviation: computed('status', function () {
     const { status } = this;
     if (!status) {

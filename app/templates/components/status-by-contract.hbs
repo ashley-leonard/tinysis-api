@@ -3,7 +3,9 @@
     <th>Name</th>
     <th>Status</th>
     {{#each months as |month|}}
-      <th data-test-term-month class="center" title={{t-date month "compactTermMonth"}}>{{t-date month "MMM"}}</th>
+      <th data-test-term-month class="text-center" title={{t-date month "compactTermMonth"}}>
+        {{t-date month "MMM"}}
+      </th>
     {{/each}}
   </tr>
 </thead>

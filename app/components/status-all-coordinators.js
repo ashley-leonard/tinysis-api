@@ -8,7 +8,7 @@ import { wasActive } from 'tinysis-ui/utils/user-utils';
 export default Component.extend({
   tinyData: service(),
 
-  classNames: ['pure-table', 'pure-table-bordered'],
+  classNames: ['t-table', 't-table-bordered'],
 
   tagName: 'table',
 

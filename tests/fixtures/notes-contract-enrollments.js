@@ -1,12 +1,12 @@
-// GET /api/notes?notableType=Enrollment&notableIds=1,2
+// GET /api/notes?notableType=Enrollment&notableIds=2,1
 export default {
   data: [
     {
       id: '1',
       type: 'note',
       attributes: {
-        note: 'Note for Greenholt for enrollment in Dolorem alo defleo cohaero subiungo.',
-        updatedAt: '2019-03-27T15:15:04.000Z',
+        note: 'Note for DuBuque for enrollment in Atque deorsum textus occaecati ascit.',
+        updatedAt: '2019-04-12T23:43:34.000Z',
       },
       relationships: {
         notable: {
@@ -27,8 +27,8 @@ export default {
       id: '2',
       type: 'note',
       attributes: {
-        note: 'Note for Mills for enrollment in Dolorem alo defleo cohaero subiungo.',
-        updatedAt: '2019-03-27T15:15:04.000Z',
+        note: 'Note for Collins for enrollment in Atque deorsum textus occaecati ascit.',
+        updatedAt: '2019-04-12T23:43:34.000Z',
       },
       relationships: {
         notable: {
@@ -51,8 +51,8 @@ export default {
       id: '1',
       type: 'user',
       attributes: {
-        firstName: 'Mark',
-        lastName: 'Kuhn',
+        firstName: 'Gabriella',
+        lastName: 'Hegmann',
         nickname: null,
         dateActive: null,
         dateInactive: null,

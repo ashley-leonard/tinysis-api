@@ -5,8 +5,8 @@ export default {
       id: '57',
       type: 'note',
       attributes: {
-        note: 'Note by Bauch for student Greenholt / assignment 1',
-        updatedAt: '2019-03-27T15:15:04.000Z',
+        note: 'Note by Hegmann for student DuBuque / assignment 1',
+        updatedAt: '2019-04-12T23:43:35.000Z',
       },
       relationships: {
         notable: {
@@ -27,8 +27,8 @@ export default {
       id: '58',
       type: 'note',
       attributes: {
-        note: 'Note by Bauch for student Greenholt / assignment 2',
-        updatedAt: '2019-03-27T15:15:04.000Z',
+        note: 'Note by Hegmann for student DuBuque / assignment 2',
+        updatedAt: '2019-04-12T23:43:35.000Z',
       },
       relationships: {
         notable: {
@@ -49,8 +49,8 @@ export default {
       id: '59',
       type: 'note',
       attributes: {
-        note: 'Note by Bauch for student Greenholt / assignment 3',
-        updatedAt: '2019-03-27T15:15:04.000Z',
+        note: 'Note by Hegmann for student DuBuque / assignment 3',
+        updatedAt: '2019-04-12T23:43:35.000Z',
       },
       relationships: {
         notable: {
@@ -71,8 +71,8 @@ export default {
       id: '60',
       type: 'note',
       attributes: {
-        note: 'Note by Bauch for student Greenholt / assignment 4',
-        updatedAt: '2019-03-27T15:15:04.000Z',
+        note: 'Note by Hegmann for student DuBuque / assignment 4',
+        updatedAt: '2019-04-12T23:43:35.000Z',
       },
       relationships: {
         notable: {
@@ -93,8 +93,8 @@ export default {
       id: '61',
       type: 'note',
       attributes: {
-        note: 'Note by Bauch for student Greenholt / assignment 5',
-        updatedAt: '2019-03-27T15:15:04.000Z',
+        note: 'Note by Hegmann for student DuBuque / assignment 5',
+        updatedAt: '2019-04-12T23:43:35.000Z',
       },
       relationships: {
         notable: {
@@ -117,8 +117,8 @@ export default {
       id: '1',
       type: 'user',
       attributes: {
-        firstName: 'Mark',
-        lastName: 'Kuhn',
+        firstName: 'Gabriella',
+        lastName: 'Hegmann',
         nickname: null,
         dateActive: null,
         dateInactive: null,

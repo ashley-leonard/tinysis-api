@@ -2,34 +2,11 @@
 export default {
   data: [
     {
-      id: '1',
-      type: 'user',
-      attributes: {
-        firstName: 'Mark',
-        lastName: 'Kuhn',
-        nickname: null,
-        dateActive: null,
-        dateInactive: null,
-        status: 'active',
-        role: 'staff',
-      },
-      relationships: {
-        coordinatees: {
-          data: [
-            {
-              id: '5',
-              type: 'student',
-            },
-          ],
-        },
-      },
-    },
-    {
       id: '2',
       type: 'user',
       attributes: {
-        firstName: 'Scottie',
-        lastName: 'Zieme',
+        firstName: 'Evita',
+        lastName: 'Haley',
         nickname: null,
         dateActive: null,
         dateInactive: null,
@@ -45,6 +22,29 @@ export default {
             },
             {
               id: '7',
+              type: 'student',
+            },
+          ],
+        },
+      },
+    },
+    {
+      id: '1',
+      type: 'user',
+      attributes: {
+        firstName: 'Gabriella',
+        lastName: 'Hegmann',
+        nickname: null,
+        dateActive: null,
+        dateInactive: null,
+        status: 'active',
+        role: 'staff',
+      },
+      relationships: {
+        coordinatees: {
+          data: [
+            {
+              id: '5',
               type: 'student',
             },
           ],

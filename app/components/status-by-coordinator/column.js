@@ -8,15 +8,11 @@ import { isUnacceptable, getAcademicStatusName } from '../../utils/status-utils'
 export default Component.extend({
   tinyData: service(),
 
-  classNames: ['status-cel', 'status-cel-coor'],
-  classNameBindings: ['isException:status-cel-exception'],
-
-  tagName: 'td',
-
-  'data-test-status-id': alias('status.id'),
-  'data-test-has-status': and('showStatus', 'status.id'),
+  tagName: '',
 
   schoolYear: alias('term.attributes.schoolYear'),
+
+  hasStatus: and('status.id', 'showStatus'),
 
   status: computed('month', 'studentHash', function () {
     const { month, studentHash } = this;

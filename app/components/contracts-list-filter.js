@@ -2,8 +2,8 @@ import Component from '@ember/component';
 import { computed } from '@ember/object';
 
 export default Component.extend({
-  classNames: ['filter'],
-  tagName: 'ul',
+  classNames: ['form'],
+  tagName: 'form',
   queryParams: {},
 
   onchange: () => {},

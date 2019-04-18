@@ -127,13 +127,13 @@ export default {
       id: '3',
       type: 'contract',
       attributes: {
-        name: 'Dolorem alo defleo cohaero subiungo.',
+        name: 'Atque deorsum textus occaecati ascit.',
         status: 'approved',
-        learningObjectives: 'Contigo sui sonitus sodalitas admoneo.',
-        competencies: 'Cresco ambulo aut ut ubi.',
-        evaluationMethods: 'Somnus eaque culpo aequus amissio.',
-        instructionalMaterials: 'Territo decumbo aspernatur ascit et.',
-        location: 'Crur bonus pel arcesso usus.',
+        learningObjectives: 'Debitis vitium natus auditor vestrum.',
+        competencies: 'Corroboro canis voluptatum denique dolores.',
+        evaluationMethods: 'Deprimo anser autus depromo suppellex.',
+        instructionalMaterials: 'Appono despecto vereor deficio in.',
+        location: 'Cito acquiro decretum spiritus strues.',
         timeslots: [
           {
             start: '8:45',
@@ -255,8 +255,8 @@ export default {
       id: '1',
       type: 'user',
       attributes: {
-        firstName: 'Mark',
-        lastName: 'Kuhn',
+        firstName: 'Gabriella',
+        lastName: 'Hegmann',
         nickname: null,
         dateActive: null,
         dateInactive: null,
@@ -311,8 +311,8 @@ export default {
       id: '5',
       type: 'user',
       attributes: {
-        firstName: 'Mauro',
-        lastName: 'Ebert',
+        firstName: 'Sean',
+        lastName: 'DuBuque',
         nickname: null,
         dateActive: '2018-08-01',
         dateInactive: null,
@@ -335,13 +335,13 @@ export default {
       id: '4',
       type: 'contract',
       attributes: {
-        name: 'Vos sordeo ustilo qui quas.',
+        name: 'Non calculus decimus et deleo.',
         status: 'approved',
-        learningObjectives: 'Vester fugiat dedecor dicta conduco.',
-        competencies: 'Denego quibusdam necessitatibus desipio concedo.',
-        evaluationMethods: 'Arto socius alius antepono deduco.',
-        instructionalMaterials: 'Certus chirographum exercitationem clementia occaecati.',
-        location: 'Et admoveo molestiae ater tolero.',
+        learningObjectives: 'Compono texo alter deduco sulum.',
+        competencies: 'Aro approbo vere amplexus qui.',
+        evaluationMethods: 'Denuncio libero alveus solvo solum.',
+        instructionalMaterials: 'Vero alioqui bestia annus taedium.',
+        location: 'Charisma tripudio angulus cunabula qui.',
         timeslots: [
           {
             start: '8:45',
@@ -410,8 +410,8 @@ export default {
       id: '2',
       type: 'user',
       attributes: {
-        firstName: 'Scottie',
-        lastName: 'Zieme',
+        firstName: 'Evita',
+        lastName: 'Haley',
         nickname: null,
         dateActive: null,
         dateInactive: null,

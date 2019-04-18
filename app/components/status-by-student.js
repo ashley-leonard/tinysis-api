@@ -7,7 +7,7 @@ import { generateNotableHash } from 'tinysis-ui/utils/note-utils';
 export default Component.extend({
   tinyData: service(),
   tagName: 'table',
-  classNames: ['pure-table', 'pure-table-bordered'],
+  classNames: ['t-table', 't-table-bordered'],
 
   months: computed('term', function () {
     const active = activeMonths(this.term, this.tinyData.getToday());
