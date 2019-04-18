@@ -43,7 +43,7 @@ module('Acceptance | contract attendance index', (hooks) => {
     await visit(attendanceListRoute);
 
     assert.equal(currentURL(), attendanceListRoute, 'page navigated to successfully');
-    assert.ok(find(`.count-paragraph[data-test-count-paragraph="${meetings.data.length}"]`), 'expected count of meetings seen');
+    assert.ok(find(`[data-test-count-paragraph="${meetings.data.length}"]`), 'expected count of meetings seen');
     assert.equal(findAll('tbody').length, enrollments.data.length, 'expected number of enrollment rows appeared');
   });
 });

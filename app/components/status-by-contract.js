@@ -7,7 +7,7 @@ import { generateNotableHash } from '../utils/note-utils';
 
 export default Component.extend(ContractRelations, {
   tagName: 'table',
-  classNames: ['pure-table', 'pure-table-bordered'],
+  classNames: ['t-table', 't-table-bordered'],
 
   months: alias('term.attributes.months'),
 

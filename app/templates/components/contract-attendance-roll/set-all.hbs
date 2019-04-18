@@ -1,7 +1,7 @@
 <t-contract-attendance-roll-set-all>
   <form {{action "onSubmit" on="submit"}}>
-    <ul class="filter">
-      <li class="filter-item">
+    <ul class="filter items-center">
+      <li class="filter-item flex items-center">
         <label>Mark all enrollees:</label>
         {{t-select
           name="participation"
@@ -10,7 +10,7 @@
           onchange=(action (mut participation))
         }}
       </li>
-      <li class="filter-item">
+      <li class="filter-item flex items-center">
         <label>Contact type:</label>
         {{t-select
           name="contactType"
@@ -19,7 +19,7 @@
           onchange=(action (mut contactType))
         }}
       </li>
-      <li class="filter-item" data-test-submit>
+      <li class="filter-item items-center" data-test-submit>
         <button type="submit">Update all</button>
       </li>
     </ul>

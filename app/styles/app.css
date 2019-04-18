@@ -1,188 +1,133 @@
-@import '../../vendor/pikaday/css/pikaday.css';
+@import './tinysis';
+@import '../../vendor/pikaday/css/pikaday';
 @import './ember-modal-dialog/ember-modal-structure.scss';
 @import './ember-modal-dialog/ember-modal-appearance.scss';
 
-.app-container {
-  margin: 0 5rem;
-}
+/**
+ * This injects Tailwind's base styles, which is a combination of
+ * Normalize.css and some additional base styles.
+ *
+ * You can see the styles here:
+ * https://github.com/tailwindcss/tailwindcss/blob/master/css/preflight.css
+ */
 
-.app-container footer {
-  margin: 2rem 0;
-}
+@tailwind preflight;
 
-.app-container .app-container-inner {
-  min-height: 80vh;
-}
+/**
+* This injects any component classes registered by plugins.
+*
+* If using `postcss-import`, use this import instead:
+*/
 
-section {
-  display: block;
-  margin: 2rem 0;
-}
+@tailwind components;
 
-section h3:first-of-type {
-  margin-top: 0;
-}
+/**
+* Here you would add any of your custom component classes; stuff that you'd
+* want loaded *before* the utilities so that the utilities could still
+* override them.
+*/
+.t-table {
+  @apply border border-collapse;
 
-.notes-row {
-  border-top: none;
-  background: lightgray;
-  font-size: 13px;
-}
+  thead {
+    @apply bg-grey-lightest border-t border-b;
+  }
 
-.full-width {
-  width: 100%;
-}
+  th {
+    @apply text-left py-2 px-6;
+    
+    &.text-center {
+      @apply text-center;
+    }
+  }
 
-html, button, input, select, textarea, .pure-g [class *= "pure-u"] {
-    /* Set your content font stack here: */
-    font-family: Roboto, sans-serif;
-    font-size: 14px;
-    font-weight: 400;
-}
+  td {
+    @apply py-2 px-6;
+  }
 
-value-button {
-  padding: .5rem;
-  cursor: pointer;
-}
-
-tbody th {
-  text-align: left;
-}
-
-.compact-paragraphs p {
-  margin: 0;
-}
-
-.notes-list ul, .actions-list {
-  padding: 0;
-  margin: 0;
-}
-
-.notes-list-item, .actions-list-item {
-  list-style-type: none;
-  margin-bottom: 1rem;
-}
-
-.actions-list {
-  display: inline-block;
-}
-.actions-list-item {
-  display: inline-block;
-  margin: 0 1rem 0 0;
-}
-
-.notes-list-item:last-child {
-  margin-bottom: 0;
-}
-
-.notes-list-item-header {
-  font-weight: bold;
-  display: inline-block;
-  padding-right: 0.5rem;
-}
-
-.filter {
-  margin: 1rem 0;
-  padding: 0;
-}
-
-.filter-item {
-  display: inline-block;
-  list-style-type: none;
-  margin: 0 1rem 0 0;
-}
-
-ul.no-bullet {
-  padding-left: 0;
-}
-
-ul.no-bullet li {
-  list-style-type: none;
-  margin: 1rem 0;
-}
-
-ul.no-bullet.compact li {
-  margin: 0;
-}
-
-.compact {
-  margin: 0;
-  padding: 0;
-}
-
-.center {
-  text-align: center;
-}
-
-.pure-table td.compact, .pure-table th.compact {
-  padding: 0;
-}
-
-.pure-table-bordered tbody {
-  border-bottom: 1px solid #cbcbcb;
-}
-
-.callout-box {
-	background-color: #444;
-	background-image: -moz-linear-gradient(top, #444, #444);
-	position: relative;
-	color: #ccc;
-	padding: 10px;
-	border-radius: 3px;
-	box-shadow: 0px 0px 20px #999;
-	margin: 25px;
-	min-height: 50px;
-	border: 1px solid #333;
-	text-shadow: 0 0 1px #000;
-}
-
-.assignments-list th.assignment-list-header {
-  vertical-align: bottom;
-  text-align: center;
-}
-
-.assignments-list th .svg-cnt {
-  display: inline-block;
-  width: 20px;
-  height: 200px;
-  margin: 0;
-}
-
-.notes-row td {
-  padding: 0 14px;
-}
-
-.action-icon {
-  text-decoration: none;
-  cursor: hand;
-  color: black;
-}
-
-dl.aligned dt {
-  width: 2rem;
-  float: left;
-}
-
-dl.aligned dt.indented {
-  padding-left: 3rem;
-}
-
-.color-red {
-  color: 'red';
-}
-
-.contract-attendance-new {
-  display: flex;
-  flex-direction: column;
-  align-content: flex-start;
-  height: 21rem;
-
-  footer {
-    position: absolute;
-    bottom: 0.5rem;
+  tbody tr {
+    @apply border-b;
   }
 }
 
-.ember-modal-dialog h3 {
-  margin: 0 0 1rem 0;
+h1 {
+  @apply mb-4;
 }
+
+h2 {
+  @apply my-4;
+}
+
+h3 {
+  @apply my-4;
+}
+
+p {
+  @apply my-2;
+}
+
+a, a:visited {
+  color: inherit;
+}
+
+
+nav.toolbar {
+  li { 
+    @apply mx-2; 
+
+    a {
+      @apply block no-underline py-2 px-4; 
+
+      &:hover {
+        @apply bg-grey;
+      }
+
+      &.active {
+        @apply bg-grey-lighter;
+      }
+    }
+  }
+}
+
+ul.filter {
+  @apply flex list-reset my-4;
+}
+
+.filter-item {
+  @apply inline-block mr-4;
+
+  label {
+    @apply pr-2;
+  }
+}
+
+input[type="text"], select {
+  @apply block border border-grey-light bg-grey-lightest w-full p-2 rounded;
+
+  &:focus {
+    @apply border-grey-darkest;
+  }
+}
+
+label {
+  @apply block whitespace-no-wrap;
+}
+
+button {
+  @apply text-center py-2 px-4 rounded bg-grey-darkest text-white border;
+
+  &:focus {
+    @apply outline-none;
+  }
+
+  &:hover {
+    @apply bg-grey-darker;
+  }
+}
+
+/**
+* This injects all of Tailwind's utility classes, generated based on your
+* config file.
+*/
+ 
+@tailwind utilities;

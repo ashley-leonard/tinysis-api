@@ -1,8 +1,15 @@
-{{#if showStatus}}
-  {{#link-to "status-by-student" student.id
-    (query-params schoolYear=schoolYear)
-    title=academicStatusName
-  }}
-    {{statusAbbreviation}}
-  {{/link-to}}
-{{/if}}
+<td
+  class="text-center {{if isException "text-red"}}"
+  data-test-status-id={{status.id}}
+  data-test-has-status={{hasStatus}}
+  data-test-has-exception={{isException}}
+>
+  {{#if showStatus}}
+    {{#link-to "status-by-student" student.id
+      (query-params schoolYear=schoolYear)
+      title=academicStatusName
+    }}
+      {{statusAbbreviation}}
+    {{/link-to}}
+  {{/if}}
+</td>

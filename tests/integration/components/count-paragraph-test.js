@@ -15,7 +15,7 @@ module('Integration | Component | count-paragraph', (hooks) => {
 
     await render(hbs`{{count-paragraph result=students name=name pluralName=pluralName}}`);
 
-    assert.ok(find(`p.count-paragraph[data-test-count-paragraph="${students.meta.count}"]`), 'expected counter rendered');
+    assert.ok(find(`p[data-test-count-paragraph="${students.meta.count}"]`), 'expected counter rendered');
 
     assert.dom(this.element).hasText(`Found ${students.meta.count} coordinatees`, 'Found expected count of coordinatees');
 

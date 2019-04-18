@@ -17,7 +17,7 @@ export default Component.extend({
   tinyData: service(),
 
   tagName: 'table',
-  classNames: ['pure-table', 'pure-table-bordered'],
+  classNames: ['t-table', 't-table-bordered'],
 
   enrollmentsList: computed('enrollments', function () {
     const { enrollments, tinyData } = this;
