@@ -1,3 +1,3 @@
-class ParticipantSerializer < UserSerializer
+class ParticipantSerializer < StudentSerializer
   set_type :user
 end

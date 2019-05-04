@@ -35,11 +35,11 @@ RSpec.describe 'Ember fixtures script', type: :request do
     create :setting, name: 'reporting_end_month', value: 6
     create :setting, name: 'current_year', value: CURRENT_YEAR
 
-    @staff1 = create :user, privilege: User::PRIVILEGE_STAFF, date_active: Date.new(2012, 9, 1), email: Faker::Internet.email
-    @staff2 = create :user, privilege: User::PRIVILEGE_STAFF, date_active: Date.new(2013, 2, 1), email: Faker::Internet.email
-    @staff3 = create :user, privilege: User::PRIVILEGE_STAFF, status: User::STATUS_INACTIVE, date_active: Date.new(2011, 2, 1), date_inactive: Date.new(2018, 1, 1), email: Faker::Internet.email
+    @staff1 = create :user, privilege: User::PRIVILEGE_STAFF
+    @staff2 = create :user, privilege: User::PRIVILEGE_STAFF
+    @staff3 = create :user, privilege: User::PRIVILEGE_STAFF, status: User::STATUS_INACTIVE, date_inactive: Date.new(2018, 1, 1)
 
-    @admin1 = create :user, privilege: User::PRIVILEGE_ADMIN, status: User::STATUS_ACTIVE, date_active: Date.new(2011, 7, 1), email: Faker::Internet.email
+    @admin1 = create :user, privilege: User::PRIVILEGE_ADMIN
 
     @term1_last = create :term, name: 'Last One', school_year: LAST_YEAR
     @term2_last = create :term, name: 'Last Two', school_year: LAST_YEAR
@@ -96,9 +96,9 @@ RSpec.describe 'Ember fixtures script', type: :request do
     end
     @contract1_current.save!
 
-    @student1 = create :user, privilege: User::PRIVILEGE_STUDENT, district_id: Random.rand(10 ** 10).to_s, coordinator: @staff1, date_active: Date.new(LAST_YEAR, 8, 1)
-    @student2 = create :user, privilege: User::PRIVILEGE_STUDENT, district_id: Random.rand(10 ** 10).to_s, coordinator: @staff2, date_active: Date.new(LAST_YEAR, 8, 1)
-    @student3 = create :user, privilege: User::PRIVILEGE_STUDENT, district_id: Random.rand(10 ** 10).to_s, coordinator: @staff2, status: User::STATUS_INACTIVE, date_active: Date.new(LAST_YEAR, 8, 1), date_inactive: Date.new(CURRENT_YEAR, 10, 1)
+    @student1 = create :user, privilege: User::PRIVILEGE_STUDENT, coordinator: @staff1, date_active: Date.new(LAST_YEAR, 8, 1)
+    @student2 = create :user, privilege: User::PRIVILEGE_STUDENT, coordinator: @staff2, date_active: Date.new(LAST_YEAR, 8, 1)
+    @student3 = create :user, privilege: User::PRIVILEGE_STUDENT, coordinator: @staff2, status: User::STATUS_INACTIVE, date_active: Date.new(LAST_YEAR, 8, 1), date_inactive: Date.new(CURRENT_YEAR, 10, 1)
     @students = [@student1, @student2, @student3]
     
     # current contracts should have active enrollments. reporting as if we are three months into
@@ -170,7 +170,7 @@ RSpec.describe 'Ember fixtures script', type: :request do
         note: "Note by #{@contract1_current.facilitator.last_name} for student #{@student1.last_name} / meeting #{meeting_number}"
 
       meeting_participant = create :meeting_participant, meeting: meeting, enrollment: enrollment3, participation: MeetingParticipant::ABSENT
-      create :note, notable: meeting_participant, creator: @contract1_current.facilitator, note: "Note by #{@contract1_current.facilitator.last_name} for student #{@student3.last_name} / meeting #{meeting_number}"
+      create :note, notable: meeting_participant, creator: @contract1_current.facilitator, note: "Note by #{@contract1_current.facilitator.last_name} for student #{@student3.last_name} / assignment #{meeting_number}"
     end
   end
 
@@ -183,12 +183,6 @@ RSpec.describe 'Ember fixtures script', type: :request do
          write_fixture "/api/#{fixture}", "#{fixture}.js"
         end
 
-        # general
-        #
-        write_fixture "/api/admin/users/#{@admin1.id}", "user-admin.js"
-        write_fixture "/api/admin/users/#{@staff1.id}", "user-staff.js"
-
-        
         # years
         write_fixture '/api/settings/years', 'years.js'
 
@@ -261,9 +255,6 @@ RSpec.describe 'Ember fixtures script', type: :request do
 
         # all active coordinators
         write_fixture '/api/staff?status=active&coordinators=true&order=lastName,firstName', 'all-coor-staff.js'
-
-        # users from admin controller
-        write_fixture '/api/admin/users', 'admin-users.js'
 
         # all coor status records for active students
         student_ids = @students.map(&:id).join(',')
