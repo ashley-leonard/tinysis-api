@@ -21,8 +21,14 @@ Rails.application.routes.draw do
     get '/terms', to: 'terms#index'
     get '/settings', to: 'settings#index'
     get '/settings/years', to: 'settings#years'
+    
     resources :staff
     resources :statuses, controller: 'status'
+
+    scope '/admin' do
+      get '/users', to: 'admin_users#index'
+      get '/users/:id', to: 'admin_users#show'
+    end
   end
 
 end
