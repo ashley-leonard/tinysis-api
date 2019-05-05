@@ -2,8 +2,8 @@ module UserControllerMethods
   extend ActiveSupport::Concern
 
   included do
-    unless const_defined?(:ALLOWED_COLUMNS)
-      ALLOWED_COLUMNS = %w{first_name last_name nickname} 
+    unless const_defined?(:ALLOWED_ORDER_COLUMNS)
+      ALLOWED_ORDER_COLUMNS = %w{first_name last_name nickname} 
       ALLOWED_INCLUDES = %w{coordinator}
     end
   end
@@ -19,7 +19,7 @@ module UserControllerMethods
       .map(&:strip)
       .map(&:underscore)
 
-    order &= ALLOWED_COLUMNS
+    order &= ALLOWED_ORDER_COLUMNS
 
     order = order.join(',')
 

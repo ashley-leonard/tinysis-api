@@ -13,6 +13,7 @@ protected
       :districtGrade,
       :status,
       :coordinator,
+      :role,
     ]
   end
 
