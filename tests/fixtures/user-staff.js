@@ -1,4 +1,4 @@
-// GET /api/profile
+// GET /api/admin/users/1
 export default {
   data: {
     id: '1',
@@ -7,27 +7,17 @@ export default {
       firstName: 'Perry',
       lastName: 'Rolfson',
       nickname: null,
+      canLogin: false,
       dateActive: '2012-09-01',
       dateInactive: null,
       districtId: null,
       districtGrade: 12,
-      login: '99riqb6cik3e',
-      email: 'nidia@stroman.net',
-      canLogin: false,
       isActive: true,
       role: 'staff',
-      isAdmin: false,
-      status: 'active',
+      login: '99riqb6cik3e',
+      email: 'nidia@stroman.net',
     },
     relationships: {
-      coordinatees: {
-        data: [
-          {
-            id: '5',
-            type: 'student',
-          },
-        ],
-      },
     },
   },
 };

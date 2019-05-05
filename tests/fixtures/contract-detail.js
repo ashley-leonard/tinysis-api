@@ -4,13 +4,13 @@ export default {
     id: '3',
     type: 'contract',
     attributes: {
-      name: 'Atque deorsum textus occaecati ascit.',
+      name: 'Verecundia vulgaris corroboro acidus verto.',
       status: 'approved',
-      learningObjectives: 'Debitis vitium natus auditor vestrum.',
-      competencies: 'Corroboro canis voluptatum denique dolores.',
-      evaluationMethods: 'Deprimo anser autus depromo suppellex.',
-      instructionalMaterials: 'Appono despecto vereor deficio in.',
-      location: 'Cito acquiro decretum spiritus strues.',
+      learningObjectives: 'Voluptatum porro denuncio ducimus ulterius.',
+      competencies: 'Sustineo accusantium desino adopto casso.',
+      evaluationMethods: 'Subiungo turba vigilo tempore aranea.',
+      instructionalMaterials: 'Somniculosus et beatae custodia cotidie.',
+      location: 'Impedit caelestis solium odit delectatio.',
       timeslots: [
         {
           start: '8:45',
@@ -263,7 +263,7 @@ export default {
       id: '1',
       type: 'ealr',
       attributes: {
-        ealr: 'Quaerat auxilium fuga aro ulterius.',
+        ealr: 'Decimus territo subvenio antiquus quasi.',
         seq: '1.1',
         category: 'Category 1',
       },
@@ -272,7 +272,7 @@ export default {
       id: '2',
       type: 'ealr',
       attributes: {
-        ealr: 'Strues delicate capillus aegre ter.',
+        ealr: 'Molestias absconditus usque apud nemo.',
         seq: '1.2',
         category: 'Category 1',
       },
@@ -281,7 +281,7 @@ export default {
       id: '3',
       type: 'ealr',
       attributes: {
-        ealr: 'Aestus triduana aptus censura currus.',
+        ealr: 'Acquiro constans arceo absque clam.',
         seq: '2.1',
         category: 'Category 2',
       },
@@ -290,7 +290,7 @@ export default {
       id: '4',
       type: 'ealr',
       attributes: {
-        ealr: 'Capio cuius patria nemo quos.',
+        ealr: 'Non voluptate thymbra aegrotatio deprecator.',
         seq: '2.2',
         category: 'Category 2',
       },
@@ -299,15 +299,30 @@ export default {
       id: '1',
       type: 'user',
       attributes: {
-        firstName: 'Gabriella',
-        lastName: 'Hegmann',
+        firstName: 'Perry',
+        lastName: 'Rolfson',
         nickname: null,
-        dateActive: null,
+        dateActive: '2012-09-01',
         dateInactive: null,
-        status: 'active',
+        districtId: null,
+        districtGrade: 12,
+        login: '99riqb6cik3e',
+        email: 'nidia@stroman.net',
+        canLogin: false,
+        isActive: true,
         role: 'staff',
+        isAdmin: false,
+        status: 'active',
       },
       relationships: {
+        coordinatees: {
+          data: [
+            {
+              id: '5',
+              type: 'student',
+            },
+          ],
+        },
       },
     },
     {
