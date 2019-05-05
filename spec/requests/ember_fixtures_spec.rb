@@ -188,7 +188,6 @@ RSpec.describe 'Ember fixtures script', type: :request do
         write_fixture "/api/admin/users/#{@admin1.id}", "user-admin.js"
         write_fixture "/api/admin/users/#{@staff1.id}", "user-staff.js"
 
-        
         # years
         write_fixture '/api/settings/years', 'years.js'
 
@@ -251,10 +250,10 @@ RSpec.describe 'Ember fixtures script', type: :request do
         write_fixture "/api/notes?notableType=Status&notableIds=#{status_ids.join(',')}", 'notes-contract-statuses.js'
 
         # students for a coordinator
-        write_fixture "/api/students?coordinator_id=#{@staff2.id}&status=reportable&order=lastName,firstName", 'coor-students.js'
+        write_fixture "/api/students?coordinatorIds=#{@staff2.id}&status=reportable&order=lastName,firstName", 'coor-students.js'
 
         # statuses for a coordinator's students
-        write_fixture "/api/statuses?student_ids=#{@staff2.coordinatees.map(&:id).join(',')}&months=#{@term_coor_current.months.join(',')}&type=student", 'coor-statuses.js'
+        write_fixture "/api/statuses?studentIds=#{@staff2.coordinatees.map(&:id).join(',')}&months=#{@term_coor_current.months.join(',')}&type=student", 'coor-statuses.js'
 
         # all active students for all-coor summary
         write_fixture '/api/students?status=reportable&order=lastName,firstName&limit=-1', 'all-coor-students.js'
@@ -263,7 +262,8 @@ RSpec.describe 'Ember fixtures script', type: :request do
         write_fixture '/api/staff?status=active&coordinators=true&order=lastName,firstName', 'all-coor-staff.js'
 
         # users from admin controller
-        write_fixture '/api/admin/users', 'admin-users.js'
+        write_fixture '/api/admin/users?include=coordinator&limit=20&order=lastName,firstName,nickname', 'admin-users.js'
+        write_fixture "/api/admin/users/#{@student1.id}", 'admin-users-student-detail.js'
 
         # all coor status records for active students
         student_ids = @students.map(&:id).join(',')
