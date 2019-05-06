@@ -4,22 +4,21 @@ export default {
     id: '5',
     type: 'user',
     attributes: {
-      firstName: 'Sean',
-      lastName: 'DuBuque',
+      firstName: 'Sherilyn',
+      lastName: 'Gislason',
       nickname: null,
       dateActive: '2018-08-01',
       dateInactive: null,
+      districtId: '1564901313',
+      districtGrade: 12,
       status: 'active',
       role: 'student',
-      districtId: null,
-      districtGrade: 12,
-      coordinatorId: '1',
     },
     relationships: {
       coordinator: {
         data: {
           id: '1',
-          type: 'coordinator',
+          type: 'staff',
         },
       },
     },

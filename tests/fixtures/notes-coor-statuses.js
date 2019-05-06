@@ -5,8 +5,8 @@ export default {
       id: '51',
       type: 'note',
       attributes: {
-        note: 'Note by Hegmann for DuBuque on 2019-09-01',
-        updatedAt: '2019-04-12T23:43:35.000Z',
+        note: 'Note by Rolfson for Gislason on 2019-09-01',
+        updatedAt: '2019-05-05T14:05:47.000Z',
       },
       relationships: {
         notable: {
@@ -27,8 +27,8 @@ export default {
       id: '52',
       type: 'note',
       attributes: {
-        note: 'Note by Haley for Brown on 2019-09-01',
-        updatedAt: '2019-04-12T23:43:35.000Z',
+        note: 'Note by Ziemann for Mraz on 2019-09-01',
+        updatedAt: '2019-05-05T14:05:47.000Z',
       },
       relationships: {
         notable: {
@@ -49,8 +49,8 @@ export default {
       id: '53',
       type: 'note',
       attributes: {
-        note: 'Note by Haley for Collins on 2019-09-01',
-        updatedAt: '2019-04-12T23:43:35.000Z',
+        note: 'Note by Ziemann for Jenkins on 2019-09-01',
+        updatedAt: '2019-05-05T14:05:47.000Z',
       },
       relationships: {
         notable: {
@@ -71,8 +71,8 @@ export default {
       id: '54',
       type: 'note',
       attributes: {
-        note: 'Note by Hegmann for DuBuque on 2019-10-01',
-        updatedAt: '2019-04-12T23:43:35.000Z',
+        note: 'Note by Rolfson for Gislason on 2019-10-01',
+        updatedAt: '2019-05-05T14:05:47.000Z',
       },
       relationships: {
         notable: {
@@ -93,8 +93,8 @@ export default {
       id: '55',
       type: 'note',
       attributes: {
-        note: 'Note by Haley for Brown on 2019-10-01',
-        updatedAt: '2019-04-12T23:43:35.000Z',
+        note: 'Note by Ziemann for Mraz on 2019-10-01',
+        updatedAt: '2019-05-05T14:05:47.000Z',
       },
       relationships: {
         notable: {
@@ -115,8 +115,8 @@ export default {
       id: '56',
       type: 'note',
       attributes: {
-        note: 'Note by Haley for Collins on 2019-10-01',
-        updatedAt: '2019-04-12T23:43:35.000Z',
+        note: 'Note by Ziemann for Jenkins on 2019-10-01',
+        updatedAt: '2019-05-05T14:05:47.000Z',
       },
       relationships: {
         notable: {
@@ -139,30 +139,64 @@ export default {
       id: '1',
       type: 'user',
       attributes: {
-        firstName: 'Gabriella',
-        lastName: 'Hegmann',
+        firstName: 'Perry',
+        lastName: 'Rolfson',
         nickname: null,
-        dateActive: null,
+        dateActive: '2012-09-01',
         dateInactive: null,
-        status: 'active',
+        districtId: null,
+        districtGrade: 12,
+        login: '99riqb6cik3e',
+        email: 'nidia@stroman.net',
+        canLogin: false,
+        isActive: true,
         role: 'staff',
+        isAdmin: false,
+        status: 'active',
       },
       relationships: {
+        coordinatees: {
+          data: [
+            {
+              id: '5',
+              type: 'student',
+            },
+          ],
+        },
       },
     },
     {
       id: '2',
       type: 'user',
       attributes: {
-        firstName: 'Evita',
-        lastName: 'Haley',
+        firstName: 'Fermin',
+        lastName: 'Ziemann',
         nickname: null,
-        dateActive: null,
+        dateActive: '2013-02-01',
         dateInactive: null,
-        status: 'active',
+        districtId: null,
+        districtGrade: 12,
+        login: 'cph16wxjdeiv',
+        email: 'corrina@beier.com',
+        canLogin: false,
+        isActive: true,
         role: 'staff',
+        isAdmin: false,
+        status: 'active',
       },
       relationships: {
+        coordinatees: {
+          data: [
+            {
+              id: '6',
+              type: 'student',
+            },
+            {
+              id: '7',
+              type: 'student',
+            },
+          ],
+        },
       },
     },
   ],

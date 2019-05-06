@@ -42,9 +42,9 @@ module('Acceptance | students list', (hooks) => {
   });
 
   test('visiting /tiny/students?schoolYear=2018 with no matching students', async (assert) => {
-    const contracts = server.getFixture('/api/students');
-    contracts.data = [];
-    contracts.meta.count = 0;
+    const students = server.getFixture('/api/students');
+    students.data = [];
+    students.meta.count = 0;
 
     await visit('/tiny/students?schoolYear=2018');
 

@@ -1,0 +1,206 @@
+{{admin-user-form/actions-row
+  isDisabled=isInvalid
+}}
+<fieldset>
+  <p>
+    {{#form-input error=errors.firstName showError=showErrors}}
+      First name
+      <input
+        type="text"
+        name="firstName"
+        value={{pojo.firstName}}
+        autofocus
+      >
+    {{/form-input}}
+  </p>
+  <p>
+    {{#form-input error=errors.lastName showError=showErrors}}
+      Last name
+      <input
+        type="text"
+        name="lastName"
+        value={{pojo.lastName}}
+      >
+    {{/form-input}}
+  </p>
+  <p>
+    {{#form-input error=errors.nickname showError=showErrors}}
+      Nickname
+      <input
+        type="text"
+        name="nickname"
+        value={{pojo.nickname}}
+      >
+    {{/form-input}}
+  </p>
+  {{#unless isStudent}}
+    <p>
+      {{#form-input error=errors.login showError=showErrors}}
+        Login
+        <input
+          type="text"
+          name="login"
+          value={{pojo.login}}
+        >
+      {{/form-input}}
+    </p>
+    <p>
+      {{#form-input error=errors.email showError=showErrors}}
+        Email
+        <input
+          type="email"
+          name="email"
+          value={{pojo.email}}
+        >
+      {{/form-input}}
+    </p>
+  {{/unless}}
+</fieldset>
+
+{{#unless isStudent}}
+  <fieldset>
+    <h3>Reset password</h3>
+    <p>
+      {{#form-input error=errors.newPassword showError=showErrors}}
+        New password
+        <input
+          type="text"
+          name="newPassword"
+          value={{pojo.newPassword}}
+        >
+      {{/form-input}}
+    </p>
+  </fieldset>
+{{/unless}}
+
+<fieldset>
+  <h3>Account Privileges and Status</h3>
+  <p>
+    {{#form-input error=errors.role showError=showErrors}}
+      User type
+      {{t-select
+        value=pojo.role
+        prompt="Select a user type"
+        options=roleOptions
+        name="role"
+      }}
+    {{/form-input}}
+  </p>
+  {{#unless isStudent}}
+    <p>
+      <label for="account_login_status">
+        Login status
+      </label>
+      <div class="inputs-horizontal">
+        <label>
+          <input
+            type="radio"
+            value={{true}}
+            checked={{if pojo.loginStatus true false}}
+            name="loginStatus"
+          >
+          Enabled
+        </label>
+        <label>
+          <input
+            type="radio"
+            value={{false}}
+            checked={{if pojo.loginStatus false true}}
+            name="loginStatus"
+          >
+          Disabled
+        </label>
+      </div>
+    </p>
+  {{/unless}}
+  <p>
+    <label>
+      Status
+    </label>
+    <div class="inputs-horizontal">
+      <label>
+        <input
+          type="radio"
+          value={{true}}
+          checked={{if pojo.isActive true false}}
+          name="isActive"
+        >
+        Active
+      </label>
+      <label>
+        <input
+          type="radio"
+          value={{false}}
+          checked={{if pojo.isActive false true}}
+          name="isActive"
+        >
+        Inactive
+      </label>
+    </div>
+  </p>
+  <div class="inputs-horizontal">
+    <p class="w-2/5">
+      {{#form-input error=errors.dateActive showError=showErrors}}
+        Date first enrolled here
+        {{t-pikaday
+          popup=true
+          name="dateActive"
+          value=pojo.dateActive
+        }}
+      {{/form-input}}
+    </p>
+    <p class="w-2/5">
+      {{#form-input error=errors.dateInactive showError=showErrors}}
+        Date enrollment ended
+        {{t-pikaday
+          popup=true
+          name="dateInactive"
+          value=pojo.dateInactive
+        }}
+      {{/form-input}}
+    </p>
+  </div>
+</fieldset>
+<fieldset>
+  <h3>Student Settings</h3>
+  <p>
+    {{#form-input error=errors.coordinator showError=showErrors}}
+      Coordinator
+      {{t-select
+        prompt="None assigned"
+        value=pojo.coordinatorId
+        options=coordinatorOptions
+        optionValuePath="id"
+        name="coordinator"
+        onchange=(action "handleCoordinatorChange")
+        bubbles=false
+      }}
+    {{/form-input}}
+  </p>
+  {{#if isStudent}}
+    <p>
+      {{#form-input error=errors.districtId showError=showErrors}}
+        District ID
+        <input
+          type="text"
+          name="districtId"
+          value={{pojo.districtId}}
+        >
+      {{/form-input}}
+    </p>
+    <p>
+      {{#form-input error=errors.districtGrade showError=showErrors}}
+        Grade level
+        {{t-select
+          prompt="None assigned"
+          value=pojo.districtGrade
+          options=grades
+          name="districtGrade"
+        }}
+      {{/form-input}}
+    </p>
+  {{/if}}
+</fieldset>
+{{admin-user-form/actions-row
+  isDisabled=isInvalid
+}}

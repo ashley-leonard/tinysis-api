@@ -1,12 +1,12 @@
-// GET /api/notes?notableType=Enrollment&notableIds=2,1
+// GET /api/notes?notableType=Enrollment&notableIds=1,2
 export default {
   data: [
     {
       id: '1',
       type: 'note',
       attributes: {
-        note: 'Note for DuBuque for enrollment in Atque deorsum textus occaecati ascit.',
-        updatedAt: '2019-04-12T23:43:34.000Z',
+        note: 'Note for Gislason for enrollment in Verecundia vulgaris corroboro acidus verto.',
+        updatedAt: '2019-05-05T14:05:47.000Z',
       },
       relationships: {
         notable: {
@@ -27,8 +27,8 @@ export default {
       id: '2',
       type: 'note',
       attributes: {
-        note: 'Note for Collins for enrollment in Atque deorsum textus occaecati ascit.',
-        updatedAt: '2019-04-12T23:43:34.000Z',
+        note: 'Note for Jenkins for enrollment in Verecundia vulgaris corroboro acidus verto.',
+        updatedAt: '2019-05-05T14:05:47.000Z',
       },
       relationships: {
         notable: {
@@ -51,15 +51,30 @@ export default {
       id: '1',
       type: 'user',
       attributes: {
-        firstName: 'Gabriella',
-        lastName: 'Hegmann',
+        firstName: 'Perry',
+        lastName: 'Rolfson',
         nickname: null,
-        dateActive: null,
+        dateActive: '2012-09-01',
         dateInactive: null,
-        status: 'active',
+        districtId: null,
+        districtGrade: 12,
+        login: '99riqb6cik3e',
+        email: 'nidia@stroman.net',
+        canLogin: false,
+        isActive: true,
         role: 'staff',
+        isAdmin: false,
+        status: 'active',
       },
       relationships: {
+        coordinatees: {
+          data: [
+            {
+              id: '5',
+              type: 'student',
+            },
+          ],
+        },
       },
     },
   ],

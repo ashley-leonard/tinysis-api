@@ -42,7 +42,7 @@ export default Route.extend({
   afterModel(student) {
     const { tinyData } = this;
     return all([
-      tinyData.fetch(`/api/staff/${student.attributes.coordinatorId}`),
+      tinyData.fetch(`/api/staff/${student.relationships.coordinator.data.id}`),
     ]).then((coordinator) => {
       this.coordinator = coordinator;
     });

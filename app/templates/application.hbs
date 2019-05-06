@@ -1,6 +1,12 @@
 <div class="mx-auto">
   <div class="mt-4 mb-20">
-    {{tiny-toolbar}}
+    {{tiny-toolbar
+      user=user
+      disabled=disableToolbar
+    }}
+    {{#each flashMessages.queue as |flash|}}
+      {{flash-message flash=flash}}
+    {{/each}}
     {{outlet}}
   </div>
   <footer class="mt-8 mb-8">

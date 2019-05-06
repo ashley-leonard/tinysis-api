@@ -1,11 +1,13 @@
 import Component from '@ember/component';
 import { get, computed } from '@ember/object';
+import { capitalize } from '../helpers/titleize';
 
 export default Component.extend({
   tagName: 'select',
   optionValuePath: 'value',
   optionNamePath: 'name',
-  attributeBindings: ['name'],
+  attributeBindings: ['name', 'disabled'],
+  bubbles: true,
   onchange: () => {},
 
   /**
@@ -26,7 +28,7 @@ export default Component.extend({
         let opt;
         if (typeof option !== 'object') {
           opt = {
-            name: option,
+            name: capitalize(option),
             value: option,
           };
         } else {
@@ -47,5 +49,7 @@ export default Component.extend({
     const value = option && option.value;
 
     this.onchange(value, name, event);
+
+    return this.bubbles;
   },
 });

@@ -1,4 +1,5 @@
 import Component from '@ember/component';
+import { formatNumber } from 'accounting';
 import { computed } from '@ember/object';
 import { alias } from '@ember/object/computed';
 import { pluralize } from 'ember-inflector';
@@ -15,7 +16,7 @@ export default Component.extend({
       return 'no';
     }
 
-    return count;
+    return formatNumber(count);
   }),
 
   displayName: computed('count', 'name', 'pluralName', function () {

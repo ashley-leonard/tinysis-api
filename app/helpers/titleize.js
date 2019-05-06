@@ -1,6 +1,7 @@
 import { helper } from '@ember/component/helper';
 
-export function capitalize(string) {
+export function capitalize(str) {
+  const string = str.toString();
   return `${(string)[0].toUpperCase()}${string.substr(1)}`;
 }
 

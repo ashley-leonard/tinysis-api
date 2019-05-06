@@ -1,5 +1,15 @@
 import dayjs from 'dayjs';
 
+export const ROLE_ADMIN = 'administrator';
+export const ROLE_STAFF = 'staff';
+export const ROLE_STUDENT = 'student';
+
+export const roleTypes = [
+  ROLE_ADMIN,
+  ROLE_STAFF,
+  ROLE_STUDENT,
+];
+
 export function wasActive(student, month) {
   const m = dayjs(month);
   const endOfMonth = m.endOf('month').format('YYYY-MM-DD');

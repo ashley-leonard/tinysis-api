@@ -5,7 +5,7 @@ export default {
       id: '1',
       type: 'contract',
       attributes: {
-        name: 'Tamdiu comprehendo neque ulciscor cervus.',
+        name: 'Cogo confugo ad alioqui videlicet.',
         status: 'closed',
       },
       relationships: {
@@ -45,7 +45,7 @@ export default {
       id: '2',
       type: 'contract',
       attributes: {
-        name: 'Teres auris aliquam capillus attonbitus.',
+        name: 'Curatio arbor magnam decens adhaero.',
         status: 'closed',
       },
       relationships: {
@@ -85,7 +85,7 @@ export default {
       id: '3',
       type: 'contract',
       attributes: {
-        name: 'Atque deorsum textus occaecati ascit.',
+        name: 'Verecundia vulgaris corroboro acidus verto.',
         status: 'approved',
       },
       relationships: {
@@ -125,7 +125,7 @@ export default {
       id: '4',
       type: 'contract',
       attributes: {
-        name: 'Non calculus decimus et deleo.',
+        name: 'Delicate tantillus tabernus cum cui.',
         status: 'approved',
       },
       relationships: {
@@ -178,15 +178,30 @@ export default {
       id: '1',
       type: 'user',
       attributes: {
-        firstName: 'Gabriella',
-        lastName: 'Hegmann',
+        firstName: 'Perry',
+        lastName: 'Rolfson',
         nickname: null,
-        dateActive: null,
+        dateActive: '2012-09-01',
         dateInactive: null,
-        status: 'active',
+        districtId: null,
+        districtGrade: 12,
+        login: '99riqb6cik3e',
+        email: 'nidia@stroman.net',
+        canLogin: false,
+        isActive: true,
         role: 'staff',
+        isAdmin: false,
+        status: 'active',
       },
       relationships: {
+        coordinatees: {
+          data: [
+            {
+              id: '5',
+              type: 'student',
+            },
+          ],
+        },
       },
     },
     {
@@ -204,15 +219,34 @@ export default {
       id: '2',
       type: 'user',
       attributes: {
-        firstName: 'Evita',
-        lastName: 'Haley',
+        firstName: 'Fermin',
+        lastName: 'Ziemann',
         nickname: null,
-        dateActive: null,
+        dateActive: '2013-02-01',
         dateInactive: null,
-        status: 'active',
+        districtId: null,
+        districtGrade: 12,
+        login: 'cph16wxjdeiv',
+        email: 'corrina@beier.com',
+        canLogin: false,
+        isActive: true,
         role: 'staff',
+        isAdmin: false,
+        status: 'active',
       },
       relationships: {
+        coordinatees: {
+          data: [
+            {
+              id: '6',
+              type: 'student',
+            },
+            {
+              id: '7',
+              type: 'student',
+            },
+          ],
+        },
       },
     },
   ],

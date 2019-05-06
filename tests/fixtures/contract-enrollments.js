@@ -2,66 +2,6 @@
 export default {
   data: [
     {
-      id: '2',
-      type: 'enrollment',
-      attributes: {
-        finalizedOn: null,
-        enrollmentStatus: 'enrolled',
-        completionStatus: 'incomplete',
-      },
-      relationships: {
-        contract: {
-          data: {
-            id: '3',
-            type: 'contract',
-          },
-        },
-        participant: {
-          data: {
-            id: '7',
-            type: 'participant',
-          },
-        },
-        creditAssignments: {
-          data: [
-            {
-              id: '6',
-              type: 'creditAssignment',
-            },
-          ],
-        },
-        turnins: {
-          data: [
-
-          ],
-        },
-        meetingParticipants: {
-          data: [
-            {
-              id: '2',
-              type: 'meetingParticipant',
-            },
-            {
-              id: '4',
-              type: 'meetingParticipant',
-            },
-            {
-              id: '6',
-              type: 'meetingParticipant',
-            },
-            {
-              id: '8',
-              type: 'meetingParticipant',
-            },
-            {
-              id: '10',
-              type: 'meetingParticipant',
-            },
-          ],
-        },
-      },
-    },
-    {
       id: '1',
       type: 'enrollment',
       attributes: {
@@ -140,10 +80,70 @@ export default {
         },
       },
     },
+    {
+      id: '2',
+      type: 'enrollment',
+      attributes: {
+        finalizedOn: null,
+        enrollmentStatus: 'enrolled',
+        completionStatus: 'incomplete',
+      },
+      relationships: {
+        contract: {
+          data: {
+            id: '3',
+            type: 'contract',
+          },
+        },
+        participant: {
+          data: {
+            id: '7',
+            type: 'participant',
+          },
+        },
+        creditAssignments: {
+          data: [
+            {
+              id: '6',
+              type: 'creditAssignment',
+            },
+          ],
+        },
+        turnins: {
+          data: [
+
+          ],
+        },
+        meetingParticipants: {
+          data: [
+            {
+              id: '2',
+              type: 'meetingParticipant',
+            },
+            {
+              id: '4',
+              type: 'meetingParticipant',
+            },
+            {
+              id: '6',
+              type: 'meetingParticipant',
+            },
+            {
+              id: '8',
+              type: 'meetingParticipant',
+            },
+            {
+              id: '10',
+              type: 'meetingParticipant',
+            },
+          ],
+        },
+      },
+    },
   ],
   included: [
     {
-      id: '6',
+      id: '5',
       type: 'creditAssignment',
       attributes: {
         creditHours: 1.0,
@@ -167,31 +167,35 @@ export default {
       },
     },
     {
-      id: '7',
+      id: '5',
       type: 'user',
       attributes: {
-        firstName: 'Cyril',
-        lastName: 'Collins',
+        firstName: 'Sherilyn',
+        lastName: 'Gislason',
         nickname: null,
         dateActive: '2018-08-01',
-        dateInactive: '2019-10-01',
-        status: 'inactive',
-        role: 'student',
-        districtId: null,
+        dateInactive: null,
+        districtId: '1564901313',
         districtGrade: 12,
-        coordinatorId: '2',
+        login: 'vpfzmxp37foz',
+        email: null,
+        canLogin: false,
+        isActive: true,
+        role: 'student',
+        isAdmin: false,
+        status: 'active',
       },
       relationships: {
         coordinator: {
           data: {
-            id: '2',
-            type: 'coordinator',
+            id: '1',
+            type: 'staff',
           },
         },
       },
     },
     {
-      id: '5',
+      id: '6',
       type: 'creditAssignment',
       attributes: {
         creditHours: 1.0,
@@ -206,25 +210,29 @@ export default {
       },
     },
     {
-      id: '5',
+      id: '7',
       type: 'user',
       attributes: {
-        firstName: 'Sean',
-        lastName: 'DuBuque',
+        firstName: 'Adaline',
+        lastName: 'Jenkins',
         nickname: null,
         dateActive: '2018-08-01',
-        dateInactive: null,
-        status: 'active',
-        role: 'student',
-        districtId: null,
+        dateInactive: '2019-10-01',
+        districtId: '9104205690',
         districtGrade: 12,
-        coordinatorId: '1',
+        login: 'ryjrzhlustnw',
+        email: null,
+        canLogin: false,
+        isActive: false,
+        role: 'student',
+        isAdmin: false,
+        status: 'inactive',
       },
       relationships: {
         coordinator: {
           data: {
-            id: '1',
-            type: 'coordinator',
+            id: '2',
+            type: 'staff',
           },
         },
       },

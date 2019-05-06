@@ -1,26 +1,29 @@
 // GET /api/profile
 export default {
   data: {
-    id: '2',
+    id: '1',
     type: 'user',
     attributes: {
-      firstName: 'Evita',
-      lastName: 'Haley',
+      firstName: 'Perry',
+      lastName: 'Rolfson',
       nickname: null,
-      dateActive: null,
+      dateActive: '2012-09-01',
       dateInactive: null,
-      status: 'active',
+      districtId: null,
+      districtGrade: 12,
+      login: '99riqb6cik3e',
+      email: 'nidia@stroman.net',
+      canLogin: false,
+      isActive: true,
       role: 'staff',
+      isAdmin: false,
+      status: 'active',
     },
     relationships: {
       coordinatees: {
         data: [
           {
-            id: '6',
-            type: 'student',
-          },
-          {
-            id: '7',
+            id: '5',
             type: 'student',
           },
         ],

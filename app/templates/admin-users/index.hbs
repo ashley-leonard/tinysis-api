@@ -1,0 +1,12 @@
+{{#check-empty
+  count=model.meta.count
+  noResultsMessage="No users were found with these filters"
+}}
+  {{count-paragraph
+    result=model
+    name="user"
+  }}
+  {{users-list
+    users=users
+  }}
+{{/check-empty}}

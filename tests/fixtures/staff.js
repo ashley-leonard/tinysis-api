@@ -5,13 +5,9 @@ export default {
       id: '1',
       type: 'user',
       attributes: {
-        firstName: 'Gabriella',
-        lastName: 'Hegmann',
+        firstName: 'Perry',
+        lastName: 'Rolfson',
         nickname: null,
-        dateActive: null,
-        dateInactive: null,
-        status: 'active',
-        role: 'staff',
       },
       relationships: {
         coordinatees: {
@@ -28,13 +24,9 @@ export default {
       id: '2',
       type: 'user',
       attributes: {
-        firstName: 'Evita',
-        lastName: 'Haley',
+        firstName: 'Fermin',
+        lastName: 'Ziemann',
         nickname: null,
-        dateActive: null,
-        dateInactive: null,
-        status: 'active',
-        role: 'staff',
       },
       relationships: {
         coordinatees: {
@@ -55,14 +47,9 @@ export default {
       id: '3',
       type: 'user',
       attributes: {
-        firstName: 'Raguel',
-        lastName: 'Bergstrom',
+        firstName: 'Jacinda',
+        lastName: 'Bogisich',
         nickname: null,
-        dateActive: null,
-        dateInactive: '2018-01-01',
-        status: 'inactive',
-        role: 'staff',
-        email: null,
       },
       relationships: {
         coordinatees: {
@@ -76,14 +63,9 @@ export default {
       id: '4',
       type: 'user',
       attributes: {
-        firstName: 'Brenda',
-        lastName: 'Collier',
+        firstName: 'Kenisha',
+        lastName: "O'Reilly",
         nickname: null,
-        dateActive: null,
-        dateInactive: null,
-        status: 'active',
-        role: 'administrator',
-        email: null,
       },
       relationships: {
         coordinatees: {

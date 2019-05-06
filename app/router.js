@@ -83,12 +83,6 @@ Router.map(function () {
       });
     });
 
-    this.route('students', {
-      resetNamespace: true,
-    }, function () {
-      this.route('index', { path: '/' });
-    });
-
     this.route('student', {
       path: 'student/:id',
       resetNamespace: true,
@@ -117,25 +111,56 @@ Router.map(function () {
       this.route('index', { path: '/' });
     });
 
-    this.route('student', {
-      path: 'student/:id',
+    this.route('admin', {
+      path: '/admin',
       resetNamespace: true,
     }, function () {
-      this.route('student-transcript', {
-        path: '/transcript',
+      this.route('index', { path: '/' });
+      this.route('admin-users', {
         resetNamespace: true,
+        path: '/users',
+      }, function () {
+        this.route('index', { path: '/' });
       });
-      this.route('student-learning-plan', {
-        path: '/learning',
+
+      this.route('admin-user', {
         resetNamespace: true,
+        path: '/user/:id',
       });
-      this.route('student-credits', {
-        path: '/credits',
+
+      this.route('admin-terms', {
         resetNamespace: true,
+        path: '/terms',
+      }, function () {
+        this.route('index', { path: '/' });
       });
-      this.route('student-graduation-plan', {
-        path: '/graduation',
+
+      this.route('admin-term', {
         resetNamespace: true,
+        path: '/term/:id',
+      });
+
+      this.route('admin-credit-batches', {
+        resetNamespace: true,
+        path: '/credit-batches',
+      });
+
+      this.route('admin-credit-batch', {
+        resetNamespace: true,
+        path: '/credit-batch/:id',
+      });
+
+      this.route('admin-reports', {
+        resetNamespace: true,
+        path: '/reports',
+      });
+
+      this.route('admin-settings', {
+        resetNamespace: true,
+        path: '/settings',
+      }, () => {
+
+
       });
     });
   });
