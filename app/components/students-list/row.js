@@ -1,6 +1,6 @@
 import Component from '@ember/component';
 import { inject as service } from '@ember/service';
-import { computed } from '@ember/object';
+import { computed, get } from '@ember/object';
 
 export default Component.extend({
   tinyData: service(),
@@ -10,6 +10,11 @@ export default Component.extend({
       tinyData,
       student,
     } = this;
-    return tinyData.get('user', student.relationships.coordinator.data.id);
+
+    const coordinatorId = get(student, 'relationships.coordinator.data.id');
+
+    if (!coordinatorId) return null;
+
+    return tinyData.get('user', coordinatorId);
   }),
 });
