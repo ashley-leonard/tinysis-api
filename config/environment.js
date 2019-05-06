@@ -21,6 +21,11 @@ module.exports = function (environment) {
       // Here you can pass flags/options to your application instance
       // when it is created
     },
+
+    flashMessageDefaults: {
+      timeout: 5000,
+      preventDuplicates: true,
+    },
   };
 
   if (environment === 'development') {
