@@ -86,4 +86,36 @@ module('Integration | Component | t-pikaday', (hooks) => {
     assert.equal(action.name, 'Boo', 'expected name supplied in action argument');
     assert.equal(action.date, '2011-04-15', 'expected ISO calendar date supplied');
   });
+
+  test('it renders with a JS date object as value', async function (assert) {
+    // the start of March 3, 2006 in the current timezone
+    this.set('value', new Date(2006, 2, 3));
+    await render(hbs`
+      {{t-pikaday
+        value=value
+        onchange=onchange
+        name="Boo"
+      }}
+    `);
+
+    const input = find('input[name="Boo"]');
+    assert.ok(input, 'input rendered');
+    assert.equal(input.value, '3/3/2006', 'input assigned expected US date value');
+    assert.equal(input.type, 'hidden', 'standard treatment is hidden');
+    assert.ok(find('.pika-single'), 'container rendered within this element');
+
+    let selectedButton = find('td.is-selected button[data-pika-day="3"]');
+    assert.ok(selectedButton, 'expected day button is preselected');
+    assert.equal(actions.length, 0, 'no actions pushed yet');
+
+    await click('button[data-pika-day="15"]');
+
+    selectedButton = find('td.is-selected button[data-pika-day="15"]');
+    assert.ok(selectedButton, 'expected day button is now selected');
+
+    assert.equal(actions.length, 1, 'one action event pushed');
+    const [action] = actions;
+    assert.equal(action.name, 'Boo', 'expected name supplied in action argument');
+    assert.equal(action.date, '2006-03-15', 'expected ISO calendar date supplied');
+  });
 });
