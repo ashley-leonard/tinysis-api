@@ -1,5 +1,11 @@
 import Component from '@ember/component';
 import { computed } from '@ember/object';
+import { capitalize } from '../helpers/titleize';
+import {
+  ROLE_STUDENT,
+  ROLE_STAFF,
+  ROLE_ADMIN,
+} from '../utils/user-utils';
 
 export default Component.extend({
   tagName: 'form',
@@ -17,6 +23,10 @@ export default Component.extend({
     { name: 'Seniors', value: '12' },
   ])),
 
+  isStaff: computed('queryParams.role', function () {
+    return this.queryParams.role && (this.queryParams.role !== ROLE_STUDENT);
+  }),
+
   termsPrompt: computed('queryParams.schoolYear', function () {
     const schoolYear = this.get('queryParams.schoolYear');
     return `All ${schoolYear} contracts`;
@@ -30,16 +40,28 @@ export default Component.extend({
       }));
   }),
 
-  schoolYearOptions: computed('schoolYears', function () {
-    return [{
-      name: 'Any year',
-      value: 'any',
-    }]
-      .concat(this.schoolYears.map(year => ({ name: year, value: year })));
+  roleOptions: computed(() => ([
+    ROLE_STUDENT,
+    ROLE_STAFF,
+    ROLE_ADMIN,
+  ].map(role => ({
+    name: capitalize(role),
+    value: role,
+  })))),
+
+  statusOptions: computed(() => ([
+    { name: 'Active', value: true },
+    { name: 'Inactive', value: false },
+  ])),
+
+  schoolYearsReversed: computed('schoolYears', function () {
+    return this.schoolYears.sort((y1, y2) => y2 - y1);
   }),
 
   actions: {
-    onInput(value) {
+    inputChange(event) {
+      const { target } = event;
+      const { value } = target;
       this.triggerOnChange('name', value);
     },
 
@@ -48,9 +70,11 @@ export default Component.extend({
 
       switch (name) {
         case 'schoolYear':
+        case 'role':
           overrides = {
-            term: '',
             status: '',
+            coordinator: '',
+            grade: '',
           };
           break;
         default:

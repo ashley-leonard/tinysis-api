@@ -19,6 +19,14 @@ export default Route.extend({
     });
   },
 
+  setupController(...args) {
+    this._super(...args);
+    this.controllerFor('application').setProperties({
+      user: this.tinyData.getUser(),
+      disableToolbar: false,
+    });
+  },
+
   actions: {
     getNotes(notables) {
       const [firstNotable] = notables;

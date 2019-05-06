@@ -270,15 +270,15 @@ module.exports = {
   */
 
   fontWeights: {
-    hairline: 100,
-    thin: 200,
-    light: 300,
-    normal: 400,
+    // hairline: 100,
+    // thin: 200,
+    // light: 300,
+    normal: 300,
     medium: 500,
-    semibold: 600,
+    // semibold: 600,
     bold: 700,
-    extrabold: 800,
-    black: 900,
+    // extrabold: 800,
+    // black: 900,
   },
 
 

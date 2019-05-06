@@ -7,17 +7,28 @@
       currentRoute=currentRoute
       route="status-all-coordinators.index"
       label="Coordinators"
+      disabled=disabled
     }}
     {{tiny-toolbar/item
       currentRoute=currentRoute
       route="contracts.index"
       label="Contracts"
+      disabled=disabled
     }}
     {{tiny-toolbar/item
       currentRoute=currentRoute
       route="students.index"
       label="Students"
+      disabled=disabled
     }}
+    {{#if userIsAdmin}}
+      {{tiny-toolbar/item
+        currentRoute=currentRoute
+        route="admin"
+        label="Admin"
+        disabled=disabled
+      }}
+    {{/if}}    
   </ul>
 
 </nav>

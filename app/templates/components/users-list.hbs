@@ -1,0 +1,20 @@
+<table class="t-table w-full" data-test-admin-users-list>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>User type</th>
+      <th>Status</th>
+      <th class="text-center">Login?</th>
+      <th>Start date</th>
+      <th>End date</th>
+      <th>District ID</th>
+      <th>Coordinator</th>
+      <th class="text-center">Grade</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each users as |user|}}
+      {{users-list/row user=user}}
+    {{/each}}
+  </tbody>
+</table>

@@ -39,6 +39,10 @@
     &.text-center {
       @apply text-center;
     }
+
+    &.text-right {
+      @apply text-right;
+    }
   }
 
   td {
@@ -68,22 +72,30 @@ p {
 
 a, a:visited {
   color: inherit;
+  @apply cursor-pointer;
 }
 
+a.disabled {
+  @apply text-grey-darker cursor-auto;
+}
 
 nav.toolbar {
   li { 
     @apply mx-2; 
 
     a {
-      @apply block no-underline py-2 px-4; 
+      @apply block no-underline py-2 px-4;
 
       &:hover {
         @apply bg-grey;
+
+        &.disabled {
+          background-color: inherit;
+        }
       }
 
       &.active {
-        @apply bg-grey-lighter;
+        @apply bg-grey-lighter cursor-default;
       }
     }
   }
@@ -94,27 +106,57 @@ ul.filter {
 }
 
 .filter-item {
-  @apply inline-block mr-4;
+  @apply inline-block mr-4 flex;
 
   label {
     @apply pr-2;
   }
 }
 
-input[type="text"], select {
-  @apply block border border-grey-light bg-grey-lightest w-full p-2 rounded;
+.t-form {
+  p {
+    @apply mb-6;
+
+    &.error-message {
+      @apply text-red text-sm absolute;
+      margin-top: 2px;
+    }
+  }
+
+  .submit-row {
+    @apply flex justify-end;
+  }
+}
+
+ 
+.inputs-horizontal {
+  @apply flex mt-4;
+  label {
+    @apply mr-6 my-0;
+  }
+  input[type="checkbox"], input[type="radio"] {
+    @apply mr-1;
+  }
+}
+
+input[type="text"], input[type="email"], select {
+  @apply block border border-grey-light bg-grey-lightest w-full p-2 mt-2 rounded;
 
   &:focus {
     @apply border-grey-darkest;
   }
 }
 
+select {
+  height: 2.5rem;
+}
+
 label {
   @apply block whitespace-no-wrap;
 }
 
-button {
-  @apply text-center py-2 px-4 rounded bg-grey-darkest text-white border;
+.btn {
+  @apply text-center py-2 px-4 rounded bg-grey-darkest text-white border mt-2;
 
   &:focus {
     @apply outline-none;
@@ -122,6 +164,20 @@ button {
 
   &:hover {
     @apply bg-grey-darker;
+  }
+
+  &.btn-clear {
+    border-color: transparent;
+    background: inherit;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  &[disabled] {
+    @apply text-grey-darker cursor-auto bg-grey-darkest;
   }
 }
 

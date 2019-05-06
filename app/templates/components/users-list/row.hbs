@@ -1,0 +1,47 @@
+<tr data-test-user-id={{user.attributes.id}} data-test-admin-users-list-row>
+  <td data-test-user-name>
+    {{#link-to "admin-user" user.id}}
+      {{full-name user}}
+    {{/link-to}}
+  </td>
+  <td>
+    {{titleize user.attributes.role}}
+  </td>
+  <td>
+    {{titleize user.attributes.status}}
+  </td>
+  <td class="text-center">
+    {{#if user.attributes.canLogin}}
+      <span class="fas fa-check" />
+    {{/if}}
+  </td>
+  <td>
+    {{t-date user.attributes.dateActive "MM-DD-YYYY"}}
+  </td>
+  <td>
+    {{t-date user.attributes.dateInactive "MM-DD-YYYY"
+      substitute="-"
+    }}
+  </td>
+  {{#if isStudent}}
+    <td data-test-district-id>
+      {{user.attributes.districtId}}
+    </td>
+    <td data-test-coordinator-name>
+      {{full-name coordinator "first-last"}}
+    </td>
+    <td class="center" data-test-district-grade>
+      {{user.attributes.districtGrade}}
+    </td>
+  {{else}}
+    <td data-test-district-id>
+      -
+    </td>
+    <td data-test-coordinator-name>
+      -
+    </td>
+    <td class="center" data-test-district-grade>
+      -
+    </td>
+  {{/if}}
+</tr>

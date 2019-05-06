@@ -1,0 +1,12 @@
+<h2>Users</h2>
+
+{{students-filter
+  queryParams=queryParams
+  schoolYears=schoolYears
+  coordinators=staff
+  showRole=true
+  showStatus=true
+  onQuery=(action "filterUsers")
+}}
+
+{{outlet}}
