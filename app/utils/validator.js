@@ -44,8 +44,12 @@ export default class Validator {
 
     Object.keys(validations)
       .forEach((key) => {
-        const fieldCollection = get(validations, key);
+        let fieldCollection = get(validations, key);
         const value = get(pojo, key);
+
+        if (!Array.isArray(fieldCollection)) {
+          fieldCollection = [fieldCollection];
+        }
 
         for (let len = fieldCollection.length, i = 0; i < len; i += 1) {
           const validation = fieldCollection[i];

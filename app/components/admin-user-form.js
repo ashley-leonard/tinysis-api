@@ -5,7 +5,6 @@ import Validator from '../utils/validator';
 import TForm from './t-form';
 
 export default TForm.extend({
-  tagName: 'form',
   roleOptions: roleTypes,
   classNames: 'w-full lg:w-1/2 xl:w-1/3',
 
@@ -87,7 +86,8 @@ export default TForm.extend({
     },
   },
 
-  normalizePojo(pojo, model) {
+  normalizeModel(model) {
+    const pojo = this._super(model);
     const coordinatorId = get(model, 'relationships.coordinator.data.id');
 
     if (coordinatorId) {
@@ -97,8 +97,11 @@ export default TForm.extend({
     return pojo;
   },
 
-  serializePojo(outbound, pojo) {
+  serializeModel(pojo, model) {
+    const outbound = this._super(pojo, model);
+
     delete outbound.attributes.coordinatorId;
+
     if (pojo.coordinatorId) {
       outbound.relationships = {
         coordinator: {

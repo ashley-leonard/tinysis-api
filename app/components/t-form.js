@@ -6,6 +6,7 @@ import clone from '../utils/clone';
 export default Component.extend({
   showErrors: false,
   classNames: ['t-form'],
+  tagName: 'form',
 
   validator: computed(() => new Validator({})),
 
@@ -14,7 +15,7 @@ export default Component.extend({
       return;
     }
 
-    const pojo = this.normalizePojo(clone(this.model.attributes), this.model);
+    const pojo = this.normalizeModel(this.model);
 
     this.lastModel = this.model;
 
@@ -32,12 +33,17 @@ export default Component.extend({
     }
   },
 
-  normalizePojo(pojo, /* model */) {
-    return pojo;
+  normalizeModel(model) {
+    return clone(model.attributes);
   },
 
-  serializePojo(outbound, /* pojo */) {
-    return outbound;
+  serializeModel(pojo, model) {
+    return {
+      ...model,
+      attributes: {
+        ...pojo,
+      },
+    };
   },
 
   updatePojo(updates) {
@@ -79,15 +85,15 @@ export default Component.extend({
   submit(event) {
     event.preventDefault();
 
-    const { pojo } = this;
+    if (this.isInvalid) {
+      if (this.reportError) {
+        this.reportError(this.errors);
+      }
+      return;
+    }
 
-    const outbound = {
-      ...this.model,
-      attributes: {
-        ...pojo,
-      },
-    };
+    const { pojo, model } = this;
 
-    this.save(this.serializePojo(outbound, pojo));
+    this.save(this.serializeModel(pojo, model));
   },
 });
