@@ -18,8 +18,7 @@ module('Integration | Component | students-list', (hooks) => {
     tinyDataServiceMock.addResult(staffFixture);
     tinyDataServiceMock.addResult(studentsFixture);
 
-    const studentIds = studentsFixture.data.map(student => student.id);
-    this.set('students', tinyDataServiceMock.get('user').filter(user => studentIds.includes(user.id)));
+    this.set('students', studentsFixture.data.map(student => tinyDataServiceMock.get('user', student.id)));
   });
 
   test('it renders', async function (assert) {

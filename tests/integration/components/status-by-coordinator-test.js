@@ -3,7 +3,6 @@ import { setupRenderingTest } from 'ember-qunit';
 import { render, findAll } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 import { stubTinyData } from '../../helpers/stub-tiny-data';
-import { clone } from '../../helpers/test-utils';
 import coorStatus from '../../fixtures/coor-statuses';
 import coorStudents from '../../fixtures/coor-students';
 import coorTerms from '../../fixtures/coor-terms';
@@ -20,11 +19,13 @@ module('Integration | Component | status-by-coordinator', (hooks) => {
     tinyDataServiceMock.addResult(coorStudents);
     tinyDataServiceMock.addResult(coorTerms);
 
-    this.setProperties({
-      students: clone(coorStudents),
-      term: clone(term),
+    const props = {
+      students: tinyDataServiceMock.get('user').filter(user => user.attributes.role === 'student'),
+      term: tinyDataServiceMock.get('term', term.id),
       statuses: tinyDataServiceMock.get('status'),
-    });
+    };
+
+    this.setProperties(props);
   });
 
   test('it renders expected markup with two students on 9/15/2019', async (assert) => {
