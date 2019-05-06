@@ -1,8 +1,12 @@
 import { helper } from '@ember/component/helper';
 import dayjs from 'dayjs';
 
-export function tDate([date, _format]) {
+export function tDate([date, _format], options) {
   let format;
+
+  if (!date) {
+    return options.substitute || '';
+  }
 
   switch (_format) {
     case 'compactTermMonth':
