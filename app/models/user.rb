@@ -94,10 +94,9 @@ class User < ApplicationRecord
   has_many :facilitated_credit_assignments, :class_name => 'CreditAssignment', :foreign_key => :contract_facilitator_id
   has_many :notes, :as => :notable
 
-
-#########################################################
-# Helper functions for getting lists of enrollments for
-# this user
+  #########################################################
+  # Helper functions for getting lists of enrollments for
+  # this user
 
   def last_name_first
     

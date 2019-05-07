@@ -1,8 +1,8 @@
 module TestRequests
 
   def setupEnrollments
-    @staff1 = create :user, privilege: 2
-    @staff2 = create :user, privilege: 2
+    @staff1 = create :user, privilege: User::PRIVILEGE_STAFF
+    @staff2 = create :user, privilege: User::PRIVILEGE_STAFF
     @student1 = create :user, coordinator: @staff1
     @student2 = create :user, coordinator: @staff2
     @term = create :term

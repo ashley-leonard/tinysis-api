@@ -1,8 +1,9 @@
 class ProfilesController < ApplicationController
   def index
+    admin = User.find_by_privilege User::PRIVILEGE_ADMIN
     conditions = {
       privilege: [User::PRIVILEGE_STAFF, User::PRIVILEGE_ADMIN],
-      id: 1
+      id: admin.id,
     }
 
     result = User

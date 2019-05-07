@@ -180,7 +180,7 @@ RSpec.describe 'Ember fixtures script', type: :request do
         # general
         #
         %w[contracts students staff terms settings categories profile].each do |fixture|
-         write_fixture "/api/#{fixture}", "#{fixture}.js"
+          write_fixture "/api/#{fixture}", "#{fixture}.js"
         end
 
         # general
@@ -222,7 +222,6 @@ RSpec.describe 'Ember fixtures script', type: :request do
         write_fixture "/api/meetings?contractIds=#{@contract1_current.id}", 'contract-attendance.js'
         response = write_fixture "/api/enrollments?contractIds=#{@contract1_current.id}&include=meetingParticipants,participant", 'contract-attendance-enrollments.js'
         enrollments_response = JSON.parse(response.body)
-        Rails.logger.info response.body
 
         meeting_participants = enrollments_response['included']
           .filter{|record| record['type'] == "meetingParticipant"}

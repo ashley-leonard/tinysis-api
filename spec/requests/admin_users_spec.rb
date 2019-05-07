@@ -1,10 +1,12 @@
 require 'rails_helper'
 
-RSpec.describe 'Students API', type: :request do
+RSpec.describe 'Admin users API', type: :request do
 
   before(:each) do
-    @staff1 = create :user, privilege: 2
-    @staff2 = create :user, privilege: 2
+    @staff1 = create :user, privilege: User::PRIVILEGE_STAFF, date_active: Date.new(2017, 8, 1), login_status: User::LOGIN_ALLOWED, email: Faker::Internet.email, password: Faker::Internet.password(10, 20)
+    @staff2 = create :user, privilege: User::PRIVILEGE_STAFF, date_active: Date.new(2017, 8, 1), login_status: User::LOGIN_ALLOWED, email: Faker::Internet.email, password: Faker::Internet.password(10, 20)
+    @staff_inactive = create :user, privilege: User::PRIVILEGE_STAFF, date_active: Date.new(2017, 8, 1), date_inactive: Date.new(2017, 12, 1), status: User::STATUS_INACTIVE, email: Faker::Internet.email
+    @admin = create :user, privilege: User::PRIVILEGE_ADMIN, email: Faker::Internet.email, login_status: User::LOGIN_ALLOWED, password: Faker::Internet.password(10, 20)
 
     @student1 = create :user, coordinator: @staff1, date_active: Date.new(2018, 8, 1)
     @student2 = create :user, coordinator: @staff2, date_active: Date.new(2018, 8, 1)
@@ -26,18 +28,27 @@ RSpec.describe 'Students API', type: :request do
     Timecop.return
   end
 
-  describe 'GET /api/students' do
-    it 'returns all students by default' do
-      get '/api/students'
+  describe 'GET /api/admin/users' do
+    it 'returns all users by default' do
+      get '/api/admin/users'
       expect(response).to have_http_status(200)
       expect(json).not_to be_empty
 
-      expect(json['data'].size).to eq(4)
-      expect(json['meta']['count']).to eq(4)
+      expect(json['data'].size).to eq(8)
+      expect(json['meta']['count']).to eq(8)
+    end
+
+    it 'returns all active users' do
+      get '/api/admin/users?status=active'
+      expect(response).to have_http_status(200)
+      expect(json).not_to be_empty
+
+      expect(json['data'].size).to eq(5)
+      expect(json['meta']['count']).to eq(5)
     end
 
     it 'returns all active students' do
-      get '/api/students?status=active'
+      get '/api/admin/users?role=student&status=active'
       expect(response).to have_http_status(200)
       expect(json).not_to be_empty
 
@@ -46,7 +57,7 @@ RSpec.describe 'Students API', type: :request do
     end
 
     it 'returns students of a given coordinator' do
-      get "/api/students?coordinatorIds=#{@staff1.id}"
+      get "/api/admin/users?coordinatorIds=#{@staff1.id}"
       expect(json).not_to be_empty
       expect(response).to have_http_status(200)
       expect(json['data'].size).to eq(1)
@@ -54,7 +65,7 @@ RSpec.describe 'Students API', type: :request do
     end
 
     it 'returns students of multiple coordinators' do
-      get "/api/students?coordinatorIds=#{@staff1.id},#{@staff2.id}"
+      get "/api/admin/users?coordinatorIds=#{@staff1.id},#{@staff2.id}"
       expect(json).not_to be_empty
       expect(response).to have_http_status(200)
       expect(json['data'].size).to eq(4)
@@ -62,7 +73,7 @@ RSpec.describe 'Students API', type: :request do
     end
 
     it 'returns all reportable students' do
-      get "/api/students?status=reportable"
+      get "/api/admin/users?role=student&status=reportable"
       expect(response).to have_http_status(200)
       expect(json).not_to be_empty
       expect(json['data'].size).to eq(3)
@@ -70,7 +81,7 @@ RSpec.describe 'Students API', type: :request do
     end
 
     it 'returns reportable students of multiple coordinators' do
-      get "/api/students?status=reportable&coordinatorIds=#{@staff1.id},#{@staff2.id}"
+      get "/api/admin/users?status=reportable&coordinatorIds=#{@staff1.id},#{@staff2.id}"
       expect(response).to have_http_status(200)
       expect(json).not_to be_empty
       expect(json['data'].size).to eq(3)
@@ -78,7 +89,7 @@ RSpec.describe 'Students API', type: :request do
     end
 
     it 'returns a 400 with bad status param' do
-      get "/api/students?status=boo"
+      get "/api/admin/users?status=boo"
       expect(response).to have_http_status(400)
       expect(json).not_to be_empty
       expect(json['message']).not_to be_empty

@@ -37,13 +37,16 @@ RSpec.describe 'Contracts API', type: :request do
 
       expect(response).to have_http_status(200)
       expect(json).not_to be_empty
+      expect(json['data'].size).to eq(4)
+      expect(json['meta']['count']).to eq(4)
+
+      get '/api/contracts?status=closed'
       expect(json['data'].size).to eq(2)
       expect(json['meta']['count']).to eq(2)
 
-      get '/api/contracts?status=all'
-      expect(json['data'].size).to eq(4)
-      expect(json['meta']['count']).to eq(4)
+      get '/api/contracts?status=active'
+      expect(json['data'].size).to eq(2)
+      expect(json['meta']['count']).to eq(2)
     end
-
   end
 end
