@@ -95,4 +95,83 @@ RSpec.describe 'Admin users API', type: :request do
       expect(json['message']).not_to be_empty
     end
   end
+
+  describe 'PUT /api/admin/users/:id' do
+    it 'returns a 200 with successful user update' do
+      postBody = UserSerializer.new(@student1).serializable_hash
+
+      postBody[:data][:relationships][:coordinator][:data][:id] = @staff2.id
+
+      put "/api/admin/users/#{@student1.id}", params: postBody.to_json, headers: json_request_headers
+
+      expect(response).to have_http_status(200)
+      expect(json).not_to be_empty
+      expect(json['data']['id']).to eq(@student1.id.to_s)
+      expect(json['data']['relationships']['coordinator']['data']['id']).to eq(@staff2.id.to_s)
+
+      @staff1.reload
+      @student1.reload
+
+      expect(@staff1.coordinatees).to be_empty
+      expect(@staff2.coordinatees.length).to eq(4)
+      expect(@student1.coordinator).to eq(@staff2)
+    end
+  end
+
+  describe 'POST /api/admin/users' do
+    it 'returns a 200 with successful user creation' do
+      postBody = {
+        data: {
+          attributes: {
+            firstName: Faker::Name.first_name,
+            lastName: Faker::Name.last_name,
+            login: Faker::Lorem.characters(12),
+            canLogin: false,
+            role: 'student',
+            isActive: true
+          },
+          relationships: {
+            coordinator: {
+              data: {
+                id: @staff1.id.to_s,
+              }
+            }
+          }
+        }
+      }
+      post "/api/admin/users", params: postBody.to_json, headers: json_request_headers
+
+      expect(response).to have_http_status(200)
+      expect(json).not_to be_empty
+      expect(json['data']['id']).not_to be_empty
+
+      attributes = json['data']['attributes']
+      %w{firstName lastName login canLogin role isActive}.each do |key|
+        expect(attributes[key]).to eq(postBody[:data][:attributes][key.to_sym])
+      end
+      expect(json['data']['relationships']['coordinator']['data']['id']).to eq(@staff1.id.to_s)
+    end
+
+    it 'requires minimum input set or yields 422' do
+      postBody = {
+        data: {
+          attributes: {
+            firstName: Faker::Name.first_name,
+            lastName: Faker::Name.last_name,
+            login: Faker::Lorem.characters(12),
+            role: 'student',
+          },
+        }
+      }
+      post "/api/admin/users", params: postBody.to_json, headers: json_request_headers
+
+      expect(response).to have_http_status(422)
+
+      expect(json).not_to be_empty
+
+      expect(json['status']).to eq(422)
+      expect(json['errors']).not_to be_empty
+      expect(json['message']).not_to be_empty
+    end
+  end
 end

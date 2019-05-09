@@ -28,6 +28,8 @@ Rails.application.routes.draw do
     scope '/admin' do
       get '/users', to: 'admin_users#index'
       get '/users/:id', to: 'admin_users#show'
+      post '/users', to: 'admin_users#create'
+      put '/users/:id', to: 'admin_users#update'
     end
   end
 

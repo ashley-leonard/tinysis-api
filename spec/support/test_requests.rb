@@ -28,6 +28,9 @@ module TestRequests
     @statusContract02Mar = create :status, statusable: @enrollment2, month: '2018-03-01', creator: @staff2
   end
 
+  def json_request_headers
+    { 'Content-Type' => 'application/json', 'Accept' => 'application/json' }
+  end
 end
 
 RSpec.configure do |config|

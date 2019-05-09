@@ -11,6 +11,7 @@ protected
       :dateInactive,
       :districtId,
       :districtGrade,
+      :isActive,
       :status,
       :coordinator,
       :role,

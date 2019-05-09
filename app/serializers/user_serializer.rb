@@ -21,14 +21,6 @@ class UserSerializer < ApplicationSerializer
     User::PRIVILEGE_NAMES[object.privilege].downcase
   end
 
-  attribute :is_admin do |object|
-    object.admin?
-  end
-
-  attribute :status do |object|
-    User::STATUS_NAMES[object.status].downcase
-  end
-
   has_many :coordinatees, record_type: :student, if: Proc.new { |record| record.staff? }
   belongs_to :coordinator, record_type: :staff, if: Proc.new{ |record| record.student? }
 end
