@@ -1,11 +1,11 @@
-// GET /api/admin/users/4
+// GET /api/admin/users/159
 export default {
   data: {
-    id: '4',
+    id: '159',
     type: 'user',
     attributes: {
-      firstName: 'Kenisha',
-      lastName: "O'Reilly",
+      firstName: 'Franklyn',
+      lastName: 'Muller',
       nickname: null,
       canLogin: false,
       dateActive: '2011-07-01',
@@ -14,8 +14,8 @@ export default {
       districtGrade: 12,
       isActive: true,
       role: 'administrator',
-      login: 'oszal3nyuvtq',
-      email: 'denabauch@boehmstanton.net',
+      login: '4y02xyfw55n2',
+      email: 'micah@pfannerstillzulauf.org',
     },
     relationships: {
     },

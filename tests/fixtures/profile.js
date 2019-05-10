@@ -1,31 +1,26 @@
 // GET /api/profile
 export default {
   data: {
-    id: '1',
+    id: '159',
     type: 'user',
     attributes: {
-      firstName: 'Perry',
-      lastName: 'Rolfson',
+      firstName: 'Franklyn',
+      lastName: 'Muller',
       nickname: null,
-      dateActive: '2012-09-01',
+      dateActive: '2011-07-01',
       dateInactive: null,
       districtId: null,
       districtGrade: 12,
-      login: '99riqb6cik3e',
-      email: 'nidia@stroman.net',
+      login: '4y02xyfw55n2',
+      email: 'micah@pfannerstillzulauf.org',
       canLogin: false,
       isActive: true,
-      role: 'staff',
-      isAdmin: false,
-      status: 'active',
+      role: 'administrator',
     },
     relationships: {
       coordinatees: {
         data: [
-          {
-            id: '5',
-            type: 'student',
-          },
+
         ],
       },
     },

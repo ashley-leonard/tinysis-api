@@ -6,7 +6,7 @@ export default Route.extend({
   actions: {
     willTransition() {
       const user = this.tinyData.getUser();
-      if (!user.attributes.isAdmin) {
+      if (user.attributes.role !== 'administrator') {
         this.transitionTo('/tiny');
       }
     },

@@ -37,7 +37,10 @@ module('Integration | Component | admin-user-form', (hooks) => {
       admin,
       allStaff: [staff, admin],
       saveUser(pojo) {
-        requests.push(pojo);
+        requests.push({ type: 'save', pojo });
+      },
+      reportError() {
+        requests.push({ type: 'error' });
       },
     });
   });
@@ -48,6 +51,7 @@ module('Integration | Component | admin-user-form', (hooks) => {
         staff=allStaff
         model=student
         save=saveUser
+        reportError=reportError
       }}
     `);
 
@@ -57,8 +61,8 @@ module('Integration | Component | admin-user-form', (hooks) => {
 
     const [payload] = requests;
 
-    assert.deepEqual(payload, student, 'round trip object should be a full clone');
-    assert.notEqual(payload, student, 'round trip object is not the same object as the original');
+    assert.deepEqual(payload.pojo, student, 'round trip object should be a full clone');
+    assert.notEqual(payload.pojo, student, 'round trip object is not the same object as the original');
   });
 
   test('it renders staff member', async (assert) => {
@@ -67,6 +71,7 @@ module('Integration | Component | admin-user-form', (hooks) => {
         staff=allStaff
         model=staff
         save=saveUser
+        reportError=reportError
       }}
     `);
 
@@ -76,8 +81,8 @@ module('Integration | Component | admin-user-form', (hooks) => {
 
     const [payload] = requests;
 
-    assert.deepEqual(payload, staff, 'round trip object should be a full clone');
-    assert.notEqual(payload, staff, 'round trip object is not the same object as the original');
+    assert.deepEqual(payload.pojo, staff, 'round trip object should be a full clone');
+    assert.notEqual(payload.pojo, staff, 'round trip object is not the same object as the original');
   });
 
   test('it renders admin', async (assert) => {
@@ -86,6 +91,7 @@ module('Integration | Component | admin-user-form', (hooks) => {
         staff=allStaff
         model=admin
         save=saveUser
+        reportError=reportError
       }}
     `);
 
@@ -95,8 +101,8 @@ module('Integration | Component | admin-user-form', (hooks) => {
 
     const [payload] = requests;
 
-    assert.deepEqual(payload, admin, 'round trip object should be a full clone');
-    assert.notEqual(payload, admin, 'round trip object is not the same object as the original');
+    assert.deepEqual(payload.pojo, admin, 'round trip object should be a full clone');
+    assert.notEqual(payload.pojo, admin, 'round trip object is not the same object as the original');
   });
 
   test('it refuses to submit an invalid user', async function (assert) {
@@ -110,11 +116,16 @@ module('Integration | Component | admin-user-form', (hooks) => {
         staff=allStaff
         model=noName
         save=saveUser
+        reportError=reportError
       }}
     `);
 
     await click('button');
 
-    assert.equal(requests.length, 0, 'Did not submit an invalid student');
+    assert.equal(requests.length, 1, 'Submitted one callback');
+
+    const [payload] = requests;
+
+    assert.deepEqual(payload.type, 'error', 'send an error callback');
   });
 });

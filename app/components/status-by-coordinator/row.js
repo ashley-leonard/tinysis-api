@@ -12,4 +12,12 @@ export default Component.extend({
 
     return statusHash[student.id] || {};
   }),
+
+  studentStatus: computed('student', function () {
+    if (this.student.attributes.isActive) {
+      return 'Active';
+    }
+
+    return 'Inactive';
+  }),
 });

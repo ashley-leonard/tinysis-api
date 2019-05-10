@@ -18,7 +18,7 @@ export function wasActive(student, month) {
     return false;
   }
 
-  if (student.attributes.status === 'active') {
+  if (student.attributes.isActive) {
     return true;
   }
 
