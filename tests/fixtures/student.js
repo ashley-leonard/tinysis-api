@@ -1,23 +1,23 @@
-// GET /api/students/5
+// GET /api/students/160
 export default {
   data: {
-    id: '5',
+    id: '160',
     type: 'user',
     attributes: {
-      firstName: 'Sherilyn',
-      lastName: 'Gislason',
+      firstName: 'Abe',
+      lastName: 'Brekke',
       nickname: null,
       dateActive: '2018-08-01',
       dateInactive: null,
-      districtId: '1564901313',
+      districtId: '4458178913',
       districtGrade: 12,
-      status: 'active',
+      isActive: true,
       role: 'student',
     },
     relationships: {
       coordinator: {
         data: {
-          id: '1',
+          id: '156',
           type: 'staff',
         },
       },

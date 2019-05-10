@@ -1,11 +1,11 @@
-// GET /api/admin/users/1
+// GET /api/admin/users/156
 export default {
   data: {
-    id: '1',
+    id: '156',
     type: 'user',
     attributes: {
-      firstName: 'Perry',
-      lastName: 'Rolfson',
+      firstName: 'Rory',
+      lastName: 'Muller',
       nickname: null,
       canLogin: false,
       dateActive: '2012-09-01',
@@ -14,8 +14,8 @@ export default {
       districtGrade: 12,
       isActive: true,
       role: 'staff',
-      login: '99riqb6cik3e',
-      email: 'nidia@stroman.net',
+      login: 'qscm4ohqweb4',
+      email: 'odell@hauck.io',
     },
     relationships: {
     },

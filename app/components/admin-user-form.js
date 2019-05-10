@@ -71,9 +71,7 @@ export default TForm.extend({
     }
 
     validationsHash = requiredKeys.reduce((memo, key) => {
-      memo[key] = [{
-        type: 'required',
-      }];
+      memo[key] = { type: 'required' };
       return memo;
     }, validationsHash);
 
