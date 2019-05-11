@@ -132,12 +132,4 @@ protected
       nil
     end
   end
-
-  def render_unprocessable_entity_response(exception)
-    render json: {
-      status: 422,
-      message: 'Validation error',
-      errors: exception.record.errors,
-    }, status: :unprocessable_entity
-  end
 end

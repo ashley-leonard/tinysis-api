@@ -56,11 +56,11 @@ RSpec.describe 'Ember fixtures script', type: :request do
     @term1_current.save!
     @term2_current.save!
 
-    @term_coor_last = create :term, name: 'COOR Last', active: false
+    @term_coor_last = create :term, name: 'COOR Last', active: false, school_year: LAST_YEAR
     @term_coor_last.set_dates LAST_YEAR, [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
     @term_coor_last.save!
 
-    @term_coor_current = create :term, name: 'COOR Current'
+    @term_coor_current = create :term, name: 'COOR Current', school_year: CURRENT_YEAR
     @term_coor_current.set_dates CURRENT_YEAR, [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
     @term_coor_current.save!
 

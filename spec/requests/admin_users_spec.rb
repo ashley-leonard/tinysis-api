@@ -17,7 +17,7 @@ RSpec.describe 'Admin users API', type: :request do
     create :setting, name: 'reporting_end_month', value: 6
     create :setting, name: 'current_year', value: 2018
 
-    @coorTerm = create :term, :name => 'COOR default'
+    @coorTerm = create :term, :name => 'COOR default', :school_year => 2018
     @coorTerm.set_dates 2018, [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
     @coorTerm.save!
 

@@ -11,6 +11,8 @@ class Term < ApplicationRecord
   
   
   validates_length_of :name, :in=>5..255
+  validates_presence_of :school_year
+  validates_presence_of :months
   
   attr_accessor :base_month
   attr_accessor :end_month
@@ -29,7 +31,11 @@ class Term < ApplicationRecord
   
   # sets months from an array of strings or integers indicating
   # the month number offset
-  
+  def set_school_year year
+    self.school_year = year
+  end
+
+
   def set_dates(year, m = [])
     months_array = []
     m = m.uniq.sort

@@ -5,7 +5,10 @@ module TestRequests
     @staff2 = create :user, privilege: User::PRIVILEGE_STAFF
     @student1 = create :user, coordinator: @staff1
     @student2 = create :user, coordinator: @staff2
-    @term = create :term
+    @term = create :term, name: 'Wazoo', school_year: 2018
+    @term.set_dates 2018, [0, 1, 2, 3, 4]
+    @term.save!
+
     @category = create :category
     @contract = create :contract, term: @term, facilitator: @staff1, category: @category, creator: @staff1
     @enrollment1 = create :enrollment, participant: @student1, contract: @contract, creator: @staff1

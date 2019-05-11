@@ -30,6 +30,8 @@ Rails.application.routes.draw do
       get '/users/:id', to: 'admin_users#show'
       post '/users', to: 'admin_users#create'
       put '/users/:id', to: 'admin_users#update'
+      post '/terms', to: 'admin_terms#create'
+      put '/terms/:id', to: 'admin_terms#update'
     end
   end
 
