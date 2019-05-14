@@ -38,13 +38,22 @@ class TermsController < ApplicationController
       .where(type_conditions)
       .count
 
-    options = { meta: { count: count }}
+    options = {
+      meta: {
+        count: count,
+      },
+      params: {}
+    }
+
+    if (params[:include] == 'usage')
+      options[:params][:usage] = Term.enrollments_report(result.map(&:id))
+    end
 
     render json: TermSerializer.new(result, options), status: 200
   end
 
   def show
-    contract = Term.find params[:id]
+    term = Term.find params[:id]
 
     render json: TermSerializer.new(term), status: 200
   end

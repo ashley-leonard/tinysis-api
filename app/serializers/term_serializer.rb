@@ -11,4 +11,10 @@ class TermSerializer < ApplicationSerializer
     object.active ? 'active' : 'inactive'
   end
 
+  meta do |term, params|
+    if params[:usage]
+      term_entry = params[:usage].find{|meta| meta[:id] == term.id}
+      term_entry.attributes.reject{|a| a == "id"}
+    end
+  end
 end

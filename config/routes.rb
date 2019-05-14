@@ -19,6 +19,7 @@ Rails.application.routes.draw do
     get '/assignments', to: 'assignments#index'
     get '/categories', to: 'categories#index'
     get '/terms', to: 'terms#index'
+    get '/terms/:id', to: 'terms#show'
     get '/settings', to: 'settings#index'
     get '/settings/years', to: 'settings#years'
     

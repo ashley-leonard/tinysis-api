@@ -94,25 +94,30 @@ class Term < ApplicationRecord
     find :all, :order => 'school_year DESC, credit_date ASC'
   end
   
-  def self.enrollments_report
+  def self.enrollments_report term_ids
     q = <<END
       SELECT 
-        terms.*, 
-        COALESCE(all_enrollments.count,0) AS count, 
-        COALESCE(finalized_enrollments.count,0) AS finalized_count, 
-        (COALESCE(all_enrollments.count,0)-COALESCE(finalized_enrollments.count,0)) AS open_count 
+        terms.id, 
+        COALESCE(term_contracts.count,0) AS contractsCount, 
+        COALESCE(all_enrollments.count,0) AS enrollmentsCount, 
+        (COALESCE(all_enrollments.count,0)-COALESCE(finalized_enrollments.count,0)) AS enrollmentsOpenCount 
       FROM terms
-      LEFT OUTER JOIN (
-        SELECT contracts.term_id, COUNT(enrollments.id) AS count FROM enrollments 
-        INNER JOIN contracts ON enrollments.contract_id = contracts.id 
-        WHERE enrollments.enrollment_status = 3 
-        GROUP BY contracts.term_id) AS finalized_enrollments ON finalized_enrollments.term_id = terms.id
-      LEFT OUTER JOIN (
-        SELECT contracts.term_id, COUNT(enrollments.id) AS count FROM enrollments 
-        INNER JOIN contracts ON enrollments.contract_id = contracts.id 
-        GROUP BY contracts.term_id) AS all_enrollments ON all_enrollments.term_id = terms.id
+        LEFT OUTER JOIN (
+          SELECT contracts.term_id, COUNT(contracts.id) AS count FROM contracts 
+          WHERE contracts.term_id IN (:term_ids) 
+          GROUP BY contracts.term_id) AS term_contracts ON term_contracts.term_id = terms.id
+        LEFT OUTER JOIN (
+          SELECT contracts.term_id, COUNT(enrollments.id) AS count FROM enrollments 
+          INNER JOIN contracts ON enrollments.contract_id = contracts.id AND contracts.term_id IN (:term_ids)
+          WHERE enrollments.enrollment_status = 3 
+          GROUP BY contracts.term_id) AS finalized_enrollments ON finalized_enrollments.term_id = terms.id
+        LEFT OUTER JOIN (
+          SELECT contracts.term_id, COUNT(enrollments.id) AS count FROM enrollments 
+          INNER JOIN contracts ON enrollments.contract_id = contracts.id AND contracts.term_id IN (:term_ids)
+          GROUP BY contracts.term_id) AS all_enrollments ON all_enrollments.term_id = terms.id
+        WHERE terms.id IN (:term_ids)
 END
-    Term.find_by_sql(q)
+    Term.find_by_sql([q, term_ids: term_ids])
   end
   
   def long_name
