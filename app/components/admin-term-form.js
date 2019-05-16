@@ -10,7 +10,7 @@ export default TForm.extend({
   isInactive: not('isActive'),
 
   sortedSchoolYears: computed('schoolYearOptions', function () {
-    return this.schoolYears.sort((a, b) => b-a);
+    return this.schoolYears.sort((a, b) => b - a);
   }),
 
   reportingMonthOptions: computed('schoolYear', 'reportingBaseMonth', function () {
