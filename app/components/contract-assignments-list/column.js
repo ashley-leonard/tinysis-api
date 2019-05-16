@@ -3,7 +3,7 @@ import { computed } from '@ember/object';
 
 export default Component.extend({
   tagName: 'td',
-  classNames: ['center', 'assignments-list-item-column'],
+  classNames: ['text-center', 'assignments-list-item-column'],
   turnin: computed('assignment', 'turninsHashedByAssignment', function () {
     const {
       turninsHashedByAssignment,

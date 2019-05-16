@@ -1,0 +1,92 @@
+.t-form {
+  @apply px-8 py-4 bg-gray-100 shadow-inner w-full rounded-sm;
+
+  .submit-row {
+    hrule {
+      @apply block border-t border-gray-300 mt-10 mb-2;
+    }
+  
+    .submit-row-inner {
+      @apply flex;
+    }
+  }
+
+  label {
+    @apply font-semibold;
+  }
+}
+
+.error-message {
+  @apply text-red-500 text-sm;
+}
+
+.inputs-horizontal {
+  @apply flex flex-wrap mt-4;
+
+  label {
+    @apply mr-6 my-0 flex items-center font-normal;
+  }
+
+  input[type="checkbox"], input[type="radio"] {
+    @apply mr-2;
+  }
+}
+
+input[type="text"], input[type="email"], select {
+  @apply block border border-gray-200 bg-white w-full p-2 mt-2 rounded;
+
+  &:focus {
+    @apply border-gray-900;
+  }
+}
+
+input[type="checkbox"] {
+  display: block;
+}
+
+select {
+  height: 2.5rem;
+}
+
+label {
+  @apply block;
+}
+
+value-button {
+  padding: .5rem;
+  cursor: pointer;
+}
+
+.btn {
+  @apply text-center py-2 px-4 rounded bg-gray-900 text-white border mt-2 no-underline;
+
+  &:visited {
+    @apply text-white;
+  }
+
+  &:focus {
+    @apply outline-none;
+  }
+
+  &:hover {
+    @apply bg-gray-700;
+  }
+
+  &.btn-clear {
+    border-color: transparent;
+    background: inherit;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+
+    &:visited {
+      @apply text-black;
+    }
+  }
+
+  &[disabled] {
+    @apply text-gray-900 cursor-auto bg-gray-900;
+  }
+}

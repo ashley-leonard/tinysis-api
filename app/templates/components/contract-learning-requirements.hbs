@@ -1,6 +1,6 @@
 {{#each groupedEalrs as |category|}}
   <h4>{{category.categoryName}}</h4>
-  <dl class="aligned" data-test-ealrs>
+  <dl data-test-ealrs>
     {{#each category.ealrs as |ealr|}}
       {{contract-learning-requirements/item ealr=ealr}}
     {{/each}}
