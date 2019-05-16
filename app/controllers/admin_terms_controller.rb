@@ -24,7 +24,7 @@ private
       if attrs[:months]
         attrs[:months] = attrs[:months].split(',').map{|m| Date.parse(m)}
       end
-    rescue error
+    rescue StandardError => error
       Rails.logger.error error
     end
     
@@ -32,15 +32,16 @@ private
       attrs[:active] = attrs[:status] == 'active'
       attrs.delete :status
     end
+
     model.update_attributes attrs
   end
 
   def term_attributes
     params.require(:data)
       .require(:attributes)
-      .permit(:name, :school_year, :status, :months, :credit_date)
+      .permit(:name, :school_year, :status, :credit_date, months: [])
   end
-
+  
   def render_unprocessable_entity_response(exception)
     render json: {
       status: 422,
