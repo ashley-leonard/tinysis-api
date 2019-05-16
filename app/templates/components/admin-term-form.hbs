@@ -1,0 +1,81 @@
+<fieldset>
+  <p>
+    {{#form-input error=errors.name showError=showErrors}}
+      Name
+      <input
+        type="text"
+        name="name"
+        value={{pojo.name}}
+        autofocus
+      >
+    {{/form-input}}
+  </p>
+  <p>
+    {{#form-input error=errors.creditDate showError=showErrors}}
+      Credit date
+      {{t-pikaday
+        popup=true
+        name="creditDate"
+        value=pojo.creditDate
+      }}
+    {{/form-input}}
+  </p>
+  <p>
+    {{#form-input error=errors.schoolYear showError=showErrors}}
+      School year
+      {{t-select
+        prompt="None assigned"
+        value=pojo.schoolYear
+        options=sortedSchoolYears
+        name="schoolYear"
+      }}
+    {{/form-input}}
+  </p>
+</fieldset>
+<fieldset>
+  <h3>Status reporting months</h3>
+  {{t-form-error-message
+    message=errors.months
+    show=showErrors
+    className="absolute -mt-4"
+  }}
+  <div class="inputs-horizontal">
+    {{#each reportingMonthOptions as |month|}}
+      {{admin-term-form/reporting-month
+        month=month
+        months=pojo.months
+        onclick=(action 'toggleMonth')
+      }}
+    {{/each}}
+  </div>
+</fieldset>
+<fieldset>
+  <h3>Term Status</h3>
+  <div class="inputs-horizontal">
+    <label>
+      <input
+        name="status"
+        type="radio"
+        checked={{isActive}}
+        value="active"
+        onclick={{action "toggleStatus"}}
+      >
+      Active
+    </label>
+    <label>
+      <input
+        name="status"
+        type="radio"
+        value="inactive"
+        checked={{isInactive}}
+        onclick={{action "toggleStatus"}}
+      >
+      Inactive
+    </label>
+  </div>
+</fieldset>
+{{#t-form-actions-row}}
+  {{#link-to "admin-terms" class="btn btn-clear"}}
+    Cancel
+  {{/link-to}}
+{{/t-form-actions-row}}

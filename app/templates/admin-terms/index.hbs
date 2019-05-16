@@ -1,0 +1,12 @@
+{{#check-empty
+  count=model.meta.count
+  noResultsMessage="No terms were found matching these filters"
+}}
+  {{count-paragraph
+    result=model
+    name="term"
+  }}
+  {{admin-terms-list
+    terms=terms
+  }}
+{{/check-empty}}

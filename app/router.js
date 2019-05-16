@@ -137,7 +137,10 @@ Router.map(function () {
 
       this.route('admin-term', {
         resetNamespace: true,
-        path: '/term/:id',
+        path: '/term',
+      }, function () {
+        this.route('new', { path: 'new' });
+        this.route('edit', { path: ':id' });
       });
 
       this.route('admin-credit-batches', {
@@ -158,9 +161,6 @@ Router.map(function () {
       this.route('admin-settings', {
         resetNamespace: true,
         path: '/settings',
-      }, () => {
-
-
       });
     });
   });
