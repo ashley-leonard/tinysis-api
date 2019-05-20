@@ -16,12 +16,11 @@ export default Route.extend({
 
     if (!schoolYears.includes(nextYear)) {
       schoolYears.push(nextYear);
-      schoolYears.sort();
     }
+    schoolYears.sort((a, b) => b - a);
 
     controller.setProperties({
       term: model.data,
-      schoolYear,
       schoolYears,
       reportingBaseMonth,
     });

@@ -4,13 +4,10 @@ import { inject as service } from '@ember/service';
 export default Route.extend({
   tinyData: service(),
   queryParams: {
-    name: {
-      refreshModel: true,
-    },
     schoolYear: {
       refreshModel: true,
     },
-    active: {
+    status: {
       refreshModel: true,
     },
   },
@@ -18,9 +15,8 @@ export default Route.extend({
   model(params) {
     const { tinyData } = this;
     const {
-      name,
       schoolYear,
-      active,
+      status,
     } = params;
 
     const requestParams = {
@@ -29,16 +25,12 @@ export default Route.extend({
       include: 'usage',
     };
 
-    if (name) {
-      requestParams.name = name;
-    }
-
     if (schoolYear !== 'any') {
       requestParams.schoolYear = schoolYear || tinyData.getSchoolYear();
     }
 
-    if (active) {
-      requestParams.active = active;
+    if (status) {
+      requestParams.status = status;
     }
 
     this.qp = Object.assign({}, params, {
@@ -64,5 +56,8 @@ export default Route.extend({
     controller.setProperties(Object.assign({}, queryParams, {
       terms: terms.data,
     }));
+
+    const adminTermsController = this.controllerFor('admin-terms');
+    adminTermsController.set('queryParams', queryParams);
   },
 });

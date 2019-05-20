@@ -11,23 +11,23 @@
     {{/form-input}}
   </p>
   <p>
+    {{#form-input error=errors.schoolYear showError=showErrors}}
+      School year
+      {{t-select
+        value=pojo.schoolYear
+        options=sortedSchoolYears
+        name="schoolYear"
+        onchange=(action "didChangeSchoolYear")
+      }}
+    {{/form-input}}
+  </p>
+  <p>
     {{#form-input error=errors.creditDate showError=showErrors}}
       Credit date
       {{t-pikaday
         popup=true
         name="creditDate"
         value=pojo.creditDate
-      }}
-    {{/form-input}}
-  </p>
-  <p>
-    {{#form-input error=errors.schoolYear showError=showErrors}}
-      School year
-      {{t-select
-        prompt="None assigned"
-        value=pojo.schoolYear
-        options=sortedSchoolYears
-        name="schoolYear"
       }}
     {{/form-input}}
   </p>
@@ -44,7 +44,7 @@
       {{admin-term-form/reporting-month
         month=month
         months=pojo.months
-        onclick=(action 'toggleMonth')
+        onclick=(action "toggleMonth")
       }}
     {{/each}}
   </div>

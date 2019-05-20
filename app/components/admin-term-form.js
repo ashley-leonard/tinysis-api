@@ -9,16 +9,17 @@ export default TForm.extend({
   isActive: equal('pojo.status', 'active'),
   isInactive: not('isActive'),
 
-  sortedSchoolYears: computed('schoolYearOptions', function () {
+  sortedSchoolYears: computed('schoolYears', function () {
     return this.schoolYears.sort((a, b) => b - a);
   }),
 
-  reportingMonthOptions: computed('schoolYear', 'reportingBaseMonth', function () {
+  reportingMonthOptions: computed('pojo.schoolYear', 'reportingBaseMonth', function () {
     const {
       reportingBaseMonth,
-      schoolYear,
+      pojo,
     } = this;
 
+    const { schoolYear } = pojo;
     const baseMonth = dayjs(new Date(schoolYear, reportingBaseMonth - 1, 1));
     const months = [];
 
@@ -68,6 +69,21 @@ export default TForm.extend({
         });
       }
       this.validate();
+    },
+
+    // keep the months stable with the newly selected
+    // year
+    didChangeSchoolYear(value) {
+      const { pojo } = this;
+      const yearDiff = value - pojo.schoolYear;
+      const months = pojo.months.map(month => dayjs(month)
+        .add(yearDiff, 'years')
+        .format('YYYY-MM-DD'));
+      this.set('pojo', {
+        ...pojo,
+        schoolYear: value,
+        months,
+      });
     },
   },
 });

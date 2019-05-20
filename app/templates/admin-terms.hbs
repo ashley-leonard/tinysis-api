@@ -1,7 +1,13 @@
 <h2>Terms</h2>
 
+{{admin-terms-list-filter
+  schoolYears=schoolYears
+  queryParams=queryParams
+  onchange=(action "changeSelection")
+}}
+
 <p>
-  {{#link-to 'admin-term.new' class="btn"}}
+  {{#link-to "admin-term.new" class="btn"}}
     Add a term
   {{/link-to}}
 </p>

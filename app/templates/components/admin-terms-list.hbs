@@ -16,7 +16,7 @@
     {{#each termsList as |term|}}
       <tr>
         <td>
-          {{#link-to 'admin-term.edit' term.id}}
+          {{#link-to "admin-term.edit" term.id}}
             {{term.attributes.name}}
           {{/link-to}}
         </td>
