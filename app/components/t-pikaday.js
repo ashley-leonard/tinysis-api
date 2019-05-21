@@ -23,6 +23,8 @@ export default Component.extend({
   todayString: computed('value', function () {
     const { value } = this;
 
+    if (!value) return '';
+
     return dayjs(value).format(dateFormat);
   }),
 
@@ -62,8 +64,7 @@ export default Component.extend({
   },
 
   getInitDate(value) {
-    const now = new Date();
-    if (!value) return now;
+    if (!value) return value;
 
     const date = dayjs(value).toDate();
 
