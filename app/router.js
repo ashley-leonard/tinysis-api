@@ -128,6 +128,14 @@ Router.map(function () {
         path: '/user/:id',
       });
 
+      this.route('admin-user', {
+        resetNamespace: true,
+        path: '/user',
+      }, function () {
+        this.route('new');
+        this.route('edit', { path: ':id' });
+      });
+
       this.route('admin-terms', {
         resetNamespace: true,
         path: '/terms',

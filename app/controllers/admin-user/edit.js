@@ -6,10 +6,7 @@ export default Controller.extend({
   tinyData: service(),
   actions: {
     saveUser(data) {
-      return this.tinyData.fetch(`/api/admin/users/${data.id}`, {
-        method: 'PUT',
-        body: JSON.stringify({ data }),
-      }).then((result) => {
+      this.updateUser(data).then((result) => {
         this.flashMessages.success('User was successfully saved.');
         return result;
       });
@@ -17,5 +14,12 @@ export default Controller.extend({
     reportError() {
       this.flashMessages.alert('Please check the values and correct any errors');
     },
+  },
+
+  updateUser(data) {
+    return this.tinyData.fetch(`/api/admin/users/${data.id}`, {
+      method: 'PUT',
+      body: JSON.stringify({ data }),
+    });
   },
 });

@@ -1,8 +1,3 @@
-{{#t-form-actions-row}}
-  {{#link-to "admin-users" class="btn btn-clear"}}
-    Cancel
-  {{/link-to}}
-{{/t-form-actions-row}}
 <fieldset>
   <p>
     {{#form-input error=errors.firstName showError=showErrors}}
@@ -35,7 +30,9 @@
       >
     {{/form-input}}
   </p>
-  {{#unless isStudent}}
+</fieldset>
+{{#unless isStudent}}
+  <fieldset>
     <p>
       {{#form-input error=errors.login showError=showErrors}}
         Login
@@ -56,22 +53,18 @@
         >
       {{/form-input}}
     </p>
-  {{/unless}}
-</fieldset>
-
-{{#unless isStudent}}
-  <fieldset>
-    <h3>Reset password</h3>
-    <p>
-      {{#form-input error=errors.newPassword showError=showErrors}}
-        New password
-        <input
-          type="text"
-          name="newPassword"
-          value={{pojo.newPassword}}
-        >
-      {{/form-input}}
-    </p>
+    {{#if isExistingUser}}
+      <p>
+        {{#form-input error=errors.newPassword showError=showErrors}}
+          Reset password
+          <input
+            type="text"
+            name="newPassword"
+            value={{pojo.newPassword}}
+          >
+        {{/form-input}}
+      </p>
+    {{/if}}
   </fieldset>
 {{/unless}}
 
@@ -88,7 +81,9 @@
       }}
     {{/form-input}}
   </p>
-  {{#unless isStudent}}
+</fieldset>
+{{#unless isStudent}}
+  <fieldset>
     <p>
       <label for="account_login_status">
         Login status
@@ -114,7 +109,9 @@
         </label>
       </div>
     </p>
-  {{/unless}}
+  </fieldset>
+{{/unless}}
+<fieldset>
   <p>
     <label>
       Status
@@ -140,46 +137,44 @@
       </label>
     </div>
   </p>
-  <div class="inputs-horizontal">
-    <p class="w-2/5">
-      {{#form-input error=errors.dateActive showError=showErrors}}
-        Date first enrolled here
-        {{t-pikaday
-          popup=true
-          name="dateActive"
-          value=pojo.dateActive
-        }}
-      {{/form-input}}
-    </p>
-    <p class="w-2/5">
-      {{#form-input error=errors.dateInactive showError=showErrors}}
-        Date enrollment ended
-        {{t-pikaday
-          popup=true
-          name="dateInactive"
-          value=pojo.dateInactive
-        }}
-      {{/form-input}}
-    </p>
-  </div>
-</fieldset>
-<fieldset>
-  <h3>Student Settings</h3>
   <p>
-    {{#form-input error=errors.coordinator showError=showErrors}}
-      Coordinator
-      {{t-select
-        prompt="None assigned"
-        value=pojo.coordinatorId
-        options=coordinatorOptions
-        optionValuePath="id"
-        name="coordinator"
-        onchange=(action "handleCoordinatorChange")
-        bubbles=false
+    {{#form-input error=errors.dateActive showError=showErrors}}
+      Date first enrolled here
+      {{t-pikaday
+        popup=true
+        name="dateActive"
+        value=pojo.dateActive
       }}
     {{/form-input}}
   </p>
-  {{#if isStudent}}
+  <p>
+    {{#form-input error=errors.dateInactive showError=showErrors}}
+      Date enrollment ended
+      {{t-pikaday
+        popup=true
+        name="dateInactive"
+        value=pojo.dateInactive
+      }}
+    {{/form-input}}
+  </p>
+</fieldset>
+{{#if isStudent}}
+  <fieldset>
+    <h3>Student Settings</h3>
+    <p>
+      {{#form-input error=errors.coordinator showError=showErrors}}
+        Coordinator
+        {{t-select
+          prompt="None assigned"
+          value=pojo.coordinatorId
+          options=coordinatorOptions
+          optionValuePath="id"
+          name="coordinator"
+          onchange=(action "handleCoordinatorChange")
+          bubbles=false
+        }}
+      {{/form-input}}
+    </p>
     <p>
       {{#form-input error=errors.districtId showError=showErrors}}
         District ID
@@ -201,8 +196,8 @@
         }}
       {{/form-input}}
     </p>
-  {{/if}}
-</fieldset>
+  </fieldset>
+{{/if}}
 {{#t-form-actions-row}}
   {{#link-to "admin-users" class="btn btn-clear"}}
     Cancel

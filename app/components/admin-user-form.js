@@ -1,5 +1,5 @@
 import { computed, get } from '@ember/object';
-import { equal } from '@ember/object/computed';
+import { equal, bool } from '@ember/object/computed';
 import { roleTypes, ROLE_STUDENT } from '../utils/user-utils';
 import Validator from '../utils/validator';
 import TForm from './t-form';
@@ -9,6 +9,8 @@ export default TForm.extend({
   classNames: 'w-full lg:w-1/2 xl:w-1/3',
 
   isStudent: equal('pojo.role', ROLE_STUDENT),
+
+  isExistingUser: bool('model.id'),
 
   coordinatorOptions: computed('staff', function () {
     return this.staff
