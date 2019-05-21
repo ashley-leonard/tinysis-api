@@ -1,6 +1,7 @@
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { render, click } from '@ember/test-helpers';
+import { render, click, find } from '@ember/test-helpers';
+import { Interactor } from '@bigtest/interactor';
 import { Promise } from 'rsvp';
 import hbs from 'htmlbars-inline-precompile';
 import { stubTinyData } from '../../helpers/stub-tiny-data';
@@ -49,14 +50,22 @@ module('Integration | Component | admin-term-form', (hooks) => {
 
     await click('button[type="submit"]');
 
-    assert.equal(requests.length, 1, 'outbound request was made');
-    const [request] = requests;
+    let request = requests.pop();
+    assert.ok(request, 'a request was made');
     assert.equal(request.type, 'save', 'it was a save request');
     assert.deepEqual(request.pojo, this.term, 'The unchanged term was resubmitted');
 
     // Change the school year and resubmit, check the dates
+    const previousYear = (term.attributes.schoolYear - 1).toString();
+    await new Interactor(find('select[name="schoolYear"]')).select(previousYear);
 
-    // Remove the name or credit date and resubmit, get an error
-    assert.ok(false, 'not yet implemented');
+    await click('button[type="submit"]');
+
+    request = requests.pop();
+    assert.ok(request, 'another request was made');
+    assert.equal(request.type, 'save', 'it was a save request');
+
+    assert.equal(request.pojo.attributes.schoolYear, previousYear, 'previous year selected as expected');
+    assert.equal(request.pojo.attributes.months[0], '2018-09-01', 'reporting months were transformed to the changed year');
   });
 });

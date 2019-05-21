@@ -29,6 +29,5 @@ module('Integration | Component | admin-terms-list', (hooks) => {
     `);
 
     assert.equal(findAll('tbody tr').length, terms.length, 'expected count of terms rendered');
-    assert.ok(false, 'not yet checking usage columns');
   });
 });
