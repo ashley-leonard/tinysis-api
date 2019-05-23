@@ -89,7 +89,7 @@ module('Integration | Component | t-pikaday', (hooks) => {
 
   test('it renders as a popup with a blank date value', async function (assert) {
     this.set('value', null);
-  
+
     await render(hbs`
       {{t-pikaday
         value=value

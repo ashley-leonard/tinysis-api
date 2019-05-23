@@ -31,7 +31,24 @@
     {{/form-input}}
   </p>
 </fieldset>
-{{#unless isStudent}}
+
+<fieldset>
+  <h3>Account Privileges and Status</h3>
+  <p>
+    {{#form-input error=errors.role showError=showErrors}}
+      User type
+      {{t-select
+        value=pojo.role
+        prompt="Select a user type"
+        options=roleOptions
+        name="role"
+        onchange=(action "handleRoleChange")
+      }}
+    {{/form-input}}
+  </p>
+</fieldset>
+
+{{#if isStaff}}
   <fieldset>
     <p>
       {{#form-input error=errors.login showError=showErrors}}
@@ -66,23 +83,7 @@
       </p>
     {{/if}}
   </fieldset>
-{{/unless}}
 
-<fieldset>
-  <h3>Account Privileges and Status</h3>
-  <p>
-    {{#form-input error=errors.role showError=showErrors}}
-      User type
-      {{t-select
-        value=pojo.role
-        prompt="Select a user type"
-        options=roleOptions
-        name="role"
-      }}
-    {{/form-input}}
-  </p>
-</fieldset>
-{{#unless isStudent}}
   <fieldset>
     <p>
       <label for="account_login_status">
@@ -93,8 +94,8 @@
           <input
             type="radio"
             value={{true}}
-            checked={{if pojo.loginStatus true false}}
-            name="loginStatus"
+            checked={{if pojo.canLogin true false}}
+            name="canLogin"
           >
           Enabled
         </label>
@@ -102,15 +103,16 @@
           <input
             type="radio"
             value={{false}}
-            checked={{if pojo.loginStatus false true}}
-            name="loginStatus"
+            checked={{if pojo.canLogin false true}}
+            name="canLogin"
           >
           Disabled
         </label>
       </div>
     </p>
   </fieldset>
-{{/unless}}
+{{/if}}
+
 <fieldset>
   <p>
     <label>
@@ -120,18 +122,18 @@
       <label>
         <input
           type="radio"
-          value={{true}}
-          checked={{if pojo.isActive true false}}
-          name="isActive"
+          value="active"
+          checked={{if isActive true false}}
+          name="status"
         >
         Active
       </label>
       <label>
         <input
           type="radio"
-          value={{false}}
-          checked={{if pojo.isActive false true}}
-          name="isActive"
+          value="inactive"
+          checked={{if isActive false true}}
+          name="status"
         >
         Inactive
       </label>
@@ -139,7 +141,7 @@
   </p>
   <p>
     {{#form-input error=errors.dateActive showError=showErrors}}
-      Date first enrolled here
+      Date active
       {{t-pikaday
         popup=true
         name="dateActive"
@@ -149,7 +151,7 @@
   </p>
   <p>
     {{#form-input error=errors.dateInactive showError=showErrors}}
-      Date enrollment ended
+      Date inactive
       {{t-pikaday
         popup=true
         name="dateInactive"

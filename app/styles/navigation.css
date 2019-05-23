@@ -36,8 +36,9 @@ ul.filter {
 }
 
 .flash-message {
-  @apply flex absolute items-center bg-blue-500 text-white text-sm font-bold px-4 py-3;
+  @apply flex fixed items-center bg-blue-500 text-white text-sm font-bold px-4 py-3;
   left: 50%;
+  top: 5vh;
   width: 30rem;
   margin-left: -15rem;
 

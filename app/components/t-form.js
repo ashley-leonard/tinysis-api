@@ -56,7 +56,6 @@ export default Component.extend({
 
     this.setProperties({
       pojo: newPojo,
-      showErrors: true,
     });
 
     this.validate();
@@ -86,8 +85,8 @@ export default Component.extend({
     event.preventDefault();
 
     if (this.isInvalid) {
+      this.set('showErrors', true);
       if (this.reportError) {
-        this.set('showErrors', true);
         this.reportError(this.errors);
       }
       return;

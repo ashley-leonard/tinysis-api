@@ -10,6 +10,7 @@ export default EditRoute.extend({
           dateInactive: null,
           status: 'active',
           role: '',
+          canLogin: true,
         },
       },
     };

@@ -1,21 +1,21 @@
-// GET /api/admin/users/159
+// GET /api/admin/users/4
 export default {
   data: {
-    id: '159',
+    id: '4',
     type: 'user',
     attributes: {
-      firstName: 'Franklyn',
-      lastName: 'Muller',
+      firstName: 'Fidela',
+      lastName: 'Kris',
       nickname: null,
       canLogin: false,
       dateActive: '2011-07-01',
       dateInactive: null,
       districtId: null,
       districtGrade: 12,
-      isActive: true,
+      status: 'active',
       role: 'administrator',
-      login: '4y02xyfw55n2',
-      email: 'micah@pfannerstillzulauf.org',
+      login: 'bclwxdajqntt',
+      email: 'brettmurray@stracke.info',
     },
     relationships: {
     },
