@@ -1,4 +1,6 @@
 class TermsController < ApplicationController
+  ALLOWED_ORDER_BY = %w{name schoolYear}
+
   def index
     limit = params[:limit] || Rails.configuration.constants[:DEFAULT_LIMIT]
 
@@ -6,6 +8,11 @@ class TermsController < ApplicationController
 
     if params[:schoolYear]
       conditions[:school_year] = params[:schoolYear]
+    end
+
+    orderBy = []
+    if params[:order]
+      orderBy = params[:order].split(',') & ALLOWED_ORDER_BY
     end
 
     if params[:status]
@@ -32,6 +39,7 @@ class TermsController < ApplicationController
     result = Term
       .where(conditions)
       .where(type_conditions)
+      .order(orderBy.join(','))
       .limit(limit)
     count = Term
       .where(conditions)

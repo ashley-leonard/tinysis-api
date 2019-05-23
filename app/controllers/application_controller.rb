@@ -18,4 +18,9 @@ private
       errors: exception.record.errors,
     }, status: :unprocessable_entity
   end
+
+  def raiseActiveRecordInvalidException model, field, error
+    model.errors.add field, error
+    raise ActiveRecord::RecordInvalid.new(model)
+  end
 end

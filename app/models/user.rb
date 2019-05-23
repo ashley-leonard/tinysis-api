@@ -120,17 +120,6 @@ class User < ApplicationRecord
       self.first_name + ' ' + self.last_name
     end
   end
-  
-  def given_name
-    
-    unless self.nickname.blank? 
-      self.nickname
-    else
-      self.first_name
-    end
-
-  end
-
 
   def last_name_f
     
@@ -488,8 +477,8 @@ END
   validates_format_of :email, :with => REGEX_EMAIL, :if => Proc.new { |user| !user.email.blank? }
   validates_uniqueness_of :email, :if => Proc.new { |user| !user.email.blank? }
 
-  validates_uniqueness_of :login
-  validates_format_of :login, :with => REGEX_VALIDLOGIN, :message => ': please enter a login name at least 5 characters long, consisting only of letters,  and numbers.'
+  validates_uniqueness_of :login, allow_nil: true
+  validates_format_of :login, :with => REGEX_VALIDLOGIN, :message => 'at least 5 characters long, consisting only of letters, and numbers.', if: Proc.new{ |user| user.staff? }
 
   validates_presence_of :login_status
 
@@ -498,7 +487,6 @@ END
   attr_accessor :password
   validates_presence_of :password, :if => Proc.new{|user| user.can_login? && (user.password_hash.blank?) }
   validates_length_of :password, :in => User::MINPASSWORDLENGTH..User::MAXPASSWORDLENGTH, :if => Proc.new{|user| user.can_login? && (user.password_hash.blank?)}
-  validates_confirmation_of :password
   
   # deprec attr_protected :status, :login_status, :privilege, :coordinator_id, :date_inactive, :date_active
   

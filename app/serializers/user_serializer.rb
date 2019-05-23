@@ -13,8 +13,15 @@ class UserSerializer < ApplicationSerializer
     object.login_status == User::LOGIN_ALLOWED
   end
 
-  attribute :is_active do |object|
-    object.status == User::STATUS_ACTIVE
+  attribute :status do |object|
+    case object.status
+    when User::STATUS_ACTIVE
+      'active'
+    when User::STATUS_INACTIVE
+      'inactive'
+    else
+      'inactive'
+    end
   end
 
   attribute :role do |object|

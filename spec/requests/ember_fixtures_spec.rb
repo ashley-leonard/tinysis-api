@@ -41,10 +41,10 @@ RSpec.describe 'Ember fixtures script', type: :request do
 
     @admin1 = create :user, privilege: User::PRIVILEGE_ADMIN, status: User::STATUS_ACTIVE, date_active: Date.new(2011, 7, 1), email: Faker::Internet.email
 
-    @term1_last = create :term, name: 'Last One', school_year: LAST_YEAR
-    @term2_last = create :term, name: 'Last Two', school_year: LAST_YEAR
-    @term1_current = create :term, name: 'Current One', school_year: CURRENT_YEAR
-    @term2_current = create :term, name: 'Current Two', school_year: CURRENT_YEAR
+    @term1_last = create :term, name: 'Last One', school_year: LAST_YEAR, credit_date: Date.new(LAST_YEAR + 1, 1, 31)
+    @term2_last = create :term, name: 'Last Two', school_year: LAST_YEAR, credit_date: Date.new(LAST_YEAR + 1, 6, 15)
+    @term1_current = create :term, name: 'Current One', school_year: CURRENT_YEAR, credit_date: Date.new(CURRENT_YEAR + 1, 1, 31)
+    @term2_current = create :term, name: 'Current Two', school_year: CURRENT_YEAR, credit_date: Date.new(CURRENT_YEAR + 1, 6, 15)
 
     @term1_last.set_dates(LAST_YEAR, [0, 1, 2, 3, 4])
     @term2_last.set_dates(LAST_YEAR, [5, 6, 7, 8, 9])
@@ -187,6 +187,7 @@ RSpec.describe 'Ember fixtures script', type: :request do
         #
         write_fixture "/api/admin/users/#{@admin1.id}", "user-admin.js"
         write_fixture "/api/admin/users/#{@staff1.id}", "user-staff.js"
+        write_fixture "/api/admin/users/#{@student1.id}", "user-student.js"
 
         # years
         write_fixture '/api/settings/years', 'years.js'
@@ -298,6 +299,10 @@ RSpec.describe 'Ember fixtures script', type: :request do
         student_status_response = JSON.parse(response.body)
         status_ids = student_status_response["data"].map{|status| status["id"]}
         write_fixture "/api/notes?notableType=Status&notableIds=#{status_ids.join(',')}", 'notes-student-statuses.js'
+
+        # admin terms - all
+        write_fixture "/api/terms?limit=20&order=name&include=usage", "admin-terms-list.js"
+        write_fixture "/api/terms/#{@term1_current.id}", "admin-term-detail.js"
       end
     end
   end

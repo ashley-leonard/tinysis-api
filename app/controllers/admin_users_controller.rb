@@ -8,9 +8,15 @@ class AdminUsersController < AdminController
 
     user = User.new
     update_attributes user
+
+    ## TO BE REPLACED LATER
+    user.password = User::random_password 20
+    user.encrypt_password
+    ##
+
     user.save!
 
-    return render json: UserSerializer.new(user)
+    render json: UserSerializer.new(user)
   end
 
   def update
@@ -20,14 +26,14 @@ class AdminUsersController < AdminController
     update_attributes user
     user.save!
 
-    return render json: UserSerializer.new(user)
+    render json: UserSerializer.new(user)
   end
 
 private
   def user_attributes
     params.require(:data)
       .require(:attributes)
-      .permit(:first_name, :last_name, :nickname, :can_login, :date_active, :date_inactive, :district_id, :district_grade, :is_active, :role, :login, :email)
+      .permit(:first_name, :last_name, :nickname, :can_login, :date_active, :date_inactive, :district_id, :district_grade, :status, :role, :login, :email)
   end
 
   def user_coordinator_id
@@ -51,7 +57,7 @@ private
 
     # renamed attributes
     update_login_status model, denormalized[:can_login]
-    update_status model, denormalized[:is_active]
+    update_status model, denormalized[:status]
     update_privilege model, denormalized[:role]
 
     model
@@ -68,36 +74,36 @@ private
 
   def update_login_status model, can_login
     return if can_login.nil?
-    raise new ArgumentError unless [true, false].include? can_login
-    if can_login === true
+    raiseActiveRecordInvalidException(model, :canLogin, 'should be either "true" or "false"') unless [true, false, 'true', 'false'].include? can_login
+
+    if can_login.to_s == 'true'
       model.login_status = User::LOGIN_ALLOWED
     else
       model.login_status = User::LOGIN_NONE
     end
   end
 
-  def update_status model, is_active
-    return if is_active.nil?
-    raise new ArgumentError unless [true, false].include? is_active
-    if is_active === true
-      model.status = User::STATUS_ACTIVE
-    else
-      model.status = User::STATUS_INACTIVE
+  def update_status model, status
+    return if status.nil?
+    raiseActiveRecordInvalidException(model, :status, 'should be either "active" or "inactive"') unless %w{active inactive}.include? status
+    model.status = case status
+    when 'active'
+      User::STATUS_ACTIVE
+    when 'inactive'
+      User::STATUS_INACTIVE
     end
   end
 
   def update_privilege model, role
     return if role.nil?
-    raise new ArgumentError unless ['student', 'admin', 'staff'].include? role
+    raiseActiveRecordInvalidException(model, :role, 'allowed values are student, administrator, or staff') unless %w{administrator staff student}.include? role
     model.privilege = case role
       when 'student'
         User::PRIVILEGE_STUDENT
-      when 'admin'
+      when 'administrator'
         User::PRIVILEGE_ADMIN
       when 'staff'
         User::PRIVILEGE_STAFF
-      else
-        raise new ArgumentError
       end
   end
 
@@ -112,7 +118,7 @@ protected
       :dateInactive,
       :districtId,
       :districtGrade,
-      :isActive,
+      :status,
       :role,
       :coordinator,
       :login,
