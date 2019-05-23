@@ -13,7 +13,10 @@ export default Route.extend({
       fetch('/api/settings/years'),
     ]).then(([settings, profile, years]) => {
       const currentYearSetting = settings.data.find(setting => setting.attributes.name === 'current_year');
+      const reportingBaseMonthSetting = settings.data.find(setting => setting.attributes.name === 'reporting_base_month');
+
       this.tinyData.setSchoolYear(currentYearSetting.attributes.value);
+      this.tinyData.setReportingBaseMonth(reportingBaseMonthSetting.attributes.value);
       this.tinyData.setUser(profile.data);
       this.tinyData.setYears(years);
     });

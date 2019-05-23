@@ -1,21 +1,21 @@
-// GET /api/admin/users/156
+// GET /api/admin/users/1
 export default {
   data: {
-    id: '156',
+    id: '1',
     type: 'user',
     attributes: {
-      firstName: 'Rory',
-      lastName: 'Muller',
+      firstName: 'Emil',
+      lastName: 'Sauer',
       nickname: null,
       canLogin: false,
       dateActive: '2012-09-01',
       dateInactive: null,
       districtId: null,
       districtGrade: 12,
-      isActive: true,
+      status: 'active',
       role: 'staff',
-      login: 'qscm4ohqweb4',
-      email: 'odell@hauck.io',
+      login: 'ajxrz6x76oa7',
+      email: 'numbersmcglynn@bashirian.co',
     },
     relationships: {
     },

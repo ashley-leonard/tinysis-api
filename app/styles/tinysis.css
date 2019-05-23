@@ -1,49 +1,7 @@
-section {
-  display: block;
-  margin: 2rem 0;
-}
-
-section h3:first-of-type {
-  margin-top: 0;
-}
-
 .notes-row {
   border-top: none;
   background: lightgray;
   font-size: 13px;
-}
-
-.full-width {
-  width: 100%;
-}
-
-html,
-button, 
-input, 
-select,
-textarea,
-p {
-  /* Set your content font stack here: */
-  font-family: sans-serif;
-  font-size: 14px;
-  @apply font-normal;
-}
-
-label {
-  @apply font-medium;
-}
-
-h1, h2, h3, h4 {
-  @apply font-bold;
-}
-
-value-button {
-  padding: .5rem;
-  cursor: pointer;
-}
-
-.compact-paragraphs p {
-  margin: 0;
 }
 
 .notes-list ul, .actions-list {
@@ -56,14 +14,6 @@ value-button {
   margin-bottom: 1rem;
 }
 
-.actions-list {
-  display: inline-block;
-}
-.actions-list-item {
-  display: inline-block;
-  margin: 0 1rem 0 0;
-}
-
 .notes-list-item:last-child {
   margin-bottom: 0;
 }
@@ -72,36 +22,6 @@ value-button {
   font-weight: bold;
   display: inline-block;
   padding-right: 0.5rem;
-}
-
-ul.no-bullet {
-  padding-left: 0;
-}
-
-ul.no-bullet li {
-  list-style-type: none;
-  margin: 1rem 0;
-}
-
-ul.no-bullet.compact li {
-  margin: 0;
-}
-
-.compact {
-  margin: 0;
-  padding: 0;
-}
-
-.center {
-  text-align: center;
-}
-
-.t-table td.compact, .t-table th.compact {
-  padding: 0;
-}
-
-.t-table-bordered tbody {
-  border-bottom: 1px solid #cbcbcb;
 }
 
 .callout-box {
@@ -120,7 +40,7 @@ ul.no-bullet.compact li {
 
 .assignments-list th.assignment-list-header {
   vertical-align: bottom;
-  text-align: center;
+  @apply text-center;
 }
 
 .assignments-list th .svg-cnt {
@@ -138,29 +58,4 @@ ul.no-bullet.compact li {
   text-decoration: none;
   cursor: hand;
   color: black;
-}
-
-dl.aligned dt {
-  width: 2rem;
-  float: left;
-}
-
-dl.aligned dt.indented {
-  padding-left: 3rem;
-}
-
-.contract-attendance-new {
-  display: flex;
-  flex-direction: column;
-  align-content: flex-start;
-  height: 21rem;
-
-  footer {
-    position: absolute;
-    bottom: 0.5rem;
-  }
-}
-
-.ember-modal-dialog h3 {
-  margin: 0 0 1rem 0;
 }

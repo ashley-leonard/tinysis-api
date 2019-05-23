@@ -5,7 +5,7 @@ import { assert } from '@ember/debug';
 
 export default Component.extend({
   tagName: 'td',
-  classNames: 'center',
+  classNames: 'text-center',
   classNameBindings: ['showStatus:active', 'isIncomplete:incomplete'],
   showStatus: bool('entry'),
   isIncomplete: equal('entryIsComplete', false),

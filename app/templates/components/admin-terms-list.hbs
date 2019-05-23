@@ -1,0 +1,50 @@
+<table class="t-table w-full" data-test-admin-users-list>
+  <thead>
+    <tr>
+      <th>Term</th>
+      <th class="text-center">School year</th>
+      <th class="text-center">Credit date</th>
+      <th class="text-center">Active?</th>
+      <th>Reporting months</th>
+      <th class="text-right">Contracts</th>
+      <th class="text-right">Enrollments</th>
+      <th class="text-right">Active</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each termsList as |term|}}
+      <tr>
+        <td>
+          {{#link-to "admin-term.edit" term.id}}
+            {{term.attributes.name}}
+          {{/link-to}}
+        </td>
+        <td class="text-center">{{term.attributes.schoolYear}}</td> 
+        <td class="text-center">{{t-date term.attributes.creditDate "MMM d, YYYY"}}</td>
+        <td class="text-center">
+          {{#if term.isActive}}
+            A
+          {{/if}}
+        </td>
+        <td>
+          {{term.months}}
+        </td>
+        <td class="text-right">
+          {{t-number term.meta.contractsCount}}
+        </td>
+        <td class="text-right">
+          {{t-number term.meta.enrollmentsCount}}
+        </td>
+        <td class="text-right">
+          {{t-number term.meta.enrollmentsOpenCount}}
+        </td>
+        <td>
+          {{#unless term.meta.enrollmentsOpenCount}}
+            Finalize
+          {{/unless}}
+        </td>
+      </tr>
+    {{/each}}
+  </tbody>
+</table>

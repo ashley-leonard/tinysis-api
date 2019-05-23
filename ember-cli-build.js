@@ -24,6 +24,9 @@ module.exports = function (defaults) {
       pikaday: {
         vendor: ['css/pikaday.css'],
       },
+      tailwindcss: {
+        vendor: ['utilities.css', 'base.css', 'components.css'],
+      },
     },
   });
 

@@ -5,7 +5,7 @@ import clone from '../utils/clone';
 
 export default Component.extend({
   showErrors: false,
-  classNames: ['t-form'],
+  classNames: ['t-form', 'w-full', 'lg:w-1/2', 'xl:w-1/2'],
   tagName: 'form',
 
   validator: computed(() => new Validator({})),
@@ -56,7 +56,6 @@ export default Component.extend({
 
     this.setProperties({
       pojo: newPojo,
-      showErrors: true,
     });
 
     this.validate();
@@ -86,6 +85,7 @@ export default Component.extend({
     event.preventDefault();
 
     if (this.isInvalid) {
+      this.set('showErrors', true);
       if (this.reportError) {
         this.reportError(this.errors);
       }

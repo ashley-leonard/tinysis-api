@@ -3,7 +3,7 @@ import { setupRenderingTest } from 'ember-qunit';
 import { render, find } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 
-module('Integration | Component | form-input/error-message', (hooks) => {
+module('Integration | Component | t-form-error-message', (hooks) => {
   setupRenderingTest(hooks);
 
   test('it renders', async function (assert) {
@@ -12,7 +12,7 @@ module('Integration | Component | form-input/error-message', (hooks) => {
       show: true,
     });
 
-    await render(hbs`{{form-input/error-message
+    await render(hbs`{{t-form-error-message
       message=message
       show=show
     }}`);

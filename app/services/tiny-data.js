@@ -47,6 +47,14 @@ export const tinyDataService = {
     return parseInt(this._data.schoolYear, 10);
   },
 
+  getReportingBaseMonth() {
+    return parseInt(this._data.reportingBaseMonth, 10);
+  },
+
+  setReportingBaseMonth(reportingBaseMonth) {
+    this._data.reportingBaseMonth = reportingBaseMonth;
+  },
+
   flush() {
     this._store = {};
     this._data = {};

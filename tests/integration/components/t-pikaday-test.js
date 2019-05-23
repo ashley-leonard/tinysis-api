@@ -87,6 +87,24 @@ module('Integration | Component | t-pikaday', (hooks) => {
     assert.equal(action.date, '2011-04-15', 'expected ISO calendar date supplied');
   });
 
+  test('it renders as a popup with a blank date value', async function (assert) {
+    this.set('value', null);
+
+    await render(hbs`
+      {{t-pikaday
+        value=value
+        onchange=onchange
+        name="Boo"
+        popup=true
+      }}
+    `);
+
+    const input = find('input[name="Boo"]');
+    assert.ok(input, 'input rendered');
+    assert.equal(input.value, '', 'input assigned expected blank value');
+    assert.equal(input.type, 'text', 'using text input');
+  });
+
   test('it renders with a JS date object as value', async function (assert) {
     // the start of March 3, 2006 in the current timezone
     this.set('value', new Date(2006, 2, 3));

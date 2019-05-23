@@ -128,6 +128,14 @@ Router.map(function () {
         path: '/user/:id',
       });
 
+      this.route('admin-user', {
+        resetNamespace: true,
+        path: '/user',
+      }, function () {
+        this.route('new');
+        this.route('edit', { path: ':id' });
+      });
+
       this.route('admin-terms', {
         resetNamespace: true,
         path: '/terms',
@@ -137,7 +145,10 @@ Router.map(function () {
 
       this.route('admin-term', {
         resetNamespace: true,
-        path: '/term/:id',
+        path: '/term',
+      }, function () {
+        this.route('new', { path: 'new' });
+        this.route('edit', { path: ':id' });
       });
 
       this.route('admin-credit-batches', {
@@ -158,9 +169,6 @@ Router.map(function () {
       this.route('admin-settings', {
         resetNamespace: true,
         path: '/settings',
-      }, () => {
-
-
       });
     });
   });

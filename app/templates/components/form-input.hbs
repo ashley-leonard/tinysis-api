@@ -1,7 +1,8 @@
-<label class="{{if hasErrorToShow "error"}} my-6">
+<label class={{if hasErrorToShow "error"}}>
   {{yield}}
-  {{form-input/error-message
+  {{t-form-error-message
     message=error
     show=showError
+    className="static absolute -mt-px"
   }}
 </label>

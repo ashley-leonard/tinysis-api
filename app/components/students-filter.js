@@ -50,8 +50,8 @@ export default Component.extend({
   })))),
 
   statusOptions: computed(() => ([
-    { name: 'Active', value: true },
-    { name: 'Inactive', value: false },
+    { name: 'Active', value: 'active' },
+    { name: 'Inactive', value: 'inactive' },
   ])),
 
   schoolYearsReversed: computed('schoolYears', function () {

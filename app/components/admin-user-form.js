@@ -1,6 +1,11 @@
 import { computed, get } from '@ember/object';
-import { equal } from '@ember/object/computed';
-import { roleTypes, ROLE_STUDENT } from '../utils/user-utils';
+import { equal, bool } from '@ember/object/computed';
+import {
+  roleTypes,
+  ROLE_STUDENT,
+  isStaff,
+  STATUS_INACTIVE,
+} from '../utils/user-utils';
 import Validator from '../utils/validator';
 import TForm from './t-form';
 
@@ -8,7 +13,12 @@ export default TForm.extend({
   roleOptions: roleTypes,
   classNames: 'w-full lg:w-1/2 xl:w-1/3',
 
+  isActive: equal('pojo.status', 'active'),
+  isExistingUser: bool('model.id'),
   isStudent: equal('pojo.role', ROLE_STUDENT),
+  isStaff: computed('pojo.role', function () {
+    return isStaff({ attributes: this.pojo });
+  }),
 
   coordinatorOptions: computed('staff', function () {
     return this.staff
@@ -33,7 +43,7 @@ export default TForm.extend({
     let validationsHash = {
       dateInactive: [{
         type: 'required',
-        if: (key, value, pojo) => !pojo.isActive,
+        if: (key, value, pojo) => pojo.status === STATUS_INACTIVE,
         message: 'Date enrollment ended is required if user is inactive',
       }, {
         type: 'valid',
@@ -45,7 +55,7 @@ export default TForm.extend({
 
     const requiredForAll = [
       'dateActive',
-      'isActive',
+      'status',
       'firstName',
       'lastName',
       'role',
@@ -81,6 +91,13 @@ export default TForm.extend({
   actions: {
     handleCoordinatorChange(coordinatorId) {
       this.updatePojo({ coordinatorId });
+    },
+
+    handleRoleChange(newRoleValue) {
+      this.updatePojo({ role: newRoleValue });
+      if (newRoleValue === 'student') {
+        this.updatePojo({ canLogin: false });
+      }
     },
   },
 

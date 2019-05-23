@@ -1,0 +1,36 @@
+.t-table {
+  @apply border border-collapse;
+
+  thead {
+    @apply bg-gray-100 border-t border-b;
+  }
+
+  th {
+    @apply text-left py-2 px-6;
+    
+    &.text-center {
+      @apply text-center;
+    }
+
+    &.text-right {
+      @apply text-right;
+    }
+  }
+
+  td {
+    @apply py-2 px-6;
+  }
+
+  tbody tr {
+    @apply border-b;
+  }
+}
+
+
+.actions-list {
+  display: inline-block;
+}
+.actions-list-item {
+  display: inline-block;
+  margin: 0 1rem 0 0;
+}
