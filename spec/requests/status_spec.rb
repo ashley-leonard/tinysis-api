@@ -6,6 +6,8 @@ RSpec.describe 'Statuses API', type: :request do
   before(:each) do
     setupEnrollments
 
+    allow(JsonWebToken).to receive(:extract_permissions).and_return(['get:config'])
+
     Timecop.freeze(Date.new(2018, 10, 15))
   end
 

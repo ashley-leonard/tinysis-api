@@ -3,6 +3,8 @@ require 'rails_helper'
 RSpec.describe 'Admin users API', type: :request do
 
   before(:each) do
+    allow(JsonWebToken).to receive(:extract_permissions).and_return(['get:config', 'manage:config'])
+
     @staff1 = create :user, privilege: User::PRIVILEGE_STAFF, date_active: Date.new(2017, 8, 1), login_status: User::LOGIN_ALLOWED, email: Faker::Internet.email, password: Faker::Internet.password(10, 20)
     @staff2 = create :user, privilege: User::PRIVILEGE_STAFF, date_active: Date.new(2017, 8, 1), login_status: User::LOGIN_ALLOWED, email: Faker::Internet.email, password: Faker::Internet.password(10, 20)
     @staff_inactive = create :user, privilege: User::PRIVILEGE_STAFF, date_active: Date.new(2017, 8, 1), date_inactive: Date.new(2017, 12, 1), status: User::STATUS_INACTIVE, email: Faker::Internet.email

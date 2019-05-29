@@ -3,6 +3,8 @@ require 'rails_helper'
 RSpec.describe 'Contracts API', type: :request do
 
   before(:each) do
+    allow(JsonWebToken).to receive(:extract_permissions).and_return(['get:config'])
+
     @staff1 = create :user, privilege: 2
     @staff2 = create :user, privilege: 2
 

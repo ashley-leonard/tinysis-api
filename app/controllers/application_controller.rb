@@ -2,6 +2,8 @@ class ApplicationController < ActionController::API
   rescue_from ActionController::RoutingError, with: :render_404
   rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity_response
 
+  include Secured
+
 private
   def expand_month month
     month.sub(/^\d{4}-\d{2}$/, '\0-01')

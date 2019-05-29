@@ -10,8 +10,14 @@ class ProfilesController < ApplicationController
       .where(conditions)
       .limit(1)
 
+    options = {
+      meta: {
+        permissions: get_permissions
+      }
+    }
+
     return render json: { message: 'Not found' }, status: 404 if result.length == 0 
 
-    render json: UserSerializer.new(result[0]), status: 200
+    render json: UserSerializer.new(result[0], options), status: 200
   end
 end

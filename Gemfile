@@ -13,6 +13,8 @@ gem 'fast_jsonapi', '>= 1.5.0', require: true
 # Use Puma as the app server
 gem 'puma', '~> 3.12.1'
 
+gem 'jwt'
+
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 # Use ActiveModel has_secure_password
