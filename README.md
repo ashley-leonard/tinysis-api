@@ -33,9 +33,8 @@ Running only some tests (filter by name)
     create database nova_test;
     create database nova_development;
 
-    CREATE user `nova_test`@`localhost` identified by 'xxxx';
-    CREATE user `nova_development`@`localhost` identified by 'xxxx'
-
+    CREATE user `nova_test`@`localhost` identified by 'nova_test';
+    CREATE user `nova_development`@`localhost` identified by 'nova_development';
 
     GRANT CREATE ON nova_test.* TO nova_test@localhost;
     GRANT ALL PRIVILEGES ON nova_test.* to `nova_test`@`localhost`;
@@ -47,20 +46,7 @@ Running only some tests (filter by name)
 
 ## mysql
 
-We've installed your MySQL database without a root password. To secure it run:
+You may need to
 
-    mysql_secure_installation
+    apt install libmysqlclient-dev
 
-MySQL is configured to only allow connections from localhost by default
-
-To connect run:
-
-    mysql -uroot
-
-To have launchd start mysql now and restart at login:
-
-  brew services start mysql
-
-Or, if you don't want/need a background service you can just run:
-
-  mysql.server start
