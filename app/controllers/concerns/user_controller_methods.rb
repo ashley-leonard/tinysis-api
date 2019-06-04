@@ -42,7 +42,7 @@ module UserControllerMethods
     when 'administrator'
       User::PRIVILEGE_ADMIN
     when 'staff'
-      User::PRIVILEGE_STAFF
+      [User::PRIVILEGE_STAFF, User::PRIVILEGE_ADMIN]
     when 'student'
       User::PRIVILEGE_STUDENT
     when nil

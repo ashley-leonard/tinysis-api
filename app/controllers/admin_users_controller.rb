@@ -33,7 +33,7 @@ private
   def user_attributes
     params.require(:data)
       .require(:attributes)
-      .permit(:first_name, :last_name, :nickname, :can_login, :date_active, :date_inactive, :district_id, :district_grade, :status, :role, :login, :email)
+      .permit(:first_name, :last_name, :nickname, :can_login, :date_active, :date_inactive, :district_id, :district_grade, :status, :role, :login, :email, :new_password)
   end
 
   def user_coordinator_id
