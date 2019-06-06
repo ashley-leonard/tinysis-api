@@ -14,6 +14,7 @@ gem 'fast_jsonapi', '>= 1.5.0', require: true
 gem 'puma', '~> 3.12.1'
 
 gem 'jwt'
+gem 'auth0'
 
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
