@@ -12,10 +12,12 @@ class AuthManagement
     [:domain, :client_secret, :client_id, :audience].each do |setting|
       raise ArgumentError.new("Expected #{setting} to be passed in config") unless @config[setting]
     end
+
+    @base_url = "https://#{@config[:domain]}"
   end
 
   def get_access_token
-    url = URI("https://#{@config[:domain]}/oauth/token")
+    url = URI("#{@base_url}/oauth/token")
 
     http = Net::HTTP.new(url.host, url.port)
     http.use_ssl = true
@@ -34,39 +36,39 @@ class AuthManagement
 
 
   def get_user email_address
-    url = URI "https://#{@config[:domain]}/api/v2/users?email=#{URI.encode_www_form_component(email_address)}"
 
-    http = Net::HTTP.new(url.host, url.port)
-    http.use_ssl = true
-    http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+    url = URI(@base_url)
 
-    request = Net::HTTP::Get.new(url, { Authorization: "Bearer #{@auth['access_token']}" })
+    Net::HTTP.start(url.host, url.port, { use_ssl: true, verify_mode: OpenSSL::SSL::VERIFY_NONE}) do |http|
+      headers = {
+        Authorization: "Bearer #{@auth['access_token']}",
+        'content-type': 'application/json',
+      }
 
-    response = http.request(request)
-  
-    users = JSON.parse(response.read_body)
+      get_user_url = URI("#{@base_url}/api/v2/users?q=email:#{URI.encode_www_form_component(email_address)}")
 
-    user = users.first
+      response = http.get(get_user_url, headers)
 
-    puts user.inspect
+      raise StandardError.new('User fetch failed') if response.code != '200'
 
-    encoded_user_id = URI.encode_www_form_component user['user_id']
+      user = JSON.parse(response.body).first
 
-    url = URI("https://#{@config[:domain]}/api/v2/users/#{encoded_user_id}/roles")
-    puts "url #{url.to_s}"
-    http = Net::HTTP.new(url.host, url.port)
-    http.use_ssl = true
-    http.verify_mode = OpenSSL::SSL::VERIFY_NONE
-    
+      return nil unless user
 
-    request = Net::HTTP::Get.new(url, { Authorization: "Bearer #{@auth['access_token']}" })
+      encoded_user_id = URI.encode_www_form_component(user['user_id'])
 
-    response = http.request(request)
+      get_roles_url = URI("#{@base_url}/api/v2/users/#{encoded_user_id}/roles")
 
-    puts response.code
+      response = http.get(get_roles_url, headers)
 
-    render json: response.read_body
+      raise StandardError.new('User roles fetch failed') if response.code != '200'
 
+      roles = JSON.parse(response.body)
+
+      user['roles'] = roles
+
+      user
+    end
   end
 
   def activate_user email, first_name, last_name, role
