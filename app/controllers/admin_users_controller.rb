@@ -9,12 +9,9 @@ class AdminUsersController < AdminController
     user = User.new
     update_attributes user
 
-    ## TO BE REPLACED LATER
-    user.password = User::random_password 20
-    user.encrypt_password
-    ##
-
     user.save!
+
+    check_authorization_requirements user
 
     render json: UserSerializer.new(user)
   end
@@ -56,7 +53,6 @@ private
     update_coordinator model, user_coordinator_id
 
     # renamed attributes
-    update_login_status model, denormalized[:can_login]
     update_status model, denormalized[:status]
     update_privilege model, denormalized[:role]
 
@@ -70,17 +66,6 @@ private
       raise ActiveRecord::RecordNotFound
     end
     user.coordinator = coordinator
-  end
-
-  def update_login_status model, can_login
-    return if can_login.nil?
-    raiseActiveRecordInvalidException(model, :canLogin, 'should be either "true" or "false"') unless [true, false, 'true', 'false'].include? can_login
-
-    if can_login.to_s == 'true'
-      model.login_status = User::LOGIN_ALLOWED
-    else
-      model.login_status = User::LOGIN_NONE
-    end
   end
 
   def update_status model, status

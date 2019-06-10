@@ -31,7 +31,10 @@ Rails.application.routes.draw do
       get '/users/:id', to: 'admin_users#show'
       post '/users', to: 'admin_users#create'
       put '/users/:id', to: 'admin_users#update'
-      get '/authorized-users/:email', to: 'admin_auth#show'
+      post '/authorized-users', to: 'admin_auth#create'
+      get '/authorized-users', to: 'admin_auth#show'
+      patch '/authorized-users/:id', to: 'admin_auth#update'
+      delete '/authorized-users/:id', to: 'admin_auth#destroy'
       post '/terms', to: 'admin_terms#create'
       put '/terms/:id', to: 'admin_terms#update'
     end
