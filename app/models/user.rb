@@ -7,7 +7,6 @@ require "digest/sha2"
 
 class User < ApplicationRecord
 
-  before_save :encrypt_password
   before_save :null_inactive_date_if_set_active
   
   include Statusable
@@ -208,17 +207,6 @@ class User < ApplicationRecord
     self.status == User::STATUS_ACTIVE
   end
   
-  # returns true if the user was active during the indicated month, otherwise returns false.
-  
-  def was_active?(month)
-
-    return false if month.end_of_month < self.date_active
-    
-    return true if self.status == STATUS_ACTIVE
-
-    return month <= self.date_inactive
-  end
-
   #########################################################
   # Learning plans
 
