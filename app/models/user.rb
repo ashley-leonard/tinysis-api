@@ -1,7 +1,6 @@
 
-# There are three status variables for users.
+# There are two status variables for users.
 # privilege: 0 = no rights, 1=student rights, 2=staff rights, 3=admin rights
-# login_status: 0 == can't login, 1==account requested, 2==can log in
 # status: 0 == no status, 1==active, 2==inactive
 
 require "digest/sha2"
@@ -209,10 +208,6 @@ class User < ApplicationRecord
     self.status == User::STATUS_ACTIVE
   end
   
-  def can_login?
-    active? && self.login_status == LOGIN_ALLOWED
-  end
-
   # returns true if the user was active during the indicated month, otherwise returns false.
   
   def was_active?(month)
@@ -466,158 +461,14 @@ END
   #####################################################################################
   # Password and Login validations and constants
   
-  MINPASSWORDLENGTH = 5
-  DEFAULTPASSWORDLENGTH = 6
-  MAXPASSWORDLENGTH = 40
   REGEX_EMAIL = /\A.+\@.+\z/i
-  REGEX_VALIDLOGIN =  /\A[\w\-_\.]{5,40}\z/
-  REGEX_CLEANLOGIN =  /[^\w\-]/
   
-  validates_presence_of :email, :if => Proc.new { |user| user.can_login? }
+  validates_presence_of :email, :if => Proc.new { |user| user.staff? and user.active? }
   validates_format_of :email, :with => REGEX_EMAIL, :if => Proc.new { |user| !user.email.blank? }
   validates_uniqueness_of :email, :if => Proc.new { |user| !user.email.blank? }
 
-  validates_uniqueness_of :login, allow_nil: true
-  validates_format_of :login, :with => REGEX_VALIDLOGIN, :message => 'at least 5 characters long, consisting only of letters, and numbers.', if: Proc.new{ |user| user.staff? }
-
-  validates_presence_of :login_status
-
   validates_format_of :first_name, :last_name, :with => /\A['\.\w\- ()]+\z/, :message => ': Please enter a first and last name - it can only have letters, numbers, dashes, spaces, and parentheses.'
-  
-  attr_accessor :password
-  validates_presence_of :password, :if => Proc.new{|user| user.can_login? && (user.password_hash.blank?) }
-  validates_length_of :password, :in => User::MINPASSWORDLENGTH..User::MAXPASSWORDLENGTH, :if => Proc.new{|user| user.can_login? && (user.password_hash.blank?)}
-  
-  # deprec attr_protected :status, :login_status, :privilege, :coordinator_id, :date_inactive, :date_active
-  
-  LOGIN_NONE = 0
-  LOGIN_REQUESTED = 1
-  LOGIN_ALLOWED = 2
-  
-  LOGIN_NAMES = {
-    LOGIN_NONE => "No",
-    LOGIN_REQUESTED => "Requested",
-    LOGIN_ALLOWED => "Yes"    
-  }
-  
-  #########################################################
-  #
-  # PASSWORD SETTING
-  
-  # Encrypts the password attribute and saves the record
-  def encrypt_password
-    return if self.password.blank?
-    self.password_salt = [Array.new(6){rand(256).chr}.join].pack("m").chomp
-    self.password_hash = Digest::SHA256.hexdigest(self.password + self.password_salt)
-  end
 
-  # resets the password, updating the record
-  def reset_password
-    plaintext = User.random_password
-    self.password = self.password_confirmation = plaintext
-    save!
-    plaintext
-  end
-
-  # generates a semi human readable random password
-  def self.random_password(size = DEFAULTPASSWORDLENGTH)
-    c = %w(b c d f g h j k l m n p qu r s t v w x z ch cr fr nd ng nk nt ph pr rd sh sl sp st th tr)
-    v = %w(a e i o u y)
-    f, r = true, ''
-    size.times do
-      r << (f ? c[rand * c.size] : v[rand * v.size])
-      f = !f
-    end
-    #r.slice(0,size)
-    r
-  end
-
-  #########################################################
-  #
-  # LOGIN AND AUTHORIZATION FUNCTIONS
-
-  def self.authorized_email(email)
-    find(:first, :conditions => ["email = ? and privilege > ? and login_status = ?", email, User::PRIVILEGE_NONE, User::LOGIN_ALLOWED])
-  end
-
-
-  # generates a unique login name given a last_name, first_name combo
-  def User.unique_login(last, first)
-
-    last = String.new(last)
-    first = String.new(first)
-    
-    [first,last].each{|n| n.gsub!(REGEX_CLEANLOGIN,'')}
-    raise ArgumentError, "Invalid characters in name #{first} #{last}" if (last+first).empty?
-    for i in (0..first.length-1)
-      login = "#{last}#{first[0..i]}".downcase
-      next if login.length < MINPASSWORDLENGTH
-      return login unless User.find(:first, :conditions => ["login = ?", login])
-    end
-
-    # give five more tries before giving up
-    for i in (1..5)
-      login = "#{last}#{first}#{i}".downcase
-      next if login.length < MINPASSWORDLENGTH
-      return login unless User.find(:first, :conditions => ["login = ?", login])
-    end
-
-    return nil
-
-  end
-
-
-  # Authenticates a login, password combination and returns the
-  # matching user (or NIL)
-  def self.authenticate(login, password)
-    user = User.find_by_login(login)
-    return nil if user.blank? or 
-      user.login_status != LOGIN_ALLOWED or 
-      user.status != STATUS_ACTIVE or
-      user.privilege == PRIVILEGE_NONE or 
-      Digest::SHA256.hexdigest(password+user.password_salt) != user.password_hash
-    user
-  end
-  
-
-  # Update an account record given a parameter set and a user to confirm permissions on
-  def update_from_params user_params, user
-
-    raise ArgumentError, "Something wrong with the parameters" unless user_params
-
-    # check the set of protected attributes and deny access if any are changing without required permissions
-    raise ArgumentError, "Account record hacking by user #{user.full_name}" if !user.admin? && !(["privilege","status","login_status","coordinator_id","district_id","district_grade","date_active","date_inactive"] & user_params.keys).empty? || !user.staff? && !(["first_name","last_name"] & user_params.keys).empty?
-
-    self.privilege = user_params[:privilege] if user_params[:privilege]
-    self.login_status = user_params[:login_status] if user_params[:login_status]
-    self.status = user_params[:status] if user_params[:status]
-    [:date_active,:date_inactive].each do |a|
-      next unless user_params[a] && !user_params[a].strip.blank?
-      begin
-        self[a] = Date.parse(user_params[a])
-      rescue ArgumentError
-        self.errors.add a, 'requires a valid date in the format yyyy-mm-dd'
-      end
-    end
-    return false unless self.errors.empty?
-
-    # if coordinator ID is there change it
-    if user_params[:coordinator_id] == "0"
-      self.coordinator = nil
-    else
-      self.coordinator = User.find(user_params[:coordinator_id]) 
-    end if user_params[:coordinator_id]
-    
-    # clean out these items we just set manually
-    [:login_status, :status, :date_inactive, :date_active, :coordinator_id, :privilege].each do |a|
-      user_params.delete a
-    end
-
-    self.attributes = user_params
-
-    save
-  end
-  
   # make sure inactive date is killed if the user has been set active
   def null_inactive_date_if_set_active
     if self.status == STATUS_ACTIVE

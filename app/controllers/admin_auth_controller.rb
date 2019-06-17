@@ -5,12 +5,13 @@ class AdminAuthController < AdminController
   def create
     user = @client.activate_user user_attributes
 
-    render(json: { error: 'User not found with provided email' }, status: 404) and return unless user
-
     render json: { data: user }
 
-  rescue => error
+  rescue AuthManagementError => error
     render_error error
+
+  rescue => error
+    render json: { message: error }, status: 500
   end
 
   def destroy
@@ -25,25 +26,33 @@ class AdminAuthController < AdminController
   def show
     email = params[:email]
 
-    user = @client.get_user email
+    user = @client.find_user email
 
     render(json: { error: 'User not found with provided email' }, status: 404) and return unless user
 
     render json: { data: user }
 
-  rescue => error
+  rescue AuthManagementError => error
     render_error error
+
+  rescue => error
+    render json: { message: error }, status: 500
   end
 
   def update
     user_id = params[:id]
 
-    user = @client.update_user user_id, user_attributes
+    @client.update_user user_id, user_attributes
+
+    user = @client.get_user user_id
 
     render json: { data: user }
 
-  rescue => error
+  rescue AuthManagementError => error
     render_error error
+
+  rescue => error
+    render json: { message: error }, status: 500
   end
 
 private
@@ -55,9 +64,9 @@ private
   def user_attributes
     params
       .require(:admin_auth)
+      .require(:data)
       .permit(:first_name, :last_name, :nickname, :email, :password, :role)
   end
-
 
   def render_error error
     Rails.logger.error error.exception || error

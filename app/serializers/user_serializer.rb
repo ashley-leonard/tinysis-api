@@ -6,12 +6,7 @@ class UserSerializer < ApplicationSerializer
   attributes :date_inactive
   attributes :district_id
   attributes :district_grade
-  attributes :login
   attributes :email
-
-  attribute :can_login do |object|
-    object.login_status == User::LOGIN_ALLOWED
-  end
 
   attribute :status do |object|
     case object.status

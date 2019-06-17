@@ -48,8 +48,40 @@ class AuthManagement
     return @auth
   end
 
+  def get_user user_id
+    url = URI(@base_url)
 
-  def get_user email_address
+    Net::HTTP.start(url.host, url.port, { use_ssl: true, verify_mode: OpenSSL::SSL::VERIFY_NONE}) do |http|
+      headers = {
+        Authorization: "Bearer #{@auth['access_token']}",
+        'content-type': 'application/json',
+      }
+
+      encoded_user_id = URI.encode_www_form_component(user_id)
+
+      get_user_url = URI("#{@base_url}/api/v2/users/#{encoded_user_id}")
+
+      response = http.get(get_user_url, headers)
+
+      raise AuthManagementError.new('User fetch failed', response) if response.code != '200'
+
+      user = JSON.parse(response.body)
+
+      get_roles_url = URI("#{@base_url}/api/v2/users/#{encoded_user_id}/roles")
+
+      response = http.get(get_roles_url, headers)
+
+      raise AuthManagementError.new('User roles fetch failed', response) if response.code != '200'
+
+      roles = JSON.parse(response.body)
+
+      user['roles'] = roles
+
+      return user
+    end
+  end
+
+  def find_user email_address
     url = URI(@base_url)
 
     Net::HTTP.start(url.host, url.port, { use_ssl: true, verify_mode: OpenSSL::SSL::VERIFY_NONE}) do |http|
@@ -84,7 +116,7 @@ class AuthManagement
     end
   end
 
-  def activate_user email, first_name, last_name, *roles
+  def activate_user(attributes)
     url = URI(@base_url)
 
     Net::HTTP.start(url.host, url.port, { use_ssl: true, verify_mode: OpenSSL::SSL::VERIFY_NONE}) do |http|
@@ -93,60 +125,56 @@ class AuthManagement
         'content-type': 'application/json',
       }
 
-      get_user_url = URI("#{@base_url}/api/v2/users?q=email:#{URI.encode_www_form_component(email_address)}")
+      email = attributes[:email]
+      get_user_url = URI("#{@base_url}/api/v2/users?q=email:#{URI.encode_www_form_component(email)}")
 
       response = http.get(get_user_url, headers)
 
-      raise AuthManagementError.new('User fetch failed', response) if response.code != '200'
+      raise AuthManagementError.new('User fetch failed', response) unless ['200', '404'].include? response.code
       raise AuthManagementError.new('Auth0 user already created') unless response.body == '[]'
 
-      request_body = { email: email, name: "#{first_name} #{last_name}" }
+      request_body = {
+        given_name: attributes[:first_name],
+        family_name: attributes[:last_name],
+        password: AuthManagement.random_password(20),
+        email: attributes[:email]
+      }
+      request_body[:nickname] = attributes[:nickname] if attributes[:nickname].present?
+      request_body[:name] = "#{attributes[:first_name]} #{attributes[:last_name]}"
+      request_body[:connection] = "Username-Password-Authentication"
+
       response = http.post("#{@base_url}/api/v2/users", request_body.to_json, headers)
 
       raise AuthManagementError.new('User creation failed', response) if response.code != '200'
 
       user = response.body
 
-      request_body = { roles: roles }
       encoded_user_id = URI.encode_www_form_component(user['user_id'])
 
-      response = http.post("#{@base_url}/api/v2/users/#{encoded_user_id}/roles", request_body, headers)
+      new_role = getRoleIdFromTinySisRole attributes[:role]
+      request_body = { roles: [ new_role[:id] ] }
 
-      raise AuthManagementError.new('Role update failed', response) if response.code != '200'
+      response = http.patch("#{@base_url}/api/v2/users/#{encoded_user_id}/roles", request_body.to_json, headers)
+
+      raise AuthManagementError.new('User role update failed', response) if response.code != '200'
 
       roles = JSON.parse(response.read_body)
 
       user['roles'] = roles
 
+      request_body = {
+        result_url: "http://localhost:3001/welcome-staff",
+        user_id: user['user_id'],
+        ttl_sec: 0,
+      }
+
+      response = http.post("#{@base_url}/api/v2/tickets/email_verification", request_body.to_json, headers)
+
+      raise AuthManagementError.new('Email verification failed', response) if response.code != '200'
+
       return user
     end
   end
-
-  def update_role user_id, role
-    url = URI(@base_url)
-
-    Net::HTTP.start(url.host, url.port, { use_ssl: true, verify_mode: OpenSSL::SSL::VERIFY_NONE}) do |http|
-      headers = {
-        Authorization: "Bearer #{@auth['access_token']}",
-        'content-type': 'application/json',
-      }
-
-      encoded_user_id = URI.encode_www_form_component(user_id)
-
-      request_body = { roles: ['student', 'admin', 'staff'] }
-      response = http.delete("#{@base_url}/api/v2/users/#{encoded_user_id}/roles", request_body, headers)
-
-      raise AuthManagementError.new('User role flush failed', response) if response.code != '200'
-
-      request_body = { roles: [ role ] }
-      response = http.patch("#{@base_url}/api/v2/users/#{encoded_user_id}/roles", request_body, headers)
-
-      raise AuthManagementError.new('User role update failed', response) if response.code != '200'
-
-      return JSON.parse(response.read_body)
-    end
-  end
-
 
   def delete_user user_id
     url = URI(@base_url)
@@ -172,7 +200,7 @@ class AuthManagement
 
     Net::HTTP.start(url.host, url.port, { use_ssl: true, verify_mode: OpenSSL::SSL::VERIFY_NONE}) do |http|
       headers = {
-        Authorization: "Bearer #{@auth['access_token']}",
+        'Authorization': "Bearer #{@auth['access_token']}",
         'content-type': 'application/json',
       }
 
@@ -194,25 +222,78 @@ class AuthManagement
         email: attributes[:email]
       })
 
+      # reject any bodies that are not populated
       bodies = bodies
         .map{|body| body.compact}
         .map{|body| body.transform_values{ |value| value == "" ? nil : value } }
         .reject(&:empty?)
 
-      return nil if bodies.empty?
-
+      # update the bodies with changed values
       bodies.each do |body|
-        Rails.logger.info "***********************************"
-        Rails.logger.info "pushing"
-        Rails.logger.info body.to_json
-        Rails.logger.info "***********************************"
-
         response = http.patch("#{@base_url}/api/v2/users/#{encoded_user_id}", body.to_json, headers)
-Rails.logger.error response.body
         raise AuthManagementError.new("Difficulty updating #{body.keys.join}", response) if response.code != '200'
+      end
+
+      # handle role updates separately
+      if attributes[:role]
+        get_roles_url = URI("#{@base_url}/api/v2/users/#{encoded_user_id}/roles")
+
+        response = http.get(get_roles_url, headers)
+  
+        raise AuthManagementError.new('User roles fetch failed', response) if response.code != '200'
+  
+        roles = JSON.parse(response.body)
+  
+        if roles.length > 0
+          request_body = {
+            "roles": roles.map{|role| role['id']}
+          }
+
+          req = Net::HTTP::Delete.new("#{@base_url}/api/v2/users/#{encoded_user_id}/roles", headers)
+
+          response = http.request(req, request_body.to_json)
+
+          raise AuthManagementError.new('User role flush failed', response) if response.code != '204'
+        end
+
+        new_role = getAuth0RoleFromTinySisRole attributes['role']
+        request_body = { roles: [ new_role[:id] ] }
+
+        add_roles_url = "#{@base_url}/api/v2/users/#{encoded_user_id}/roles"
+
+        response = http.post(add_roles_url, request_body.to_json, headers)
+
+        raise AuthManagementError.new('User role update failed', response) if response.code.to_i >= 400
       end
 
       return true
     end
   end
+
+  # generates a semi human readable random password
+  DEFAULT_PASSWORD_LENGTH = 20
+  def self.random_password(size = DEFAULT_PASSWORD_LENGTH)
+    c = %w(b c d f g h j k l m n p qu r s t v w x z ch cr fr nd ng nk nt ph pr rd sh sl sp st th tr)
+    v = %w(a e i o u y)
+    r = ''
+    f = true
+    size.times do
+      r = r + (f ? c[rand * c.size] : v[rand * v.size])
+      f = !f
+    end
+
+    r
+      .capitalize
+      .slice(0, size - 1)
+      .concat((rand * 10).round.to_s)
+  end
+
+private
+
+  def getAuth0RoleFromTinySisRole roleName
+    Rails.application.secrets
+      .auth0_management[:roles]
+      .find{|role| role[:name] == roleName}
+  end
+
 end
