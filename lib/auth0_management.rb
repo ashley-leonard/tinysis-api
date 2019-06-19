@@ -118,6 +118,7 @@ class AuthManagement
 
   def activate_user(attributes)
     url = URI(@base_url)
+    user = nil
 
     Net::HTTP.start(url.host, url.port, { use_ssl: true, verify_mode: OpenSSL::SSL::VERIFY_NONE}) do |http|
       headers = {
@@ -137,43 +138,30 @@ class AuthManagement
         given_name: attributes[:first_name],
         family_name: attributes[:last_name],
         password: AuthManagement.random_password(20),
-        email: attributes[:email]
+        email: attributes[:email],
+        connection: 'Username-Password-Authentication',
       }
-      request_body[:nickname] = attributes[:nickname] if attributes[:nickname].present?
       request_body[:name] = "#{attributes[:first_name]} #{attributes[:last_name]}"
-      request_body[:connection] = "Username-Password-Authentication"
 
       response = http.post("#{@base_url}/api/v2/users", request_body.to_json, headers)
 
-      raise AuthManagementError.new('User creation failed', response) if response.code != '200'
+      raise AuthManagementError.new('User creation failed', response) if response.code.to_i >= 400
 
-      user = response.body
+      user = JSON.parse(response.body)
 
       encoded_user_id = URI.encode_www_form_component(user['user_id'])
 
-      new_role = getRoleIdFromTinySisRole attributes[:role]
+      new_role = getAuth0RoleFromTinySisRole attributes[:role]
       request_body = { roles: [ new_role[:id] ] }
 
-      response = http.patch("#{@base_url}/api/v2/users/#{encoded_user_id}/roles", request_body.to_json, headers)
+      roles_url = "#{@base_url}/api/v2/users/#{encoded_user_id}/roles"
 
-      raise AuthManagementError.new('User role update failed', response) if response.code != '200'
+      response = http.post(roles_url, request_body.to_json, headers)
 
-      roles = JSON.parse(response.read_body)
-
-      user['roles'] = roles
-
-      request_body = {
-        result_url: "http://localhost:3001/welcome-staff",
-        user_id: user['user_id'],
-        ttl_sec: 0,
-      }
-
-      response = http.post("#{@base_url}/api/v2/tickets/email_verification", request_body.to_json, headers)
-
-      raise AuthManagementError.new('Email verification failed', response) if response.code != '200'
-
-      return user
+      raise AuthManagementError.new('User role update failed', response) if response.code.to_i >= 400
     end
+
+    return user
   end
 
   def delete_user user_id

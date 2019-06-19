@@ -5,12 +5,16 @@ class AdminAuthController < AdminController
   def create
     user = @client.activate_user user_attributes
 
-    render json: { data: user }
+    user_with_roles = @client.get_user user['user_id']
+
+    render json: { data: user_with_roles }
 
   rescue AuthManagementError => error
     render_error error
 
   rescue => error
+    Rails.logger.error "Error creating user"
+    Rails.logger.error error
     render json: { message: error }, status: 500
   end
 
