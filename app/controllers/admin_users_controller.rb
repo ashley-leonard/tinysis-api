@@ -11,8 +11,6 @@ class AdminUsersController < AdminController
 
     user.save!
 
-    check_authorization_requirements user
-
     render json: UserSerializer.new(user)
   end
 
