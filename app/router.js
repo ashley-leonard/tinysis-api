@@ -173,6 +173,9 @@ Router.map(function () {
     });
   });
 
+  this.route('welcome');
+  this.route('user-settings');
+  this.route('session');
   this.route('404', { path: '/*path' });
 
   return null;

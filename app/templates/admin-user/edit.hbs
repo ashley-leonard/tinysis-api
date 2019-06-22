@@ -1,8 +1,19 @@
 <h2>{{full-name user}} ({{titleize user.attributes.role}})</h2>
 
-{{admin-user-form
-  staff=staff
-  model=user
-  save=(action "saveUser")
-  reportError=(action "reportError")
-}}
+<div class="flex hb-4">
+  {{admin-user-form
+    staff=staff
+    model=user
+    save=(action "saveUser")
+    reportError=(action "reportError")
+    updateAuthorizedUser=(action "updateAuthorizedUser")
+  }}
+
+  {{admin-user-authorized-user
+    user=user
+    activateUser=(action "activateUser")
+    updateAuthorizedUser=(action "updateAuthorizedUser")
+    destroyAuthorizedUser=(action "destroyAuthorizedUser")
+    getAuthorizedUser=(action "getAuthorizedUser")
+  }}
+</div>

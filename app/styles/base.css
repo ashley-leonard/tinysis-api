@@ -30,7 +30,7 @@ ol {
   padding-left: none;
 }
 
-h1, h2, h3 {
+h1, h2, h3, h4 {
   @apply font-bold;
 }
 
@@ -44,6 +44,10 @@ h2 {
 
 h3 {
   @apply my-4 text-lg;
+}
+
+h4 {
+  @apply my-4;
 }
 
 p {

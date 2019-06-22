@@ -1,11 +1,12 @@
 import Component from '@ember/component';
-import { inject as service } from '@ember/service';
 import { computed } from '@ember/object';
 import { ROLE_ADMIN } from '../utils/user-utils';
 
 export default Component.extend({
-  tinyData: service(),
   tagName: '',
+  signin: () => {},
+  signoff: () => {},
+
   userIsAdmin: computed('user', function () {
     const { user } = this;
 
@@ -13,4 +14,13 @@ export default Component.extend({
 
     return user.attributes.role === ROLE_ADMIN;
   }),
+
+  actions: {
+    signIn() {
+      this.signin();
+    },
+    signOut() {
+      this.signout();
+    },
+  },
 });
