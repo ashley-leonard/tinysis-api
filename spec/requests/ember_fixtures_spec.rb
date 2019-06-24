@@ -26,6 +26,62 @@ def write_fixture(request, file)
   response
 end
 
+def write_authorized_user_fixture user, file
+  user_id = Digest::MD5.hexdigest user.email
+  fixture = {
+    "data": {
+      "email": user.email,
+      "email_verified": false,
+      "updated_at": "2019-06-23T23:44:29.877Z",
+      "user_id": "auth0|#{user_id}",
+      "name": user.full_name,
+      "identities": [
+        {
+          "connection": "Username-Password-Authentication",
+          "provider": "auth0",
+          "user_id": user_id,
+          "isSocial": false
+        }
+      ],
+      "created_at": "2019-05-25T00:24:18.815Z",
+      "last_password_reset": "2019-06-10T04:09:05.883Z",
+      "given_name": user.first_name,
+      "family_name": user.last_name,
+      "nickname": user.nickname,
+      "last_login": "2019-06-23T23:44:29.877Z",
+      "last_ip": "208.100.155.216",
+      "logins_count": 38,
+      "roles": [
+        {
+          "id": "rol_7B7Ic4uF67wTTC1W",
+          "name": User::PRIVILEGE_NAMES[user.privilege].downcase,
+          "description": "Manage all data, access admin settings",
+          "sources": [
+            {
+              "source_id": "",
+              "source_type": "DIRECT",
+              "source_name": ""
+            }
+          ]
+        }
+      ]
+    }
+  }
+
+  path_name = Rails.root.join('tmp', file)
+  pretty = JSON.pretty_generate(fixture)
+  output = <<~END
+    // auth for user #{user.id}
+    export default #{pretty};
+  END
+
+  File.open(path_name, 'w') do |f|
+    f.write(output)
+  end
+
+  fixture
+end
+
 CURRENT_YEAR = 2019
 LAST_YEAR = CURRENT_YEAR - 1
 
@@ -188,7 +244,9 @@ RSpec.describe 'Ember fixtures script', type: :request do
         # general
         #
         write_fixture "/api/admin/users/#{@admin1.id}", "user-admin.js"
+        write_authorized_user_fixture @admin1, "auth-user-admin.js"
         write_fixture "/api/admin/users/#{@staff1.id}", "user-staff.js"
+        write_authorized_user_fixture @staff1, "auth-user-staff1.js"
         write_fixture "/api/admin/users/#{@student1.id}", "user-student.js"
 
         # years
