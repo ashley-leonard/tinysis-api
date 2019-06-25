@@ -1,6 +1,7 @@
 import fetch from 'tinysis-ui/utils/fetch';
 import { module, test } from 'qunit';
 import Pretender from 'pretender';
+import { MockLocalStorage } from '../../helpers/test-utils';
 
 const apiResult = {
   data: [{ bee: 'bo' }],
@@ -13,10 +14,12 @@ const api = '/api/bee/bo';
 module('Unit | Utility | fetch', (hooks) => {
   hooks.beforeEach(function () {
     this.pretender = new Pretender();
+    this.localStorage = new MockLocalStorage();
   });
 
   hooks.afterEach(function () {
     this.pretender.shutdown();
+    this.localStorage.unmock();
   });
 
   test('exercising /fetch', async function (assert) {

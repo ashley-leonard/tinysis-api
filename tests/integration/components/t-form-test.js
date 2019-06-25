@@ -7,6 +7,7 @@ import {
   click,
   fillIn,
 } from '@ember/test-helpers';
+import { resolve } from 'rsvp';
 import hbs from 'htmlbars-inline-precompile';
 
 let requests;
@@ -28,6 +29,7 @@ module('Integration | Component | t-form', (hooks) => {
       }),
       save(outbound) {
         requests.push({ type: 'submit', outbound });
+        return resolve({ data: outbound });
       },
       reportError(errors) {
         requests.push({ type: 'error', errors });

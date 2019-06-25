@@ -1,4 +1,4 @@
-// GET /api/meetings?contractIds=12
+// GET /api/meetings?contractIds=3
 export default {
   data: [
     {

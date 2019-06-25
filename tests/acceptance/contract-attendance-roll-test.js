@@ -9,6 +9,7 @@ import {
 import { setupApplicationTest } from 'ember-qunit';
 import { Interactor } from '@bigtest/interactor';
 import MockServer, { provisionTinySisBootstrapRoutes } from '../helpers/mock-server';
+import { MockLocalStorage } from '../helpers/test-utils';
 
 import contractDetailFixture from '../fixtures/contract-detail';
 import contractAttendanceRollMeetingFixture from '../fixtures/contract-attendance-roll-meeting';
@@ -16,6 +17,8 @@ import contractAttendanceRollEnrollments from '../fixtures/contract-attendance-r
 import contractAttendanceRollNotes from '../fixtures/contract-attendance-roll-notes';
 
 let server;
+let localStorage;
+
 const contractAttendanceRollUrl = `/tiny/contract/${contractDetailFixture.data.id}/attendance/${contractAttendanceRollMeetingFixture.data.id}`;
 
 module('Acceptance | contract attendance roll', (hooks) => {
@@ -23,6 +26,8 @@ module('Acceptance | contract attendance roll', (hooks) => {
 
   hooks.beforeEach((assert) => {
     server = new MockServer();
+    localStorage = new MockLocalStorage();
+
     provisionTinySisBootstrapRoutes(server);
 
     server.addRequest('get', '/api/contracts/:id', contractDetailFixture);
@@ -35,6 +40,7 @@ module('Acceptance | contract attendance roll', (hooks) => {
 
   hooks.afterEach(() => {
     server.shutdown();
+    localStorage.unmock();
   });
 
   test(`visiting ${contractAttendanceRollUrl}`, async (assert) => {

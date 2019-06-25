@@ -1,13 +1,13 @@
-// GET /api/statuses?enrollmentIds=15,17
+// GET /api/statuses?enrollmentIds=1,3
 export default {
   data: [
     {
-      id: '61',
+      id: '1',
       type: 'status',
       attributes: {
         month: '2019-09-01',
-        createdAt: '2019-05-09T04:36:04.000Z',
-        updatedAt: '2019-05-09T04:36:04.000Z',
+        createdAt: '2019-06-24T02:51:25.000Z',
+        updatedAt: '2019-06-24T02:51:25.000Z',
         fteHours: 25,
         metFteRequirements: true,
         heldPeriodicCheckins: true,
@@ -17,25 +17,25 @@ export default {
       relationships: {
         creator: {
           data: {
-            id: '156',
+            id: '1',
             type: 'creator',
           },
         },
         statusable: {
           data: {
-            id: '15',
+            id: '1',
             type: 'enrollment',
           },
         },
       },
     },
     {
-      id: '62',
+      id: '2',
       type: 'status',
       attributes: {
         month: '2019-10-01',
-        createdAt: '2019-05-09T04:36:04.000Z',
-        updatedAt: '2019-05-09T04:36:04.000Z',
+        createdAt: '2019-06-24T02:51:25.000Z',
+        updatedAt: '2019-06-24T02:51:25.000Z',
         fteHours: 25,
         metFteRequirements: true,
         heldPeriodicCheckins: true,
@@ -45,25 +45,25 @@ export default {
       relationships: {
         creator: {
           data: {
-            id: '156',
+            id: '1',
             type: 'creator',
           },
         },
         statusable: {
           data: {
-            id: '15',
+            id: '1',
             type: 'enrollment',
           },
         },
       },
     },
     {
-      id: '63',
+      id: '3',
       type: 'status',
       attributes: {
         month: '2019-11-01',
-        createdAt: '2019-05-09T04:36:04.000Z',
-        updatedAt: '2019-05-09T04:36:04.000Z',
+        createdAt: '2019-06-24T02:51:25.000Z',
+        updatedAt: '2019-06-24T02:51:25.000Z',
         fteHours: 25,
         metFteRequirements: true,
         heldPeriodicCheckins: true,
@@ -73,25 +73,25 @@ export default {
       relationships: {
         creator: {
           data: {
-            id: '156',
+            id: '1',
             type: 'creator',
           },
         },
         statusable: {
           data: {
-            id: '15',
+            id: '1',
             type: 'enrollment',
           },
         },
       },
     },
     {
-      id: '67',
+      id: '7',
       type: 'status',
       attributes: {
         month: '2019-09-01',
-        createdAt: '2019-05-09T04:36:04.000Z',
-        updatedAt: '2019-05-09T04:36:04.000Z',
+        createdAt: '2019-06-24T02:51:25.000Z',
+        updatedAt: '2019-06-24T02:51:25.000Z',
         fteHours: 25,
         metFteRequirements: true,
         heldPeriodicCheckins: true,
@@ -101,25 +101,25 @@ export default {
       relationships: {
         creator: {
           data: {
-            id: '157',
+            id: '2',
             type: 'creator',
           },
         },
         statusable: {
           data: {
-            id: '17',
+            id: '3',
             type: 'enrollment',
           },
         },
       },
     },
     {
-      id: '68',
+      id: '8',
       type: 'status',
       attributes: {
         month: '2019-10-01',
-        createdAt: '2019-05-09T04:36:05.000Z',
-        updatedAt: '2019-05-09T04:36:05.000Z',
+        createdAt: '2019-06-24T02:51:25.000Z',
+        updatedAt: '2019-06-24T02:51:25.000Z',
         fteHours: 25,
         metFteRequirements: true,
         heldPeriodicCheckins: true,
@@ -129,25 +129,25 @@ export default {
       relationships: {
         creator: {
           data: {
-            id: '157',
+            id: '2',
             type: 'creator',
           },
         },
         statusable: {
           data: {
-            id: '17',
+            id: '3',
             type: 'enrollment',
           },
         },
       },
     },
     {
-      id: '69',
+      id: '9',
       type: 'status',
       attributes: {
         month: '2019-11-01',
-        createdAt: '2019-05-09T04:36:05.000Z',
-        updatedAt: '2019-05-09T04:36:05.000Z',
+        createdAt: '2019-06-24T02:51:25.000Z',
+        updatedAt: '2019-06-24T02:51:25.000Z',
         fteHours: 25,
         metFteRequirements: true,
         heldPeriodicCheckins: true,
@@ -157,13 +157,13 @@ export default {
       relationships: {
         creator: {
           data: {
-            id: '157',
+            id: '2',
             type: 'creator',
           },
         },
         statusable: {
           data: {
-            id: '17',
+            id: '3',
             type: 'enrollment',
           },
         },
@@ -172,27 +172,25 @@ export default {
   ],
   included: [
     {
-      id: '156',
+      id: '1',
       type: 'user',
       attributes: {
-        firstName: 'Rory',
-        lastName: 'Muller',
+        firstName: 'Donald',
+        lastName: 'Stoltenberg',
         nickname: null,
         dateActive: '2012-09-01',
         dateInactive: null,
         districtId: null,
         districtGrade: 12,
-        login: 'qscm4ohqweb4',
-        email: 'odell@hauck.io',
-        canLogin: false,
-        isActive: true,
+        email: 'chase@hellerjohnson.info',
+        status: 'active',
         role: 'staff',
       },
       relationships: {
         coordinatees: {
           data: [
             {
-              id: '160',
+              id: '5',
               type: 'student',
             },
           ],
@@ -200,31 +198,29 @@ export default {
       },
     },
     {
-      id: '157',
+      id: '2',
       type: 'user',
       attributes: {
-        firstName: 'Richard',
-        lastName: 'Kuhic',
+        firstName: 'Keven',
+        lastName: 'Champlin',
         nickname: null,
         dateActive: '2013-02-01',
         dateInactive: null,
         districtId: null,
         districtGrade: 12,
-        login: 'a701gzbzzkjc',
-        email: 'lacy@runolfonlowe.io',
-        canLogin: false,
-        isActive: true,
+        email: 'denis@macejkovic.com',
+        status: 'active',
         role: 'staff',
       },
       relationships: {
         coordinatees: {
           data: [
             {
-              id: '161',
+              id: '6',
               type: 'student',
             },
             {
-              id: '162',
+              id: '7',
               type: 'student',
             },
           ],

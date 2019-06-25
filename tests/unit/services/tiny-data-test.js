@@ -1,6 +1,7 @@
 import { module, test } from 'qunit';
 import { setupTest } from 'ember-qunit';
 import Pretender from 'pretender';
+import { MockLocalStorage } from '../../helpers/test-utils';
 import notesResult from '../../fixtures/notes-contract-enrollments';
 
 const apiResult = {
@@ -16,6 +17,8 @@ let fetches;
 module('Unit | Service | tiny-data', (hooks) => {
   hooks.beforeEach(function () {
     this.pretender = new Pretender();
+    this.localStorage = new MockLocalStorage();
+
     fetches = [];
     this.pretender.get(api, (pretenderRequest) => {
       fetches.push({
@@ -31,6 +34,7 @@ module('Unit | Service | tiny-data', (hooks) => {
 
   hooks.afterEach(function () {
     this.pretender.shutdown();
+    this.localStorage.unmock();
   });
 
   setupTest(hooks);

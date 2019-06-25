@@ -10,26 +10,26 @@ export default Controller.extend({
   flashMessages: service(),
   tinyData: service(),
   actions: {
-    getAuthorizedUser(email) {
+    getLogin(email) {
       const encEmail = encodeURIComponent(email);
       return fetch(`/api/admin/authorized-users?email=${encEmail}`)
         .then((response) => {
-          this.set('authorizedUser', response.data);
+          this.set('login', response.data);
           return response.data;
         });
     },
 
-    updateAuthorizedUser(data, authorizedUser, attributesChanged) {
-      return this.saveAuthorizedUser(data, authorizedUser, attributesChanged)
+    updateLogin(data, login, attributesChanged) {
+      return this.saveLogin(data, login, attributesChanged)
         .then((result) => {
-          this.set('authorizedUser', result);
+          this.set('login', result);
           this.flashMessages.success('Login was successfully updated.');
           return result;
         });
     },
 
-    destroyAuthorizedUser(authorizedUser) {
-      return fetch(`/api/admin/authorized-users/${authorizedUser.user_id}`, {
+    destroyLogin(login) {
+      return fetch(`/api/admin/authorized-users/${login.user_id}`, {
         method: 'DELETE',
       });
     },
@@ -64,7 +64,7 @@ export default Controller.extend({
             body: JSON.stringify({ data }),
           });
 
-          const postSaveAction = await this.syncAuthorizedUser(data, this.authorizedUser);
+          const postSaveAction = await this.syncLogin(data, this.login);
 
           switch (postSaveAction.action) {
             case 'redirect':
@@ -94,15 +94,15 @@ export default Controller.extend({
     },
   },
 
-  async syncAuthorizedUser(data, authorizedUser) {
+  async syncLogin(data, login) {
     const user = this.get('user');
     const changedKeys = getChangedKeys(user, data);
     const actionRedirect = { action: 'redirect' };
     const actionPrompt = { action: 'prompt' };
 
-    if (authorizedUser) {
+    if (login) {
       if (['firstName', 'lastName', 'nickname', 'email'].find(value => changedKeys.includes(value))) {
-        await this.saveAuthorizedUser(data, authorizedUser, changedKeys);
+        await this.saveLogin(data, login, changedKeys);
       }
     }
 
@@ -115,7 +115,7 @@ export default Controller.extend({
 
     // No authorized user, and user is now >= staff and active
     //
-    if (!authorizedUser && isStaffRole(user.attributes.role && isActive(user))) {
+    if (!login && isStaffRole(user.attributes.role && isActive(user))) {
       return actionPrompt;
     }
 
@@ -124,13 +124,13 @@ export default Controller.extend({
 
   // TODO should this reset the local user state? upon success?
   //
-  saveAuthorizedUser(data, authorizedUser, changedKeys = AUTH_USER_KEYS) {
+  saveLogin(data, login, changedKeys = AUTH_USER_KEYS) {
     const body = changedKeys.reduce((memo, key) => {
       memo[key] = data.attributes[key];
       return memo;
     }, {});
 
-    return fetch(`/api/admin/authorized-users/${authorizedUser.user_id}`, {
+    return fetch(`/api/admin/authorized-users/${login.user_id}`, {
       method: 'PATCH',
       body: JSON.stringify({ data: body }),
     });

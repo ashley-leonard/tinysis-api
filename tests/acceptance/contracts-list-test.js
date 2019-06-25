@@ -7,6 +7,7 @@ import {
 } from '@ember/test-helpers';
 import { setupApplicationTest } from 'ember-qunit';
 import MockServer, { provisionTinySisBootstrapRoutes } from '../helpers/mock-server';
+import { MockLocalStorage } from '../helpers/test-utils';
 
 import termsFixture from '../fixtures/terms';
 import categoriesFixture from '../fixtures/categories';
@@ -14,12 +15,15 @@ import staffFixture from '../fixtures/staff';
 import contractsFixture from '../fixtures/contracts';
 
 let server;
+let localStorage;
 
 module('Acceptance | contracts list', (hooks) => {
   setupApplicationTest(hooks);
 
   hooks.beforeEach((assert) => {
     server = new MockServer();
+    localStorage = new MockLocalStorage();
+
     provisionTinySisBootstrapRoutes(server);
     server.addRequest('get', '/api/terms', termsFixture);
     server.addRequest('get', '/api/categories', categoriesFixture);
@@ -33,6 +37,7 @@ module('Acceptance | contracts list', (hooks) => {
 
   hooks.afterEach(() => {
     server.shutdown();
+    localStorage.unmock();
   });
 
   test('visiting /tiny/contracts?schoolYear=2018 with matching contracts', async (assert) => {

@@ -1,8 +1,8 @@
-// GET /api/enrollments?contractIds=12&include=creditAssignments,creditAssignments.credit,participant
+// GET /api/enrollments?contractIds=3&include=creditAssignments,creditAssignments.credit,participant
 export default {
   data: [
     {
-      id: '15',
+      id: '2',
       type: 'enrollment',
       attributes: {
         finalizedOn: null,
@@ -12,13 +12,73 @@ export default {
       relationships: {
         contract: {
           data: {
-            id: '12',
+            id: '3',
             type: 'contract',
           },
         },
         participant: {
           data: {
-            id: '160',
+            id: '7',
+            type: 'participant',
+          },
+        },
+        creditAssignments: {
+          data: [
+            {
+              id: '6',
+              type: 'creditAssignment',
+            },
+          ],
+        },
+        turnins: {
+          data: [
+
+          ],
+        },
+        meetingParticipants: {
+          data: [
+            {
+              id: '2',
+              type: 'meetingParticipant',
+            },
+            {
+              id: '4',
+              type: 'meetingParticipant',
+            },
+            {
+              id: '6',
+              type: 'meetingParticipant',
+            },
+            {
+              id: '8',
+              type: 'meetingParticipant',
+            },
+            {
+              id: '10',
+              type: 'meetingParticipant',
+            },
+          ],
+        },
+      },
+    },
+    {
+      id: '1',
+      type: 'enrollment',
+      attributes: {
+        finalizedOn: null,
+        enrollmentStatus: 'enrolled',
+        completionStatus: 'incomplete',
+      },
+      relationships: {
+        contract: {
+          data: {
+            id: '3',
+            type: 'contract',
+          },
+        },
+        participant: {
+          data: {
+            id: '5',
             type: 'participant',
           },
         },
@@ -80,68 +140,56 @@ export default {
         },
       },
     },
+  ],
+  included: [
     {
-      id: '16',
-      type: 'enrollment',
+      id: '6',
+      type: 'creditAssignment',
       attributes: {
-        finalizedOn: null,
-        enrollmentStatus: 'enrolled',
-        completionStatus: 'incomplete',
+        creditHours: 1.0,
       },
       relationships: {
-        contract: {
+        credit: {
           data: {
-            id: '12',
-            type: 'contract',
+            id: '1',
+            type: 'credit',
           },
-        },
-        participant: {
-          data: {
-            id: '162',
-            type: 'participant',
-          },
-        },
-        creditAssignments: {
-          data: [
-            {
-              id: '6',
-              type: 'creditAssignment',
-            },
-          ],
-        },
-        turnins: {
-          data: [
-
-          ],
-        },
-        meetingParticipants: {
-          data: [
-            {
-              id: '2',
-              type: 'meetingParticipant',
-            },
-            {
-              id: '4',
-              type: 'meetingParticipant',
-            },
-            {
-              id: '6',
-              type: 'meetingParticipant',
-            },
-            {
-              id: '8',
-              type: 'meetingParticipant',
-            },
-            {
-              id: '10',
-              type: 'meetingParticipant',
-            },
-          ],
         },
       },
     },
-  ],
-  included: [
+    {
+      id: '1',
+      type: 'credit',
+      attributes: {
+        courseId: '0',
+        courseName: 'Course 1',
+        courseType: 0,
+      },
+    },
+    {
+      id: '7',
+      type: 'user',
+      attributes: {
+        firstName: 'Stephane',
+        lastName: 'Maggio',
+        nickname: null,
+        dateActive: '2018-08-01',
+        dateInactive: '2019-10-01',
+        districtId: '2351707665',
+        districtGrade: 12,
+        email: null,
+        status: 'inactive',
+        role: 'student',
+      },
+      relationships: {
+        coordinator: {
+          data: {
+            id: '2',
+            type: 'staff',
+          },
+        },
+      },
+    },
     {
       id: '5',
       type: 'creditAssignment',
@@ -151,83 +199,31 @@ export default {
       relationships: {
         credit: {
           data: {
-            id: '6',
+            id: '1',
             type: 'credit',
           },
         },
       },
     },
     {
-      id: '6',
-      type: 'credit',
-      attributes: {
-        courseId: '0',
-        courseName: 'Course 1',
-        courseType: 0,
-      },
-    },
-    {
-      id: '160',
+      id: '5',
       type: 'user',
       attributes: {
-        firstName: 'Abe',
-        lastName: 'Brekke',
+        firstName: 'Marshall',
+        lastName: 'Rohan',
         nickname: null,
         dateActive: '2018-08-01',
         dateInactive: null,
-        districtId: '4458178913',
+        districtId: '2732911327',
         districtGrade: 12,
-        login: 'pk6qoc4qh7ma',
         email: null,
-        canLogin: false,
-        isActive: true,
+        status: 'active',
         role: 'student',
       },
       relationships: {
         coordinator: {
           data: {
-            id: '156',
-            type: 'staff',
-          },
-        },
-      },
-    },
-    {
-      id: '6',
-      type: 'creditAssignment',
-      attributes: {
-        creditHours: 1.0,
-      },
-      relationships: {
-        credit: {
-          data: {
-            id: '6',
-            type: 'credit',
-          },
-        },
-      },
-    },
-    {
-      id: '162',
-      type: 'user',
-      attributes: {
-        firstName: 'Ria',
-        lastName: 'Goodwin',
-        nickname: null,
-        dateActive: '2018-08-01',
-        dateInactive: '2019-10-01',
-        districtId: '3024504196',
-        districtGrade: 12,
-        login: '1fgjki9yz07v',
-        email: null,
-        canLogin: false,
-        isActive: false,
-        role: 'student',
-      },
-      relationships: {
-        coordinator: {
-          data: {
-            id: '157',
+            id: '1',
             type: 'staff',
           },
         },

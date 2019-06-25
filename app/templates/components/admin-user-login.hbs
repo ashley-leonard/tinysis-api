@@ -2,7 +2,7 @@
   {{#if loading}}
     loading
   {{else}}
-    {{#unless authorizedUser}}
+    {{#unless login}}
       <h3>No login for {{full-name user "first-last"}}</h3>
 
       {{#if showAccessWarning}}
@@ -15,7 +15,7 @@
           </p>
           <button
             class="btn"
-            onclick={{action "activateUser" user}}
+            onclick={{action "createLogin" user}}
           >
             Click to create a login
           </button>
@@ -27,19 +27,20 @@
       {{/if}}
     {{/unless}}
 
-    {{#if authorizedUser}}
+    {{#if login}}
       <h3>Login active for {{full-name user "first-last"}}</h3>
       {{#if showRoleRequiresUpdate}}
         {{#t-notice type="alert"}}
           <p>
-            The user has a different role defined in the login system,
-            from what is shown here. The role should be updated in the
+            The user has a different role defined in their login. This
+            can cause access or information privacy problems.
+            The role should be updated in the
             login system to match the current setting of
             {{titleize user.attributes.role}}.
           </p>
           <button
             class="btn"
-            onclick={{action (action "updateAuthorizedUser" user authorizedUser)}}
+            onclick={{action (action "updateLogin" user login)}}
           >
             Click to update login role to {{titleize user.attributes.role}}
           </button>
@@ -48,11 +49,12 @@
       {{#if showAttributesDontMatch}}
         {{#t-notice type="alert"}}
           <p>
-            User settings, such as email or names, are out of sync. They should be updated to match what is shown here.
+            User settings for the login, such as email or names, are out of sync.
+            They should be updated to match what is shown here.
           </p>
           <button
             class="btn"
-            onclick={{action (action "updateAuthorizedUser" user authorizedUser)}}
+            onclick={{action (action "updateLogin" user login)}}
           >
             Click to update now
           </button>
@@ -65,12 +67,12 @@
           </p>
           <button
             class="btn"
-            onclick={{action (action "removeLogin" user authorizedUser)}}
+            onclick={{action (action "removeLogin" user login)}}
           >
             Click to remove their login now
           </button>
         {{/t-notice}}
       {{/if}}
-    {{/if}} {{!-- an authorizedUser exists --}}
+    {{/if}} {{!-- an login exists --}}
   {{/if}} {{!-- done loading --}}
 </div>

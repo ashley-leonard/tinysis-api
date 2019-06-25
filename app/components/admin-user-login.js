@@ -13,29 +13,29 @@ export default Component.extend({
 
   showAttributesDontMatch: bool('attributesOutOfSync'),
 
-  showAccessWarning: computed('user', 'authorizedUser', function () {
+  showAccessWarning: computed('user', 'login', function () {
     const userIsActive = isActive(this.user);
     const userIsStaff = isStaff(this.user);
-    const authorizedUser = this.get('authorizedUser');
+    const login = this.get('login');
 
     // An active admin or staff member should have an identity.
-    if (userIsActive && userIsStaff && !authorizedUser) {
+    if (userIsActive && userIsStaff && !login) {
       return true;
     }
 
     return false;
   }),
 
-  attributesOutOfSync: computed('user', 'authorizedUser', function () {
+  attributesOutOfSync: computed('user', 'login', function () {
     const {
       user,
-      authorizedUser,
+      login,
       showRoleRequiresUpdate,
       showRemoveOption,
     } = this;
 
     if (showRoleRequiresUpdate || showRemoveOption) return false;
-    if (!authorizedUser) return false;
+    if (!login) return false;
 
     const comparitors = [{
       user: 'firstName',
@@ -50,7 +50,7 @@ export default Component.extend({
     const attributesMismatch = comparitors.filter((comparitor) => {
       const userKey = comparitor.user || comparitor;
       const authKey = comparitor.auth || comparitor;
-      const result = (user.attributes[userKey] || undefined) !== authorizedUser[authKey];
+      const result = (user.attributes[userKey] || undefined) !== login[authKey];
 
       return result;
     });
@@ -58,29 +58,29 @@ export default Component.extend({
     return attributesMismatch.length ? attributesMismatch : null;
   }),
 
-  showRoleRequiresUpdate: computed('user', 'authorizedUser', function () {
+  showRoleRequiresUpdate: computed('user', 'login', function () {
     const {
       user,
-      authorizedUser,
+      login,
       showRemoveOption,
     } = this;
 
     if (showRemoveOption) return false;
-    if (!authorizedUser) return false;
+    if (!login) return false;
 
     const tinyRole = user.attributes.role || '';
-    const authRoles = authorizedUser.roles || [];
+    const authRoles = login.roles || [];
     const authRole = authRoles.map(r => r.name.toLowerCase()).join('');
 
     return (isStaff(user) && tinyRole !== authRole);
   }),
 
-  showRemoveOption: computed('user', 'authorizedUser', function () {
+  showRemoveOption: computed('user', 'login', function () {
     const userIsInactive = !isActive(this.user);
     const userIsStaff = isStaff(this.user);
-    const authorizedUserExists = Boolean(this.authorizedUser);
+    const loginExists = Boolean(this.login);
 
-    return (userIsInactive || !userIsStaff) && authorizedUserExists;
+    return (userIsInactive || !userIsStaff) && loginExists;
   }),
 
   async didReceiveAttrs() {
@@ -91,43 +91,43 @@ export default Component.extend({
 
     this.set('role', currentUserRole);
 
-    let authorizedUser;
+    let login;
     try {
-      authorizedUser = await this.getAuthorizedUser(this.get('user.attributes.email'));
+      login = await this.getLogin(this.get('user.attributes.email'));
     } catch (e) {
-      authorizedUser = null;
+      login = null;
     }
 
     this.setProperties({
-      authorizedUser,
+      login,
       loading: false,
     });
   },
 
   actions: {
-    async activateUser(user) {
+    async activateLogin(user) {
       this.set('updating', true);
-      const updatedUser = await this.activateUser(user);
+      const updatedLogin = await this.activateLogin(user);
       if (!this.isDestroyed) {
         this.setProperties({
           updating: false,
-          authorizedUser: updatedUser,
+          login: updatedLogin,
         });
       }
     },
 
-    async removeAuthorizedUser(authorizedUser) {
+    async destroyLogin(login) {
       this.set('updating', true);
-      await this.destroyAuthorizedUser(authorizedUser);
+      await this.destroyLogin(login);
       if (!this.isDestroyed) {
         this.setProperties({
           updating: false,
-          authorizedUser: null,
+          login: null,
         });
       }
     },
 
-    async updateAuthorizedUser(user, authorizedUser) {
+    async updateLogin(user, login) {
       const {
         attributesOutOfSync,
         showRoleRequiresUpdate,
@@ -139,11 +139,11 @@ export default Component.extend({
       }
 
       this.set('updating', true);
-      const updatedUser = await this.updateAuthorizedUser(user, authorizedUser, changed);
+      const updatedLogin = await this.updateLogin(user, login, changed);
       if (!this.isDestroyed) {
         this.setProperties({
           updating: false,
-          authorizedUser: updatedUser.data,
+          login: updatedLogin.data,
         });
       }
     },

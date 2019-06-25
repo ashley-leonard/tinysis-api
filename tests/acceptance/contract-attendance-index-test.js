@@ -7,6 +7,7 @@ import {
 } from '@ember/test-helpers';
 import { setupApplicationTest } from 'ember-qunit';
 import MockServer, { provisionTinySisBootstrapRoutes } from '../helpers/mock-server';
+import { MockLocalStorage } from '../helpers/test-utils';
 
 import contractDetailFixture from '../fixtures/contract-detail';
 import contractAttendanceMeetingFixture from '../fixtures/contract-attendance';
@@ -14,6 +15,7 @@ import contractAttendanceEnrollmentsFixture from '../fixtures/contract-attendanc
 import contractAttendanceNotesFixture from '../fixtures/contract-attendance-notes';
 
 let server;
+let localStorage;
 let meetings;
 let enrollments;
 
@@ -22,6 +24,8 @@ module('Acceptance | contract attendance index', (hooks) => {
 
   hooks.beforeEach((assert) => {
     server = new MockServer();
+    localStorage = new MockLocalStorage();
+
     provisionTinySisBootstrapRoutes(server);
     server.addRequest('get', '/api/contracts/:id', contractDetailFixture);
     server.addRequest('get', '/api/meetings', contractAttendanceMeetingFixture);
@@ -36,6 +40,7 @@ module('Acceptance | contract attendance index', (hooks) => {
 
   hooks.afterEach(() => {
     server.shutdown();
+    localStorage.unmock();
   });
 
   const attendanceListRoute = '/tiny/contract/123/attendance';
