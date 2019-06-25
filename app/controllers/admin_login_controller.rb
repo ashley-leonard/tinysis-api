@@ -1,6 +1,6 @@
 require './lib/auth0_management'
 
-class AdminAuthController < AdminController
+class AdminLoginController < AdminController
 
   def create
     user = @client.activate_user user_attributes

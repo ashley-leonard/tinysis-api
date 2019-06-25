@@ -77,6 +77,16 @@ class AuthManagement
 
       user['roles'] = roles
 
+      get_permissions_url = URI("#{@base_url}/api/v2/users/#{encoded_user_id}/permissions")
+
+      response = http.get(get_permissions_url, headers)
+
+      raise AuthManagementError.new('User permissions fetch failed', response) if response.code != '200'
+
+      permissions = JSON.parse(response.body)
+
+      user['permissions'] = permissions
+
       return user
     end
   end
