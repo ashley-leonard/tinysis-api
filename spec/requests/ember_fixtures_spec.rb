@@ -246,7 +246,7 @@ RSpec.describe 'Ember fixtures script', type: :request do
         write_fixture "/api/admin/users/#{@admin1.id}", "user-admin.js"
         write_authorized_user_fixture @admin1, "auth-user-admin.js"
         write_fixture "/api/admin/users/#{@staff1.id}", "user-staff.js"
-        write_authorized_user_fixture @staff1, "auth-user-staff1.js"
+        write_authorized_user_fixture @staff1, "auth-user-staff.js"
         write_fixture "/api/admin/users/#{@student1.id}", "user-student.js"
 
         # years
