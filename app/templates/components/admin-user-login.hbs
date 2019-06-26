@@ -2,31 +2,6 @@
   {{#if loading}}
     loading
   {{else}}
-    {{#unless login}}
-      <h3>No login for {{full-name user "first-last"}}</h3>
-
-      {{#if showAccessWarning}}
-        {{#t-notice type="alert"}}
-          <p>
-            {{full-name user "first-last"}} is active and has a role
-            of {{titleize user.attributes.role}}. Without
-            a login, no access is possible.
-            Shall we create a login?
-          </p>
-          <button
-            class="btn"
-            onclick={{action "createLogin" user}}
-          >
-            Click to create a login
-          </button>
-        {{/t-notice}}
-      {{else}}
-        {{#t-notice}}
-          No login is required due to status and/or role.
-        {{/t-notice}}
-      {{/if}}
-    {{/unless}}
-
     {{#if login}}
       <h3>Login active for {{full-name user "first-last"}}</h3>
       {{#if showRoleRequiresUpdate}}
@@ -67,12 +42,36 @@
           </p>
           <button
             class="btn"
-            onclick={{action (action "removeLogin" user login)}}
+            onclick={{action (action "destroyLogin" user login)}}
           >
             Click to remove their login now
           </button>
         {{/t-notice}}
       {{/if}}
-    {{/if}} {{!-- an login exists --}}
+    {{else}}
+      {{!-- no login exists --}}
+      <h3>No login for {{full-name user "first-last"}}</h3>
+
+      {{#if showAccessWarning}}
+        {{#t-notice type="alert"}}
+          <p>
+            {{full-name user "first-last"}} is active and has a role
+            of {{titleize user.attributes.role}}. Without
+            a login, no access is possible.
+            Shall we create a login?
+          </p>
+          <button
+            class="btn"
+            onclick={{action "createLogin" user}}
+          >
+            Click to create a login
+          </button>
+        {{/t-notice}}
+      {{else}}
+        {{#t-notice}}
+          No login is required due to status and/or role.
+        {{/t-notice}}
+      {{/if}}
+    {{/if}}
   {{/if}} {{!-- done loading --}}
 </div>

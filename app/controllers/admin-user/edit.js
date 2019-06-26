@@ -12,7 +12,7 @@ export default Controller.extend({
   actions: {
     getLogin(email) {
       const encEmail = encodeURIComponent(email);
-      return fetch(`/api/admin/authorized-users?email=${encEmail}`)
+      return fetch(`/api/admin/login?email=${encEmail}`)
         .then((response) => {
           this.set('login', response.data);
           return response.data;
@@ -29,12 +29,12 @@ export default Controller.extend({
     },
 
     destroyLogin(login) {
-      return fetch(`/api/admin/authorized-users/${login.user_id}`, {
+      return fetch(`/api/admin/login/${login.user_id}`, {
         method: 'DELETE',
       });
     },
 
-    activateUser(user) {
+    createLogin(user) {
       const {
         firstName,
         lastName,
@@ -50,7 +50,7 @@ export default Controller.extend({
         role,
       };
 
-      return fetch('/api/admin/authorized-users', {
+      return fetch('/api/admin/login', {
         method: 'POST',
         body: JSON.stringify({ data }),
       });
@@ -130,7 +130,7 @@ export default Controller.extend({
       return memo;
     }, {});
 
-    return fetch(`/api/admin/authorized-users/${login.user_id}`, {
+    return fetch(`/api/admin/login/${login.user_id}`, {
       method: 'PATCH',
       body: JSON.stringify({ data: body }),
     });

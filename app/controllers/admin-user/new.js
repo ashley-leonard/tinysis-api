@@ -34,7 +34,7 @@ export default Controller.extend({
         }, {});
 
         try {
-          await this.tinyData.fetch('/api/admin/authorized-users', {
+          await this.tinyData.fetch('/api/admin/login', {
             method: 'POST',
             body: JSON.stringify({ data: authPostBody }),
           });

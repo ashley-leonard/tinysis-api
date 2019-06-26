@@ -55,6 +55,7 @@ export default Service.extend({
     return new Promise((resolve, reject) => {
       auth0.parseHash({ hash: window.location.hash }, (err, authResult) => {
         if (err) return reject(err);
+
         return resolve(authResult);
       });
     });

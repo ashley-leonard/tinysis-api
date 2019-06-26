@@ -105,9 +105,9 @@ export default Component.extend({
   },
 
   actions: {
-    async activateLogin(user) {
+    async createLogin(user) {
       this.set('updating', true);
-      const updatedLogin = await this.activateLogin(user);
+      const updatedLogin = await this.createLogin(user);
       if (!this.isDestroyed) {
         this.setProperties({
           updating: false,
