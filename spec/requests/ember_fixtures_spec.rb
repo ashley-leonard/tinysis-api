@@ -26,7 +26,7 @@ def write_fixture(request, file)
   response
 end
 
-def write_authorized_user_fixture user, file
+def write_login_fixture user, file
   user_id = Digest::MD5.hexdigest user.email
   fixture = {
     "data": {
@@ -244,9 +244,9 @@ RSpec.describe 'Ember fixtures script', type: :request do
         # general
         #
         write_fixture "/api/admin/users/#{@admin1.id}", "user-admin.js"
-        write_authorized_user_fixture @admin1, "auth-user-admin.js"
+        write_login_fixture @admin1, "login-admin.js"
         write_fixture "/api/admin/users/#{@staff1.id}", "user-staff.js"
-        write_authorized_user_fixture @staff1, "auth-user-staff.js"
+        write_login_fixture @staff1, "login-staff.js"
         write_fixture "/api/admin/users/#{@student1.id}", "user-student.js"
 
         # years
