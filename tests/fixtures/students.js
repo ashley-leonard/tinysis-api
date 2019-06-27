@@ -2,69 +2,69 @@
 export default {
   data: [
     {
-      id: '160',
+      id: '5',
       type: 'user',
       attributes: {
-        firstName: 'Abe',
-        lastName: 'Brekke',
+        firstName: 'Marshall',
+        lastName: 'Rohan',
         nickname: null,
         dateActive: '2018-08-01',
         dateInactive: null,
-        districtId: '4458178913',
+        districtId: '2732911327',
         districtGrade: 12,
-        isActive: true,
+        status: 'active',
         role: 'student',
       },
       relationships: {
         coordinator: {
           data: {
-            id: '156',
+            id: '1',
             type: 'staff',
           },
         },
       },
     },
     {
-      id: '161',
+      id: '6',
       type: 'user',
       attributes: {
-        firstName: 'Tinisha',
-        lastName: 'Waters',
+        firstName: 'Clifton',
+        lastName: 'Jacobi',
         nickname: null,
         dateActive: '2018-08-01',
         dateInactive: null,
-        districtId: '6534797625',
+        districtId: '6387659518',
         districtGrade: 12,
-        isActive: true,
+        status: 'active',
         role: 'student',
       },
       relationships: {
         coordinator: {
           data: {
-            id: '157',
+            id: '2',
             type: 'staff',
           },
         },
       },
     },
     {
-      id: '162',
+      id: '7',
       type: 'user',
       attributes: {
-        firstName: 'Ria',
-        lastName: 'Goodwin',
+        firstName: 'Stephane',
+        lastName: 'Maggio',
         nickname: null,
         dateActive: '2018-08-01',
         dateInactive: '2019-10-01',
-        districtId: '3024504196',
+        districtId: '2351707665',
         districtGrade: 12,
-        isActive: false,
+        status: 'inactive',
         role: 'student',
       },
       relationships: {
         coordinator: {
           data: {
-            id: '157',
+            id: '2',
             type: 'staff',
           },
         },

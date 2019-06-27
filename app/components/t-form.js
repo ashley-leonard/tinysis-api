@@ -5,7 +5,7 @@ import clone from '../utils/clone';
 
 export default Component.extend({
   showErrors: false,
-  classNames: ['t-form', 'w-full', 'lg:w-1/2', 'xl:w-1/2'],
+  classNames: ['t-form'],
   tagName: 'form',
 
   validator: computed(() => new Validator({})),
@@ -94,6 +94,13 @@ export default Component.extend({
 
     const { pojo, model } = this;
 
-    this.save(this.serializeModel(pojo, model));
+    this.set('disabled', true);
+    const result = this.save(this.serializeModel(pojo, model));
+
+    result.finally(() => {
+      if (this.isDestroyed) return;
+
+      this.set('disabled', false);
+    });
   },
 });

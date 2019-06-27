@@ -3,7 +3,8 @@ import { equal, bool } from '@ember/object/computed';
 import {
   roleTypes,
   ROLE_STUDENT,
-  isStaff,
+  isStaffRole,
+  STATUS_ACTIVE,
   STATUS_INACTIVE,
 } from '../utils/user-utils';
 import Validator from '../utils/validator';
@@ -11,13 +12,15 @@ import TForm from './t-form';
 
 export default TForm.extend({
   roleOptions: roleTypes,
-  classNames: 'w-full lg:w-1/2 xl:w-1/3',
-
+  classNames: ['w-full', 'lg:w-1/2', 'xl:w-1/3'],
+  attributeBindings: ['autocomplete'],
+  autocomplete: 'off',
   isActive: equal('pojo.status', 'active'),
   isExistingUser: bool('model.id'),
   isStudent: equal('pojo.role', ROLE_STUDENT),
   isStaff: computed('pojo.role', function () {
-    return isStaff({ attributes: this.pojo });
+    const role = this.get('pojo.role');
+    return isStaffRole(role);
   }),
 
   coordinatorOptions: computed('staff', function () {
@@ -44,12 +47,17 @@ export default TForm.extend({
       dateInactive: [{
         type: 'required',
         if: (key, value, pojo) => pojo.status === STATUS_INACTIVE,
-        message: 'Date enrollment ended is required if user is inactive',
+        message: 'Inactive date is required if user is inactive',
       }, {
         type: 'valid',
-        if: (key, value, pojo) => !pojo.isActive,
+        if: (key, value, pojo) => pojo.dateInactive,
         isValid: (key, value, pojo) => value >= pojo.dateActive,
-        message: 'Date enrollment ended should be later than date first enrolled',
+        message: 'Inactive date should be later than active date',
+      }, {
+        type: 'valid',
+        if: (key, value) => Boolean(value),
+        isValid: (key, value, pojo) => pojo.status === STATUS_ACTIVE,
+        message: 'Inactive date should not be filled out for an active user',
       }],
     };
 
@@ -62,9 +70,7 @@ export default TForm.extend({
     ];
 
     const requiredForStaff = [
-      'login',
       'email',
-      'canLogin',
     ];
 
     const requiredForStudents = [
@@ -91,13 +97,6 @@ export default TForm.extend({
   actions: {
     handleCoordinatorChange(coordinatorId) {
       this.updatePojo({ coordinatorId });
-    },
-
-    handleRoleChange(newRoleValue) {
-      this.updatePojo({ role: newRoleValue });
-      if (newRoleValue === 'student') {
-        this.updatePojo({ canLogin: false });
-      }
     },
   },
 

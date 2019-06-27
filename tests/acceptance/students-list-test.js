@@ -7,17 +7,19 @@ import {
 } from '@ember/test-helpers';
 import { setupApplicationTest } from 'ember-qunit';
 import MockServer, { provisionTinySisBootstrapRoutes } from '../helpers/mock-server';
-
+import { MockLocalStorage } from '../helpers/test-utils';
 import studentsFixture from '../fixtures/students';
 import staffFixture from '../fixtures/staff';
 
 let server;
+let localStorage;
 
 module('Acceptance | students list', (hooks) => {
   setupApplicationTest(hooks);
 
   hooks.beforeEach((assert) => {
     server = new MockServer();
+    localStorage = new MockLocalStorage();
 
     provisionTinySisBootstrapRoutes(server);
 
@@ -26,11 +28,12 @@ module('Acceptance | students list', (hooks) => {
 
     // this should always be done with mocks.
     // prevents test from hanging for minutes when Pretender crashes.
-    assert.timeout(200);
+    assert.timeout(1000);
   });
 
   hooks.afterEach(() => {
     server.shutdown();
+    localStorage.unmock();
   });
 
   test('visiting /tiny/students?schoolYear=2018 with matching students', async (assert) => {

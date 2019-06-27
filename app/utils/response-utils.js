@@ -10,6 +10,10 @@
  */
 export function summarizeValidationError(response) {
   const { errors } = response;
+  if (!errors) {
+    return response.exception || response.message;
+  }
+
   const fieldMessages = Object.keys(errors)
     .map((field) => {
       const fieldErrors = errors[field];

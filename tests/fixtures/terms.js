@@ -2,12 +2,12 @@
 export default {
   data: [
     {
-      id: '28',
+      id: '1',
       type: 'term',
       attributes: {
         name: 'Last One',
         schoolYear: 2018,
-        creditDate: null,
+        creditDate: '2019-01-31',
         months: [
           '2018-09-01',
           '2018-10-01',
@@ -17,14 +17,15 @@ export default {
         ],
         status: 'active',
       },
+      meta: null,
     },
     {
-      id: '29',
+      id: '2',
       type: 'term',
       attributes: {
         name: 'Last Two',
         schoolYear: 2018,
-        creditDate: null,
+        creditDate: '2019-06-15',
         months: [
           '2019-02-01',
           '2019-03-01',
@@ -34,14 +35,15 @@ export default {
         ],
         status: 'active',
       },
+      meta: null,
     },
     {
-      id: '30',
+      id: '3',
       type: 'term',
       attributes: {
         name: 'Current One',
         schoolYear: 2019,
-        creditDate: null,
+        creditDate: '2020-01-31',
         months: [
           '2019-09-01',
           '2019-10-01',
@@ -51,14 +53,15 @@ export default {
         ],
         status: 'active',
       },
+      meta: null,
     },
     {
-      id: '31',
+      id: '4',
       type: 'term',
       attributes: {
         name: 'Current Two',
         schoolYear: 2019,
-        creditDate: null,
+        creditDate: '2020-06-15',
         months: [
           '2020-02-01',
           '2020-03-01',
@@ -68,9 +71,10 @@ export default {
         ],
         status: 'active',
       },
+      meta: null,
     },
     {
-      id: '32',
+      id: '5',
       type: 'term',
       attributes: {
         name: 'COOR Last',
@@ -90,9 +94,10 @@ export default {
         ],
         status: 'inactive',
       },
+      meta: null,
     },
     {
-      id: '33',
+      id: '6',
       type: 'term',
       attributes: {
         name: 'COOR Current',
@@ -112,6 +117,7 @@ export default {
         ],
         status: 'active',
       },
+      meta: null,
     },
   ],
   meta: {

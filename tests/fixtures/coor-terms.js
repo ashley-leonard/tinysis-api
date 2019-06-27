@@ -2,7 +2,7 @@
 export default {
   data: [
     {
-      id: '33',
+      id: '6',
       type: 'term',
       attributes: {
         name: 'COOR Current',
@@ -22,6 +22,7 @@ export default {
         ],
         status: 'active',
       },
+      meta: null,
     },
   ],
   meta: {

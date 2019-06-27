@@ -1,20 +1,18 @@
 // GET /api/profile
 export default {
   data: {
-    id: '159',
+    id: '4',
     type: 'user',
     attributes: {
-      firstName: 'Franklyn',
-      lastName: 'Muller',
+      firstName: 'Miles',
+      lastName: 'Flatley',
       nickname: null,
       dateActive: '2011-07-01',
       dateInactive: null,
       districtId: null,
       districtGrade: 12,
-      login: '4y02xyfw55n2',
-      email: 'micah@pfannerstillzulauf.org',
-      canLogin: false,
-      isActive: true,
+      email: 'angeline@mayertstiedemann.co',
+      status: 'active',
       role: 'administrator',
     },
     relationships: {
@@ -24,5 +22,11 @@ export default {
         ],
       },
     },
+  },
+  meta: {
+    permissions: [
+      'get:config',
+      'manage:config',
+    ],
   },
 };

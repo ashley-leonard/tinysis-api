@@ -5,28 +5,54 @@ import fetch from '../utils/fetch';
 
 export default Route.extend({
   tinyData: service(),
+  session: service(),
+
+  async beforeModel(transition) {
+    const { tinyData } = this;
+
+    try {
+      const profile = await tinyData.fetch('/api/profile');
+      const mergedProfile = { ...profile.data, meta: profile.meta };
+
+      tinyData.setUser(mergedProfile);
+    } catch (e) {
+      const { intent } = transition;
+
+      transition.abort();
+
+      if (e.status === 401 || e.message === 'No session') {
+        this.session.setIntendedUrl(intent.url);
+        this.session.signIn();
+        return;
+      }
+
+      throw e;
+    }
+  },
 
   model() {
+    const { tinyData } = this;
+
     return Promise.all([
-      this.tinyData.fetch('/api/settings'),
-      this.tinyData.fetch('/api/profile'),
+      tinyData.fetch('/api/settings'),
       fetch('/api/settings/years'),
-    ]).then(([settings, profile, years]) => {
+    ]).then(([settings, years]) => {
       const currentYearSetting = settings.data.find(setting => setting.attributes.name === 'current_year');
       const reportingBaseMonthSetting = settings.data.find(setting => setting.attributes.name === 'reporting_base_month');
 
-      this.tinyData.setSchoolYear(currentYearSetting.attributes.value);
-      this.tinyData.setReportingBaseMonth(reportingBaseMonthSetting.attributes.value);
-      this.tinyData.setUser(profile.data);
-      this.tinyData.setYears(years);
+      tinyData.setSchoolYear(currentYearSetting.attributes.value);
+      tinyData.setReportingBaseMonth(reportingBaseMonthSetting.attributes.value);
+      tinyData.setYears(years);
     });
   },
 
   setupController(...args) {
     this._super(...args);
+
+    const user = this.tinyData.getUser();
+
     this.controllerFor('application').setProperties({
-      user: this.tinyData.getUser(),
-      disableToolbar: false,
+      user,
     });
   },
 

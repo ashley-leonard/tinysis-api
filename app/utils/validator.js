@@ -54,8 +54,9 @@ export default class Validator {
         for (let len = fieldCollection.length, i = 0; i < len; i += 1) {
           const validation = fieldCollection[i];
 
+          // skip this validation if falsy
           if (validation.if && !validation.if(key, value, pojo)) {
-            break;
+            continue;
           }
 
           let error;

@@ -48,6 +48,9 @@ module.exports = {
     // can leave line length to the developer to sort out
     'max-len': 0,
 
+    // continue statements are not the devil
+    'no-continue': 0,
+
     // allows the convention of a leading underscore for
     // "private" attributes
     'no-underscore-dangle': 0,

@@ -58,7 +58,7 @@ value-button {
 }
 
 .btn {
-  @apply text-center py-2 px-4 rounded bg-gray-900 text-white border mt-2 no-underline;
+  @apply text-center py-2 px-4 rounded bg-gray-900 text-white border mt-2 no-underline cursor-pointer;
 
   &:visited {
     @apply text-white;
@@ -87,6 +87,6 @@ value-button {
   }
 
   &[disabled] {
-    @apply text-gray-900 cursor-auto bg-gray-900;
+    @apply text-gray-100 cursor-auto bg-gray-500;
   }
 }

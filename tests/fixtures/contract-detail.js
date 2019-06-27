@@ -1,16 +1,16 @@
-// GET /api/contracts/12?include=category,facilitator,assignments,meetings,creditAssignments,creditAssignments.credit,term,ealrs
+// GET /api/contracts/3?include=category,facilitator,assignments,meetings,creditAssignments,creditAssignments.credit,term,ealrs
 export default {
   data: {
-    id: '12',
+    id: '3',
     type: 'contract',
     attributes: {
-      name: 'Laboriosam denique coruscus fugit aggredior.',
+      name: 'Templum provident corporis apto conspergo.',
       status: 'approved',
-      learningObjectives: 'Ubi tyrannus articulus sunt derideo.',
-      competencies: 'Omnis cubo cultellus ascit ut.',
-      evaluationMethods: 'Ut saepe cunabula numquam depopulo.',
-      instructionalMaterials: 'Pectus cultellus abscido recusandae arbustum.',
-      location: 'Uberrime strues solum tabernus abeo.',
+      learningObjectives: 'Crastinus accommodo celebrer theatrum voluptas.',
+      competencies: 'Temperantia doloribus apostolus crur tutamen.',
+      evaluationMethods: 'Vester vacuus animi vorax laudantium.',
+      instructionalMaterials: 'Amoveo recusandae tamisium sint quo.',
+      location: 'Cilicium aer comes artificiose corona.',
       timeslots: [
         {
           start: '8:45',
@@ -23,30 +23,30 @@ export default {
       enrollments: {
         data: [
           {
-            id: '15',
+            id: '1',
             type: 'enrollment',
           },
           {
-            id: '16',
+            id: '2',
             type: 'enrollment',
           },
         ],
       },
       facilitator: {
         data: {
-          id: '156',
+          id: '1',
           type: 'User',
         },
       },
       term: {
         data: {
-          id: '30',
+          id: '3',
           type: 'term',
         },
       },
       category: {
         data: {
-          id: '8',
+          id: '1',
           type: 'category',
         },
       },
@@ -225,7 +225,7 @@ export default {
       },
     },
     {
-      id: '8',
+      id: '1',
       type: 'category',
       attributes: {
         name: 'Category 1',
@@ -244,14 +244,14 @@ export default {
       relationships: {
         credit: {
           data: {
-            id: '6',
+            id: '1',
             type: 'credit',
           },
         },
       },
     },
     {
-      id: '6',
+      id: '1',
       type: 'credit',
       attributes: {
         courseId: '0',
@@ -263,7 +263,7 @@ export default {
       id: '1',
       type: 'ealr',
       attributes: {
-        ealr: 'Clibanus adipiscor vox venustas saepe.',
+        ealr: 'Temeritas caelum aut aegre denego.',
         seq: '1.1',
         category: 'Category 1',
       },
@@ -272,7 +272,7 @@ export default {
       id: '2',
       type: 'ealr',
       attributes: {
-        ealr: 'Corrumpo perspiciatis quas vae capto.',
+        ealr: 'Tactus tutis catena commodi pectus.',
         seq: '1.2',
         category: 'Category 1',
       },
@@ -281,7 +281,7 @@ export default {
       id: '3',
       type: 'ealr',
       attributes: {
-        ealr: 'Esse blandior audio illo tristis.',
+        ealr: 'Officiis toties decumbo cumque sponte.',
         seq: '2.1',
         category: 'Category 2',
       },
@@ -290,33 +290,31 @@ export default {
       id: '4',
       type: 'ealr',
       attributes: {
-        ealr: 'Accedo carcer spectaculum ubi aurum.',
+        ealr: 'Anser aranea reiciendis theca utor.',
         seq: '2.2',
         category: 'Category 2',
       },
     },
     {
-      id: '156',
+      id: '1',
       type: 'user',
       attributes: {
-        firstName: 'Rory',
-        lastName: 'Muller',
+        firstName: 'Donald',
+        lastName: 'Stoltenberg',
         nickname: null,
         dateActive: '2012-09-01',
         dateInactive: null,
         districtId: null,
         districtGrade: 12,
-        login: 'qscm4ohqweb4',
-        email: 'odell@hauck.io',
-        canLogin: false,
-        isActive: true,
+        email: 'chase@hellerjohnson.info',
+        status: 'active',
         role: 'staff',
       },
       relationships: {
         coordinatees: {
           data: [
             {
-              id: '160',
+              id: '5',
               type: 'student',
             },
           ],
@@ -434,12 +432,12 @@ export default {
       },
     },
     {
-      id: '30',
+      id: '3',
       type: 'term',
       attributes: {
         name: 'Current One',
         schoolYear: 2019,
-        creditDate: null,
+        creditDate: '2020-01-31',
         months: [
           '2019-09-01',
           '2019-10-01',
@@ -449,6 +447,7 @@ export default {
         ],
         status: 'active',
       },
+      meta: null,
     },
   ],
 };

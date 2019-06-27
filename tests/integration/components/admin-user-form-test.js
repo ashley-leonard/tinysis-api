@@ -5,6 +5,7 @@ import {
   click,
 } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
+import { resolve } from 'rsvp';
 import { stubTinyData } from '../../helpers/stub-tiny-data';
 import userStaff from '../../fixtures/user-staff';
 import userStudent from '../../fixtures/user-student';
@@ -38,6 +39,7 @@ module('Integration | Component | admin-user-form', (hooks) => {
       allStaff: [staff, admin],
       saveUser(pojo) {
         requests.push({ type: 'save', pojo });
+        return resolve({ data: pojo });
       },
       reportError() {
         requests.push({ type: 'error' });

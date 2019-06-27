@@ -1,10 +1,20 @@
 import dayjs from 'dayjs';
 
+export const AUTH_USER_KEYS = [
+  'email',
+  'role',
+  'password',
+  'firstName',
+  'lastName',
+  'nickname',
+];
+
 export const ROLE_ADMIN = 'administrator';
 export const ROLE_STAFF = 'staff';
 export const ROLE_STUDENT = 'student';
 
 export const STATUS_INACTIVE = 'inactive';
+export const STATUS_ACTIVE = 'active';
 
 export const roleTypes = [
   ROLE_ADMIN,
@@ -12,8 +22,16 @@ export const roleTypes = [
   ROLE_STUDENT,
 ];
 
+export function isStaffRole(role) {
+  return [ROLE_ADMIN, ROLE_STAFF].includes(role);
+}
+
 export function isStaff(user) {
-  return [ROLE_ADMIN, ROLE_STAFF].includes(user.attributes.role);
+  return isStaffRole(user.attributes.role);
+}
+
+export function isActive(user) {
+  return user.attributes.status === STATUS_ACTIVE;
 }
 
 export function wasActive(student, month) {
@@ -24,7 +42,7 @@ export function wasActive(student, month) {
     return false;
   }
 
-  if (student.attributes.isActive) {
+  if (isActive(student)) {
     return true;
   }
 

@@ -5,6 +5,7 @@ import {
   ROLE_STUDENT,
   ROLE_STAFF,
   ROLE_ADMIN,
+  isStaffRole,
 } from '../utils/user-utils';
 
 export default Component.extend({
@@ -24,7 +25,7 @@ export default Component.extend({
   ])),
 
   isStaff: computed('queryParams.role', function () {
-    return this.queryParams.role && (this.queryParams.role !== ROLE_STUDENT);
+    return this.queryParams.role && isStaffRole(this.queryParams.role);
   }),
 
   termsPrompt: computed('queryParams.schoolYear', function () {

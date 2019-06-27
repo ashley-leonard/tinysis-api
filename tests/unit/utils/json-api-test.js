@@ -1,8 +1,40 @@
-import { createEntity } from 'tinysis-ui/utils/json-api';
+import {
+  createEntity,
+  getChangedKeys,
+} from 'tinysis-ui/utils/json-api';
 import { module, test } from 'qunit';
 
 module('Unit | Utility | json-api', () => {
-  test('it works', (assert) => {
+  test('getChangedKeys works as expected', (assert) => {
+    const orig = {
+      id: '1',
+      type: 'contract',
+      attributes: {
+        name: 'Jam',
+        bool: true,
+        date: '2009-09-01',
+      },
+    };
+
+    const altered = {
+      id: '1',
+      type: 'contract',
+      attributes: {
+        name: 'Jam',
+        bool: false,
+        date: '2009-09-02',
+      },
+    };
+
+    const changed = getChangedKeys(orig, altered);
+
+    assert.equal(changed.length, 2, 'expected return value of an array with appropriate count of elements');
+    assert.ok(changed.includes('bool'), 'boolean attribute detected');
+    assert.ok(changed.includes('date'), 'string attribute detected');
+    assert.notOk(changed.includes('name'), 'name did not falsely detect');
+  });
+
+  test('createEntity works as expected', (assert) => {
     const contract = {
       id: '1',
       type: 'contract',

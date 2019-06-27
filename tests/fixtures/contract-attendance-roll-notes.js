@@ -5,8 +5,8 @@ export default {
       id: '62',
       type: 'note',
       attributes: {
-        note: 'Note by Muller for student Brekke / meeting 1',
-        updatedAt: '2019-05-09T04:36:05.000Z',
+        note: 'Note by Stoltenberg for student Rohan / meeting 1',
+        updatedAt: '2019-06-24T02:51:25.000Z',
       },
       relationships: {
         notable: {
@@ -17,7 +17,7 @@ export default {
         },
         creator: {
           data: {
-            id: '156',
+            id: '1',
             type: 'User',
           },
         },
@@ -27,8 +27,8 @@ export default {
       id: '63',
       type: 'note',
       attributes: {
-        note: 'Note by Muller for student Goodwin / meeting 1',
-        updatedAt: '2019-05-09T04:36:05.000Z',
+        note: 'Note by Stoltenberg for student Maggio / meeting 1',
+        updatedAt: '2019-06-24T02:51:25.000Z',
       },
       relationships: {
         notable: {
@@ -39,7 +39,7 @@ export default {
         },
         creator: {
           data: {
-            id: '156',
+            id: '1',
             type: 'User',
           },
         },
@@ -48,27 +48,25 @@ export default {
   ],
   included: [
     {
-      id: '156',
+      id: '1',
       type: 'user',
       attributes: {
-        firstName: 'Rory',
-        lastName: 'Muller',
+        firstName: 'Donald',
+        lastName: 'Stoltenberg',
         nickname: null,
         dateActive: '2012-09-01',
         dateInactive: null,
         districtId: null,
         districtGrade: 12,
-        login: 'qscm4ohqweb4',
-        email: 'odell@hauck.io',
-        canLogin: false,
-        isActive: true,
+        email: 'chase@hellerjohnson.info',
+        status: 'active',
         role: 'staff',
       },
       relationships: {
         coordinatees: {
           data: [
             {
-              id: '160',
+              id: '5',
               type: 'student',
             },
           ],

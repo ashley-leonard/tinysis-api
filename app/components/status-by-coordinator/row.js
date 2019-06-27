@@ -1,6 +1,8 @@
 import Component from '@ember/component';
 import { computed } from '@ember/object';
 import { alias } from '@ember/object/computed';
+import { isActive } from '../../utils/user-utils';
+
 
 export default Component.extend({
   tagName: 'tr',
@@ -14,7 +16,7 @@ export default Component.extend({
   }),
 
   studentStatus: computed('student', function () {
-    if (this.student.attributes.isActive) {
+    if (isActive(this.student)) {
       return 'Active';
     }
 

@@ -1,8 +1,8 @@
-// GET /api/enrollments?contractIds=12&include=turnins,participant
+// GET /api/enrollments?contractIds=3&include=turnins,participant
 export default {
   data: [
     {
-      id: '15',
+      id: '2',
       type: 'enrollment',
       attributes: {
         finalizedOn: null,
@@ -12,13 +12,73 @@ export default {
       relationships: {
         contract: {
           data: {
-            id: '12',
+            id: '3',
             type: 'contract',
           },
         },
         participant: {
           data: {
-            id: '160',
+            id: '7',
+            type: 'participant',
+          },
+        },
+        creditAssignments: {
+          data: [
+            {
+              id: '6',
+              type: 'creditAssignment',
+            },
+          ],
+        },
+        turnins: {
+          data: [
+
+          ],
+        },
+        meetingParticipants: {
+          data: [
+            {
+              id: '2',
+              type: 'meetingParticipant',
+            },
+            {
+              id: '4',
+              type: 'meetingParticipant',
+            },
+            {
+              id: '6',
+              type: 'meetingParticipant',
+            },
+            {
+              id: '8',
+              type: 'meetingParticipant',
+            },
+            {
+              id: '10',
+              type: 'meetingParticipant',
+            },
+          ],
+        },
+      },
+    },
+    {
+      id: '1',
+      type: 'enrollment',
+      attributes: {
+        finalizedOn: null,
+        enrollmentStatus: 'enrolled',
+        completionStatus: 'incomplete',
+      },
+      relationships: {
+        contract: {
+          data: {
+            id: '3',
+            type: 'contract',
+          },
+        },
+        participant: {
+          data: {
+            id: '5',
             type: 'participant',
           },
         },
@@ -80,89 +140,51 @@ export default {
         },
       },
     },
-    {
-      id: '16',
-      type: 'enrollment',
-      attributes: {
-        finalizedOn: null,
-        enrollmentStatus: 'enrolled',
-        completionStatus: 'incomplete',
-      },
-      relationships: {
-        contract: {
-          data: {
-            id: '12',
-            type: 'contract',
-          },
-        },
-        participant: {
-          data: {
-            id: '162',
-            type: 'participant',
-          },
-        },
-        creditAssignments: {
-          data: [
-            {
-              id: '6',
-              type: 'creditAssignment',
-            },
-          ],
-        },
-        turnins: {
-          data: [
-
-          ],
-        },
-        meetingParticipants: {
-          data: [
-            {
-              id: '2',
-              type: 'meetingParticipant',
-            },
-            {
-              id: '4',
-              type: 'meetingParticipant',
-            },
-            {
-              id: '6',
-              type: 'meetingParticipant',
-            },
-            {
-              id: '8',
-              type: 'meetingParticipant',
-            },
-            {
-              id: '10',
-              type: 'meetingParticipant',
-            },
-          ],
-        },
-      },
-    },
   ],
   included: [
     {
-      id: '160',
+      id: '7',
       type: 'user',
       attributes: {
-        firstName: 'Abe',
-        lastName: 'Brekke',
+        firstName: 'Stephane',
+        lastName: 'Maggio',
         nickname: null,
         dateActive: '2018-08-01',
-        dateInactive: null,
-        districtId: '4458178913',
+        dateInactive: '2019-10-01',
+        districtId: '2351707665',
         districtGrade: 12,
-        login: 'pk6qoc4qh7ma',
         email: null,
-        canLogin: false,
-        isActive: true,
+        status: 'inactive',
         role: 'student',
       },
       relationships: {
         coordinator: {
           data: {
-            id: '156',
+            id: '2',
+            type: 'staff',
+          },
+        },
+      },
+    },
+    {
+      id: '5',
+      type: 'user',
+      attributes: {
+        firstName: 'Marshall',
+        lastName: 'Rohan',
+        nickname: null,
+        dateActive: '2018-08-01',
+        dateInactive: null,
+        districtId: '2732911327',
+        districtGrade: 12,
+        email: null,
+        status: 'active',
+        role: 'student',
+      },
+      relationships: {
+        coordinator: {
+          data: {
+            id: '1',
             type: 'staff',
           },
         },
@@ -183,7 +205,7 @@ export default {
         },
         enrollment: {
           data: {
-            id: '15',
+            id: '1',
             type: 'enrollment',
           },
         },
@@ -204,7 +226,7 @@ export default {
         },
         enrollment: {
           data: {
-            id: '15',
+            id: '1',
             type: 'enrollment',
           },
         },
@@ -225,7 +247,7 @@ export default {
         },
         enrollment: {
           data: {
-            id: '15',
+            id: '1',
             type: 'enrollment',
           },
         },
@@ -246,7 +268,7 @@ export default {
         },
         enrollment: {
           data: {
-            id: '15',
+            id: '1',
             type: 'enrollment',
           },
         },
@@ -267,34 +289,8 @@ export default {
         },
         enrollment: {
           data: {
-            id: '15',
+            id: '1',
             type: 'enrollment',
-          },
-        },
-      },
-    },
-    {
-      id: '162',
-      type: 'user',
-      attributes: {
-        firstName: 'Ria',
-        lastName: 'Goodwin',
-        nickname: null,
-        dateActive: '2018-08-01',
-        dateInactive: '2019-10-01',
-        districtId: '3024504196',
-        districtGrade: 12,
-        login: '1fgjki9yz07v',
-        email: null,
-        canLogin: false,
-        isActive: false,
-        role: 'student',
-      },
-      relationships: {
-        coordinator: {
-          data: {
-            id: '157',
-            type: 'staff',
           },
         },
       },

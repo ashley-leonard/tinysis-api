@@ -2,7 +2,7 @@
 export default {
   data: [
     {
-      id: '8',
+      id: '1',
       type: 'category',
       attributes: {
         name: 'Category 1',
@@ -13,7 +13,7 @@ export default {
       },
     },
     {
-      id: '9',
+      id: '2',
       type: 'category',
       attributes: {
         name: 'Category 2',
