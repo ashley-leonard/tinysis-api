@@ -28,7 +28,7 @@ QUnit.extend(QUnit.assert, {
       result,
       actual,
       expected,
-      message: message || `matched ${regex}`,
+      message: message || `matched ${regex} to ${actual}`,
     });
   },
 });

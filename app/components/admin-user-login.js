@@ -84,22 +84,20 @@ export default Component.extend({
   }),
 
   async didReceiveAttrs() {
-    const { role } = this;
-    const currentUserRole = this.get('user.attributes.role');
+    const { user } = this;
+    const { email } = user.attributes;
 
-    if (role === currentUserRole) return;
+    if (!email) return;
 
-    this.set('role', currentUserRole);
-
-    let login;
+    let response;
     try {
-      login = await this.getLogin(this.get('user.attributes.email'));
+      response = await this.getLogin(this.get('user.attributes.email'));
     } catch (e) {
-      login = null;
+      response = {};
     }
 
     this.setProperties({
-      login,
+      login: response.data,
       loading: false,
     });
   },

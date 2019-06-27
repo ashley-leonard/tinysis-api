@@ -6,12 +6,16 @@
       <h3>Login active for {{full-name user "first-last"}}</h3>
       {{#if showRoleRequiresUpdate}}
         {{#t-notice type="alert"}}
+          <p data-test-reason="roles">
+            The login role needs to be synced with the application
+            role of {{titleize user.attributes.role}}.
+          </p>
+          
           <p>
-            The user has a different role defined in their login. This
+            This mismatch
             can cause access or information privacy problems.
-            The role should be updated in the
-            login system to match the current setting of
-            {{titleize user.attributes.role}}.
+            Shall we update the login role to match the application
+            role of {{titleize user.attributes.role}}?
           </p>
           <button
             class="btn"
@@ -23,8 +27,8 @@
       {{/if}}
       {{#if showAttributesDontMatch}}
         {{#t-notice type="alert"}}
-          <p>
-            User settings for the login, such as email or names, are out of sync.
+          <p data-test-reason="attributes">
+            User settings for the login, such as names, are out of sync.
             They should be updated to match what is shown here.
           </p>
           <button
@@ -37,7 +41,7 @@
       {{/if}}
       {{#if showRemoveOption}}
         {{#t-notice type="alert"}}
-          <p>
+          <p data-test-reason="deactivate">
             {{full-name user "first-last"}} is no longer entitled to have a login.
           </p>
           <button
@@ -54,7 +58,7 @@
 
       {{#if showAccessWarning}}
         {{#t-notice type="alert"}}
-          <p>
+          <p data-test-reason="activate">
             {{full-name user "first-last"}} is active and has a role
             of {{titleize user.attributes.role}}. Without
             a login, no access is possible.
