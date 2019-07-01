@@ -35,6 +35,7 @@ Rails.application.routes.draw do
       get '/login', to: 'admin_login#show'
       patch '/login/:id', to: 'admin_login#update'
       delete '/login/:id', to: 'admin_login#destroy'
+      put '/settings', to: 'admin_settings#update'
       post '/terms', to: 'admin_login#create'
       put '/terms/:id', to: 'admin_login#update'
     end
