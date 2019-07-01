@@ -125,11 +125,6 @@ Router.map(function () {
 
       this.route('admin-user', {
         resetNamespace: true,
-        path: '/user/:id',
-      });
-
-      this.route('admin-user', {
-        resetNamespace: true,
         path: '/user',
       }, function () {
         this.route('new');
@@ -169,6 +164,36 @@ Router.map(function () {
       this.route('admin-settings', {
         resetNamespace: true,
         path: '/settings',
+      }, function () {
+        this.route('index', { path: '/' });
+        this.route('settings-calendar', {
+          resetNamespace: true,
+          path: '/calendar',
+        });
+        this.route('settings-credits', {
+          resetNamespace: true,
+          path: '/credits',
+        });
+        this.route('settings-contract-categories', {
+          resetNamespace: true,
+          path: '/contract-categories',
+        });
+        this.route('settings-competencies', {
+          resetNamespace: true,
+          path: '/competencies',
+        });
+        this.route('settings-learning-plan-goals', {
+          resetNamespace: true,
+          path: '/learning-plan-goals',
+        });
+        this.route('settings-graduation-plan-requirements', {
+          resetNamespace: true,
+          path: '/graduation-plan-requirements',
+        });
+        this.route('settings-periods', {
+          resetNamespace: true,
+          path: '/periods',
+        });
       });
     });
   });
