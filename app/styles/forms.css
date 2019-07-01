@@ -16,6 +16,10 @@
   }
 }
 
+t-help {
+  @apply block font-normal;
+}
+
 .error-message {
   @apply text-red-500 text-sm font-normal;
 }

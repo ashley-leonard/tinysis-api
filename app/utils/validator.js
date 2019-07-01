@@ -2,7 +2,7 @@ import { get } from '@ember/object';
 import { isPresent } from '@ember/utils';
 
 export default class Validator {
-  constructor(validations) {
+  constructor(validations = {}) {
     this.validations = validations;
   }
 

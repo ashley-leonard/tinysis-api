@@ -1,0 +1,85 @@
+<h2>Calendar settings</h2>
+
+<div class="w-full lg:w-1/2 xl:w-1/2">
+  {{#t-form
+    validator=validator
+    model=settingsModel
+    save=(action "save")
+    reportError=(action "reportError")
+    as |form|
+  }}
+    <fieldset>
+      <p>
+        {{#form-input
+          error=form.errors.current_year
+          showError=form.showErrors
+        }}
+          Current school year
+          <t-help>This is the year in which the Fall term begins. By default, screens show terms for the current year only</t-help>
+          {{t-select
+            options=yearOptions
+            value=form.pojo.current_year
+            name="current_year"
+            prompt="Choose a school year"
+          }}
+        {{/form-input}}
+      </p>
+
+      <p>
+        {{#form-input
+          error=form.errors.reporting_base_month
+          showError=form.showErrors
+        }}
+          First month of school year
+          <t-help>COOR status reporting begins at the starting month</t-help>
+          {{t-select
+            options=monthOptions
+            value=form.pojo.reporting_base_month
+            name="reporting_base_month"
+            prompt="Choose a starting month"
+          }}
+        {{/form-input}}
+      </p>
+
+      <p>
+        {{#form-input
+          error=form.errors.reporting_end_month
+          showError=form.showErrors
+        }}
+          Last month of school year
+          <t-help>COOR status reporting ends on the ending month</t-help>
+          {{t-select
+            options=monthOptions
+            value=form.pojo.reporting_end_month
+            name="reporting_end_month"
+            prompt="Choose an ending month"
+          }}
+        {{/form-input}}
+      </p>
+    </fieldset>
+
+    <fieldset>
+      <p>
+        {{#form-input}}
+          Default term for new contracts
+          <t-help>COOR status reporting ends on the ending month</t-help>
+          {{t-select
+            options=termOptions
+            value=form.pojo.new_contract_term_default
+            name="new_contract_term_default"
+            prompt="Choose a default term"
+          }}
+        {{/form-input}}
+      </p>
+    </fieldset>
+
+    {{#t-form-actions-row
+      disabled=disabled
+    }}
+      {{#link-to "admin-settings.index" class="btn btn-clear"}}
+        Return to list of settings
+      {{/link-to}}
+    {{/t-form-actions-row}}
+
+  {{/t-form}}
+</div>
