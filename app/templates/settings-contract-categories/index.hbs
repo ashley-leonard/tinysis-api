@@ -1,0 +1,50 @@
+{{#check-empty
+  count=model.meta.count
+  noResultsMessage="No categories were found"
+}}
+  {{count-paragraph
+    result=model
+    name="contract category"
+  }}
+  <table class="t-table t-table-bordered" data-test-categories-list>
+    <thead>
+      <tr>
+        <th>Category</th>
+        <th>Active contracts</th>
+        <th>Catalog?</th>
+        <th>Reporting</th>
+        <th>Group</th>
+      </tr>    
+    </thead>
+    <tbody>
+      {{#each categoriesList as |category|}}
+        {{#settings-contract-categories/row
+          category=category
+          as |row|
+        }}
+          <tr>
+            <td>
+              {{#link-to "settings-contract-category" category}}
+                {{row.name}}
+              {{/link-to}}
+            </td>
+            <td>
+              {{t-number category.attributes.activeContractsCount}}
+            </td>
+            <td>
+              {{#if category.attributes.public}}
+                Y
+              {{/if}}
+            </td>
+            <td>
+              {{category.attributes.reporting}}
+            </td>
+            <td>
+              {{category.attributes.sequence}}
+            </td>
+          </tr>
+        {{/settings-contract-categories/row}}
+      {{/each}}
+    </tbody>
+  </table>
+{{/check-empty}}
