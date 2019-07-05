@@ -21,6 +21,7 @@ module('Integration | Component | t-form', (hooks) => {
         attributes: {
           name: 'Sam',
           age: null,
+          booOrFalse: true,
         },
       },
       validator: new Validator({
@@ -46,9 +47,11 @@ module('Integration | Component | t-form', (hooks) => {
         model=model
         save=save
         reportError=reportError
+        as |form|
       }}
         <input name="name" value={{pojo.attributes.name}}>
         <input name="age" value={{pojo.attributes.age}} >
+        <input name="booOrFalse" type="checkbox" checked={{pojo.attributes.booOrFalse}} onchange={{action "toggleValue" "booOrFalse" target=form}}>
         <button type="submit">Save</button>
       {{/t-form}}
     `);
@@ -76,6 +79,7 @@ module('Integration | Component | t-form', (hooks) => {
 
     requests = [];
     await fillIn("input[name='age']", '55');
+    await click("input[name='booOrFalse']");
     await click('button');
 
     assert.equal(requests.length, 1, 'another outbound call occurred');
@@ -83,5 +87,11 @@ module('Integration | Component | t-form', (hooks) => {
     assert.equal(request.type, 'submit', 'this time a submit occurred');
     assert.equal(request.outbound.attributes.name, this.model.attributes.name, 'name is present outbound');
     assert.equal(request.outbound.attributes.age, '55', 'updated age is present outbound');
+    assert.equal(request.outbound.attributes.booOrFalse, false, 'updated checkbox value to false');
+
+    await click("input[name='booOrFalse']");
+    await click('button');
+
+    assert.equal(request.outbound.attributes.booOrFalse, true, 'updated checkbox value to true');
   });
 });
