@@ -8,9 +8,9 @@ class Category < ApplicationRecord
   STATUSABLE_END = 2
   
   STATUSABLE_NAMES = {
-    STATUSABLE_NONE => "None",
-    STATUSABLE_MONTHLY => "Monthly",
-    STATUSABLE_END => "End of term"    
+    STATUSABLE_NONE => "none",
+    STATUSABLE_MONTHLY => "monthly",
+    STATUSABLE_END => "end-of-term"    
   }
   
   def self.statusable
@@ -25,7 +25,23 @@ class Category < ApplicationRecord
     Category.all_query(:public=> false)
   end
   
-  
+  def reporting
+    STATUSABLE_NAMES[self.statusable]
+  end
+
+  def reporting= reporting_type
+    self.statusable = case reporting_type
+      when STATUSABLE_NAMES[STATUSABLE_NONE]
+        STATUSABLE_NONE
+      when STATUSABLE_NAMES[STATUSABLE_MONTHLY]
+        STATUSABLE_MONTHLY
+      when STATUSABLE_NAMES[STATUSABLE_END]
+        STATUSABLE_END
+      else
+        STATUSABLE_NONE
+      end
+  end
+
 protected
   def self.all_query(options = {})
     q = []

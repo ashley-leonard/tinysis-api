@@ -5,9 +5,9 @@ RSpec.describe 'Students API', type: :request do
   before(:each) do
     allow(JsonWebToken).to receive(:extract_permissions).and_return(['get:config'])
 
-    @staff1 = create :user, privilege: 2
-    @staff2 = create :user, privilege: 2
-    @staff3 = create :user, privilege: 2, status: User::STATUS_INACTIVE, date_inactive: Date.new(2018, 1, 1)
+    @staff1 = create :user, privilege: User::PRIVILEGE_STAFF, :email => Faker::Internet.email
+    @staff2 = create :user, privilege: User::PRIVILEGE_STAFF, :email => Faker::Internet.email
+    @staff3 = create :user, privilege: User::PRIVILEGE_STAFF, status: User::STATUS_INACTIVE, date_inactive: Date.new(2018, 1, 1), :email => Faker::Internet.email
 
     @student1 = create :user, coordinator: @staff1, date_active: Date.new(2018, 8, 1)
     @student2 = create :user, coordinator: @staff2, date_active: Date.new(2018, 8, 1)

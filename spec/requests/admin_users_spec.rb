@@ -127,10 +127,8 @@ RSpec.describe 'Admin users API', type: :request do
           attributes: {
             firstName: Faker::Name.first_name,
             lastName: Faker::Name.last_name,
-            login: Faker::Lorem.characters(12),
-            canLogin: false,
             role: 'student',
-            isActive: true
+            status: 'active'
           },
           relationships: {
             coordinator: {
