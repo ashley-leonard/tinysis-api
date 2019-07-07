@@ -5,8 +5,8 @@ RSpec.describe 'Contracts API', type: :request do
   before(:each) do
     allow(JsonWebToken).to receive(:extract_permissions).and_return(['get:config'])
 
-    @staff1 = create :user, privilege: 2
-    @staff2 = create :user, privilege: 2
+    @staff1 = create :user, privilege: User::PRIVILEGE_STAFF, email: Faker::Internet.email
+    @staff2 = create :user, privilege: User::PRIVILEGE_STAFF, email: Faker::Internet.email
 
     @term1_2008 = create :term, name: '2008 One', school_year: 2008
     @term2_2008 = create :term, name: '2008 Two', school_year: 2008
