@@ -49,6 +49,30 @@ module('Integration | Component | t-pikaday', (hooks) => {
     assert.equal(action.date, '2011-04-15', 'expected ISO calendar date supplied');
   });
 
+  test('it renders as a popup without emitting bogus change actions', async function (assert) {
+    this.containerOnChange = (event) => {
+      actions.push({ event, type: 'containerChange', value: event.target.value });
+    };
+
+    await render(hbs`
+      <div onchange={{containerOnChange}}>
+        {{t-pikaday
+          value=value
+          onchange=onchange
+          name="Boo"
+          popup=true
+        }}
+      </div>
+    `);
+
+    const input = find('input[name="Boo"]');
+    assert.ok(input, 'input rendered');
+    assert.equal(input.value, '4/1/2011', 'input assigned expected US date value');
+    assert.equal(input.type, 'text', 'using text input');
+
+    assert.equal(actions.length, 0, 'no change event was triggered');
+  });
+
   test('it renders as a popup', async (assert) => {
     await render(hbs`
       {{t-pikaday

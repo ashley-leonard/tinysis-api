@@ -1,0 +1,66 @@
+<fieldset>
+  <p>
+    {{#form-input error=errors.name showError=showErrors}}
+      Category name
+      <input
+        value={{pojo.name}}
+        name="name"
+        type="text"
+      >
+    {{/form-input}}
+  </p>
+</fieldset>
+<fieldset>
+  <p>
+    {{#form-input for="category-public"}}
+      <input
+        id="category-public"
+        type="checkbox"
+        name="public"
+        checked={{pojo.public}}
+        onchange={{action "toggleValue" "public"}}
+      >
+      Show in catalog?
+    {{/form-input}}
+  </p>
+  <p>
+    {{#form-input error=errors.name showError=showErrors}}
+      Reporting
+      {{t-select
+        name="reporting"
+        value=pojo.reporting
+        options=reportingOptions
+      }}
+    {{/form-input}}
+  </p>
+  <p>
+    {{#form-input for="homeroom"}}
+      <input
+        id="homeroom"
+        type="checkbox"
+        name="homeroom"
+        checked={{pojo.homeroom}}
+        onchange={{action "toggleValue" "homeroom"}}
+      >
+      Homeroom?
+    {{/form-input}}
+  </p>
+  <p>
+    {{#form-input error=errors.sequence showError=showErrors}}
+      Sequence group
+      <t-help>Use this number to group related categories together</t-help>
+      <input
+        type="number"
+        name="sequence"
+        value={{pojo.sequence}}
+      >
+    {{/form-input}}
+  </p>
+</fieldset>
+{{#t-form-actions-row
+  disabled=disabled
+}}
+  {{#link-to "settings-contract-categories.index" class="btn btn-clear"}}
+    Cancel
+  {{/link-to}}
+{{/t-form-actions-row}}

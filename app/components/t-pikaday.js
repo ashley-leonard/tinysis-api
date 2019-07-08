@@ -63,6 +63,16 @@ export default Component.extend({
     });
   },
 
+  actions: {
+    inputChanged(event) {
+      const newDateValue = dayjs(event.target.value, dateFormat);
+
+      if (newDateValue.isSame(this.value)) {
+        event.stopPropagation();
+      }
+    },
+  },
+
   getInitDate(value) {
     if (!value) return value;
 

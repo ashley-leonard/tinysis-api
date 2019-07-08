@@ -1,14 +1,10 @@
 import Component from '@ember/component';
-import { computed } from '@ember/object';
-import Validator from '../utils/validator';
 import clone from '../utils/clone';
 
 export default Component.extend({
   showErrors: false,
   classNames: ['t-form'],
   tagName: 'form',
-
-  validator: computed(() => new Validator({})),
 
   didReceiveAttrs() {
     if (this.lastModel === this.model) {
@@ -31,6 +27,17 @@ export default Component.extend({
       autofocus.focus();
       autofocus.select();
     }
+  },
+
+  actions: {
+    toggleValue(name, event) {
+      event.stopPropagation();
+      const { pojo } = this;
+      this.set('pojo', {
+        ...pojo,
+        [name]: !pojo[name],
+      });
+    },
   },
 
   normalizeModel(model) {
@@ -70,6 +77,8 @@ export default Component.extend({
   },
 
   validate() {
+    if (!this.validator) return;
+
     const validationResult = this.validator.validate(this.pojo);
 
     this.setProperties(validationResult);
