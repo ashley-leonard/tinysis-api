@@ -89,9 +89,11 @@ module('Integration | Component | t-form', (hooks) => {
     assert.equal(request.outbound.attributes.age, '55', 'updated age is present outbound');
     assert.equal(request.outbound.attributes.booOrFalse, false, 'updated checkbox value to false');
 
+    requests = [];
     await click("input[name='booOrFalse']");
     await click('button');
 
+    [request] = requests;
     assert.equal(request.outbound.attributes.booOrFalse, true, 'updated checkbox value to true');
   });
 });

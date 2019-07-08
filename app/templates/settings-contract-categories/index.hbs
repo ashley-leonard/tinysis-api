@@ -1,3 +1,9 @@
+<p>
+  {{#link-to "settings-contract-categories.new" class="btn"}}
+    Add a category
+  {{/link-to}}
+</p>
+
 {{#check-empty
   count=model.meta.count
   noResultsMessage="No categories were found"
@@ -37,7 +43,7 @@
               {{/if}}
             </td>
             <td>
-              {{category.attributes.reporting}}
+              {{row.reportingName}}
             </td>
             <td>
               {{category.attributes.sequence}}

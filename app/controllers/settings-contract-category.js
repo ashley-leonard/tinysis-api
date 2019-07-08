@@ -14,13 +14,11 @@ export default Controller.extend({
   actions: {
     async save(data) {
       try {
-        await this.tinyData.fetch(`/api/admin/contract-categories/${data.id}`, {
-          method: 'PUT',
-          body: JSON.stringify({ data }),
-        });
+        const result = await this.save(data);
 
-        this.flashMessages.success(`Category ${data.attributes.name} was updated`);
+        this.flashMessages.success(`Category ${result.data.attributes.name} was updated`);
         this.transitionToRoute('settings-contract-categories.index');
+        return result;
       } catch (e) {
         this.flashMessages.alert(summarizeValidationError(e));
         return e;
@@ -30,4 +28,11 @@ export default Controller.extend({
       this.flashMessages.alert(error);
     },
   },
+  save(data) {
+    return this.tinyData.fetch(`/api/admin/contract-categories/${data.id}`, {
+      method: 'PUT',
+      body: JSON.stringify({ data }),
+    });
+  },
+
 });

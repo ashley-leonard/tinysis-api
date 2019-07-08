@@ -179,6 +179,7 @@ Router.map(function () {
           path: '/contract-categories',
         }, function () {
           this.route('index', { path: '/' });
+          this.route('new');
           this.route('settings-contract-category', {
             resetNamespace: true,
             path: ':id',

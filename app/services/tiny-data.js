@@ -133,7 +133,7 @@ export const tinyDataService = {
       return clone(Object.keys(records).map(key => clone(records[key])));
     } catch (e) {
       warn('JSON-API-STORE', 'no entity matching', type, id);
-      return null;
+      throw new Error(`No ${type} matching id "${id}"`);
     }
   },
 
