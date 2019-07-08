@@ -35,7 +35,7 @@ export default Component.extend({
       const { pojo } = this;
       this.set('pojo', {
         ...pojo,
-        [name]: !pojo[name]
+        [name]: !pojo[name],
       });
     },
   },
