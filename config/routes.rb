@@ -56,6 +56,8 @@ Rails.application.routes.draw do
       post '/contract-categories', to: 'admin_contract_categories#create'
       put '/contract-categories/:id', to: 'admin_contract_categories#update'
       delete '/contract-categories/:id', to: 'admin_contract_categories#destroy'
+
+      resources :graduation_plan_requirements, controller: :admin_graduation_plan_requirements, path: 'graduation-plan-requirements'
     end
   end
 

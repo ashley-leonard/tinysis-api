@@ -230,6 +230,17 @@ RSpec.describe 'Ember fixtures script', type: :request do
       meeting_participant = create :meeting_participant, meeting: meeting, enrollment: enrollment3, participation: MeetingParticipant::ABSENT
       create :note, notable: meeting_participant, creator: @contract1_current.facilitator, note: "Note by #{@contract1_current.facilitator.last_name} for student #{@student3.last_name} / meeting #{meeting_number}"
     end
+
+    # graduation plans
+    gradMath = create :graduation_plan_requirement, name: 'Math', requirement_type: 'credit'
+    gradLang = create :graduation_plan_requirement, name: 'Language', requirement_type: 'credit'
+    gradSci = create :graduation_plan_requirement, name: 'Science', requirement_type: 'credit'
+
+    credit_assignment = @student2.credit_assignments.find {|ca| ca.facilitator_approved? }
+
+    graduation_plan = create :graduation_plan, user: @student2
+
+    create :graduation_plan_mapping, graduation_plan: graduation_plan, graduation_plan_requirement: gradMath, credit_assignment: credit_assignment
   end
 
   describe 'write' do
