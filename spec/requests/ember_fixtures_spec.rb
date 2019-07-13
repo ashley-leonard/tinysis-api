@@ -235,6 +235,7 @@ RSpec.describe 'Ember fixtures script', type: :request do
     gradMath = create :graduation_plan_requirement, name: 'Math', requirement_type: 'credit'
     gradLang = create :graduation_plan_requirement, name: 'Language', requirement_type: 'credit'
     gradSci = create :graduation_plan_requirement, name: 'Science', requirement_type: 'credit'
+    gradDefunct = create :graduation_plan_requirement, name: 'Defunct', requirement_type: 'credit', status: GraduationPlanRequirement::STATUS_INACTIVE
 
     credit_assignment = @student2.credit_assignments.find {|ca| ca.facilitator_approved? }
 
@@ -374,6 +375,10 @@ RSpec.describe 'Ember fixtures script', type: :request do
         # admin terms - all
         write_fixture "/api/terms?limit=20&order=name&include=usage", "admin-terms-list.js"
         write_fixture "/api/terms/#{@term1_current.id}", "admin-term-detail.js"
+
+        # admin graduation plan requirements - all
+        write_fixture "/api/admin/graduation-plan-requirements?status=all", "admin-graduation-plan-requirements-list-all.js"
+        write_fixture "/api/admin/graduation-plan-requirements", "admin-graduation-plan-requirements-list-active.js"
       end
     end
   end

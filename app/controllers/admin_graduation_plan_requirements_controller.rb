@@ -5,19 +5,30 @@ class AdminGraduationPlanRequirementsController < AdminController
 
     limit = nil if limit == "-1"
 
+    status = params[:status] || 'active'
+    status_params = case status
+      when 'active'
+        status
+      when 'all'
+        nil
+      end
+
     order = (params[:order] || '')
       .split(',')
       .map(&:underscore)
       .join(',')
 
     result = GraduationPlanRequirement
+      .where(status: status)
       .order(Arel.sql(order))
       .limit(limit)
 
-    count = GraduationPlanRequirement.count
+    count = GraduationPlanRequirement
+      .where(status: status)
+      .count
 
     options = { meta: { count: count }}
-Rails.logger.error "Got this far!!!!"
+
     render json: GraduationPlanRequirementSerializer.new(result, options), status: 200
   end
 
