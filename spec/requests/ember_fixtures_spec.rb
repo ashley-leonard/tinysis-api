@@ -231,11 +231,17 @@ RSpec.describe 'Ember fixtures script', type: :request do
       create :note, notable: meeting_participant, creator: @contract1_current.facilitator, note: "Note by #{@contract1_current.facilitator.last_name} for student #{@student3.last_name} / meeting #{meeting_number}"
     end
 
-    # graduation plans
-    gradMath = create :graduation_plan_requirement, name: 'Math', requirement_type: 'credit'
-    gradLang = create :graduation_plan_requirement, name: 'Language', requirement_type: 'credit'
-    gradSci = create :graduation_plan_requirement, name: 'Science', requirement_type: 'credit'
-    gradDefunct = create :graduation_plan_requirement, name: 'Defunct', requirement_type: 'credit', status: GraduationPlanRequirement::STATUS_INACTIVE
+    # graduation plans requirements
+    gradMath = create :graduation_plan_requirement, name: 'Math', requirement_type: 'credit', position: 1
+    gradLang = create :graduation_plan_requirement, name: 'Language', requirement_type: 'credit', position: 2
+    gradSci = create :graduation_plan_requirement, name: 'Science', requirement_type: 'credit', position: 3
+    gradLang1 = create :graduation_plan_requirement, name: 'Language1', requirement_type: 'credit', parent: gradLang, position: 1
+    gradLang2 = create :graduation_plan_requirement, name: 'Language2', requirement_type: 'credit', parent: gradLang, position: 2
+    gradDefunct = create :graduation_plan_requirement, name: 'Defunct', requirement_type: 'credit', status: GraduationPlanRequirement::STATUS_INACTIVE, position: 3
+    create :graduation_plan_requirement, name: 'General1', requirement_type: 'general', position: 1
+    create :graduation_plan_requirement, name: 'General2', requirement_type: 'general', position: 2
+    create :graduation_plan_requirement, name: 'Service1', requirement_type: 'service', position: 1
+    create :graduation_plan_requirement, name: 'Service2', requirement_type: 'service', position: 2
 
     credit_assignment = @student2.credit_assignments.find {|ca| ca.facilitator_approved? }
 

@@ -35,7 +35,6 @@ class Term < ApplicationRecord
     self.school_year = year
   end
 
-
   def set_dates(year, m = [])
     months_array = []
     m = m.uniq.sort
@@ -50,6 +49,7 @@ class Term < ApplicationRecord
         year += 1
         month %= 12
       end
+      Rails.logger.error "building #{year} #{month} #{1}"
       months_array << Date.new(year, month, 1)
     end
     self.months = months_array
