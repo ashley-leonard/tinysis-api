@@ -5,7 +5,7 @@ export default {
       id: '1',
       type: 'contract',
       attributes: {
-        name: 'Vilitas ulterius cattus vero cedo.',
+        name: 'Cena claustrum culpa voluptatem quae.',
         status: 'closed',
       },
       relationships: {
@@ -45,7 +45,7 @@ export default {
       id: '2',
       type: 'contract',
       attributes: {
-        name: 'Tabella eaque defluo tot vicissitudo.',
+        name: 'Tabernus apto virga defetiscor et.',
         status: 'closed',
       },
       relationships: {
@@ -85,7 +85,7 @@ export default {
       id: '3',
       type: 'contract',
       attributes: {
-        name: 'Templum provident corporis apto conspergo.',
+        name: 'Spectaculum magnam eaque harum utrimque.',
         status: 'approved',
       },
       relationships: {
@@ -125,7 +125,7 @@ export default {
       id: '4',
       type: 'contract',
       attributes: {
-        name: 'Cunctatio rerum quisquam defigo testimonium.',
+        name: 'Chirographum vulnus considero dens textilis.',
         status: 'approved',
       },
       relationships: {
@@ -170,22 +170,37 @@ export default {
         name: 'Category 1',
         sequence: 0,
         public: false,
+        reporting: 'none',
+        activeContractsCount: 1,
         homeroom: false,
-        statusable: false,
+      },
+      relationships: {
+        contracts: {
+          data: [
+            {
+              id: '1',
+              type: 'contract',
+            },
+            {
+              id: '3',
+              type: 'contract',
+            },
+          ],
+        },
       },
     },
     {
       id: '1',
       type: 'user',
       attributes: {
-        firstName: 'Donald',
-        lastName: 'Stoltenberg',
+        firstName: 'Angel',
+        lastName: 'McLaughlin',
         nickname: null,
         dateActive: '2012-09-01',
         dateInactive: null,
         districtId: null,
         districtGrade: 12,
-        email: 'chase@hellerjohnson.info',
+        email: 'stellawilderman@aufderhar.com',
         status: 'active',
         role: 'staff',
       },
@@ -207,22 +222,37 @@ export default {
         name: 'Category 2',
         sequence: 0,
         public: false,
+        reporting: 'none',
+        activeContractsCount: 1,
         homeroom: false,
-        statusable: false,
+      },
+      relationships: {
+        contracts: {
+          data: [
+            {
+              id: '2',
+              type: 'contract',
+            },
+            {
+              id: '4',
+              type: 'contract',
+            },
+          ],
+        },
       },
     },
     {
       id: '2',
       type: 'user',
       attributes: {
-        firstName: 'Keven',
-        lastName: 'Champlin',
+        firstName: 'Mikel',
+        lastName: 'Davis',
         nickname: null,
         dateActive: '2013-02-01',
         dateInactive: null,
         districtId: null,
         districtGrade: 12,
-        email: 'denis@macejkovic.com',
+        email: 'vicenta@moenrowe.io',
         status: 'active',
         role: 'staff',
       },

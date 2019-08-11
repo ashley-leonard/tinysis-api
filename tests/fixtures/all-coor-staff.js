@@ -5,8 +5,8 @@ export default {
       id: '2',
       type: 'user',
       attributes: {
-        firstName: 'Keven',
-        lastName: 'Champlin',
+        firstName: 'Mikel',
+        lastName: 'Davis',
         nickname: null,
       },
       relationships: {
@@ -28,8 +28,8 @@ export default {
       id: '1',
       type: 'user',
       attributes: {
-        firstName: 'Donald',
-        lastName: 'Stoltenberg',
+        firstName: 'Angel',
+        lastName: 'McLaughlin',
         nickname: null,
       },
       relationships: {

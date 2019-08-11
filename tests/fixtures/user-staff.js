@@ -4,8 +4,8 @@ export default {
     id: '1',
     type: 'user',
     attributes: {
-      firstName: 'Donald',
-      lastName: 'Stoltenberg',
+      firstName: 'Angel',
+      lastName: 'McLaughlin',
       nickname: null,
       dateActive: '2012-09-01',
       dateInactive: null,
@@ -13,7 +13,7 @@ export default {
       districtGrade: 12,
       status: 'active',
       role: 'staff',
-      email: 'chase@hellerjohnson.info',
+      email: 'stellawilderman@aufderhar.com',
     },
     relationships: {
     },

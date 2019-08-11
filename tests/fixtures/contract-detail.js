@@ -4,13 +4,13 @@ export default {
     id: '3',
     type: 'contract',
     attributes: {
-      name: 'Templum provident corporis apto conspergo.',
+      name: 'Spectaculum magnam eaque harum utrimque.',
       status: 'approved',
-      learningObjectives: 'Crastinus accommodo celebrer theatrum voluptas.',
-      competencies: 'Temperantia doloribus apostolus crur tutamen.',
-      evaluationMethods: 'Vester vacuus animi vorax laudantium.',
-      instructionalMaterials: 'Amoveo recusandae tamisium sint quo.',
-      location: 'Cilicium aer comes artificiose corona.',
+      learningObjectives: 'Laudantium delibero brevis turpe coniuratio.',
+      competencies: 'Atqui non admoveo strues suffoco.',
+      evaluationMethods: 'Quia tergiversatio voluptatem vorax eligendi.',
+      instructionalMaterials: 'Decerno terebro maiores acer dolores.',
+      location: 'Ater viridis arto ter rerum.',
       timeslots: [
         {
           start: '8:45',
@@ -231,8 +231,23 @@ export default {
         name: 'Category 1',
         sequence: 0,
         public: false,
+        reporting: 'none',
+        activeContractsCount: 1,
         homeroom: false,
-        statusable: false,
+      },
+      relationships: {
+        contracts: {
+          data: [
+            {
+              id: '1',
+              type: 'contract',
+            },
+            {
+              id: '3',
+              type: 'contract',
+            },
+          ],
+        },
       },
     },
     {
@@ -263,7 +278,7 @@ export default {
       id: '1',
       type: 'ealr',
       attributes: {
-        ealr: 'Temeritas caelum aut aegre denego.',
+        ealr: 'Tonsor qui avoco vicinus succedo.',
         seq: '1.1',
         category: 'Category 1',
       },
@@ -272,7 +287,7 @@ export default {
       id: '2',
       type: 'ealr',
       attributes: {
-        ealr: 'Tactus tutis catena commodi pectus.',
+        ealr: 'Socius vetus curiositas quia rerum.',
         seq: '1.2',
         category: 'Category 1',
       },
@@ -281,7 +296,7 @@ export default {
       id: '3',
       type: 'ealr',
       attributes: {
-        ealr: 'Officiis toties decumbo cumque sponte.',
+        ealr: 'Infit compello officia vergo acquiro.',
         seq: '2.1',
         category: 'Category 2',
       },
@@ -290,7 +305,7 @@ export default {
       id: '4',
       type: 'ealr',
       attributes: {
-        ealr: 'Anser aranea reiciendis theca utor.',
+        ealr: 'Desidero aestivus celer depromo tamisium.',
         seq: '2.2',
         category: 'Category 2',
       },
@@ -299,14 +314,14 @@ export default {
       id: '1',
       type: 'user',
       attributes: {
-        firstName: 'Donald',
-        lastName: 'Stoltenberg',
+        firstName: 'Angel',
+        lastName: 'McLaughlin',
         nickname: null,
         dateActive: '2012-09-01',
         dateInactive: null,
         districtId: null,
         districtGrade: 12,
-        email: 'chase@hellerjohnson.info',
+        email: 'stellawilderman@aufderhar.com',
         status: 'active',
         role: 'staff',
       },

@@ -8,8 +8,23 @@ export default {
         name: 'Category 1',
         sequence: 0,
         public: false,
+        reporting: 'none',
+        activeContractsCount: 1,
         homeroom: false,
-        statusable: false,
+      },
+      relationships: {
+        contracts: {
+          data: [
+            {
+              id: '1',
+              type: 'contract',
+            },
+            {
+              id: '3',
+              type: 'contract',
+            },
+          ],
+        },
       },
     },
     {
@@ -19,8 +34,23 @@ export default {
         name: 'Category 2',
         sequence: 0,
         public: false,
+        reporting: 'none',
+        activeContractsCount: 1,
         homeroom: false,
-        statusable: false,
+      },
+      relationships: {
+        contracts: {
+          data: [
+            {
+              id: '2',
+              type: 'contract',
+            },
+            {
+              id: '4',
+              type: 'contract',
+            },
+          ],
+        },
       },
     },
   ],

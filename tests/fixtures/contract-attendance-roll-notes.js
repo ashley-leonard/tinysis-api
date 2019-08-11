@@ -5,8 +5,8 @@ export default {
       id: '62',
       type: 'note',
       attributes: {
-        note: 'Note by Stoltenberg for student Rohan / meeting 1',
-        updatedAt: '2019-06-24T02:51:25.000Z',
+        note: 'Note by McLaughlin for student Ratke / meeting 1',
+        updatedAt: '2019-08-08T21:36:16.000Z',
       },
       relationships: {
         notable: {
@@ -27,8 +27,8 @@ export default {
       id: '63',
       type: 'note',
       attributes: {
-        note: 'Note by Stoltenberg for student Maggio / meeting 1',
-        updatedAt: '2019-06-24T02:51:25.000Z',
+        note: 'Note by McLaughlin for student Blanda / meeting 1',
+        updatedAt: '2019-08-08T21:36:16.000Z',
       },
       relationships: {
         notable: {
@@ -51,14 +51,14 @@ export default {
       id: '1',
       type: 'user',
       attributes: {
-        firstName: 'Donald',
-        lastName: 'Stoltenberg',
+        firstName: 'Angel',
+        lastName: 'McLaughlin',
         nickname: null,
         dateActive: '2012-09-01',
         dateInactive: null,
         districtId: null,
         districtGrade: 12,
-        email: 'chase@hellerjohnson.info',
+        email: 'stellawilderman@aufderhar.com',
         status: 'active',
         role: 'staff',
       },

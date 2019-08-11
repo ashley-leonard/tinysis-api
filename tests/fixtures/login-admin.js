@@ -1,23 +1,23 @@
 // auth for user 4
 export default {
   data: {
-    email: 'angeline@mayertstiedemann.co',
+    email: 'junie@carroll.io',
     email_verified: false,
     updated_at: '2019-06-23T23:44:29.877Z',
-    user_id: 'auth0|319ed6a68ae56b3e59a65b831c4ff806',
-    name: 'Miles Flatley',
+    user_id: 'auth0|5615baed132a98734e3d072700393485',
+    name: 'Enola Shields',
     identities: [
       {
         connection: 'Username-Password-Authentication',
         provider: 'auth0',
-        user_id: '319ed6a68ae56b3e59a65b831c4ff806',
+        user_id: '5615baed132a98734e3d072700393485',
         isSocial: false,
       },
     ],
     created_at: '2019-05-25T00:24:18.815Z',
     last_password_reset: '2019-06-10T04:09:05.883Z',
-    given_name: 'Miles',
-    family_name: 'Flatley',
+    given_name: 'Enola',
+    family_name: 'Shields',
     nickname: null,
     last_login: '2019-06-23T23:44:29.877Z',
     last_ip: '208.100.155.216',
