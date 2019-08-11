@@ -56,8 +56,8 @@ RSpec.describe 'Admin graduation plan requirements API', type: :request do
         data: {
           attributes: {
             name: Faker::Name.name,
-            status: 'active',
-            requirementType: 'credit'
+            status: 'inactive',
+            requirementType: 'general'
           },
           relationships: {
             parent: {
@@ -76,7 +76,7 @@ RSpec.describe 'Admin graduation plan requirements API', type: :request do
       expect(json['data']['id']).not_to be_empty
 
       attributes = json['data']['attributes']
-      %w{name}.each do |key|
+      %w{name status requirementType}.each do |key|
         expect(attributes[key]).to eq(postBody[:data][:attributes][key.to_sym])
       end
       expect(json['data']['relationships']['parent']['data']['id']).to eq(@grad1.id.to_s)

@@ -24,7 +24,14 @@ class AdminGraduationPlanRequirementsController < AdminController
       .where(where)
       .count
 
-    options = { meta: { count: count }}
+    options = {
+      meta: {
+        count: count,
+        params: {
+          status: params[:status]
+        }
+      }
+    }
 
     render json: GraduationPlanRequirementSerializer.new(result, options), status: 200
   end
@@ -80,7 +87,7 @@ private
   def requirements_attributes
     params.require(:data)
       .require(:attributes)
-      .permit(:name, :notes, :position, :requirement_type, :reporting)
+      .permit(:name, :notes, :position, :requirement_type, :status)
   end
 
   def requirement_parent_attributes
