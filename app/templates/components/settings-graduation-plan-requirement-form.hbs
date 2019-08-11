@@ -1,0 +1,66 @@
+<fieldset>
+  <p>
+    {{#form-input error=errors.name showError=showErrors}}
+      Name
+      <input
+        type="text"
+        name="name"
+        value={{pojo.name}}
+        autofocus
+      >
+    {{/form-input}}
+  </p>
+  <p>
+    {{#form-input}}
+      Status
+      {{t-select
+        options=statusOptions
+        value=pojo.status
+        name="status"
+      }}
+    {{/form-input}}
+  </p>
+  <p>
+    {{#form-input error=errors.notes showError=showErrors}}
+      Notes
+      <textarea
+        name="notes"
+        value={{pojo.notes}}
+      ></textarea>
+    {{/form-input}}
+  </p>
+  <p>
+    {{#form-input}}
+      Requirement type
+      {{t-select
+        options=requirementTypeOptions
+        value=requirementType
+        name="requirementType"
+        onchange=(action (mut pojo.requirementType))
+      }}
+    {{/form-input}}
+  </p>
+</fieldset>
+
+<fieldset>
+  <p>
+    {{#form-input error=errors.parent showError=showErrors}}
+      Parent requirement
+      {{t-select
+        value=parentId
+        prompt="Select a requirement"
+        options=parentOptions
+        name="parentId"
+        onchange=(action (mut parentId))
+      }}
+    {{/form-input}}
+  </p>
+</fieldset>
+
+{{#t-form-actions-row
+  disabled=disabled
+}}
+  {{#link-to "settings-graduation-plan-requirements" class="btn btn-clear"}}
+    Cancel
+  {{/link-to}}
+{{/t-form-actions-row}}

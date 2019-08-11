@@ -66,9 +66,12 @@
     "postcss-preset-env": "^6.6.0",
     "pretender": "~3.0.1",
     "qunit-dom": "~0.8.4",
+    "showdown": "^1.9.0",
+    "svg-to-dataurl": "^1.0.0",
     "tailwindcss": "~1.0.1"
   },
   "engines": {
     "node": "6.* || 8.* || >= 10.*"
-  }
+  },
+  "dependencies": {}
 }

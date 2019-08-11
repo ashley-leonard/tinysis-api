@@ -1,0 +1,10 @@
+<td>
+  {{t-drag-handle}}
+</td>
+<td class={{if indented "indented"}}>
+  {{#link-to "settings-graduation-plan-requirements.edit" req.id}}
+    {{req.attributes.name}}
+  {{/link-to}}
+</td> 
+<td>{{titleize req.attributes.status}}</td>
+<td>{{t-markdown req.attributes.notes}}</td>

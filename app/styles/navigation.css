@@ -1,6 +1,3 @@
-@import "./ember-modal-dialog/ember-modal-structure.scss";
-@import "./ember-modal-dialog/ember-modal-appearance.scss";
-
 nav.toolbar {
   li { 
     @apply mx-2; 

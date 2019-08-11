@@ -1,0 +1,36 @@
+<p>
+  {{#link-to "settings-graduation-plan-requirements.new" class="btn"}}
+    Add a requirement
+  {{/link-to}}
+</p>
+
+{{#check-empty
+  count=model.meta.count
+  noResultsMessage="No graduation plan requirements were found"
+}}
+  {{count-paragraph
+    result=model
+    name="requirement"
+  }}
+
+  <h3>Credit requirements</h3>
+  {{graduation-plan-requirements-list
+    graduationPlanRequirements=graduationPlanRequirements
+    updateSeries=(action "updateSeries")
+    requirementType="credit"
+  }}
+
+  <h3>General requirements</h3>
+  {{graduation-plan-requirements-list
+    graduationPlanRequirements=graduationPlanRequirements
+    updateSeries=(action "updateSeries")
+    requirementType="general"
+  }}
+
+  <h3>Service requirements</h3>
+  {{graduation-plan-requirements-list
+    graduationPlanRequirements=graduationPlanRequirements
+    updateSeries=(action "updateSeries")
+    requirementType="service"
+  }}
+{{/check-empty}}

@@ -36,7 +36,7 @@ t-help {
   }
 }
 
-input[type="text"], input[type="email"], input[type="number"], select {
+input[type="text"], input[type="email"], input[type="number"], select, textarea {
   @apply block border border-gray-200 bg-white w-full p-2 mt-2 rounded;
 
   &:focus {
