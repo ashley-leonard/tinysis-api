@@ -5,24 +5,14 @@ class AdminGraduationPlanRequirementsController < AdminController
 
     limit = nil if limit == "-1"
 
-    where = nil
-
-    case params[:status]
-      when 'active'
-        where = { status: 'active' }
-      end
-
     order = 'position,name'
 
     result = GraduationPlanRequirement
-      .where(where)
       .includes(:children)
       .order(Arel.sql(order))
       .limit(limit)
 
-    count = GraduationPlanRequirement
-      .where(where)
-      .count
+    count = GraduationPlanRequirement.count
 
     options = {
       meta: {
