@@ -24,7 +24,11 @@ Rails.application.routes.draw do
     post '/meeting_participants', to: 'meeting_participants#create'
     put '/meeting_participants/:id', to: 'meeting_participants#update'
  
-    get '/graduation-plans', to: 'graduation_plans#index'
+    get '/graduation-plans/:student_id', to: 'graduation_plans#show'
+    put '/graduation-plans/:student_id', to: 'graduation_plans#update'
+
+    get '/graduation-plan-requirements', to: 'graduation_plan_requirements#index'
+    get '/graduation-plan-requirements/:id', to: 'graduation_plan_requirements#show'
 
     get '/assignments', to: 'assignments#index'
   
@@ -59,8 +63,6 @@ Rails.application.routes.draw do
       put '/contract-categories/:id', to: 'admin_contract_categories#update'
       delete '/contract-categories/:id', to: 'admin_contract_categories#destroy'
 
-      get '/graduation-plan-requirements', to: 'admin_graduation_plan_requirements#index'
-      get '/graduation-plan-requirements/:id', to: 'admin_graduation_plan_requirements#show'
       put '/graduation-plan-requirements/sort', to: 'admin_graduation_plan_requirements#sort'
       put '/graduation-plan-requirements/:id', to: 'admin_graduation_plan_requirements#update'
       post '/graduation-plan-requirements', to: 'admin_graduation_plan_requirements#create'

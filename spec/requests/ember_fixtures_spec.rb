@@ -382,9 +382,8 @@ RSpec.describe 'Ember fixtures script', type: :request do
         write_fixture "/api/terms?limit=20&order=name&include=usage", "admin-terms-list.js"
         write_fixture "/api/terms/#{@term1_current.id}", "admin-term-detail.js"
 
-        # admin graduation plan requirements - all
-        write_fixture "/api/admin/graduation-plan-requirements?status=all", "admin-graduation-plan-requirements-list-all.js"
-        write_fixture "/api/admin/graduation-plan-requirements", "admin-graduation-plan-requirements-list-active.js"
+        # graduation plan requirements - all
+        write_fixture "/api/graduation-plan-requirements", "graduation-plan-requirements-list-all.js"
       end
     end
   end

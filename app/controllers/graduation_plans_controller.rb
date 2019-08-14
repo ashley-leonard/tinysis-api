@@ -1,23 +1,21 @@
 class GraduationPlansController < ApplicationController
-  def index
+  def create
 
-    limit = params[:limit] || Rails.configuration.constants[:DEFAULT_LIMIT]
+  end
 
-    limit = nil if limit == "-1"
+  def show
+    plan = GraduationPlan.find_by_user_id params[:student_id]
 
-    order = (params[:order] || '')
-      .split(',')
-      .map(&:underscore)
-      .join(',')
+    if plan
+      return render json: GraduationPlanSerializer.new(plan)
+    else
+      render json: { message: 'not found' }, status: 404 unless plan
+    end
+    
+  end
 
-    result = GraduationPlanRequirement
-      .order(Arel.sql(order))
-      .limit(limit)
+  def update
 
-    count = GraduationPlanRequirement.count
 
-    options = { meta: { count: count }}
-
-    render json: GraduationPlanRequirementSerializer.new(result, options), status: 200
   end
 end
