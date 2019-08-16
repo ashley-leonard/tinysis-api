@@ -52,7 +52,7 @@ class GraduationPlan < ApplicationRecord
     
     return gpm
   end
-  
+ 
   #SWEEP
   def map_credit_assignment(requirement, ca)
     raise ArgumentError, "Some kind of information leak" unless (ca.user == self.user) || (ca.primary_parent == self)

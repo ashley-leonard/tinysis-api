@@ -24,8 +24,9 @@ Rails.application.routes.draw do
     post '/meeting_participants', to: 'meeting_participants#create'
     put '/meeting_participants/:id', to: 'meeting_participants#update'
  
-    get '/graduation-plans/:student_id', to: 'graduation_plans#show'
-    put '/graduation-plans/:student_id', to: 'graduation_plans#update'
+    get '/graduation-plan-mappings/:student_id', to: 'graduation_plan_mappings#index'
+    put '/graduation-plan-mappings/:student_id', to: 'graduation_plan_mappings#update'
+    delete '/graduation-plan-mappings/:student_id/:mapping_id', to: 'graduation_plan_mappings#destroy'
 
     get '/graduation-plan-requirements', to: 'graduation_plan_requirements#index'
     get '/graduation-plan-requirements/:id', to: 'graduation_plan_requirements#show'
