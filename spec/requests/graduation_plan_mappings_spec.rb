@@ -41,61 +41,100 @@ RSpec.describe 'Graduation plan mappings API', type: :request do
     end
 
     it 'returns a 200 with an empty graduation plan' do
+      expect(GraduationPlan.find_by_user_id(@student2.id)).to equal(nil)
+
       get "/api/graduation-plan-mappings/#{@student2.id}", headers: json_request_headers
 
       expect(response).to have_http_status(200)
       expect(json).not_to be_empty
 
-      Rails.logger.info json
-
       expect(json['meta']['count']).to eq(0)
+
+      expect(GraduationPlan.find_by_user_id(@student2.id)).not_to equal(nil)
     end
   end
 
-  # describe 'POST /api/admin/terms' do
-  #   it 'returns a 200 with successful term creation' do
-  #     postBody = {
-  #       data: {
-  #         attributes: {
-  #           name: Faker::Name.first_name,
-  #           schoolYear: 2011,
-  #           active: true,
-  #           months:  ['2011-09-01', '2011-10-01', '2011-11-01', '2011-12-01', '2012-01-01'],
-  #           credit_date: '2012-02-01'
-  #         }
-  #       }
-  #     }
-  #     post "/api/admin/terms", params: postBody.to_json, headers: json_request_headers
+  describe 'DELETE /api/graduation-plan-mappings/:student_id/:mapping_id' do
+    it 'returns a 204 with successful deletion' do
+      delete "/api/graduation-plan-mappings/#{@student1.id}/#{@mapping1.id}", headers: json_request_headers
 
-  #     expect(response).to have_http_status(200)
-  #     expect(json).not_to be_empty
-  #     expect(json['data']['id']).not_to be_empty
+      expect(response).to have_http_status(204)
+      expect(GraduationPlanMapping.find_by_id(@mapping1.id)).to be_nil
+    end
+  end
 
-  #     attributes = json['data']['attributes']
-  #     %w{firstName lastName login canLogin role isActive}.each do |key|
-  #       expect(attributes[key]).to eq(postBody[:data][:attributes][key.to_sym])
-  #     end
+  describe 'POST /api/graduation-plan-mappings/:student_id' do
+    it 'returns a 200 with successful mapping creation' do
+      body = {
+        data: {
+          relationships: {
+            graduation_plan_requirement: {
+              data: {
+                id: @req2.id
+              }
+            },
+            creditAssignment: {
+              data: {
+                id: @credit_assignment_3.id
+              }
+            }
+          }
+        }
+      }
 
-  #     expect(attributes['months'].join(',')).to eq('2011-09-01,2011-10-01,2011-11-01,2011-12-01,2012-01-01')
-  #   end
+      post "/api/graduation-plan-mappings/#{@student1.id}", params: body.to_json, headers: json_request_headers
 
-  #   it 'requires minimum input set or yields 422' do
-  #     postBody = {
-  #       data: {
-  #         attributes: {
-  #           name: Faker::Name.first_name,
-  #         },
-  #       }
-  #     }
-  #     post "/api/admin/terms", params: postBody.to_json, headers: json_request_headers
+      expect(response).to have_http_status(200)
+      expect(json).not_to be_empty
+      expect(json['data']['id']).not_to be_empty
+    end
 
-  #     expect(response).to have_http_status(422)
+    it 'returns a 422 with duplicate mapping' do
+      body = {
+        data: {
+          relationships: {
+            graduation_plan_requirement: {
+              data: {
+                id: @mapping1.graduation_plan_requirement_id
+              }
+            },
+            creditAssignment: {
+              data: {
+                id: @mapping1.credit_assignment_id
+              }
+            }
+          }
+        }
+      }
 
-  #     expect(json).not_to be_empty
+      post "/api/graduation-plan-mappings/#{@student1.id}", params: body.to_json, headers: json_request_headers
 
-  #     expect(json['status']).to eq(422)
-  #     expect(json['errors']).not_to be_empty
-  #     expect(json['message']).not_to be_empty
-  #   end
-  # end
+      expect(response).to have_http_status(422)
+      expect(json).not_to be_empty
+    end
+
+    it 'requires minimum input set or yields 422' do
+      body = {
+        data: {
+          relationships: {
+            creditAssignment: {
+              data: {
+                id: @credit_assignment_3.id
+              }
+            }
+          }
+        }
+      }
+
+      post "/api/graduation-plan-mappings/#{@student1.id}", params: body.to_json, headers: json_request_headers
+
+      expect(response).to have_http_status(422)
+
+      expect(json).not_to be_empty
+
+      expect(json['status']).to eq(422)
+      expect(json['errors']).not_to be_empty
+      expect(json['message']).not_to be_empty
+    end
+  end
 end
