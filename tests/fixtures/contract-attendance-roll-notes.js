@@ -5,8 +5,8 @@ export default {
       id: '62',
       type: 'note',
       attributes: {
-        note: 'Note by McLaughlin for student Ratke / meeting 1',
-        updatedAt: '2019-08-08T21:36:16.000Z',
+        note: 'Note by Hansen for student Pfannerstill / meeting 1',
+        updatedAt: '2019-08-13T04:44:34.000Z',
       },
       relationships: {
         notable: {
@@ -27,8 +27,8 @@ export default {
       id: '63',
       type: 'note',
       attributes: {
-        note: 'Note by McLaughlin for student Blanda / meeting 1',
-        updatedAt: '2019-08-08T21:36:16.000Z',
+        note: 'Note by Hansen for student Simonis / meeting 1',
+        updatedAt: '2019-08-13T04:44:34.000Z',
       },
       relationships: {
         notable: {
@@ -51,14 +51,14 @@ export default {
       id: '1',
       type: 'user',
       attributes: {
-        firstName: 'Angel',
-        lastName: 'McLaughlin',
+        firstName: 'Crista',
+        lastName: 'Hansen',
         nickname: null,
         dateActive: '2012-09-01',
         dateInactive: null,
         districtId: null,
         districtGrade: 12,
-        email: 'stellawilderman@aufderhar.com',
+        email: 'zachariaheffertz@oreilly.name',
         status: 'active',
         role: 'staff',
       },

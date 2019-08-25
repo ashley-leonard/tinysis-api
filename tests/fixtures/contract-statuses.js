@@ -1,4 +1,4 @@
-// GET /api/statuses?enrollmentIds=2,1
+// GET /api/statuses?enrollmentIds=1,2
 export default {
   data: [
     {
@@ -6,8 +6,8 @@ export default {
       type: 'status',
       attributes: {
         month: '2019-09-01',
-        createdAt: '2019-08-08T21:36:16.000Z',
-        updatedAt: '2019-08-08T21:36:16.000Z',
+        createdAt: '2019-08-13T04:44:33.000Z',
+        updatedAt: '2019-08-13T04:44:33.000Z',
         fteHours: 25,
         metFteRequirements: true,
         heldPeriodicCheckins: true,
@@ -34,8 +34,8 @@ export default {
       type: 'status',
       attributes: {
         month: '2019-10-01',
-        createdAt: '2019-08-08T21:36:16.000Z',
-        updatedAt: '2019-08-08T21:36:16.000Z',
+        createdAt: '2019-08-13T04:44:33.000Z',
+        updatedAt: '2019-08-13T04:44:33.000Z',
         fteHours: 25,
         metFteRequirements: true,
         heldPeriodicCheckins: true,
@@ -62,8 +62,8 @@ export default {
       type: 'status',
       attributes: {
         month: '2019-11-01',
-        createdAt: '2019-08-08T21:36:16.000Z',
-        updatedAt: '2019-08-08T21:36:16.000Z',
+        createdAt: '2019-08-13T04:44:33.000Z',
+        updatedAt: '2019-08-13T04:44:33.000Z',
         fteHours: 25,
         metFteRequirements: true,
         heldPeriodicCheckins: true,
@@ -90,8 +90,8 @@ export default {
       type: 'status',
       attributes: {
         month: '2019-09-01',
-        createdAt: '2019-08-08T21:36:16.000Z',
-        updatedAt: '2019-08-08T21:36:16.000Z',
+        createdAt: '2019-08-13T04:44:33.000Z',
+        updatedAt: '2019-08-13T04:44:33.000Z',
         fteHours: 25,
         metFteRequirements: true,
         heldPeriodicCheckins: true,
@@ -118,8 +118,8 @@ export default {
       type: 'status',
       attributes: {
         month: '2019-10-01',
-        createdAt: '2019-08-08T21:36:16.000Z',
-        updatedAt: '2019-08-08T21:36:16.000Z',
+        createdAt: '2019-08-13T04:44:33.000Z',
+        updatedAt: '2019-08-13T04:44:33.000Z',
         fteHours: 25,
         metFteRequirements: true,
         heldPeriodicCheckins: true,
@@ -146,8 +146,8 @@ export default {
       type: 'status',
       attributes: {
         month: '2019-11-01',
-        createdAt: '2019-08-08T21:36:16.000Z',
-        updatedAt: '2019-08-08T21:36:16.000Z',
+        createdAt: '2019-08-13T04:44:33.000Z',
+        updatedAt: '2019-08-13T04:44:33.000Z',
         fteHours: 25,
         metFteRequirements: true,
         heldPeriodicCheckins: true,
@@ -175,14 +175,14 @@ export default {
       id: '1',
       type: 'user',
       attributes: {
-        firstName: 'Angel',
-        lastName: 'McLaughlin',
+        firstName: 'Crista',
+        lastName: 'Hansen',
         nickname: null,
         dateActive: '2012-09-01',
         dateInactive: null,
         districtId: null,
         districtGrade: 12,
-        email: 'stellawilderman@aufderhar.com',
+        email: 'zachariaheffertz@oreilly.name',
         status: 'active',
         role: 'staff',
       },

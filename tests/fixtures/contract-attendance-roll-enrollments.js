@@ -2,66 +2,6 @@
 export default {
   data: [
     {
-      id: '2',
-      type: 'enrollment',
-      attributes: {
-        finalizedOn: null,
-        enrollmentStatus: 'enrolled',
-        completionStatus: 'incomplete',
-      },
-      relationships: {
-        contract: {
-          data: {
-            id: '3',
-            type: 'contract',
-          },
-        },
-        participant: {
-          data: {
-            id: '7',
-            type: 'participant',
-          },
-        },
-        creditAssignments: {
-          data: [
-            {
-              id: '6',
-              type: 'creditAssignment',
-            },
-          ],
-        },
-        turnins: {
-          data: [
-
-          ],
-        },
-        meetingParticipants: {
-          data: [
-            {
-              id: '2',
-              type: 'meetingParticipant',
-            },
-            {
-              id: '4',
-              type: 'meetingParticipant',
-            },
-            {
-              id: '6',
-              type: 'meetingParticipant',
-            },
-            {
-              id: '8',
-              type: 'meetingParticipant',
-            },
-            {
-              id: '10',
-              type: 'meetingParticipant',
-            },
-          ],
-        },
-      },
-    },
-    {
       id: '1',
       type: 'enrollment',
       attributes: {
@@ -140,42 +80,78 @@ export default {
         },
       },
     },
-  ],
-  included: [
     {
-      id: '7',
-      type: 'user',
+      id: '2',
+      type: 'enrollment',
       attributes: {
-        firstName: 'Zetta',
-        lastName: 'Blanda',
-        nickname: null,
-        dateActive: '2018-08-01',
-        dateInactive: '2019-10-01',
-        districtId: '2333436592',
-        districtGrade: 12,
-        email: null,
-        status: 'inactive',
-        role: 'student',
+        finalizedOn: null,
+        enrollmentStatus: 'enrolled',
+        completionStatus: 'incomplete',
       },
       relationships: {
-        coordinator: {
+        contract: {
           data: {
-            id: '2',
-            type: 'staff',
+            id: '3',
+            type: 'contract',
           },
+        },
+        participant: {
+          data: {
+            id: '7',
+            type: 'participant',
+          },
+        },
+        creditAssignments: {
+          data: [
+            {
+              id: '6',
+              type: 'creditAssignment',
+            },
+          ],
+        },
+        turnins: {
+          data: [
+
+          ],
+        },
+        meetingParticipants: {
+          data: [
+            {
+              id: '2',
+              type: 'meetingParticipant',
+            },
+            {
+              id: '4',
+              type: 'meetingParticipant',
+            },
+            {
+              id: '6',
+              type: 'meetingParticipant',
+            },
+            {
+              id: '8',
+              type: 'meetingParticipant',
+            },
+            {
+              id: '10',
+              type: 'meetingParticipant',
+            },
+          ],
         },
       },
     },
+  ],
+  included: [
     {
       id: '5',
       type: 'user',
       attributes: {
-        firstName: 'Zachery',
-        lastName: 'Ratke',
+        firstName: 'Eliana',
+        lastName: 'Pfannerstill',
         nickname: null,
         dateActive: '2018-08-01',
         dateInactive: null,
-        districtId: '4824754434',
+        districtId: '9816947609',
         districtGrade: 12,
         email: null,
         status: 'active',
@@ -185,6 +161,30 @@ export default {
         coordinator: {
           data: {
             id: '1',
+            type: 'staff',
+          },
+        },
+      },
+    },
+    {
+      id: '7',
+      type: 'user',
+      attributes: {
+        firstName: 'Winston',
+        lastName: 'Simonis',
+        nickname: null,
+        dateActive: '2018-08-01',
+        dateInactive: '2019-10-01',
+        districtId: '9798983283',
+        districtGrade: 12,
+        email: null,
+        status: 'inactive',
+        role: 'student',
+      },
+      relationships: {
+        coordinator: {
+          data: {
+            id: '2',
             type: 'staff',
           },
         },

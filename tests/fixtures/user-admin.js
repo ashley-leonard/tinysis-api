@@ -4,8 +4,8 @@ export default {
     id: '4',
     type: 'user',
     attributes: {
-      firstName: 'Enola',
-      lastName: 'Shields',
+      firstName: 'Cletus',
+      lastName: 'Brekke',
       nickname: null,
       dateActive: '2011-07-01',
       dateInactive: null,
@@ -13,7 +13,7 @@ export default {
       districtGrade: 12,
       status: 'active',
       role: 'administrator',
-      email: 'junie@carroll.io',
+      email: 'joannebauch@denesik.com',
     },
     relationships: {
     },

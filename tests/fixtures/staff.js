@@ -5,8 +5,8 @@ export default {
       id: '1',
       type: 'user',
       attributes: {
-        firstName: 'Angel',
-        lastName: 'McLaughlin',
+        firstName: 'Crista',
+        lastName: 'Hansen',
         nickname: null,
       },
       relationships: {
@@ -24,8 +24,8 @@ export default {
       id: '2',
       type: 'user',
       attributes: {
-        firstName: 'Mikel',
-        lastName: 'Davis',
+        firstName: 'Garry',
+        lastName: 'Terry',
         nickname: null,
       },
       relationships: {
@@ -47,8 +47,8 @@ export default {
       id: '3',
       type: 'user',
       attributes: {
-        firstName: 'Nolan',
-        lastName: 'Donnelly',
+        firstName: 'Herman',
+        lastName: 'Hickle',
         nickname: null,
       },
       relationships: {
@@ -63,8 +63,8 @@ export default {
       id: '4',
       type: 'user',
       attributes: {
-        firstName: 'Enola',
-        lastName: 'Shields',
+        firstName: 'Cletus',
+        lastName: 'Brekke',
         nickname: null,
       },
       relationships: {

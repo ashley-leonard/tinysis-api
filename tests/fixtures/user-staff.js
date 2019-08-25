@@ -4,8 +4,8 @@ export default {
     id: '1',
     type: 'user',
     attributes: {
-      firstName: 'Angel',
-      lastName: 'McLaughlin',
+      firstName: 'Crista',
+      lastName: 'Hansen',
       nickname: null,
       dateActive: '2012-09-01',
       dateInactive: null,
@@ -13,7 +13,7 @@ export default {
       districtGrade: 12,
       status: 'active',
       role: 'staff',
-      email: 'stellawilderman@aufderhar.com',
+      email: 'zachariaheffertz@oreilly.name',
     },
     relationships: {
     },

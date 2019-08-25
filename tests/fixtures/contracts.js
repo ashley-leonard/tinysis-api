@@ -5,7 +5,7 @@ export default {
       id: '1',
       type: 'contract',
       attributes: {
-        name: 'Cena claustrum culpa voluptatem quae.',
+        name: 'Tutis ubi commodo succurro calco.',
         status: 'closed',
       },
       relationships: {
@@ -45,7 +45,7 @@ export default {
       id: '2',
       type: 'contract',
       attributes: {
-        name: 'Tabernus apto virga defetiscor et.',
+        name: 'Et abscido vesco crux claustrum.',
         status: 'closed',
       },
       relationships: {
@@ -85,7 +85,7 @@ export default {
       id: '3',
       type: 'contract',
       attributes: {
-        name: 'Spectaculum magnam eaque harum utrimque.',
+        name: 'Videlicet curso voco cena vorago.',
         status: 'approved',
       },
       relationships: {
@@ -125,7 +125,7 @@ export default {
       id: '4',
       type: 'contract',
       attributes: {
-        name: 'Chirographum vulnus considero dens textilis.',
+        name: 'Advoco tantum calamitas terga vomer.',
         status: 'approved',
       },
       relationships: {
@@ -193,14 +193,14 @@ export default {
       id: '1',
       type: 'user',
       attributes: {
-        firstName: 'Angel',
-        lastName: 'McLaughlin',
+        firstName: 'Crista',
+        lastName: 'Hansen',
         nickname: null,
         dateActive: '2012-09-01',
         dateInactive: null,
         districtId: null,
         districtGrade: 12,
-        email: 'stellawilderman@aufderhar.com',
+        email: 'zachariaheffertz@oreilly.name',
         status: 'active',
         role: 'staff',
       },
@@ -245,14 +245,14 @@ export default {
       id: '2',
       type: 'user',
       attributes: {
-        firstName: 'Mikel',
-        lastName: 'Davis',
+        firstName: 'Garry',
+        lastName: 'Terry',
         nickname: null,
         dateActive: '2013-02-01',
         dateInactive: null,
         districtId: null,
         districtGrade: 12,
-        email: 'vicenta@moenrowe.io',
+        email: 'billie@durganmckenzie.name',
         status: 'active',
         role: 'staff',
       },

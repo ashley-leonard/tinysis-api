@@ -2,17 +2,17 @@
 export default {
   data: [
     {
-      id: '6',
+      id: '7',
       type: 'user',
       attributes: {
-        firstName: 'Oswaldo',
-        lastName: 'Bartoletti',
+        firstName: 'Winston',
+        lastName: 'Simonis',
         nickname: null,
         dateActive: '2018-08-01',
-        dateInactive: null,
-        districtId: '5571345198',
+        dateInactive: '2019-10-01',
+        districtId: '9798983283',
         districtGrade: 12,
-        status: 'active',
+        status: 'inactive',
         role: 'student',
       },
       relationships: {
@@ -25,17 +25,17 @@ export default {
       },
     },
     {
-      id: '7',
+      id: '6',
       type: 'user',
       attributes: {
-        firstName: 'Zetta',
-        lastName: 'Blanda',
+        firstName: 'Khalilah',
+        lastName: 'Strosin',
         nickname: null,
         dateActive: '2018-08-01',
-        dateInactive: '2019-10-01',
-        districtId: '2333436592',
+        dateInactive: null,
+        districtId: '4232569079',
         districtGrade: 12,
-        status: 'inactive',
+        status: 'active',
         role: 'student',
       },
       relationships: {

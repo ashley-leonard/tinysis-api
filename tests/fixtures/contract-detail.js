@@ -4,13 +4,13 @@ export default {
     id: '3',
     type: 'contract',
     attributes: {
-      name: 'Spectaculum magnam eaque harum utrimque.',
+      name: 'Videlicet curso voco cena vorago.',
       status: 'approved',
-      learningObjectives: 'Laudantium delibero brevis turpe coniuratio.',
-      competencies: 'Atqui non admoveo strues suffoco.',
-      evaluationMethods: 'Quia tergiversatio voluptatem vorax eligendi.',
-      instructionalMaterials: 'Decerno terebro maiores acer dolores.',
-      location: 'Ater viridis arto ter rerum.',
+      learningObjectives: 'Desino aeternus tres defluo accusator.',
+      competencies: 'Suppono tondeo tergo stipes decimus.',
+      evaluationMethods: 'Et totus nemo explicabo dolores.',
+      instructionalMaterials: 'Accusator esse super nostrum cattus.',
+      location: 'Sint cariosus administratio ulterius id.',
       timeslots: [
         {
           start: '8:45',
@@ -278,7 +278,7 @@ export default {
       id: '1',
       type: 'ealr',
       attributes: {
-        ealr: 'Tonsor qui avoco vicinus succedo.',
+        ealr: 'Corrupti solum anser deputo abeo.',
         seq: '1.1',
         category: 'Category 1',
       },
@@ -287,7 +287,7 @@ export default {
       id: '2',
       type: 'ealr',
       attributes: {
-        ealr: 'Socius vetus curiositas quia rerum.',
+        ealr: 'Veritatis barba cibo creptio clamo.',
         seq: '1.2',
         category: 'Category 1',
       },
@@ -296,7 +296,7 @@ export default {
       id: '3',
       type: 'ealr',
       attributes: {
-        ealr: 'Infit compello officia vergo acquiro.',
+        ealr: 'Cohaero placeat vigor templum stultus.',
         seq: '2.1',
         category: 'Category 2',
       },
@@ -305,7 +305,7 @@ export default {
       id: '4',
       type: 'ealr',
       attributes: {
-        ealr: 'Desidero aestivus celer depromo tamisium.',
+        ealr: 'Antepono benigne in templum aut.',
         seq: '2.2',
         category: 'Category 2',
       },
@@ -314,14 +314,14 @@ export default {
       id: '1',
       type: 'user',
       attributes: {
-        firstName: 'Angel',
-        lastName: 'McLaughlin',
+        firstName: 'Crista',
+        lastName: 'Hansen',
         nickname: null,
         dateActive: '2012-09-01',
         dateInactive: null,
         districtId: null,
         districtGrade: 12,
-        email: 'stellawilderman@aufderhar.com',
+        email: 'zachariaheffertz@oreilly.name',
         status: 'active',
         role: 'staff',
       },

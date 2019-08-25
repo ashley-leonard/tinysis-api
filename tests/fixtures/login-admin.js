@@ -1,23 +1,23 @@
 // auth for user 4
 export default {
   data: {
-    email: 'junie@carroll.io',
+    email: 'joannebauch@denesik.com',
     email_verified: false,
     updated_at: '2019-06-23T23:44:29.877Z',
-    user_id: 'auth0|5615baed132a98734e3d072700393485',
-    name: 'Enola Shields',
+    user_id: 'auth0|3958d1e2d17cfe34d9da0a7db020f150',
+    name: 'Cletus Brekke',
     identities: [
       {
         connection: 'Username-Password-Authentication',
         provider: 'auth0',
-        user_id: '5615baed132a98734e3d072700393485',
+        user_id: '3958d1e2d17cfe34d9da0a7db020f150',
         isSocial: false,
       },
     ],
     created_at: '2019-05-25T00:24:18.815Z',
     last_password_reset: '2019-06-10T04:09:05.883Z',
-    given_name: 'Enola',
-    family_name: 'Shields',
+    given_name: 'Cletus',
+    family_name: 'Brekke',
     nickname: null,
     last_login: '2019-06-23T23:44:29.877Z',
     last_ip: '208.100.155.216',
