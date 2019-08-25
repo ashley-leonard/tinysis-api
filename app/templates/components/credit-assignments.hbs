@@ -1,5 +1,12 @@
 {{#each creditAssignments as |creditAssignment|}}
-  {{credit-assignments/item
-    creditAssignment=creditAssignment
+  {{#credit-assignments/item
+    creditAssignment=creditAssignment as |cai|
   }}
+    {{yield 
+      (hash
+        creditAssignment=creditAssignment
+        credit=cai.credit
+      )
+    }}
+  {{/credit-assignments/item}}
 {{/each}}

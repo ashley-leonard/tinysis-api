@@ -10,6 +10,7 @@
   {{#each requirementsList as |requirement|}}
     {{graduation-plan-requirements-list/primary-item
       requirement=requirement
+      status=status
       dropTarget=dropTarget
       setDrop=(action (mut dropTarget))
       onDrop=(action "onDrop")

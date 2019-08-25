@@ -1,3 +1,9 @@
-{{credit.attributes.courseName}}
+{{courseName}}
 /
 {{creditAssignment.attributes.creditHours}}
+{{yield
+  (hash
+    creditAssignment=creditAssignment
+    credit=credit
+  )
+}}

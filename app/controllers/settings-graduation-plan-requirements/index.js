@@ -1,10 +1,16 @@
 import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
+import { computed } from '@ember/object';
 
 export default Controller.extend({
   tinyData: service(),
   queryParams: ['status'],
   status: 'active',
+  statusOptions: computed(() => ([
+    { name: 'All', value: 'all' },
+    { name: 'Active', value: 'active' },
+    { name: 'Inactive', value: 'inactive' },
+  ])),
   actions: {
     updateSeries(series) {
       const { tinyData } = this;

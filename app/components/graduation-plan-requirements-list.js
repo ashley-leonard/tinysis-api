@@ -5,20 +5,25 @@ import { inject as service } from '@ember/service';
 export default Component.extend({
   tinyData: service(),
   tagName: '',
-  requirementsList: computed('graduationPlanRequirements', function () {
+  requirementsList: computed('graduationPlanRequirements', 'status', 'requirementType', function () {
     const {
       requirementType,
+      status,
       graduationPlanRequirements,
     } = this;
 
-    let list = graduationPlanRequirements;
+    let list = graduationPlanRequirements
+      .filter(req => !req.relationships.parent.data);
 
     if (requirementType) {
       list = list.filter(req => req.attributes.requirementType === requirementType);
     }
 
+    if (status && status !== 'all') {
+      list = list.filter(req => req.attributes.status === status);
+    }
+
     return list
-      .filter(req => !req.relationships.parent.data)
       .sort((req1, req2) => req1.attributes.position - req2.attributes.position);
   }),
   actions: {

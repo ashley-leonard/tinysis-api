@@ -59,3 +59,16 @@
   cursor: hand;
   color: black;
 }
+
+
+.req-map-item .credit-assignments li {
+  span {
+    visibility: hidden;
+  }
+
+  &:hover {
+    span {
+      visibility: visible;
+    }
+  }
+}

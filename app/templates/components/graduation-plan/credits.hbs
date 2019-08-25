@@ -1,0 +1,10 @@
+<h3>Unassigned credits</h3>
+<ul>
+  {{#each unassignedCredits as |creditAssignment|}}
+    {{graduation-plan/credits-item
+      creditAssignment=creditAssignment
+      onDrag=onDrag
+    }}
+  {{/each}}
+</ul>
+{{yield}}

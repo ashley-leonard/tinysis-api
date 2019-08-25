@@ -1,0 +1,40 @@
+<div class="flex flex-col w-full lg:w-1/2">
+  <h3>Credit Requirements</h3>
+  {{graduation-plan/requirements-map
+    requirementType="credit"
+    mappings=mappings
+    requirements=requirements
+    creditsHash=creditsHash
+    draggedCreditAssignment=draggedCreditAssignment
+    addMapping=(action "addMapping")
+    removeMapping=(action "removeMapping")
+  }}
+
+  <h3>General Requirements</h3>
+  {{graduation-plan/requirements-map
+    requirementType="general"
+    mappings=mappings
+    requirements=requirements
+    creditsHash=creditsHash
+    draggedCreditAssignment=draggedCreditAssignment
+    addMapping=(action "addMapping")
+    removeMapping=(action "removeMapping")
+  }}
+
+  <h3>Service Requirements</h3>
+  {{graduation-plan/requirements-map
+    requirementType="service"
+    mappings=mappings
+    requirements=requirements
+    creditsHash=creditsHash
+    draggedCreditAssignment=draggedCreditAssignment
+    addMapping=(action "addMapping")
+    removeMapping=(action "removeMapping")
+  }}
+</div>
+<div class="flex flex-col w-full lg:w-1/2">
+  {{graduation-plan/credits
+    creditAssignments=creditAssignments
+    onDrag=(action "onDrag")
+  }}
+</div>

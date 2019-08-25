@@ -22,7 +22,13 @@ export default function fetch(_url, callerOptions = {}) {
   return new Promise((resolve, reject) => {
     _fetch(url, options)
       .then((response) => {
-        if (response.ok) return resolve(response.json());
+        if (response.ok) {
+          if (response.status === 204) {
+            return resolve();
+          }
+
+          return resolve(response.json());
+        }
 
         const err = new Error(response.statusText);
         Object.assign(err, {

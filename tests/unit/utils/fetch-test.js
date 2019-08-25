@@ -32,6 +32,14 @@ module('Unit | Utility | fetch', (hooks) => {
     assert.equal(result.data[0].bee, 'bo', 'it has the attribute we expect');
   });
 
+  test('exercising /fetch with 204', async function (assert) {
+    this.pretender.delete(api, () => [204]);
+
+    const result = await fetch(api, { method: 'DELETE' });
+
+    assert.notOk(result, 'got a null response');
+  });
+
   test('exercising /fetch with error', async function (assert) {
     this.pretender.get(api, () => [404, {}, JSON.stringify({ message: 'not found' })]);
 

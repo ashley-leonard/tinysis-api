@@ -1,0 +1,8 @@
+{{requirement.attributes.name}}
+{{#credit-assignments
+  creditAssignments=creditAssignments as |params|
+}}
+  <a {{action "removeMapping" params.creditAssignment}} href="#" title="Remove">
+    <span class="far fa-times-circle"/>
+  </a>
+{{/credit-assignments}}
