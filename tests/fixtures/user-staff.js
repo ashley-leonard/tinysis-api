@@ -1,11 +1,11 @@
-// GET /api/admin/users/1
+// GET /api/admin/users/180
 export default {
   data: {
-    id: '1',
+    id: '180',
     type: 'user',
     attributes: {
-      firstName: 'Crista',
-      lastName: 'Hansen',
+      firstName: 'Karena',
+      lastName: 'Jacobs',
       nickname: null,
       dateActive: '2012-09-01',
       dateInactive: null,
@@ -13,7 +13,7 @@ export default {
       districtGrade: 12,
       status: 'active',
       role: 'staff',
-      email: 'zachariaheffertz@oreilly.name',
+      email: 'ariezemlak@macejkovicwhite.com',
     },
     relationships: {
     },

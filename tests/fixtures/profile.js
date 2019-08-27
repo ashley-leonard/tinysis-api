@@ -1,17 +1,17 @@
 // GET /api/profile
 export default {
   data: {
-    id: '4',
+    id: '183',
     type: 'user',
     attributes: {
-      firstName: 'Cletus',
-      lastName: 'Brekke',
+      firstName: 'Nestor',
+      lastName: 'Jacobi',
       nickname: null,
       dateActive: '2011-07-01',
       dateInactive: null,
       districtId: null,
       districtGrade: 12,
-      email: 'joannebauch@denesik.com',
+      email: 'paz@schmidtstark.biz',
       status: 'active',
       role: 'administrator',
     },

@@ -1,11 +1,11 @@
-// GET /api/admin/users/4
+// GET /api/admin/users/183
 export default {
   data: {
-    id: '4',
+    id: '183',
     type: 'user',
     attributes: {
-      firstName: 'Cletus',
-      lastName: 'Brekke',
+      firstName: 'Nestor',
+      lastName: 'Jacobi',
       nickname: null,
       dateActive: '2011-07-01',
       dateInactive: null,
@@ -13,7 +13,7 @@ export default {
       districtGrade: 12,
       status: 'active',
       role: 'administrator',
-      email: 'joannebauch@denesik.com',
+      email: 'paz@schmidtstark.biz',
     },
     relationships: {
     },

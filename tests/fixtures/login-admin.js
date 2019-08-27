@@ -1,23 +1,23 @@
-// auth for user 4
+// auth for user 183
 export default {
   data: {
-    email: 'joannebauch@denesik.com',
+    email: 'paz@schmidtstark.biz',
     email_verified: false,
     updated_at: '2019-06-23T23:44:29.877Z',
-    user_id: 'auth0|3958d1e2d17cfe34d9da0a7db020f150',
-    name: 'Cletus Brekke',
+    user_id: 'auth0|4e6bb6b6a3e2f875a37ddfb8f7a645a5',
+    name: 'Nestor Jacobi',
     identities: [
       {
         connection: 'Username-Password-Authentication',
         provider: 'auth0',
-        user_id: '3958d1e2d17cfe34d9da0a7db020f150',
+        user_id: '4e6bb6b6a3e2f875a37ddfb8f7a645a5',
         isSocial: false,
       },
     ],
     created_at: '2019-05-25T00:24:18.815Z',
     last_password_reset: '2019-06-10T04:09:05.883Z',
-    given_name: 'Cletus',
-    family_name: 'Brekke',
+    given_name: 'Nestor',
+    family_name: 'Jacobi',
     nickname: null,
     last_login: '2019-06-23T23:44:29.877Z',
     last_ip: '208.100.155.216',

@@ -2,7 +2,7 @@
 export default {
   data: [
     {
-      id: '6',
+      id: '61',
       type: 'term',
       attributes: {
         name: 'COOR Current',
@@ -29,7 +29,7 @@ export default {
       },
     },
     {
-      id: '5',
+      id: '60',
       type: 'term',
       attributes: {
         name: 'COOR Last',
@@ -56,7 +56,7 @@ export default {
       },
     },
     {
-      id: '3',
+      id: '58',
       type: 'term',
       attributes: {
         name: 'Current One',
@@ -78,7 +78,7 @@ export default {
       },
     },
     {
-      id: '4',
+      id: '59',
       type: 'term',
       attributes: {
         name: 'Current Two',
@@ -100,7 +100,7 @@ export default {
       },
     },
     {
-      id: '1',
+      id: '56',
       type: 'term',
       attributes: {
         name: 'Last One',
@@ -122,7 +122,7 @@ export default {
       },
     },
     {
-      id: '2',
+      id: '57',
       type: 'term',
       attributes: {
         name: 'Last Two',

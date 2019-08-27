@@ -1,16 +1,16 @@
-// GET /api/contracts/3?include=category,facilitator,assignments,meetings,creditAssignments,creditAssignments.credit,term,ealrs
+// GET /api/contracts/8?include=category,facilitator,assignments,meetings,creditAssignments,creditAssignments.credit,term,ealrs
 export default {
   data: {
-    id: '3',
+    id: '8',
     type: 'contract',
     attributes: {
-      name: 'Videlicet curso voco cena vorago.',
+      name: 'Vado veritas tenetur aspicio volup.',
       status: 'approved',
-      learningObjectives: 'Desino aeternus tres defluo accusator.',
-      competencies: 'Suppono tondeo tergo stipes decimus.',
-      evaluationMethods: 'Et totus nemo explicabo dolores.',
-      instructionalMaterials: 'Accusator esse super nostrum cattus.',
-      location: 'Sint cariosus administratio ulterius id.',
+      learningObjectives: 'Quos velociter vulgaris strues impedit.',
+      competencies: 'Clam bibo decerno circumvenio sufficio.',
+      evaluationMethods: 'Accipio quasi officiis cultura asper.',
+      instructionalMaterials: 'Culpa et adinventitias cur voluptas.',
+      location: 'Somniculosus curvus viduo repellat ducimus.',
       timeslots: [
         {
           start: '8:45',
@@ -23,30 +23,30 @@ export default {
       enrollments: {
         data: [
           {
-            id: '1',
+            id: '11',
             type: 'enrollment',
           },
           {
-            id: '2',
+            id: '12',
             type: 'enrollment',
           },
         ],
       },
       facilitator: {
         data: {
-          id: '1',
+          id: '180',
           type: 'User',
         },
       },
       term: {
         data: {
-          id: '3',
+          id: '58',
           type: 'term',
         },
       },
       category: {
         data: {
-          id: '1',
+          id: '6',
           type: 'category',
         },
       },
@@ -77,7 +77,7 @@ export default {
       creditAssignments: {
         data: [
           {
-            id: '2',
+            id: '20',
             type: 'creditAssignment',
           },
         ],
@@ -225,7 +225,7 @@ export default {
       },
     },
     {
-      id: '1',
+      id: '6',
       type: 'category',
       attributes: {
         name: 'Category 1',
@@ -239,11 +239,11 @@ export default {
         contracts: {
           data: [
             {
-              id: '1',
+              id: '6',
               type: 'contract',
             },
             {
-              id: '3',
+              id: '8',
               type: 'contract',
             },
           ],
@@ -251,7 +251,7 @@ export default {
       },
     },
     {
-      id: '2',
+      id: '20',
       type: 'creditAssignment',
       attributes: {
         creditHours: 1.0,
@@ -259,14 +259,17 @@ export default {
       relationships: {
         credit: {
           data: {
-            id: '1',
+            id: '18',
             type: 'credit',
           },
+        },
+        graduationPlanMapping: {
+          data: null,
         },
       },
     },
     {
-      id: '1',
+      id: '18',
       type: 'credit',
       attributes: {
         courseId: '0',
@@ -278,7 +281,7 @@ export default {
       id: '1',
       type: 'ealr',
       attributes: {
-        ealr: 'Corrupti solum anser deputo abeo.',
+        ealr: 'Carmen commemoro spiculum comburo adnuo.',
         seq: '1.1',
         category: 'Category 1',
       },
@@ -287,7 +290,7 @@ export default {
       id: '2',
       type: 'ealr',
       attributes: {
-        ealr: 'Veritatis barba cibo creptio clamo.',
+        ealr: 'Talio vulpes cedo non depromo.',
         seq: '1.2',
         category: 'Category 1',
       },
@@ -296,7 +299,7 @@ export default {
       id: '3',
       type: 'ealr',
       attributes: {
-        ealr: 'Cohaero placeat vigor templum stultus.',
+        ealr: 'Coerceo eligendi aut voluptas eum.',
         seq: '2.1',
         category: 'Category 2',
       },
@@ -305,23 +308,23 @@ export default {
       id: '4',
       type: 'ealr',
       attributes: {
-        ealr: 'Antepono benigne in templum aut.',
+        ealr: 'Pauci cum verumtamen admoveo atqui.',
         seq: '2.2',
         category: 'Category 2',
       },
     },
     {
-      id: '1',
+      id: '180',
       type: 'user',
       attributes: {
-        firstName: 'Crista',
-        lastName: 'Hansen',
+        firstName: 'Karena',
+        lastName: 'Jacobs',
         nickname: null,
         dateActive: '2012-09-01',
         dateInactive: null,
         districtId: null,
         districtGrade: 12,
-        email: 'zachariaheffertz@oreilly.name',
+        email: 'ariezemlak@macejkovicwhite.com',
         status: 'active',
         role: 'staff',
       },
@@ -329,7 +332,7 @@ export default {
         coordinatees: {
           data: [
             {
-              id: '5',
+              id: '184',
               type: 'student',
             },
           ],
@@ -447,7 +450,7 @@ export default {
       },
     },
     {
-      id: '3',
+      id: '58',
       type: 'term',
       attributes: {
         name: 'Current One',

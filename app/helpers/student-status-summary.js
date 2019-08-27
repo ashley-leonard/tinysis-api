@@ -1,4 +1,5 @@
 import { helper } from '@ember/component/helper';
+import dayjs from 'dayjs';
 
 function getGrade(districtGrade) {
   switch (districtGrade) {
@@ -18,6 +19,20 @@ function getGrade(districtGrade) {
 export default helper((params) => {
   const [student] = params;
   const { districtGrade } = student.attributes;
+  const dateFormat = 'MMM YYYY';
 
-  return [getGrade(districtGrade), 'active since|attended xx-yy', 'graduated'].join('; ');
+  let enrollmentStatus;
+  const strActive = dayjs(student.attributes.dateActive).format(dateFormat);
+
+  if (student.attributes.dateInactive) {
+    const strInactive = dayjs(student.attributes.dateInactive).format(dateFormat);
+    enrollmentStatus = `enrolled ${strActive}-${strInactive}`;
+  } else {
+    enrollmentStatus = `enrolled since ${strActive}`;
+  }
+
+  return [
+    getGrade(districtGrade),
+    enrollmentStatus,
+  ].join('; ');
 });

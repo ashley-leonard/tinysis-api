@@ -1,8 +1,8 @@
-// GET /api/enrollments?contractIds=3&include=creditAssignments,creditAssignments.credit,participant
+// GET /api/enrollments?contractIds=8&include=creditAssignments,creditAssignments.credit,participant
 export default {
   data: [
     {
-      id: '1',
+      id: '12',
       type: 'enrollment',
       attributes: {
         finalizedOn: null,
@@ -12,20 +12,80 @@ export default {
       relationships: {
         contract: {
           data: {
-            id: '3',
+            id: '8',
             type: 'contract',
           },
         },
         participant: {
           data: {
-            id: '5',
+            id: '186',
             type: 'participant',
           },
         },
         creditAssignments: {
           data: [
             {
-              id: '5',
+              id: '24',
+              type: 'creditAssignment',
+            },
+          ],
+        },
+        turnins: {
+          data: [
+
+          ],
+        },
+        meetingParticipants: {
+          data: [
+            {
+              id: '2',
+              type: 'meetingParticipant',
+            },
+            {
+              id: '4',
+              type: 'meetingParticipant',
+            },
+            {
+              id: '6',
+              type: 'meetingParticipant',
+            },
+            {
+              id: '8',
+              type: 'meetingParticipant',
+            },
+            {
+              id: '10',
+              type: 'meetingParticipant',
+            },
+          ],
+        },
+      },
+    },
+    {
+      id: '11',
+      type: 'enrollment',
+      attributes: {
+        finalizedOn: null,
+        enrollmentStatus: 'enrolled',
+        completionStatus: 'incomplete',
+      },
+      relationships: {
+        contract: {
+          data: {
+            id: '8',
+            type: 'contract',
+          },
+        },
+        participant: {
+          data: {
+            id: '184',
+            type: 'participant',
+          },
+        },
+        creditAssignments: {
+          data: [
+            {
+              id: '23',
               type: 'creditAssignment',
             },
           ],
@@ -80,70 +140,10 @@ export default {
         },
       },
     },
-    {
-      id: '2',
-      type: 'enrollment',
-      attributes: {
-        finalizedOn: null,
-        enrollmentStatus: 'enrolled',
-        completionStatus: 'incomplete',
-      },
-      relationships: {
-        contract: {
-          data: {
-            id: '3',
-            type: 'contract',
-          },
-        },
-        participant: {
-          data: {
-            id: '7',
-            type: 'participant',
-          },
-        },
-        creditAssignments: {
-          data: [
-            {
-              id: '6',
-              type: 'creditAssignment',
-            },
-          ],
-        },
-        turnins: {
-          data: [
-
-          ],
-        },
-        meetingParticipants: {
-          data: [
-            {
-              id: '2',
-              type: 'meetingParticipant',
-            },
-            {
-              id: '4',
-              type: 'meetingParticipant',
-            },
-            {
-              id: '6',
-              type: 'meetingParticipant',
-            },
-            {
-              id: '8',
-              type: 'meetingParticipant',
-            },
-            {
-              id: '10',
-              type: 'meetingParticipant',
-            },
-          ],
-        },
-      },
-    },
   ],
   included: [
     {
-      id: '5',
+      id: '24',
       type: 'creditAssignment',
       attributes: {
         creditHours: 1.0,
@@ -151,14 +151,17 @@ export default {
       relationships: {
         credit: {
           data: {
-            id: '1',
+            id: '18',
             type: 'credit',
           },
+        },
+        graduationPlanMapping: {
+          data: null,
         },
       },
     },
     {
-      id: '1',
+      id: '18',
       type: 'credit',
       attributes: {
         courseId: '0',
@@ -167,54 +170,15 @@ export default {
       },
     },
     {
-      id: '5',
+      id: '186',
       type: 'user',
       attributes: {
-        firstName: 'Eliana',
-        lastName: 'Pfannerstill',
-        nickname: null,
-        dateActive: '2018-08-01',
-        dateInactive: null,
-        districtId: '9816947609',
-        districtGrade: 12,
-        email: null,
-        status: 'active',
-        role: 'student',
-      },
-      relationships: {
-        coordinator: {
-          data: {
-            id: '1',
-            type: 'staff',
-          },
-        },
-      },
-    },
-    {
-      id: '6',
-      type: 'creditAssignment',
-      attributes: {
-        creditHours: 1.0,
-      },
-      relationships: {
-        credit: {
-          data: {
-            id: '1',
-            type: 'credit',
-          },
-        },
-      },
-    },
-    {
-      id: '7',
-      type: 'user',
-      attributes: {
-        firstName: 'Winston',
-        lastName: 'Simonis',
+        firstName: 'Jarrod',
+        lastName: 'Gulgowski',
         nickname: null,
         dateActive: '2018-08-01',
         dateInactive: '2019-10-01',
-        districtId: '9798983283',
+        districtId: '3246089314',
         districtGrade: 12,
         email: null,
         status: 'inactive',
@@ -223,7 +187,49 @@ export default {
       relationships: {
         coordinator: {
           data: {
-            id: '2',
+            id: '181',
+            type: 'staff',
+          },
+        },
+      },
+    },
+    {
+      id: '23',
+      type: 'creditAssignment',
+      attributes: {
+        creditHours: 1.0,
+      },
+      relationships: {
+        credit: {
+          data: {
+            id: '18',
+            type: 'credit',
+          },
+        },
+        graduationPlanMapping: {
+          data: null,
+        },
+      },
+    },
+    {
+      id: '184',
+      type: 'user',
+      attributes: {
+        firstName: 'Gerardo',
+        lastName: 'Schimmel',
+        nickname: null,
+        dateActive: '2018-08-01',
+        dateInactive: null,
+        districtId: '5751521221',
+        districtGrade: 12,
+        email: null,
+        status: 'active',
+        role: 'student',
+      },
+      relationships: {
+        coordinator: {
+          data: {
+            id: '180',
             type: 'staff',
           },
         },
