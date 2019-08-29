@@ -41,6 +41,8 @@ module('Integration | Component | graduation-plan', (hooks) => {
       }}
     `);
 
+    debugger;
+
     assert.equal(this.element.textContent.trim(), '');
   });
 });

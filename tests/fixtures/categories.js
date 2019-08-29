@@ -20,7 +20,7 @@ export default {
               type: 'contract',
             },
             {
-              id: '8',
+              id: '9',
               type: 'contract',
             },
           ],
@@ -46,7 +46,11 @@ export default {
               type: 'contract',
             },
             {
-              id: '9',
+              id: '8',
+              type: 'contract',
+            },
+            {
+              id: '10',
               type: 'contract',
             },
           ],

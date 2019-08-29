@@ -1,11 +1,11 @@
-// GET /api/admin/users/183
+// GET /api/admin/users/155
 export default {
   data: {
-    id: '183',
+    id: '155',
     type: 'user',
     attributes: {
-      firstName: 'Nestor',
-      lastName: 'Jacobi',
+      firstName: 'Wiley',
+      lastName: 'Wehner',
       nickname: null,
       dateActive: '2011-07-01',
       dateInactive: null,
@@ -13,7 +13,7 @@ export default {
       districtGrade: 12,
       status: 'active',
       role: 'administrator',
-      email: 'paz@schmidtstark.biz',
+      email: 'collinhuel@paucekferry.io',
     },
     relationships: {
     },

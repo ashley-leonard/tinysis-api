@@ -1,4 +1,12 @@
-{{requirement.attributes.name}}
+<div class="flex items-center">
+  <h4 class="my-1">{{requirement.attributes.name}}</h4>
+  {{#if isCreditItem}}
+    <div data-test-sum={{sum}} class="text-lg text-purple-500 font-semibold ml-4">{{sum}}</div>
+  {{/if}}
+</div>
+{{#if requirement.attributes.notes}}
+  {{t-markdown requirement.attributes.notes}}
+{{/if}}
 {{#credit-assignments
   creditAssignments=creditAssignments as |params|
 }}
@@ -6,3 +14,17 @@
     <span class="far fa-times-circle"/>
   </a>
 {{/credit-assignments}}
+
+{{#if childRequirements}}
+  {{graduation-plan/requirements-map
+    requirementType=requirementType
+    mappings=mappings
+    showChildren=true
+    requirements=childRequirements
+    creditsHash=creditsHash
+    draggedCreditAssignment=draggedCreditAssignment
+    addMapping=addMapping
+    removeMapping=removeMapping
+    reportSum=reportSum
+  }}
+{{/if}}

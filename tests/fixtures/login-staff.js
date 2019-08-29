@@ -1,23 +1,23 @@
-// auth for user 180
+// auth for user 152
 export default {
   data: {
-    email: 'ariezemlak@macejkovicwhite.com',
+    email: 'jackie@nicolas.info',
     email_verified: false,
     updated_at: '2019-06-23T23:44:29.877Z',
-    user_id: 'auth0|64f069d4ec8c6d45661ceb0274217132',
-    name: 'Karena Jacobs',
+    user_id: 'auth0|b19aec8306234b523bcff9f49db2186b',
+    name: 'Frederick Lehner',
     identities: [
       {
         connection: 'Username-Password-Authentication',
         provider: 'auth0',
-        user_id: '64f069d4ec8c6d45661ceb0274217132',
+        user_id: 'b19aec8306234b523bcff9f49db2186b',
         isSocial: false,
       },
     ],
     created_at: '2019-05-25T00:24:18.815Z',
     last_password_reset: '2019-06-10T04:09:05.883Z',
-    given_name: 'Karena',
-    family_name: 'Jacobs',
+    given_name: 'Frederick',
+    family_name: 'Lehner',
     nickname: null,
     last_login: '2019-06-23T23:44:29.877Z',
     last_ip: '208.100.155.216',

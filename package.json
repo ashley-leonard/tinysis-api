@@ -24,6 +24,7 @@
     "@ember/optional-features": "^0.7.0",
     "accounting": "^0.4.1",
     "auth0-js": "^9.10.4",
+    "big.js": "^5.2.2",
     "broccoli-asset-rev": "~3.0.0",
     "dayjs": "^1.8.12",
     "ember-auto-import": "^1.2.21",

@@ -138,8 +138,8 @@ export default {
         status: 'active',
       },
       meta: {
-        contractsCount: 1,
-        enrollmentsCount: 2,
+        contractsCount: 2,
+        enrollmentsCount: 4,
         enrollmentsOpenCount: 0,
       },
     },

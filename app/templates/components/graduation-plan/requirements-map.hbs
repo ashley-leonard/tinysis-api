@@ -1,7 +1,8 @@
-<ul class="list-reset">
+<ul class="list-reset mr-4">
   {{#each filteredRequirements as |requirement|}}
     {{graduation-plan/requirements-map-item
       requirement=requirement
+      requirementType=requirementType
       creditsHash=creditsHash
       draggedCreditAssignment=draggedCreditAssignment
       addMapping=addMapping

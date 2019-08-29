@@ -11,20 +11,20 @@ export default {
     relationships: {
       contract: {
         data: {
-          id: '8',
+          id: '9',
           type: 'contract',
         },
       },
       participant: {
         data: {
-          id: '184',
+          id: '156',
           type: 'participant',
         },
       },
       creditAssignments: {
         data: [
           {
-            id: '23',
+            id: '6',
             type: 'creditAssignment',
           },
         ],
@@ -81,7 +81,7 @@ export default {
   },
   included: [
     {
-      id: '23',
+      id: '6',
       type: 'creditAssignment',
       attributes: {
         creditHours: 1.0,
@@ -89,7 +89,7 @@ export default {
       relationships: {
         credit: {
           data: {
-            id: '18',
+            id: '6',
             type: 'credit',
           },
         },
@@ -99,7 +99,7 @@ export default {
       },
     },
     {
-      id: '18',
+      id: '6',
       type: 'credit',
       attributes: {
         courseId: '0',
@@ -218,15 +218,15 @@ export default {
       },
     },
     {
-      id: '184',
+      id: '156',
       type: 'user',
       attributes: {
-        firstName: 'Gerardo',
-        lastName: 'Schimmel',
+        firstName: 'Randell',
+        lastName: 'Turner',
         nickname: null,
         dateActive: '2018-08-01',
         dateInactive: null,
-        districtId: '5751521221',
+        districtId: '7474755857',
         districtGrade: 12,
         email: null,
         status: 'active',
@@ -235,7 +235,7 @@ export default {
       relationships: {
         coordinator: {
           data: {
-            id: '180',
+            id: '152',
             type: 'staff',
           },
         },
