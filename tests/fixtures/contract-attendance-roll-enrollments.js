@@ -2,7 +2,7 @@
 export default {
   data: [
     {
-      id: '12',
+      id: '6',
       type: 'enrollment',
       attributes: {
         finalizedOn: null,
@@ -18,14 +18,14 @@ export default {
         },
         participant: {
           data: {
-            id: '158',
+            id: '110',
             type: 'participant',
           },
         },
         creditAssignments: {
           data: [
             {
-              id: '7',
+              id: '8',
               type: 'creditAssignment',
             },
           ],
@@ -62,7 +62,7 @@ export default {
       },
     },
     {
-      id: '11',
+      id: '5',
       type: 'enrollment',
       attributes: {
         finalizedOn: null,
@@ -78,14 +78,14 @@ export default {
         },
         participant: {
           data: {
-            id: '156',
+            id: '108',
             type: 'participant',
           },
         },
         creditAssignments: {
           data: [
             {
-              id: '6',
+              id: '7',
               type: 'creditAssignment',
             },
           ],
@@ -143,15 +143,15 @@ export default {
   ],
   included: [
     {
-      id: '158',
+      id: '110',
       type: 'user',
       attributes: {
-        firstName: 'Mason',
-        lastName: 'Bogan',
+        firstName: 'Velma',
+        lastName: 'Medhurst',
         nickname: null,
         dateActive: '2018-08-01',
         dateInactive: '2019-10-01',
-        districtId: '1389427736',
+        districtId: '8637686549',
         districtGrade: 12,
         email: null,
         status: 'inactive',
@@ -160,22 +160,22 @@ export default {
       relationships: {
         coordinator: {
           data: {
-            id: '153',
+            id: '105',
             type: 'staff',
           },
         },
       },
     },
     {
-      id: '156',
+      id: '108',
       type: 'user',
       attributes: {
-        firstName: 'Randell',
-        lastName: 'Turner',
+        firstName: 'Suzie',
+        lastName: 'Schinner',
         nickname: null,
         dateActive: '2018-08-01',
         dateInactive: null,
-        districtId: '7474755857',
+        districtId: '7906630283',
         districtGrade: 12,
         email: null,
         status: 'active',
@@ -184,7 +184,7 @@ export default {
       relationships: {
         coordinator: {
           data: {
-            id: '152',
+            id: '104',
             type: 'staff',
           },
         },

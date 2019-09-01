@@ -1,11 +1,11 @@
-// GET /api/admin/users/152
+// GET /api/admin/users/104
 export default {
   data: {
-    id: '152',
+    id: '104',
     type: 'user',
     attributes: {
-      firstName: 'Frederick',
-      lastName: 'Lehner',
+      firstName: 'Celia',
+      lastName: 'Mosciski',
       nickname: null,
       dateActive: '2012-09-01',
       dateInactive: null,
@@ -13,7 +13,7 @@ export default {
       districtGrade: 12,
       status: 'active',
       role: 'staff',
-      email: 'jackie@nicolas.info',
+      email: 'august@gradykaulke.co',
     },
     relationships: {
     },

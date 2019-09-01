@@ -2,20 +2,22 @@ import Component from '@ember/component';
 import Big from 'big.js';
 import { computed, get } from '@ember/object';
 import { inject as service } from '@ember/service';
+import { createEntity } from '../utils/json-api';
 
 export default Component.extend({
   tinyData: service(),
-  classNames: ['flex', 'flex-row', 'sticky', 'top-0'],
+  classNames: ['flex', 'flex-row', 'border-red-600', 'border'],
   creditsHash: computed('creditAssignments', function () {
     const {
       creditAssignments,
       tinyData,
     } = this;
 
-    function entry() {
+    function createEntry() {
       return {
         sum: new Big(0),
         creditAssignments: [],
+        mapping: null,
       };
     }
 
@@ -29,16 +31,19 @@ export default Component.extend({
         if (!mappingRequirementId) return memo;
 
         // create or update entry accumulator
-        memo[mappingRequirementId] = memo[mappingRequirementId] || entry();
-        memo[mappingRequirementId].creditAssignments.push(creditAssignment);
-        memo[mappingRequirementId].sum = memo[mappingRequirementId].sum.plus(creditAssignment.attributes.creditHours);
+        const entry = memo[mappingRequirementId] || createEntry();
+        memo[mappingRequirementId] = entry;
+
+        entry.creditAssignments.push(creditAssignment);
+        entry.sum = memo[mappingRequirementId].sum.plus(creditAssignment.attributes.creditHours);
+        entry.mapping = mapping;
 
         // create or update parent accumulator
         const requirement = tinyData.get('graduationPlanRequirement', mappingRequirementId);
         const parentId = get(requirement, 'relationships.parent.data.id');
 
         if (parentId) {
-          memo[parentId] = memo[parentId] || entry();
+          memo[parentId] = memo[parentId] || createEntry();
           memo[parentId].sum = memo[parentId].sum.plus(creditAssignment.attributes.creditHours);
         }
 
@@ -46,6 +51,19 @@ export default Component.extend({
       }, {});
   }),
   actions: {
+    editMapping(mapping, requirement) {
+      this.toggleProperty('showDialog');
+      const mappingToEdit = mapping || createEntity('graduationPlanMapping', {
+        dateCompleted: null,
+        note: null,
+      }, requirement);
+      this.setProperties({
+        mappingToEdit,
+      });
+    },
+    saveMapping(mapping) {
+      return this.saveMapping(mapping);
+    },
     onDrag(creditAssignment) {
       this.set('draggedCreditAssignment', creditAssignment);
     },

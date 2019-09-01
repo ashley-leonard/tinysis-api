@@ -6,6 +6,7 @@
     requirements=requirements
     creditsHash=creditsHash
     draggedCreditAssignment=draggedCreditAssignment
+    editMapping=(action "editMapping")
     addMapping=(action "addMapping")
     removeMapping=(action "removeMapping")
   }}
@@ -17,6 +18,7 @@
     requirements=requirements
     creditsHash=creditsHash
     draggedCreditAssignment=draggedCreditAssignment
+    editMapping=(action "editMapping")
     addMapping=(action "addMapping")
     removeMapping=(action "removeMapping")
   }}
@@ -28,13 +30,57 @@
     requirements=requirements
     creditsHash=creditsHash
     draggedCreditAssignment=draggedCreditAssignment
+    editMapping=(action "editMapping")
     addMapping=(action "addMapping")
     removeMapping=(action "removeMapping")
   }}
 </div>
-<div class="flex flex-col w-full lg:w-1/2 sticky top-0">
+<div class="flex flex-col w-full lg:w-1/2 sticky top-8">
   {{graduation-plan/credits
     creditAssignments=creditAssignments
     onDrag=(action "onDrag")
   }}
 </div>
+
+{{#if showDialog}}
+  {{#modal-dialog
+    onClose=(action "editMapping")  
+    translucentOverlay=true
+  }}
+    {{#t-form
+      model=mappingToEdit
+      save=(action 'saveMapping')
+    }}
+      <fieldset>
+        <p>
+          {{#form-input error=errors.coordinator showError=showErrors}}
+            Notes
+            <textarea
+              name="notes"
+              value={{pojo.notes}}
+            />
+          {{/form-input}}
+        </p>
+        <p>
+          {{#form-input error=errors.completionDate showError=showErrors}}
+            Completion date
+            {{t-pikaday
+              value=pojo.dateCompleted
+              name="dateCompleted"
+            }}
+          {{/form-input}}
+        </p>
+      </fieldset>
+      {{#t-form-actions-row
+        disabled=disabled
+      }}
+        <a
+          {{action 'editMapping'}}
+          class="btn btn-clear"
+        >
+          Cancel
+        </a>
+      {{/t-form-actions-row}}
+    {{/t-form}}
+  {{/modal-dialog}}
+{{/if}}

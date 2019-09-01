@@ -1,7 +1,16 @@
 <div class="flex items-center">
   <h4 class="my-1">{{requirement.attributes.name}}</h4>
-  {{#if isCreditItem}}
-    <div data-test-sum={{sum}} class="text-lg text-purple-500 font-semibold ml-4">{{sum}}</div>
+  {{#if isCredit}}
+    <div
+      data-test-sum={{sum}}
+      class="text-lg text-purple-500 font-semibold ml-4"
+    >
+      {{#if showSum}}
+        {{sum}}
+      {{else}}
+        -
+      {{/if}}
+    </div>
   {{/if}}
 </div>
 {{#if requirement.attributes.notes}}
@@ -10,7 +19,10 @@
 {{#credit-assignments
   creditAssignments=creditAssignments as |params|
 }}
-  <a {{action "removeMapping" params.creditAssignment}} href="#" title="Remove">
+  <a
+    {{action "removeMapping" params.creditAssignment}}
+    title="Remove"
+  >
     <span class="far fa-times-circle"/>
   </a>
 {{/credit-assignments}}
@@ -25,6 +37,24 @@
     draggedCreditAssignment=draggedCreditAssignment
     addMapping=addMapping
     removeMapping=removeMapping
-    reportSum=reportSum
   }}
 {{/if}}
+
+{{#unless isCredit}}
+  {{#if mapping}}
+    <p>
+      Completed
+      {{t-date mapping.attributes.completedAt}}
+    </p>
+    {{#if mapping.attributes.notes}}
+      {{t-markdown notes}}
+    {{/if}}
+  {{/if}}
+  <p>
+    <a
+      {{action 'editMapping'}}
+    >
+      {{#if mapping}}Edit{{else}}Add entry{{/if}}
+    </a>
+  </p>
+{{/unless}}

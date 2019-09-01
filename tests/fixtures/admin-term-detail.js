@@ -1,7 +1,7 @@
-// GET /api/terms/58
+// GET /api/terms/50
 export default {
   data: {
-    id: '58',
+    id: '50',
     type: 'term',
     attributes: {
       name: 'Current One',

@@ -1,17 +1,17 @@
 // GET /api/profile
 export default {
   data: {
-    id: '155',
+    id: '107',
     type: 'user',
     attributes: {
-      firstName: 'Wiley',
-      lastName: 'Wehner',
+      firstName: 'Eileen',
+      lastName: 'Wilkinson',
       nickname: null,
       dateActive: '2011-07-01',
       dateInactive: null,
       districtId: null,
       districtGrade: 12,
-      email: 'collinhuel@paucekferry.io',
+      email: 'tommie@bernhard.com',
       status: 'active',
       role: 'administrator',
     },

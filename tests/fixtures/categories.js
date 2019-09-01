@@ -2,7 +2,7 @@
 export default {
   data: [
     {
-      id: '6',
+      id: '3',
       type: 'category',
       attributes: {
         name: 'Category 1',
@@ -16,7 +16,7 @@ export default {
         contracts: {
           data: [
             {
-              id: '6',
+              id: '5',
               type: 'contract',
             },
             {
@@ -28,7 +28,7 @@ export default {
       },
     },
     {
-      id: '7',
+      id: '4',
       type: 'category',
       attributes: {
         name: 'Category 2',
@@ -41,6 +41,10 @@ export default {
       relationships: {
         contracts: {
           data: [
+            {
+              id: '6',
+              type: 'contract',
+            },
             {
               id: '7',
               type: 'contract',

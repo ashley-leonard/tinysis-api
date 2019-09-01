@@ -1,6 +1,7 @@
 import Controller from '@ember/controller';
 import { computed } from '@ember/object';
 import { inject as service } from '@ember/service';
+import { resolve } from 'rsvp';
 import { createEntity } from '../utils/json-api';
 
 export default Controller.extend({
@@ -17,6 +18,10 @@ export default Controller.extend({
           data: createEntity('graduationPlanMapping', {}, requirement, creditAssignment),
         }),
       });
+    },
+    saveMapping(mapping, requirement) {
+      console.log('saving', mapping, requirement);
+      return resolve();
     },
     removeMapping(mapping) {
       const { student } = this;

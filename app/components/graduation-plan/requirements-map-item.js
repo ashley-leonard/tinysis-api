@@ -9,8 +9,19 @@ export default Component.extend({
   tagName: 'li',
   classNames: 'req-map-item',
   creditAssignments: alias('requirementHash.creditAssignments'),
-  isCreditItem: equal('requirement.attributes.requirementType', 'credit'),
+  mapping: alias('requirementHash.mapping'),
+  isCredit: equal('requirement.attributes.requirementType', 'credit'),
+  showSum: computed('isCredit', 'sum', function () {
+    const {
+      isCredit,
+      sum,
+    } = this;
+
+    return sum && isCredit;
+  }),
   sum: computed('requirementHash.sum', function () {
+    if (this.requirementHash.sum.eq(0)) return null;
+
     return this.requirementHash.sum.toPrecision(2);
   }),
   requirementHash: computed('creditsHash', 'requirement', function () {
@@ -29,6 +40,13 @@ export default Component.extend({
     return children.map(child => tinyData.get('graduationPlanRequirement', child.id));
   }),
   actions: {
+    editMapping() {
+      const {
+        mapping,
+        requirement,
+      } = this;
+      this.editMapping(mapping, requirement);
+    },
     removeMapping(creditAssignment) {
       this.removeMapping(creditAssignment);
     },

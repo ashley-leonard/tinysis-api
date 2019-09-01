@@ -2,7 +2,7 @@
 export default {
   data: [
     {
-      id: '61',
+      id: '53',
       type: 'term',
       attributes: {
         name: 'COOR Current',
@@ -29,7 +29,7 @@ export default {
       },
     },
     {
-      id: '60',
+      id: '52',
       type: 'term',
       attributes: {
         name: 'COOR Last',
@@ -56,7 +56,7 @@ export default {
       },
     },
     {
-      id: '58',
+      id: '50',
       type: 'term',
       attributes: {
         name: 'Current One',
@@ -78,7 +78,7 @@ export default {
       },
     },
     {
-      id: '59',
+      id: '51',
       type: 'term',
       attributes: {
         name: 'Current Two',
@@ -100,7 +100,7 @@ export default {
       },
     },
     {
-      id: '56',
+      id: '48',
       type: 'term',
       attributes: {
         name: 'Last One',
@@ -122,7 +122,7 @@ export default {
       },
     },
     {
-      id: '57',
+      id: '49',
       type: 'term',
       attributes: {
         name: 'Last Two',
@@ -138,7 +138,7 @@ export default {
         status: 'active',
       },
       meta: {
-        contractsCount: 2,
+        contractsCount: 3,
         enrollmentsCount: 4,
         enrollmentsOpenCount: 0,
       },

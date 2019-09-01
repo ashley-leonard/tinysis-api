@@ -16,6 +16,10 @@
   }
 }
 
+.ember-modal-dialog .t-form {
+  @apply p-4;
+}
+
 t-help {
   @apply block font-normal;
 }

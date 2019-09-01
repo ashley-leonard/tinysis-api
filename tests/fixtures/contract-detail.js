@@ -4,13 +4,13 @@ export default {
     id: '9',
     type: 'contract',
     attributes: {
-      name: 'Averto spiculum spoliatio aestus alter.',
+      name: 'Cupiditas alias cibo vobis textilis.',
       status: 'approved',
-      learningObjectives: 'Adfectus calculus claro somniculosus tubineus.',
-      competencies: 'Tabesco porro veritas solutio cubo.',
-      evaluationMethods: 'Thymum est alienus comis molestiae.',
-      instructionalMaterials: 'Compono autem architecto adiuvo avaritia.',
-      location: 'Delectus capillus adstringo verumtamen alter.',
+      learningObjectives: 'Adfectus desparatus trado civitas verbum.',
+      competencies: 'Speciosus confido labore deripio coniuratio.',
+      evaluationMethods: 'Thorax comprehendo sodalitas temporibus suus.',
+      instructionalMaterials: 'Ter ascit repellendus arma eos.',
+      location: 'Atrox acervus comedo vomito timor.',
       timeslots: [
         {
           start: '8:45',
@@ -23,30 +23,30 @@ export default {
       enrollments: {
         data: [
           {
-            id: '11',
+            id: '5',
             type: 'enrollment',
           },
           {
-            id: '12',
+            id: '6',
             type: 'enrollment',
           },
         ],
       },
       facilitator: {
         data: {
-          id: '152',
+          id: '104',
           type: 'User',
         },
       },
       term: {
         data: {
-          id: '58',
+          id: '50',
           type: 'term',
         },
       },
       category: {
         data: {
-          id: '6',
+          id: '3',
           type: 'category',
         },
       },
@@ -225,7 +225,7 @@ export default {
       },
     },
     {
-      id: '6',
+      id: '3',
       type: 'category',
       attributes: {
         name: 'Category 1',
@@ -239,7 +239,7 @@ export default {
         contracts: {
           data: [
             {
-              id: '6',
+              id: '5',
               type: 'contract',
             },
             {
@@ -259,7 +259,7 @@ export default {
       relationships: {
         credit: {
           data: {
-            id: '6',
+            id: '1',
             type: 'credit',
           },
         },
@@ -269,7 +269,7 @@ export default {
       },
     },
     {
-      id: '6',
+      id: '1',
       type: 'credit',
       attributes: {
         courseId: '0',
@@ -281,7 +281,7 @@ export default {
       id: '1',
       type: 'ealr',
       attributes: {
-        ealr: 'Caecus auris solio thymum quibusdam.',
+        ealr: 'Atavus et amor corroboro triduana.',
         seq: '1.1',
         category: 'Category 1',
       },
@@ -290,7 +290,7 @@ export default {
       id: '2',
       type: 'ealr',
       attributes: {
-        ealr: 'Virtus facilis apud quas pax.',
+        ealr: 'Sumptus tametsi cur defaeco abstergo.',
         seq: '1.2',
         category: 'Category 1',
       },
@@ -299,7 +299,7 @@ export default {
       id: '3',
       type: 'ealr',
       attributes: {
-        ealr: 'Taedium acceptus similique aliquid numquam.',
+        ealr: 'Repellat usque autem barba sol.',
         seq: '2.1',
         category: 'Category 2',
       },
@@ -308,23 +308,23 @@ export default {
       id: '4',
       type: 'ealr',
       attributes: {
-        ealr: 'Curriculum accipio thorax damno depromo.',
+        ealr: 'Vaco cum tener cito qui.',
         seq: '2.2',
         category: 'Category 2',
       },
     },
     {
-      id: '152',
+      id: '104',
       type: 'user',
       attributes: {
-        firstName: 'Frederick',
-        lastName: 'Lehner',
+        firstName: 'Celia',
+        lastName: 'Mosciski',
         nickname: null,
         dateActive: '2012-09-01',
         dateInactive: null,
         districtId: null,
         districtGrade: 12,
-        email: 'jackie@nicolas.info',
+        email: 'august@gradykaulke.co',
         status: 'active',
         role: 'staff',
       },
@@ -332,7 +332,7 @@ export default {
         coordinatees: {
           data: [
             {
-              id: '156',
+              id: '108',
               type: 'student',
             },
           ],
@@ -450,7 +450,7 @@ export default {
       },
     },
     {
-      id: '58',
+      id: '50',
       type: 'term',
       attributes: {
         name: 'Current One',

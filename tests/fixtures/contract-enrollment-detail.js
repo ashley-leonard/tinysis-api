@@ -1,7 +1,7 @@
-// GET /api/enrollments/11?include=participant,turnins,meetingParticipants,creditAssignments,creditAssignments.credit
+// GET /api/enrollments/5?include=participant,turnins,meetingParticipants,creditAssignments,creditAssignments.credit
 export default {
   data: {
-    id: '11',
+    id: '5',
     type: 'enrollment',
     attributes: {
       finalizedOn: null,
@@ -17,14 +17,14 @@ export default {
       },
       participant: {
         data: {
-          id: '156',
+          id: '108',
           type: 'participant',
         },
       },
       creditAssignments: {
         data: [
           {
-            id: '6',
+            id: '7',
             type: 'creditAssignment',
           },
         ],
@@ -81,7 +81,7 @@ export default {
   },
   included: [
     {
-      id: '6',
+      id: '7',
       type: 'creditAssignment',
       attributes: {
         creditHours: 1.0,
@@ -89,7 +89,7 @@ export default {
       relationships: {
         credit: {
           data: {
-            id: '6',
+            id: '1',
             type: 'credit',
           },
         },
@@ -99,7 +99,7 @@ export default {
       },
     },
     {
-      id: '6',
+      id: '1',
       type: 'credit',
       attributes: {
         courseId: '0',
@@ -123,7 +123,7 @@ export default {
         },
         enrollment: {
           data: {
-            id: '11',
+            id: '5',
             type: 'enrollment',
           },
         },
@@ -145,7 +145,7 @@ export default {
         },
         enrollment: {
           data: {
-            id: '11',
+            id: '5',
             type: 'enrollment',
           },
         },
@@ -167,7 +167,7 @@ export default {
         },
         enrollment: {
           data: {
-            id: '11',
+            id: '5',
             type: 'enrollment',
           },
         },
@@ -189,7 +189,7 @@ export default {
         },
         enrollment: {
           data: {
-            id: '11',
+            id: '5',
             type: 'enrollment',
           },
         },
@@ -211,22 +211,22 @@ export default {
         },
         enrollment: {
           data: {
-            id: '11',
+            id: '5',
             type: 'enrollment',
           },
         },
       },
     },
     {
-      id: '156',
+      id: '108',
       type: 'user',
       attributes: {
-        firstName: 'Randell',
-        lastName: 'Turner',
+        firstName: 'Suzie',
+        lastName: 'Schinner',
         nickname: null,
         dateActive: '2018-08-01',
         dateInactive: null,
-        districtId: '7474755857',
+        districtId: '7906630283',
         districtGrade: 12,
         email: null,
         status: 'active',
@@ -235,7 +235,7 @@ export default {
       relationships: {
         coordinator: {
           data: {
-            id: '152',
+            id: '104',
             type: 'staff',
           },
         },
@@ -256,7 +256,7 @@ export default {
         },
         enrollment: {
           data: {
-            id: '11',
+            id: '5',
             type: 'enrollment',
           },
         },
@@ -277,7 +277,7 @@ export default {
         },
         enrollment: {
           data: {
-            id: '11',
+            id: '5',
             type: 'enrollment',
           },
         },
@@ -298,7 +298,7 @@ export default {
         },
         enrollment: {
           data: {
-            id: '11',
+            id: '5',
             type: 'enrollment',
           },
         },
@@ -319,7 +319,7 @@ export default {
         },
         enrollment: {
           data: {
-            id: '11',
+            id: '5',
             type: 'enrollment',
           },
         },
@@ -340,7 +340,7 @@ export default {
         },
         enrollment: {
           data: {
-            id: '11',
+            id: '5',
             type: 'enrollment',
           },
         },

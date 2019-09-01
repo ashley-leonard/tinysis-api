@@ -2,18 +2,22 @@
 export default {
   data: [
     {
-      id: '152',
+      id: '105',
       type: 'user',
       attributes: {
-        firstName: 'Frederick',
-        lastName: 'Lehner',
+        firstName: 'Shane',
+        lastName: 'Denesik',
         nickname: null,
       },
       relationships: {
         coordinatees: {
           data: [
             {
-              id: '156',
+              id: '109',
+              type: 'student',
+            },
+            {
+              id: '110',
               type: 'student',
             },
           ],
@@ -21,22 +25,18 @@ export default {
       },
     },
     {
-      id: '153',
+      id: '104',
       type: 'user',
       attributes: {
-        firstName: 'Tamie',
-        lastName: 'Trantow',
+        firstName: 'Celia',
+        lastName: 'Mosciski',
         nickname: null,
       },
       relationships: {
         coordinatees: {
           data: [
             {
-              id: '157',
-              type: 'student',
-            },
-            {
-              id: '158',
+              id: '108',
               type: 'student',
             },
           ],

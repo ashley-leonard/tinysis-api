@@ -1,8 +1,8 @@
-// GET /api/credit-assignments?studentIds=157
+// GET /api/credit-assignments?studentIds=109
 export default {
   data: [
     {
-      id: '10',
+      id: '11',
       type: 'creditAssignment',
       attributes: {
         creditHours: 2.0,
@@ -10,7 +10,7 @@ export default {
       relationships: {
         credit: {
           data: {
-            id: '7',
+            id: '2',
             type: 'credit',
           },
         },
@@ -23,7 +23,7 @@ export default {
       },
     },
     {
-      id: '12',
+      id: '13',
       type: 'creditAssignment',
       attributes: {
         creditHours: 2.0,
@@ -31,7 +31,7 @@ export default {
       relationships: {
         credit: {
           data: {
-            id: '7',
+            id: '2',
             type: 'credit',
           },
         },
@@ -44,7 +44,7 @@ export default {
       },
     },
     {
-      id: '14',
+      id: '15',
       type: 'creditAssignment',
       attributes: {
         creditHours: 2.0,
@@ -52,7 +52,7 @@ export default {
       relationships: {
         credit: {
           data: {
-            id: '7',
+            id: '2',
             type: 'credit',
           },
         },
@@ -67,7 +67,7 @@ export default {
   ],
   included: [
     {
-      id: '7',
+      id: '2',
       type: 'credit',
       attributes: {
         courseId: '0',
