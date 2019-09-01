@@ -127,6 +127,8 @@ RSpec.describe 'Ember fixtures script', type: :request do
 
     @contract1_last = create :contract, term: @term1_last, facilitator: @staff1, category: @category1, creator: @staff1, contract_status: Contract::STATUS_CLOSED
     @contract2_last = create :contract, term: @term2_last, facilitator: @staff2, category: @category2, creator: @staff2, contract_status: Contract::STATUS_CLOSED
+    @contract3_last = create :contract, term: @term2_last, facilitator: @staff2, category: @category2, creator: @staff2, contract_status: Contract::STATUS_CLOSED
+    @contract4_last = create :contract, term: @term2_last, facilitator: @staff2, category: @category2, creator: @staff2, contract_status: Contract::STATUS_CLOSED
     @contract1_current = create :contract, term: @term1_current, facilitator: @staff1, category: @category1, creator: @staff1
     @contract2_current = create :contract, term: @term1_current, facilitator: @staff2, category: @category2, creator: @staff2
 
@@ -137,7 +139,7 @@ RSpec.describe 'Ember fixtures script', type: :request do
       ca = create :credit_assignment, credit: @credit1, contract: contract, credit_hours: 1
     end
 
-    [@contract2_last, @contract2_current].each do |contract|
+    [@contract2_last, @contract2_current, @contract3_last, @contract4_last].each do |contract|
       create :credit_assignment, credit: @credit2, contract: contract, credit_hours: 2
     end
 
@@ -178,7 +180,7 @@ RSpec.describe 'Ember fixtures script', type: :request do
     end
   
     # closed contracts should have fulfilled enrollments and finalized credits
-    [@contract1_last, @contract2_last].each do |contract|
+    [@contract1_last, @contract2_last, @contract3_last].each do |contract|
       [@student2, @student3].each do |student|
         enrollment = create :enrollment, participant: student, contract: contract, creator: contract.facilitator
         create :credit_assignment, enrollment: enrollment, credit: @credit2, credit_hours: 2
@@ -243,11 +245,13 @@ RSpec.describe 'Ember fixtures script', type: :request do
     create :graduation_plan_requirement, name: 'Service1', requirement_type: 'service', position: 1
     create :graduation_plan_requirement, name: 'Service2', requirement_type: 'service', position: 2
 
-    credit_assignment = @student2.credit_assignments.find {|ca| ca.facilitator_approved? }
+    credit_assignments = @student2.credit_assignments.filter {|ca| ca.facilitator_approved? }
 
     graduation_plan = create :graduation_plan, user: @student2
 
-    create :graduation_plan_mapping, graduation_plan: graduation_plan, graduation_plan_requirement: gradMath, credit_assignment: credit_assignment
+    create :graduation_plan_mapping, graduation_plan: graduation_plan, graduation_plan_requirement: gradMath, credit_assignment: credit_assignments.pop
+    create :graduation_plan_mapping, graduation_plan: graduation_plan, graduation_plan_requirement: gradLang1, credit_assignment: credit_assignments.pop
+    create :graduation_plan_mapping, graduation_plan: graduation_plan, graduation_plan_requirement: gradLang2, credit_assignment: credit_assignments.pop
   end
 
   describe 'write' do
@@ -384,6 +388,12 @@ RSpec.describe 'Ember fixtures script', type: :request do
 
         # graduation plan requirements - all
         write_fixture "/api/graduation-plan-requirements", "graduation-plan-requirements-list-all.js"
+
+        # credit assignments
+        write_fixture "/api/credit-assignments?studentIds=#{@student2.id}", "student-credit-assignments.js"
+
+        # graduation plan mappings
+        write_fixture "/api/graduation-plan-mappings/#{@student2.id}", "graduation-plan-mappings.js"
       end
     end
   end
