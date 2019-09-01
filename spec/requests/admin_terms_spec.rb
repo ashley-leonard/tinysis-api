@@ -48,7 +48,7 @@ RSpec.describe 'Admin terms API', type: :request do
           attributes: {
             name: Faker::Name.first_name,
             schoolYear: 2011,
-            active: true,
+            status: 'active',
             months:  ['2011-09-01', '2011-10-01', '2011-11-01', '2011-12-01', '2012-01-01'],
             credit_date: '2012-02-01'
           }

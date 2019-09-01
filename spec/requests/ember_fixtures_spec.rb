@@ -240,9 +240,9 @@ RSpec.describe 'Ember fixtures script', type: :request do
     gradLang1 = create :graduation_plan_requirement, name: 'Language1', requirement_type: 'credit', parent: gradLang, position: 1
     gradLang2 = create :graduation_plan_requirement, name: 'Language2', requirement_type: 'credit', parent: gradLang, position: 2
     gradDefunct = create :graduation_plan_requirement, name: 'Defunct', requirement_type: 'credit', status: GraduationPlanRequirement::STATUS_INACTIVE, position: 3
-    create :graduation_plan_requirement, name: 'General1', requirement_type: 'general', position: 1
+    gradGeneral1 = create :graduation_plan_requirement, name: 'General1', requirement_type: 'general', position: 1
     create :graduation_plan_requirement, name: 'General2', requirement_type: 'general', position: 2
-    create :graduation_plan_requirement, name: 'Service1', requirement_type: 'service', position: 1
+    gradService1 = create :graduation_plan_requirement, name: 'Service1', requirement_type: 'service', position: 1
     create :graduation_plan_requirement, name: 'Service2', requirement_type: 'service', position: 2
 
     credit_assignments = @student2.credit_assignments.filter {|ca| ca.facilitator_approved? }
@@ -252,6 +252,8 @@ RSpec.describe 'Ember fixtures script', type: :request do
     create :graduation_plan_mapping, graduation_plan: graduation_plan, graduation_plan_requirement: gradMath, credit_assignment: credit_assignments.pop
     create :graduation_plan_mapping, graduation_plan: graduation_plan, graduation_plan_requirement: gradLang1, credit_assignment: credit_assignments.pop
     create :graduation_plan_mapping, graduation_plan: graduation_plan, graduation_plan_requirement: gradLang2, credit_assignment: credit_assignments.pop
+    create :graduation_plan_mapping, graduation_plan: graduation_plan, graduation_plan_requirement: gradGeneral1, notes: 'It is done', date_completed: '2019-06-15'
+    create :graduation_plan_mapping, graduation_plan: graduation_plan, graduation_plan_requirement: gradService1, notes: 'It is serviced', date_completed: '2019-06-15'
   end
 
   describe 'write' do

@@ -13,7 +13,24 @@ class GraduationPlanMappingsController < ApplicationController
   end
 
   def create
-    mapping = GraduationPlanMapping.new
+    mapping = GraduationPlanMapping.new graduation_plan_attributes
+
+    mapping.credit_assignment = CreditAssignment.find_by_id_and_user_id(credit_assignment_id, @graduation_plan.user_id)
+
+    mapping.graduation_plan = @graduation_plan
+    mapping.graduation_plan_requirement = GraduationPlanRequirement.find_by_id_and_status graduation_plan_requirement_id, 'active'
+
+    if GraduationPlanMapping.find_by_graduation_plan_id_and_credit_assignment_id(@graduation_plan.id, mapping.credit_assignment_id)
+      render json: { message: 'Duplicate mapping' }, status: 422 and return
+    end
+
+    mapping.save!
+
+    render json: GraduationPlanMappingSerializer.new(mapping)
+  end
+
+  def update
+    mapping = GraduationPlanMapping.find_by_id_and_graduation_plan_id params[:id], @graduation_plan.id
 
     mapping.credit_assignment = CreditAssignment.find_by_id_and_user_id(credit_assignment_id, @graduation_plan.user_id)
 
@@ -66,4 +83,9 @@ private
       .dig(:graduation_plan_requirement, :data, :id)
   end
 
+  def graduation_plan_attributes
+    params.require(:data)
+      .require(:attributes)
+      .dig(:notes, :date_completed)
+  end
 end
