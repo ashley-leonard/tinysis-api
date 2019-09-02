@@ -15,7 +15,9 @@ class GraduationPlanMappingsController < ApplicationController
   def create
     mapping = GraduationPlanMapping.new graduation_plan_attributes
 
-    mapping.credit_assignment = CreditAssignment.find_by_id_and_user_id(credit_assignment_id, @graduation_plan.user_id)
+    if credit_assignment_id
+      mapping.credit_assignment = CreditAssignment.find_by_id_and_user_id(credit_assignment_id, @graduation_plan.user_id)
+    end
 
     mapping.graduation_plan = @graduation_plan
     mapping.graduation_plan_requirement = GraduationPlanRequirement.find_by_id_and_status graduation_plan_requirement_id, 'active'
@@ -32,7 +34,9 @@ class GraduationPlanMappingsController < ApplicationController
   def update
     mapping = GraduationPlanMapping.find_by_id_and_graduation_plan_id params[:id], @graduation_plan.id
 
-    mapping.credit_assignment = CreditAssignment.find_by_id_and_user_id(credit_assignment_id, @graduation_plan.user_id)
+    if credit_assignment_id
+      mapping.credit_assignment = CreditAssignment.find_by_id_and_user_id(credit_assignment_id, @graduation_plan.user_id)
+    end
 
     mapping.graduation_plan = @graduation_plan
     mapping.graduation_plan_requirement = GraduationPlanRequirement.find_by_id_and_status graduation_plan_requirement_id, 'active'
@@ -85,7 +89,7 @@ private
 
   def graduation_plan_attributes
     params.require(:data)
-      .require(:attributes)
+      .permit(:attributes)
       .dig(:notes, :date_completed)
   end
 end
