@@ -4,11 +4,6 @@ RSpec.describe 'Students API', type: :request do
 
   before(:each) do
     allow(JsonWebToken).to receive(:extract_permissions).and_return(['get:config'])
-
-    create :setting, name: 'reporting_base_month', value: 8
-    create :setting, name: 'reporting_end_month', value: 6
-    create :setting, name: 'current_year', value: 2018
-
   end
 
   describe 'GET /api/settings' do

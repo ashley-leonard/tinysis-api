@@ -10,10 +10,6 @@ RSpec.describe 'Graduation plan mappings API', type: :request do
     @student1 = create :user, coordinator: @staff1, date_active: Date.new(2018, 8, 1)
     @student2 = create :user, coordinator: @staff1, date_active: Date.new(2018, 8, 1)
 
-    create :setting, name: 'reporting_base_month', value: 9
-    create :setting, name: 'reporting_end_month', value: 6
-    create :setting, name: 'current_year', value: 2018
-
     @graduation_plan = create :graduation_plan, user: @student1
 
     @req1 = create :graduation_plan_requirement, requirement_type: :credit, name: 'Language'

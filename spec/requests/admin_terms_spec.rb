@@ -5,10 +5,6 @@ RSpec.describe 'Admin terms API', type: :request do
   before(:each) do
     allow(JsonWebToken).to receive(:extract_permissions).and_return(['get:config', 'manage:config'])
 
-    create :setting, name: 'reporting_base_month', value: 9
-    create :setting, name: 'reporting_end_month', value: 6
-    create :setting, name: 'current_year', value: 2018
-
     @coorTerm = create :term, :name => 'COOR default', :school_year => 2011
     @coorTerm.set_dates 2018, [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
     @coorTerm.save!

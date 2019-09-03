@@ -5,10 +5,6 @@ RSpec.describe 'Admin graduation plan requirements API', type: :request do
   before(:each) do
     allow(JsonWebToken).to receive(:extract_permissions).and_return(['get:config', 'manage:config'])
 
-    create :setting, name: 'reporting_base_month', value: 9
-    create :setting, name: 'reporting_end_month', value: 6
-    create :setting, name: 'current_year', value: 2018
-
     @grad1 = create :graduation_plan_requirement, name: Faker::Name.name, status: 'active'
     @grad2 = create :graduation_plan_requirement, name: Faker::Name.name, status: 'active'
     @grad3 = create :graduation_plan_requirement, name: Faker::Name.name, status: 'active', parent: @grad2

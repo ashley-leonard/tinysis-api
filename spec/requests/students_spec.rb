@@ -13,10 +13,6 @@ RSpec.describe 'Students API', type: :request do
     @studentInactive = create :user, coordinator: @staff2, status: User::STATUS_INACTIVE, date_active: Date.new(2018, 8, 1), date_inactive: Date.new(2018, 12, 1)
     @studentUnreportable = create :user, coordinator: @staff2, status: User::STATUS_INACTIVE, date_active: Date.new(2017, 8, 1), date_inactive: Date.new(2018, 4, 15)
 
-    create :setting, name: 'reporting_base_month', value: 9
-    create :setting, name: 'reporting_end_month', value: 6
-    create :setting, name: 'current_year', value: 2018
-
     @coorTerm = create :term, :name => 'COOR default', :school_year => 2018
     @coorTerm.set_dates 2018, [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
     @coorTerm.save!
