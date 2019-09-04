@@ -22,7 +22,7 @@ class GraduationPlanMappingsController < ApplicationController
     mapping.graduation_plan = @graduation_plan
     mapping.graduation_plan_requirement = GraduationPlanRequirement.find_by_id_and_status graduation_plan_requirement_id, 'active'
 
-    if GraduationPlanMapping.find_by_graduation_plan_id_and_credit_assignment_id(@graduation_plan.id, mapping.credit_assignment_id)
+    if mapping.credit_assignment && GraduationPlanMapping.find_by_graduation_plan_id_and_credit_assignment_id(@graduation_plan.id, mapping.credit_assignment_id)
       render json: { message: 'Duplicate mapping' }, status: 422 and return
     end
 
@@ -41,7 +41,7 @@ class GraduationPlanMappingsController < ApplicationController
     mapping.graduation_plan = @graduation_plan
     mapping.graduation_plan_requirement = GraduationPlanRequirement.find_by_id_and_status graduation_plan_requirement_id, 'active'
 
-    if GraduationPlanMapping.find_by_graduation_plan_id_and_credit_assignment_id(@graduation_plan.id, mapping.credit_assignment_id)
+    if mapping.credit_assignment && GraduationPlanMapping.find_by_graduation_plan_id_and_credit_assignment_id(@graduation_plan.id, mapping.credit_assignment_id)
       render json: { message: 'Duplicate mapping' }, status: 422 and return
     end
 
@@ -89,7 +89,6 @@ private
 
   def graduation_plan_attributes
     params.require(:data)
-      .permit(:attributes)
-      .dig(:notes, :date_completed)
+      .permit(attributes: [ :notes, :date_completed ])
   end
 end

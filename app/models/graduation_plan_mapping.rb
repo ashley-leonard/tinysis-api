@@ -5,7 +5,7 @@ class GraduationPlanMapping < ApplicationRecord
   belongs_to :credit_assignment, optional: true
   
   validates_presence_of :graduation_plan, :graduation_plan_requirement
-  
+
   alias_attribute :notes, :name
 
   def before_save 

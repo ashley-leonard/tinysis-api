@@ -60,7 +60,7 @@ RSpec.describe 'Graduation plan mappings API', type: :request do
   end
 
   describe 'POST /api/graduation-plan-mappings/:student_id' do
-    it 'returns a 200 with successful mapping creation' do
+    it 'returns a 200 with successful creation of a credit mapping' do
       body = {
         data: {
           relationships: {
@@ -83,6 +83,34 @@ RSpec.describe 'Graduation plan mappings API', type: :request do
       expect(response).to have_http_status(200)
       expect(json).not_to be_empty
       expect(json['data']['id']).not_to be_empty
+    end
+
+    it 'returns a 200 with successful creation of a general mapping' do
+      body = {
+        data: {
+          relationships: {
+            graduation_plan_requirement: {
+              data: {
+                id: @req2.id,
+              }
+            },
+          },
+          attributes: {
+            notes: 'When in the course of human events',
+            date_completed: '2018-11-08',
+          },
+        },
+      }
+
+      post "/api/graduation-plan-mappings/#{@student1.id}", params: body.to_json, headers: json_request_headers
+
+      expect(response).to have_http_status(200)
+      expect(json).not_to be_empty
+      expect(json['data']['id']).not_to be_empty
+      expect(json['data']['attributes']).not_to be_empty
+
+      expect(json['data']['attributes']['notes']).to eq("When in the course of human events")
+      expect(json['data']['attributes']['dateCompleted']).to eq("2018-11-08")
     end
 
     it 'returns a 422 with duplicate mapping' do
