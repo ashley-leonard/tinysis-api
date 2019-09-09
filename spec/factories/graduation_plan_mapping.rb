@@ -2,6 +2,5 @@
 
 FactoryBot.define do
   factory :graduation_plan_mapping do
-    notes { Faker::Lorem.paragraphs.join('\n\n') }
   end
 end

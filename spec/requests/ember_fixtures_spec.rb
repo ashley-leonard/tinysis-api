@@ -183,7 +183,8 @@ RSpec.describe 'Ember fixtures script', type: :request do
     [@contract1_last, @contract2_last, @contract3_last].each do |contract|
       [@student2, @student3].each do |student|
         enrollment = create :enrollment, participant: student, contract: contract, creator: contract.facilitator
-        create :credit_assignment, enrollment: enrollment, credit: @credit2, credit_hours: 2
+        create :credit_assignment, enrollment: enrollment, credit: @credit1, credit_hours: 0.25
+        create :credit_assignment, enrollment: enrollment, credit: @credit2, credit_hours: 0.5
         create :note, note: "Note for #{student.last_name} for enrollment in #{contract.name}", notable: enrollment, creator: contract.facilitator
 
         enrollment.set_closed Enrollment::COMPLETION_FULFILLED, contract.facilitator

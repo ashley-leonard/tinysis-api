@@ -26,6 +26,7 @@ Rails.application.routes.draw do
  
     get '/graduation-plan-mappings/:student_id', to: 'graduation_plan_mappings#index'
     post '/graduation-plan-mappings/:student_id', to: 'graduation_plan_mappings#create'
+    put '/graduation-plan-mappings/:student_id/:mapping_id', to: 'graduation_plan_mappings#update'
     delete '/graduation-plan-mappings/:student_id/:mapping_id', to: 'graduation_plan_mappings#destroy'
 
     get '/graduation-plan-requirements', to: 'graduation_plan_requirements#index'
