@@ -42,7 +42,7 @@ RSpec.describe 'Admin terms API', type: :request do
       postBody = {
         data: {
           attributes: {
-            name: Faker::Name.first_name,
+            name: Faker::Company.catch_phrase,
             schoolYear: 2011,
             status: 'active',
             months:  ['2011-09-01', '2011-10-01', '2011-11-01', '2011-12-01', '2012-01-01'],
@@ -50,6 +50,7 @@ RSpec.describe 'Admin terms API', type: :request do
           }
         }
       }
+
       post "/api/admin/terms", params: postBody.to_json, headers: json_request_headers
 
       expect(response).to have_http_status(200)
