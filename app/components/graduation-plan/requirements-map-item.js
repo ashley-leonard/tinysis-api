@@ -2,14 +2,12 @@ import Component from '@ember/component';
 import Big from 'big.js';
 import { computed } from '@ember/object';
 import { inject as service } from '@ember/service';
-import { alias, equal } from '@ember/object/computed';
+import { equal } from '@ember/object/computed';
 
 export default Component.extend({
   tinyData: service(),
   tagName: 'li',
   classNames: 'req-map-item',
-  creditAssignments: alias('requirementHash.creditAssignments'),
-  mapping: alias('requirementHash.mapping'),
   isCredit: equal('requirement.attributes.requirementType', 'credit'),
   showSum: computed('isCredit', 'sum', function () {
     const {
@@ -24,12 +22,12 @@ export default Component.extend({
 
     return this.requirementHash.sum.toPrecision(2);
   }),
-  requirementHash: computed('creditsHash', 'requirement', function () {
+  requirementHash: computed('mappingsHash', 'requirement', function () {
     const {
-      creditsHash,
+      mappingsHash,
       requirement,
     } = this;
-    return creditsHash[requirement.id] || { creditAssignments: [], sum: new Big(0) };
+    return mappingsHash[requirement.id] || { creditAssignments: [], sum: new Big(0) };
   }),
   childRequirements: computed('requirement.relationships.children.data', function () {
     const children = this.get('requirement.relationships.children.data');
@@ -42,9 +40,10 @@ export default Component.extend({
   actions: {
     editMapping() {
       const {
-        mapping,
+        requirementHash,
         requirement,
       } = this;
+      const { mapping } = requirementHash;
       this.editMapping(mapping, requirement);
     },
     removeMapping(creditAssignment) {

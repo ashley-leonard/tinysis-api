@@ -2,41 +2,42 @@ import Component from '@ember/component';
 import Big from 'big.js';
 import { computed, get } from '@ember/object';
 import { inject as service } from '@ember/service';
-import { createEntity } from '../utils/json-api';
+import { createEntity, replaceModel } from '../utils/json-api';
 
 export default Component.extend({
   tinyData: service(),
-  classNames: ['flex', 'flex-row', 'border-red-600', 'border'],
-  creditsHash: computed('creditAssignments', function () {
+  mappingsHash: computed('mappings', function () {
     const {
-      creditAssignments,
       tinyData,
+      mappings,
     } = this;
 
-    function createEntry() {
+    function createEntry(mapping = null) {
       return {
         sum: new Big(0),
         creditAssignments: [],
-        mapping: null,
+        mapping,
       };
     }
 
-    return creditAssignments
-      .reduce((memo, creditAssignment) => {
-        const mappingId = get(creditAssignment, 'relationships.graduationPlanMapping.data.id');
-        if (!mappingId) return memo;
-
-        const mapping = tinyData.get('graduationPlanMapping', mappingId);
+    return mappings
+      .reduce((memo, mapping) => {
         const mappingRequirementId = get(mapping, 'relationships.graduationPlanRequirement.data.id');
         if (!mappingRequirementId) return memo;
 
         // create or update entry accumulator
-        const entry = memo[mappingRequirementId] || createEntry();
+        const entry = memo[mappingRequirementId] || createEntry(mapping);
         memo[mappingRequirementId] = entry;
+
+        const creditAssignmentId = get(mapping, 'relationships.creditAssignment.data.id');
+
+        // rest of this is credit-specific
+        if (!creditAssignmentId) return memo;
+
+        const creditAssignment = tinyData.get('creditAssignment', creditAssignmentId);
 
         entry.creditAssignments.push(creditAssignment);
         entry.sum = memo[mappingRequirementId].sum.plus(creditAssignment.attributes.creditHours);
-        entry.mapping = mapping;
 
         // create or update parent accumulator
         const requirement = tinyData.get('graduationPlanRequirement', mappingRequirementId);
@@ -55,41 +56,48 @@ export default Component.extend({
       this.toggleProperty('showDialog');
       const mappingToEdit = mapping || createEntity('graduationPlanMapping', {
         dateCompleted: null,
-        note: null,
+        notes: null,
       }, requirement);
       this.setProperties({
         mappingToEdit,
+        requirementToEdit: requirement,
       });
     },
-    saveMapping(mapping) {
-      return this.saveMapping(mapping);
+    async saveMapping(mappingModel) {
+      const result = await this.saveMapping(mappingModel);
+      const mapping = result.data;
+      this.toggleProperty('showDialog');
+      this.set('mappings', replaceModel(this.mappings, mapping));
+    },
+    cancelDialog() {
+      this.toggleProperty('showDialog');
     },
     onDrag(creditAssignment) {
       this.set('draggedCreditAssignment', creditAssignment);
     },
     async addMapping(requirement, creditAssignment) {
-      const graduationPlanMapping = await this.addMapping(requirement, creditAssignment);
+      const result = await this.addMapping(requirement, creditAssignment);
 
       // add the link
       const assignedCredit = {
         ...creditAssignment,
         relationships: {
           ...creditAssignment.relationships,
-          graduationPlanMapping,
+          graduationPlanMapping: result,
         },
       };
 
       // replace the ca
-      const { id } = creditAssignment;
-      const creditAssignments = this.creditAssignments.filter(ca => ca.id !== id);
-      creditAssignments.push(assignedCredit);
+      const creditAssignments = replaceModel(this.creditAssignments, assignedCredit);
 
-      this.set('creditAssignments', creditAssignments);
-
-      this.set('mappings', this.mappings.concat([graduationPlanMapping]));
+      this.setProperties({
+        creditAssignments,
+        mappings: this.mappings.concat([result.data]),
+      });
     },
-    removeMapping(creditAssignment) {
-      const { id } = creditAssignment;
+    async removeMapping(creditAssignment) {
+      const mapping = creditAssignment.relationships.graduationPlanMapping.data;
+      await this.removeMapping(mapping);
 
       // remove the link
       const unassigned = {
@@ -101,12 +109,12 @@ export default Component.extend({
       };
 
       // replace the ca
-      const creditAssignments = this.creditAssignments.filter(ca => ca.id !== id);
-      creditAssignments.push(unassigned);
+      const creditAssignments = replaceModel(this.creditAssignments, unassigned);
 
-      this.set('creditAssignments', creditAssignments);
-
-      this.removeMapping(creditAssignment.relationships.graduationPlanMapping.data);
+      this.setProperties({
+        creditAssignments,
+        mappings: this.mappings.filter(m => m.id !== mapping.id),
+      });
     },
   },
 });

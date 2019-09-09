@@ -1,7 +1,6 @@
 import Controller from '@ember/controller';
 import { computed } from '@ember/object';
 import { inject as service } from '@ember/service';
-import { resolve } from 'rsvp';
 import { createEntity } from '../utils/json-api';
 
 export default Controller.extend({
@@ -19,9 +18,23 @@ export default Controller.extend({
         }),
       });
     },
-    saveMapping(mapping, requirement) {
-      console.log('saving', mapping, requirement);
-      return resolve();
+    saveMapping(mapping) {
+      const { student } = this;
+      let url;
+      let method;
+      if (mapping.id) {
+        url = `/api/graduation-plan-mappings/${student.id}/${mapping.id}`;
+        method = 'PUT';
+      } else {
+        url = `/api/graduation-plan-mappings/${student.id}`;
+        method = 'POST';
+      }
+      return this.tinyData.fetch(url, {
+        method,
+        body: JSON.stringify({
+          data: mapping,
+        }),
+      });
     },
     removeMapping(mapping) {
       const { student } = this;
