@@ -84,6 +84,7 @@ value-button {
     border-color: transparent;
     background: inherit;
     text-decoration: none;
+    @apply text-gray-900;
 
     &:hover {
       text-decoration: underline;
