@@ -21,7 +21,7 @@ export default Component.extend({
   },
 
   didInsertElement() {
-    const autofocus = this.element.querySelector('input[autofocus]');
+    const autofocus = this.element.querySelector('[autofocus]');
 
     if (autofocus) {
       autofocus.focus();
