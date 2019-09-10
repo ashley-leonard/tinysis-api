@@ -1,17 +1,17 @@
 // GET /api/profile
 export default {
   data: {
-    id: '107',
+    id: '25',
     type: 'user',
     attributes: {
-      firstName: 'Eileen',
-      lastName: 'Wilkinson',
+      firstName: 'Jarrett',
+      lastName: 'Kuphal',
       nickname: null,
       dateActive: '2011-07-01',
       dateInactive: null,
       districtId: null,
       districtGrade: 12,
-      email: 'tommie@bernhard.com',
+      email: 'pamelia@blanda.biz',
       status: 'active',
       role: 'administrator',
     },

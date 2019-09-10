@@ -2,7 +2,7 @@
 export default {
   data: [
     {
-      id: '53',
+      id: '6',
       type: 'term',
       attributes: {
         name: 'COOR Current',
@@ -29,7 +29,7 @@ export default {
       },
     },
     {
-      id: '52',
+      id: '5',
       type: 'term',
       attributes: {
         name: 'COOR Last',
@@ -56,54 +56,10 @@ export default {
       },
     },
     {
-      id: '50',
+      id: '1',
       type: 'term',
       attributes: {
-        name: 'Current One',
-        schoolYear: 2019,
-        creditDate: '2020-01-31',
-        months: [
-          '2019-09-01',
-          '2019-10-01',
-          '2019-11-01',
-          '2019-12-01',
-          '2020-01-01',
-        ],
-        status: 'active',
-      },
-      meta: {
-        contractsCount: 2,
-        enrollmentsCount: 4,
-        enrollmentsOpenCount: 4,
-      },
-    },
-    {
-      id: '51',
-      type: 'term',
-      attributes: {
-        name: 'Current Two',
-        schoolYear: 2019,
-        creditDate: '2020-06-15',
-        months: [
-          '2020-02-01',
-          '2020-03-01',
-          '2020-04-01',
-          '2020-05-01',
-          '2020-06-01',
-        ],
-        status: 'active',
-      },
-      meta: {
-        contractsCount: 0,
-        enrollmentsCount: 0,
-        enrollmentsOpenCount: 0,
-      },
-    },
-    {
-      id: '48',
-      type: 'term',
-      attributes: {
-        name: 'Last One',
+        name: 'Face to face client-server portal',
         schoolYear: 2018,
         creditDate: '2019-01-31',
         months: [
@@ -122,10 +78,32 @@ export default {
       },
     },
     {
-      id: '49',
+      id: '3',
       type: 'term',
       attributes: {
-        name: 'Last Two',
+        name: 'Progressive 24/7 orchestration',
+        schoolYear: 2019,
+        creditDate: '2020-01-31',
+        months: [
+          '2019-09-01',
+          '2019-10-01',
+          '2019-11-01',
+          '2019-12-01',
+          '2020-01-01',
+        ],
+        status: 'active',
+      },
+      meta: {
+        contractsCount: 2,
+        enrollmentsCount: 4,
+        enrollmentsOpenCount: 4,
+      },
+    },
+    {
+      id: '2',
+      type: 'term',
+      attributes: {
+        name: 'Total mobile solution',
         schoolYear: 2018,
         creditDate: '2019-06-15',
         months: [
@@ -140,6 +118,28 @@ export default {
       meta: {
         contractsCount: 3,
         enrollmentsCount: 4,
+        enrollmentsOpenCount: 0,
+      },
+    },
+    {
+      id: '4',
+      type: 'term',
+      attributes: {
+        name: 'Visionary discrete knowledge base',
+        schoolYear: 2019,
+        creditDate: '2020-06-15',
+        months: [
+          '2020-02-01',
+          '2020-03-01',
+          '2020-04-01',
+          '2020-05-01',
+          '2020-06-01',
+        ],
+        status: 'active',
+      },
+      meta: {
+        contractsCount: 0,
+        enrollmentsCount: 0,
         enrollmentsOpenCount: 0,
       },
     },

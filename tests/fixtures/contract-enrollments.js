@@ -1,8 +1,8 @@
-// GET /api/enrollments?contractIds=9&include=creditAssignments,creditAssignments.credit,participant
+// GET /api/enrollments?contractIds=5&include=creditAssignments,creditAssignments.credit,participant
 export default {
   data: [
     {
-      id: '6',
+      id: '2',
       type: 'enrollment',
       attributes: {
         finalizedOn: null,
@@ -12,20 +12,20 @@ export default {
       relationships: {
         contract: {
           data: {
-            id: '9',
+            id: '5',
             type: 'contract',
           },
         },
         participant: {
           data: {
-            id: '110',
+            id: '28',
             type: 'participant',
           },
         },
         creditAssignments: {
           data: [
             {
-              id: '8',
+              id: '29',
               type: 'creditAssignment',
             },
           ],
@@ -62,7 +62,7 @@ export default {
       },
     },
     {
-      id: '5',
+      id: '1',
       type: 'enrollment',
       attributes: {
         finalizedOn: null,
@@ -72,20 +72,20 @@ export default {
       relationships: {
         contract: {
           data: {
-            id: '9',
+            id: '5',
             type: 'contract',
           },
         },
         participant: {
           data: {
-            id: '108',
+            id: '26',
             type: 'participant',
           },
         },
         creditAssignments: {
           data: [
             {
-              id: '7',
+              id: '28',
               type: 'creditAssignment',
             },
           ],
@@ -143,7 +143,7 @@ export default {
   ],
   included: [
     {
-      id: '8',
+      id: '29',
       type: 'creditAssignment',
       attributes: {
         creditHours: 1.0,
@@ -151,7 +151,7 @@ export default {
       relationships: {
         credit: {
           data: {
-            id: '1',
+            id: '15',
             type: 'credit',
           },
         },
@@ -161,7 +161,7 @@ export default {
       },
     },
     {
-      id: '1',
+      id: '15',
       type: 'credit',
       attributes: {
         courseId: '0',
@@ -170,15 +170,15 @@ export default {
       },
     },
     {
-      id: '110',
+      id: '28',
       type: 'user',
       attributes: {
-        firstName: 'Velma',
-        lastName: 'Medhurst',
+        firstName: 'Bonnie',
+        lastName: 'Auer',
         nickname: null,
         dateActive: '2018-08-01',
         dateInactive: '2019-10-01',
-        districtId: '8637686549',
+        districtId: '4905452447',
         districtGrade: 12,
         email: null,
         status: 'inactive',
@@ -187,14 +187,14 @@ export default {
       relationships: {
         coordinator: {
           data: {
-            id: '105',
-            type: 'staff',
+            id: '23',
+            type: 'user',
           },
         },
       },
     },
     {
-      id: '7',
+      id: '28',
       type: 'creditAssignment',
       attributes: {
         creditHours: 1.0,
@@ -202,7 +202,7 @@ export default {
       relationships: {
         credit: {
           data: {
-            id: '1',
+            id: '15',
             type: 'credit',
           },
         },
@@ -212,15 +212,15 @@ export default {
       },
     },
     {
-      id: '108',
+      id: '26',
       type: 'user',
       attributes: {
-        firstName: 'Suzie',
-        lastName: 'Schinner',
+        firstName: 'Eli',
+        lastName: 'Monahan',
         nickname: null,
         dateActive: '2018-08-01',
         dateInactive: null,
-        districtId: '7906630283',
+        districtId: '3891854733',
         districtGrade: 12,
         email: null,
         status: 'active',
@@ -229,8 +229,8 @@ export default {
       relationships: {
         coordinator: {
           data: {
-            id: '104',
-            type: 'staff',
+            id: '22',
+            type: 'user',
           },
         },
       },

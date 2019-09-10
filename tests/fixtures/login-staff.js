@@ -1,23 +1,23 @@
-// auth for user 104
+// auth for user 22
 export default {
   data: {
-    email: 'august@gradykaulke.co',
+    email: 'serita@bartoletti.net',
     email_verified: false,
     updated_at: '2019-06-23T23:44:29.877Z',
-    user_id: 'auth0|b8dd4b8ae2735906c8fd4a6a4b150d58',
-    name: 'Celia Mosciski',
+    user_id: 'auth0|7e33cbf96edcc539f790d4e10d509b06',
+    name: 'Hoyt Sauer',
     identities: [
       {
         connection: 'Username-Password-Authentication',
         provider: 'auth0',
-        user_id: 'b8dd4b8ae2735906c8fd4a6a4b150d58',
+        user_id: '7e33cbf96edcc539f790d4e10d509b06',
         isSocial: false,
       },
     ],
     created_at: '2019-05-25T00:24:18.815Z',
     last_password_reset: '2019-06-10T04:09:05.883Z',
-    given_name: 'Celia',
-    family_name: 'Mosciski',
+    given_name: 'Hoyt',
+    family_name: 'Sauer',
     nickname: null,
     last_login: '2019-06-23T23:44:29.877Z',
     last_ip: '208.100.155.216',
