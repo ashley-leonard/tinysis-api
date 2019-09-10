@@ -1,3 +1,9 @@
-{{courseName}}
-/
-{{creditAssignment.attributes.creditHours}}
+<li
+  data-test-credit-assignment-id={{creditAssignment.id}}
+  ondragstart={{action 'onDragStart'}}
+  draggable=true
+>
+  {{courseName}}
+  /
+  {{creditAssignment.attributes.creditHours}}
+</li>

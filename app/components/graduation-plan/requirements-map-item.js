@@ -6,8 +6,7 @@ import { equal } from '@ember/object/computed';
 
 export default Component.extend({
   tinyData: service(),
-  tagName: 'li',
-  classNames: 'req-map-item',
+  tagName: '',
   isCredit: equal('requirement.attributes.requirementType', 'credit'),
   showSum: computed('isCredit', 'sum', function () {
     const {
@@ -20,13 +19,14 @@ export default Component.extend({
   sum: computed('requirementHash.sum', function () {
     if (this.requirementHash.sum.eq(0)) return null;
 
-    return this.requirementHash.sum.toPrecision(2);
+    return this.requirementHash.sum.toFixed();
   }),
   requirementHash: computed('mappingsHash', 'requirement', function () {
     const {
       mappingsHash,
       requirement,
     } = this;
+    console.log('rebuilding requirementHash');
     return mappingsHash[requirement.id] || { creditAssignments: [], sum: new Big(0) };
   }),
   childRequirements: computed('requirement.relationships.children.data', function () {
@@ -49,16 +49,16 @@ export default Component.extend({
     removeMapping(creditAssignment) {
       this.removeMapping(creditAssignment);
     },
-  },
-  dragEnter(event) {
-    event.preventDefault();
-  },
-  dragOver(event) {
-    event.preventDefault();
-  },
-  drop(event) {
-    event.preventDefault();
-    event.stopPropagation();
-    this.addMapping(this.requirement, this.draggedCreditAssignment);
+    onDrop(event) {
+      event.preventDefault();
+      event.stopPropagation();
+      this.addMapping(this.requirement, this.draggedCreditAssignment);
+    },
+    onDragEnter(event) {
+      event.preventDefault();
+    },
+    onDragOver(event) {
+      event.preventDefault();
+    },
   },
 });
