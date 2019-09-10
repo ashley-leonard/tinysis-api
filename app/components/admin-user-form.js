@@ -121,7 +121,7 @@ export default TForm.extend({
         coordinator: {
           data: {
             id: pojo.coordinatorId,
-            type: 'staff',
+            type: 'user',
           },
         },
       };
