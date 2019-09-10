@@ -28,7 +28,9 @@ class GraduationPlanMappingsController < ApplicationController
 
     mapping.save!
 
-    render json: GraduationPlanMappingSerializer.new(mapping)
+    render json: GraduationPlanMappingSerializer.new(mapping, {
+      include: [:credit_assignment]
+    })
   end
 
   def update
@@ -38,7 +40,9 @@ class GraduationPlanMappingsController < ApplicationController
 
     mapping.save!
 
-    render json: GraduationPlanMappingSerializer.new(mapping)
+    render json: GraduationPlanMappingSerializer.new(mapping, {
+      include: [:credit_assignment]
+    })
   end
 
   def destroy
