@@ -69,6 +69,8 @@ export const tinyDataService = {
   },
 
   addResult(result) {
+    if (!result) return;
+
     const additions = {};
 
     function _add(entity) {

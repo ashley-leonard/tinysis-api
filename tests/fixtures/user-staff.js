@@ -1,11 +1,11 @@
-// GET /api/admin/users/1
+// GET /api/admin/users/22
 export default {
   data: {
-    id: '1',
+    id: '22',
     type: 'user',
     attributes: {
-      firstName: 'Donald',
-      lastName: 'Stoltenberg',
+      firstName: 'Hoyt',
+      lastName: 'Sauer',
       nickname: null,
       dateActive: '2012-09-01',
       dateInactive: null,
@@ -13,7 +13,7 @@ export default {
       districtGrade: 12,
       status: 'active',
       role: 'staff',
-      email: 'chase@hellerjohnson.info',
+      email: 'serita@bartoletti.net',
     },
     relationships: {
     },

@@ -7,7 +7,7 @@ export default Component.extend({
     return this.category.attributes.name || 'Untitled';
   }),
   reportingName: computed('category.attributes.reporting', function () {
-    const { reporting } = this.pojo;
+    const { reporting } = this.category.attributes;
     switch (reporting) {
       case 'monthly':
         return 'Monthly';

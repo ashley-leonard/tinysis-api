@@ -1,16 +1,16 @@
-// GET /api/contracts/3?include=category,facilitator,assignments,meetings,creditAssignments,creditAssignments.credit,term,ealrs
+// GET /api/contracts/5?include=category,facilitator,assignments,meetings,creditAssignments,creditAssignments.credit,term,ealrs
 export default {
   data: {
-    id: '3',
+    id: '5',
     type: 'contract',
     attributes: {
-      name: 'Templum provident corporis apto conspergo.',
+      name: 'Molestias usque acervus talis cado.',
       status: 'approved',
-      learningObjectives: 'Crastinus accommodo celebrer theatrum voluptas.',
-      competencies: 'Temperantia doloribus apostolus crur tutamen.',
-      evaluationMethods: 'Vester vacuus animi vorax laudantium.',
-      instructionalMaterials: 'Amoveo recusandae tamisium sint quo.',
-      location: 'Cilicium aer comes artificiose corona.',
+      learningObjectives: 'Sponte summisse acquiro voluptatibus creta.',
+      competencies: 'Quis vicissitudo delectus recusandae velit.',
+      evaluationMethods: 'Sum vehemens quo conqueror qui.',
+      instructionalMaterials: 'Deripio victus colligo crastinus supplanto.',
+      location: 'Odio ut vomito candidus coerceo.',
       timeslots: [
         {
           start: '8:45',
@@ -34,7 +34,7 @@ export default {
       },
       facilitator: {
         data: {
-          id: '1',
+          id: '22',
           type: 'User',
         },
       },
@@ -77,7 +77,7 @@ export default {
       creditAssignments: {
         data: [
           {
-            id: '2',
+            id: '23',
             type: 'creditAssignment',
           },
         ],
@@ -231,12 +231,27 @@ export default {
         name: 'Category 1',
         sequence: 0,
         public: false,
+        reporting: 'none',
+        activeContractsCount: 1,
         homeroom: false,
-        statusable: false,
+      },
+      relationships: {
+        contracts: {
+          data: [
+            {
+              id: '1',
+              type: 'contract',
+            },
+            {
+              id: '5',
+              type: 'contract',
+            },
+          ],
+        },
       },
     },
     {
-      id: '2',
+      id: '23',
       type: 'creditAssignment',
       attributes: {
         creditHours: 1.0,
@@ -244,14 +259,17 @@ export default {
       relationships: {
         credit: {
           data: {
-            id: '1',
+            id: '15',
             type: 'credit',
           },
+        },
+        graduationPlanMapping: {
+          data: null,
         },
       },
     },
     {
-      id: '1',
+      id: '15',
       type: 'credit',
       attributes: {
         courseId: '0',
@@ -263,7 +281,7 @@ export default {
       id: '1',
       type: 'ealr',
       attributes: {
-        ealr: 'Temeritas caelum aut aegre denego.',
+        ealr: 'Bene crastinus sublime audio nemo.',
         seq: '1.1',
         category: 'Category 1',
       },
@@ -272,7 +290,7 @@ export default {
       id: '2',
       type: 'ealr',
       attributes: {
-        ealr: 'Tactus tutis catena commodi pectus.',
+        ealr: 'Cilicium vesco apostolus crux adimpleo.',
         seq: '1.2',
         category: 'Category 1',
       },
@@ -281,7 +299,7 @@ export default {
       id: '3',
       type: 'ealr',
       attributes: {
-        ealr: 'Officiis toties decumbo cumque sponte.',
+        ealr: 'Velum perferendis crur voluptas cultellus.',
         seq: '2.1',
         category: 'Category 2',
       },
@@ -290,23 +308,23 @@ export default {
       id: '4',
       type: 'ealr',
       attributes: {
-        ealr: 'Anser aranea reiciendis theca utor.',
+        ealr: 'Deserunt delicate adsidue cimentarius talis.',
         seq: '2.2',
         category: 'Category 2',
       },
     },
     {
-      id: '1',
+      id: '22',
       type: 'user',
       attributes: {
-        firstName: 'Donald',
-        lastName: 'Stoltenberg',
+        firstName: 'Hoyt',
+        lastName: 'Sauer',
         nickname: null,
         dateActive: '2012-09-01',
         dateInactive: null,
         districtId: null,
         districtGrade: 12,
-        email: 'chase@hellerjohnson.info',
+        email: 'serita@bartoletti.net',
         status: 'active',
         role: 'staff',
       },
@@ -314,8 +332,8 @@ export default {
         coordinatees: {
           data: [
             {
-              id: '5',
-              type: 'student',
+              id: '26',
+              type: 'user',
             },
           ],
         },
@@ -435,7 +453,7 @@ export default {
       id: '3',
       type: 'term',
       attributes: {
-        name: 'Current One',
+        name: 'Progressive 24/7 orchestration',
         schoolYear: 2019,
         creditDate: '2020-01-31',
         months: [

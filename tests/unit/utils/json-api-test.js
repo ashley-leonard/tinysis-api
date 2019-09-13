@@ -1,6 +1,7 @@
 import {
   createEntity,
   getChangedKeys,
+  replaceModel,
 } from 'tinysis-ui/utils/json-api';
 import { module, test } from 'qunit';
 
@@ -66,5 +67,34 @@ module('Unit | Utility | json-api', () => {
     assert.ok(entity.relationships, 'relationships now necessary');
     assert.equal(entity.relationships.user.data.id, user.id, 'id copied to relationship');
     assert.equal(entity.relationships.user.data.type, user.type, 'type copied to relationship');
+  });
+
+  test('replaceModel works as expected', (assert) => {
+    const list = [{
+      id: '1',
+    }, {
+      id: '2',
+    }];
+    const newModel = {
+      id: '3',
+      attributes: {},
+    };
+    const updatedModel = {
+      id: '2',
+      attributes: {},
+    };
+
+    const listWithNewModel = replaceModel(list, newModel);
+    assert.equal(list.length, 2, 'when adding a new model, original list was not altered');
+    assert.equal(listWithNewModel.length, 3, 'when adding a new model, result was increased by 1');
+    assert.ok(listWithNewModel.find(m => m.id === newModel.id), 'new model is in list');
+
+    const listWithExistingModel = replaceModel(list, updatedModel);
+    assert.equal(list.length, 2, 'when adding an existing model, original list was not altered');
+    assert.equal(listWithExistingModel.length, 2, 'when adding an existing model, result was not increased by 1');
+
+    const model = listWithExistingModel.find(m => m.id === updatedModel.id);
+    assert.ok(model, 'updated model is in list');
+    assert.ok(model.attributes, 'updated model is in list');
   });
 });

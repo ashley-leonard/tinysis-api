@@ -1,23 +1,23 @@
-// auth for user 1
+// auth for user 22
 export default {
   data: {
-    email: 'chase@hellerjohnson.info',
+    email: 'serita@bartoletti.net',
     email_verified: false,
     updated_at: '2019-06-23T23:44:29.877Z',
-    user_id: 'auth0|f67ca25dd8ec8a7fd26744b4475ccf08',
-    name: 'Donald Stoltenberg',
+    user_id: 'auth0|7e33cbf96edcc539f790d4e10d509b06',
+    name: 'Hoyt Sauer',
     identities: [
       {
         connection: 'Username-Password-Authentication',
         provider: 'auth0',
-        user_id: 'f67ca25dd8ec8a7fd26744b4475ccf08',
+        user_id: '7e33cbf96edcc539f790d4e10d509b06',
         isSocial: false,
       },
     ],
     created_at: '2019-05-25T00:24:18.815Z',
     last_password_reset: '2019-06-10T04:09:05.883Z',
-    given_name: 'Donald',
-    family_name: 'Stoltenberg',
+    given_name: 'Hoyt',
+    family_name: 'Sauer',
     nickname: null,
     last_login: '2019-06-23T23:44:29.877Z',
     last_ip: '208.100.155.216',

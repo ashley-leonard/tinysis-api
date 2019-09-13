@@ -21,7 +21,7 @@ export default Component.extend({
   },
 
   didInsertElement() {
-    const autofocus = this.element.querySelector('input[autofocus]');
+    const autofocus = this.element.querySelector('[autofocus]');
 
     if (autofocus) {
       autofocus.focus();
@@ -32,11 +32,14 @@ export default Component.extend({
   actions: {
     toggleValue(name, event) {
       event.stopPropagation();
-      const { pojo } = this;
-      this.set('pojo', {
-        ...pojo,
-        [name]: !pojo[name],
-      });
+      this.handleAttributeChange(name, !this.pojo[name]);
+    },
+
+    // derived forms may want to override this. but
+    // it's here if you want to call it explicitly from e.g.
+    // a custom component change handler.
+    onChange(value, name) {
+      this.handleAttributeChange(name, value);
     },
   },
 

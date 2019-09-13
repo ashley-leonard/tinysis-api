@@ -1,3 +1,11 @@
-{{credit.attributes.courseName}}
-/
-{{creditAssignment.attributes.creditHours}}
+<li data-test-credit-assignment-id={{creditAssignment.id}}>
+  {{courseName}}
+  /
+  {{creditAssignment.attributes.creditHours}}
+  {{yield
+    (hash
+      creditAssignment=creditAssignment
+      credit=credit
+    )
+  }}
+</li>

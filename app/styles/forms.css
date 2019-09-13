@@ -16,6 +16,10 @@
   }
 }
 
+.ember-modal-dialog .t-form {
+  @apply p-4;
+}
+
 t-help {
   @apply block font-normal;
 }
@@ -36,7 +40,7 @@ t-help {
   }
 }
 
-input[type="text"], input[type="email"], input[type="number"], select {
+input[type="text"], input[type="email"], input[type="number"], select, textarea {
   @apply block border border-gray-200 bg-white w-full p-2 mt-2 rounded;
 
   &:focus {
@@ -80,6 +84,7 @@ value-button {
     border-color: transparent;
     background: inherit;
     text-decoration: none;
+    @apply text-gray-900;
 
     &:hover {
       text-decoration: underline;

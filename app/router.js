@@ -196,6 +196,10 @@ Router.map(function () {
         this.route('settings-graduation-plan-requirements', {
           resetNamespace: true,
           path: '/graduation-plan-requirements',
+        }, function () {
+          this.route('index', { path: '/' });
+          this.route('new');
+          this.route('edit', { path: '/:id' });
         });
         this.route('settings-periods', {
           resetNamespace: true,

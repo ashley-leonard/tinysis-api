@@ -1,0 +1,50 @@
+<p>
+  {{#link-to "settings-graduation-plan-requirements.new" class="btn"}}
+    Add a requirement
+  {{/link-to}}
+</p>
+
+<ul class="filter">
+  <li class="filter-item" data-test-status>
+    {{t-select
+      options=statusOptions
+      value=status
+      name="status"
+      onchange=(action (mut status))
+    }}
+  </li>
+</ul>
+
+{{#check-empty
+  count=countOfStatus
+  noResultsMessage="No graduation plan requirements were found"
+}}
+  {{count-paragraph
+    count=countOfStatus
+    name="requirement"
+  }}
+
+  <h3>Credit requirements</h3>
+  {{graduation-plan-requirements-list
+    graduationPlanRequirements=graduationPlanRequirements
+    updateSeries=(action "updateSeries")
+    requirementType="credit"
+    status=status
+  }}
+
+  <h3>General requirements</h3>
+  {{graduation-plan-requirements-list
+    graduationPlanRequirements=graduationPlanRequirements
+    updateSeries=(action "updateSeries")
+    requirementType="general"
+    status=status
+  }}
+
+  <h3>Service requirements</h3>
+  {{graduation-plan-requirements-list
+    graduationPlanRequirements=graduationPlanRequirements
+    updateSeries=(action "updateSeries")
+    requirementType="service"
+    status=status
+  }}
+{{/check-empty}}

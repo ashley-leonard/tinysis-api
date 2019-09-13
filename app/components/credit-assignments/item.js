@@ -1,10 +1,16 @@
 import Component from '@ember/component';
 import { inject as service } from '@ember/service';
-import { get } from '@ember/object';
+import { get, computed } from '@ember/object';
 
 export default Component.extend({
   tinyData: service(),
-  tagName: 'li',
+  tagName: '',
+
+  courseName: computed('credit.attributes.courseName', 'creditAssignment.attributes.creditCourseName', function () {
+    return this.get('credit.attributes.courseName')
+      || this.get('creditAssignment.attributes.creditCourseName')
+      || this.get('creditAssignment.attributes.contractName');
+  }),
 
   didReceiveAttrs() {
     if (this.credit) return;

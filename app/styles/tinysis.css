@@ -59,3 +59,26 @@
   cursor: hand;
   color: black;
 }
+
+.req-map-item {
+  @apply border p-2 my-4;
+}
+
+.req-map-item .credit-assignments li {
+  span {
+    visibility: hidden;
+  }
+
+  &:hover {
+    span {
+      visibility: visible;
+    }
+  }
+}
+
+.only-drop-target {
+  @apply border-red-500;
+  * {
+    @apply pointer-events-none border-red-200;
+  }
+}

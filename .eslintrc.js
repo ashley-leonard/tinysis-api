@@ -64,7 +64,8 @@ module.exports = {
       object: true,
     }, {
       enforceForRenamedProperties: false,
-    }],
+    },
+    ],
   },
   overrides: [
     // node files

@@ -36,6 +36,21 @@ export function createEntity(type, attributes, ...relationships) {
 }
 
 /*
+ * From an array of models, finds the original model and replaces it
+ * with the provided one. If the model is not present it is simply
+ * added.
+ *
+ * @param {Array} list of models
+ * @param {Object} object to replace or add to the list
+ * @returns A new array with the replaced or added model
+ */
+export function replaceModel(array, model) {
+  return array
+    .filter(m => m.id !== model.id)
+    .concat([model]);
+}
+
+/*
  * Diffs two JSONAPI models, returning a list of keys that are different
  *
  * @param {Object} origModel - the unaltered object

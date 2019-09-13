@@ -1,0 +1,85 @@
+<li
+  class="req-map-item {{dragStateClass}}"
+  data-test-requirement-id={{requirement.id}}
+  ondragover={{action "onDragOver"}}
+  ondragenter={{action "onDragEnter"}}
+  ondragleave={{action "onDragLeave"}}
+  ondrop={{action "onDrop"}}
+>
+  <div class="flex items-center">
+    <h4 class="my-1 flex-none">{{requirement.attributes.name}}</h4>
+    <div
+      data-test-sum={{sum}}
+      class="ml-4 flex-none"
+    >
+      {{#if isCredit}}
+        {{#if showSum}}
+          <span class="text-lg text-purple-500 font-semibold">{{sum}}</span>
+        {{else}}
+          <span class="text-purple-500">0</span>
+        {{/if}}
+      {{else}}
+        {{#if requirementHash.mapping}}
+          {{#if requirementHash.mapping.attributes.dateCompleted}}
+            <span class="font-semibold text-purple-500">
+              <i class="fas fa-check" /> 
+              {{t-date requirementHash.mapping.attributes.dateCompleted "M/D/YY"}}
+            </span>
+          {{/if}}
+        {{/if}}
+      {{/if}}
+    </div>
+    {{#unless isCredit}}
+      <div class="flex-grow text-right">
+        <a
+          {{action "editMapping"}}
+          href="#"
+        >
+          Edit
+        </a>
+      </div>
+    {{/unless}}
+  </div>
+
+  {{#if requirement.attributes.notes}}
+    <div class="my-2">
+      {{t-markdown requirement.attributes.notes}}
+    </div>
+  {{/if}}
+
+  {{#if isCredit}}
+    {{#credit-assignments
+      creditAssignments=requirementHash.creditAssignments
+      as |params|
+    }}
+      <a
+        {{action "removeMapping" params.creditAssignment}}
+        title="Remove"
+        href="#"
+        class="only-drop-target-excluded"
+      >
+        <span class="far fa-times-circle"/>
+      </a>
+    {{/credit-assignments}}
+  {{/if}}
+
+  {{#if childRequirements}}
+    {{graduation-plan/requirements-map
+      requirementType=requirementType
+      mappings=mappings
+      showChildren=true
+      requirements=childRequirements
+      mappingsHash=mappingsHash
+      draggedCreditAssignment=draggedCreditAssignment
+      addMapping=addMapping
+      removeMapping=removeMapping
+    }}
+  {{/if}}
+
+  {{#if requirementHash.mapping.attributes.notes}}
+    <hrule class="block border-t border-gray-300 mt-4 mb-2" />
+    <p>
+      {{requirementHash.mapping.attributes.notes}}
+    </p>
+  {{/if}}
+</li>

@@ -4,7 +4,7 @@ export default {
     id: '3',
     type: 'term',
     attributes: {
-      name: 'Current One',
+      name: 'Progressive 24/7 orchestration',
       schoolYear: 2019,
       creditDate: '2020-01-31',
       months: [

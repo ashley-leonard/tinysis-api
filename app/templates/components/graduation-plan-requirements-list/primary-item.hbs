@@ -1,0 +1,15 @@
+{{graduation-plan-requirements-list/row
+  requirement=requirement
+  dropTarget=dropTarget
+  setDrop=setDrop
+  onDrop=onDrop
+}}
+{{#each children as |child|}}
+  {{graduation-plan-requirements-list/row
+    indented=true
+    requirement=child
+    dropTarget=dropTarget
+    setDrop=setDrop
+    onDrop=onDrop
+  }}
+{{/each}}

@@ -5,7 +5,7 @@ export default {
       id: '1',
       type: 'contract',
       attributes: {
-        name: 'Vilitas ulterius cattus vero cedo.',
+        name: 'Vulnus talio derideo id desidero.',
         status: 'closed',
       },
       relationships: {
@@ -17,7 +17,7 @@ export default {
         },
         facilitator: {
           data: {
-            id: '1',
+            id: '22',
             type: 'User',
           },
         },
@@ -45,7 +45,7 @@ export default {
       id: '2',
       type: 'contract',
       attributes: {
-        name: 'Tabella eaque defluo tot vicissitudo.',
+        name: 'Coepi quia vicinus tendo veniam.',
         status: 'closed',
       },
       relationships: {
@@ -57,7 +57,7 @@ export default {
         },
         facilitator: {
           data: {
-            id: '2',
+            id: '23',
             type: 'User',
           },
         },
@@ -85,7 +85,80 @@ export default {
       id: '3',
       type: 'contract',
       attributes: {
-        name: 'Templum provident corporis apto conspergo.',
+        name: 'Delinquo tego strenuus vulgo caritas.',
+        status: 'closed',
+      },
+      relationships: {
+        category: {
+          data: {
+            id: '2',
+            type: 'category',
+          },
+        },
+        facilitator: {
+          data: {
+            id: '23',
+            type: 'User',
+          },
+        },
+        term: {
+          data: {
+            id: '2',
+            type: 'term',
+          },
+        },
+        enrollments: {
+          data: [
+            {
+              id: '9',
+              type: 'enrollment',
+            },
+            {
+              id: '10',
+              type: 'enrollment',
+            },
+          ],
+        },
+      },
+    },
+    {
+      id: '4',
+      type: 'contract',
+      attributes: {
+        name: 'Aequitas solitudo tego nesciunt ut.',
+        status: 'closed',
+      },
+      relationships: {
+        category: {
+          data: {
+            id: '2',
+            type: 'category',
+          },
+        },
+        facilitator: {
+          data: {
+            id: '23',
+            type: 'User',
+          },
+        },
+        term: {
+          data: {
+            id: '2',
+            type: 'term',
+          },
+        },
+        enrollments: {
+          data: [
+
+          ],
+        },
+      },
+    },
+    {
+      id: '5',
+      type: 'contract',
+      attributes: {
+        name: 'Molestias usque acervus talis cado.',
         status: 'approved',
       },
       relationships: {
@@ -97,7 +170,7 @@ export default {
         },
         facilitator: {
           data: {
-            id: '1',
+            id: '22',
             type: 'User',
           },
         },
@@ -122,10 +195,10 @@ export default {
       },
     },
     {
-      id: '4',
+      id: '6',
       type: 'contract',
       attributes: {
-        name: 'Cunctatio rerum quisquam defigo testimonium.',
+        name: 'Titulus perferendis tripudio sumo blandior.',
         status: 'approved',
       },
       relationships: {
@@ -137,7 +210,7 @@ export default {
         },
         facilitator: {
           data: {
-            id: '2',
+            id: '23',
             type: 'User',
           },
         },
@@ -170,22 +243,37 @@ export default {
         name: 'Category 1',
         sequence: 0,
         public: false,
+        reporting: 'none',
+        activeContractsCount: 1,
         homeroom: false,
-        statusable: false,
+      },
+      relationships: {
+        contracts: {
+          data: [
+            {
+              id: '1',
+              type: 'contract',
+            },
+            {
+              id: '5',
+              type: 'contract',
+            },
+          ],
+        },
       },
     },
     {
-      id: '1',
+      id: '22',
       type: 'user',
       attributes: {
-        firstName: 'Donald',
-        lastName: 'Stoltenberg',
+        firstName: 'Hoyt',
+        lastName: 'Sauer',
         nickname: null,
         dateActive: '2012-09-01',
         dateInactive: null,
         districtId: null,
         districtGrade: 12,
-        email: 'chase@hellerjohnson.info',
+        email: 'serita@bartoletti.net',
         status: 'active',
         role: 'staff',
       },
@@ -193,8 +281,8 @@ export default {
         coordinatees: {
           data: [
             {
-              id: '5',
-              type: 'student',
+              id: '26',
+              type: 'user',
             },
           ],
         },
@@ -207,22 +295,45 @@ export default {
         name: 'Category 2',
         sequence: 0,
         public: false,
+        reporting: 'none',
+        activeContractsCount: 1,
         homeroom: false,
-        statusable: false,
+      },
+      relationships: {
+        contracts: {
+          data: [
+            {
+              id: '2',
+              type: 'contract',
+            },
+            {
+              id: '3',
+              type: 'contract',
+            },
+            {
+              id: '4',
+              type: 'contract',
+            },
+            {
+              id: '6',
+              type: 'contract',
+            },
+          ],
+        },
       },
     },
     {
-      id: '2',
+      id: '23',
       type: 'user',
       attributes: {
-        firstName: 'Keven',
-        lastName: 'Champlin',
+        firstName: 'Theo',
+        lastName: 'Cruickshank',
         nickname: null,
         dateActive: '2013-02-01',
         dateInactive: null,
         districtId: null,
         districtGrade: 12,
-        email: 'denis@macejkovic.com',
+        email: 'leeanna@torp.net',
         status: 'active',
         role: 'staff',
       },
@@ -230,12 +341,12 @@ export default {
         coordinatees: {
           data: [
             {
-              id: '6',
-              type: 'student',
+              id: '27',
+              type: 'user',
             },
             {
-              id: '7',
-              type: 'student',
+              id: '28',
+              type: 'user',
             },
           ],
         },
@@ -243,6 +354,6 @@ export default {
     },
   ],
   meta: {
-    count: 4,
+    count: 6,
   },
 };

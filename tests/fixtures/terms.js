@@ -5,7 +5,7 @@ export default {
       id: '1',
       type: 'term',
       attributes: {
-        name: 'Last One',
+        name: 'Face to face client-server portal',
         schoolYear: 2018,
         creditDate: '2019-01-31',
         months: [
@@ -23,7 +23,7 @@ export default {
       id: '2',
       type: 'term',
       attributes: {
-        name: 'Last Two',
+        name: 'Total mobile solution',
         schoolYear: 2018,
         creditDate: '2019-06-15',
         months: [
@@ -41,7 +41,7 @@ export default {
       id: '3',
       type: 'term',
       attributes: {
-        name: 'Current One',
+        name: 'Progressive 24/7 orchestration',
         schoolYear: 2019,
         creditDate: '2020-01-31',
         months: [
@@ -59,7 +59,7 @@ export default {
       id: '4',
       type: 'term',
       attributes: {
-        name: 'Current Two',
+        name: 'Visionary discrete knowledge base',
         schoolYear: 2019,
         creditDate: '2020-06-15',
         months: [
