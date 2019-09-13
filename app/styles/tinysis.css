@@ -75,3 +75,10 @@
     }
   }
 }
+
+.only-drop-target {
+  @apply border-red-500;
+  * {
+    @apply pointer-events-none border-red-200;
+  }
+}

@@ -17,7 +17,7 @@ export default Route.extend({
       requestParams.status = status === 'all' ? 'nil' : status;
     }
 
-    return this.tinyData.fetch('/api/admin/graduation-plan-requirements', {
+    return this.tinyData.fetch('/api/graduation-plan-requirements', {
       params,
     });
   },

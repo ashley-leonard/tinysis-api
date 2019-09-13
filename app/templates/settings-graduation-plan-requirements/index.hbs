@@ -8,20 +8,19 @@
   <li class="filter-item" data-test-status>
     {{t-select
       options=statusOptions
-      value=queryParams.status
+      value=status
       name="status"
-      prompt="Any status"
       onchange=(action (mut status))
     }}
   </li>
 </ul>
 
 {{#check-empty
-  count=model.meta.count
+  count=countOfStatus
   noResultsMessage="No graduation plan requirements were found"
 }}
   {{count-paragraph
-    result=model
+    count=countOfStatus
     name="requirement"
   }}
 

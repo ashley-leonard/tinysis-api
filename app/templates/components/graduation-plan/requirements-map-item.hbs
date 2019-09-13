@@ -1,8 +1,9 @@
 <li
-  class="req-map-item"
+  class="req-map-item {{dragStateClass}}"
   data-test-requirement-id={{requirement.id}}
   ondragover={{action "onDragOver"}}
   ondragenter={{action "onDragEnter"}}
+  ondragleave={{action "onDragLeave"}}
   ondrop={{action "onDrop"}}
 >
   <div class="flex items-center">
@@ -55,6 +56,7 @@
         {{action "removeMapping" params.creditAssignment}}
         title="Remove"
         href="#"
+        class="only-drop-target-excluded"
       >
         <span class="far fa-times-circle"/>
       </a>

@@ -11,6 +11,13 @@ export default Controller.extend({
     { name: 'Active', value: 'active' },
     { name: 'Inactive', value: 'inactive' },
   ])),
+  countOfStatus: computed('status', 'graduationPlanRequirements', function () {
+    const {
+      status,
+      graduationPlanRequirements,
+    } = this;
+    return graduationPlanRequirements.filter(req => req.attributes.status === status).length;
+  }),
   actions: {
     updateSeries(series) {
       const { tinyData } = this;

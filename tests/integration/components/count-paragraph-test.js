@@ -32,4 +32,22 @@ module('Integration | Component | count-paragraph', (hooks) => {
     this.set('students', Object.assign({}, students, { meta: { count: 0 } }));
     assert.dom(this.element).hasText('Found no squawking blue birds', 'Found no squawking blue birds');
   });
+
+  test('it overrides count explicitly rather than passing a model', async function (assert) {
+    this.setProperties({
+      name: 'dude',
+      count: 20,
+    });
+
+    await render(hbs`
+      {{count-paragraph
+        name=name
+        count=count
+      }}
+    `);
+
+    assert.ok(find(`p[data-test-count-paragraph="${this.count}"]`), 'expected counter rendered');
+
+    assert.dom(this.element).hasText(`Found ${this.count} dudes`, 'Found expected count of dudes');
+  });
 });

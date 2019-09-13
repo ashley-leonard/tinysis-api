@@ -1,6 +1,6 @@
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { render } from '@ember/test-helpers';
+import { render, find } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 
 import { stubTinyData } from '../../helpers/stub-tiny-data';
@@ -30,7 +30,7 @@ module('Integration | Component | graduation-plan', (hooks) => {
     });
   });
 
-  test('it renders', async function (assert) {
+  test('graduation plan renders', async function (assert) {
     await render(hbs`
       {{graduation-plan
         mappings=mappings
@@ -41,8 +41,20 @@ module('Integration | Component | graduation-plan', (hooks) => {
       }}
     `);
 
-    debugger;
+    const creditMappings = this.mappings.filter(mapping => mapping.relationships.creditAssignment.data);
+    const generalMappings = this.mappings.filter(mapping => !mapping.relationships.creditAssignment.data);
 
-    assert.equal(this.element.textContent.trim(), '');
+    creditMappings.forEach((mapping) => {
+      const el = find(`[data-test-requirement-id="${mapping.relationships.graduationPlanRequirement.data.id}"]`);
+      assert.ok(el, 'expected mapping requirement was rendered');
+
+      const creditAssignment = find(`[data-test-requirement-id="${mapping.relationships.graduationPlanRequirement.data.id}"] li[data-test-credit-assignment-id="${mapping.relationships.creditAssignment.data.id}"]`);
+      assert.ok(creditAssignment, 'expected credit assignment mapping was rendered');
+    });
+
+    generalMappings.forEach((mapping) => {
+      const el = find(`[data-test-requirement-id="${mapping.relationships.graduationPlanRequirement.data.id}"]`);
+      assert.ok(el, 'expected mapping requirement was rendered');
+    });
   });
 });

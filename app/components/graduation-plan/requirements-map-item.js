@@ -26,7 +26,7 @@ export default Component.extend({
       mappingsHash,
       requirement,
     } = this;
-    console.log('rebuilding requirementHash');
+
     return mappingsHash[requirement.id] || { creditAssignments: [], sum: new Big(0) };
   }),
   childRequirements: computed('requirement.relationships.children.data', function () {
@@ -36,6 +36,16 @@ export default Component.extend({
     const { tinyData } = this;
 
     return children.map(child => tinyData.get('graduationPlanRequirement', child.id));
+  }),
+  hasChildren: computed('requirement', function () {
+    return Boolean(this.get('requirement.relationships.children.data.length'));
+  }),
+  isDropTarget: computed('isCredit', 'hasChildren', function () {
+    return this.isCredit && !this.hasChildren;
+  }),
+  isDropTargetClass: computed('isDropTarget', function () {
+    if (this.isDropTarget) return 'only-drop-target';
+    return null;
   }),
   actions: {
     editMapping() {
@@ -50,15 +60,27 @@ export default Component.extend({
       this.removeMapping(creditAssignment);
     },
     onDrop(event) {
+      if (!this.isDropTarget) return;
       event.preventDefault();
       event.stopPropagation();
+      this.set('dragStateClass', null);
       this.addMapping(this.requirement, this.draggedCreditAssignment);
     },
     onDragEnter(event) {
+      if (!this.isDropTarget) return;
       event.preventDefault();
+
+      this.set('dragStateClass', 'only-drop-target');
     },
     onDragOver(event) {
+      if (!this.isDropTarget) return;
+
       event.preventDefault();
+    },
+    onDragLeave() {
+      if (!this.isDropTarget) return;
+
+      this.set('dragStateClass', null);
     },
   },
 });
