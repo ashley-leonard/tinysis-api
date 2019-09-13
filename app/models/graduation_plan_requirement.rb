@@ -1,15 +1,19 @@
 class GraduationPlanRequirement < ApplicationRecord
+
+  STATUS_ACTIVE = 'active'
+  STATUS_INACTIVE = 'inactive'
   
   REQUIREMENT_TYPES = [
     :credit,
     :general,
     :service
   ]
-  has_many :graduation_plan_mappings, :dependent => :destroy
-  has_many :child_requirements, :foreign_key => :parent_id, :class_name => 'GraduationPlanRequirement', :dependent => :destroy
-  belongs_to :parent_requirement, :foreign_key => :parent_id, :class_name => 'GraduationPlanRequirement'
 
-  validates_length_of :name, :minimum => 5
+  has_many :graduation_plan_mappings, :dependent => :destroy
+  has_many :children, :foreign_key => :parent_id, :class_name => 'GraduationPlanRequirement', :dependent => :destroy
+  belongs_to :parent, :class_name => 'GraduationPlanRequirement', optional: true
+
+  validates_length_of :name, :minimum => 3
   validates_uniqueness_of :name, :scope => :requirement_type
   
   def privileges(user)

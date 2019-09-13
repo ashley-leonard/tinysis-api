@@ -22,4 +22,5 @@ class CreditAssignmentSerializer < ApplicationSerializer
   }
 
   belongs_to :credit
+  has_one :graduation_plan_mapping
 end

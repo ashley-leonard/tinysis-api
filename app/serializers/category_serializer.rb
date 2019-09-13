@@ -10,4 +10,6 @@ class CategorySerializer < ApplicationSerializer
   attribute :homeroom do |record|
     record.homeroom?
   end
+
+  has_many :contracts
 end

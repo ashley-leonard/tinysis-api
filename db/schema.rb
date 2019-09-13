@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_26_143335) do
+ActiveRecord::Schema.define(version: 2019_07_12_052413) do
 
   create_table "assignments", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.integer "contract_id"
@@ -166,6 +166,7 @@ ActiveRecord::Schema.define(version: 2019_03_26_143335) do
     t.string "requirement_type", limit: 7, default: "credit", null: false
     t.datetime "created_at", default: "1900-01-01 00:00:00", null: false
     t.datetime "updated_at", default: "1900-01-01 00:00:00", null: false
+    t.string "status", default: "active"
     t.index ["parent_id"], name: "index_graduation_plan_requirements_on_parent_id"
     t.index ["requirement_type"], name: "index_graduation_plan_requirements_on_requirement_type"
   end

@@ -85,6 +85,12 @@ RSpec.configure do |config|
     DatabaseCleaner.clean_with(:truncation)
   end
 
+  config.before(:each) do
+    create :setting, name: 'reporting_base_month', value: 9
+    create :setting, name: 'reporting_end_month', value: 6
+    create :setting, name: 'current_year', value: 2018
+  end
+
   config.around(:each) do |example|
     DatabaseCleaner.cleaning do
       example.run
