@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Students API', type: :request do
+RSpec.describe 'Settings API', type: :request do
 
   before(:each) do
     allow(JsonWebToken).to receive(:extract_permissions).and_return(['get:config'])

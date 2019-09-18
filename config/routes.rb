@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
 
+  get 'credits/index'
+  namespace :admin do
+    get 'credits/create'
+    get 'credits/update'
+    get 'credits/destroy'
+  end
   scope '/api' do
     get '/profile', to: 'profiles#index'
   
@@ -41,6 +47,9 @@ Rails.application.routes.draw do
   
     get '/settings', to: 'settings#index'
     get '/settings/years', to: 'settings#years'
+
+    get '/credits', to: 'credits#index'
+    get '/credits/:id', to: 'credits#show'
     
     resources :staff
     resources :statuses, controller: 'status'
@@ -68,6 +77,10 @@ Rails.application.routes.draw do
       put '/graduation-plan-requirements/sort', to: 'admin_graduation_plan_requirements#sort'
       put '/graduation-plan-requirements/:id', to: 'admin_graduation_plan_requirements#update'
       post '/graduation-plan-requirements', to: 'admin_graduation_plan_requirements#create'
+
+      post '/credits', to: 'admin_credits#create'
+      put '/credits/:id', to: 'admin_credits#update'
+      put '/credits/:id', to: 'admin_credits#update'
     end
   end
 

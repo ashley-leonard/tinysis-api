@@ -404,6 +404,13 @@ RSpec.describe 'Ember fixtures script', type: :request do
 
         # graduation plan mappings
         write_fixture "/api/graduation-plan-mappings/#{@student2.id}", "graduation-plan-mappings.js"
+
+        # credits
+        write_fixture "/api/credits", "credits-index.js"
+
+        # credit
+        credit = Credit.first
+        write_fixture "/api/credits/#{credit.id}", "credit-detail.js"
       end
     end
   end

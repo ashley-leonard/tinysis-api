@@ -50,3 +50,24 @@ You may need to
 
     apt install libmysqlclient-dev
 
+## Credit assignment notes
+
+  1. Enrollment credit
+  2. Enrollment finalized
+     1. Capture contract details on credit assignment
+        - Facilitator name, id
+        - Term id
+     2. If enrollment completed
+        1. Enrollment_finalized_on date set
+        2. Assigned to user
+     3. If enrollment canceled
+         1. denormalize (cache course_name, course_id)
+         2. Note that it might be reinstated if the enrollment is reactivated
+  3. User credit
+  4. Facilitator can combine with other credits to create a new credit assignment
+  5. Facilitator approves for district transmittal
+    - set approved by (denormalized name)
+    - set approved on date
+    - denormalize (cache course_name, course_id)
+    - denormalize all child credits and save
+    - (Can be unapproved until transmitted)

@@ -23,4 +23,7 @@ class CreditAssignmentSerializer < ApplicationSerializer
 
   belongs_to :credit
   has_one :graduation_plan_mapping
+
+  has_many :child_credit_assignments, record_type: :credit_assignment
+  belongs_to :parent_credit_assignment, record_type: :credit_assignment
 end

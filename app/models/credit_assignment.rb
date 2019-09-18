@@ -28,10 +28,6 @@ class CreditAssignment < ApplicationRecord
     primary_parent.privileges(user)
   end
   
-  def placeholder?
-    false #self.creditable_type == 'GraduationPlan'
-  end
-  
   def assign_credit(user, new_credit)
     raise "User does not have privileges to assign credit" unless privileges(user)[:edit]
     raise "Credit is off limits" if batched_for_transmit?
