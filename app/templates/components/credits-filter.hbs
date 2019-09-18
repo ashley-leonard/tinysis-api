@@ -1,0 +1,41 @@
+<form onsubmit={{action "onSubmit"}}>
+  <ul class="filter">
+    <li class="filter-item" data-test-name>
+      <input
+        name="search"
+        type="text"
+        placeholder="Search"
+        value={{queryParams.search}}
+        autocomplete="off"
+        onchange={{action "onChangeSearch"}}
+      >
+    </li>
+    <li class="filter-item" data-test-status>
+      {{t-select
+        options=courseTypeOptions
+        value=queryParams.courseType
+        name="courseType"
+        prompt="Any type"
+        optionValuePath="courseType"
+        optionNamePath="name"
+        onchange=(action "onChangeStatus")
+      }}
+    </li>
+    <li class="filter-item" data-test-status>
+      {{t-select
+        options=statusOptions
+        value=queryParams.status
+        name="status"
+        prompt="Any status"
+        optionValuePath="courseType"
+        optionNamePath="name"
+        onchange=(action "onChangeStatus")
+      }}
+    </li>
+    <li class="filter-item" data-test-submit>
+      <button type="submit" class="btn">
+        Find
+      </button>
+    </li>
+  </ul>
+</form>

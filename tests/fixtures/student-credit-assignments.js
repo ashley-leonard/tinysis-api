@@ -1,4 +1,4 @@
-// GET /api/credit-assignments?studentIds=27
+// GET /api/credit-assignments?studentIds=192
 export default {
   data: [
     {
@@ -10,11 +10,19 @@ export default {
       relationships: {
         credit: {
           data: {
-            id: '15',
+            id: '45',
             type: 'credit',
           },
         },
         graduationPlanMapping: {
+          data: null,
+        },
+        childCreditAssignments: {
+          data: [
+
+          ],
+        },
+        parentCreditAssignment: {
           data: null,
         },
       },
@@ -28,11 +36,19 @@ export default {
       relationships: {
         credit: {
           data: {
-            id: '16',
+            id: '46',
             type: 'credit',
           },
         },
         graduationPlanMapping: {
+          data: null,
+        },
+        childCreditAssignments: {
+          data: [
+
+          ],
+        },
+        parentCreditAssignment: {
           data: null,
         },
       },
@@ -46,11 +62,19 @@ export default {
       relationships: {
         credit: {
           data: {
-            id: '15',
+            id: '45',
             type: 'credit',
           },
         },
         graduationPlanMapping: {
+          data: null,
+        },
+        childCreditAssignments: {
+          data: [
+
+          ],
+        },
+        parentCreditAssignment: {
           data: null,
         },
       },
@@ -64,7 +88,7 @@ export default {
       relationships: {
         credit: {
           data: {
-            id: '16',
+            id: '46',
             type: 'credit',
           },
         },
@@ -73,6 +97,14 @@ export default {
             id: '19',
             type: 'graduationPlanMapping',
           },
+        },
+        childCreditAssignments: {
+          data: [
+
+          ],
+        },
+        parentCreditAssignment: {
+          data: null,
         },
       },
     },
@@ -85,7 +117,7 @@ export default {
       relationships: {
         credit: {
           data: {
-            id: '15',
+            id: '45',
             type: 'credit',
           },
         },
@@ -94,6 +126,14 @@ export default {
             id: '18',
             type: 'graduationPlanMapping',
           },
+        },
+        childCreditAssignments: {
+          data: [
+
+          ],
+        },
+        parentCreditAssignment: {
+          data: null,
         },
       },
     },
@@ -106,7 +146,7 @@ export default {
       relationships: {
         credit: {
           data: {
-            id: '16',
+            id: '46',
             type: 'credit',
           },
         },
@@ -116,26 +156,36 @@ export default {
             type: 'graduationPlanMapping',
           },
         },
+        childCreditAssignments: {
+          data: [
+
+          ],
+        },
+        parentCreditAssignment: {
+          data: null,
+        },
       },
     },
   ],
   included: [
     {
-      id: '15',
+      id: '45',
       type: 'credit',
       attributes: {
         courseId: '0',
         courseName: 'Course 1',
-        courseType: 0,
+        status: 'active',
+        courseType: 'none',
       },
     },
     {
-      id: '16',
+      id: '46',
       type: 'credit',
       attributes: {
         courseId: '0',
         courseName: 'Course 2',
-        courseType: 0,
+        status: 'active',
+        courseType: 'none',
       },
     },
   ],

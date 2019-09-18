@@ -1,17 +1,17 @@
 // GET /api/profile
 export default {
   data: {
-    id: '25',
+    id: '190',
     type: 'user',
     attributes: {
-      firstName: 'Jarrett',
-      lastName: 'Kuphal',
+      firstName: 'Shaun',
+      lastName: 'Stokes',
       nickname: null,
       dateActive: '2011-07-01',
       dateInactive: null,
       districtId: null,
       districtGrade: 12,
-      email: 'pamelia@blanda.biz',
+      email: 'belinda@lueilwitzbartoletti.com',
       status: 'active',
       role: 'administrator',
     },

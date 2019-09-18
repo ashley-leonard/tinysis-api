@@ -170,10 +170,22 @@ Router.map(function () {
           resetNamespace: true,
           path: '/calendar',
         });
+
         this.route('settings-credits', {
           resetNamespace: true,
           path: '/credits',
+        }, function () {
+          this.route('index', { path: '/' });
         });
+
+        this.route('settings-credit', {
+          resetNamespace: true,
+          path: '/credit',
+        }, function () {
+          this.route('new');
+          this.route('edit', { path: ':id' });
+        });
+
         this.route('settings-contract-categories', {
           resetNamespace: true,
           path: '/contract-categories',

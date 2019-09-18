@@ -1,16 +1,16 @@
-// GET /api/contracts/5?include=category,facilitator,assignments,meetings,creditAssignments,creditAssignments.credit,term,ealrs
+// GET /api/contracts/14?include=category,facilitator,assignments,meetings,creditAssignments,creditAssignments.credit,term,ealrs
 export default {
   data: {
-    id: '5',
+    id: '14',
     type: 'contract',
     attributes: {
-      name: 'Molestias usque acervus talis cado.',
+      name: 'Non cena atque vindico vestrum.',
       status: 'approved',
-      learningObjectives: 'Sponte summisse acquiro voluptatibus creta.',
-      competencies: 'Quis vicissitudo delectus recusandae velit.',
-      evaluationMethods: 'Sum vehemens quo conqueror qui.',
-      instructionalMaterials: 'Deripio victus colligo crastinus supplanto.',
-      location: 'Odio ut vomito candidus coerceo.',
+      learningObjectives: 'Chirographum tego canto cattus tamen.',
+      competencies: 'Similique terror depereo tergeo clarus.',
+      evaluationMethods: 'Sto depono sit auris demergo.',
+      instructionalMaterials: 'Solum vita videlicet denuncio surgo.',
+      location: 'Dolores verumtamen vesco volutabrum chirographum.',
       timeslots: [
         {
           start: '8:45',
@@ -23,30 +23,30 @@ export default {
       enrollments: {
         data: [
           {
-            id: '1',
+            id: '15',
             type: 'enrollment',
           },
           {
-            id: '2',
+            id: '16',
             type: 'enrollment',
           },
         ],
       },
       facilitator: {
         data: {
-          id: '22',
+          id: '187',
           type: 'User',
         },
       },
       term: {
         data: {
-          id: '3',
+          id: '62',
           type: 'term',
         },
       },
       category: {
         data: {
-          id: '1',
+          id: '8',
           type: 'category',
         },
       },
@@ -225,7 +225,7 @@ export default {
       },
     },
     {
-      id: '1',
+      id: '8',
       type: 'category',
       attributes: {
         name: 'Category 1',
@@ -239,11 +239,11 @@ export default {
         contracts: {
           data: [
             {
-              id: '1',
+              id: '10',
               type: 'contract',
             },
             {
-              id: '5',
+              id: '14',
               type: 'contract',
             },
           ],
@@ -259,29 +259,38 @@ export default {
       relationships: {
         credit: {
           data: {
-            id: '15',
+            id: '45',
             type: 'credit',
           },
         },
         graduationPlanMapping: {
           data: null,
         },
+        childCreditAssignments: {
+          data: [
+
+          ],
+        },
+        parentCreditAssignment: {
+          data: null,
+        },
       },
     },
     {
-      id: '15',
+      id: '45',
       type: 'credit',
       attributes: {
         courseId: '0',
         courseName: 'Course 1',
-        courseType: 0,
+        status: 'active',
+        courseType: 'none',
       },
     },
     {
       id: '1',
       type: 'ealr',
       attributes: {
-        ealr: 'Bene crastinus sublime audio nemo.',
+        ealr: 'Arx aer pecus supra demergo.',
         seq: '1.1',
         category: 'Category 1',
       },
@@ -290,7 +299,7 @@ export default {
       id: '2',
       type: 'ealr',
       attributes: {
-        ealr: 'Cilicium vesco apostolus crux adimpleo.',
+        ealr: 'Tabesco unde varius brevis decet.',
         seq: '1.2',
         category: 'Category 1',
       },
@@ -299,7 +308,7 @@ export default {
       id: '3',
       type: 'ealr',
       attributes: {
-        ealr: 'Velum perferendis crur voluptas cultellus.',
+        ealr: 'Vulnero cupiditate vultuosus placeat cicuta.',
         seq: '2.1',
         category: 'Category 2',
       },
@@ -308,23 +317,23 @@ export default {
       id: '4',
       type: 'ealr',
       attributes: {
-        ealr: 'Deserunt delicate adsidue cimentarius talis.',
+        ealr: 'Vomer venustas concido ut torrens.',
         seq: '2.2',
         category: 'Category 2',
       },
     },
     {
-      id: '22',
+      id: '187',
       type: 'user',
       attributes: {
-        firstName: 'Hoyt',
-        lastName: 'Sauer',
+        firstName: 'Judson',
+        lastName: 'Emmerich',
         nickname: null,
         dateActive: '2012-09-01',
         dateInactive: null,
         districtId: null,
         districtGrade: 12,
-        email: 'serita@bartoletti.net',
+        email: 'hosea@kovacek.info',
         status: 'active',
         role: 'staff',
       },
@@ -332,7 +341,7 @@ export default {
         coordinatees: {
           data: [
             {
-              id: '26',
+              id: '191',
               type: 'user',
             },
           ],
@@ -450,10 +459,10 @@ export default {
       },
     },
     {
-      id: '3',
+      id: '62',
       type: 'term',
       attributes: {
-        name: 'Progressive 24/7 orchestration',
+        name: 'Face to face web-enabled ability',
         schoolYear: 2019,
         creditDate: '2020-01-31',
         months: [

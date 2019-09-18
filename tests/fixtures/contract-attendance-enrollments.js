@@ -1,8 +1,8 @@
-// GET /api/enrollments?contractIds=5&include=meetingParticipants,participant
+// GET /api/enrollments?contractIds=14&include=meetingParticipants,participant
 export default {
   data: [
     {
-      id: '2',
+      id: '15',
       type: 'enrollment',
       attributes: {
         finalizedOn: null,
@@ -12,73 +12,13 @@ export default {
       relationships: {
         contract: {
           data: {
-            id: '5',
+            id: '14',
             type: 'contract',
           },
         },
         participant: {
           data: {
-            id: '28',
-            type: 'participant',
-          },
-        },
-        creditAssignments: {
-          data: [
-            {
-              id: '29',
-              type: 'creditAssignment',
-            },
-          ],
-        },
-        turnins: {
-          data: [
-
-          ],
-        },
-        meetingParticipants: {
-          data: [
-            {
-              id: '2',
-              type: 'meetingParticipant',
-            },
-            {
-              id: '4',
-              type: 'meetingParticipant',
-            },
-            {
-              id: '6',
-              type: 'meetingParticipant',
-            },
-            {
-              id: '8',
-              type: 'meetingParticipant',
-            },
-            {
-              id: '10',
-              type: 'meetingParticipant',
-            },
-          ],
-        },
-      },
-    },
-    {
-      id: '1',
-      type: 'enrollment',
-      attributes: {
-        finalizedOn: null,
-        enrollmentStatus: 'enrolled',
-        completionStatus: 'incomplete',
-      },
-      relationships: {
-        contract: {
-          data: {
-            id: '5',
-            type: 'contract',
-          },
-        },
-        participant: {
-          data: {
-            id: '26',
+            id: '191',
             type: 'participant',
           },
         },
@@ -140,142 +80,68 @@ export default {
         },
       },
     },
+    {
+      id: '16',
+      type: 'enrollment',
+      attributes: {
+        finalizedOn: null,
+        enrollmentStatus: 'enrolled',
+        completionStatus: 'incomplete',
+      },
+      relationships: {
+        contract: {
+          data: {
+            id: '14',
+            type: 'contract',
+          },
+        },
+        participant: {
+          data: {
+            id: '193',
+            type: 'participant',
+          },
+        },
+        creditAssignments: {
+          data: [
+            {
+              id: '29',
+              type: 'creditAssignment',
+            },
+          ],
+        },
+        turnins: {
+          data: [
+
+          ],
+        },
+        meetingParticipants: {
+          data: [
+            {
+              id: '2',
+              type: 'meetingParticipant',
+            },
+            {
+              id: '4',
+              type: 'meetingParticipant',
+            },
+            {
+              id: '6',
+              type: 'meetingParticipant',
+            },
+            {
+              id: '8',
+              type: 'meetingParticipant',
+            },
+            {
+              id: '10',
+              type: 'meetingParticipant',
+            },
+          ],
+        },
+      },
+    },
   ],
   included: [
-    {
-      id: '2',
-      type: 'meetingParticipant',
-      attributes: {
-        participation: 'absent',
-        contactType: 'class',
-      },
-      relationships: {
-        meeting: {
-          data: {
-            id: '1',
-            type: 'meeting',
-          },
-        },
-        enrollment: {
-          data: {
-            id: '2',
-            type: 'enrollment',
-          },
-        },
-      },
-    },
-    {
-      id: '4',
-      type: 'meetingParticipant',
-      attributes: {
-        participation: 'absent',
-        contactType: 'class',
-      },
-      relationships: {
-        meeting: {
-          data: {
-            id: '2',
-            type: 'meeting',
-          },
-        },
-        enrollment: {
-          data: {
-            id: '2',
-            type: 'enrollment',
-          },
-        },
-      },
-    },
-    {
-      id: '6',
-      type: 'meetingParticipant',
-      attributes: {
-        participation: 'absent',
-        contactType: 'class',
-      },
-      relationships: {
-        meeting: {
-          data: {
-            id: '3',
-            type: 'meeting',
-          },
-        },
-        enrollment: {
-          data: {
-            id: '2',
-            type: 'enrollment',
-          },
-        },
-      },
-    },
-    {
-      id: '8',
-      type: 'meetingParticipant',
-      attributes: {
-        participation: 'absent',
-        contactType: 'class',
-      },
-      relationships: {
-        meeting: {
-          data: {
-            id: '4',
-            type: 'meeting',
-          },
-        },
-        enrollment: {
-          data: {
-            id: '2',
-            type: 'enrollment',
-          },
-        },
-      },
-    },
-    {
-      id: '10',
-      type: 'meetingParticipant',
-      attributes: {
-        participation: 'absent',
-        contactType: 'class',
-      },
-      relationships: {
-        meeting: {
-          data: {
-            id: '5',
-            type: 'meeting',
-          },
-        },
-        enrollment: {
-          data: {
-            id: '2',
-            type: 'enrollment',
-          },
-        },
-      },
-    },
-    {
-      id: '28',
-      type: 'user',
-      attributes: {
-        firstName: 'Bonnie',
-        lastName: 'Auer',
-        nickname: null,
-        dateActive: '2018-08-01',
-        dateInactive: '2019-10-01',
-        districtId: '4905452447',
-        districtGrade: 12,
-        email: null,
-        status: 'inactive',
-        role: 'student',
-      },
-      relationships: {
-        coordinator: {
-          data: {
-            id: '23',
-            type: 'user',
-          },
-        },
-      },
-    },
     {
       id: '1',
       type: 'meetingParticipant',
@@ -292,7 +158,7 @@ export default {
         },
         enrollment: {
           data: {
-            id: '1',
+            id: '15',
             type: 'enrollment',
           },
         },
@@ -314,7 +180,7 @@ export default {
         },
         enrollment: {
           data: {
-            id: '1',
+            id: '15',
             type: 'enrollment',
           },
         },
@@ -336,7 +202,7 @@ export default {
         },
         enrollment: {
           data: {
-            id: '1',
+            id: '15',
             type: 'enrollment',
           },
         },
@@ -358,7 +224,7 @@ export default {
         },
         enrollment: {
           data: {
-            id: '1',
+            id: '15',
             type: 'enrollment',
           },
         },
@@ -380,22 +246,22 @@ export default {
         },
         enrollment: {
           data: {
-            id: '1',
+            id: '15',
             type: 'enrollment',
           },
         },
       },
     },
     {
-      id: '26',
+      id: '191',
       type: 'user',
       attributes: {
-        firstName: 'Eli',
-        lastName: 'Monahan',
+        firstName: 'Wally',
+        lastName: 'Baumbach',
         nickname: null,
         dateActive: '2018-08-01',
         dateInactive: null,
-        districtId: '3891854733',
+        districtId: '8257538751',
         districtGrade: 12,
         email: null,
         status: 'active',
@@ -404,7 +270,141 @@ export default {
       relationships: {
         coordinator: {
           data: {
-            id: '22',
+            id: '187',
+            type: 'user',
+          },
+        },
+      },
+    },
+    {
+      id: '2',
+      type: 'meetingParticipant',
+      attributes: {
+        participation: 'absent',
+        contactType: 'class',
+      },
+      relationships: {
+        meeting: {
+          data: {
+            id: '1',
+            type: 'meeting',
+          },
+        },
+        enrollment: {
+          data: {
+            id: '16',
+            type: 'enrollment',
+          },
+        },
+      },
+    },
+    {
+      id: '4',
+      type: 'meetingParticipant',
+      attributes: {
+        participation: 'absent',
+        contactType: 'class',
+      },
+      relationships: {
+        meeting: {
+          data: {
+            id: '2',
+            type: 'meeting',
+          },
+        },
+        enrollment: {
+          data: {
+            id: '16',
+            type: 'enrollment',
+          },
+        },
+      },
+    },
+    {
+      id: '6',
+      type: 'meetingParticipant',
+      attributes: {
+        participation: 'absent',
+        contactType: 'class',
+      },
+      relationships: {
+        meeting: {
+          data: {
+            id: '3',
+            type: 'meeting',
+          },
+        },
+        enrollment: {
+          data: {
+            id: '16',
+            type: 'enrollment',
+          },
+        },
+      },
+    },
+    {
+      id: '8',
+      type: 'meetingParticipant',
+      attributes: {
+        participation: 'absent',
+        contactType: 'class',
+      },
+      relationships: {
+        meeting: {
+          data: {
+            id: '4',
+            type: 'meeting',
+          },
+        },
+        enrollment: {
+          data: {
+            id: '16',
+            type: 'enrollment',
+          },
+        },
+      },
+    },
+    {
+      id: '10',
+      type: 'meetingParticipant',
+      attributes: {
+        participation: 'absent',
+        contactType: 'class',
+      },
+      relationships: {
+        meeting: {
+          data: {
+            id: '5',
+            type: 'meeting',
+          },
+        },
+        enrollment: {
+          data: {
+            id: '16',
+            type: 'enrollment',
+          },
+        },
+      },
+    },
+    {
+      id: '193',
+      type: 'user',
+      attributes: {
+        firstName: 'Ramon',
+        lastName: 'Durgan',
+        nickname: null,
+        dateActive: '2018-08-01',
+        dateInactive: '2019-10-01',
+        districtId: '7445503495',
+        districtGrade: 12,
+        email: null,
+        status: 'inactive',
+        role: 'student',
+      },
+      relationships: {
+        coordinator: {
+          data: {
+            id: '188',
             type: 'user',
           },
         },

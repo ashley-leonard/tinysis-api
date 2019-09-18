@@ -1,23 +1,23 @@
-// auth for user 25
+// auth for user 190
 export default {
   data: {
-    email: 'pamelia@blanda.biz',
+    email: 'belinda@lueilwitzbartoletti.com',
     email_verified: false,
     updated_at: '2019-06-23T23:44:29.877Z',
-    user_id: 'auth0|c180051490e7438cb9bd032883a9c96f',
-    name: 'Jarrett Kuphal',
+    user_id: 'auth0|72a24cd88c43778afe036249b9ce9dde',
+    name: 'Shaun Stokes',
     identities: [
       {
         connection: 'Username-Password-Authentication',
         provider: 'auth0',
-        user_id: 'c180051490e7438cb9bd032883a9c96f',
+        user_id: '72a24cd88c43778afe036249b9ce9dde',
         isSocial: false,
       },
     ],
     created_at: '2019-05-25T00:24:18.815Z',
     last_password_reset: '2019-06-10T04:09:05.883Z',
-    given_name: 'Jarrett',
-    family_name: 'Kuphal',
+    given_name: 'Shaun',
+    family_name: 'Stokes',
     nickname: null,
     last_login: '2019-06-23T23:44:29.877Z',
     last_ip: '208.100.155.216',

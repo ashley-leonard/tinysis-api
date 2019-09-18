@@ -1,0 +1,54 @@
+<fieldset>
+  <p>
+    {{#form-input error=errors.courseName showError=showErrors}}
+      Course name
+      <input
+        type="text"
+        name="courseName"
+        value={{pojo.courseName}}
+        autofocus
+      >
+    {{/form-input}}
+  </p>
+  <p>
+    {{#form-input error=errors.courseId showError=showErrors}}
+      Course ID
+      <input
+        type="text"
+        name="courseId"
+        value={{pojo.courseId}}
+      >
+    {{/form-input}}
+  </p>
+
+  <p>
+    {{#form-input error=errors.courseType showError=showErrors}}
+      Course type
+      {{t-select
+        value=pojo.courseType
+        prompt="Select a course type"
+        options=courseTypeOptions
+        name="courseType"
+      }}
+    {{/form-input}}
+  </p>
+
+  <p>
+    {{#form-input error=errors.status showError=showErrors}}
+      Status
+      {{t-select
+        value=pojo.status
+        options=statusOptions
+        name="status"
+      }}
+    {{/form-input}}
+  </p>
+</fieldset>
+
+{{#t-form-actions-row
+  disabled=disabled
+}}
+  {{#link-to "settings-credits.index" class="btn btn-clear"}}
+    Cancel
+  {{/link-to}}
+{{/t-form-actions-row}}

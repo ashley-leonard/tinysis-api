@@ -1,8 +1,8 @@
-// GET /api/enrollments?contractIds=5&include=creditAssignments,creditAssignments.credit,participant
+// GET /api/enrollments?contractIds=14&include=creditAssignments,creditAssignments.credit,participant
 export default {
   data: [
     {
-      id: '2',
+      id: '15',
       type: 'enrollment',
       attributes: {
         finalizedOn: null,
@@ -12,73 +12,13 @@ export default {
       relationships: {
         contract: {
           data: {
-            id: '5',
+            id: '14',
             type: 'contract',
           },
         },
         participant: {
           data: {
-            id: '28',
-            type: 'participant',
-          },
-        },
-        creditAssignments: {
-          data: [
-            {
-              id: '29',
-              type: 'creditAssignment',
-            },
-          ],
-        },
-        turnins: {
-          data: [
-
-          ],
-        },
-        meetingParticipants: {
-          data: [
-            {
-              id: '2',
-              type: 'meetingParticipant',
-            },
-            {
-              id: '4',
-              type: 'meetingParticipant',
-            },
-            {
-              id: '6',
-              type: 'meetingParticipant',
-            },
-            {
-              id: '8',
-              type: 'meetingParticipant',
-            },
-            {
-              id: '10',
-              type: 'meetingParticipant',
-            },
-          ],
-        },
-      },
-    },
-    {
-      id: '1',
-      type: 'enrollment',
-      attributes: {
-        finalizedOn: null,
-        enrollmentStatus: 'enrolled',
-        completionStatus: 'incomplete',
-      },
-      relationships: {
-        contract: {
-          data: {
-            id: '5',
-            type: 'contract',
-          },
-        },
-        participant: {
-          data: {
-            id: '26',
+            id: '191',
             type: 'participant',
           },
         },
@@ -140,8 +80,128 @@ export default {
         },
       },
     },
+    {
+      id: '16',
+      type: 'enrollment',
+      attributes: {
+        finalizedOn: null,
+        enrollmentStatus: 'enrolled',
+        completionStatus: 'incomplete',
+      },
+      relationships: {
+        contract: {
+          data: {
+            id: '14',
+            type: 'contract',
+          },
+        },
+        participant: {
+          data: {
+            id: '193',
+            type: 'participant',
+          },
+        },
+        creditAssignments: {
+          data: [
+            {
+              id: '29',
+              type: 'creditAssignment',
+            },
+          ],
+        },
+        turnins: {
+          data: [
+
+          ],
+        },
+        meetingParticipants: {
+          data: [
+            {
+              id: '2',
+              type: 'meetingParticipant',
+            },
+            {
+              id: '4',
+              type: 'meetingParticipant',
+            },
+            {
+              id: '6',
+              type: 'meetingParticipant',
+            },
+            {
+              id: '8',
+              type: 'meetingParticipant',
+            },
+            {
+              id: '10',
+              type: 'meetingParticipant',
+            },
+          ],
+        },
+      },
+    },
   ],
   included: [
+    {
+      id: '28',
+      type: 'creditAssignment',
+      attributes: {
+        creditHours: 1.0,
+      },
+      relationships: {
+        credit: {
+          data: {
+            id: '45',
+            type: 'credit',
+          },
+        },
+        graduationPlanMapping: {
+          data: null,
+        },
+        childCreditAssignments: {
+          data: [
+
+          ],
+        },
+        parentCreditAssignment: {
+          data: null,
+        },
+      },
+    },
+    {
+      id: '45',
+      type: 'credit',
+      attributes: {
+        courseId: '0',
+        courseName: 'Course 1',
+        status: 'active',
+        courseType: 'none',
+      },
+    },
+    {
+      id: '191',
+      type: 'user',
+      attributes: {
+        firstName: 'Wally',
+        lastName: 'Baumbach',
+        nickname: null,
+        dateActive: '2018-08-01',
+        dateInactive: null,
+        districtId: '8257538751',
+        districtGrade: 12,
+        email: null,
+        status: 'active',
+        role: 'student',
+      },
+      relationships: {
+        coordinator: {
+          data: {
+            id: '187',
+            type: 'user',
+          },
+        },
+      },
+    },
     {
       id: '29',
       type: 'creditAssignment',
@@ -151,34 +211,33 @@ export default {
       relationships: {
         credit: {
           data: {
-            id: '15',
+            id: '45',
             type: 'credit',
           },
         },
         graduationPlanMapping: {
           data: null,
         },
+        childCreditAssignments: {
+          data: [
+
+          ],
+        },
+        parentCreditAssignment: {
+          data: null,
+        },
       },
     },
     {
-      id: '15',
-      type: 'credit',
-      attributes: {
-        courseId: '0',
-        courseName: 'Course 1',
-        courseType: 0,
-      },
-    },
-    {
-      id: '28',
+      id: '193',
       type: 'user',
       attributes: {
-        firstName: 'Bonnie',
-        lastName: 'Auer',
+        firstName: 'Ramon',
+        lastName: 'Durgan',
         nickname: null,
         dateActive: '2018-08-01',
         dateInactive: '2019-10-01',
-        districtId: '4905452447',
+        districtId: '7445503495',
         districtGrade: 12,
         email: null,
         status: 'inactive',
@@ -187,49 +246,7 @@ export default {
       relationships: {
         coordinator: {
           data: {
-            id: '23',
-            type: 'user',
-          },
-        },
-      },
-    },
-    {
-      id: '28',
-      type: 'creditAssignment',
-      attributes: {
-        creditHours: 1.0,
-      },
-      relationships: {
-        credit: {
-          data: {
-            id: '15',
-            type: 'credit',
-          },
-        },
-        graduationPlanMapping: {
-          data: null,
-        },
-      },
-    },
-    {
-      id: '26',
-      type: 'user',
-      attributes: {
-        firstName: 'Eli',
-        lastName: 'Monahan',
-        nickname: null,
-        dateActive: '2018-08-01',
-        dateInactive: null,
-        districtId: '3891854733',
-        districtGrade: 12,
-        email: null,
-        status: 'active',
-        role: 'student',
-      },
-      relationships: {
-        coordinator: {
-          data: {
-            id: '22',
+            id: '188',
             type: 'user',
           },
         },
