@@ -27,11 +27,15 @@ class CreditAssignmentsController < ApplicationController
       .where(conditions)
       .count
 
+    includes = params[:include].nil? ? 
+      [] : 
+      params[:include].split(',').map(&:underscore) : []
+
     options = {
       meta: {
         count: count,
       },
-      include: [:credit],
+      include: includes,
       params: {
         forFulfilled: params[:includeFulfilledAttributes] == 'true',
       }
