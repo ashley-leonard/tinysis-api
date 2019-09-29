@@ -1,0 +1,28 @@
+{{#check-empty
+  count=finalizedCreditAssignments.length
+  noResultsMessage="There are no finalized credits."
+}}
+  {{count-paragraph
+    count=finalizedCreditAssignments.length
+    name="credit"
+  }}
+  <table class="t-table w-full" data-test-settings-credits-list>
+    <thead>
+      <tr>
+        <th>District?</th>
+        <th>Credit</th>
+        <th>Term</th>
+        <th>Credits</th>
+        <th>Earned on</th>
+        <th>Approval</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each finalizedCreditAssignments as |creditAssignment|}}
+        {{finalized-credits/item
+          creditAssignment=creditAssignment
+        }}
+      {{/each}}
+    </tbody>
+  </table>
+{{/check-empty}}

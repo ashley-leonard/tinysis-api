@@ -18,7 +18,7 @@ function getGrade(districtGrade) {
 
 export default helper((params) => {
   const [student] = params;
-  const { districtGrade } = student.attributes;
+  const { districtGrade, districtId } = student.attributes;
   const dateFormat = 'MMM YYYY';
 
   let enrollmentStatus;
@@ -31,8 +31,7 @@ export default helper((params) => {
     enrollmentStatus = `enrolled since ${strActive}`;
   }
 
-  return [
-    getGrade(districtGrade),
-    enrollmentStatus,
-  ].join('; ');
+  return `
+    ${getGrade(districtGrade)}; ${enrollmentStatus}. ${districtId}
+  `;
 });

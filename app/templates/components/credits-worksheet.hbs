@@ -1,0 +1,33 @@
+{{#check-empty
+  count=unfinalizedCredits.length
+  noResultsMessage="There are no credits to approve."
+}}
+  {{count-paragraph
+    result=model
+    name="credit"
+  }}
+  <table class="t-table w-full" data-test-settings-credits-list>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Course ID</th>
+        <th>Type</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each credits as |credit|}}
+        <tr>
+          <td>
+            {{#link-to "settings-credit.edit" credit.id}}
+              {{credit.attributes.courseName}}
+            {{/link-to}}
+          </td>
+          <td>{{credit.attributes.courseId}}</td>
+          <td>{{titleize credit.attributes.courseType}}</td>
+          <td>{{titleize credit.attributes.status}}</td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+{{/check-empty}}
