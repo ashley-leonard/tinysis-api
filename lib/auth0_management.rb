@@ -150,7 +150,13 @@ class AuthManagement
         password: AuthManagement.random_password(20),
         email: attributes[:email],
         connection: 'Username-Password-Authentication',
+
+        # Auth0 does not allow you to use an attribute name of user_id
+        app_metadata: {
+          databaseId: attributes[:id],
+        },
       }
+
       request_body[:name] = "#{attributes[:first_name]} #{attributes[:last_name]}"
 
       response = http.post("#{@base_url}/api/v2/users", request_body.to_json, headers)
@@ -185,15 +191,18 @@ class AuthManagement
 
       encoded_user_id = URI.encode_www_form_component(user_id)
 
-      response = http.delete("#{@base_url}/api/v2/users/#{encoded_user_id}", nil, headers)
+      response = http.delete("#{@base_url}/api/v2/users/#{encoded_user_id}", headers)
 
-      raise AuthManagementError.new('User update failed', response) if response.code != '204'
+      raise AuthManagementError.new('User deletion failed', response) if response.code != '204'
 
       return nil
     end
   end
 
   def update_user user_id, attributes
+    Rails.logger.info "update_user"
+    Rails.logger.info attributes
+
     url = URI(@base_url)
 
     Net::HTTP.start(url.host, url.port, { use_ssl: true, verify_mode: OpenSSL::SSL::VERIFY_NONE}) do |http|
@@ -211,20 +220,23 @@ class AuthManagement
         given_name: attributes[:first_name],
         family_name: attributes[:last_name],
         nickname: attributes[:nickname],
-        name: name
-      })
-      bodies.push({
-        password: attributes[:password]
+        name: name,
       })
       bodies.push({
         email: attributes[:email]
       })
+
+      Rails.logger.info "updating"
+      Rails.logger.info bodies
 
       # reject any bodies that are not populated
       bodies = bodies
         .map{|body| body.compact}
         .map{|body| body.transform_values{ |value| value == "" ? nil : value } }
         .reject(&:empty?)
+
+      Rails.logger.info "remaining"
+      Rails.logger.info bodies
 
       # update the bodies with changed values
       bodies.each do |body|
@@ -234,12 +246,14 @@ class AuthManagement
 
       # handle role updates separately
       if attributes[:role]
+        Rails.logger.info "handling role"
         get_roles_url = URI("#{@base_url}/api/v2/users/#{encoded_user_id}/roles")
 
         response = http.get(get_roles_url, headers)
   
         raise AuthManagementError.new('User roles fetch failed', response) if response.code != '200'
-  
+  Rails.logger.info "got roles"
+  Rails.logger.info response.body
         roles = JSON.parse(response.body)
   
         if roles.length > 0
@@ -250,6 +264,9 @@ class AuthManagement
           req = Net::HTTP::Delete.new("#{@base_url}/api/v2/users/#{encoded_user_id}/roles", headers)
 
           response = http.request(req, request_body.to_json)
+
+          Rails.logger.info response
+
 
           raise AuthManagementError.new('User role flush failed', response) if response.code != '204'
         end
@@ -289,9 +306,13 @@ class AuthManagement
 private
 
   def getAuth0RoleFromTinySisRole roleName
-    Rails.application.secrets
+    roleData = Rails.application.secrets
       .auth0_management[:roles]
       .find{|role| role[:name] == roleName}
+
+    raise AuthManagementError.new('Role designation missing in config') unless roleData
+
+    roleData
   end
 
 end
