@@ -1,8 +1,7 @@
 class ProfilesController < ApplicationController
   def index
     user_id = get_user_id
-    Rails.logger.info "user_id"
-    Rails.logger.info user_id
+
     user = User.find user_id
 
     options = {
