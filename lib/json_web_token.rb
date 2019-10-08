@@ -9,7 +9,7 @@ class JsonWebToken
     JWT.decode(token, nil,
                true, # Verify the signature of this token
                algorithm: 'RS256',
-               iss: 'https://dev-ksc8v0d7.auth0.com/',
+               iss: Rails.application.secrets.auth0_issuer,
                verify_iss: true,
                aud: Rails.application.secrets.auth0_api_audience,
                verify_aud: true) do |header|
@@ -18,7 +18,7 @@ class JsonWebToken
   end
 
   def self.jwks_hash
-    jwks_raw = Net::HTTP.get URI("https://dev-ksc8v0d7.auth0.com/.well-known/jwks.json")
+    jwks_raw = Net::HTTP.get URI("#{Rails.application.secrets.auth0_issuer}.well-known/jwks.json")
     jwks_keys = Array(JSON.parse(jwks_raw)['keys'])
     Hash[
       jwks_keys
@@ -33,9 +33,23 @@ class JsonWebToken
     ]
   end
 
-  def self.extract_permissions http_token
+  def self.extract_token http_token, key
     decoded_token = JsonWebToken.verify(http_token)
-    payload = decoded_token.find{|token| token['permissions']}
-    payload['permissions']
+
+    payload = decoded_token.find{|token| token[key]}
+
+    raise Exception.new "Failed to extract token #{key}" unless payload
+
+    payload[key]
+  end
+
+
+  def self.extract_permissions http_token
+    extract_token http_token, 'permissions'
+  end
+
+  def self.extract_user_id http_token
+    key = "#{Rails.application.secrets.auth0_api_audience.chomp('/')}.databaseId"
+    extract_token http_token, key
   end
 end

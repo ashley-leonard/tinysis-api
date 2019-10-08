@@ -31,7 +31,10 @@ module Secured
   end
 
   def get_permissions
-    # JsonWebToken.extract_permissions(http_token)
-    ['get:config', 'manage:config']
+    JsonWebToken.extract_permissions(http_token)
+  end
+
+  def get_user_id
+    JsonWebToken.extract_user_id(http_token)
   end
 end
