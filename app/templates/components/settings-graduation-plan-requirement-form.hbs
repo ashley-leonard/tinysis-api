@@ -7,6 +7,7 @@
         name="name"
         value={{pojo.name}}
         autofocus
+        onchange={{action "onChange"}}
       >
     {{/form-input}}
   </p>
@@ -17,6 +18,7 @@
         options=statusOptions
         value=pojo.status
         name="status"
+        onchange=(action "onChange")
       }}
     {{/form-input}}
   </p>
@@ -26,6 +28,7 @@
       <textarea
         name="notes"
         value={{pojo.notes}}
+        onchange={{action "onChange"}}
       ></textarea>
     {{/form-input}}
   </p>

@@ -9,9 +9,7 @@ export default Route.extend({
   },
 
   async afterModel() {
-    const staff = await this.tinyData.fetch('/api/staff?order=lastName,firstName');
-    this.staff = staff;
-    return staff;
+    this.staff = await this.tinyData.fetch('/api/staff?order=lastName,firstName');
   },
 
   setupController(controller, model) {

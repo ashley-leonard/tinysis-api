@@ -1,6 +1,11 @@
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { render, click, find } from '@ember/test-helpers';
+import {
+  render,
+  click,
+  find,
+  fillIn,
+} from '@ember/test-helpers';
 import { Interactor } from '@bigtest/interactor';
 import { Promise } from 'rsvp';
 import hbs from 'htmlbars-inline-precompile';
@@ -58,6 +63,7 @@ module('Integration | Component | admin-term-form', (hooks) => {
     // Change the school year and resubmit, check the dates
     const previousYear = (term.attributes.schoolYear - 1).toString();
     await new Interactor(find('select[name="schoolYear"]')).select(previousYear);
+    await fillIn('input[name="name"]', 'Boo-yah');
 
     await click('button[type="submit"]');
 
@@ -67,5 +73,6 @@ module('Integration | Component | admin-term-form', (hooks) => {
 
     assert.equal(request.pojo.attributes.schoolYear, previousYear, 'previous year selected as expected');
     assert.equal(request.pojo.attributes.months[0], '2018-09-01', 'reporting months were transformed to the changed year');
+    assert.equal(request.pojo.attributes.name, 'Boo-yah', 'Name updated');
   });
 });

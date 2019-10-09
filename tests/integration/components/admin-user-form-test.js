@@ -3,6 +3,7 @@ import { setupRenderingTest } from 'ember-qunit';
 import {
   render,
   click,
+  fillIn,
 } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 import { resolve } from 'rsvp';
@@ -129,5 +130,49 @@ module('Integration | Component | admin-user-form', (hooks) => {
     const [payload] = requests;
 
     assert.deepEqual(payload.type, 'error', 'send an error callback');
+  });
+
+  test('it renders admin and handles edits', async (assert) => {
+    await render(hbs`
+      {{admin-user-form
+        staff=allStaff
+        model=admin
+        save=saveUser
+        reportError=reportError
+      }}
+    `);
+
+    await fillIn('input[name="firstName"]', 'Sally');
+    await fillIn('input[name="lastName"]', 'Forth');
+    await fillIn('input[name="nickname"]', 'SallyForth');
+
+    await click('button');
+
+    assert.equal(requests.length, 1, 'Can successfully submit a valid model');
+
+    let success = requests.pop();
+
+    assert.matches(success.pojo.attributes.firstName, 'Sally');
+    assert.matches(success.pojo.attributes.lastName, 'Forth');
+    assert.matches(success.pojo.attributes.nickname, 'SallyForth');
+
+    await fillIn('[name="dateInactive"]', '10/19/2019');
+
+    await click('button');
+
+    const err = requests.pop();
+
+    assert.ok(err);
+    assert.equal(err.type, 'error', 'error reported');
+
+    await click('[name="status"][value="inactive"]');
+    await click('button');
+
+    success = requests.pop();
+    assert.ok(success);
+    assert.equal(success.type, 'save', 'success reported with status set properly');
+
+    assert.matches(success.pojo.attributes.dateInactive, '2019-10-19');
+    assert.matches(success.pojo.attributes.status, 'inactive');
   });
 });

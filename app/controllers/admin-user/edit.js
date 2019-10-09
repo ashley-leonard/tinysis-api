@@ -12,29 +12,29 @@ export default Controller.extend({
   actions: {
     getLogin(email) {
       const encEmail = encodeURIComponent(email);
-      return fetch(`/api/admin/login?email=${encEmail}`)
-        .then((response) => {
-          this.set('login', response.data);
-          return response.data;
-        });
+      return fetch(`/api/admin/login?email=${encEmail}`);
     },
 
     updateLogin(data, login, attributesChanged) {
       return this.saveLogin(data, login, attributesChanged)
         .then((result) => {
-          this.set('login', result);
           this.flashMessages.success('Login was successfully updated.');
           return result;
         });
     },
 
-    destroyLogin(login) {
+    destroyLogin(user, login) {
       return fetch(`/api/admin/login/${login.user_id}`, {
         method: 'DELETE',
+      }).then((result) => {
+        this.flashMessages.success(`Successfully removed access for user ${user.attributes.firstName} ${user.attributes.lastName}.`);
+        return result;
       });
     },
 
     createLogin(user) {
+      const { id } = user;
+
       const {
         firstName,
         lastName,
@@ -48,6 +48,7 @@ export default Controller.extend({
         nickname,
         email,
         role,
+        id,
       };
 
       return fetch('/api/admin/login', {

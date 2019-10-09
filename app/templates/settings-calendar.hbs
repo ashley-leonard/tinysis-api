@@ -21,6 +21,7 @@
             value=form.pojo.current_year
             name="current_year"
             prompt="Choose a school year"
+            onchange=(action "onChange")
           }}
         {{/form-input}}
       </p>
@@ -37,6 +38,7 @@
             value=form.pojo.reporting_base_month
             name="reporting_base_month"
             prompt="Choose a starting month"
+            onchange=(action "onChange")
           }}
         {{/form-input}}
       </p>
@@ -53,6 +55,7 @@
             value=form.pojo.reporting_end_month
             name="reporting_end_month"
             prompt="Choose an ending month"
+            onchange=(action "onChange")
           }}
         {{/form-input}}
       </p>
@@ -68,6 +71,7 @@
             value=form.pojo.new_contract_term_default
             name="new_contract_term_default"
             prompt="Choose a default term"
+            onchange=(action "onChange")
           }}
         {{/form-input}}
       </p>

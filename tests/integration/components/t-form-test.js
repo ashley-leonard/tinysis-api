@@ -49,9 +49,22 @@ module('Integration | Component | t-form', (hooks) => {
         reportError=reportError
         as |form|
       }}
-        <input name="name" value={{pojo.attributes.name}}>
-        <input name="age" value={{pojo.attributes.age}} >
-        <input name="booOrFalse" type="checkbox" checked={{pojo.attributes.booOrFalse}} onchange={{action "toggleValue" "booOrFalse" target=form}}>
+        <input
+          name="name"
+          value={{pojo.attributes.name}}
+          onchange={{action "onChange" target=form}}
+        >
+        <input
+          name="age"
+          value={{pojo.attributes.age}}
+          onchange={{action "onChange" target=form}}
+        >
+        <input
+          name="booOrFalse"
+          type="checkbox"
+          checked={{pojo.attributes.booOrFalse}}
+          onchange={{action "toggleValue" "booOrFalse" target=form}}
+        >
         <button type="submit">Save</button>
       {{/t-form}}
     `);

@@ -2,6 +2,10 @@
   type={{fieldType}}
   value={{todayString}}
   name={{name}}
-  class={{class}}
   onchange={{action "inputChanged"}}
 >
+{{#if showClear}}
+  <a href="#" class="block flex items-center justify-center no-underline" data-test-clear {{action "clear"}}>
+    <span class="block fas fa-times-circle ml-2" />
+  </a>
+{{/if}}

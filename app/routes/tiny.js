@@ -11,8 +11,9 @@ export default Route.extend({
     const { tinyData } = this;
 
     try {
-      const profile = await tinyData.fetch('/api/profile');
-      const mergedProfile = { ...profile.data, meta: profile.meta };
+      const appProfile = await tinyData.fetch('/api/profile');
+
+      const mergedProfile = { ...appProfile.data, meta: appProfile.meta };
 
       tinyData.setUser(mergedProfile);
     } catch (e) {

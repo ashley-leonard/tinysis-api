@@ -6,7 +6,7 @@ export default Route.extend({
   async redirect() {
     const { session } = this;
     const jwt = await session.getTokenFromHash();
-    this.session.setSessionData(jwt);
+    session.setSessionData(jwt);
 
     let redirectUrl = session.getIntendedUrl();
     if (redirectUrl) {

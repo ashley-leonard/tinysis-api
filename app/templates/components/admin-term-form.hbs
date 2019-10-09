@@ -7,6 +7,7 @@
         name="name"
         value={{pojo.name}}
         autofocus
+        onchange={{action "onChange"}}
       >
     {{/form-input}}
   </p>
@@ -28,6 +29,7 @@
         popup=true
         name="creditDate"
         value=pojo.creditDate
+        onchange=(action "onChange")
       }}
     {{/form-input}}
   </p>

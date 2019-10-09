@@ -35,10 +35,20 @@ export default Component.extend({
       this.handleAttributeChange(name, !this.pojo[name]);
     },
 
-    // derived forms may want to override this. but
-    // it's here if you want to call it explicitly from e.g.
-    // a custom component change handler.
-    onChange(value, name) {
+    /* An action handler for change events, that works both with various
+       controls that send along the value, name signature, along with
+       generic DOM inputs that send an event
+     */
+    onChange(_value, _name) {
+      let value;
+      let name;
+
+      if (_value instanceof Event) {
+        ({ value, name } = _value.target);
+      } else {
+        value = _value;
+        name = _name;
+      }
       this.handleAttributeChange(name, value);
     },
   },
@@ -85,12 +95,6 @@ export default Component.extend({
     const validationResult = this.validator.validate(this.pojo);
 
     this.setProperties(validationResult);
-  },
-
-  change(event) {
-    const { name, value } = event.target;
-
-    this.handleAttributeChange(name, value);
   },
 
   submit(event) {

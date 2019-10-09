@@ -7,6 +7,7 @@
         name="firstName"
         value={{pojo.firstName}}
         autofocus
+        onchange={{action "onChange"}}
       >
     {{/form-input}}
   </p>
@@ -17,6 +18,7 @@
         type="text"
         name="lastName"
         value={{pojo.lastName}}
+        onchange={{action "onChange"}}
       >
     {{/form-input}}
   </p>
@@ -27,6 +29,7 @@
         type="text"
         name="nickname"
         value={{pojo.nickname}}
+        onchange={{action "onChange"}}
       >
     {{/form-input}}
   </p>
@@ -42,6 +45,7 @@
         prompt="Select a user type"
         options=roleOptions
         name="role"
+        onchange=(action "onChange")
       }}
     {{/form-input}}
   </p>
@@ -56,6 +60,7 @@
           type="email"
           name="email"
           value={{pojo.email}}
+          onchange={{action "onChange"}}
         >
       {{/form-input}}
     </p>
@@ -74,6 +79,7 @@
           value="active"
           checked={{if isActive true false}}
           name="status"
+          onchange={{action "onChange"}}
         >
         Active
       </label>
@@ -83,6 +89,7 @@
           value="inactive"
           checked={{if isActive false true}}
           name="status"
+          onchange={{action "onChange"}}
         >
         Inactive
       </label>
@@ -95,6 +102,7 @@
         popup=true
         name="dateActive"
         value=pojo.dateActive
+        onchange=(action "updateDate")
       }}
     {{/form-input}}
   </p>
@@ -105,6 +113,8 @@
         popup=true
         name="dateInactive"
         value=pojo.dateInactive
+        onchange=(action "updateDate")
+        showClear=true
       }}
     {{/form-input}}
   </p>
@@ -133,6 +143,7 @@
           type="text"
           name="districtId"
           value={{pojo.districtId}}
+          onchange={{action "onChange"}}
         >
       {{/form-input}}
     </p>
@@ -144,6 +155,7 @@
           value=pojo.districtGrade
           options=grades
           name="districtGrade"
+          onchange=(action "onChange")
         }}
       {{/form-input}}
     </p>

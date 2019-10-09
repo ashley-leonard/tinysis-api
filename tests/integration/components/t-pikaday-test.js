@@ -50,29 +50,53 @@ module('Integration | Component | t-pikaday', (hooks) => {
   });
 
   test('it renders as a popup without emitting bogus change actions', async function (assert) {
-    this.containerOnChange = (event) => {
-      actions.push({ event, type: 'containerChange', value: event.target.value });
-    };
+    this.set('value', '2020-12-01');
 
     await render(hbs`
-      <div onchange={{containerOnChange}}>
-        {{t-pikaday
-          value=value
-          onchange=onchange
-          name="Boo"
-          popup=true
-        }}
-      </div>
+      {{t-pikaday
+        value=value
+        onchange=onchange
+        name="Boo"
+        popup=true
+      }}
     `);
 
     const input = find('input[name="Boo"]');
     assert.ok(input, 'input rendered');
-    assert.equal(input.value, '4/1/2011', 'input assigned expected US date value');
+    assert.equal(input.value, '12/1/2020', 'input assigned expected US date value');
     assert.equal(input.type, 'text', 'using text input');
 
     assert.equal(actions.length, 0, 'no change event was triggered');
   });
 
+  test('it emits the expected change actions', async function (assert) {
+    this.set('value', '2020-12-01');
+
+    await render(hbs`
+      {{t-pikaday
+        value=value
+        onchange=onchange
+        name="Boo"
+      }}
+    `);
+
+    const input = find('input[name="Boo"]');
+    assert.ok(input, 'input rendered');
+    assert.equal(input.value, '12/1/2020', 'input assigned expected US date value');
+    assert.equal(input.type, 'hidden', 'using hidden input');
+
+    assert.equal(actions.length, 0, 'no change event was triggered');
+
+    await click('button[data-pika-day="15"]');
+
+    assert.equal(actions.length, 1, 'one action event pushed');
+    const [action] = actions;
+    assert.equal(action.name, 'Boo', 'expected name supplied in action argument');
+    assert.equal(action.date, '2020-12-15', 'value was cleared');
+
+    assert.equal('12/15/2020', find('input').value, 'Field shows new date now');
+  });
+  
   test('it renders as a popup', async (assert) => {
     await render(hbs`
       {{t-pikaday
@@ -159,5 +183,28 @@ module('Integration | Component | t-pikaday', (hooks) => {
     const [action] = actions;
     assert.equal(action.name, 'Boo', 'expected name supplied in action argument');
     assert.equal(action.date, '2006-03-15', 'expected ISO calendar date supplied');
+  });
+
+  test('it can clear its value', async function (assert) {
+    // the start of March 3, 2006 in the current timezone
+    this.set('value', '2006-02-03');
+    await render(hbs`
+      {{t-pikaday
+        value=value
+        onchange=onchange
+        name="Boo"
+        showClear=true
+        popup=true
+      }}
+    `);
+
+    await click('[data-test-clear]');
+
+    assert.equal(actions.length, 1, 'one action event pushed');
+    const [action] = actions;
+    assert.equal(action.name, 'Boo', 'expected name supplied in action argument');
+    assert.equal(action.date, null, 'value was cleared');
+
+    assert.equal('', find('input').value, 'Field shows blank now');
   });
 });

@@ -7,6 +7,8 @@
         name="courseName"
         value={{pojo.courseName}}
         autofocus
+        onchange={{action "onChange"}}
+
       >
     {{/form-input}}
   </p>
@@ -17,6 +19,7 @@
         type="text"
         name="courseId"
         value={{pojo.courseId}}
+        onchange={{action "onChange"}}
       >
     {{/form-input}}
   </p>
@@ -29,6 +32,7 @@
         prompt="Select a course type"
         options=courseTypeOptions
         name="courseType"
+        onchange=(action "onChange")
       }}
     {{/form-input}}
   </p>
@@ -40,6 +44,7 @@
         value=pojo.status
         options=statusOptions
         name="status"
+        onchange=(action "onChange")
       }}
     {{/form-input}}
   </p>
