@@ -65,6 +65,10 @@ export default Component.extend({
     });
   },
 
+  willDestroyElement() {
+    if (this.pikaday) this.pikaday.destroy();
+  },
+
   actions: {
     inputChanged(event) {
       const newDateValue = dayjs(event.target.value, dateFormat);
