@@ -170,7 +170,7 @@ RSpec.describe 'Ember fixtures script', type: :request do
       # current contracts should have active enrollments. reporting as if we are three months into
       # the current contracts.
       [@contract1_current, @contract2_current].each do |contract|
-        [@student1, @student3].each do |student|
+        [@student1, @student2, @student3].each do |student|
           enrollment = create :enrollment, participant: student, contract: contract, creator: contract.facilitator
           create :credit_assignment, enrollment: enrollment, credit: @credit1, credit_hours: 1
           create :note, note: "Note for #{student.last_name} for enrollment in #{contract.name}", notable: enrollment, creator: contract.facilitator
@@ -261,6 +261,8 @@ RSpec.describe 'Ember fixtures script', type: :request do
       create :graduation_plan_mapping, graduation_plan: graduation_plan, graduation_plan_requirement: gradLang2, credit_assignment: credit_assignments.pop
       create :graduation_plan_mapping, graduation_plan: graduation_plan, graduation_plan_requirement: gradGeneral1, notes: 'It is done', date_completed: '2019-06-15'
       create :graduation_plan_mapping, graduation_plan: graduation_plan, graduation_plan_requirement: gradService1, notes: 'It is serviced', date_completed: '2019-06-15'
+
+      allow(JsonWebToken).to receive(:extract_user_id).and_return(@admin1.id)
     end
   end
 

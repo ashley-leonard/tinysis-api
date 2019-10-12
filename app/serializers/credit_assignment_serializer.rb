@@ -19,10 +19,11 @@ class CreditAssignmentSerializer < ApplicationSerializer
 
   belongs_to :credit
   has_one :graduation_plan_mapping
-  belongs_to :contract_term, record_type: :term
-  belongs_to :contract_facilitator, record_type: :user
+  belongs_to :contract_term, record_type: :term, serializer: :term
+  belongs_to :contract_facilitator, record_type: :user, serializer: :user
   belongs_to :contract
   belongs_to :user
+  belongs_to :credit_transmittal_batch
 
   has_many :child_credit_assignments, record_type: :credit_assignment
   belongs_to :parent_credit_assignment, record_type: :credit_assignment

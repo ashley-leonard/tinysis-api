@@ -18,12 +18,16 @@ class CreditTransmittalBatch < ApplicationRecord
   end
   
   def self.create_batch( user )
-    count = CreditAssignment.count(:conditions => APPROVED_CONDITIONS)
+    count = CreditAssignment.count(APPROVED_CONDITIONS)
+
     return nil if count==0
 
-    batch = CreditTransmittalBatch.create!(:finalized_by => user.full_name, :finalized_on => Time.now.gmtime)
-    
-    CreditAssignment.update_all(["credit_transmittal_batch_id = ?", batch.id], APPROVED_CONDITIONS)
+    batch = CreditTransmittalBatch
+      .create!(:finalized_by => user.full_name, :finalized_on => Time.now.gmtime)
+
+    CreditAssignment
+      .where(APPROVED_CONDITIONS)
+      .update_all(["credit_transmittal_batch_id = ?", batch.id])
 
     batch.reload
     
