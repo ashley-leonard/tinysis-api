@@ -185,18 +185,25 @@ RSpec.describe 'Ember fixtures script', type: :request do
         end
       end
     
+      finalized_credits = []
+
       # closed contracts should have fulfilled enrollments and finalized credits
       [@contract1_last, @contract2_last, @contract3_last].each do |contract|
         [@student2, @student3].each do |student|
           enrollment = create :enrollment, participant: student, contract: contract, creator: contract.facilitator
-          create :credit_assignment, enrollment: enrollment, credit: @credit1, credit_hours: 0.25
-          create :credit_assignment, enrollment: enrollment, credit: @credit2, credit_hours: 0.5
+          finalized_credits.push create :credit_assignment, enrollment: enrollment, credit: @credit1, credit_hours: 0.25
+          finalized_credits.push create :credit_assignment, enrollment: enrollment, credit: @credit2, credit_hours: 0.5
           create :note, note: "Note for #{student.last_name} for enrollment in #{contract.name}", notable: enrollment, creator: contract.facilitator
 
           enrollment.set_closed Enrollment::COMPLETION_FULFILLED, contract.facilitator
           enrollment.set_finalized @admin1
         end
       end
+
+      finalized_credits.each do |credit_assignment|
+        credit_assignment.district_approve @admin1, Date.new(CURRENT_YEAR, 11, 15)
+      end
+      CreditTransmittalBatch.create_batch @admin1
 
       # coor statuses for all months of the last coor
       @term_coor_last.months.each do |month|
@@ -226,18 +233,23 @@ RSpec.describe 'Ember fixtures script', type: :request do
           note: "Note by #{@contract1_current.facilitator.last_name} for student #{@student1.last_name} / assignment #{assignment_number}"
       end
 
-      # for contract 1, define 5 meetings which are attended only by student 3
-      enrollment3 = @contract1_current.enrollments.find{|e| e.participant == @student3}
+      # for contract 1, define 5 meetings which are attended only by student 1
       (1..5).each do |meeting_number|
         meeting = create :meeting, contract: @contract1_current, meeting_date: @contract1_current.term.months.first + meeting_number.days
-        meeting_participant = create :meeting_participant, meeting: meeting, enrollment: enrollment, participation: MeetingParticipant::PRESENT
-        create :note,
-          notable: meeting_participant,
-          creator: @contract1_current.facilitator,
-          note: "Note by #{@contract1_current.facilitator.last_name} for student #{@student1.last_name} / meeting #{meeting_number}"
 
-        meeting_participant = create :meeting_participant, meeting: meeting, enrollment: enrollment3, participation: MeetingParticipant::ABSENT
-        create :note, notable: meeting_participant, creator: @contract1_current.facilitator, note: "Note by #{@contract1_current.facilitator.last_name} for student #{@student3.last_name} / meeting #{meeting_number}"
+        @contract1_current.enrollments.each do |enrollment|
+          attendance = if enrollment.participant.id == @student1.id then
+            MeetingParticipant::PRESENT
+          else
+            MeetingParticipant::ABSENT
+          end
+
+          meeting_participant = create :meeting_participant, meeting: meeting, enrollment: enrollment, participation: attendance
+          create :note,
+            notable: meeting_participant,
+            creator: @contract1_current.facilitator,
+            note: "Note by #{@contract1_current.facilitator.last_name} for student #{enrollment.participant.last_name} / meeting #{meeting_number}"
+        end
       end
 
       # graduation plans requirements
@@ -324,7 +336,7 @@ RSpec.describe 'Ember fixtures script', type: :request do
         write_fixture "/api/notes?notableType=meetingParticipant&notableIds=#{meeting_participants.join(',')}", 'contract-attendance-notes.js'
 
         # contract enrollment status detail
-        enrollment = @contract1_current.enrollments.first
+        enrollment = @contract1_current.enrollments.find { |enrollment| enrollment.participant === @student1 }
         write_fixture "/api/enrollments/#{enrollment.id}?include=participant,turnins,meetingParticipants,creditAssignments,creditAssignments.credit", 'contract-enrollment-detail.js'
 
         # enrollments by contract

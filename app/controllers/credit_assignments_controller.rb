@@ -27,19 +27,18 @@ class CreditAssignmentsController < ApplicationController
       .where(conditions)
       .count
 
-    includes = params[:include].nil? ? 
-      [] : 
-      params[:include].split(',').map(&:underscore) : []
-
     options = {
       meta: {
         count: count,
       },
-      include: includes,
       params: {
         forFulfilled: params[:includeFulfilledAttributes] == 'true',
       }
     }
+
+    if params[:include]
+      options[:include] = params[:include].split(',').map(&:underscore)
+    end
 
     render json: CreditAssignmentSerializer.new(result, options), status: 200
   end
