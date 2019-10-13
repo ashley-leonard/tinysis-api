@@ -19,7 +19,11 @@ module Secured
   def authenticate_request!
     permissions = get_permissions
 
-    render_unauthorized if permissions.empty?
+    render_unauthorized and return if permissions.empty?
+
+    user_id = get_user_id
+
+    @user = User.find user_id
   rescue JWT::VerificationError, JWT::DecodeError
     render_unauthorized
   end
