@@ -191,9 +191,11 @@ RSpec.describe 'Ember fixtures script', type: :request do
       [@contract1_last, @contract2_last, @contract3_last].each do |contract|
         [@student2, @student3].each do |student|
           enrollment = create :enrollment, participant: student, contract: contract, creator: contract.facilitator
-          finalized_credits.push create :credit_assignment, enrollment: enrollment, credit: @credit1, credit_hours: 0.25
-          finalized_credits.push create :credit_assignment, enrollment: enrollment, credit: @credit2, credit_hours: 0.5
+          credit1 = create :credit_assignment, enrollment: enrollment, credit: @credit1, credit_hours: 0.25
+          credit2 = create :credit_assignment, enrollment: enrollment, credit: @credit2, credit_hours: 0.5
           create :note, note: "Note for #{student.last_name} for enrollment in #{contract.name}", notable: enrollment, creator: contract.facilitator
+
+          finalized_credits.push credit1
 
           enrollment.set_closed Enrollment::COMPLETION_FULFILLED, contract.facilitator
           enrollment.set_finalized @admin1
@@ -414,7 +416,7 @@ RSpec.describe 'Ember fixtures script', type: :request do
         write_fixture "/api/graduation-plan-requirements", "graduation-plan-requirements-list-all.js"
 
         # credit assignments
-        write_fixture "/api/credit-assignments?studentIds=#{@student2.id}", "student-credit-assignments.js"
+        write_fixture "/api/credit-assignments?studentIds=#{@student2.id}&includeFulfilledAttributes=true&include=credit,contractTerm,contractFacilitator,contract", "student-credit-assignments.js"
 
         # graduation plan mappings
         write_fixture "/api/graduation-plan-mappings/#{@student2.id}", "graduation-plan-mappings.js"

@@ -9,7 +9,6 @@ class CreditAssignmentSerializer < ApplicationSerializer
     :district_finalize_approved,
     :district_finalize_approved_by,
     :district_finalize_approved_on,
-    :credit_transmittal_batch_id,
     :district_transmitted_on,
     :override_hours,
     :override_by,

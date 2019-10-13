@@ -43,16 +43,17 @@ class CreditAssignment < ApplicationRecord
     # set finalized_on date
     self.enrollment_finalized_on = date
     
-    # set denormalized contract values
+    # map attributes onto credit for easier access by the client
+    self.contract = contract
+    self.contract_facilitator = contract.facilitator
+    self.contract_term = contract.term
     self.contract_name = contract.name
-    self.contract_facilitator_name = contract.facilitator.last_name_first
-    self.contract_facilitator_id = contract.facilitator_id
-    self.contract_term_id = contract.term_id
+    self.contract_facilitator_name = contract.facilitator.full_name
     
     # assign to student if fulfilled
     case completion_status
     when Enrollment::COMPLETION_FULFILLED
-      self.user_id = participant.id
+      self.user = participant
       
     # cache the credit in case this is a left-behind
     when Enrollment::COMPLETION_CANCELED
