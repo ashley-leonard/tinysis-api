@@ -37,17 +37,22 @@ export function createEntity(type, attributes, ...relationships) {
 
 /*
  * From an array of models, finds the original model and replaces it
- * with the provided one. If the model is not present it is simply
- * added.
+ * with the provided one, maintaining the original position.
+ * If the model is not present it is simply added.
  *
  * @param {Array} list of models
  * @param {Object} object to replace or add to the list
  * @returns A new array with the replaced or added model
  */
 export function replaceModel(array, model) {
-  return array
-    .filter(m => m.id !== model.id)
-    .concat([model]);
+  const pivot = array
+    .findIndex(m => m.id === model.id);
+
+  if (pivot === -1) return array.concat([model]);
+
+  return array.slice(0, pivot)
+    .concat([model])
+    .concat(array.slice(pivot + 1));
 }
 
 /*
