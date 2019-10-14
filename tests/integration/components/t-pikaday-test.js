@@ -96,7 +96,7 @@ module('Integration | Component | t-pikaday', (hooks) => {
 
     assert.equal('12/15/2020', find('input').value, 'Field shows new date now');
   });
-  
+
   test('it renders as a popup', async (assert) => {
     await render(hbs`
       {{t-pikaday

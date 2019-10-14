@@ -1,16 +1,16 @@
-// GET /api/contracts/14?include=category,facilitator,assignments,meetings,creditAssignments,creditAssignments.credit,term,ealrs
+// GET /api/contracts/10?include=category,facilitator,assignments,meetings,creditAssignments,creditAssignments.credit,term,ealrs
 export default {
   data: {
-    id: '14',
+    id: '10',
     type: 'contract',
     attributes: {
-      name: 'Non cena atque vindico vestrum.',
+      name: 'Animadverto totidem triduana decretum uberrime.',
       status: 'approved',
-      learningObjectives: 'Chirographum tego canto cattus tamen.',
-      competencies: 'Similique terror depereo tergeo clarus.',
-      evaluationMethods: 'Sto depono sit auris demergo.',
-      instructionalMaterials: 'Solum vita videlicet denuncio surgo.',
-      location: 'Dolores verumtamen vesco volutabrum chirographum.',
+      learningObjectives: 'Tui delego attollo et ambulo.',
+      competencies: 'Necessitatibus sto temperantia via artificiose.',
+      evaluationMethods: 'Deporto armo minima argumentum deduco.',
+      instructionalMaterials: 'Deserunt aliquid qui copiose antea.',
+      location: 'Valens tot aggredior adaugeo totam.',
       timeslots: [
         {
           start: '8:45',
@@ -23,30 +23,34 @@ export default {
       enrollments: {
         data: [
           {
-            id: '15',
+            id: '11',
             type: 'enrollment',
           },
           {
-            id: '16',
+            id: '12',
+            type: 'enrollment',
+          },
+          {
+            id: '13',
             type: 'enrollment',
           },
         ],
       },
       facilitator: {
         data: {
-          id: '187',
+          id: '94',
           type: 'User',
         },
       },
       term: {
         data: {
-          id: '62',
+          id: '15',
           type: 'term',
         },
       },
       category: {
         data: {
-          id: '8',
+          id: '6',
           type: 'category',
         },
       },
@@ -225,7 +229,7 @@ export default {
       },
     },
     {
-      id: '8',
+      id: '6',
       type: 'category',
       attributes: {
         name: 'Category 1',
@@ -239,11 +243,11 @@ export default {
         contracts: {
           data: [
             {
-              id: '10',
+              id: '6',
               type: 'contract',
             },
             {
-              id: '14',
+              id: '10',
               type: 'contract',
             },
           ],
@@ -264,6 +268,24 @@ export default {
           },
         },
         graduationPlanMapping: {
+          data: null,
+        },
+        contractTerm: {
+          data: null,
+        },
+        contractFacilitator: {
+          data: null,
+        },
+        contract: {
+          data: {
+            id: '10',
+            type: 'contract',
+          },
+        },
+        user: {
+          data: null,
+        },
+        creditTransmittalBatch: {
           data: null,
         },
         childCreditAssignments: {
@@ -290,7 +312,7 @@ export default {
       id: '1',
       type: 'ealr',
       attributes: {
-        ealr: 'Arx aer pecus supra demergo.',
+        ealr: 'Creber alioqui communis occaecati tenuis.',
         seq: '1.1',
         category: 'Category 1',
       },
@@ -299,7 +321,7 @@ export default {
       id: '2',
       type: 'ealr',
       attributes: {
-        ealr: 'Tabesco unde varius brevis decet.',
+        ealr: 'Sortitus torrens suspendo quaerat vinculum.',
         seq: '1.2',
         category: 'Category 1',
       },
@@ -308,7 +330,7 @@ export default {
       id: '3',
       type: 'ealr',
       attributes: {
-        ealr: 'Vulnero cupiditate vultuosus placeat cicuta.',
+        ealr: 'Vox dicta auxilium magnam triduana.',
         seq: '2.1',
         category: 'Category 2',
       },
@@ -317,23 +339,23 @@ export default {
       id: '4',
       type: 'ealr',
       attributes: {
-        ealr: 'Vomer venustas concido ut torrens.',
+        ealr: 'Delectus deludo correptius deinde suadeo.',
         seq: '2.2',
         category: 'Category 2',
       },
     },
     {
-      id: '187',
+      id: '94',
       type: 'user',
       attributes: {
-        firstName: 'Judson',
-        lastName: 'Emmerich',
+        firstName: 'Lou',
+        lastName: 'Johnson',
         nickname: null,
         dateActive: '2012-09-01',
         dateInactive: null,
         districtId: null,
         districtGrade: 12,
-        email: 'hosea@kovacek.info',
+        email: 'joy@schimmelmacejkovic.com',
         status: 'active',
         role: 'staff',
       },
@@ -341,7 +363,7 @@ export default {
         coordinatees: {
           data: [
             {
-              id: '191',
+              id: '98',
               type: 'user',
             },
           ],
@@ -366,6 +388,10 @@ export default {
               id: '2',
               type: 'meetingParticipant',
             },
+            {
+              id: '3',
+              type: 'meetingParticipant',
+            },
           ],
         },
       },
@@ -381,11 +407,15 @@ export default {
         meetingParticipants: {
           data: [
             {
-              id: '3',
+              id: '4',
               type: 'meetingParticipant',
             },
             {
-              id: '4',
+              id: '5',
+              type: 'meetingParticipant',
+            },
+            {
+              id: '6',
               type: 'meetingParticipant',
             },
           ],
@@ -403,11 +433,15 @@ export default {
         meetingParticipants: {
           data: [
             {
-              id: '5',
+              id: '7',
               type: 'meetingParticipant',
             },
             {
-              id: '6',
+              id: '8',
+              type: 'meetingParticipant',
+            },
+            {
+              id: '9',
               type: 'meetingParticipant',
             },
           ],
@@ -425,11 +459,15 @@ export default {
         meetingParticipants: {
           data: [
             {
-              id: '7',
+              id: '10',
               type: 'meetingParticipant',
             },
             {
-              id: '8',
+              id: '11',
+              type: 'meetingParticipant',
+            },
+            {
+              id: '12',
               type: 'meetingParticipant',
             },
           ],
@@ -447,11 +485,15 @@ export default {
         meetingParticipants: {
           data: [
             {
-              id: '9',
+              id: '13',
               type: 'meetingParticipant',
             },
             {
-              id: '10',
+              id: '14',
+              type: 'meetingParticipant',
+            },
+            {
+              id: '15',
               type: 'meetingParticipant',
             },
           ],
@@ -459,10 +501,10 @@ export default {
       },
     },
     {
-      id: '62',
+      id: '15',
       type: 'term',
       attributes: {
-        name: 'Face to face web-enabled ability',
+        name: 'Multi-channelled motivating flexibility',
         schoolYear: 2019,
         creditDate: '2020-01-31',
         months: [

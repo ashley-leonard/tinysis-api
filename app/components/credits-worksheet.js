@@ -2,8 +2,28 @@ import Component from '@ember/component';
 import { computed } from '@ember/object';
 
 export default Component.extend({
+  selectedCredits: (() => ([]))(),
   unfinalizedCredits: computed('creditAssignments', function () {
     return this.creditAssignments
-      .filter(ca => ca.attributes.districtFinalizeApproved === false);
+      .filter(ca => !ca.relationships.creditTransmittalBatch.data);
   }),
+  actions: {
+    approveCredit(creditAssignment) {
+      this.approveCredit(creditAssignment);
+    },
+    combineCredits() {
+      console.log(this.selectedCredits);
+    },
+    splitCredit(creditAssignment) {
+
+    },
+    selectCredit(creditAssignment) {
+      const { selectedCredits } = this;
+      if (selectedCredits.find(ca => ca === creditAssignment)) {
+        this.set('selectedCredits', selectedCredits.filter(ca => ca !== creditAssignment));
+      } else {
+        this.set('selectedCredits', selectedCredits.concat([creditAssignment]));
+      }
+    },
+  },
 });

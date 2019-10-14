@@ -1,15 +1,22 @@
 <h2>Credits</h2>
 
-<h3>Credits to approve</h3>
+<ul>
+  <li>credits with children show children via credit-assignments component</li>
+  <li>credits with children include a split button with confirmation popup</li>
+  <li>approve button can toggle approval state</li>
+</ul>
+
+<h3>Available credits to approve</h3>
 
 {{credits-worksheet
   student=student
   creditAssignments=creditAssignments
-  combineCredits=(action 'combineCredits')
-  divideCredits=(action 'divideCredits')
+  combineCredits=(action "combineCredits")
+  splitCredit=(action "splitCredit")
+  approveCredit=(action "approveCredit")
 }}
 
-<h3>Credits finalized for district transcript</h3>
+<h3>Credits finalized with district</h3>
 
 {{finalized-credits
   student=student

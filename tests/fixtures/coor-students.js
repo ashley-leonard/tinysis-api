@@ -1,39 +1,16 @@
-// GET /api/students?coordinatorIds=188&status=reportable&order=lastName,firstName
+// GET /api/students?coordinatorIds=95&status=reportable&order=lastName,firstName
 export default {
   data: [
     {
-      id: '193',
+      id: '99',
       type: 'user',
       attributes: {
-        firstName: 'Ramon',
-        lastName: 'Durgan',
-        nickname: null,
-        dateActive: '2018-08-01',
-        dateInactive: '2019-10-01',
-        districtId: '7445503495',
-        districtGrade: 12,
-        status: 'inactive',
-        role: 'student',
-      },
-      relationships: {
-        coordinator: {
-          data: {
-            id: '188',
-            type: 'user',
-          },
-        },
-      },
-    },
-    {
-      id: '192',
-      type: 'user',
-      attributes: {
-        firstName: 'Maura',
-        lastName: 'Lowe',
+        firstName: 'Connie',
+        lastName: 'Kunze',
         nickname: null,
         dateActive: '2018-08-01',
         dateInactive: null,
-        districtId: '4487389042',
+        districtId: '8805060332',
         districtGrade: 12,
         status: 'active',
         role: 'student',
@@ -41,7 +18,30 @@ export default {
       relationships: {
         coordinator: {
           data: {
-            id: '188',
+            id: '95',
+            type: 'user',
+          },
+        },
+      },
+    },
+    {
+      id: '100',
+      type: 'user',
+      attributes: {
+        firstName: 'Melita',
+        lastName: 'Mann',
+        nickname: null,
+        dateActive: '2018-08-01',
+        dateInactive: '2019-10-01',
+        districtId: '5464249688',
+        districtGrade: 12,
+        status: 'inactive',
+        role: 'student',
+      },
+      relationships: {
+        coordinator: {
+          data: {
+            id: '95',
             type: 'user',
           },
         },

@@ -1,17 +1,17 @@
 // GET /api/profile
 export default {
   data: {
-    id: '190',
+    id: '97',
     type: 'user',
     attributes: {
-      firstName: 'Shaun',
-      lastName: 'Stokes',
+      firstName: 'Claretha',
+      lastName: 'Gusikowski',
       nickname: null,
       dateActive: '2011-07-01',
       dateInactive: null,
       districtId: null,
       districtGrade: 12,
-      email: 'belinda@lueilwitzbartoletti.com',
+      email: 'domingowalter@walker.io',
       status: 'active',
       role: 'administrator',
     },

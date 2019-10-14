@@ -1,11 +1,11 @@
-// GET /api/admin/users/190
+// GET /api/admin/users/97
 export default {
   data: {
-    id: '190',
+    id: '97',
     type: 'user',
     attributes: {
-      firstName: 'Shaun',
-      lastName: 'Stokes',
+      firstName: 'Claretha',
+      lastName: 'Gusikowski',
       nickname: null,
       dateActive: '2011-07-01',
       dateInactive: null,
@@ -13,7 +13,7 @@ export default {
       districtGrade: 12,
       status: 'active',
       role: 'administrator',
-      email: 'belinda@lueilwitzbartoletti.com',
+      email: 'domingowalter@walker.io',
     },
     relationships: {
     },

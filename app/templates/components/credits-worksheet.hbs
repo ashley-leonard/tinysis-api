@@ -3,30 +3,39 @@
   noResultsMessage="There are no credits to approve."
 }}
   {{count-paragraph
-    result=model
+    count=unfinalizedCredits.length
     name="credit"
   }}
+  <p class="flex">
+    <a
+      href="#"
+      class="no-underline"
+      {{action 'combineCredits'}}
+      disabled={{canCombineCredits}}
+    >
+      <span class="fa fa-object-group no-underline mr-2" />Combine selected credits
+    </a>
+  </p>
   <table class="t-table w-full" data-test-settings-credits-list>
     <thead>
       <tr>
-        <th>Name</th>
-        <th>Course ID</th>
-        <th>Type</th>
-        <th>Status</th>
+        <th></th>
+        <th>Credit</th>
+        <th>Term</th>
+        <th class="text-right">Credits</th>
+        <th class="text-right">Completed</th>
+        <th class="text-right">Approved</th>
+        <th>Actions</th>
       </tr>
     </thead>
     <tbody>
-      {{#each credits as |credit|}}
-        <tr>
-          <td>
-            {{#link-to "settings-credit.edit" credit.id}}
-              {{credit.attributes.courseName}}
-            {{/link-to}}
-          </td>
-          <td>{{credit.attributes.courseId}}</td>
-          <td>{{titleize credit.attributes.courseType}}</td>
-          <td>{{titleize credit.attributes.status}}</td>
-        </tr>
+      {{#each unfinalizedCredits as |creditAssignment i|}}
+        {{credits-worksheet/item
+          creditAssignment=creditAssignment
+          splitCredit=(action 'splitCredit')
+          selectCredit=(action 'selectCredit')
+          approveCredit=(action 'approveCredit')
+        }}
       {{/each}}
     </tbody>
   </table>

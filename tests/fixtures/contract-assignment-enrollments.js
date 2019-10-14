@@ -1,8 +1,8 @@
-// GET /api/enrollments?contractIds=14&include=turnins,participant
+// GET /api/enrollments?contractIds=10&include=turnins,participant
 export default {
   data: [
     {
-      id: '15',
+      id: '11',
       type: 'enrollment',
       attributes: {
         finalizedOn: null,
@@ -12,13 +12,13 @@ export default {
       relationships: {
         contract: {
           data: {
-            id: '14',
+            id: '10',
             type: 'contract',
           },
         },
         participant: {
           data: {
-            id: '191',
+            id: '98',
             type: 'participant',
           },
         },
@@ -61,11 +61,7 @@ export default {
               type: 'meetingParticipant',
             },
             {
-              id: '3',
-              type: 'meetingParticipant',
-            },
-            {
-              id: '5',
+              id: '4',
               type: 'meetingParticipant',
             },
             {
@@ -73,7 +69,11 @@ export default {
               type: 'meetingParticipant',
             },
             {
-              id: '9',
+              id: '10',
+              type: 'meetingParticipant',
+            },
+            {
+              id: '13',
               type: 'meetingParticipant',
             },
           ],
@@ -81,7 +81,7 @@ export default {
       },
     },
     {
-      id: '16',
+      id: '12',
       type: 'enrollment',
       attributes: {
         finalizedOn: null,
@@ -91,13 +91,13 @@ export default {
       relationships: {
         contract: {
           data: {
-            id: '14',
+            id: '10',
             type: 'contract',
           },
         },
         participant: {
           data: {
-            id: '193',
+            id: '99',
             type: 'participant',
           },
         },
@@ -121,11 +121,7 @@ export default {
               type: 'meetingParticipant',
             },
             {
-              id: '4',
-              type: 'meetingParticipant',
-            },
-            {
-              id: '6',
+              id: '5',
               type: 'meetingParticipant',
             },
             {
@@ -133,7 +129,71 @@ export default {
               type: 'meetingParticipant',
             },
             {
-              id: '10',
+              id: '11',
+              type: 'meetingParticipant',
+            },
+            {
+              id: '14',
+              type: 'meetingParticipant',
+            },
+          ],
+        },
+      },
+    },
+    {
+      id: '13',
+      type: 'enrollment',
+      attributes: {
+        finalizedOn: null,
+        enrollmentStatus: 'enrolled',
+        completionStatus: 'incomplete',
+      },
+      relationships: {
+        contract: {
+          data: {
+            id: '10',
+            type: 'contract',
+          },
+        },
+        participant: {
+          data: {
+            id: '100',
+            type: 'participant',
+          },
+        },
+        creditAssignments: {
+          data: [
+            {
+              id: '30',
+              type: 'creditAssignment',
+            },
+          ],
+        },
+        turnins: {
+          data: [
+
+          ],
+        },
+        meetingParticipants: {
+          data: [
+            {
+              id: '3',
+              type: 'meetingParticipant',
+            },
+            {
+              id: '6',
+              type: 'meetingParticipant',
+            },
+            {
+              id: '9',
+              type: 'meetingParticipant',
+            },
+            {
+              id: '12',
+              type: 'meetingParticipant',
+            },
+            {
+              id: '15',
               type: 'meetingParticipant',
             },
           ],
@@ -143,15 +203,15 @@ export default {
   ],
   included: [
     {
-      id: '191',
+      id: '98',
       type: 'user',
       attributes: {
-        firstName: 'Wally',
-        lastName: 'Baumbach',
+        firstName: 'Adrian',
+        lastName: 'Bahringer',
         nickname: null,
         dateActive: '2018-08-01',
         dateInactive: null,
-        districtId: '8257538751',
+        districtId: '1086617984',
         districtGrade: 12,
         email: null,
         status: 'active',
@@ -160,7 +220,7 @@ export default {
       relationships: {
         coordinator: {
           data: {
-            id: '187',
+            id: '94',
             type: 'user',
           },
         },
@@ -181,7 +241,7 @@ export default {
         },
         enrollment: {
           data: {
-            id: '15',
+            id: '11',
             type: 'enrollment',
           },
         },
@@ -202,7 +262,7 @@ export default {
         },
         enrollment: {
           data: {
-            id: '15',
+            id: '11',
             type: 'enrollment',
           },
         },
@@ -223,7 +283,7 @@ export default {
         },
         enrollment: {
           data: {
-            id: '15',
+            id: '11',
             type: 'enrollment',
           },
         },
@@ -244,7 +304,7 @@ export default {
         },
         enrollment: {
           data: {
-            id: '15',
+            id: '11',
             type: 'enrollment',
           },
         },
@@ -265,22 +325,46 @@ export default {
         },
         enrollment: {
           data: {
-            id: '15',
+            id: '11',
             type: 'enrollment',
           },
         },
       },
     },
     {
-      id: '193',
+      id: '99',
       type: 'user',
       attributes: {
-        firstName: 'Ramon',
-        lastName: 'Durgan',
+        firstName: 'Connie',
+        lastName: 'Kunze',
+        nickname: null,
+        dateActive: '2018-08-01',
+        dateInactive: null,
+        districtId: '8805060332',
+        districtGrade: 12,
+        email: null,
+        status: 'active',
+        role: 'student',
+      },
+      relationships: {
+        coordinator: {
+          data: {
+            id: '95',
+            type: 'user',
+          },
+        },
+      },
+    },
+    {
+      id: '100',
+      type: 'user',
+      attributes: {
+        firstName: 'Melita',
+        lastName: 'Mann',
         nickname: null,
         dateActive: '2018-08-01',
         dateInactive: '2019-10-01',
-        districtId: '7445503495',
+        districtId: '5464249688',
         districtGrade: 12,
         email: null,
         status: 'inactive',
@@ -289,7 +373,7 @@ export default {
       relationships: {
         coordinator: {
           data: {
-            id: '188',
+            id: '95',
             type: 'user',
           },
         },
@@ -297,6 +381,6 @@ export default {
     },
   ],
   meta: {
-    count: 2,
+    count: 3,
   },
 };

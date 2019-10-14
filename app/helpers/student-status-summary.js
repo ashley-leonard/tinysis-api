@@ -32,6 +32,6 @@ export default helper((params) => {
   }
 
   return `
-    ${getGrade(districtGrade)}; ${enrollmentStatus}. ${districtId}
+    ${getGrade(districtGrade)}; ${enrollmentStatus}. #${districtId}
   `;
 });

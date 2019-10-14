@@ -1,4 +1,4 @@
-// GET /api/assignments?contractIds=14
+// GET /api/assignments?contractIds=10
 export default {
   data: [
     {

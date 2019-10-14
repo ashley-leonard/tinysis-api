@@ -1,11 +1,11 @@
-// GET /api/admin/users/187
+// GET /api/admin/users/94
 export default {
   data: {
-    id: '187',
+    id: '94',
     type: 'user',
     attributes: {
-      firstName: 'Judson',
-      lastName: 'Emmerich',
+      firstName: 'Lou',
+      lastName: 'Johnson',
       nickname: null,
       dateActive: '2012-09-01',
       dateInactive: null,
@@ -13,7 +13,7 @@ export default {
       districtGrade: 12,
       status: 'active',
       role: 'staff',
-      email: 'hosea@kovacek.info',
+      email: 'joy@schimmelmacejkovic.com',
     },
     relationships: {
     },

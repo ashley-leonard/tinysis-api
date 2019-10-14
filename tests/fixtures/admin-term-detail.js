@@ -1,10 +1,10 @@
-// GET /api/terms/62
+// GET /api/terms/15
 export default {
   data: {
-    id: '62',
+    id: '15',
     type: 'term',
     attributes: {
-      name: 'Face to face web-enabled ability',
+      name: 'Multi-channelled motivating flexibility',
       schoolYear: 2019,
       creditDate: '2020-01-31',
       months: [

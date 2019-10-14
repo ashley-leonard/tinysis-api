@@ -2,10 +2,10 @@
 export default {
   data: [
     {
-      id: '60',
+      id: '13',
       type: 'term',
       attributes: {
-        name: 'Exclusive 24 hour extranet',
+        name: 'Virtual bandwidth-monitored architecture',
         schoolYear: 2018,
         creditDate: '2019-01-31',
         months: [
@@ -20,10 +20,10 @@ export default {
       meta: null,
     },
     {
-      id: '61',
+      id: '14',
       type: 'term',
       attributes: {
-        name: 'Reduced systemic circuit',
+        name: 'Digitized analyzing leverage',
         schoolYear: 2018,
         creditDate: '2019-06-15',
         months: [
@@ -38,10 +38,10 @@ export default {
       meta: null,
     },
     {
-      id: '62',
+      id: '15',
       type: 'term',
       attributes: {
-        name: 'Face to face web-enabled ability',
+        name: 'Multi-channelled motivating flexibility',
         schoolYear: 2019,
         creditDate: '2020-01-31',
         months: [
@@ -56,10 +56,10 @@ export default {
       meta: null,
     },
     {
-      id: '63',
+      id: '16',
       type: 'term',
       attributes: {
-        name: 'Re-engineered empowering budgetary management',
+        name: 'Future-proofed 6th generation architecture',
         schoolYear: 2019,
         creditDate: '2020-06-15',
         months: [
@@ -74,7 +74,7 @@ export default {
       meta: null,
     },
     {
-      id: '64',
+      id: '17',
       type: 'term',
       attributes: {
         name: 'COOR Last',
@@ -97,7 +97,7 @@ export default {
       meta: null,
     },
     {
-      id: '65',
+      id: '18',
       type: 'term',
       attributes: {
         name: 'COOR Current',

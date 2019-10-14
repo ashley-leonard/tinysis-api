@@ -1,14 +1,14 @@
 <tr>
-  <td class="text-center">
-    {{#if creditAssignment.relationships.creditTransmittalBatch.data.id}}
-      <span class="fas fa-check" />
-    {{/if}}
+  <td class="align-center">
+    <input
+      type="checkbox"
+      checked={{selected}}
+      onchange={{action 'selectCredit'}}
+      disabled={{selectionDisabled}}
+    />
   </td>
   <td>
     {{courseName}}
-    {{#if childCreditAssignments}}
-      {{credit-assignments creditAssignments=childCreditAssignments}}
-    {{/if}}
   </td>
   <td>
     {{term.attributes.name}}
@@ -24,5 +24,19 @@
     title={{creditAssignment.attributes.districtFinalizeApprovedBy}}
   >
     {{t-date creditAssignment.attributes.districtFinalizeApprovedOn "M/D/YYYY"}}
+  </td>
+  <td>
+    {{#if showSplit}}
+      Split
+    {{/if}}
+    {{#if showApproveForTransmittal}}
+      <a href="#" {{action 'approveCredit'}} >
+        {{#if isApproved}}
+          Un-approve
+        {{else}}
+          Approve
+        {{/if}}
+      </a>
+    {{/if}}
   </td>
 </tr>
