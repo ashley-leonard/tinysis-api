@@ -16,6 +16,8 @@ Rails.application.routes.draw do
     get '/enrollments/:id', to: 'enrollments#show'
   
     get '/credit-assignments', to: 'credit_assignments#index'
+    put '/credit-assignments/:id/approve', to: 'credit_assignments#approve'
+    put '/credit-assignments/:id/unapprove', to: 'credit_assignments#unapprove'
   
     get '/notes', to: 'notes#index'
   

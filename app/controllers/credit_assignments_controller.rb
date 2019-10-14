@@ -43,4 +43,26 @@ class CreditAssignmentsController < ApplicationController
     render json: CreditAssignmentSerializer.new(result, options), status: 200
   end
 
+  def approve
+    credit_assignment = CreditAssignment.find params[:id]
+
+    credit_assignment.district_approve @user, approval_attributes[:district_finalize_approved_on]
+
+    render json: CreditAssignmentSerializer.new(credit_assignment, { params: { forFulfilled: true } })
+  end
+
+  def unapprove
+    credit_assignment = CreditAssignment.find params[:id]
+
+    credit_assignment.district_unapprove
+
+    render json: CreditAssignmentSerializer.new(credit_assignment, { params: { forFulfilled: true } })
+  end
+  
+protected
+  def approval_attributes
+    params.require(:data)
+      .require(:attributes)
+      .permit(:district_finalize_approved_on)
+  end
 end

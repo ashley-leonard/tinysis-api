@@ -6,7 +6,6 @@ class CreditAssignmentSerializer < ApplicationSerializer
   attributes :enrollment_finalized_on,
     :contract_name,
     :contract_facilitator_name,
-    :district_finalize_approved,
     :district_finalize_approved_by,
     :district_finalize_approved_on,
     :district_transmitted_on,
