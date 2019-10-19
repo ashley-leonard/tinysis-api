@@ -2,10 +2,10 @@
   <li class="filter-item">
     <TSelect
       @options={{schoolYearOptions}}
-      @value={{queryParams}}.schoolYear
+      @value={{queryParams.schoolYear}}
       name="schoolYear"
       @onchange={{action "onSelect"}}
-    >
+    />
   </li>
   <li class="filter-item">
     <TSelect
@@ -14,6 +14,6 @@
       name="status"
       @prompt="Any status"
       @onchange={{action "onSelect"}}
-    >
+    />
   </li>
 </ul>

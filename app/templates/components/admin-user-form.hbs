@@ -46,7 +46,7 @@
         @options={{roleOptions}}
         name="role"
         @onchange={{action "onChange"}}
-      >
+      />
     {{/form-input}}
   </p>
 </fieldset>
@@ -132,7 +132,7 @@
           @optionValuePath="id"
           name="coordinator"
           @onchange={{action "handleCoordinatorChange"}}
-        >
+        />
       {{/form-input}}
     </p>
     <p>
@@ -154,8 +154,8 @@
           @value={{pojo.districtGrade}}
           @options={{grades}}
           name="districtGrade"
-          @onchange=(action "onChange")
-        >
+          @onchange={{action "onChange"}}
+        />
       {{/form-input}}
     </p>
   </fieldset>

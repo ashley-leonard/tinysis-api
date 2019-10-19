@@ -1,6 +1,28 @@
-import { get } from '@ember/object';
 import { isPresent } from '@ember/utils';
 
+/*
+ * A plugin validator with a DSL for defining validation rules,
+ * and a data checker that validates and returns feedback
+ * about errors.
+ *
+ * validation types:
+ *
+ * required: the value or relationship must be present
+ * format: the value must match a regex. not sensible for relationships
+ * valid: the value is passed to a helper function to validate and return an error
+ *
+ * options:
+ *
+ * if: fn(key, value, pojo, relationships) callback returns false to skip validation
+ * message: optional text to display as message
+ *
+ * example:
+ *    new Validator({
+ *      name: { type: 'required' },
+ *      age: { type: 'required', message: 'You\'re not old enough' },
+ *      zip: { type: 'format', regex: /^\d{5}(-\d{4})?&/ },
+ *    })
+ */
 export default class Validator {
   constructor(validations = {}) {
     this.validations = validations;
@@ -35,7 +57,7 @@ export default class Validator {
     return validation.message || 'Please check the value';
   }
 
-  validate(pojo) {
+  validate(pojo, relationships = {}) {
     const { validations } = this;
     let validationResult = {
       isInvalid: false,
@@ -44,8 +66,17 @@ export default class Validator {
 
     Object.keys(validations)
       .forEach((key) => {
-        let fieldCollection = get(validations, key);
-        const value = get(pojo, key);
+        const relationshipsMatch = /relationships\.(\w+)/.exec(key);
+
+        let fieldCollection = validations[key];
+        let value;
+
+        if (relationshipsMatch) {
+          const [, relationshipsKey] = relationshipsMatch;
+          value = relationships[relationshipsKey];
+        } else {
+          value = pojo[key];
+        }
 
         if (!Array.isArray(fieldCollection)) {
           fieldCollection = [fieldCollection];

@@ -3,6 +3,9 @@ import { computed } from '@ember/object';
 
 export default Component.extend({
   selectedCredits: (() => ([]))(),
+  combineLinkDisabled: computed('selectedCredits', function () {
+    return this.selectedCredits.length < 2;
+  }),
   unfinalizedCredits: computed('creditAssignments', function () {
     return this.creditAssignments
       .filter(ca => !ca.relationships.creditTransmittalBatch.data);
@@ -12,7 +15,7 @@ export default Component.extend({
       this.approveCredit(creditAssignment);
     },
     combineCredits() {
-      console.log(this.selectedCredits);
+      this.showCombine(this.selectedCredits);
     },
     splitCredit(creditAssignment) {
 

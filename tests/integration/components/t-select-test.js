@@ -37,7 +37,7 @@ module('Integration | Component | t-select', (hooks) => {
         @value={{value}}
         name=name
         @onchange={{onChange}}
-      >
+      />
     `);
 
     const selects = this.element.querySelectorAll('select');
@@ -60,7 +60,7 @@ module('Integration | Component | t-select', (hooks) => {
         @value={{value}}
         name=name
         @onchange={{onChange}}
-      >
+      />
     `);
 
     options = Array.prototype.slice.call(this.element.querySelectorAll('option'));
@@ -93,7 +93,7 @@ module('Integration | Component | t-select', (hooks) => {
         @optionNamePath="name"
         @optionValuePath="id"
         @onchange={{onChange}}
-      >
+      />
     `);
 
     const selects = this.element.querySelectorAll('select');
@@ -118,7 +118,7 @@ module('Integration | Component | t-select', (hooks) => {
         @optionNamePath="name"
         @optionValuePath="id"
         @onchange={{onChange}}
-      >
+      />
     `);
 
     options = findAll('option');

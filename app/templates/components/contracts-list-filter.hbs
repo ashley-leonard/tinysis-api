@@ -4,8 +4,8 @@
       @options={{schoolYears}}
       @value={{queryParams.schoolYear}}
       name="schoolYear"
-      @onchange=(action "onSelect")
-    >
+      @onchange={{action "onSelect"}}
+    />
   </li>
   <li class="filter-item">
     <TSelect
@@ -16,7 +16,7 @@
       @optionValuePath="id"
       @optionNamePath="attributes.name"
       @onchange={{action "onSelect"}}
-    >
+    />
   </li>
   <li class="filter-item">
     <TSelect
@@ -27,7 +27,7 @@
       @optionValuePath="id"
       @optionNamePath="name"
       @onchange={{action "onSelect"}}
-    >
+    />
   </li>
   <li class="filter-item">
     <TSelect
@@ -38,7 +38,7 @@
       @optionValuePath="id"
       @optionNamePath="attributes.name"
       @onchange={{action "onSelect"}}
-    >
+    />
   </li>
   <li class="filter-item">
     <TSelect
@@ -47,6 +47,6 @@
       name="status"
       @prompt="Any status"
       @onchange={{action "onSelect"}}
-    >
+    />
   </li>
 </ul>

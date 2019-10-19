@@ -8,6 +8,8 @@ export default Component.extend(CreditAssignmentPropsMixin, {
   tagName: '',
   selected: false,
 
+  showApproveForTransmittal: computed('creditAssignment', () => true),
+
   selectionDisabled: computed('disabled', 'hasChildren', function () {
     if (this.disabled) {
       return true;
@@ -18,10 +20,6 @@ export default Component.extend(CreditAssignmentPropsMixin, {
 
   showSplit: computed('hasChildren', function () {
     return this.hasChildren;
-  }),
-
-  showApproveForTransmittal: computed('creditAssignment', function () {
-    return true;
   }),
 
   actions: {

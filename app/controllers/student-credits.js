@@ -1,16 +1,37 @@
 import Controller from '@ember/controller';
 import dayjs from 'dayjs';
 import { inject as service } from '@ember/service';
+import { computed } from '@ember/object';
+import { resolve } from 'rsvp';
 import { replaceModel } from '../utils/json-api';
 
 export default Controller.extend({
   tinyData: service(),
   actions: {
-    combineCredits(creditAssignments) {
-      console.log('send combineCredits', creditAssignments);
+    updateSelectedCredits(creditAssignments) {
+      this.set('selectedCredits', creditAssignments);
+    },
+    combineCredits(combineModel) {
+      console.log('send combineCredits', combineModel);
+      return resolve();
     },
     splitCredit(creditAssignment) {
       console.log('send splitCredit', creditAssignment);
+    },
+    hideCombine() {
+      this.set('showCombineDialog', false);
+    },
+    async showCombine(creditsToCombine) {
+      if (!this.terms) {
+        const terms = await this.tinyData.fetch('/api/terms?status=active');
+        this.terms = terms.data;
+      }
+
+      this.setProperties({
+        creditsToCombine,
+        showCombineDialog: true,
+        terms: this.terms,
+      });
     },
     async approveCredit(creditAssignment) {
       const isApproved = Boolean(creditAssignment.attributes.districtFinalizeApprovedOn);

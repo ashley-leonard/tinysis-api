@@ -20,6 +20,7 @@ nav.toolbar {
   }
 }
 
+
 ul.filter {
   @apply flex list-reset my-4;
 }
@@ -29,6 +30,18 @@ ul.filter {
 
   label {
     @apply pr-2;
+  }
+}
+
+a, t-link {
+  text-decoration: none;
+  cursor: pointer;
+  &:hover {
+    text-decoration: underline;
+  }
+
+  &[disabled] {
+    @apply text-gray-500;
   }
 }
 

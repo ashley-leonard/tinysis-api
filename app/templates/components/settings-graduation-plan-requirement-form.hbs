@@ -19,7 +19,7 @@
         @value={{pojo.status}}
         name="status"
         @onchange={{action "onChange"}}
-      >
+      />
     {{/form-input}}
   </p>
   <p>
@@ -29,7 +29,7 @@
         name="notes"
         value={{pojo.notes}}
         onchange={{action "onChange"}}
-      ></textarea>
+      />
     {{/form-input}}
   </p>
   <p>
@@ -40,7 +40,7 @@
         @value={{requirementType}}
         name="requirementType"
         @onchange={{action (mut pojo.requirementType)}}
-      >
+      />
     {{/form-input}}
   </p>
 </fieldset>
@@ -55,7 +55,7 @@
         options={{parentOptions}}
         name="parentId"
         onchange={{action (mut parentId)}}
-      >
+      />
     {{/form-input}}
   </p>
 </fieldset>

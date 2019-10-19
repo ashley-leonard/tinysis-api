@@ -17,7 +17,7 @@
         name="role"
         @prompt="All roles"
         @onchange={{action "onSelect"}}
-      >
+      />
     </li>
   {{/if}}
   {{#if showStatus}}
@@ -28,7 +28,7 @@
         name="status"
         @prompt="Any status"
         @onchange={{action "onSelect"}}
-      >
+      />
     </li>
   {{/if}}
   <li class="filter-item" data-test-coordinator>
@@ -41,7 +41,7 @@
       @optionNamePath="name"
       disabled={{isStaff}}
       @onchange={{action "onSelect"}}
-    >
+    />
   </li>
   <li class="filter-item" data-test-grade>
     <TSelect
@@ -51,7 +51,7 @@
       @prompt="Any grade"
       disabled={{isStaff}}
       @onchange={{action "onSelect"}}
-    >
+    />
   </li>
   <li class="filter-item" data-test-year>
     <TSelect
@@ -61,7 +61,7 @@
       prompt="Any year"
       @disabled={{isStaff}}
       @onchange={{action "onSelect"}}
-    >
+    />
   </li>
   <li class="filter-item" data-test-submit>
     <button type="submit" class="btn">

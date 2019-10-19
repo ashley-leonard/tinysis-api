@@ -3,11 +3,11 @@
     <input
       type="checkbox"
       checked={{selected}}
-      onchange={{action 'selectCredit'}}
+      onchange={{action "selectCredit"}}
       disabled={{selectionDisabled}}
-    />
+    >
   </td>
-  <td>
+  <td onclick={{action "selectCredit"}} class="cursor-pointer">
     {{courseName}}
   </td>
   <td>
@@ -30,12 +30,13 @@
       Split
     {{/if}}
     {{#if showApproveForTransmittal}}
-      <a href="#" {{action 'approveCredit'}} >
+      <a href="#" {{action "approveCredit"}} >
         {{#if isApproved}}
-          Un-approve
+          <span class="fas fa-times text-red-700" />
         {{else}}
-          Approve
+          <span class="fas fa-check text-green-700" />
         {{/if}}
+        Approve
       </a>
     {{/if}}
   </td>
