@@ -11,7 +11,7 @@ let creditAssignments;
 let student;
 let requests;
 
-module('Integration | Component | finalized-credits', (hooks) => {
+module('Integration | Component | credits-finalized', (hooks) => {
   setupRenderingTest(hooks);
 
   hooks.beforeEach(function () {
@@ -30,12 +30,11 @@ module('Integration | Component | finalized-credits', (hooks) => {
 
   test('it renders with finalized credits', async function (assert) {
     await render(hbs`
-      {{finalized-credits
+      {{credits-finalized
         student=student
         creditAssignments=creditAssignments
       }}
     `);
-    debugger;
     assert.equal(this.element.textContent.trim(), '');
   });
 });
