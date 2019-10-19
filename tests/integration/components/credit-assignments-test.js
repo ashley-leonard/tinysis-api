@@ -29,4 +29,17 @@ module('Integration | Component | credit-assignments', (hooks) => {
 
     assert.equal(this.element.querySelectorAll('ul.credit-assignments li').length, expectedCreditAssignments.length, 'list items count is correct');
   });
+
+  test('it renders a null list', async function (assert) {
+    this.set('creditAssignments', null);
+
+    await render(hbs`
+      {{credit-assignments
+        creditAssignments=creditAssignments
+      }}
+    `);
+
+    assert.equal(this.element.querySelectorAll('ul.credit-assignments').length, 0, 'List not rendered');
+    assert.equal(this.element.querySelectorAll('p.no-results').length, 1, 'No-results paragraph rendered');
+  });
 });

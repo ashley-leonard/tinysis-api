@@ -10,7 +10,11 @@ export default Mixin.create({
     return term;
   }),
   childCreditAssignments: computed('creditAssignment', function () {
-    return this.creditAssignment.relationships.childCreditAssignments.data;
+    if (!this.creditAssignment.relationships.childCreditAssignments.data) return null;
+
+    const { tinyData } = this;
+    return this.creditAssignment.relationships.childCreditAssignments.data
+      .map(ca => tinyData.get('creditAssignment', ca.id));
   }),
   hasChildren: computed('creditAssignment', function () {
     return this.creditAssignment.relationships.childCreditAssignments.data && this.creditAssignment.relationships.childCreditAssignments.data.length > 0;
