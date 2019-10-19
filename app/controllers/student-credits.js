@@ -1,7 +1,6 @@
 import Controller from '@ember/controller';
 import dayjs from 'dayjs';
 import { inject as service } from '@ember/service';
-import { computed } from '@ember/object';
 import { resolve } from 'rsvp';
 import { replaceModel } from '../utils/json-api';
 
