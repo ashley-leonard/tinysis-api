@@ -40,13 +40,13 @@
   <p>
     {{#form-input error=errors.role showError=showErrors}}
       User type
-      {{t-select
-        value=pojo.role
-        prompt="Select a user type"
-        options=roleOptions
+      <TSelect
+        @value={{pojo.role}}
+        @prompt="Select a user type"
+        @options={{roleOptions}}
         name="role"
-        onchange=(action "onChange")
-      }}
+        @onchange={{action "onChange"}}
+      >
     {{/form-input}}
   </p>
 </fieldset>
@@ -125,15 +125,14 @@
     <p>
       {{#form-input error=errors.coordinator showError=showErrors}}
         Coordinator
-        {{t-select
-          prompt="None assigned"
-          value=pojo.coordinatorId
-          options=coordinatorOptions
-          optionValuePath="id"
+        <TSelect
+          @prompt="None assigned"
+          @value={{pojo.coordinatorId}}
+          @options={{coordinatorOptions}}
+          @optionValuePath="id"
           name="coordinator"
-          onchange=(action "handleCoordinatorChange")
-          bubbles=false
-        }}
+          @onchange={{action "handleCoordinatorChange"}}
+        >
       {{/form-input}}
     </p>
     <p>
@@ -150,13 +149,13 @@
     <p>
       {{#form-input error=errors.districtGrade showError=showErrors}}
         Grade level
-        {{t-select
-          prompt="None assigned"
-          value=pojo.districtGrade
-          options=grades
+        <TSelect
+          @prompt="None assigned"
+          @value={{pojo.districtGrade}}
+          @options={{grades}}
           name="districtGrade"
-          onchange=(action "onChange")
-        }}
+          @onchange=(action "onChange")
+        >
       {{/form-input}}
     </p>
   </fieldset>

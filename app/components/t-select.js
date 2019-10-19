@@ -3,11 +3,9 @@ import { get, computed } from '@ember/object';
 import { capitalize } from '../helpers/titleize';
 
 export default Component.extend({
-  tagName: 'select',
+  tagName: '',
   optionValuePath: 'value',
   optionNamePath: 'name',
-  attributeBindings: ['name', 'disabled'],
-  bubbles: true,
   onchange: () => {},
 
   /**
@@ -42,14 +40,14 @@ export default Component.extend({
       });
   }),
 
-  change(event) {
-    const select = event.target;
-    const { name } = select;
-    const [option] = select.selectedOptions;
-    const value = option && option.value;
+  actions: {
+    onChange(event) {
+      const select = event.target;
+      const { name } = select;
+      const [option] = select.selectedOptions;
+      const value = option && option.value;
 
-    this.onchange(value, name, event);
-
-    return this.bubbles;
+      this.onchange(value, name, event);
+    },
   },
 });

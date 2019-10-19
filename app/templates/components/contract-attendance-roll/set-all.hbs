@@ -3,21 +3,21 @@
     <ul class="filter items-center">
       <li class="filter-item flex items-center">
         <label>Mark all enrollees:</label>
-        {{t-select
+        <TSelect
           name="participation"
-          value=participation
-          options=participationOptions
-          onchange=(action (mut participation))
-        }}
+          @value={{participation}}
+          @options={{participationOptions}}
+          @onchange={{action (mut participation)}}
+        >
       </li>
       <li class="filter-item flex items-center">
         <label>Contact type:</label>
-        {{t-select
+        <TSelect
           name="contactType"
-          value=contactType
-          options=contactTypeOptions
-          onchange=(action (mut contactType))
-        }}
+          @value={{contactType}}
+          @options={{contactTypeOptions}}
+          @onchange={{action (mut contactType)}}
+        >
       </li>
       <li class="filter-item items-center" data-test-submit>
         <button type="submit" class="btn">

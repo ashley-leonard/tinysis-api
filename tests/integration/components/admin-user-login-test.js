@@ -133,7 +133,7 @@ module('Integration | Component | admin-user-login', (hooks) => {
 
   test('login needs to be activated', async function (assert) {
     const savedLogin = login;
-    
+
     login = null;
 
     await renderComponent();

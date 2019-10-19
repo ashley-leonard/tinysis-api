@@ -14,12 +14,12 @@
   <p>
     {{#form-input}}
       Status
-      {{t-select
-        options=statusOptions
-        value=pojo.status
+      <TSelect
+        @options={{statusOptions}}
+        @value={{pojo.status}}
         name="status"
-        onchange=(action "onChange")
-      }}
+        @onchange={{action "onChange"}}
+      >
     {{/form-input}}
   </p>
   <p>
@@ -35,12 +35,12 @@
   <p>
     {{#form-input}}
       Requirement type
-      {{t-select
-        options=requirementTypeOptions
-        value=requirementType
+      <TSelect
+        @options={{requirementTypeOptions}}
+        @value={{requirementType}}
         name="requirementType"
-        onchange=(action (mut pojo.requirementType))
-      }}
+        @onchange={{action (mut pojo.requirementType)}}
+      >
     {{/form-input}}
   </p>
 </fieldset>
@@ -49,20 +49,20 @@
   <p>
     {{#form-input error=errors.parent showError=showErrors}}
       Parent requirement
-      {{t-select
-        value=parentId
+      <TSelect
+        @value={{parentId}}
         prompt="Select a requirement"
-        options=parentOptions
+        options={{parentOptions}}
         name="parentId"
-        onchange=(action (mut parentId))
-      }}
+        onchange={{action (mut parentId)}}
+      >
     {{/form-input}}
   </p>
 </fieldset>
 
 {{#t-form-actions-row
   disabled=disabled
-}}
+}}action (mut parentId)
   {{#link-to "settings-graduation-plan-requirements" class="btn btn-clear"}}
     Cancel
   {{/link-to}}

@@ -27,25 +27,25 @@
   <p>
     {{#form-input error=errors.courseType showError=showErrors}}
       Course type
-      {{t-select
-        value=pojo.courseType
-        prompt="Select a course type"
-        options=courseTypeOptions
+      <TSelect
+        @value={{pojo.courseType}}
+        @prompt="Select a course type"
+        @options={{courseTypeOptions}}
         name="courseType"
-        onchange=(action "onChange")
-      }}
+        @onchange={{action "onChange"}}
+      >
     {{/form-input}}
   </p>
 
   <p>
     {{#form-input error=errors.status showError=showErrors}}
       Status
-      {{t-select
-        value=pojo.status
-        options=statusOptions
+      <TSelect
+        @value={{pojo.status}}
+        @options={{statusOptions}}
         name="status"
-        onchange=(action "onChange")
-      }}
+        @onchange={{action "onChange"}}
+      >
     {{/form-input}}
   </p>
 </fieldset>

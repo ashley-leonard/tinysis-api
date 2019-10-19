@@ -39,12 +39,6 @@ export default Controller.extend({
     }
     return yearOptions;
   }),
-  termOptions: computed('terms', function () {
-    return this.terms.map(term => ({
-      name: term.attributes.name,
-      value: term.id,
-    }));
-  }),
   monthOptions: computed(() => [
     'January',
     'February',

@@ -31,13 +31,13 @@ module('Integration | Component | t-select', (hooks) => {
     this.name = 'test';
 
     await render(hbs`
-      {{t-select
-        prompt="select something"
-        options=simpleOptions
-        value=value
+      <TSelect
+        @prompt="select something"
+        @options={{simpleOptions}}
+        @value={{value}}
         name=name
-        onchange=onChange
-      }}
+        @onchange={{onChange}}
+      >
     `);
 
     const selects = this.element.querySelectorAll('select');
@@ -54,13 +54,13 @@ module('Integration | Component | t-select', (hooks) => {
     this.set('value', '1');
 
     await render(hbs`
-      {{t-select
-        prompt="select something"
-        options=simpleOptions
-        value=value
+      <TSelect
+        @prompt="select something"
+        @options={{simpleOptions}}
+        @value={{value}}
         name=name
-        onchange=onChange
-      }}
+        @onchange={{onChange}}
+      >
     `);
 
     options = Array.prototype.slice.call(this.element.querySelectorAll('option'));
@@ -85,15 +85,15 @@ module('Integration | Component | t-select', (hooks) => {
     this.name = 'test';
 
     await render(hbs`
-      {{t-select
-        prompt="select something"
-        options=objectOptions
-        value=value
-        name=name
-        optionNamePath="name"
-        optionValuePath="id"
-        onchange=onChange
-      }}
+      <TSelect
+        @prompt="select something"
+        @options={{objectOptions}}
+        @value={{value}}
+        name={{name}}
+        @optionNamePath="name"
+        @optionValuePath="id"
+        @onchange={{onChange}}
+      >
     `);
 
     const selects = this.element.querySelectorAll('select');
@@ -110,15 +110,15 @@ module('Integration | Component | t-select', (hooks) => {
     this.set('value', 'red');
 
     await render(hbs`
-      {{t-select
-        prompt="select something"
-        options=objectOptions
-        value=value
-        name=name
-        optionNamePath="name"
-        optionValuePath="id"
-        onchange=onChange
-      }}
+      <TSelect
+        @prompt="select something"
+        @options={{objectOptions}}
+        @value={{value}}
+        name={{name}}
+        @optionNamePath="name"
+        @optionValuePath="id"
+        @onchange={{onChange}}
+      >
     `);
 
     options = findAll('option');

@@ -11,26 +11,26 @@
       >
     </li>
     <li class="filter-item" data-test-status>
-      {{t-select
-        options=courseTypeOptions
-        value=queryParams.courseType
+      <TSelect
+        @options={{courseTypeOptions}}
+        @value={{queryParams.courseType}}
         name="courseType"
-        prompt="Any type"
-        optionValuePath="courseType"
-        optionNamePath="name"
-        onchange=(action "onChangeStatus")
-      }}
+        @prompt="Any type"
+        @optionValuePath="courseType"
+        @optionNamePath="name"
+        @onchange={{action "onChangeStatus"}}
+      >
     </li>
     <li class="filter-item" data-test-status>
-      {{t-select
-        options=statusOptions
-        value=queryParams.status
+      <TSelect
+        @options={{statusOptions}}
+        @value={{queryParams.status}}
         name="status"
-        prompt="Any status"
-        optionValuePath="courseType"
-        optionNamePath="name"
-        onchange=(action "onChangeStatus")
-      }}
+        @prompt="Any status"
+        @optionValuePath="courseType"
+        @optionNamePath="name"
+        @onchange={{action "onChangeStatus"}}
+      >
     </li>
     <li class="filter-item" data-test-submit>
       <button type="submit" class="btn">

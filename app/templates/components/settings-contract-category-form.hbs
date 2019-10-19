@@ -27,12 +27,12 @@
   <p>
     {{#form-input error=errors.name showError=showErrors}}
       Reporting
-      {{t-select
+      <TSelect
         name="reporting"
-        value=pojo.reporting
-        options=reportingOptions
-        onchange=(action "onChange")
-      }}
+        @value={{pojo.reporting}}
+        @options={{reportingOptions}}
+        @onchange={{action "onChange"}}
+      >
     {{/form-input}}
   </p>
   <p>

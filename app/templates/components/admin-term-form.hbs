@@ -14,12 +14,12 @@
   <p>
     {{#form-input error=errors.schoolYear showError=showErrors}}
       School year
-      {{t-select
-        value=pojo.schoolYear
-        options=sortedSchoolYears
+      <TSelect
         name="schoolYear"
-        onchange=(action "didChangeSchoolYear")
-      }}
+        @value={{pojo.schoolYear}}
+        @options={{sortedSchoolYears}}
+        @onchange={{action "didChangeSchoolYear"}}
+      >
     {{/form-input}}
   </p>
   <p>
