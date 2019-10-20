@@ -4,7 +4,7 @@ import layout from '../templates/components/t-select';
 
 export default TSelect.extend({
   layout,
-  options: computed('terms', function () {
+  optionsList: computed('terms', function () {
     return this.terms
       .sort((t1, t2) => {
         const year = t2.attributes.schoolYear - t1.attributes.schoolYear;
