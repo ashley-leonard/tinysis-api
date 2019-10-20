@@ -68,7 +68,9 @@ export default Component.extend({
    *   { boo: { id: 1, type: 'foo' } }
    */
   normalizeRelationships(model) {
-    const modelRelationships = model.relationships || {};
+    const modelRelationships = model.relationships;
+    if (!modelRelationships) return null;
+
     const relationships = Object.keys(modelRelationships)
       .reduce((memo, key) => {
         memo[key] = modelRelationships[key].data;
@@ -78,13 +80,22 @@ export default Component.extend({
   },
 
   serializeModel(pojo, model, relationships) {
-    return {
+    const serialized = {
       ...model,
       attributes: {
         ...pojo,
       },
-      relationships,
     };
+
+    // with relationships if present
+    if (relationships) {
+      return {
+        ...serialized,
+        relationships,
+      };
+    }
+
+    return serialized;
   },
 
   updatePojo(updates, updatePath = 'pojo') {
