@@ -1,7 +1,7 @@
 <ul class="filter">
   <li class="filter-item">
     <TSelect
-      @options={{schoolYears}}
+      @optionsList={{schoolYears}}
       @value={{queryParams.schoolYear}}
       name="schoolYear"
       @onchange={{action "onSelect"}}
@@ -9,7 +9,7 @@
   </li>
   <li class="filter-item">
     <TSelect
-      @options={{terms}}
+      @optionsList={{terms}}
       @value={{queryParams.term}}
       name="term"
       @prompt={{termsPrompt}}
@@ -20,7 +20,7 @@
   </li>
   <li class="filter-item">
     <TSelect
-      @options={{facilitatorOptions}}
+      @optionsList={{facilitatorOptions}}
       @value={{queryParams.facilitator}}
       name="facilitator"
       @prompt="All facilitators"
@@ -31,7 +31,7 @@
   </li>
   <li class="filter-item">
     <TSelect
-      @options={{categories}}
+      @optionsList={{categories}}
       @value={{queryParams.category}}
       name="category"
       @prompt="All categories"
@@ -42,7 +42,7 @@
   </li>
   <li class="filter-item">
     <TSelect
-      @options={{statuses}}
+      @optionsList={{statuses}}
       @value={{queryParams.status}}
       name="status"
       @prompt="Any status"

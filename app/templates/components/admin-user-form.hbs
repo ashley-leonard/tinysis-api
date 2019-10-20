@@ -43,7 +43,7 @@
       <TSelect
         @value={{pojo.role}}
         @prompt="Select a user type"
-        @options={{roleOptions}}
+        @optionsList={{roleOptions}}
         name="role"
         @onchange={{action "onChange"}}
       />
@@ -128,7 +128,7 @@
         <TSelect
           @prompt="None assigned"
           @value={{pojo.coordinatorId}}
-          @options={{coordinatorOptions}}
+          @optionsList={{coordinatorOptions}}
           @optionValuePath="id"
           name="coordinator"
           @onchange={{action "handleCoordinatorChange"}}
@@ -152,7 +152,7 @@
         <TSelect
           @prompt="None assigned"
           @value={{pojo.districtGrade}}
-          @options={{grades}}
+          @optionsList={{grades}}
           name="districtGrade"
           @onchange={{action "onChange"}}
         />

@@ -30,7 +30,7 @@
       <TSelect
         @value={{pojo.courseType}}
         @prompt="Select a course type"
-        @options={{courseTypeOptions}}
+        @optionsList={{courseTypeOptions}}
         name="courseType"
         @onchange={{action "onChange"}}
       />
@@ -42,7 +42,7 @@
       Status
       <TSelect
         @value={{pojo.status}}
-        @options={{statusOptions}}
+        @optionsList={{statusOptions}}
         name="status"
         @onchange={{action "onChange"}}
       />

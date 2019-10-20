@@ -17,7 +17,7 @@
           Current school year
           <t-help>This is the year in which the Fall term begins. By default, screens show terms for the current year only</t-help>
           <TSelect
-            @options={{yearOptions}}
+            @optionsList={{yearOptions}}
             @value={{form.pojo.current_year}}
             name="current_year"
             @prompt="Choose a school year"
@@ -34,7 +34,7 @@
           First month of school year
           <t-help>COOR status reporting begins at the starting month</t-help>
           <TSelect
-            @options={{monthOptions}}
+            @optionsList={{monthOptions}}
             @value={{form.pojo.reporting_base_month}}
             name="reporting_base_month"
             @prompt="Choose a starting month"
@@ -51,7 +51,7 @@
           Last month of school year
           <t-help>COOR status reporting ends on the ending month</t-help>
           <TSelect
-            @options={{monthOptions}}
+            @optionsList={{monthOptions}}
             @value={{form.pojo.reporting_end_month}}
             name="reporting_end_month"
             @prompt="Choose an ending month"

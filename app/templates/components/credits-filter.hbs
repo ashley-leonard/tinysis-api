@@ -12,7 +12,7 @@
     </li>
     <li class="filter-item" data-test-status>
       <TSelect
-        @options={{courseTypeOptions}}
+        @optionsList={{courseTypeOptions}}
         @value={{queryParams.courseType}}
         name="courseType"
         @prompt="Any type"
@@ -23,7 +23,7 @@
     </li>
     <li class="filter-item" data-test-status>
       <TSelect
-        @options={{statusOptions}}
+        @optionsList={{statusOptions}}
         @value={{queryParams.status}}
         name="status"
         @prompt="Any status"

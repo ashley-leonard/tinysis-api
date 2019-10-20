@@ -12,7 +12,7 @@
   {{#if showRole}}
     <li class="filter-item" data-test-role>
       <TSelect
-        @options={{roleOptions}}
+        @optionsList={{roleOptions}}
         @value={{queryParams.role}}
         name="role"
         @prompt="All roles"
@@ -23,7 +23,7 @@
   {{#if showStatus}}
     <li class="filter-item" data-test-status>
       <TSelect
-        @options={{statusOptions}}
+        @optionsList={{statusOptions}}
         @value={{queryParams.status}}
         name="status"
         @prompt="Any status"
@@ -33,7 +33,7 @@
   {{/if}}
   <li class="filter-item" data-test-coordinator>
     <TSelect
-      @options={{coordinatorOptions}}
+      @optionsList={{coordinatorOptions}}
       @value={{queryParams.coordinator}}
       name="coordinator"
       @prompt="All coordinators"
@@ -45,7 +45,7 @@
   </li>
   <li class="filter-item" data-test-grade>
     <TSelect
-      @options={{grades}}
+      @optionsList={{grades}}
       @value={{queryParams.grade}}
       name="grade"
       @prompt="Any grade"
@@ -55,7 +55,7 @@
   </li>
   <li class="filter-item" data-test-year>
     <TSelect
-      @options={{schoolYearsReversed}}
+      @optionsList={{schoolYearsReversed}}
       @value={{queryParams.schoolYear}}
       name="schoolYear"
       prompt="Any year"

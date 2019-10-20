@@ -33,9 +33,9 @@ module('Integration | Component | t-select', (hooks) => {
     await render(hbs`
       <TSelect
         @prompt="select something"
-        @options={{simpleOptions}}
+        @optionsList={{simpleOptions}}
         @value={{value}}
-        name=name
+        name={{name}}
         @onchange={{onChange}}
       />
     `);
@@ -56,9 +56,9 @@ module('Integration | Component | t-select', (hooks) => {
     await render(hbs`
       <TSelect
         @prompt="select something"
-        @options={{simpleOptions}}
+        @optionsList={{simpleOptions}}
         @value={{value}}
-        name=name
+        name={{name}}
         @onchange={{onChange}}
       />
     `);
@@ -87,7 +87,7 @@ module('Integration | Component | t-select', (hooks) => {
     await render(hbs`
       <TSelect
         @prompt="select something"
-        @options={{objectOptions}}
+        @optionsList={{objectOptions}}
         @value={{value}}
         name={{name}}
         @optionNamePath="name"
@@ -112,7 +112,7 @@ module('Integration | Component | t-select', (hooks) => {
     await render(hbs`
       <TSelect
         @prompt="select something"
-        @options={{objectOptions}}
+        @optionsList={{objectOptions}}
         @value={{value}}
         name={{name}}
         @optionNamePath="name"

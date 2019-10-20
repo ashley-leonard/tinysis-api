@@ -14,14 +14,14 @@ export default Component.extend({
    * changes are handled by the native control. So we don't
    * recompute this on value changes.
    */
-  optionSelections: computed('options', 'optionValuePath', 'optionNamePath', function () {
+  optionSelections: computed('optionsList', 'optionValuePath', 'optionNamePath', function () {
     const {
-      options,
+      optionsList,
       optionValuePath,
       optionNamePath,
     } = this;
 
-    return options
+    return optionsList
       .map((option) => {
         let opt;
         if (typeof option !== 'object') {

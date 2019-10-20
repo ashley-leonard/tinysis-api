@@ -15,7 +15,7 @@
     {{#form-input}}
       Status
       <TSelect
-        @options={{statusOptions}}
+        @optionsList={{statusOptions}}
         @value={{pojo.status}}
         name="status"
         @onchange={{action "onChange"}}
@@ -36,7 +36,7 @@
     {{#form-input}}
       Requirement type
       <TSelect
-        @options={{requirementTypeOptions}}
+        @optionsList={{requirementTypeOptions}}
         @value={{requirementType}}
         name="requirementType"
         @onchange={{action (mut pojo.requirementType)}}
@@ -51,10 +51,10 @@
       Parent requirement
       <TSelect
         @value={{parentId}}
-        prompt="Select a requirement"
-        options={{parentOptions}}
+        @prompt="Select a requirement"
+        @optionsList={{parentOptions}}
         name="parentId"
-        onchange={{action (mut parentId)}}
+        @onchange={{action (mut parentId)}}
       />
     {{/form-input}}
   </p>

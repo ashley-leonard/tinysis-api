@@ -4,10 +4,10 @@
   </td>
   <td>
     <TSelect
-      value={{meetingParticipant.attributes.contactType}}
+      @value={{meetingParticipant.attributes.contactType}}
       name="contactType"
-      options={{contactTypeOptions}}
-      onchange={{action "setMeetingType"}}
+      @optionsList={{contactTypeOptions}}
+      @onchange={{action "setMeetingType"}}
     />
   </td>
   {{#each participationOptions as |option|}}
