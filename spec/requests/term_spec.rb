@@ -3,8 +3,6 @@ require 'rails_helper'
 RSpec.describe 'Terms api', type: :request do
 
   before(:each) do
-    allow(JsonWebToken).to receive(:extract_permissions).and_return(['get:config'])
-
     @term1 = create :term, name: 'COOR test', school_year: 2018
     @term1.set_dates 2018, [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
     @term1.save!

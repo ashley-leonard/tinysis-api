@@ -3,8 +3,6 @@ require 'rails_helper'
 RSpec.describe 'Graduation plan mappings API', type: :request do
 
   before(:each) do
-    allow(JsonWebToken).to receive(:extract_permissions).and_return(['get:config', 'manage:own-reporting'])
-
     @staff1 = create :user, privilege: User::PRIVILEGE_STAFF, :email => Faker::Internet.email
 
     @student1 = create :user, coordinator: @staff1, date_active: Date.new(2018, 8, 1)

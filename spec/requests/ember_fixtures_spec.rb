@@ -89,8 +89,6 @@ RSpec.describe 'Ember fixtures script', type: :request do
   before(:each) do
     travel_to Date.new(CURRENT_YEAR, 11, 15) do
 
-      allow(JsonWebToken).to receive(:extract_permissions).and_return(['get:config', 'manage:config'])
-
       # clear our global settings from the test db
       Setting.destroy_all
 

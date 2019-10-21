@@ -3,7 +3,6 @@ require 'rails_helper'
 RSpec.describe 'Credits API', type: :request do
 
   before(:each) do
-    allow(JsonWebToken).to receive(:extract_permissions).and_return(['get:config'])
     Credit.create! course_name: 'Hello', course_id: '100', status: 'active', course_type: 'course'
     Credit.create! course_name: 'Goodbye', course_id: '200', status: 'active', course_type: 'course'
     Credit.create! course_name: 'General', course_id: '400', status: 'active', course_type: 'general'

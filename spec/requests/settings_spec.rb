@@ -2,10 +2,6 @@ require 'rails_helper'
 
 RSpec.describe 'Settings API', type: :request do
 
-  before(:each) do
-    allow(JsonWebToken).to receive(:extract_permissions).and_return(['get:config'])
-  end
-
   describe 'GET /api/settings' do
 
     it 'returns all settings' do
