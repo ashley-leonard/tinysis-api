@@ -91,6 +91,12 @@ RSpec.configure do |config|
     create :setting, name: 'current_year', value: 2018
   end
 
+  config.before(:each) do
+    @admin0 = create :user, privilege: User::PRIVILEGE_ADMIN, status: User::STATUS_ACTIVE, date_active: Date.new(2011, 7, 1), email: Faker::Internet.email
+    allow(JsonWebToken).to receive(:extract_permissions).and_return(['get:config', 'manage:config'])
+    allow(JsonWebToken).to receive(:extract_user_id).and_return(@admin0.id)
+  end
+
   config.around(:each) do |example|
     DatabaseCleaner.cleaning do
       example.run

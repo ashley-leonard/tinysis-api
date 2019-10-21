@@ -193,9 +193,11 @@ RSpec.describe 'Ember fixtures script', type: :request do
           enrollment = create :enrollment, participant: student, contract: contract, creator: contract.facilitator
           credit1 = create :credit_assignment, enrollment: enrollment, credit: @credit1, credit_hours: 0.25
           credit2 = create :credit_assignment, enrollment: enrollment, credit: @credit2, credit_hours: 0.5
+          credit3 = create :credit_assignment, enrollment: enrollment, credit: @credit2, credit_hours: 0.5
           create :note, note: "Note for #{student.last_name} for enrollment in #{contract.name}", notable: enrollment, creator: contract.facilitator
 
           finalized_credits.push credit1
+          finalized_credits.push credit2
 
           enrollment.set_closed Enrollment::COMPLETION_FULFILLED, contract.facilitator
           enrollment.set_finalized @admin1
@@ -205,7 +207,9 @@ RSpec.describe 'Ember fixtures script', type: :request do
       finalized_credits.each do |credit_assignment|
         credit_assignment.district_approve @admin1, Date.new(CURRENT_YEAR, 11, 15)
       end
-      CreditTransmittalBatch.create_batch @admin1
+
+      # create a batch with just the 0.25 credits
+      CreditTransmittalBatch.create_batch_from_credits_list @admin1, finalized_credits.filter{|ca| ca.credit_hours == 0.25 }
 
       # coor statuses for all months of the last coor
       @term_coor_last.months.each do |month|

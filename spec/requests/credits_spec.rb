@@ -65,7 +65,7 @@ RSpec.describe 'Credits API', type: :request do
     end
   end
 
-  describe "POST /api/admin/redits" do
+  describe "POST /api/admin/credits" do
     it 'can add one credit' do
       body = {
         data: {

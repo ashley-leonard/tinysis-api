@@ -1,6 +1,7 @@
 class CreditsController < ApplicationController
   def index
     limit = params[:limit] || Rails.configuration.constants[:DEFAULT_LIMIT]
+    limit = nil if limit == "-1"
 
     order = (params[:order] || '').split(',').map(&:underscore).join(',')
 

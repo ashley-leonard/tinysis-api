@@ -58,11 +58,39 @@ class CreditAssignmentsController < ApplicationController
 
     render json: CreditAssignmentSerializer.new(credit_assignment, { params: { forFulfilled: true } })
   end
+
+  def combine
+    term_id = combine_relation(:term)
+    credit_id = combine_relation(:credit)
+    attributes = combine_attributes
+    credit_assignment_ids = combine_relation(:child_credit_assignments)
+
+    Rails.logger.info term_id
+    Rails.logger.info credit_id
+    Rails.logger.info attributes
+    Rails.logger.info credit_assignment_ids
+
+    render nothing: true
+  end
   
 protected
   def approval_attributes
     params.require(:data)
       .require(:attributes)
       .permit(:district_finalize_approved_on)
+  end
+
+  def combine_attributes
+    params.require(:data)
+      .require(:attributes)
+      .permit(:note, :credits_override)
+  end
+
+  def combine_relation(relation)
+    params.require(:data)
+      .require(:relationships)
+      .require(relation)
+      .require(:data)
+      .require(:id)
   end
 end

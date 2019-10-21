@@ -18,7 +18,9 @@ Rails.application.routes.draw do
     get '/credit-assignments', to: 'credit_assignments#index'
     put '/credit-assignments/:id/approve', to: 'credit_assignments#approve'
     put '/credit-assignments/:id/unapprove', to: 'credit_assignments#unapprove'
-  
+    put '/credit-assignments/:id/combine', to: 'credit_assignments#combine'
+    put '/credit-assignments/:id/split', to: 'credit_assignments#split'
+
     get '/notes', to: 'notes#index'
   
     get '/contracts', to: 'contracts#index'

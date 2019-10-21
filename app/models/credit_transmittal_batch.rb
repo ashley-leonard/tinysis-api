@@ -16,7 +16,7 @@ class CreditTransmittalBatch < ApplicationRecord
   
     CreditTransmittalBatch.find_by_sql(sql.join(' '))
   end
-  
+
   def self.create_batch( user )
     count = CreditAssignment.count(APPROVED_CONDITIONS)
 
@@ -27,6 +27,23 @@ class CreditTransmittalBatch < ApplicationRecord
 
     CreditAssignment
       .where(APPROVED_CONDITIONS)
+      .update_all(["credit_transmittal_batch_id = ?", batch.id])
+
+    batch.reload
+    
+    return batch
+  end
+  
+  def self.create_batch_from_credits_list( user, credits_list )
+    count = credits_list.length
+
+    return nil if count==0
+
+    batch = CreditTransmittalBatch
+      .create!(:finalized_by => user.full_name, :finalized_on => Time.now.gmtime)
+
+    CreditAssignment
+      .where("id IN (?)", credits_list.map(&:id))
       .update_all(["credit_transmittal_batch_id = ?", batch.id])
 
     batch.reload
