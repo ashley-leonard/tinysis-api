@@ -8,7 +8,7 @@ require File.expand_path('../../config/environment', __FILE__)
 Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
 
 # Prevent database truncation if the environment is production
-abort("The Rails environment is running in production mode!") if Rails.env.production?
+abort('The Rails environment is running in production mode!') if Rails.env.production?
 
 require 'rspec/rails'
 
@@ -85,15 +85,19 @@ RSpec.configure do |config|
     DatabaseCleaner.clean_with(:truncation)
   end
 
+  # build settings
+  #
   config.before(:each) do
     create :setting, name: 'reporting_base_month', value: 9
     create :setting, name: 'reporting_end_month', value: 6
     create :setting, name: 'current_year', value: 2018
   end
 
+  # assume an admin user for all specs
+  #
   config.before(:each) do
     @admin0 = create :user, privilege: User::PRIVILEGE_ADMIN, status: User::STATUS_ACTIVE, date_active: Date.new(2011, 7, 1), email: Faker::Internet.email
-    allow(JsonWebToken).to receive(:extract_permissions).and_return(['get:config', 'manage:config'])
+    allow(JsonWebToken).to receive(:extract_permissions).and_return(['manage:all-reporting', 'manage:config', 'manage:own-reporting', 'read:config', 'read:reporting'])
     allow(JsonWebToken).to receive(:extract_user_id).and_return(@admin0.id)
   end
 
