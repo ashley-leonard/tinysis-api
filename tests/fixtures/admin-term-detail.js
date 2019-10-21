@@ -1,10 +1,10 @@
-// GET /api/terms/15
+// GET /api/terms/62
 export default {
   data: {
-    id: '15',
+    id: '62',
     type: 'term',
     attributes: {
-      name: 'Multi-channelled motivating flexibility',
+      name: 'Extended local flexibility',
       schoolYear: 2019,
       creditDate: '2020-01-31',
       months: [

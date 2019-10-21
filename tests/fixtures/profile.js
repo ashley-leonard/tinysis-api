@@ -1,17 +1,17 @@
 // GET /api/profile
 export default {
   data: {
-    id: '97',
+    id: '244',
     type: 'user',
     attributes: {
-      firstName: 'Claretha',
-      lastName: 'Gusikowski',
+      firstName: 'Scotty',
+      lastName: 'Mohr',
       nickname: null,
       dateActive: '2011-07-01',
       dateInactive: null,
       districtId: null,
       districtGrade: 12,
-      email: 'domingowalter@walker.io',
+      email: 'brittturcotte@ohara.co',
       status: 'active',
       role: 'administrator',
     },
@@ -25,8 +25,11 @@ export default {
   },
   meta: {
     permissions: [
-      'get:config',
+      'manage:all-reporting',
       'manage:config',
+      'manage:own-reporting',
+      'read:config',
+      'read:reporting',
     ],
   },
 };

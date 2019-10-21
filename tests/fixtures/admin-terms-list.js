@@ -2,7 +2,51 @@
 export default {
   data: [
     {
-      id: '18',
+      id: '60',
+      type: 'term',
+      attributes: {
+        name: 'Adaptive 6th generation function',
+        schoolYear: 2018,
+        creditDate: '2019-01-31',
+        months: [
+          '2018-09-01',
+          '2018-10-01',
+          '2018-11-01',
+          '2018-12-01',
+          '2019-01-01',
+        ],
+        status: 'active',
+      },
+      meta: {
+        contractsCount: 1,
+        enrollmentsCount: 2,
+        enrollmentsOpenCount: 0,
+      },
+    },
+    {
+      id: '61',
+      type: 'term',
+      attributes: {
+        name: 'Balanced content-based open architecture',
+        schoolYear: 2018,
+        creditDate: '2019-06-15',
+        months: [
+          '2019-02-01',
+          '2019-03-01',
+          '2019-04-01',
+          '2019-05-01',
+          '2019-06-01',
+        ],
+        status: 'active',
+      },
+      meta: {
+        contractsCount: 3,
+        enrollmentsCount: 4,
+        enrollmentsOpenCount: 0,
+      },
+    },
+    {
+      id: '65',
       type: 'term',
       attributes: {
         name: 'COOR Current',
@@ -29,7 +73,7 @@ export default {
       },
     },
     {
-      id: '17',
+      id: '64',
       type: 'term',
       attributes: {
         name: 'COOR Last',
@@ -56,32 +100,10 @@ export default {
       },
     },
     {
-      id: '14',
+      id: '63',
       type: 'term',
       attributes: {
-        name: 'Digitized analyzing leverage',
-        schoolYear: 2018,
-        creditDate: '2019-06-15',
-        months: [
-          '2019-02-01',
-          '2019-03-01',
-          '2019-04-01',
-          '2019-05-01',
-          '2019-06-01',
-        ],
-        status: 'active',
-      },
-      meta: {
-        contractsCount: 3,
-        enrollmentsCount: 4,
-        enrollmentsOpenCount: 0,
-      },
-    },
-    {
-      id: '16',
-      type: 'term',
-      attributes: {
-        name: 'Future-proofed 6th generation architecture',
+        name: 'Enhanced fault-tolerant archive',
         schoolYear: 2019,
         creditDate: '2020-06-15',
         months: [
@@ -100,10 +122,10 @@ export default {
       },
     },
     {
-      id: '15',
+      id: '62',
       type: 'term',
       attributes: {
-        name: 'Multi-channelled motivating flexibility',
+        name: 'Extended local flexibility',
         schoolYear: 2019,
         creditDate: '2020-01-31',
         months: [
@@ -119,28 +141,6 @@ export default {
         contractsCount: 2,
         enrollmentsCount: 6,
         enrollmentsOpenCount: 6,
-      },
-    },
-    {
-      id: '13',
-      type: 'term',
-      attributes: {
-        name: 'Virtual bandwidth-monitored architecture',
-        schoolYear: 2018,
-        creditDate: '2019-01-31',
-        months: [
-          '2018-09-01',
-          '2018-10-01',
-          '2018-11-01',
-          '2018-12-01',
-          '2019-01-01',
-        ],
-        status: 'active',
-      },
-      meta: {
-        contractsCount: 1,
-        enrollmentsCount: 2,
-        enrollmentsOpenCount: 0,
       },
     },
   ],

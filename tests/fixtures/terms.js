@@ -2,10 +2,10 @@
 export default {
   data: [
     {
-      id: '13',
+      id: '60',
       type: 'term',
       attributes: {
-        name: 'Virtual bandwidth-monitored architecture',
+        name: 'Adaptive 6th generation function',
         schoolYear: 2018,
         creditDate: '2019-01-31',
         months: [
@@ -20,10 +20,10 @@ export default {
       meta: null,
     },
     {
-      id: '14',
+      id: '61',
       type: 'term',
       attributes: {
-        name: 'Digitized analyzing leverage',
+        name: 'Balanced content-based open architecture',
         schoolYear: 2018,
         creditDate: '2019-06-15',
         months: [
@@ -38,10 +38,10 @@ export default {
       meta: null,
     },
     {
-      id: '15',
+      id: '62',
       type: 'term',
       attributes: {
-        name: 'Multi-channelled motivating flexibility',
+        name: 'Extended local flexibility',
         schoolYear: 2019,
         creditDate: '2020-01-31',
         months: [
@@ -56,10 +56,10 @@ export default {
       meta: null,
     },
     {
-      id: '16',
+      id: '63',
       type: 'term',
       attributes: {
-        name: 'Future-proofed 6th generation architecture',
+        name: 'Enhanced fault-tolerant archive',
         schoolYear: 2019,
         creditDate: '2020-06-15',
         months: [
@@ -74,7 +74,7 @@ export default {
       meta: null,
     },
     {
-      id: '17',
+      id: '64',
       type: 'term',
       attributes: {
         name: 'COOR Last',
@@ -97,7 +97,7 @@ export default {
       meta: null,
     },
     {
-      id: '18',
+      id: '65',
       type: 'term',
       attributes: {
         name: 'COOR Current',

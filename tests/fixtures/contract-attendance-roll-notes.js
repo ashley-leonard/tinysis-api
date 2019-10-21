@@ -5,7 +5,7 @@ export default {
       id: '72',
       type: 'note',
       attributes: {
-        note: 'Note by Johnson for student Bahringer / meeting 1',
+        note: 'Note by Mayer for student Dietrich / meeting 1',
         updatedAt: '2019-11-15T00:00:00.000Z',
       },
       relationships: {
@@ -17,7 +17,7 @@ export default {
         },
         creator: {
           data: {
-            id: '94',
+            id: '241',
             type: 'User',
           },
         },
@@ -27,7 +27,7 @@ export default {
       id: '73',
       type: 'note',
       attributes: {
-        note: 'Note by Johnson for student Kunze / meeting 1',
+        note: 'Note by Mayer for student Murphy / meeting 1',
         updatedAt: '2019-11-15T00:00:00.000Z',
       },
       relationships: {
@@ -39,7 +39,7 @@ export default {
         },
         creator: {
           data: {
-            id: '94',
+            id: '241',
             type: 'User',
           },
         },
@@ -49,7 +49,7 @@ export default {
       id: '74',
       type: 'note',
       attributes: {
-        note: 'Note by Johnson for student Mann / meeting 1',
+        note: 'Note by Mayer for student Kutch / meeting 1',
         updatedAt: '2019-11-15T00:00:00.000Z',
       },
       relationships: {
@@ -61,7 +61,7 @@ export default {
         },
         creator: {
           data: {
-            id: '94',
+            id: '241',
             type: 'User',
           },
         },
@@ -70,17 +70,17 @@ export default {
   ],
   included: [
     {
-      id: '94',
+      id: '241',
       type: 'user',
       attributes: {
-        firstName: 'Lou',
-        lastName: 'Johnson',
+        firstName: 'Bong',
+        lastName: 'Mayer',
         nickname: null,
         dateActive: '2012-09-01',
         dateInactive: null,
         districtId: null,
         districtGrade: 12,
-        email: 'joy@schimmelmacejkovic.com',
+        email: 'kenakulas@pourotamm.com',
         status: 'active',
         role: 'staff',
       },
@@ -88,7 +88,7 @@ export default {
         coordinatees: {
           data: [
             {
-              id: '98',
+              id: '245',
               type: 'user',
             },
           ],

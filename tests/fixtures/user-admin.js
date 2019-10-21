@@ -1,11 +1,11 @@
-// GET /api/admin/users/97
+// GET /api/admin/users/244
 export default {
   data: {
-    id: '97',
+    id: '244',
     type: 'user',
     attributes: {
-      firstName: 'Claretha',
-      lastName: 'Gusikowski',
+      firstName: 'Scotty',
+      lastName: 'Mohr',
       nickname: null,
       dateActive: '2011-07-01',
       dateInactive: null,
@@ -13,7 +13,7 @@ export default {
       districtGrade: 12,
       status: 'active',
       role: 'administrator',
-      email: 'domingowalter@walker.io',
+      email: 'brittturcotte@ohara.co',
     },
     relationships: {
     },

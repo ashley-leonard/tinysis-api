@@ -1,16 +1,16 @@
-// GET /api/contracts/10?include=category,facilitator,assignments,meetings,creditAssignments,creditAssignments.credit,term,ealrs
+// GET /api/contracts/14?include=category,facilitator,assignments,meetings,creditAssignments,creditAssignments.credit,term,ealrs
 export default {
   data: {
-    id: '10',
+    id: '14',
     type: 'contract',
     attributes: {
-      name: 'Animadverto totidem triduana decretum uberrime.',
+      name: 'Fugit repellat trans voluptatibus decens.',
       status: 'approved',
-      learningObjectives: 'Tui delego attollo et ambulo.',
-      competencies: 'Necessitatibus sto temperantia via artificiose.',
-      evaluationMethods: 'Deporto armo minima argumentum deduco.',
-      instructionalMaterials: 'Deserunt aliquid qui copiose antea.',
-      location: 'Valens tot aggredior adaugeo totam.',
+      learningObjectives: 'Ut vivo abundans laudantium corpus.',
+      competencies: 'Damnatio illo placeat rerum comminor.',
+      evaluationMethods: 'Velociter avoco autem amissio ager.',
+      instructionalMaterials: 'Tergiversatio dolore vigor voluptate amo.',
+      location: 'Quod et rem eligendi defaeco.',
       timeslots: [
         {
           start: '8:45',
@@ -23,34 +23,34 @@ export default {
       enrollments: {
         data: [
           {
-            id: '11',
+            id: '15',
             type: 'enrollment',
           },
           {
-            id: '12',
+            id: '16',
             type: 'enrollment',
           },
           {
-            id: '13',
+            id: '17',
             type: 'enrollment',
           },
         ],
       },
       facilitator: {
         data: {
-          id: '94',
+          id: '241',
           type: 'User',
         },
       },
       term: {
         data: {
-          id: '15',
+          id: '62',
           type: 'term',
         },
       },
       category: {
         data: {
-          id: '6',
+          id: '8',
           type: 'category',
         },
       },
@@ -229,7 +229,7 @@ export default {
       },
     },
     {
-      id: '6',
+      id: '8',
       type: 'category',
       attributes: {
         name: 'Category 1',
@@ -243,11 +243,11 @@ export default {
         contracts: {
           data: [
             {
-              id: '6',
+              id: '10',
               type: 'contract',
             },
             {
-              id: '10',
+              id: '14',
               type: 'contract',
             },
           ],
@@ -278,7 +278,7 @@ export default {
         },
         contract: {
           data: {
-            id: '10',
+            id: '14',
             type: 'contract',
           },
         },
@@ -312,7 +312,7 @@ export default {
       id: '1',
       type: 'ealr',
       attributes: {
-        ealr: 'Creber alioqui communis occaecati tenuis.',
+        ealr: 'Et vobis patior sed cubicularis.',
         seq: '1.1',
         category: 'Category 1',
       },
@@ -321,7 +321,7 @@ export default {
       id: '2',
       type: 'ealr',
       attributes: {
-        ealr: 'Sortitus torrens suspendo quaerat vinculum.',
+        ealr: 'Pax natus ipsum tumultus aggero.',
         seq: '1.2',
         category: 'Category 1',
       },
@@ -330,7 +330,7 @@ export default {
       id: '3',
       type: 'ealr',
       attributes: {
-        ealr: 'Vox dicta auxilium magnam triduana.',
+        ealr: 'Volubilis decipio confero cinis amor.',
         seq: '2.1',
         category: 'Category 2',
       },
@@ -339,23 +339,23 @@ export default {
       id: '4',
       type: 'ealr',
       attributes: {
-        ealr: 'Delectus deludo correptius deinde suadeo.',
+        ealr: 'Tredecim usitas universe spargo volva.',
         seq: '2.2',
         category: 'Category 2',
       },
     },
     {
-      id: '94',
+      id: '241',
       type: 'user',
       attributes: {
-        firstName: 'Lou',
-        lastName: 'Johnson',
+        firstName: 'Bong',
+        lastName: 'Mayer',
         nickname: null,
         dateActive: '2012-09-01',
         dateInactive: null,
         districtId: null,
         districtGrade: 12,
-        email: 'joy@schimmelmacejkovic.com',
+        email: 'kenakulas@pourotamm.com',
         status: 'active',
         role: 'staff',
       },
@@ -363,7 +363,7 @@ export default {
         coordinatees: {
           data: [
             {
-              id: '98',
+              id: '245',
               type: 'user',
             },
           ],
@@ -501,10 +501,10 @@ export default {
       },
     },
     {
-      id: '15',
+      id: '62',
       type: 'term',
       attributes: {
-        name: 'Multi-channelled motivating flexibility',
+        name: 'Extended local flexibility',
         schoolYear: 2019,
         creditDate: '2020-01-31',
         months: [

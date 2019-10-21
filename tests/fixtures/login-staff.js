@@ -1,23 +1,23 @@
-// auth for user 94
+// auth for user 241
 export default {
   data: {
-    email: 'joy@schimmelmacejkovic.com',
+    email: 'kenakulas@pourotamm.com',
     email_verified: false,
     updated_at: '2019-06-23T23:44:29.877Z',
-    user_id: 'auth0|ecbb1097aafd441cf996dcf7fb60ba40',
-    name: 'Lou Johnson',
+    user_id: 'auth0|8002f98dd6508b3469f3fed73c09a447',
+    name: 'Bong Mayer',
     identities: [
       {
         connection: 'Username-Password-Authentication',
         provider: 'auth0',
-        user_id: 'ecbb1097aafd441cf996dcf7fb60ba40',
+        user_id: '8002f98dd6508b3469f3fed73c09a447',
         isSocial: false,
       },
     ],
     created_at: '2019-05-25T00:24:18.815Z',
     last_password_reset: '2019-06-10T04:09:05.883Z',
-    given_name: 'Lou',
-    family_name: 'Johnson',
+    given_name: 'Bong',
+    family_name: 'Mayer',
     nickname: null,
     last_login: '2019-06-23T23:44:29.877Z',
     last_ip: '208.100.155.216',

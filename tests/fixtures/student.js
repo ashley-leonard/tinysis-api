@@ -1,15 +1,15 @@
-// GET /api/students/98
+// GET /api/students/245
 export default {
   data: {
-    id: '98',
+    id: '245',
     type: 'user',
     attributes: {
-      firstName: 'Adrian',
-      lastName: 'Bahringer',
+      firstName: 'Lincoln',
+      lastName: 'Dietrich',
       nickname: null,
       dateActive: '2018-08-01',
       dateInactive: null,
-      districtId: '1086617984',
+      districtId: '8450113509',
       districtGrade: 12,
       status: 'active',
       role: 'student',
@@ -17,7 +17,7 @@ export default {
     relationships: {
       coordinator: {
         data: {
-          id: '94',
+          id: '241',
           type: 'user',
         },
       },

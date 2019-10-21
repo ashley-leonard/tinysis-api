@@ -1,4 +1,4 @@
-// GET /api/credit-assignments?studentIds=99&includeFulfilledAttributes=true&include=credit,contractTerm,contractFacilitator,contract
+// GET /api/credit-assignments?studentIds=246&includeFulfilledAttributes=true&include=credit,contractTerm,contractFacilitator,contract
 export default {
   data: [
     {
@@ -7,10 +7,9 @@ export default {
       attributes: {
         creditHours: 0.25,
         enrollmentFinalizedOn: '2019-11-15',
-        contractName: 'Reiciendis ea viscus tabesco somniculosus.',
-        contractFacilitatorName: 'Lou Johnson',
-        districtFinalizeApproved: true,
-        districtFinalizeApprovedBy: 'Gusikowski, Claretha',
+        contractName: 'Crepusculum sodalitas similique cohibeo depulso.',
+        contractFacilitatorName: 'Bong Mayer',
+        districtFinalizeApprovedBy: 'Mohr, Scotty',
         districtFinalizeApprovedOn: '2019-11-15',
         districtTransmittedOn: null,
         overrideHours: null,
@@ -28,25 +27,25 @@ export default {
         },
         contractTerm: {
           data: {
-            id: '13',
+            id: '60',
             type: 'term',
           },
         },
         contractFacilitator: {
           data: {
-            id: '94',
+            id: '241',
             type: 'user',
           },
         },
         contract: {
           data: {
-            id: '6',
+            id: '10',
             type: 'contract',
           },
         },
         user: {
           data: {
-            id: '99',
+            id: '246',
             type: 'user',
           },
         },
@@ -72,9 +71,69 @@ export default {
       attributes: {
         creditHours: 0.5,
         enrollmentFinalizedOn: '2019-11-15',
-        contractName: 'Reiciendis ea viscus tabesco somniculosus.',
-        contractFacilitatorName: 'Lou Johnson',
-        districtFinalizeApproved: null,
+        contractName: 'Crepusculum sodalitas similique cohibeo depulso.',
+        contractFacilitatorName: 'Bong Mayer',
+        districtFinalizeApprovedBy: 'Mohr, Scotty',
+        districtFinalizeApprovedOn: '2019-11-15',
+        districtTransmittedOn: null,
+        overrideHours: null,
+        overrideBy: null,
+      },
+      relationships: {
+        credit: {
+          data: {
+            id: '46',
+            type: 'credit',
+          },
+        },
+        graduationPlanMapping: {
+          data: null,
+        },
+        contractTerm: {
+          data: {
+            id: '60',
+            type: 'term',
+          },
+        },
+        contractFacilitator: {
+          data: {
+            id: '241',
+            type: 'user',
+          },
+        },
+        contract: {
+          data: {
+            id: '10',
+            type: 'contract',
+          },
+        },
+        user: {
+          data: {
+            id: '246',
+            type: 'user',
+          },
+        },
+        creditTransmittalBatch: {
+          data: null,
+        },
+        childCreditAssignments: {
+          data: [
+
+          ],
+        },
+        parentCreditAssignment: {
+          data: null,
+        },
+      },
+    },
+    {
+      id: '36',
+      type: 'creditAssignment',
+      attributes: {
+        creditHours: 0.5,
+        enrollmentFinalizedOn: '2019-11-15',
+        contractName: 'Crepusculum sodalitas similique cohibeo depulso.',
+        contractFacilitatorName: 'Bong Mayer',
         districtFinalizeApprovedBy: null,
         districtFinalizeApprovedOn: null,
         districtTransmittedOn: null,
@@ -93,25 +152,25 @@ export default {
         },
         contractTerm: {
           data: {
-            id: '13',
+            id: '60',
             type: 'term',
           },
         },
         contractFacilitator: {
           data: {
-            id: '94',
+            id: '241',
             type: 'user',
           },
         },
         contract: {
           data: {
-            id: '6',
+            id: '10',
             type: 'contract',
           },
         },
         user: {
           data: {
-            id: '99',
+            id: '246',
             type: 'user',
           },
         },
@@ -129,15 +188,14 @@ export default {
       },
     },
     {
-      id: '38',
+      id: '40',
       type: 'creditAssignment',
       attributes: {
         creditHours: 0.25,
         enrollmentFinalizedOn: '2019-11-15',
-        contractName: 'Damno ulciscor ut contego autem.',
-        contractFacilitatorName: 'Walton Jast',
-        districtFinalizeApproved: true,
-        districtFinalizeApprovedBy: 'Gusikowski, Claretha',
+        contractName: 'Compono amiculum cupiditate urbs defessus.',
+        contractFacilitatorName: 'Hector Ritchie',
+        districtFinalizeApprovedBy: 'Mohr, Scotty',
         districtFinalizeApprovedOn: '2019-11-15',
         districtTransmittedOn: null,
         overrideHours: null,
@@ -155,25 +213,25 @@ export default {
         },
         contractTerm: {
           data: {
-            id: '14',
+            id: '61',
             type: 'term',
           },
         },
         contractFacilitator: {
           data: {
-            id: '95',
+            id: '242',
             type: 'user',
           },
         },
         contract: {
           data: {
-            id: '7',
+            id: '11',
             type: 'contract',
           },
         },
         user: {
           data: {
-            id: '99',
+            id: '246',
             type: 'user',
           },
         },
@@ -194,16 +252,15 @@ export default {
       },
     },
     {
-      id: '39',
+      id: '41',
       type: 'creditAssignment',
       attributes: {
         creditHours: 0.5,
         enrollmentFinalizedOn: '2019-11-15',
-        contractName: 'Damno ulciscor ut contego autem.',
-        contractFacilitatorName: 'Walton Jast',
-        districtFinalizeApproved: null,
-        districtFinalizeApprovedBy: null,
-        districtFinalizeApprovedOn: null,
+        contractName: 'Compono amiculum cupiditate urbs defessus.',
+        contractFacilitatorName: 'Hector Ritchie',
+        districtFinalizeApprovedBy: 'Mohr, Scotty',
+        districtFinalizeApprovedOn: '2019-11-15',
         districtTransmittedOn: null,
         overrideHours: null,
         overrideBy: null,
@@ -216,32 +273,29 @@ export default {
           },
         },
         graduationPlanMapping: {
-          data: {
-            id: '19',
-            type: 'graduationPlanMapping',
-          },
+          data: null,
         },
         contractTerm: {
           data: {
-            id: '14',
+            id: '61',
             type: 'term',
           },
         },
         contractFacilitator: {
           data: {
-            id: '95',
+            id: '242',
             type: 'user',
           },
         },
         contract: {
           data: {
-            id: '7',
+            id: '11',
             type: 'contract',
           },
         },
         user: {
           data: {
-            id: '99',
+            id: '246',
             type: 'user',
           },
         },
@@ -262,12 +316,72 @@ export default {
       id: '42',
       type: 'creditAssignment',
       attributes: {
+        creditHours: 0.5,
+        enrollmentFinalizedOn: '2019-11-15',
+        contractName: 'Compono amiculum cupiditate urbs defessus.',
+        contractFacilitatorName: 'Hector Ritchie',
+        districtFinalizeApprovedBy: null,
+        districtFinalizeApprovedOn: null,
+        districtTransmittedOn: null,
+        overrideHours: null,
+        overrideBy: null,
+      },
+      relationships: {
+        credit: {
+          data: {
+            id: '46',
+            type: 'credit',
+          },
+        },
+        graduationPlanMapping: {
+          data: null,
+        },
+        contractTerm: {
+          data: {
+            id: '61',
+            type: 'term',
+          },
+        },
+        contractFacilitator: {
+          data: {
+            id: '242',
+            type: 'user',
+          },
+        },
+        contract: {
+          data: {
+            id: '11',
+            type: 'contract',
+          },
+        },
+        user: {
+          data: {
+            id: '246',
+            type: 'user',
+          },
+        },
+        creditTransmittalBatch: {
+          data: null,
+        },
+        childCreditAssignments: {
+          data: [
+
+          ],
+        },
+        parentCreditAssignment: {
+          data: null,
+        },
+      },
+    },
+    {
+      id: '46',
+      type: 'creditAssignment',
+      attributes: {
         creditHours: 0.25,
         enrollmentFinalizedOn: '2019-11-15',
-        contractName: 'Accusantium campana possimus pauci votum.',
-        contractFacilitatorName: 'Walton Jast',
-        districtFinalizeApproved: true,
-        districtFinalizeApprovedBy: 'Gusikowski, Claretha',
+        contractName: 'Conculco angustus tempus toties dicta.',
+        contractFacilitatorName: 'Hector Ritchie',
+        districtFinalizeApprovedBy: 'Mohr, Scotty',
         districtFinalizeApprovedOn: '2019-11-15',
         districtTransmittedOn: null,
         overrideHours: null,
@@ -282,31 +396,31 @@ export default {
         },
         graduationPlanMapping: {
           data: {
-            id: '18',
+            id: '19',
             type: 'graduationPlanMapping',
           },
         },
         contractTerm: {
           data: {
-            id: '14',
+            id: '61',
             type: 'term',
           },
         },
         contractFacilitator: {
           data: {
-            id: '95',
+            id: '242',
             type: 'user',
           },
         },
         contract: {
           data: {
-            id: '8',
+            id: '12',
             type: 'contract',
           },
         },
         user: {
           data: {
-            id: '99',
+            id: '246',
             type: 'user',
           },
         },
@@ -327,14 +441,77 @@ export default {
       },
     },
     {
-      id: '43',
+      id: '47',
       type: 'creditAssignment',
       attributes: {
         creditHours: 0.5,
         enrollmentFinalizedOn: '2019-11-15',
-        contractName: 'Accusantium campana possimus pauci votum.',
-        contractFacilitatorName: 'Walton Jast',
-        districtFinalizeApproved: null,
+        contractName: 'Conculco angustus tempus toties dicta.',
+        contractFacilitatorName: 'Hector Ritchie',
+        districtFinalizeApprovedBy: 'Mohr, Scotty',
+        districtFinalizeApprovedOn: '2019-11-15',
+        districtTransmittedOn: null,
+        overrideHours: null,
+        overrideBy: null,
+      },
+      relationships: {
+        credit: {
+          data: {
+            id: '46',
+            type: 'credit',
+          },
+        },
+        graduationPlanMapping: {
+          data: {
+            id: '18',
+            type: 'graduationPlanMapping',
+          },
+        },
+        contractTerm: {
+          data: {
+            id: '61',
+            type: 'term',
+          },
+        },
+        contractFacilitator: {
+          data: {
+            id: '242',
+            type: 'user',
+          },
+        },
+        contract: {
+          data: {
+            id: '12',
+            type: 'contract',
+          },
+        },
+        user: {
+          data: {
+            id: '246',
+            type: 'user',
+          },
+        },
+        creditTransmittalBatch: {
+          data: null,
+        },
+        childCreditAssignments: {
+          data: [
+
+          ],
+        },
+        parentCreditAssignment: {
+          data: null,
+        },
+      },
+    },
+    {
+      id: '48',
+      type: 'creditAssignment',
+      attributes: {
+        creditHours: 0.5,
+        enrollmentFinalizedOn: '2019-11-15',
+        contractName: 'Conculco angustus tempus toties dicta.',
+        contractFacilitatorName: 'Hector Ritchie',
         districtFinalizeApprovedBy: null,
         districtFinalizeApprovedOn: null,
         districtTransmittedOn: null,
@@ -356,25 +533,25 @@ export default {
         },
         contractTerm: {
           data: {
-            id: '14',
+            id: '61',
             type: 'term',
           },
         },
         contractFacilitator: {
           data: {
-            id: '95',
+            id: '242',
             type: 'user',
           },
         },
         contract: {
           data: {
-            id: '8',
+            id: '12',
             type: 'contract',
           },
         },
         user: {
           data: {
-            id: '99',
+            id: '246',
             type: 'user',
           },
         },
@@ -394,16 +571,16 @@ export default {
   ],
   included: [
     {
-      id: '6',
+      id: '10',
       type: 'contract',
       attributes: {
-        name: 'Reiciendis ea viscus tabesco somniculosus.',
+        name: 'Crepusculum sodalitas similique cohibeo depulso.',
         status: 'closed',
-        learningObjectives: 'Voluptate ullam audeo viriliter tactus.',
-        competencies: 'Allatus commodi cras tersus vito.',
-        evaluationMethods: 'Tergo tibi denego accusantium atrox.',
-        instructionalMaterials: 'Clamo ultra consequatur defleo video.',
-        location: 'Attollo voco tener vultuosus conduco.',
+        learningObjectives: 'Tertius nisi quaerat voluptates balbus.',
+        competencies: 'Earum et animi adhaero explicabo.',
+        evaluationMethods: 'Timor pauper acervus ara depromo.',
+        instructionalMaterials: 'Animus comedo tricesimus amiculum umquam.',
+        location: 'Et termes avarus denuncio sui.',
         timeslots: [
           {
             start: '8:45',
@@ -416,30 +593,30 @@ export default {
         enrollments: {
           data: [
             {
-              id: '17',
+              id: '21',
               type: 'enrollment',
             },
             {
-              id: '18',
+              id: '22',
               type: 'enrollment',
             },
           ],
         },
         facilitator: {
           data: {
-            id: '94',
+            id: '241',
             type: 'User',
           },
         },
         term: {
           data: {
-            id: '13',
+            id: '60',
             type: 'term',
           },
         },
         category: {
           data: {
-            id: '6',
+            id: '8',
             type: 'category',
           },
         },
@@ -470,6 +647,14 @@ export default {
               id: '37',
               type: 'creditAssignment',
             },
+            {
+              id: '38',
+              type: 'creditAssignment',
+            },
+            {
+              id: '39',
+              type: 'creditAssignment',
+            },
           ],
         },
         meetings: {
@@ -485,17 +670,17 @@ export default {
       },
     },
     {
-      id: '94',
+      id: '241',
       type: 'user',
       attributes: {
-        firstName: 'Lou',
-        lastName: 'Johnson',
+        firstName: 'Bong',
+        lastName: 'Mayer',
         nickname: null,
         dateActive: '2012-09-01',
         dateInactive: null,
         districtId: null,
         districtGrade: 12,
-        email: 'joy@schimmelmacejkovic.com',
+        email: 'kenakulas@pourotamm.com',
         status: 'active',
         role: 'staff',
       },
@@ -503,7 +688,7 @@ export default {
         coordinatees: {
           data: [
             {
-              id: '98',
+              id: '245',
               type: 'user',
             },
           ],
@@ -511,10 +696,10 @@ export default {
       },
     },
     {
-      id: '13',
+      id: '60',
       type: 'term',
       attributes: {
-        name: 'Virtual bandwidth-monitored architecture',
+        name: 'Adaptive 6th generation function',
         schoolYear: 2018,
         creditDate: '2019-01-31',
         months: [
@@ -549,16 +734,16 @@ export default {
       },
     },
     {
-      id: '7',
+      id: '11',
       type: 'contract',
       attributes: {
-        name: 'Damno ulciscor ut contego autem.',
+        name: 'Compono amiculum cupiditate urbs defessus.',
         status: 'closed',
-        learningObjectives: 'Thesis adaugeo ullus labore consequatur.',
-        competencies: 'Viduata cernuus amita centum vallum.',
-        evaluationMethods: 'Suppellex aeneus totidem doloribus ver.',
-        instructionalMaterials: 'Ratione benevolentia argumentum consectetur patruus.',
-        location: 'Sordeo absum congregatio balbus vel.',
+        learningObjectives: 'Tepesco quam vesica iure vestrum.',
+        competencies: 'Corrigo sol baiulus urbs amoveo.',
+        evaluationMethods: 'Adeo tristis auris venustas ullus.',
+        instructionalMaterials: 'Paulatim attonbitus cupiditate acies avaritia.',
+        location: 'Urbanus vigilo sufficio contra earum.',
         timeslots: [
           {
             start: '8:45',
@@ -571,30 +756,30 @@ export default {
         enrollments: {
           data: [
             {
-              id: '19',
+              id: '23',
               type: 'enrollment',
             },
             {
-              id: '20',
+              id: '24',
               type: 'enrollment',
             },
           ],
         },
         facilitator: {
           data: {
-            id: '95',
+            id: '242',
             type: 'User',
           },
         },
         term: {
           data: {
-            id: '14',
+            id: '61',
             type: 'term',
           },
         },
         category: {
           data: {
-            id: '7',
+            id: '9',
             type: 'category',
           },
         },
@@ -610,142 +795,11 @@ export default {
               type: 'creditAssignment',
             },
             {
-              id: '38',
-              type: 'creditAssignment',
-            },
-            {
-              id: '39',
-              type: 'creditAssignment',
-            },
-            {
               id: '40',
               type: 'creditAssignment',
             },
             {
               id: '41',
-              type: 'creditAssignment',
-            },
-          ],
-        },
-        meetings: {
-          data: [
-
-          ],
-        },
-        ealrs: {
-          data: [
-
-          ],
-        },
-      },
-    },
-    {
-      id: '95',
-      type: 'user',
-      attributes: {
-        firstName: 'Walton',
-        lastName: 'Jast',
-        nickname: null,
-        dateActive: '2013-02-01',
-        dateInactive: null,
-        districtId: null,
-        districtGrade: 12,
-        email: 'destiny@kuhickunde.com',
-        status: 'active',
-        role: 'staff',
-      },
-      relationships: {
-        coordinatees: {
-          data: [
-            {
-              id: '99',
-              type: 'user',
-            },
-            {
-              id: '100',
-              type: 'user',
-            },
-          ],
-        },
-      },
-    },
-    {
-      id: '14',
-      type: 'term',
-      attributes: {
-        name: 'Digitized analyzing leverage',
-        schoolYear: 2018,
-        creditDate: '2019-06-15',
-        months: [
-          '2019-02-01',
-          '2019-03-01',
-          '2019-04-01',
-          '2019-05-01',
-          '2019-06-01',
-        ],
-        status: 'active',
-      },
-      meta: null,
-    },
-    {
-      id: '8',
-      type: 'contract',
-      attributes: {
-        name: 'Accusantium campana possimus pauci votum.',
-        status: 'closed',
-        learningObjectives: 'Et adficio quia atrox thorax.',
-        competencies: 'Strenuus vaco culpa dapifer turpis.',
-        evaluationMethods: 'Conitor ademptio decimus verus tepidus.',
-        instructionalMaterials: 'Audentia illo vociferor vita cimentarius.',
-        location: 'Vesper explicabo dicta confido arca.',
-        timeslots: [
-          {
-            start: '8:45',
-            end: '10:30',
-            weekdays: '01234',
-          },
-        ],
-      },
-      relationships: {
-        enrollments: {
-          data: [
-            {
-              id: '21',
-              type: 'enrollment',
-            },
-            {
-              id: '22',
-              type: 'enrollment',
-            },
-          ],
-        },
-        facilitator: {
-          data: {
-            id: '95',
-            type: 'User',
-          },
-        },
-        term: {
-          data: {
-            id: '14',
-            type: 'term',
-          },
-        },
-        category: {
-          data: {
-            id: '7',
-            type: 'category',
-          },
-        },
-        assignments: {
-          data: [
-
-          ],
-        },
-        creditAssignments: {
-          data: [
-            {
-              id: '26',
               type: 'creditAssignment',
             },
             {
@@ -778,8 +832,155 @@ export default {
         },
       },
     },
+    {
+      id: '242',
+      type: 'user',
+      attributes: {
+        firstName: 'Hector',
+        lastName: 'Ritchie',
+        nickname: null,
+        dateActive: '2013-02-01',
+        dateInactive: null,
+        districtId: null,
+        districtGrade: 12,
+        email: 'ethelkris@dicki.co',
+        status: 'active',
+        role: 'staff',
+      },
+      relationships: {
+        coordinatees: {
+          data: [
+            {
+              id: '246',
+              type: 'user',
+            },
+            {
+              id: '247',
+              type: 'user',
+            },
+          ],
+        },
+      },
+    },
+    {
+      id: '61',
+      type: 'term',
+      attributes: {
+        name: 'Balanced content-based open architecture',
+        schoolYear: 2018,
+        creditDate: '2019-06-15',
+        months: [
+          '2019-02-01',
+          '2019-03-01',
+          '2019-04-01',
+          '2019-05-01',
+          '2019-06-01',
+        ],
+        status: 'active',
+      },
+      meta: null,
+    },
+    {
+      id: '12',
+      type: 'contract',
+      attributes: {
+        name: 'Conculco angustus tempus toties dicta.',
+        status: 'closed',
+        learningObjectives: 'Tepesco curvus architecto virgo coruscus.',
+        competencies: 'Creptio adiuvo contigo eos vetus.',
+        evaluationMethods: 'Excepturi solus debilito coma tumultus.',
+        instructionalMaterials: 'Vae tondeo circumvenio cenaculum toties.',
+        location: 'Claustrum crustulum undique aut eaque.',
+        timeslots: [
+          {
+            start: '8:45',
+            end: '10:30',
+            weekdays: '01234',
+          },
+        ],
+      },
+      relationships: {
+        enrollments: {
+          data: [
+            {
+              id: '25',
+              type: 'enrollment',
+            },
+            {
+              id: '26',
+              type: 'enrollment',
+            },
+          ],
+        },
+        facilitator: {
+          data: {
+            id: '242',
+            type: 'User',
+          },
+        },
+        term: {
+          data: {
+            id: '61',
+            type: 'term',
+          },
+        },
+        category: {
+          data: {
+            id: '9',
+            type: 'category',
+          },
+        },
+        assignments: {
+          data: [
+
+          ],
+        },
+        creditAssignments: {
+          data: [
+            {
+              id: '26',
+              type: 'creditAssignment',
+            },
+            {
+              id: '46',
+              type: 'creditAssignment',
+            },
+            {
+              id: '47',
+              type: 'creditAssignment',
+            },
+            {
+              id: '48',
+              type: 'creditAssignment',
+            },
+            {
+              id: '49',
+              type: 'creditAssignment',
+            },
+            {
+              id: '50',
+              type: 'creditAssignment',
+            },
+            {
+              id: '51',
+              type: 'creditAssignment',
+            },
+          ],
+        },
+        meetings: {
+          data: [
+
+          ],
+        },
+        ealrs: {
+          data: [
+
+          ],
+        },
+      },
+    },
   ],
   meta: {
-    count: 6,
+    count: 9,
   },
 };
