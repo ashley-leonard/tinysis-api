@@ -66,6 +66,8 @@ export default Component.extend({
    * is normalized as
    *
    *   { boo: { id: 1, type: 'foo' } }
+   *
+   * Allows for easier use in templates and easier validation
    */
   normalizeRelationships(model) {
     const modelRelationships = model.relationships;
@@ -91,11 +93,21 @@ export default Component.extend({
     if (relationships) {
       return {
         ...serialized,
-        relationships,
+        relationships: this.serializeRelationships(relationships),
       };
     }
 
     return serialized;
+  },
+
+  serializeRelationships(relationships) {
+    return Object.keys(relationships)
+      .reduce((memo, key) => {
+        memo[key] = {
+          data: relationships[key],
+        };
+        return memo;
+      }, {});
   },
 
   updatePojo(updates, updatePath = 'pojo') {
@@ -132,7 +144,7 @@ export default Component.extend({
   validate() {
     if (!this.validator) return;
 
-    const validationResult = this.validator.validate(this.pojo, this.relationships);
+    const validationResult = this.validator.validate(this.pojo);
 
     this.setProperties(validationResult);
   },
