@@ -7,8 +7,8 @@ import { isPresent } from '@ember/utils';
  *
  * validation types:
  *
- * required: the value or relationship must be present
- * format: the value must match a regex. not sensible for relationships
+ * required: the value must be present
+ * format: the string value must match a regex
  * valid: the value is passed to a helper function to validate and return an error
  *
  * options:
@@ -57,7 +57,7 @@ export default class Validator {
     return validation.message || 'Please check the value';
   }
 
-  validate(pojo, relationships = {}) {
+  validate(pojo) {
     const { validations } = this;
     let validationResult = {
       isInvalid: false,
@@ -66,17 +66,8 @@ export default class Validator {
 
     Object.keys(validations)
       .forEach((key) => {
-        const relationshipsMatch = /relationships\.(\w+)/.exec(key);
-
         let fieldCollection = validations[key];
-        let value;
-
-        if (relationshipsMatch) {
-          const [, relationshipsKey] = relationshipsMatch;
-          value = relationships[relationshipsKey];
-        } else {
-          value = pojo[key];
-        }
+        const value = pojo[key];
 
         if (!Array.isArray(fieldCollection)) {
           fieldCollection = [fieldCollection];
@@ -85,7 +76,7 @@ export default class Validator {
         for (let len = fieldCollection.length, i = 0; i < len; i += 1) {
           const validation = fieldCollection[i];
 
-          // skip this validation if falsy
+          // skip this validation if falsey
           if (validation.if && !validation.if(key, value, pojo)) {
             continue;
           }

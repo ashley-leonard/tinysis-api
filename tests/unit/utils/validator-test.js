@@ -57,4 +57,38 @@ module('Unit | Utility | validator', (hooks) => {
     assert.matches(result.errors.verifyName, /must match the other/, 'expected validity flagged');
     assert.ok(result.errors.date, /check the value/, 'expected format flagged');
   });
+
+  test('it can validate the simplified relationships used by t-form internally', (assert) => {
+    const validator = new Validator({
+      food: [{
+        type: 'required',
+      }],
+      friends: [{
+        type: 'required',
+      }],
+    });
+
+    const relationships = {
+      food: {
+        id: 1,
+        type: 'jam',
+      },
+      friends: [],
+    };
+
+    let result = validator.validate(relationships);
+
+    assert.ok(result, 'a result was returned');
+    assert.equal(result.isInvalid, true, 'object validated as invalid');
+    assert.ok(result.errors.friends, 'error present for friends');
+    assert.notOk(result.errors.food, 'no error present for food');
+
+    relationships.friends = [{ id: 1, type: 'joe' }];
+
+    result = validator.validate(relationships);
+
+    assert.ok(result, 'a result was returned');
+    assert.equal(result.isInvalid, false, 'object validated as valid');
+    assert.notOk(result.errors.friends, 'no error present for friends');
+  });
 });
