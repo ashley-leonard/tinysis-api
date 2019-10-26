@@ -8,8 +8,9 @@
       Course
       <TSelect
         name="credit"
-        @value={{relationships.credit.data.id}}
-        @onchange={{action "onChangeRelationship" "credit"}}
+        @prompt="Select a course"
+        @value={{relationships.credit.id}}
+        @onchange={{action "updateRelationship" "credit" "credit"}}
         @optionsList={{creditOptions}}
       />
     {{/form-input}}
@@ -26,6 +27,7 @@
           {{#if pojo.enableOverride}}<span class="inline no-underline fas fa-check text-orange-500 mr-2" />{{/if}}
           <TLink
             class="font-normal"
+            data-test-toggle-override
             @action={{action "toggleOverride"}}
           >
             Override
@@ -38,11 +40,12 @@
           step="0.25"
           min="0"
           name="creditsOverride"
+          data-test-credit-hours
           value={{pojo.creditsOverride}}
           onchange={{action "onChange"}}
         >
       {{else}}
-        <span class="field">
+        <span data-test-credit-hours class="field">
           {{pojo.creditHours}}
         </span>
       {{/if}}
@@ -51,14 +54,14 @@
 </fieldset>
 <fieldset>
   <p>
-    {{#form-input error=errors.termId showError=showErrors}}
+    {{#form-input error=errors.contractTerm showError=showErrors}}
       Term
       <TermSelect
-        name="term"
-        value={{relationships.term.data.id}}
-        @prompt="Select term"
+        name="contractTerm"
+        @value={{relationships.contractTerm.id}}
+        @prompt="Select a term"
         @terms={{terms}}
-        @onchange={{action "onChangeRelationship"}}
+        @onchange={{action "updateRelationship" "contractTerm" "term"}}
       />
     {{/form-input}}
   </p>

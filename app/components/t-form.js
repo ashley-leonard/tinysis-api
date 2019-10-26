@@ -142,11 +142,13 @@ export default Component.extend({
   },
 
   validate() {
-    if (!this.validator) return;
+    if (!this.validator) return { isValid: true, errors: {} };
 
     const validationResult = this.validator.validate(this.pojo);
 
     this.setProperties(validationResult);
+
+    return validationResult;
   },
 
   submit(event) {

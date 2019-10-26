@@ -2,13 +2,31 @@ import Big from 'big.js';
 import { schedule } from '@ember/runloop';
 import { computed } from '@ember/object';
 import TForm from './t-form';
+import clone from '../utils/clone';
 import Validator from '../utils/validator';
 
+const validateRelationships = new Validator({
+  contractTerm: { type: 'required' },
+  credit: { type: 'required' },
+});
+
+const creditsRegex = /^\d+(\.(75|5|25))?$/;
+const validator = new Validator({
+  creditHours: {
+    type: 'format',
+    regex: creditsRegex,
+    message: 'Invalid credit value',
+  },
+  creditsOverride: {
+    type: 'format',
+    regex: creditsRegex,
+    message: 'Invalid credit override value',
+    if: (key, value, pojo) => pojo.enableOverride,
+  },
+});
+
 export default TForm.extend({
-  validator: computed(() => new Validator({
-    'relationships.term': { type: 'required' },
-    'relationships.credit': { type: 'required' },
-  })),
+  validator,
   creditOptions: computed('availableCredits', function () {
     const { availableCredits } = this;
     return availableCredits.map(credit => ({
@@ -23,6 +41,7 @@ export default TForm.extend({
         (sum, ca) => sum.add(ca.attributes.creditHours),
         new Big(0)
       );
+
     const [first] = creditAssignments;
 
     this.model = {
@@ -33,8 +52,8 @@ export default TForm.extend({
         creditId: first.relationships.credit.data.id,
       },
       relationships: {
-        term: first.relationships.contractTerm,
-        credit: first.relationships.credit,
+        contractTerm: clone(first.relationships.contractTerm),
+        credit: clone(first.relationships.credit),
         childCreditAssignments: {
           data: creditAssignments.map(ca => ({
             id: ca.id,
@@ -44,11 +63,31 @@ export default TForm.extend({
       },
     };
 
+    this.relationships = clone(this.model.relationships);
+
     this._super();
   },
   actions: {
     close() {
       this.close();
+    },
+    updateRelationship(attrKey, type, value) {
+      let newValue;
+      if (value) {
+        newValue = {
+          id: value,
+          type,
+        };
+      } else {
+        newValue = null;
+      }
+      const newRelationships = {
+        ...this.relationships,
+        [attrKey]: newValue,
+      };
+
+      this.set('relationships', newRelationships);
+      this.validate();
     },
     toggleOverride() {
       const enableOverride = !this.pojo.enableOverride;
@@ -60,5 +99,22 @@ export default TForm.extend({
       }
       this.updatePojo({ enableOverride });
     },
+  },
+  validate() {
+    const { relationships } = this;
+
+    const attributesResult = this._super();
+
+    const relationshipsResult = validateRelationships.validate(relationships);
+
+    const result = {
+      isInvalid: attributesResult.isInvalid || relationshipsResult.isInvalid,
+      errors: {
+        ...relationshipsResult.errors,
+        ...attributesResult.errors,
+      },
+    };
+
+    this.setProperties(result);
   },
 });
