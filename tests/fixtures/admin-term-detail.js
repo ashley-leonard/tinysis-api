@@ -1,10 +1,10 @@
-// GET /api/terms/62
+// GET /api/terms/7
 export default {
   data: {
-    id: '62',
+    id: '7',
     type: 'term',
     attributes: {
-      name: 'Extended local flexibility',
+      name: 'Seamless contextually-based encoding',
       schoolYear: 2019,
       creditDate: '2020-01-31',
       months: [

@@ -2,10 +2,10 @@
 export default {
   data: [
     {
-      id: '60',
+      id: '5',
       type: 'term',
       attributes: {
-        name: 'Adaptive 6th generation function',
+        name: 'Fundamental actuating local area network',
         schoolYear: 2018,
         creditDate: '2019-01-31',
         months: [
@@ -20,10 +20,10 @@ export default {
       meta: null,
     },
     {
-      id: '61',
+      id: '6',
       type: 'term',
       attributes: {
-        name: 'Balanced content-based open architecture',
+        name: 'Re-engineered intermediate extranet',
         schoolYear: 2018,
         creditDate: '2019-06-15',
         months: [
@@ -38,10 +38,10 @@ export default {
       meta: null,
     },
     {
-      id: '62',
+      id: '7',
       type: 'term',
       attributes: {
-        name: 'Extended local flexibility',
+        name: 'Seamless contextually-based encoding',
         schoolYear: 2019,
         creditDate: '2020-01-31',
         months: [
@@ -56,10 +56,10 @@ export default {
       meta: null,
     },
     {
-      id: '63',
+      id: '8',
       type: 'term',
       attributes: {
-        name: 'Enhanced fault-tolerant archive',
+        name: 'Progressive homogeneous collaboration',
         schoolYear: 2019,
         creditDate: '2020-06-15',
         months: [
@@ -74,7 +74,7 @@ export default {
       meta: null,
     },
     {
-      id: '64',
+      id: '9',
       type: 'term',
       attributes: {
         name: 'COOR Last',
@@ -97,7 +97,7 @@ export default {
       meta: null,
     },
     {
-      id: '65',
+      id: '10',
       type: 'term',
       attributes: {
         name: 'COOR Current',

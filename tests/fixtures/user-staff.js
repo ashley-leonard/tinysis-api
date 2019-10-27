@@ -1,11 +1,11 @@
-// GET /api/admin/users/241
+// GET /api/admin/users/7
 export default {
   data: {
-    id: '241',
+    id: '7',
     type: 'user',
     attributes: {
-      firstName: 'Bong',
-      lastName: 'Mayer',
+      firstName: 'Dominic',
+      lastName: 'Collier',
       nickname: null,
       dateActive: '2012-09-01',
       dateInactive: null,
@@ -13,7 +13,7 @@ export default {
       districtGrade: 12,
       status: 'active',
       role: 'staff',
-      email: 'kenakulas@pourotamm.com',
+      email: 'janelle@rathskiles.net',
     },
     relationships: {
     },

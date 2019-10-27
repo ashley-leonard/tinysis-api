@@ -5,7 +5,7 @@ export default {
       id: '67',
       type: 'note',
       attributes: {
-        note: 'Note by Mayer for student Dietrich / assignment 1',
+        note: 'Note by Collier for student Bednar / assignment 1',
         updatedAt: '2019-11-15T00:00:00.000Z',
       },
       relationships: {
@@ -17,7 +17,7 @@ export default {
         },
         creator: {
           data: {
-            id: '241',
+            id: '7',
             type: 'User',
           },
         },
@@ -27,7 +27,7 @@ export default {
       id: '68',
       type: 'note',
       attributes: {
-        note: 'Note by Mayer for student Dietrich / assignment 2',
+        note: 'Note by Collier for student Bednar / assignment 2',
         updatedAt: '2019-11-15T00:00:00.000Z',
       },
       relationships: {
@@ -39,7 +39,7 @@ export default {
         },
         creator: {
           data: {
-            id: '241',
+            id: '7',
             type: 'User',
           },
         },
@@ -49,7 +49,7 @@ export default {
       id: '69',
       type: 'note',
       attributes: {
-        note: 'Note by Mayer for student Dietrich / assignment 3',
+        note: 'Note by Collier for student Bednar / assignment 3',
         updatedAt: '2019-11-15T00:00:00.000Z',
       },
       relationships: {
@@ -61,7 +61,7 @@ export default {
         },
         creator: {
           data: {
-            id: '241',
+            id: '7',
             type: 'User',
           },
         },
@@ -71,7 +71,7 @@ export default {
       id: '70',
       type: 'note',
       attributes: {
-        note: 'Note by Mayer for student Dietrich / assignment 4',
+        note: 'Note by Collier for student Bednar / assignment 4',
         updatedAt: '2019-11-15T00:00:00.000Z',
       },
       relationships: {
@@ -83,7 +83,7 @@ export default {
         },
         creator: {
           data: {
-            id: '241',
+            id: '7',
             type: 'User',
           },
         },
@@ -93,7 +93,7 @@ export default {
       id: '71',
       type: 'note',
       attributes: {
-        note: 'Note by Mayer for student Dietrich / assignment 5',
+        note: 'Note by Collier for student Bednar / assignment 5',
         updatedAt: '2019-11-15T00:00:00.000Z',
       },
       relationships: {
@@ -105,7 +105,7 @@ export default {
         },
         creator: {
           data: {
-            id: '241',
+            id: '7',
             type: 'User',
           },
         },
@@ -114,17 +114,17 @@ export default {
   ],
   included: [
     {
-      id: '241',
+      id: '7',
       type: 'user',
       attributes: {
-        firstName: 'Bong',
-        lastName: 'Mayer',
+        firstName: 'Dominic',
+        lastName: 'Collier',
         nickname: null,
         dateActive: '2012-09-01',
         dateInactive: null,
         districtId: null,
         districtGrade: 12,
-        email: 'kenakulas@pourotamm.com',
+        email: 'janelle@rathskiles.net',
         status: 'active',
         role: 'staff',
       },
@@ -132,7 +132,7 @@ export default {
         coordinatees: {
           data: [
             {
-              id: '245',
+              id: '11',
               type: 'user',
             },
           ],

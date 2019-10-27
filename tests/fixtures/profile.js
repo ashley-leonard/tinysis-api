@@ -1,17 +1,17 @@
 // GET /api/profile
 export default {
   data: {
-    id: '244',
+    id: '10',
     type: 'user',
     attributes: {
-      firstName: 'Scotty',
-      lastName: 'Mohr',
+      firstName: 'Cleotilde',
+      lastName: 'Kohler',
       nickname: null,
       dateActive: '2011-07-01',
       dateInactive: null,
       districtId: null,
       districtGrade: 12,
-      email: 'brittturcotte@ohara.co',
+      email: 'simon@watermith.name',
       status: 'active',
       role: 'administrator',
     },

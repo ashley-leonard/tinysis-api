@@ -61,7 +61,10 @@ export default {
           ],
         },
         parentCreditAssignment: {
-          data: null,
+          data: {
+            id: '31',
+            type: 'credit_assignment',
+          },
         },
       },
     },
@@ -122,7 +125,10 @@ export default {
           ],
         },
         parentCreditAssignment: {
-          data: null,
+          data: {
+            id: '31',
+            type: 'credit_assignment',
+          },
         },
       },
     },
@@ -568,6 +574,71 @@ export default {
         },
       },
     },
+    {
+      id: '31',
+      type: 'creditAssignment',
+      attributes: {
+        creditHours: 0.75,
+        enrollmentFinalizedOn: '2019-11-15',
+        contractName: 'Combined',
+        contractFacilitatorName: 'Fahey, Antonio',
+        districtFinalizeApprovedBy: null,
+        districtFinalizeApprovedOn: null,
+        districtTransmittedOn: null,
+        overrideHours: null,
+        overrideBy: null,
+      },
+      relationships: {
+        credit: {
+          data: {
+            id: '1',
+            type: 'credit',
+          },
+        },
+        graduationPlanMapping: {
+          data: null,
+        },
+        contractTerm: {
+          data: {
+            id: '5',
+            type: 'term',
+          },
+        },
+        contractFacilitator: {
+          data: {
+            id: '6',
+            type: 'user',
+          },
+        },
+        contract: {
+          data: null,
+        },
+        user: {
+          data: {
+            id: '12',
+            type: 'user',
+          },
+        },
+        creditTransmittalBatch: {
+          data: null,
+        },
+        childCreditAssignments: {
+          data: [
+            {
+              id: '13',
+              type: 'credit_assignment',
+            },
+            {
+              id: '14',
+              type: 'credit_assignment',
+            },
+          ],
+        },
+        parentCreditAssignment: {
+          data: null,
+        },
+      },
+    },
   ],
   included: [
     {
@@ -979,8 +1050,31 @@ export default {
         },
       },
     },
+    {
+      id: '6',
+      type: 'user',
+      attributes: {
+        firstName: 'Antonio',
+        lastName: 'Fahey',
+        nickname: null,
+        dateActive: '2011-07-01',
+        dateInactive: null,
+        districtId: null,
+        districtGrade: 12,
+        email: 'xavier@heathcote.net',
+        status: 'active',
+        role: 'administrator',
+      },
+      relationships: {
+        coordinatees: {
+          data: [
+
+          ],
+        },
+      },
+    },
   ],
   meta: {
-    count: 9,
+    count: 10,
   },
 };

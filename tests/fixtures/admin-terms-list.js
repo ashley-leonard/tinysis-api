@@ -2,51 +2,7 @@
 export default {
   data: [
     {
-      id: '60',
-      type: 'term',
-      attributes: {
-        name: 'Adaptive 6th generation function',
-        schoolYear: 2018,
-        creditDate: '2019-01-31',
-        months: [
-          '2018-09-01',
-          '2018-10-01',
-          '2018-11-01',
-          '2018-12-01',
-          '2019-01-01',
-        ],
-        status: 'active',
-      },
-      meta: {
-        contractsCount: 1,
-        enrollmentsCount: 2,
-        enrollmentsOpenCount: 0,
-      },
-    },
-    {
-      id: '61',
-      type: 'term',
-      attributes: {
-        name: 'Balanced content-based open architecture',
-        schoolYear: 2018,
-        creditDate: '2019-06-15',
-        months: [
-          '2019-02-01',
-          '2019-03-01',
-          '2019-04-01',
-          '2019-05-01',
-          '2019-06-01',
-        ],
-        status: 'active',
-      },
-      meta: {
-        contractsCount: 3,
-        enrollmentsCount: 4,
-        enrollmentsOpenCount: 0,
-      },
-    },
-    {
-      id: '65',
+      id: '10',
       type: 'term',
       attributes: {
         name: 'COOR Current',
@@ -73,7 +29,7 @@ export default {
       },
     },
     {
-      id: '64',
+      id: '9',
       type: 'term',
       attributes: {
         name: 'COOR Last',
@@ -100,10 +56,32 @@ export default {
       },
     },
     {
-      id: '63',
+      id: '5',
       type: 'term',
       attributes: {
-        name: 'Enhanced fault-tolerant archive',
+        name: 'Fundamental actuating local area network',
+        schoolYear: 2018,
+        creditDate: '2019-01-31',
+        months: [
+          '2018-09-01',
+          '2018-10-01',
+          '2018-11-01',
+          '2018-12-01',
+          '2019-01-01',
+        ],
+        status: 'active',
+      },
+      meta: {
+        contractsCount: 1,
+        enrollmentsCount: 2,
+        enrollmentsOpenCount: 0,
+      },
+    },
+    {
+      id: '8',
+      type: 'term',
+      attributes: {
+        name: 'Progressive homogeneous collaboration',
         schoolYear: 2019,
         creditDate: '2020-06-15',
         months: [
@@ -122,10 +100,32 @@ export default {
       },
     },
     {
-      id: '62',
+      id: '6',
       type: 'term',
       attributes: {
-        name: 'Extended local flexibility',
+        name: 'Re-engineered intermediate extranet',
+        schoolYear: 2018,
+        creditDate: '2019-06-15',
+        months: [
+          '2019-02-01',
+          '2019-03-01',
+          '2019-04-01',
+          '2019-05-01',
+          '2019-06-01',
+        ],
+        status: 'active',
+      },
+      meta: {
+        contractsCount: 3,
+        enrollmentsCount: 4,
+        enrollmentsOpenCount: 0,
+      },
+    },
+    {
+      id: '7',
+      type: 'term',
+      attributes: {
+        name: 'Seamless contextually-based encoding',
         schoolYear: 2019,
         creditDate: '2020-01-31',
         months: [
