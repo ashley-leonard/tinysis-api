@@ -10,12 +10,16 @@ const validateRelationships = new Validator({
   credit: { type: 'required' },
 });
 
-const creditsRegex = /^\d+(\.(75|5|25))?$/;
+// credits allow a number followed by an optional, constrained decimal fraction,
+// or a decimal with no whole number
+//
+const creditsRegex = /(^\d+(\.(75|5|25))?$)|(^\.(75|5|25)$)/;
 const validator = new Validator({
   creditHours: {
     type: 'format',
     regex: creditsRegex,
-    message: 'Invalid credit value',
+    message: 'Invalid credit value - please override with a value having a 0.25 multiple',
+    if: (key, value, pojo) => !pojo.enableOverride,
   },
   creditsOverride: {
     type: 'format',

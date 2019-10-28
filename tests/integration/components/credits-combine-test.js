@@ -1,7 +1,9 @@
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { render, find, click, findAll, fillIn } from '@ember/test-helpers';
-import { Interactor } from '@bigtest/interactor'
+import {
+  render, find, click, fillIn,
+} from '@ember/test-helpers';
+import { Interactor } from '@bigtest/interactor';
 import { resolve } from 'rsvp';
 import hbs from 'htmlbars-inline-precompile';
 import studentCreditAssignmentsFixture from '../../fixtures/student-credit-assignments';
@@ -134,8 +136,11 @@ module('Integration | Component | credits-combine', (hooks) => {
 
     await click('[data-test-toggle-override]');
     await fillIn('[data-test-credit-hours]', '');
-    await new Interactor('select[name="contractTerm"]').select('Select a term')
-    await new Interactor('select[name="credit"]').select('Select a course')
+    const termInteractor = new Interactor('select[name="contractTerm"]');
+    const creditInteractor = new Interactor('select[name="credit"]');
+
+    await termInteractor.select('Select a term');
+    await creditInteractor.select('Select a course');
 
     await click('button[type="submit"]');
 
@@ -149,5 +154,55 @@ module('Integration | Component | credits-combine', (hooks) => {
     ['creditsOverride', 'contractTerm', 'credit'].forEach((field) => {
       assert.ok(request.errors[field], `${field} was flagged`);
     });
+
+    await termInteractor.select(terms[0].attributes.name);
+    await creditInteractor.select(credits[0].attributes.courseName);
+    await fillIn('[data-test-credit-hours]', '0.5');
+
+    await click('button[type="submit"]');
+
+    [, request] = requests;
+    assert.ok(request, 'another request received');
+    assert.ok(request.model, 'model was provided');
+    assert.equal(request.type, 'save', 'it was a save request');
+  });
+
+  test('it does not permit submittal with invalid computed credit, but permits submittal with valid overridden credit', async (assert) => {
+    creditsToCombine.forEach((ca) => {
+      ca.attributes.creditHours = 0.111;
+    });
+
+    await render(hbs`
+      <CreditsCombine
+        @availableCredits={{credits}}
+        @creditAssignments={{creditsToCombine}}
+        @today={{today}}
+        @terms={{terms}}
+        @save={{this.save}}
+        @close={{this.close}}
+        @reportError={{this.reportError}}
+      />
+    `);
+
+    await click('button[type="submit"]');
+
+    let [request] = requests;
+
+    assert.ok(request, 'a request was made');
+    assert.equal(request.type, 'error', 'error reported');
+    assert.ok(request.errors.creditHours, 'message reported regarding credit hours');
+
+    await click('[data-test-toggle-override]');
+    await fillIn('input[data-test-credit-hours]', '.25');
+    await click('button[type="submit"]');
+
+    [, request] = requests;
+
+    assert.ok(request, 'a request was made');
+    assert.equal(request.type, 'save', 'save reported');
+    assert.ok(request.model, 'model included');
+
+    assert.equal(request.model.attributes.enableOverride, true, 'override enabled');
+    assert.equal(request.model.attributes.creditsOverride, '.25', 'override saved');
   });
 });
