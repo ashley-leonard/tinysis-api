@@ -1,26 +1,25 @@
 <h2>Credits</h2>
 
 <ul>
-  <li>credits with children show children via credit-assignments component</li>
   <li>credits with children include a split button with confirmation popup</li>
 </ul>
 
 <h3>Available credits to approve</h3>
 
-{{credits-worksheet
-  student=student
-  creditAssignments=creditAssignments
-  showCombine=(action "showCombine")
-  splitCredit=(action "splitCredit")
-  approveCredit=(action "approveCredit")
-}}
+<CreditsWorksheet
+  @student={{student}}
+  @creditAssignments={{creditAssignments}}
+  @showCombine={{action "showCombine"}}
+  @splitCredit={{action "splitCredit"}}
+  @approveCredit={{action "approveCredit"}}
+/>
 
 <h3>Credits finalized and sent to district</h3>
 
-{{credits-finalized
-  student=student
-  creditAssignments=creditAssignments
-}}
+<CreditsFinalized
+  @student={{student}}
+  @creditAssignments={{creditAssignments}}
+/>
 
 {{#if showCombineDialog}}
   {{#modal-dialog

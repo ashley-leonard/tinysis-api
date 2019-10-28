@@ -9,6 +9,11 @@
   </td>
   <td onclick={{action "selectCredit"}} class="cursor-pointer">
     {{courseName}}
+    {{#if hasChildren}}
+      <CreditAssignments
+        @creditAssignments={{childCreditAssignments}}
+      />
+    {{/if}}
   </td>
   <td>
     {{term.attributes.name}}
@@ -27,17 +32,24 @@
   </td>
   <td>
     {{#if showSplit}}
-      Split
+      <span class="fas fa-columns" />
+      <TLink
+        @action={{action "splitCredit"}}
+      >
+        Split
+      </TLink>
     {{/if}}
     {{#if showApproveForTransmittal}}
-      <a href="#" {{action "approveCredit"}} >
+      <TLink
+        @action={{action "approveCredit"}}
+      >
         {{#if isApproved}}
           <span class="fas fa-times text-red-700" />
         {{else}}
           <span class="fas fa-check text-green-700" />
         {{/if}}
         Approve
-      </a>
+      </TLink>
     {{/if}}
   </td>
 </tr>
