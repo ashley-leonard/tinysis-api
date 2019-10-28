@@ -1,4 +1,6 @@
-<tr>
+<tr
+  data-test-credit-id={{creditAssignment.id}}
+>
   <td class="align-center">
     <input
       type="checkbox"
@@ -34,6 +36,7 @@
     {{#if showSplit}}
       <span class="fas fa-columns" />
       <TLink
+        data-test-split-link
         @action={{action "splitCredit"}}
       >
         Split
@@ -41,12 +44,19 @@
     {{/if}}
     {{#if showApproveForTransmittal}}
       <TLink
+        data-test-approve-link
         @action={{action "approveCredit"}}
       >
         {{#if isApproved}}
-          <span class="fas fa-times text-red-700" />
+          <span
+            data-test-approved
+            class="fas fa-times text-red-700"
+          />
         {{else}}
-          <span class="fas fa-check text-green-700" />
+          <span
+            data-test-unapproved
+            class="fas fa-check text-green-700"
+          />
         {{/if}}
         Approve
       </TLink>

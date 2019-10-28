@@ -30,6 +30,7 @@ export default Component.extend(CreditAssignmentPropsMixin, {
       this.splitCredit(this.creditAssignment);
     },
     selectCredit() {
+      if (this.selectionDisabled) return;
       this.toggleProperty('selected');
       this.selectCredit(this.creditAssignment, this.selected);
     },

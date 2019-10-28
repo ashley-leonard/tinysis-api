@@ -18,7 +18,7 @@ export default Component.extend({
       this.showCombine(this.selectedCredits);
     },
     splitCredit(creditAssignment) {
-
+      this.splitCredit(creditAssignment);
     },
     selectCredit(creditAssignment) {
       const { selectedCredits } = this;
