@@ -14,6 +14,9 @@ class CreditAssignment < ApplicationRecord
   has_many :notes, :as => :notable, :dependent => :destroy
   
   validates_presence_of :credit_id
+  validates_presence_of :contract_term, if: -> { user? }
+  validates_presence_of :credit_hours
+  
   belongs_to :parent_credit_assignment, :class_name => 'CreditAssignment', :foreign_key => :parent_credit_assignment_id, optional: true
   has_many :child_credit_assignments, :class_name  => 'CreditAssignment', :foreign_key => :parent_credit_assignment_id
   
@@ -110,7 +113,7 @@ class CreditAssignment < ApplicationRecord
 
   # safe retrieval of contract term name
   def contract_term_name
-    unless self.contract_term_id and self.contract_term
+    unless self.contract_term
       return 'Unknown term'
     end
     return self.contract_term.name
@@ -205,25 +208,30 @@ class CreditAssignment < ApplicationRecord
   end
   
   def self.combine(student, credit_id, term_id, override, credit_assignments, user)
-    ca_term = credit_assignments[0]
-    
     # scan and get the most recent term and the cumulative hours
     hours = credit_assignments.sum(&:credit_hours)
-    
-    # create the new credit
-    now = Time.now.gmtime
-    year = Setting.current_year
-    
-    parent = CreditAssignment.new(:credit_id => credit_id, :credit_hours => hours, :contract_name => "Combined", :contract_facilitator_id => user.id, :contract_facilitator_name => user.last_name_first, :enrollment_finalized_on => now, :contract_term => Term.find_by_id(term_id))
+
+    parent = CreditAssignment.new(
+      credit_id: credit_id,
+      credit_hours: hours,
+      contract_name: "Combined",
+      contract_facilitator_id: user.id,
+      contract_facilitator_name: user.last_name_first,
+      enrollment_finalized_on: Time.now.gmtime,
+      contract_term: Term.find_by_id(term_id)
+    )
     parent.override(override, user)
     
     credit_assignments.each do |ca|
+      # TODO protect against unaffiliated credit assignments being added
       ca.graduation_plan_mapping.destroy if ca.graduation_plan_mapping
       ca.parent_credit_assignment = parent
       ca.denormalize_credit
       ca.save
     end
     student.credit_assignments << parent
+
+    parent
   end
 
   def uncombine
@@ -236,7 +244,7 @@ class CreditAssignment < ApplicationRecord
   end
   
   def user?
-    self.user_id?
+    self.user.present?
   end
   
   def primary_parent

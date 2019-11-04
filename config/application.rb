@@ -39,5 +39,8 @@ module TinysisApi
       MIN_TITLE: 4,
       DEFAULT_LIMIT: 30,
     }
+
+    # TODO should move these into app tree
+    config.autoload_paths << Rails.root.join('lib')
   end
 end

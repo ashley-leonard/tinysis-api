@@ -1,5 +1,7 @@
 class CreditAssignmentsController < ApplicationController
 
+  before_action :get_student, only: [:approve, :unapprove, :create_for_student]
+
   def index
     limit = params[:limit] || Rails.configuration.constants[:DEFAULT_LIMIT]
 
@@ -43,6 +45,41 @@ class CreditAssignmentsController < ApplicationController
     render json: CreditAssignmentSerializer.new(result, options), status: 200
   end
 
+  def create_for_enrollment
+    credit_relation = get_relation(:credit)
+
+    credit = Credit.find credit_relation['id']
+    enrollment = Enrollment.find params[:enrollment_id]
+
+    attributes = get_attributes
+
+    new_credit_assignment = CreditAssignment.new attributes
+    new_credit_assignment.enrollment = enrollment
+    new_credit_assignment.credit = credit
+    new_credit_assignment.save!
+
+    render json: CreditAssignmentSerializer.new(new_credit_assignment)
+  end
+
+  def create_for_student
+    term_relation = get_relation(:contract_term)
+    credit_relation = get_relation(:credit)
+    child_credit_assignment_ids = get_relation(:child_credit_assignments).map { |ca| ca['id'] }
+
+    attributes = get_attributes
+
+    term = Term.find term_relation['id']
+    credit = Credit.find credit_relation['id']
+    child_credit_assignments = CreditAssignment
+      .where({id: child_credit_assignment_ids, user_id: @student.id})
+
+    raise ActionController::ParameterMissing.new('childCreditAssignments') if child_credit_assignments.empty?
+
+    new_credit_assignment = CreditAssignment.combine(@student, credit[:id], term[:id], attributes[:override_hours], child_credit_assignments, @user)
+
+    render json: CreditAssignmentSerializer.new(new_credit_assignment, { params: { forFulfilled: true } })
+  end
+  
   def approve
     credit_assignment = CreditAssignment.find params[:id]
 
@@ -59,38 +96,41 @@ class CreditAssignmentsController < ApplicationController
     render json: CreditAssignmentSerializer.new(credit_assignment, { params: { forFulfilled: true } })
   end
 
-  def combine
-    term_id = combine_relation(:term)
-    credit_id = combine_relation(:credit)
-    attributes = combine_attributes
-    credit_assignment_ids = combine_relation(:child_credit_assignments)
+  def destroy
+    credit_assignment = CreditAssignment.find(:id)
 
-    Rails.logger.info term_id
-    Rails.logger.info credit_id
-    Rails.logger.info attributes
-    Rails.logger.info credit_assignment_ids
+    children = credit_assignment.child_credit_assignments
 
-    render nothing: true
+    raise TinyException.new("Not permitted to delete this credit assignment") unless children.length > 0 and !credit_assignment.transmitted?
+
+    credit_assignment.uncombine
+
+    render json: CreditAssignmentSerializer.new(children, { includes: [ :credit ] })
   end
   
 protected
-  def approval_attributes
+  def get_student
+    @student = User.find_by_id_and_privilege params[:student_id], User::PRIVILEGE_STUDENT
+    raise ActiveRecord::RecordNotFound unless @student
+  end
+
+  def get_approval_attributes
     params.require(:data)
       .require(:attributes)
       .permit(:district_finalize_approved_on)
   end
 
-  def combine_attributes
+  def get_attributes
     params.require(:data)
       .require(:attributes)
-      .permit(:note, :credits_override)
+      .permit(:note, :credit_hours, :override_hours)
   end
 
-  def combine_relation(relation)
-    params.require(:data)
+  def get_relation(relation)
+    params
+      .require(:data)
       .require(:relationships)
       .require(relation)
       .require(:data)
-      .require(:id)
   end
 end

@@ -22,6 +22,7 @@ class CreditAssignmentSerializer < ApplicationSerializer
   belongs_to :contract
   belongs_to :user
   belongs_to :credit_transmittal_batch
+  belongs_to :enrollment
 
   has_many :child_credit_assignments, record_type: :credit_assignment
   belongs_to :parent_credit_assignment, record_type: :credit_assignment

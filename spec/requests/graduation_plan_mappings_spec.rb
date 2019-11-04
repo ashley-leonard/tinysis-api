@@ -3,10 +3,7 @@ require 'rails_helper'
 RSpec.describe 'Graduation plan mappings API', type: :request do
 
   before(:each) do
-    @staff1 = create :user, privilege: User::PRIVILEGE_STAFF, :email => Faker::Internet.email
-
-    @student1 = create :user, coordinator: @staff1, date_active: Date.new(2018, 8, 1)
-    @student2 = create :user, coordinator: @staff1, date_active: Date.new(2018, 8, 1)
+    setupContract
 
     @graduation_plan = create :graduation_plan, user: @student1
 
@@ -16,9 +13,9 @@ RSpec.describe 'Graduation plan mappings API', type: :request do
     credit1 = create :credit, course_name: 'Language 1'
     credit2 = create :credit, course_name: 'Math 1'
 
-    @credit_assignment_1 = create :credit_assignment, credit: credit1, user: @student1
-    @credit_assignment_2 = create :credit_assignment, credit: credit2, user: @student1
-    @credit_assignment_3 = create :credit_assignment, credit: credit2, user: @student1
+    @credit_assignment_1 = create :credit_assignment, credit: credit1, user: @student1, contract_term: @term
+    @credit_assignment_2 = create :credit_assignment, credit: credit2, user: @student1, contract_term: @term
+    @credit_assignment_3 = create :credit_assignment, credit: credit2, user: @student1, contract_term: @term
 
     @mapping1 = create :graduation_plan_mapping, graduation_plan_requirement: @req1, credit_assignment: @credit_assignment_1, graduation_plan: @graduation_plan
     @mapping2 = create :graduation_plan_mapping, graduation_plan_requirement: @req2, credit_assignment: @credit_assignment_2, graduation_plan: @graduation_plan

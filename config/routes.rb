@@ -9,18 +9,20 @@ Rails.application.routes.draw do
   scope '/api' do
     get '/profile', to: 'profiles#index'
   
+    get '/credit-assignments', to: 'credit_assignments#index'
+    put '/students/:student_id/credit-assignments/:id/approve', to: 'credit_assignments#approve'
+    put '/students/:student_id/credit-assignments/:id/unapprove', to: 'credit_assignments#unapprove'
+    post '/students/:student_id/credit-assignments', to: 'credit_assignments#create_for_student'
+    post '/enrollments/:enrollment_id/credit-assignments', to: 'credit_assignments#create_for_enrollment'
+    post '/contracts/:contract_id/credit-assignments', to: 'credit_assignments#create_for_contract'
+    delete '/students/:student_id/credit-assignments/:id', to: 'credit_assignments#destroy'
+
     get '/students', to: 'students#index'
     get '/students/:id', to: 'students#show'
   
     get '/enrollments', to: 'enrollments#index'
     get '/enrollments/:id', to: 'enrollments#show'
   
-    get '/credit-assignments', to: 'credit_assignments#index'
-    put '/credit-assignments/:id/approve', to: 'credit_assignments#approve'
-    put '/credit-assignments/:id/unapprove', to: 'credit_assignments#unapprove'
-    put '/credit-assignments/:id/combine', to: 'credit_assignments#combine'
-    put '/credit-assignments/:id/split', to: 'credit_assignments#split'
-
     get '/notes', to: 'notes#index'
   
     get '/contracts', to: 'contracts#index'

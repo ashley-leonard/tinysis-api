@@ -429,6 +429,11 @@ RSpec.describe 'Ember fixtures script', type: :request do
         # credit
         credit = Credit.first
         write_fixture "/api/credits/#{credit.id}", "credit-detail.js"
+
+        # combine two credits
+        student2_credits = @student2.credit_assignments[0..1]
+        CreditAssignment.combine @student2, student2_credits.first.credit.id, student2_credits.first.contract_term.id, nil, student2_credits, @admin0
+        write_fixture "/api/credit-assignments?studentIds=#{@student2.id}&includeFulfilledAttributes=true&include=credit,contractTerm,contractFacilitator,contract", "student-credit-assignments-with-combined.js"
       end
     end
   end
