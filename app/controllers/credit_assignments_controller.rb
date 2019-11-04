@@ -80,6 +80,23 @@ class CreditAssignmentsController < ApplicationController
     render json: CreditAssignmentSerializer.new(new_credit_assignment, { params: { forFulfilled: true } })
   end
   
+  def create_for_contract
+    credit_relation = get_relation(:credit)
+    contract_relation = get_relation(:contract)
+
+    attributes = get_attributes
+
+    credit = Credit.find credit_relation['id']
+    contract = Contract.find contract_relation['id']
+
+    new_credit_assignment = CreditAssignment.new attributes
+    new_credit_assignment.contract = contract
+    new_credit_assignment.credit = credit
+    new_credit_assignment.save!
+
+    render json: CreditAssignmentSerializer.new(new_credit_assignment)
+  end
+  
   def approve
     credit_assignment = CreditAssignment.find params[:id]
 

@@ -40,6 +40,27 @@ RSpec.describe 'Credit assignments API', type: :request do
   # end
 
   describe 'POST credit-assignments' do
+    it 'returns a 200 with successful creation of a credit assignment bound to a contract' do
+      body = {
+        data: {
+          attributes: { creditHours: 0.25 },
+          relationships: {
+            contract: { data: { id: @enrollment1.contract.id } },
+            credit: { data: { id: @credit1.id } },
+          }
+        }
+      }
+
+      post "/api/contracts/#{@enrollment1.contract.id}/credit-assignments", params: body.to_json, headers: json_request_headers
+
+      expect(response).to have_http_status(200)
+      expect(json).not_to be_empty
+      expect(json['data']['id']).not_to be_empty
+      expect(json['data']['attributes']['creditHours']).to eq(0.25)
+      expect(json['data']['relationships']['contract']['data']['id']).to eq(@enrollment1.contract.id.to_s)
+      expect(json['data']['relationships']['credit']['data']['id']).to eq(@credit1.id.to_s)
+    end
+
     it 'returns a 200 with successful creation of a credit assignment bound to an enrollment' do
       body = {
         data: {
