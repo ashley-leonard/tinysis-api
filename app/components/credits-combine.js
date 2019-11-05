@@ -46,18 +46,15 @@ export default TForm.extend({
         new Big(0)
       );
 
-    const [first] = creditAssignments;
-
     this.model = {
       attributes: {
         enableOverride: false,
         creditHours,
         creditsOverride: creditHours,
-        creditId: first.relationships.credit.data.id,
       },
       relationships: {
-        contractTerm: clone(first.relationships.contractTerm),
-        credit: clone(first.relationships.credit),
+        contractTerm: { data: null },
+        credit: { data: null },
         childCreditAssignments: {
           data: creditAssignments.map(ca => ({
             id: ca.id,
@@ -103,6 +100,14 @@ export default TForm.extend({
       }
       this.updatePojo({ enableOverride });
     },
+  },
+  serializeModel(pojo, _model, relationships) {
+    const model = this._super(pojo, _model, relationships);
+    if (!model.attributes.enableOverride) {
+      delete model.attributes.creditsOverride;
+    }
+    delete model.attributes.enableOverride;
+    return model;
   },
   validate() {
     const { relationships } = this;

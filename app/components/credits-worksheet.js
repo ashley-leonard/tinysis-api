@@ -8,7 +8,8 @@ export default Component.extend({
   }),
   unfinalizedCredits: computed('creditAssignments', function () {
     return this.creditAssignments
-      .filter(ca => !ca.relationships.creditTransmittalBatch.data);
+      .filter(ca => !ca.relationships.creditTransmittalBatch.data)
+      .filter(ca => !ca.relationships.parentCreditAssignment.data);
   }),
   actions: {
     approveCredit(creditAssignment) {
