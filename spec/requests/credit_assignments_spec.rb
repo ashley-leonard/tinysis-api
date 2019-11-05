@@ -103,6 +103,7 @@ RSpec.describe 'Credit assignments API', type: :request do
       expect(json['data']['id']).not_to be_empty
       expect(json['data']['attributes']['creditHours']).to eq(@credit_assignment_1.credit_hours + @credit_assignment_1.credit_hours)
       expect(json['data']['attributes']['overrideHours']).to eq(5.0)
+      expect(json['data']['relationships']['user']['data']['id']).to eq(@student1.id.to_s)
       expect(json['data']['relationships']['contractTerm']['data']['id']).to eq(@enrollment1.contract.term.id.to_s)
       expect(json['data']['relationships']['credit']['data']['id']).to eq(@credit1.id.to_s)
       expect(json['data']['relationships']['childCreditAssignments']['data'][0]['id']).to eq(@credit_assignment_1.id.to_s)

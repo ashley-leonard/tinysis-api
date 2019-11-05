@@ -218,7 +218,8 @@ class CreditAssignment < ApplicationRecord
       contract_facilitator_id: user.id,
       contract_facilitator_name: user.last_name_first,
       enrollment_finalized_on: Time.now.gmtime,
-      contract_term: Term.find_by_id(term_id)
+      contract_term: Term.find_by_id(term_id),
+      user: student
     )
     parent.override(override, user)
     
