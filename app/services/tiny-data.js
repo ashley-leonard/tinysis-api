@@ -3,6 +3,11 @@ import dayjs from 'dayjs';
 import { warn } from '../utils/logger';
 import fetch from '../utils/fetch';
 import clone from '../utils/clone';
+import {
+  AuthError,
+  doSigninRedirect,
+} from '../utils/session-utils';
+
 
 export const tinyDataService = {
   init(...args) {
@@ -65,6 +70,11 @@ export const tinyDataService = {
       .then((result) => {
         this.addResult(result);
         return result;
+      }, (err) => {
+        if (err instanceof AuthError) {
+          return doSigninRedirect(window.location.href);
+        }
+        return err;
       });
   },
 

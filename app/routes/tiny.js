@@ -2,10 +2,10 @@ import Route from '@ember/routing/route';
 import Promise from 'rsvp';
 import { inject as service } from '@ember/service';
 import fetch from '../utils/fetch';
+import { doSigninRedirect } from '../utils/session-utils';
 
 export default Route.extend({
   tinyData: service(),
-  session: service(),
 
   async beforeModel(transition) {
     const { tinyData } = this;
@@ -22,8 +22,7 @@ export default Route.extend({
       transition.abort();
 
       if (e.status === 401 || e.message === 'No session') {
-        this.session.setIntendedUrl(intent.url);
-        this.session.signIn();
+        doSigninRedirect(intent.url);
         return;
       }
 

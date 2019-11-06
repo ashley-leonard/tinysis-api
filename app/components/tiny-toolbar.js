@@ -4,8 +4,8 @@ import { ROLE_ADMIN } from '../utils/user-utils';
 
 export default Component.extend({
   tagName: '',
-  signin: () => {},
-  signoff: () => {},
+  signIn: () => {},
+  signOut: () => {},
 
   userIsAdmin: computed('user', function () {
     const { user } = this;
@@ -17,10 +17,10 @@ export default Component.extend({
 
   actions: {
     signIn() {
-      this.signin();
+      this.signIn();
     },
     signOut() {
-      this.signout();
+      this.signOut();
     },
   },
 });
