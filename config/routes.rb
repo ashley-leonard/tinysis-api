@@ -15,7 +15,7 @@ Rails.application.routes.draw do
     post '/students/:student_id/credit-assignments', to: 'credit_assignments#create_for_student'
     post '/enrollments/:enrollment_id/credit-assignments', to: 'credit_assignments#create_for_enrollment'
     post '/contracts/:contract_id/credit-assignments', to: 'credit_assignments#create_for_contract'
-    delete '/students/:student_id/credit-assignments/:id', to: 'credit_assignments#destroy'
+    delete '/credit-assignments/:id', to: 'credit_assignments#destroy'
 
     get '/students', to: 'students#index'
     get '/students/:id', to: 'students#show'
@@ -24,6 +24,7 @@ Rails.application.routes.draw do
     get '/enrollments/:id', to: 'enrollments#show'
   
     get '/notes', to: 'notes#index'
+    post '/notes/:notable_type/:notable_id', to: 'notes#create'
   
     get '/contracts', to: 'contracts#index'
     get '/contracts/:id', to: 'contracts#show'
