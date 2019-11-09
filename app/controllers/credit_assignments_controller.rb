@@ -114,7 +114,7 @@ class CreditAssignmentsController < ApplicationController
   end
 
   def destroy
-    credit_assignment = CreditAssignment.find(:id)
+    credit_assignment = CreditAssignment.find params[:id]
 
     children = credit_assignment.child_credit_assignments
 
@@ -124,7 +124,7 @@ class CreditAssignmentsController < ApplicationController
 
     render json: CreditAssignmentSerializer.new(children, { includes: [ :credit ] })
   end
-  
+
 protected
   def get_student
     @student = User.find_by_id_and_privilege params[:student_id], User::PRIVILEGE_STUDENT
