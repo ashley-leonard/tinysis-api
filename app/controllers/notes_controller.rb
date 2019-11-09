@@ -7,14 +7,9 @@ class NotesController < ApplicationController
 
     conditions = {}
 
-    if !(params[:notableType] && params[:notableIds])
-      return render json: { message: 'requires notableType and notableIds' }, status: 400
+    [:notable_type, :notable_ids].each do |p|
+      conditions[p] = params[p] if params[p].present?
     end
-
-    conditions = {
-      notable_type: params[:notableType].capitalize,
-      notable_id: params[:notableIds].split(',')
-    }
 
     result = Note
       .where(conditions)
