@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   scope '/api' do
     get '/profile', to: 'profiles#index'
   
+    get '/credit-assignments/:id', to: 'credit_assignments#show'
     get '/credit-assignments', to: 'credit_assignments#index'
     put '/students/:student_id/credit-assignments/:id/approve', to: 'credit_assignments#approve'
     put '/students/:student_id/credit-assignments/:id/unapprove', to: 'credit_assignments#unapprove'

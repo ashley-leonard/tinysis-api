@@ -28,6 +28,16 @@ RSpec.describe 'Credit assignments API', type: :request do
       expect(json['meta']['count']).to eq(6)
       expect(json['data'].length).to eq(6)
     end
+
+    it 'returns a 200 for a single credit assignment' do
+      get "/api/credit-assignments/#{@credit_assignment_6.id}"
+
+      expect(response).to have_http_status(200)
+      expect(json).not_to be_empty
+      expect(json['data']).not_to be_empty
+      expect(json['data']['id']).to eq(@credit_assignment_6.id.to_s)
+      expect(json['data']['type']).to eq('creditAssignment')
+    end
   end
 
   # describe 'DELETE /api/graduation-plan-mappings/:student_id/:mapping_id' do

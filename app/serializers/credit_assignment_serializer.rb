@@ -17,6 +17,7 @@ class CreditAssignmentSerializer < ApplicationSerializer
 
   belongs_to :credit
   has_one :graduation_plan_mapping
+  has_many :notes
   belongs_to :contract_term, record_type: :term, serializer: :term
   belongs_to :contract_facilitator, record_type: :user, serializer: :user
   belongs_to :contract

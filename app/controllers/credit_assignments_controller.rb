@@ -42,7 +42,13 @@ class CreditAssignmentsController < ApplicationController
       options[:include] = params[:include].split(',').map(&:underscore)
     end
 
-    render json: CreditAssignmentSerializer.new(result, options), status: 200
+    render json: CreditAssignmentSerializer.new(result, options)
+  end
+
+  def show
+    credit_assignment = CreditAssignment.find params[:id]
+
+    render json: CreditAssignmentSerializer.new(credit_assignment, { include: [:notes] })
   end
 
   def create_for_enrollment
