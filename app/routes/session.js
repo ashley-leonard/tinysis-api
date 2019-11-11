@@ -17,6 +17,6 @@ export default Route.extend({
     } else {
       redirectUrl = '/tiny';
     }
-    this.transitionTo(redirectUrl);
+    window.location.href = redirectUrl;
   },
 });

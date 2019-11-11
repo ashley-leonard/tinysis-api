@@ -22,6 +22,13 @@ export default Component.extend(CreditAssignmentPropsMixin, {
     return this.hasChildren;
   }),
 
+  notes: computed('creditAssignment', function () {
+    const { tinyData } = this;
+    const refs = this.creditAssignment.relationships.notes.data || [];
+
+    return refs.map(ref => tinyData.get('note', ref.id));
+  }),
+
   actions: {
     approveCredit() {
       this.approveCredit(this.creditAssignment);

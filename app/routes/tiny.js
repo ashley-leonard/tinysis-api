@@ -17,6 +17,8 @@ export default Route.extend({
 
       tinyData.setUser(mergedProfile);
     } catch (e) {
+      // TODO this code does not run any more, as the redirect
+      // is handled in the tinyData service.
       const { intent } = transition;
 
       transition.abort();

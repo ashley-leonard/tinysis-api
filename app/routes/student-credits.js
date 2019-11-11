@@ -11,7 +11,7 @@ export default Route.extend({
 
     this.student = student.data;
 
-    return this.tinyData.fetch(`/api/credit-assignments?studentIds=${student.data.id}&limit=-1&includeFulfilledAttributes=true&include=contractTerm,contractFacilitator,contract`);
+    return this.tinyData.fetch(`/api/credit-assignments?studentIds=${student.data.id}&limit=-1&includeFulfilledAttributes=true&include=contractTerm,contractFacilitator,contract,notes`);
   },
   setupController(controller, model) {
     this._super(controller, model);
@@ -19,7 +19,13 @@ export default Route.extend({
       student: this.student,
       creditAssignments: model.data,
       availableCredits: this.availableCredits.data,
+      selectedCredits: [],
       today: new Date(),
     });
+  },
+  actions: {
+    refreshModel() {
+      this.refresh();
+    },
   },
 });

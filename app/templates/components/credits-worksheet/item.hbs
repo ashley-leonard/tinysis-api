@@ -9,13 +9,23 @@
       disabled={{selectionDisabled}}
     >
   </td>
-  <td onclick={{action "selectCredit"}} class="cursor-pointer">
-    {{courseName}}
+  <td>
+    <TLink
+      class="no-underline-not-working"
+      @action={{action "selectCredit"}}
+    >
+      {{courseName}}
+    </TLink>
     {{#if hasChildren}}
       <CreditAssignments
         @creditAssignments={{childCreditAssignments}}
       />
     {{/if}}
+    <NotesList
+      @notes={{notes}}
+      @notable={{creditAssignment}}
+      @expanded={{true}}
+    />
   </td>
   <td>
     {{term.attributes.name}}

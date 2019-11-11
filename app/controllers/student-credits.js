@@ -2,9 +2,12 @@ import Controller from '@ember/controller';
 import dayjs from 'dayjs';
 import { inject as service } from '@ember/service';
 import { replaceModel } from '../utils/json-api';
+import NotesMixin from '../mixins/notes';
 
-export default Controller.extend({
+export default Controller.extend(NotesMixin, {
   tinyData: service(),
+  flashMessages: service(),
+
   actions: {
     updateSelectedCredits(creditAssignments) {
       this.set('selectedCredits', creditAssignments);
@@ -20,36 +23,30 @@ export default Controller.extend({
         }),
       });
 
-      const { creditAssignments } = this;
-      const combined = combineModel.relationships.childCreditAssignments.data.map(ca => ca.id);
-      const newCreditAssignmentsList = creditAssignments
-        .filter(ca => !combined.contains(ca.id))
-        .concat([newCreditAssignment]);
+      const note = (combineModel.attributes.note || '').trim();
+      if (note) {
+        await this.createNote(newCreditAssignment.data, note);
+      }
 
-      this.setProperties({
-        creditAssignments: newCreditAssignmentsList,
-        showCombineDialog: false,
-      });
+      this.hideCombineDialog();
+
+      this.send('refreshModel');
+
+      this.flashMessages.success('Credits were combined.');
     },
     async splitCredit(creditAssignment) {
       const url = `/api/credit-assignments/${creditAssignment.id}`;
 
-      const releasedCreditAssignments = await this.tinyData.fetch(url, {
+      await this.tinyData.fetch(url, {
         method: 'DELETE',
       });
 
-      const { creditAssignments } = this;
-      const toExclude = [creditAssignment, ...releasedCreditAssignments.data];
-      const newCreditAssignmentsList = creditAssignments
-        .filter(ca => !toExclude.find(ex => ex.id === ca.id))
-        .concat(releasedCreditAssignments.data);
+      this.send('refreshModel');
 
-      this.setProperties({
-        creditAssignments: newCreditAssignmentsList,
-      });
+      this.flashMessages.success('Credits were split.');
     },
     hideCombine() {
-      this.set('showCombineDialog', false);
+      this.hideCombineDialog();
     },
     async showCombine(creditsToCombine) {
       if (!this.terms) {
@@ -91,5 +88,9 @@ export default Controller.extend({
 
       return newCreditAssignment;
     },
+  },
+
+  hideCombineDialog() {
+    this.set('showCombineDialog', false);
   },
 });

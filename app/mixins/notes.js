@@ -1,5 +1,6 @@
 import Mixin from '@ember/object/mixin';
 import { inject as service } from '@ember/service';
+import { dasherize } from '@ember/string';
 
 export default Mixin.create({
   tinyData: service(),
@@ -15,6 +16,23 @@ export default Mixin.create({
         notableType,
         notableIds: notableIds.join(','),
       },
+    });
+  },
+
+  createNote(notable, note) {
+    const {
+      type,
+      id,
+    } = notable;
+    return this.tinyData.fetch(`/api/notes/${dasherize(type)}/${id}`, {
+      method: 'POST',
+      body: JSON.stringify({
+        data: {
+          attributes: {
+            note,
+          },
+        },
+      }),
     });
   },
 });

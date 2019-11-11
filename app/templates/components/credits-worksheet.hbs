@@ -29,9 +29,10 @@
       </tr>
     </thead>
     <tbody>
-      {{#each unfinalizedCredits as |creditAssignment|}}
+      {{#each viewModels as |viewModel|}}
         {{credits-worksheet/item
-          creditAssignment=creditAssignment
+          creditAssignment=viewModel.creditAssignment
+          credit=viewModel.credit
           splitCredit=(action "splitCredit")
           selectCredit=(action "selectCredit")
           approveCredit=(action "approveCredit")

@@ -1,6 +1,7 @@
 import Big from 'big.js';
 import { schedule } from '@ember/runloop';
 import { computed } from '@ember/object';
+import { inject as service } from '@ember/service';
 import TForm from './t-form';
 import clone from '../utils/clone';
 import Validator from '../utils/validator';
@@ -30,6 +31,7 @@ const validator = new Validator({
 });
 
 export default TForm.extend({
+  tinyData: service(),
   validator,
   creditOptions: computed('availableCredits', function () {
     const { availableCredits } = this;
@@ -39,12 +41,16 @@ export default TForm.extend({
     }));
   }),
   didReceiveAttrs() {
-    const { creditAssignments } = this;
+    const { creditAssignments, tinyData } = this;
     const creditHours = creditAssignments
       .reduce(
         (sum, ca) => sum.add(ca.attributes.creditHours),
         new Big(0)
       );
+
+    const [firstCredit] = creditAssignments;
+    const creditCandidate = tinyData.get('credit', firstCredit.relationships.credit.data.id);
+    const termCandidate = tinyData.get('term', firstCredit.relationships.contractTerm.data.id);
 
     this.model = {
       attributes: {
@@ -53,8 +59,8 @@ export default TForm.extend({
         creditsOverride: creditHours,
       },
       relationships: {
-        contractTerm: { data: null },
-        credit: { data: null },
+        contractTerm: { data: termCandidate.attributes.status === 'active' ? { id: termCandidate.id } : null },
+        credit: { data: creditCandidate.attributes.status === 'active' ? { id: creditCandidate.id } : null },
         childCreditAssignments: {
           data: creditAssignments.map(ca => ({
             id: ca.id,
