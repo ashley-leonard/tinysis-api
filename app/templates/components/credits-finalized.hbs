@@ -1,15 +1,15 @@
 {{#check-empty
-  count=finalizedCreditAssignments.length
+  count=viewModels.length
   noResultsMessage="There are no finalized credits."
 }}
   {{count-paragraph
-    count=finalizedCreditAssignments.length
+    count=viewModels.length
     name="credit"
   }}
   <table class="t-table w-full" data-test-settings-credits-list>
     <thead>
       <tr>
-        <th class="text-center">District</th>
+        <th></th>
         <th>Credit</th>
         <th>Term</th>
         <th class="text-right">Credits</th>
@@ -18,9 +18,10 @@
       </tr>
     </thead>
     <tbody>
-      {{#each finalizedCreditAssignments as |creditAssignment|}}
+      {{#each viewModels as |viewModel|}}
         {{credits-finalized/item
-          creditAssignment=creditAssignment
+          creditAssignment=viewModel.creditAssignment
+          credit=viewModel.credit
         }}
       {{/each}}
     </tbody>

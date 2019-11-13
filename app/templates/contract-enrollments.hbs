@@ -2,6 +2,11 @@
 
 {{contract-credit-assignments contract=contract}}
 
+<TTypeAhead
+  @onSearch={{action 'searchUsers'}}
+  @onChange={{action 'selectUser'}}
+/>
+
 {{#check-empty
   count=model.meta.count
   noResultsMessage="No enrollments as of yet"

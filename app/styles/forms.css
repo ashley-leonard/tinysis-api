@@ -52,6 +52,12 @@ input[type="text"], input[type="email"], input[type="number"], select, textarea,
   }
 }
 
+div.field {
+  span::after {
+    content: ' ',
+  }
+}
+
 input[type="checkbox"] {
   display: block;
 }

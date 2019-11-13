@@ -33,7 +33,7 @@ export function getTokenFromHash() {
   });
 }
 
-function setIntendedUrl(url) {
+export function setIntendedUrl(url) {
   window.localStorage.setItem(SESSION_INTENDED_URL_KEY, url);
 }
 
