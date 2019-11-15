@@ -19,9 +19,11 @@ module('Integration | Component | tiny-toolbar', (hooks) => {
     requests = [];
     this.setProperties({
       signin: () => {
+        console.log('signin')
         requests.push({ type: 'signin' });
       },
       signout: () => {
+        console.log('signout')
         requests.push({ type: 'signout' });
       },
     });
@@ -39,8 +41,8 @@ module('Integration | Component | tiny-toolbar', (hooks) => {
       {{tiny-toolbar
         user=user
         permissions=user.permissions
-        signin=signin
-        signout=signout
+        signIn=signin
+        signOut=signout
       }}
     `);
 
@@ -69,14 +71,15 @@ module('Integration | Component | tiny-toolbar', (hooks) => {
       {{tiny-toolbar
         user=user
         permissions=user.permissions
-        signin=signin
-        signout=signout
+        signIn=signin
+        signOut=signout
       }}
     `);
     assert.ok(find('[data-test-route="status-all-coordinators.index"]'), 'coordinators link is exposed');
     assert.ok(find('[data-test-route="students.index"]'), 'students link is exposed');
     assert.ok(find('[data-test-route="contracts.index"]'), 'contracts link is exposed');
     assert.ok(find('[data-test-route="admin"]'), 'admin links are exposed');
+
   });
 
   test('it renders in logged-out state', async function (assert) {
@@ -93,8 +96,8 @@ module('Integration | Component | tiny-toolbar', (hooks) => {
       {{tiny-toolbar
         user=user
         permissions=user.permissions
-        signin=signin
-        signout=signout
+        signIn=signin
+        signOut=signout
       }}
     `);
 
