@@ -51,7 +51,7 @@ module('Integration | Component | credits-worksheet', (hooks) => {
 
     assert.ok(find('[data-test-credits-worksheet]'), 'worksheet table rendered');
 
-    const unbatched = creditAssignments.filter(ca => !ca.relationships.creditTransmittalBatch.data);
+    const unbatched = creditAssignments.filter(ca => !(ca.relationships.creditTransmittalBatch.data || ca.relationships.parentCreditAssignment.data));
     const countParagraph = find(`[data-test-count-paragraph="${unbatched.length}"]`);
     assert.ok(countParagraph, 'the expected count was rendered');
 

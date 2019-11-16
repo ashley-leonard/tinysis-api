@@ -98,13 +98,14 @@ export default TForm.extend({
     },
     toggleOverride() {
       const enableOverride = !this.pojo.enableOverride;
+      this.updatePojo({ enableOverride });
+
       if (enableOverride) {
         schedule('afterRender', this, function () {
           const element = this.element.querySelector('input[name="creditsOverride"]');
           element.focus();
         });
       }
-      this.updatePojo({ enableOverride });
     },
   },
   serializeModel(pojo, _model, relationships) {

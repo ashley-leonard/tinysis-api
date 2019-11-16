@@ -24,7 +24,7 @@ export default Component.extend(CreditAssignmentPropsMixin, {
 
   notes: computed('creditAssignment', function () {
     const { tinyData } = this;
-    const refs = this.creditAssignment.relationships.notes.data || [];
+    const refs = this.get('creditAssignment.relationships.notes.data') || [];
 
     return refs.map(ref => tinyData.get('note', ref.id));
   }),

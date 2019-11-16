@@ -19,11 +19,9 @@ module('Integration | Component | tiny-toolbar', (hooks) => {
     requests = [];
     this.setProperties({
       signin: () => {
-        console.log('signin')
         requests.push({ type: 'signin' });
       },
       signout: () => {
-        console.log('signout')
         requests.push({ type: 'signout' });
       },
     });
@@ -79,7 +77,6 @@ module('Integration | Component | tiny-toolbar', (hooks) => {
     assert.ok(find('[data-test-route="students.index"]'), 'students link is exposed');
     assert.ok(find('[data-test-route="contracts.index"]'), 'contracts link is exposed');
     assert.ok(find('[data-test-route="admin"]'), 'admin links are exposed');
-
   });
 
   test('it renders in logged-out state', async function (assert) {

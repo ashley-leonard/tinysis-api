@@ -186,7 +186,7 @@ module('Integration | Component | credits-combine', (hooks) => {
 
     await click('button[type="submit"]');
 
-    let [request] = requests;
+    let request = requests.pop();
 
     assert.ok(request, 'a request was made');
     assert.equal(request.type, 'error', 'error reported');
@@ -196,13 +196,11 @@ module('Integration | Component | credits-combine', (hooks) => {
     await fillIn('input[data-test-credit-hours]', '.25');
     await click('button[type="submit"]');
 
-    [, request] = requests;
+    request = requests.pop();
 
     assert.ok(request, 'a request was made');
     assert.equal(request.type, 'save', 'save reported');
     assert.ok(request.model, 'model included');
-
-    assert.equal(request.model.attributes.enableOverride, true, 'override enabled');
     assert.equal(request.model.attributes.creditsOverride, '.25', 'override saved');
   });
 });
