@@ -15,8 +15,8 @@ export default Controller.extend({
 
       return results.data.map(user => ({ name: `${user.attributes.lastName}, ${user.attributes.firstName}`, value: user.id }));
     },
-    selectUser(userToSelect) {
-      console.log('select', userToSelect);
+    selectUser(/* userToSelect */) {
+      // NYI
     },
   },
 });

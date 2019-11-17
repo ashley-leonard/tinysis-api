@@ -3,12 +3,28 @@ import { computed } from '@ember/object';
 import { schedule } from '@ember/runloop';
 
 export default Component.extend({
+  tagName: '',
+
   onChange() {},
   onSearch() {},
 
   hasResults: computed('results', function () {
     return this.results && this.results.length;
   }),
+
+  didReceiveAttrs() {
+    const {
+      results,
+      value,
+    } = this;
+
+    if (!(results && value)) return;
+
+    const index = results.findIndex(r => r.value === value);
+    if (index === -1) return;
+
+    this.doChange(index, results[index]);
+  },
 
   actions: {
     async doInput(event) {
@@ -20,11 +36,16 @@ export default Component.extend({
       } else {
         results = null;
       }
+
+      if (!Array.isArray(results)) throw new Error('Array result required for search');
+
       this.setResults(results);
     },
+
     doSelect(index, result) {
       this.doChange(index, result);
     },
+
     doKeyDown(event) {
       switch (event.key) {
         case 'ArrowDown':
@@ -55,6 +76,7 @@ export default Component.extend({
           break;
       }
     },
+
     doClearResult() {
       const { result } = this;
 
@@ -65,6 +87,7 @@ export default Component.extend({
 
       schedule('afterRender', this, () => this.element.querySelector('input').focus());
     },
+
     doMouseOverSearchResult(index) {
       this.set('index', index);
     },

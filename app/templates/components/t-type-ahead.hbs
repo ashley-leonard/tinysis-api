@@ -1,35 +1,39 @@
-{{#if result}}
-  <div class="field cursor-text" onclick={{action "doClearResult"}}>
-    {{result.name}}
-  </div>
-{{else}}
-  <input
-    type="text"
-    oninput={{action "doInput"}}
-    onkeydown={{action "doKeyDown"}}
-    disabled={{unless result false}}
-  >
-{{/if}}
-{{#if showResults}}
-  <ul
-    class="absolute search-results bg-white border border-black-600 list-reset p-0 z-100"
-  >
-    {{#if results}}
-      {{#each results as |result i|}}
-        <TTypeAhead::Item
-          @result={{result}}
-          @index={{i}}
-          @selection={{index}}
-          @onClick={{action "doSelect" i result}}
-          @onMouseOver={{action "doMouseOverSearchResult" i}}
-        />
-      {{/each}}
-    {{else}}
-      {{#if searchValue}}
-        <li class="list-reset">
-          No matches found
-        </li>
+<t-type-ahead
+  data-test-value={{result.value}}
+>
+  {{#if result}}
+    <t-type-ahead-result class="field cursor-text" onclick={{action "doClearResult"}}>
+      {{result.name}}
+    </t-type-ahead-result>
+  {{else}}
+    <input
+      type="text"
+      oninput={{action "doInput"}}
+      onkeydown={{action "doKeyDown"}}
+      disabled={{unless result false}}
+    >
+  {{/if}}
+  {{#if showResults}}
+    <ul
+      class="absolute search-results bg-white border border-black-600 list-reset p-0 z-100"
+    >
+      {{#if results}}
+        {{#each results as |result i|}}
+          <TTypeAhead::Item
+            @result={{result}}
+            @index={{i}}
+            @selection={{index}}
+            @onClick={{action "doSelect" i result}}
+            @onMouseOver={{action "doMouseOverSearchResult" i}}
+          />
+        {{/each}}
+      {{else}}
+        {{#if searchValue}}
+          <li class="list-reset">
+            No matches found
+          </li>
+        {{/if}}
       {{/if}}
-    {{/if}}
-  </ul>
-{{/if}}
+    </ul>
+  {{/if}}
+</t-type-ahead>
