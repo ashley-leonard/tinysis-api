@@ -7,8 +7,12 @@ class NotesController < ApplicationController
 
     conditions = {}
 
-    [:notable_type, :notable_ids].each do |p|
-      conditions[p] = params[p] if params[p].present?
+    if params[:notableType]
+      conditions[:notable_type] = params[:notableType]
+    end
+
+    if params[:notableIds]
+      conditions[:notable_id] = params[:notableIds]
     end
 
     result = Note
