@@ -1,6 +1,7 @@
 class CreditAssignmentsController < ApplicationController
 
   before_action :get_student, only: [:approve, :unapprove, :create_for_student]
+  before_action :entitle_student, only: [:destroy, :create_for_student]
 
   def index
     limit = params[:limit] || Rails.configuration.constants[:DEFAULT_LIMIT]
@@ -102,7 +103,7 @@ class CreditAssignmentsController < ApplicationController
 
     render json: CreditAssignmentSerializer.new(new_credit_assignment)
   end
-  
+
   def approve
     credit_assignment = CreditAssignment.find params[:id]
 
@@ -128,10 +129,15 @@ class CreditAssignmentsController < ApplicationController
 
     credit_assignment.uncombine
 
-    render json: CreditAssignmentSerializer.new(children, { includes: [ :credit ] })
+    render nothing: true, status: 204
   end
 
 protected
+  def entitle_student
+    # TBI
+    true
+  end
+
   def get_student
     @student = User.find_by_id_and_privilege params[:student_id], User::PRIVILEGE_STUDENT
     raise ActiveRecord::RecordNotFound unless @student

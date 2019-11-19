@@ -1,6 +1,6 @@
 module TestRequests
 
-  def setupContract
+  def setup_contract
     @staff1 = create :user, privilege: User::PRIVILEGE_STAFF, email: Faker::Internet.email
     @staff2 = create :user, privilege: User::PRIVILEGE_STAFF, email: Faker::Internet.email
     @student1 = create :user, coordinator: @staff1
@@ -18,7 +18,7 @@ module TestRequests
   end
 
   def setupEnrollments
-    setupContract
+    setup_contract
 
     @statusCoor01Jan = create :status, statusable: @student1, month: '2018-01-01', creator: @staff1
     @statusCoor02Jan = create :status, statusable: @student2, month: '2018-01-01', creator: @staff1

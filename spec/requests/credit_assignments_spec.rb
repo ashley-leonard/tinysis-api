@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe 'Credit assignments API', type: :request do
 
   before(:each) do
-    setupContract
+    setup_contract
 
     @credit1 = create :credit, course_name: 'Language 1'
     @credit2 = create :credit, course_name: 'Math 1'
@@ -40,39 +40,22 @@ RSpec.describe 'Credit assignments API', type: :request do
     end
   end
 
-  # describe 'DELETE /api/graduation-plan-mappings/:student_id/:mapping_id' do
-  #   it 'returns a 204 with successful deletion' do
-  #     delete "/api/graduation-plan-mappings/#{@student1.id}/#{@mapping1.id}", headers: json_request_headers
-
-  #     expect(response).to have_http_status(204)
-  #     expect(GraduationPlanMapping.find_by_id(@mapping1.id)).to be_nil
-  #   end
-  # end
-
-  describe 'POST credit-assignments' do
-    it 'returns a 200 with successful creation of a credit assignment bound to a contract' do
-      body = {
-        data: {
-          attributes: { creditHours: 0.25 },
-          relationships: {
-            contract: { data: { id: @enrollment1.contract.id } },
-            credit: { data: { id: @credit1.id } },
-          }
-        }
-      }
-
-      post "/api/contracts/#{@enrollment1.contract.id}/credit-assignments", params: body.to_json, headers: json_request_headers
-
-      expect(response).to have_http_status(200)
-      expect(json).not_to be_empty
-      expect(json['data']['id']).not_to be_empty
-      expect(json['data']['attributes']['creditHours']).to eq(0.25)
-      expect(json['data']['relationships']['contract']['data']['id']).to eq(@enrollment1.contract.id.to_s)
-      expect(json['data']['relationships']['credit']['data']['id']).to eq(@credit1.id.to_s)
+  describe 'DELETE credit-assignments' do
+    before(:each) do
+      @combined = CreditAssignment.combine @student1, @credit1.id, @term.id, 3.0, [@credit_assignment_1, @credit_assignment_2], @staff1
     end
 
+    it 'returns a 204 with successful deletion of a combined credit assignment' do
+      delete "/api/credit-assignments/#{@combined.id}", headers: json_request_headers
+
+      expect(response).to have_http_status(204)
+      expect(response.body).to be_empty
+    end
+  end
+  
+  describe 'POST credit-assignments' do
     it 'returns a 200 with successful creation of a credit assignment bound to an enrollment' do
-      body = {
+      body = {params: body.to_json, 
         data: {
           attributes: { creditHours: 0.25 },
           relationships: {

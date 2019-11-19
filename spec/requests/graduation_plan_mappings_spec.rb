@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe 'Graduation plan mappings API', type: :request do
 
   before(:each) do
-    setupContract
+    setup_contract
 
     @graduation_plan = create :graduation_plan, user: @student1
 
