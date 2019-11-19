@@ -36,7 +36,7 @@ RSpec.describe 'Notes API', type: :request do
           }
         },
       }
-      post "/api/notes/creditAssignment/#{@credit_assignment_1.id}", params: body.to_json, headers: json_request_headers
+      post "/api/notes/credit-assignment/#{@credit_assignment_1.id}", params: body.to_json, headers: json_request_headers
 
       expect(response).to have_http_status(200)
 

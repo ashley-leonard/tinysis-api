@@ -60,7 +60,7 @@ protected
   end
 
   def target_class
-    unless %w{creditAssignment enrollment status turnin assignment}.include? params[:notable_type]
+    unless %w{credit-assignment enrollment status turnin assignment}.include? params[:notable_type]
       raise TinyException.new('Invalid notable type')
     end
 
