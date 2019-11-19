@@ -77,7 +77,7 @@ module('Integration | Component | credits-worksheet', (hooks) => {
     await click(tr.querySelector('[data-test-split-link]'));
     let request = requests.pop();
     assert.ok(request, 'a request was sent upon clicking split');
-    assert.ok(request.type, 'split', 'it was a split request');
+    assert.equal(request.type, 'split', 'it was a split request');
     assert.equal(request.model.id, creditWithChildren.id, 'the model sent with the split command was correct');
 
     await click(tr.querySelector('[data-test-approve-link]'));
@@ -113,10 +113,11 @@ module('Integration | Component | credits-worksheet', (hooks) => {
     assert.ok(tr.querySelector('[data-test-unapproved]'), 'the link is shown as unapproved');
 
     await click(tr.querySelector('[data-test-approve-link]'));
+
     request = requests.pop();
     assert.ok(request, 'a request was sent upon clicking approve');
-    assert.ok(request.type, 'split', 'it was an approve request');
-    assert.equal(request.model.id, unapprovedCredit.id, 'the model sent with the split command was correct');
+    assert.equal(request.type, 'approve', 'it was an approve request');
+    assert.equal(request.model.id, unapprovedCredit.id, 'the model sent with the approve command was correct');
 
     // can trigger combine dialog
     await click(`tr[data-test-credit-id="${combinableCredits[0].id}"] input[type="checkbox"]`);
