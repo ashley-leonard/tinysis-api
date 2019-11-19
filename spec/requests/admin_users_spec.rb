@@ -3,8 +3,6 @@ require 'rails_helper'
 RSpec.describe 'Admin users API', type: :request do
 
   before(:each) do
-    allow(JsonWebToken).to receive(:extract_permissions).and_return(['get:config', 'manage:config'])
-
     @staff1 = create :user, privilege: User::PRIVILEGE_STAFF, date_active: Date.new(2017, 8, 1), email: Faker::Internet.email
     @staff2 = create :user, privilege: User::PRIVILEGE_STAFF, date_active: Date.new(2017, 8, 1), email: Faker::Internet.email
     @staff_inactive = create :user, privilege: User::PRIVILEGE_STAFF, date_active: Date.new(2017, 8, 1), date_inactive: Date.new(2017, 12, 1), status: User::STATUS_INACTIVE, email: Faker::Internet.email
@@ -36,8 +34,10 @@ RSpec.describe 'Admin users API', type: :request do
       expect(response).to have_http_status(200)
       expect(json).not_to be_empty
 
-      expect(json['data'].size).to eq(8)
-      expect(json['meta']['count']).to eq(8)
+      users = User.all
+
+      expect(json['data'].size).to eq(users.length)
+      expect(json['meta']['count']).to eq(users.length)
     end
 
     it 'returns all active users' do
@@ -45,8 +45,10 @@ RSpec.describe 'Admin users API', type: :request do
       expect(response).to have_http_status(200)
       expect(json).not_to be_empty
 
-      expect(json['data'].size).to eq(5)
-      expect(json['meta']['count']).to eq(5)
+      users = User.where('status = ?', User::STATUS_ACTIVE)
+
+      expect(json['data'].size).to eq(users.length)
+      expect(json['meta']['count']).to eq(users.length)
     end
 
     it 'returns all active students' do
@@ -54,8 +56,10 @@ RSpec.describe 'Admin users API', type: :request do
       expect(response).to have_http_status(200)
       expect(json).not_to be_empty
 
-      expect(json['data'].size).to eq(2)
-      expect(json['meta']['count']).to eq(2)
+      users = User.where('status = ? AND privilege = ?', User::STATUS_ACTIVE, User::PRIVILEGE_STUDENT)
+
+      expect(json['data'].size).to eq(users.length)
+      expect(json['meta']['count']).to eq(users.length)
     end
 
     it 'returns students of a given coordinator' do

@@ -4,7 +4,7 @@ class GraduationPlanMappingsController < ApplicationController
   def index
     mappings = GraduationPlanMapping.where(graduation_plan: @graduation_plan)
     options = {
-      include: [:graduation_plan_requirement, :credit_assignment],
+      include: [:graduation_plan_requirement, :credit_assignment, :'credit_assignment.credit'],
       meta: {
         count: mappings.length
       }

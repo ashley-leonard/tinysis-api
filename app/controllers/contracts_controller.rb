@@ -52,7 +52,7 @@ class ContractsController < ApplicationController
       meta: {
         count: count
       },
-      include: [ :category, :facilitator ],
+      include: [ :category, :facilitator, :term ],
       fields: { contract: [:name, :status, :category, :facilitator, :term, :enrollments] },
     }
 

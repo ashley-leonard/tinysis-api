@@ -3,8 +3,6 @@ require 'rails_helper'
 RSpec.describe 'Admin terms API', type: :request do
 
   before(:each) do
-    allow(JsonWebToken).to receive(:extract_permissions).and_return(['get:config', 'manage:config'])
-
     @coorTerm = create :term, :name => 'COOR default', :school_year => 2011
     @coorTerm.set_dates 2018, [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
     @coorTerm.save!

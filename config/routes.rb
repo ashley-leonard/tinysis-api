@@ -1,17 +1,31 @@
 Rails.application.routes.draw do
 
+  get 'credits/index'
+  namespace :admin do
+    get 'credits/create'
+    get 'credits/update'
+    get 'credits/destroy'
+  end
   scope '/api' do
     get '/profile', to: 'profiles#index'
   
+    get '/credit-assignments/:id', to: 'credit_assignments#show'
+    get '/credit-assignments', to: 'credit_assignments#index'
+    put '/students/:student_id/credit-assignments/:id/approve', to: 'credit_assignments#approve'
+    put '/students/:student_id/credit-assignments/:id/unapprove', to: 'credit_assignments#unapprove'
+    post '/students/:student_id/credit-assignments', to: 'credit_assignments#create_for_student'
+    post '/enrollments/:enrollment_id/credit-assignments', to: 'credit_assignments#create_for_enrollment'
+    post '/contracts/:contract_id/credit-assignments', to: 'credit_assignments#create_for_contract'
+    delete '/credit-assignments/:id', to: 'credit_assignments#destroy'
+
     get '/students', to: 'students#index'
     get '/students/:id', to: 'students#show'
   
     get '/enrollments', to: 'enrollments#index'
     get '/enrollments/:id', to: 'enrollments#show'
   
-    get '/credit-assignments', to: 'credit_assignments#index'
-  
     get '/notes', to: 'notes#index'
+    post '/notes/:notable_type/:notable_id', to: 'notes#create'
   
     get '/contracts', to: 'contracts#index'
     get '/contracts/:id', to: 'contracts#show'
@@ -41,6 +55,9 @@ Rails.application.routes.draw do
   
     get '/settings', to: 'settings#index'
     get '/settings/years', to: 'settings#years'
+
+    get '/credits', to: 'credits#index'
+    get '/credits/:id', to: 'credits#show'
     
     resources :staff
     resources :statuses, controller: 'status'
@@ -68,6 +85,10 @@ Rails.application.routes.draw do
       put '/graduation-plan-requirements/sort', to: 'admin_graduation_plan_requirements#sort'
       put '/graduation-plan-requirements/:id', to: 'admin_graduation_plan_requirements#update'
       post '/graduation-plan-requirements', to: 'admin_graduation_plan_requirements#create'
+
+      post '/credits', to: 'admin_credits#create'
+      put '/credits/:id', to: 'admin_credits#update'
+      put '/credits/:id', to: 'admin_credits#update'
     end
   end
 

@@ -68,7 +68,7 @@ private
 
   def update_status model, status
     return if status.nil?
-    raiseActiveRecordInvalidException(model, :status, 'should be either "active" or "inactive"') unless %w{active inactive}.include? status
+    raise ActiveRecordInvalidException(model, :status, 'should be either "active" or "inactive"') unless %w{active inactive}.include? status
     model.status = case status
     when 'active'
       User::STATUS_ACTIVE
@@ -79,7 +79,7 @@ private
 
   def update_privilege model, role
     return if role.nil?
-    raiseActiveRecordInvalidException(model, :role, 'allowed values are student, administrator, or staff') unless %w{administrator staff student}.include? role
+    raise ActiveRecordInvalidException(model, :role, 'allowed values are student, administrator, or staff') unless %w{administrator staff student}.include? role
     model.privilege = case role
       when 'student'
         User::PRIVILEGE_STUDENT

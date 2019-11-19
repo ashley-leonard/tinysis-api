@@ -19,12 +19,15 @@ class AdminLoginController < AdminController
   end
 
   def destroy
-    @client.destroy_user params[:id]
+    @client.delete_user params[:id]
 
     render nothing: true, status: 204
 
-  rescue => error
+  rescue AuthManagementError => error
     render_error error
+
+  rescue => error
+    render json: { message: error }, status: 500
   end
 
   def show
@@ -66,16 +69,17 @@ private
   end
 
   def user_attributes
-    params
-      .require(:admin_auth)
+    attrs = params
       .require(:data)
-      .permit(:first_name, :last_name, :nickname, :email, :password, :role)
+      .permit(:first_name, :last_name, :nickname, :email, :password, :id, :role)
+
+    return attrs
   end
 
   def render_error error
     Rails.logger.error error.exception || error
     
-    render json: error.body || {}, status: error.code || 500
+    render json: (error.body || {}), status: error.code || 500
   end
 
 end

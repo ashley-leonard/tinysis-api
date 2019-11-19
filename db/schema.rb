@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_12_052413) do
+ActiveRecord::Schema.define(version: 2019_09_14_171321) do
 
   create_table "assignments", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.integer "contract_id"
@@ -117,6 +117,7 @@ ActiveRecord::Schema.define(version: 2019_07_12_052413) do
     t.float "required_hours", default: 0.0, null: false
     t.datetime "created_at", default: "1900-01-01 00:00:00", null: false
     t.datetime "updated_at", default: "1900-01-01 00:00:00", null: false
+    t.string "status", default: "active"
   end
 
   create_table "ealrs", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|

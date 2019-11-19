@@ -3,8 +3,6 @@ require 'rails_helper'
 RSpec.describe 'Graduation plan requirements API', type: :request do
 
   before(:each) do
-    allow(JsonWebToken).to receive(:extract_permissions).and_return(['get:config'])
-
     @grad1 = create :graduation_plan_requirement, name: Faker::Name.name, status: 'active'
     @grad2 = create :graduation_plan_requirement, name: Faker::Name.name, status: 'active'
     @grad3 = create :graduation_plan_requirement, name: Faker::Name.name, status: 'active', parent: @grad2

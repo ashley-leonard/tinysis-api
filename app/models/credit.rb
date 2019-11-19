@@ -9,12 +9,19 @@ class Credit < ApplicationRecord
     TYPE_NONE => "None",
     TYPE_GENERAL => "General",
     TYPE_COURSE => "Course" }
+
+  STATUS_ACTIVE = 'active'
+  STATUS_INACTIVE = 'inactive'
     
   validates_presence_of :course_name
   has_many :credit_assignments
   validates_uniqueness_of :course_name, :message => 'has already been used.'
   validates_uniqueness_of :course_id, :if => Proc.new { |cr| cr.course_id.present? and cr.course_id_changed? and cr.course_id != "0" }, :message => 'ID has already been used.'
   
+  def course_type_string
+    TYPE_NAMES[course_type].downcase
+  end
+
   def Credit.admin_credit_report
     find_by_sql %Q{
       SELECT credits.*, COALESCE(ca_enrolled.count,0) AS enrolled_count, COALESCE(ca_finalized.count,0) AS finalized_count, COALESCE(ca_approved.count,0) AS approved_count

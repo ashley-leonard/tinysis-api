@@ -41,12 +41,4 @@ private
       .require(:attributes)
       .permit(:name, :school_year, :status, :credit_date, months: [])
   end
-  
-  def render_unprocessable_entity_response(exception)
-    render json: {
-      status: 422,
-      message: 'Validation error',
-      errors: exception.record.errors,
-    }, status: :unprocessable_entity
-  end
 end

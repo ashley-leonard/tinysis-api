@@ -89,8 +89,6 @@ RSpec.describe 'Ember fixtures script', type: :request do
   before(:each) do
     travel_to Date.new(CURRENT_YEAR, 11, 15) do
 
-      allow(JsonWebToken).to receive(:extract_permissions).and_return(['get:config', 'manage:config'])
-
       # clear our global settings from the test db
       Setting.destroy_all
 
@@ -170,7 +168,7 @@ RSpec.describe 'Ember fixtures script', type: :request do
       # current contracts should have active enrollments. reporting as if we are three months into
       # the current contracts.
       [@contract1_current, @contract2_current].each do |contract|
-        [@student1, @student3].each do |student|
+        [@student1, @student2, @student3].each do |student|
           enrollment = create :enrollment, participant: student, contract: contract, creator: contract.facilitator
           create :credit_assignment, enrollment: enrollment, credit: @credit1, credit_hours: 1
           create :note, note: "Note for #{student.last_name} for enrollment in #{contract.name}", notable: enrollment, creator: contract.facilitator
@@ -185,18 +183,31 @@ RSpec.describe 'Ember fixtures script', type: :request do
         end
       end
     
+      finalized_credits = []
+
       # closed contracts should have fulfilled enrollments and finalized credits
       [@contract1_last, @contract2_last, @contract3_last].each do |contract|
         [@student2, @student3].each do |student|
           enrollment = create :enrollment, participant: student, contract: contract, creator: contract.facilitator
-          create :credit_assignment, enrollment: enrollment, credit: @credit1, credit_hours: 0.25
-          create :credit_assignment, enrollment: enrollment, credit: @credit2, credit_hours: 0.5
+          credit1 = create :credit_assignment, enrollment: enrollment, credit: @credit1, credit_hours: 0.25
+          credit2 = create :credit_assignment, enrollment: enrollment, credit: @credit2, credit_hours: 0.5
+          credit3 = create :credit_assignment, enrollment: enrollment, credit: @credit2, credit_hours: 0.5
           create :note, note: "Note for #{student.last_name} for enrollment in #{contract.name}", notable: enrollment, creator: contract.facilitator
+
+          finalized_credits.push credit1
+          finalized_credits.push credit2
 
           enrollment.set_closed Enrollment::COMPLETION_FULFILLED, contract.facilitator
           enrollment.set_finalized @admin1
         end
       end
+
+      finalized_credits.each do |credit_assignment|
+        credit_assignment.district_approve @admin1, Date.new(CURRENT_YEAR, 11, 15)
+      end
+
+      # create a batch with just the 0.25 credits
+      CreditTransmittalBatch.create_batch_from_credits_list @admin1, finalized_credits.filter{|ca| ca.credit_hours == 0.25 }
 
       # coor statuses for all months of the last coor
       @term_coor_last.months.each do |month|
@@ -226,18 +237,23 @@ RSpec.describe 'Ember fixtures script', type: :request do
           note: "Note by #{@contract1_current.facilitator.last_name} for student #{@student1.last_name} / assignment #{assignment_number}"
       end
 
-      # for contract 1, define 5 meetings which are attended only by student 3
-      enrollment3 = @contract1_current.enrollments.find{|e| e.participant == @student3}
+      # for contract 1, define 5 meetings which are attended only by student 1
       (1..5).each do |meeting_number|
         meeting = create :meeting, contract: @contract1_current, meeting_date: @contract1_current.term.months.first + meeting_number.days
-        meeting_participant = create :meeting_participant, meeting: meeting, enrollment: enrollment, participation: MeetingParticipant::PRESENT
-        create :note,
-          notable: meeting_participant,
-          creator: @contract1_current.facilitator,
-          note: "Note by #{@contract1_current.facilitator.last_name} for student #{@student1.last_name} / meeting #{meeting_number}"
 
-        meeting_participant = create :meeting_participant, meeting: meeting, enrollment: enrollment3, participation: MeetingParticipant::ABSENT
-        create :note, notable: meeting_participant, creator: @contract1_current.facilitator, note: "Note by #{@contract1_current.facilitator.last_name} for student #{@student3.last_name} / meeting #{meeting_number}"
+        @contract1_current.enrollments.each do |enrollment|
+          attendance = if enrollment.participant.id == @student1.id then
+            MeetingParticipant::PRESENT
+          else
+            MeetingParticipant::ABSENT
+          end
+
+          meeting_participant = create :meeting_participant, meeting: meeting, enrollment: enrollment, participation: attendance
+          create :note,
+            notable: meeting_participant,
+            creator: @contract1_current.facilitator,
+            note: "Note by #{@contract1_current.facilitator.last_name} for student #{enrollment.participant.last_name} / meeting #{meeting_number}"
+        end
       end
 
       # graduation plans requirements
@@ -261,6 +277,8 @@ RSpec.describe 'Ember fixtures script', type: :request do
       create :graduation_plan_mapping, graduation_plan: graduation_plan, graduation_plan_requirement: gradLang2, credit_assignment: credit_assignments.pop
       create :graduation_plan_mapping, graduation_plan: graduation_plan, graduation_plan_requirement: gradGeneral1, notes: 'It is done', date_completed: '2019-06-15'
       create :graduation_plan_mapping, graduation_plan: graduation_plan, graduation_plan_requirement: gradService1, notes: 'It is serviced', date_completed: '2019-06-15'
+
+      allow(JsonWebToken).to receive(:extract_user_id).and_return(@admin1.id)
     end
   end
 
@@ -322,7 +340,7 @@ RSpec.describe 'Ember fixtures script', type: :request do
         write_fixture "/api/notes?notableType=meetingParticipant&notableIds=#{meeting_participants.join(',')}", 'contract-attendance-notes.js'
 
         # contract enrollment status detail
-        enrollment = @contract1_current.enrollments.first
+        enrollment = @contract1_current.enrollments.find { |enrollment| enrollment.participant === @student1 }
         write_fixture "/api/enrollments/#{enrollment.id}?include=participant,turnins,meetingParticipants,creditAssignments,creditAssignments.credit", 'contract-enrollment-detail.js'
 
         # enrollments by contract
@@ -400,10 +418,22 @@ RSpec.describe 'Ember fixtures script', type: :request do
         write_fixture "/api/graduation-plan-requirements", "graduation-plan-requirements-list-all.js"
 
         # credit assignments
-        write_fixture "/api/credit-assignments?studentIds=#{@student2.id}", "student-credit-assignments.js"
+        write_fixture "/api/credit-assignments?studentIds=#{@student2.id}&includeFulfilledAttributes=true&include=credit,contractTerm,contractFacilitator,contract", "student-credit-assignments.js"
 
         # graduation plan mappings
         write_fixture "/api/graduation-plan-mappings/#{@student2.id}", "graduation-plan-mappings.js"
+
+        # credits
+        write_fixture "/api/credits", "credits-index.js"
+
+        # credit
+        credit = Credit.first
+        write_fixture "/api/credits/#{credit.id}", "credit-detail.js"
+
+        # combine two credits
+        student2_credits = @student2.credit_assignments[0..1]
+        CreditAssignment.combine @student2, student2_credits.first.credit.id, student2_credits.first.contract_term.id, nil, student2_credits, @admin0
+        write_fixture "/api/credit-assignments?studentIds=#{@student2.id}&includeFulfilledAttributes=true&include=credit,contractTerm,contractFacilitator,contract", "student-credit-assignments-with-combined.js"
       end
     end
   end
