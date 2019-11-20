@@ -1,11 +1,11 @@
-// GET /api/admin/users/25
+// GET /api/admin/users/10
 export default {
   data: {
-    id: '25',
+    id: '10',
     type: 'user',
     attributes: {
-      firstName: 'Jarrett',
-      lastName: 'Kuphal',
+      firstName: 'Cleotilde',
+      lastName: 'Kohler',
       nickname: null,
       dateActive: '2011-07-01',
       dateInactive: null,
@@ -13,7 +13,7 @@ export default {
       districtGrade: 12,
       status: 'active',
       role: 'administrator',
-      email: 'pamelia@blanda.biz',
+      email: 'simon@watermith.name',
     },
     relationships: {
     },

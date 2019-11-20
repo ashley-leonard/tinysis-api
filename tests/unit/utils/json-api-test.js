@@ -96,5 +96,9 @@ module('Unit | Utility | json-api', () => {
     const model = listWithExistingModel.find(m => m.id === updatedModel.id);
     assert.ok(model, 'updated model is in list');
     assert.ok(model.attributes, 'updated model is in list');
+
+    const oldIndex = list.findIndex(m => m.id === newModel.id);
+    const newIndex = listWithExistingModel.findIndex(m => m.id === newModel.id);
+    assert.equal(oldIndex, newIndex, 'model was replaced in the original position');
   });
 });

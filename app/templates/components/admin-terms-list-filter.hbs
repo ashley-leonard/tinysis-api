@@ -1,19 +1,19 @@
 <ul class="filter">
   <li class="filter-item">
-    {{t-select
-      options=schoolYearOptions
-      value=queryParams.schoolYear
+    <TSelect
+      @optionsList={{schoolYearOptions}}
+      @value={{queryParams.schoolYear}}
       name="schoolYear"
-      onchange=(action "onSelect")
-    }}
+      @onchange={{action "onSelect"}}
+    />
   </li>
   <li class="filter-item">
-    {{t-select
-      options=statusOptions
-      value=queryParams.status
+    <TSelect
+      @optionsList={{statusOptions}}
+      @value={{queryParams.status}}
       name="status"
-      prompt="Any status"
-      onchange=(action "onSelect")
-    }}
+      @prompt="Any status"
+      @onchange={{action "onSelect"}}
+    />
   </li>
 </ul>

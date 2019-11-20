@@ -1,16 +1,16 @@
-// GET /api/contracts/5?include=category,facilitator,assignments,meetings,creditAssignments,creditAssignments.credit,term,ealrs
+// GET /api/contracts/9?include=category,facilitator,assignments,meetings,creditAssignments,creditAssignments.credit,term,ealrs
 export default {
   data: {
-    id: '5',
+    id: '9',
     type: 'contract',
     attributes: {
-      name: 'Molestias usque acervus talis cado.',
+      name: 'Demergo somnus denuncio tamen solitudo.',
       status: 'approved',
-      learningObjectives: 'Sponte summisse acquiro voluptatibus creta.',
-      competencies: 'Quis vicissitudo delectus recusandae velit.',
-      evaluationMethods: 'Sum vehemens quo conqueror qui.',
-      instructionalMaterials: 'Deripio victus colligo crastinus supplanto.',
-      location: 'Odio ut vomito candidus coerceo.',
+      learningObjectives: 'Capillus terga certo viscus texo.',
+      competencies: 'Armarium carmen ambitus cerno vero.',
+      evaluationMethods: 'Et amor vinco articulus cohibeo.',
+      instructionalMaterials: 'Inflammatio venustas tracto vix verus.',
+      location: 'Molestiae acidus vis sed nihil.',
       timeslots: [
         {
           start: '8:45',
@@ -23,30 +23,34 @@ export default {
       enrollments: {
         data: [
           {
-            id: '1',
+            id: '5',
             type: 'enrollment',
           },
           {
-            id: '2',
+            id: '6',
+            type: 'enrollment',
+          },
+          {
+            id: '7',
             type: 'enrollment',
           },
         ],
       },
       facilitator: {
         data: {
-          id: '22',
+          id: '7',
           type: 'User',
         },
       },
       term: {
         data: {
-          id: '3',
+          id: '7',
           type: 'term',
         },
       },
       category: {
         data: {
-          id: '1',
+          id: '3',
           type: 'category',
         },
       },
@@ -77,7 +81,7 @@ export default {
       creditAssignments: {
         data: [
           {
-            id: '23',
+            id: '2',
             type: 'creditAssignment',
           },
         ],
@@ -225,7 +229,7 @@ export default {
       },
     },
     {
-      id: '1',
+      id: '3',
       type: 'category',
       attributes: {
         name: 'Category 1',
@@ -239,11 +243,11 @@ export default {
         contracts: {
           data: [
             {
-              id: '1',
+              id: '5',
               type: 'contract',
             },
             {
-              id: '5',
+              id: '9',
               type: 'contract',
             },
           ],
@@ -251,7 +255,7 @@ export default {
       },
     },
     {
-      id: '23',
+      id: '2',
       type: 'creditAssignment',
       attributes: {
         creditHours: 1.0,
@@ -259,29 +263,56 @@ export default {
       relationships: {
         credit: {
           data: {
-            id: '15',
+            id: '1',
             type: 'credit',
           },
         },
         graduationPlanMapping: {
           data: null,
         },
+        contractTerm: {
+          data: null,
+        },
+        contractFacilitator: {
+          data: null,
+        },
+        contract: {
+          data: {
+            id: '9',
+            type: 'contract',
+          },
+        },
+        user: {
+          data: null,
+        },
+        creditTransmittalBatch: {
+          data: null,
+        },
+        childCreditAssignments: {
+          data: [
+
+          ],
+        },
+        parentCreditAssignment: {
+          data: null,
+        },
       },
     },
     {
-      id: '15',
+      id: '1',
       type: 'credit',
       attributes: {
         courseId: '0',
         courseName: 'Course 1',
-        courseType: 0,
+        status: 'active',
+        courseType: 'none',
       },
     },
     {
       id: '1',
       type: 'ealr',
       attributes: {
-        ealr: 'Bene crastinus sublime audio nemo.',
+        ealr: 'Pectus cubo adsuesco armarium currus.',
         seq: '1.1',
         category: 'Category 1',
       },
@@ -290,7 +321,7 @@ export default {
       id: '2',
       type: 'ealr',
       attributes: {
-        ealr: 'Cilicium vesco apostolus crux adimpleo.',
+        ealr: 'Triginta omnis creptio aequus vomer.',
         seq: '1.2',
         category: 'Category 1',
       },
@@ -299,7 +330,7 @@ export default {
       id: '3',
       type: 'ealr',
       attributes: {
-        ealr: 'Velum perferendis crur voluptas cultellus.',
+        ealr: 'Vos ad consequatur ubi aranea.',
         seq: '2.1',
         category: 'Category 2',
       },
@@ -308,23 +339,23 @@ export default {
       id: '4',
       type: 'ealr',
       attributes: {
-        ealr: 'Deserunt delicate adsidue cimentarius talis.',
+        ealr: 'Demo nesciunt cohibeo aveho facere.',
         seq: '2.2',
         category: 'Category 2',
       },
     },
     {
-      id: '22',
+      id: '7',
       type: 'user',
       attributes: {
-        firstName: 'Hoyt',
-        lastName: 'Sauer',
+        firstName: 'Dominic',
+        lastName: 'Collier',
         nickname: null,
         dateActive: '2012-09-01',
         dateInactive: null,
         districtId: null,
         districtGrade: 12,
-        email: 'serita@bartoletti.net',
+        email: 'janelle@rathskiles.net',
         status: 'active',
         role: 'staff',
       },
@@ -332,7 +363,7 @@ export default {
         coordinatees: {
           data: [
             {
-              id: '26',
+              id: '11',
               type: 'user',
             },
           ],
@@ -357,6 +388,10 @@ export default {
               id: '2',
               type: 'meetingParticipant',
             },
+            {
+              id: '3',
+              type: 'meetingParticipant',
+            },
           ],
         },
       },
@@ -372,11 +407,15 @@ export default {
         meetingParticipants: {
           data: [
             {
-              id: '3',
+              id: '4',
               type: 'meetingParticipant',
             },
             {
-              id: '4',
+              id: '5',
+              type: 'meetingParticipant',
+            },
+            {
+              id: '6',
               type: 'meetingParticipant',
             },
           ],
@@ -394,11 +433,15 @@ export default {
         meetingParticipants: {
           data: [
             {
-              id: '5',
+              id: '7',
               type: 'meetingParticipant',
             },
             {
-              id: '6',
+              id: '8',
+              type: 'meetingParticipant',
+            },
+            {
+              id: '9',
               type: 'meetingParticipant',
             },
           ],
@@ -416,11 +459,15 @@ export default {
         meetingParticipants: {
           data: [
             {
-              id: '7',
+              id: '10',
               type: 'meetingParticipant',
             },
             {
-              id: '8',
+              id: '11',
+              type: 'meetingParticipant',
+            },
+            {
+              id: '12',
               type: 'meetingParticipant',
             },
           ],
@@ -438,11 +485,15 @@ export default {
         meetingParticipants: {
           data: [
             {
-              id: '9',
+              id: '13',
               type: 'meetingParticipant',
             },
             {
-              id: '10',
+              id: '14',
+              type: 'meetingParticipant',
+            },
+            {
+              id: '15',
               type: 'meetingParticipant',
             },
           ],
@@ -450,10 +501,10 @@ export default {
       },
     },
     {
-      id: '3',
+      id: '7',
       type: 'term',
       attributes: {
-        name: 'Progressive 24/7 orchestration',
+        name: 'Seamless contextually-based encoding',
         schoolYear: 2019,
         creditDate: '2020-01-31',
         months: [

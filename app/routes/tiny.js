@@ -2,27 +2,29 @@ import Route from '@ember/routing/route';
 import Promise from 'rsvp';
 import { inject as service } from '@ember/service';
 import fetch from '../utils/fetch';
+import { doSigninRedirect } from '../utils/session-utils';
 
 export default Route.extend({
   tinyData: service(),
-  session: service(),
 
   async beforeModel(transition) {
     const { tinyData } = this;
 
     try {
-      const profile = await tinyData.fetch('/api/profile');
-      const mergedProfile = { ...profile.data, meta: profile.meta };
+      const appProfile = await tinyData.fetch('/api/profile');
+
+      const mergedProfile = { ...appProfile.data, meta: appProfile.meta };
 
       tinyData.setUser(mergedProfile);
     } catch (e) {
+      // TODO this code does not run any more, as the redirect
+      // is handled in the tinyData service.
       const { intent } = transition;
 
       transition.abort();
 
       if (e.status === 401 || e.message === 'No session') {
-        this.session.setIntendedUrl(intent.url);
-        this.session.signIn();
+        doSigninRedirect(intent.url);
         return;
       }
 

@@ -5,7 +5,7 @@
   "description": "Small description for tinysis-ui goes here",
   "repository": "",
   "license": "MIT",
-  "author": "",
+  "author": "Juniper Swordplay, LLC",
   "directories": {
     "doc": "doc",
     "test": "tests"
@@ -52,7 +52,7 @@
     "ember-route-action-helper": "^2.0.7",
     "ember-sinon": "^4.0.0",
     "ember-sinon-qunit": "^3.4.0",
-    "ember-source": "^3.7.3",
+    "ember-source": "~3.12.0",
     "ember-sticky-element": "^0.2.3",
     "ember-test-selectors": "~2.0.0",
     "eslint": "^5.14.1",

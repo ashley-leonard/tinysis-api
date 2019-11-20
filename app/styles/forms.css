@@ -40,11 +40,21 @@ t-help {
   }
 }
 
-input[type="text"], input[type="email"], input[type="number"], select, textarea {
+input[type="text"], input[type="email"], input[type="number"], select, textarea, .field {
   @apply block border border-gray-200 bg-white w-full p-2 mt-2 rounded;
 
   &:focus {
     @apply border-gray-900;
+  }
+
+  &.disabled, &[disabled] {
+    @apply bg-gray-200;
+  }
+}
+
+div.field {
+  span::after {
+    content: ' ',
   }
 }
 

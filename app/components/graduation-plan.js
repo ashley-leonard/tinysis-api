@@ -3,9 +3,20 @@ import Big from 'big.js';
 import { computed, get } from '@ember/object';
 import { inject as service } from '@ember/service';
 import { createEntity, replaceModel } from '../utils/json-api';
+import { getHours } from '../utils/credit-utils';
 
 export default Component.extend({
   tinyData: service(),
+  creditsAvailableToMap: computed('creditAssignments', function () {
+    return this.creditAssignments
+      .filter((creditAssignment) => {
+        if (get(creditAssignment, 'relationships.parentCreditAssignment.data')) {
+          return false;
+        }
+        const hours = getHours(creditAssignment);
+        return hours > 0;
+      });
+  }),
   mappingsHash: computed('mappings', function () {
     const {
       tinyData,

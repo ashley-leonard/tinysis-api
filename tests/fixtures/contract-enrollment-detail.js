@@ -1,7 +1,7 @@
-// GET /api/enrollments/1?include=participant,turnins,meetingParticipants,creditAssignments,creditAssignments.credit
+// GET /api/enrollments/5?include=participant,turnins,meetingParticipants,creditAssignments,creditAssignments.credit
 export default {
   data: {
-    id: '1',
+    id: '5',
     type: 'enrollment',
     attributes: {
       finalizedOn: null,
@@ -11,20 +11,20 @@ export default {
     relationships: {
       contract: {
         data: {
-          id: '5',
+          id: '9',
           type: 'contract',
         },
       },
       participant: {
         data: {
-          id: '26',
+          id: '11',
           type: 'participant',
         },
       },
       creditAssignments: {
         data: [
           {
-            id: '28',
+            id: '7',
             type: 'creditAssignment',
           },
         ],
@@ -60,11 +60,7 @@ export default {
             type: 'meetingParticipant',
           },
           {
-            id: '3',
-            type: 'meetingParticipant',
-          },
-          {
-            id: '5',
+            id: '4',
             type: 'meetingParticipant',
           },
           {
@@ -72,7 +68,11 @@ export default {
             type: 'meetingParticipant',
           },
           {
-            id: '9',
+            id: '10',
+            type: 'meetingParticipant',
+          },
+          {
+            id: '13',
             type: 'meetingParticipant',
           },
         ],
@@ -81,7 +81,7 @@ export default {
   },
   included: [
     {
-      id: '28',
+      id: '7',
       type: 'creditAssignment',
       attributes: {
         creditHours: 1.0,
@@ -89,22 +89,46 @@ export default {
       relationships: {
         credit: {
           data: {
-            id: '15',
+            id: '1',
             type: 'credit',
           },
         },
         graduationPlanMapping: {
           data: null,
         },
+        contractTerm: {
+          data: null,
+        },
+        contractFacilitator: {
+          data: null,
+        },
+        contract: {
+          data: null,
+        },
+        user: {
+          data: null,
+        },
+        creditTransmittalBatch: {
+          data: null,
+        },
+        childCreditAssignments: {
+          data: [
+
+          ],
+        },
+        parentCreditAssignment: {
+          data: null,
+        },
       },
     },
     {
-      id: '15',
+      id: '1',
       type: 'credit',
       attributes: {
         courseId: '0',
         courseName: 'Course 1',
-        courseType: 0,
+        status: 'active',
+        courseType: 'none',
       },
     },
     {
@@ -123,14 +147,14 @@ export default {
         },
         enrollment: {
           data: {
-            id: '1',
+            id: '5',
             type: 'enrollment',
           },
         },
       },
     },
     {
-      id: '3',
+      id: '4',
       type: 'meetingParticipant',
       attributes: {
         participation: 'present',
@@ -145,29 +169,7 @@ export default {
         },
         enrollment: {
           data: {
-            id: '1',
-            type: 'enrollment',
-          },
-        },
-      },
-    },
-    {
-      id: '5',
-      type: 'meetingParticipant',
-      attributes: {
-        participation: 'present',
-        contactType: 'class',
-      },
-      relationships: {
-        meeting: {
-          data: {
-            id: '3',
-            type: 'meeting',
-          },
-        },
-        enrollment: {
-          data: {
-            id: '1',
+            id: '5',
             type: 'enrollment',
           },
         },
@@ -183,20 +185,42 @@ export default {
       relationships: {
         meeting: {
           data: {
-            id: '4',
+            id: '3',
             type: 'meeting',
           },
         },
         enrollment: {
           data: {
-            id: '1',
+            id: '5',
             type: 'enrollment',
           },
         },
       },
     },
     {
-      id: '9',
+      id: '10',
+      type: 'meetingParticipant',
+      attributes: {
+        participation: 'present',
+        contactType: 'class',
+      },
+      relationships: {
+        meeting: {
+          data: {
+            id: '4',
+            type: 'meeting',
+          },
+        },
+        enrollment: {
+          data: {
+            id: '5',
+            type: 'enrollment',
+          },
+        },
+      },
+    },
+    {
+      id: '13',
       type: 'meetingParticipant',
       attributes: {
         participation: 'present',
@@ -211,22 +235,22 @@ export default {
         },
         enrollment: {
           data: {
-            id: '1',
+            id: '5',
             type: 'enrollment',
           },
         },
       },
     },
     {
-      id: '26',
+      id: '11',
       type: 'user',
       attributes: {
-        firstName: 'Eli',
-        lastName: 'Monahan',
+        firstName: 'Leatrice',
+        lastName: 'Bednar',
         nickname: null,
         dateActive: '2018-08-01',
         dateInactive: null,
-        districtId: '3891854733',
+        districtId: '2870279804',
         districtGrade: 12,
         email: null,
         status: 'active',
@@ -235,7 +259,7 @@ export default {
       relationships: {
         coordinator: {
           data: {
-            id: '22',
+            id: '7',
             type: 'user',
           },
         },
@@ -256,7 +280,7 @@ export default {
         },
         enrollment: {
           data: {
-            id: '1',
+            id: '5',
             type: 'enrollment',
           },
         },
@@ -277,7 +301,7 @@ export default {
         },
         enrollment: {
           data: {
-            id: '1',
+            id: '5',
             type: 'enrollment',
           },
         },
@@ -298,7 +322,7 @@ export default {
         },
         enrollment: {
           data: {
-            id: '1',
+            id: '5',
             type: 'enrollment',
           },
         },
@@ -319,7 +343,7 @@ export default {
         },
         enrollment: {
           data: {
-            id: '1',
+            id: '5',
             type: 'enrollment',
           },
         },
@@ -340,7 +364,7 @@ export default {
         },
         enrollment: {
           data: {
-            id: '1',
+            id: '5',
             type: 'enrollment',
           },
         },

@@ -1,7 +1,14 @@
 <li data-test-credit-assignment-id={{creditAssignment.id}}>
   {{courseName}}
   /
-  {{creditAssignment.attributes.creditHours}}
+  {{hours}}
+  {{#if creditAssignment.attributes.overrideBy}}
+    <note
+      title="was {{creditAssignment.attributes.creditHours}}; by {{creditAssignment.attributes.overrideBy}}"
+    >
+      (O)
+    </note>
+  {{/if}}
   {{yield
     (hash
       creditAssignment=creditAssignment

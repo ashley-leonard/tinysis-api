@@ -18,6 +18,10 @@ export default {
             id: '2',
             type: 'meetingParticipant',
           },
+          {
+            id: '3',
+            type: 'meetingParticipant',
+          },
         ],
       },
     },
@@ -39,7 +43,7 @@ export default {
         },
         enrollment: {
           data: {
-            id: '1',
+            id: '5',
             type: 'enrollment',
           },
         },
@@ -61,7 +65,29 @@ export default {
         },
         enrollment: {
           data: {
-            id: '2',
+            id: '6',
+            type: 'enrollment',
+          },
+        },
+      },
+    },
+    {
+      id: '3',
+      type: 'meetingParticipant',
+      attributes: {
+        participation: 'absent',
+        contactType: 'class',
+      },
+      relationships: {
+        meeting: {
+          data: {
+            id: '1',
+            type: 'meeting',
+          },
+        },
+        enrollment: {
+          data: {
+            id: '7',
             type: 'enrollment',
           },
         },

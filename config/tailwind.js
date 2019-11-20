@@ -488,9 +488,7 @@ module.exports = {
   corePlugins: {},
   plugins: [
     function({ addVariant }) {
-      console.log('called add variant')
       addVariant('visited', ({ modifySelectors, separator }) => {
-        console.log('called add variant interior')
         modifySelectors(({ className }) => {
           return `.visited${separator}${className}:visited`;
         });

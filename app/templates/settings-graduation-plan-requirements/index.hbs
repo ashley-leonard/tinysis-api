@@ -6,12 +6,12 @@
 
 <ul class="filter">
   <li class="filter-item" data-test-status>
-    {{t-select
-      options=statusOptions
-      value=status
+    <TSelect
+      @optionsList={{statusOptions}}
+      @value={{status}}
       name="status"
-      onchange=(action (mut status))
-    }}
+      @onchange={{action (mut status)}}
+    />
   </li>
 </ul>
 

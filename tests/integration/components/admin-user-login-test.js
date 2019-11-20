@@ -132,6 +132,8 @@ module('Integration | Component | admin-user-login', (hooks) => {
   });
 
   test('login needs to be activated', async function (assert) {
+    const savedLogin = login;
+
     login = null;
 
     await renderComponent();
@@ -140,6 +142,8 @@ module('Integration | Component | admin-user-login', (hooks) => {
 
     const notice = find('.notice [data-test-reason="activate"]');
     assert.ok(notice, 'create login notice was rendered');
+
+    login = savedLogin;
 
     await click('button');
 

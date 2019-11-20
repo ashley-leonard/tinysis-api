@@ -12,10 +12,14 @@ export default Component.extend({
     }
 
     const pojo = this.normalizeModel(this.model);
+    const relationships = this.normalizeRelationships(this.model);
 
     this.lastModel = this.model;
 
-    this.set('pojo', pojo);
+    this.setProperties({
+      pojo,
+      relationships,
+    });
 
     this.validate();
   },
@@ -32,14 +36,19 @@ export default Component.extend({
   actions: {
     toggleValue(name, event) {
       event.stopPropagation();
-      this.handleAttributeChange(name, !this.pojo[name]);
+      this.handleChange(name, !this.pojo[name], 'pojo');
     },
 
-    // derived forms may want to override this. but
-    // it's here if you want to call it explicitly from e.g.
-    // a custom component change handler.
+    /* An action handler for change events, that works both with various
+       controls that send along the value, name signature, along with
+       generic DOM inputs that send an event
+     */
     onChange(value, name) {
-      this.handleAttributeChange(name, value);
+      this.handleChange(name, value, 'pojo');
+    },
+
+    onChangeRelationship(value, name) {
+      this.handleChange(name, value, 'relationships');
     },
   },
 
@@ -47,50 +56,99 @@ export default Component.extend({
     return clone(model.attributes);
   },
 
-  serializeModel(pojo, model) {
-    return {
+  /*
+   * Relationships are normalized into a more compact form,
+   * with keys pointing directly to the resource linkage
+   * (skipping the data attribute). E.g.
+   *
+   *   { relationships: { boo: { data: { id: 1, type: 'foo' }}}}
+   *
+   * is normalized as
+   *
+   *   { boo: { id: 1, type: 'foo' } }
+   *
+   * Allows for easier use in templates and easier validation
+   */
+  normalizeRelationships(model) {
+    const modelRelationships = model.relationships;
+    if (!modelRelationships) return null;
+
+    const relationships = Object.keys(modelRelationships)
+      .reduce((memo, key) => {
+        memo[key] = modelRelationships[key].data;
+        return memo;
+      }, {});
+    return relationships;
+  },
+
+  serializeModel(pojo, model, relationships) {
+    const serialized = {
       ...model,
       attributes: {
         ...pojo,
       },
     };
+
+    // with relationships if present
+    if (relationships) {
+      return {
+        ...serialized,
+        relationships: this.serializeRelationships(relationships),
+      };
+    }
+
+    return serialized;
   },
 
-  updatePojo(updates) {
-    const { pojo } = this;
+  serializeRelationships(relationships) {
+    return Object.keys(relationships)
+      .reduce((memo, key) => {
+        memo[key] = {
+          data: relationships[key],
+        };
+        return memo;
+      }, {});
+  },
+
+  updatePojo(updates, updatePath = 'pojo') {
+    const pojo = this[updatePath];
 
     const newPojo = {
       ...pojo,
       ...updates,
     };
 
-    this.setProperties({
-      pojo: newPojo,
-    });
+    this.set(updatePath, newPojo);
 
     this.validate();
   },
 
-  handleAttributeChange(name, newValue) {
+  handleChange(_name, _value, updatePath) {
+    let value;
+    let name;
+
+    if (_value instanceof Event) {
+      ({ value, name } = _value.target);
+    } else {
+      value = _value;
+      name = _name;
+    }
+
     const updates = {
-      [name]: newValue,
+      [name]: value,
     };
 
-    this.updatePojo(updates);
+    this.updatePojo(updates, updatePath);
   },
 
   validate() {
-    if (!this.validator) return;
+    if (!this.validator) return { isValid: true, errors: {} };
 
     const validationResult = this.validator.validate(this.pojo);
 
     this.setProperties(validationResult);
-  },
 
-  change(event) {
-    const { name, value } = event.target;
-
-    this.handleAttributeChange(name, value);
+    return validationResult;
   },
 
   submit(event) {
@@ -104,10 +162,14 @@ export default Component.extend({
       return;
     }
 
-    const { pojo, model } = this;
+    const {
+      pojo,
+      model,
+      relationships,
+    } = this;
 
     this.set('disabled', true);
-    const result = this.save(this.serializeModel(pojo, model));
+    const result = this.save(this.serializeModel(pojo, model, relationships));
 
     result.finally(() => {
       if (this.isDestroyed) return;

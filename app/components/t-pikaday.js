@@ -7,6 +7,8 @@ import { computed } from '@ember/object';
 const dateFormat = 'M/D/YYYY';
 
 export default Component.extend({
+  classNames: ['flex'],
+
   disableDay: null,
 
   popup: false,
@@ -63,6 +65,10 @@ export default Component.extend({
     });
   },
 
+  willDestroyElement() {
+    if (this.pikaday) this.pikaday.destroy();
+  },
+
   actions: {
     inputChanged(event) {
       const newDateValue = dayjs(event.target.value, dateFormat);
@@ -70,6 +76,11 @@ export default Component.extend({
       if (newDateValue.isSame(this.value)) {
         event.stopPropagation();
       }
+    },
+
+    clear() {
+      this.set('value', null);
+      this.onchange(null, this.name);
     },
   },
 

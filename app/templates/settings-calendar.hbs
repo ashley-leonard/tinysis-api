@@ -16,12 +16,13 @@
         }}
           Current school year
           <t-help>This is the year in which the Fall term begins. By default, screens show terms for the current year only</t-help>
-          {{t-select
-            options=yearOptions
-            value=form.pojo.current_year
+          <TSelect
+            @optionsList={{yearOptions}}
+            @value={{form.pojo.current_year}}
             name="current_year"
-            prompt="Choose a school year"
-          }}
+            @prompt="Choose a school year"
+            @onchange={{action "onChange" target=form}}
+          />
         {{/form-input}}
       </p>
 
@@ -32,12 +33,13 @@
         }}
           First month of school year
           <t-help>COOR status reporting begins at the starting month</t-help>
-          {{t-select
-            options=monthOptions
-            value=form.pojo.reporting_base_month
+          <TSelect
+            @optionsList={{monthOptions}}
+            @value={{form.pojo.reporting_base_month}}
             name="reporting_base_month"
-            prompt="Choose a starting month"
-          }}
+            @prompt="Choose a starting month"
+            @onchange={{action "onChange" target=form}}
+          />
         {{/form-input}}
       </p>
 
@@ -48,12 +50,13 @@
         }}
           Last month of school year
           <t-help>COOR status reporting ends on the ending month</t-help>
-          {{t-select
-            options=monthOptions
-            value=form.pojo.reporting_end_month
+          <TSelect
+            @optionsList={{monthOptions}}
+            @value={{form.pojo.reporting_end_month}}
             name="reporting_end_month"
-            prompt="Choose an ending month"
-          }}
+            @prompt="Choose an ending month"
+            @onchange={{action "onChange" target=form}}
+          />
         {{/form-input}}
       </p>
     </fieldset>
@@ -63,12 +66,13 @@
         {{#form-input}}
           Default term for new contracts
           <t-help>COOR status reporting ends on the ending month</t-help>
-          {{t-select
-            options=termOptions
-            value=form.pojo.new_contract_term_default
+          <TermSelect
             name="new_contract_term_default"
-            prompt="Choose a default term"
-          }}
+            @value={{form.pojo.new_contract_term_default}}
+            @terms={{terms}}
+            @prompt="Choose a default term"
+            @onchange={{action "onChange" target=form}}
+          />
         {{/form-input}}
       </p>
     </fieldset>

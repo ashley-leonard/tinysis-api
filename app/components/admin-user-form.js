@@ -1,10 +1,10 @@
 import { computed, get } from '@ember/object';
 import { equal, bool } from '@ember/object/computed';
+
 import {
   roleTypes,
   ROLE_STUDENT,
   isStaffRole,
-  STATUS_ACTIVE,
   STATUS_INACTIVE,
 } from '../utils/user-utils';
 import Validator from '../utils/validator';
@@ -56,7 +56,7 @@ export default TForm.extend({
       }, {
         type: 'valid',
         if: (key, value) => Boolean(value),
-        isValid: (key, value, pojo) => pojo.status === STATUS_ACTIVE,
+        isValid: (key, value, pojo) => pojo.status === STATUS_INACTIVE,
         message: 'Inactive date should not be filled out for an active user',
       }],
     };
@@ -97,6 +97,13 @@ export default TForm.extend({
   actions: {
     handleCoordinatorChange(coordinatorId) {
       this.updatePojo({ coordinatorId });
+    },
+
+    updateDate(date, name) {
+      const update = {};
+      update[name] = date;
+      this.updatePojo(update);
+      this.validate();
     },
   },
 

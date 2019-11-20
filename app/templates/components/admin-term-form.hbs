@@ -7,18 +7,19 @@
         name="name"
         value={{pojo.name}}
         autofocus
+        onchange={{action "onChange"}}
       >
     {{/form-input}}
   </p>
   <p>
     {{#form-input error=errors.schoolYear showError=showErrors}}
       School year
-      {{t-select
-        value=pojo.schoolYear
-        options=sortedSchoolYears
+      <TSelect
         name="schoolYear"
-        onchange=(action "didChangeSchoolYear")
-      }}
+        @value={{pojo.schoolYear}}
+        @optionsList={{sortedSchoolYears}}
+        @onchange={{action "didChangeSchoolYear"}}
+      />
     {{/form-input}}
   </p>
   <p>
@@ -28,6 +29,7 @@
         popup=true
         name="creditDate"
         value=pojo.creditDate
+        onchange=(action "onChange")
       }}
     {{/form-input}}
   </p>

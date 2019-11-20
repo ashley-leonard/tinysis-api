@@ -1,8 +1,8 @@
-// GET /api/enrollments?contractIds=5&include=meetingParticipants,participant
+// GET /api/enrollments?contractIds=9&include=meetingParticipants,participant
 export default {
   data: [
     {
-      id: '2',
+      id: '5',
       type: 'enrollment',
       attributes: {
         finalizedOn: null,
@@ -12,20 +12,99 @@ export default {
       relationships: {
         contract: {
           data: {
-            id: '5',
+            id: '9',
             type: 'contract',
           },
         },
         participant: {
           data: {
-            id: '28',
+            id: '11',
             type: 'participant',
           },
         },
         creditAssignments: {
           data: [
             {
-              id: '29',
+              id: '7',
+              type: 'creditAssignment',
+            },
+          ],
+        },
+        turnins: {
+          data: [
+            {
+              id: '1',
+              type: 'turnin',
+            },
+            {
+              id: '2',
+              type: 'turnin',
+            },
+            {
+              id: '3',
+              type: 'turnin',
+            },
+            {
+              id: '4',
+              type: 'turnin',
+            },
+            {
+              id: '5',
+              type: 'turnin',
+            },
+          ],
+        },
+        meetingParticipants: {
+          data: [
+            {
+              id: '1',
+              type: 'meetingParticipant',
+            },
+            {
+              id: '4',
+              type: 'meetingParticipant',
+            },
+            {
+              id: '7',
+              type: 'meetingParticipant',
+            },
+            {
+              id: '10',
+              type: 'meetingParticipant',
+            },
+            {
+              id: '13',
+              type: 'meetingParticipant',
+            },
+          ],
+        },
+      },
+    },
+    {
+      id: '6',
+      type: 'enrollment',
+      attributes: {
+        finalizedOn: null,
+        enrollmentStatus: 'enrolled',
+        completionStatus: 'incomplete',
+      },
+      relationships: {
+        contract: {
+          data: {
+            id: '9',
+            type: 'contract',
+          },
+        },
+        participant: {
+          data: {
+            id: '12',
+            type: 'participant',
+          },
+        },
+        creditAssignments: {
+          data: [
+            {
+              id: '8',
               type: 'creditAssignment',
             },
           ],
@@ -42,11 +121,7 @@ export default {
               type: 'meetingParticipant',
             },
             {
-              id: '4',
-              type: 'meetingParticipant',
-            },
-            {
-              id: '6',
+              id: '5',
               type: 'meetingParticipant',
             },
             {
@@ -54,7 +129,11 @@ export default {
               type: 'meetingParticipant',
             },
             {
-              id: '10',
+              id: '11',
+              type: 'meetingParticipant',
+            },
+            {
+              id: '14',
               type: 'meetingParticipant',
             },
           ],
@@ -62,7 +141,7 @@ export default {
       },
     },
     {
-      id: '1',
+      id: '7',
       type: 'enrollment',
       attributes: {
         finalizedOn: null,
@@ -72,68 +151,49 @@ export default {
       relationships: {
         contract: {
           data: {
-            id: '5',
+            id: '9',
             type: 'contract',
           },
         },
         participant: {
           data: {
-            id: '26',
+            id: '13',
             type: 'participant',
           },
         },
         creditAssignments: {
           data: [
             {
-              id: '28',
+              id: '9',
               type: 'creditAssignment',
             },
           ],
         },
         turnins: {
           data: [
-            {
-              id: '1',
-              type: 'turnin',
-            },
-            {
-              id: '2',
-              type: 'turnin',
-            },
-            {
-              id: '3',
-              type: 'turnin',
-            },
-            {
-              id: '4',
-              type: 'turnin',
-            },
-            {
-              id: '5',
-              type: 'turnin',
-            },
+
           ],
         },
         meetingParticipants: {
           data: [
             {
-              id: '1',
-              type: 'meetingParticipant',
-            },
-            {
               id: '3',
               type: 'meetingParticipant',
             },
             {
-              id: '5',
-              type: 'meetingParticipant',
-            },
-            {
-              id: '7',
+              id: '6',
               type: 'meetingParticipant',
             },
             {
               id: '9',
+              type: 'meetingParticipant',
+            },
+            {
+              id: '12',
+              type: 'meetingParticipant',
+            },
+            {
+              id: '15',
               type: 'meetingParticipant',
             },
           ],
@@ -142,6 +202,140 @@ export default {
     },
   ],
   included: [
+    {
+      id: '1',
+      type: 'meetingParticipant',
+      attributes: {
+        participation: 'present',
+        contactType: 'class',
+      },
+      relationships: {
+        meeting: {
+          data: {
+            id: '1',
+            type: 'meeting',
+          },
+        },
+        enrollment: {
+          data: {
+            id: '5',
+            type: 'enrollment',
+          },
+        },
+      },
+    },
+    {
+      id: '4',
+      type: 'meetingParticipant',
+      attributes: {
+        participation: 'present',
+        contactType: 'class',
+      },
+      relationships: {
+        meeting: {
+          data: {
+            id: '2',
+            type: 'meeting',
+          },
+        },
+        enrollment: {
+          data: {
+            id: '5',
+            type: 'enrollment',
+          },
+        },
+      },
+    },
+    {
+      id: '7',
+      type: 'meetingParticipant',
+      attributes: {
+        participation: 'present',
+        contactType: 'class',
+      },
+      relationships: {
+        meeting: {
+          data: {
+            id: '3',
+            type: 'meeting',
+          },
+        },
+        enrollment: {
+          data: {
+            id: '5',
+            type: 'enrollment',
+          },
+        },
+      },
+    },
+    {
+      id: '10',
+      type: 'meetingParticipant',
+      attributes: {
+        participation: 'present',
+        contactType: 'class',
+      },
+      relationships: {
+        meeting: {
+          data: {
+            id: '4',
+            type: 'meeting',
+          },
+        },
+        enrollment: {
+          data: {
+            id: '5',
+            type: 'enrollment',
+          },
+        },
+      },
+    },
+    {
+      id: '13',
+      type: 'meetingParticipant',
+      attributes: {
+        participation: 'present',
+        contactType: 'class',
+      },
+      relationships: {
+        meeting: {
+          data: {
+            id: '5',
+            type: 'meeting',
+          },
+        },
+        enrollment: {
+          data: {
+            id: '5',
+            type: 'enrollment',
+          },
+        },
+      },
+    },
+    {
+      id: '11',
+      type: 'user',
+      attributes: {
+        firstName: 'Leatrice',
+        lastName: 'Bednar',
+        nickname: null,
+        dateActive: '2018-08-01',
+        dateInactive: null,
+        districtId: '2870279804',
+        districtGrade: 12,
+        email: null,
+        status: 'active',
+        role: 'student',
+      },
+      relationships: {
+        coordinator: {
+          data: {
+            id: '7',
+            type: 'user',
+          },
+        },
+      },
+    },
     {
       id: '2',
       type: 'meetingParticipant',
@@ -158,14 +352,14 @@ export default {
         },
         enrollment: {
           data: {
-            id: '2',
+            id: '6',
             type: 'enrollment',
           },
         },
       },
     },
     {
-      id: '4',
+      id: '5',
       type: 'meetingParticipant',
       attributes: {
         participation: 'absent',
@@ -180,29 +374,7 @@ export default {
         },
         enrollment: {
           data: {
-            id: '2',
-            type: 'enrollment',
-          },
-        },
-      },
-    },
-    {
-      id: '6',
-      type: 'meetingParticipant',
-      attributes: {
-        participation: 'absent',
-        contactType: 'class',
-      },
-      relationships: {
-        meeting: {
-          data: {
-            id: '3',
-            type: 'meeting',
-          },
-        },
-        enrollment: {
-          data: {
-            id: '2',
+            id: '6',
             type: 'enrollment',
           },
         },
@@ -218,20 +390,42 @@ export default {
       relationships: {
         meeting: {
           data: {
-            id: '4',
+            id: '3',
             type: 'meeting',
           },
         },
         enrollment: {
           data: {
-            id: '2',
+            id: '6',
             type: 'enrollment',
           },
         },
       },
     },
     {
-      id: '10',
+      id: '11',
+      type: 'meetingParticipant',
+      attributes: {
+        participation: 'absent',
+        contactType: 'class',
+      },
+      relationships: {
+        meeting: {
+          data: {
+            id: '4',
+            type: 'meeting',
+          },
+        },
+        enrollment: {
+          data: {
+            id: '6',
+            type: 'enrollment',
+          },
+        },
+      },
+    },
+    {
+      id: '14',
       type: 'meetingParticipant',
       attributes: {
         participation: 'absent',
@@ -246,54 +440,32 @@ export default {
         },
         enrollment: {
           data: {
-            id: '2',
+            id: '6',
             type: 'enrollment',
           },
         },
       },
     },
     {
-      id: '28',
+      id: '12',
       type: 'user',
       attributes: {
-        firstName: 'Bonnie',
-        lastName: 'Auer',
+        firstName: 'Garry',
+        lastName: 'Pollich',
         nickname: null,
         dateActive: '2018-08-01',
-        dateInactive: '2019-10-01',
-        districtId: '4905452447',
+        dateInactive: null,
+        districtId: '1780983772',
         districtGrade: 12,
         email: null,
-        status: 'inactive',
+        status: 'active',
         role: 'student',
       },
       relationships: {
         coordinator: {
           data: {
-            id: '23',
+            id: '8',
             type: 'user',
-          },
-        },
-      },
-    },
-    {
-      id: '1',
-      type: 'meetingParticipant',
-      attributes: {
-        participation: 'present',
-        contactType: 'class',
-      },
-      relationships: {
-        meeting: {
-          data: {
-            id: '1',
-            type: 'meeting',
-          },
-        },
-        enrollment: {
-          data: {
-            id: '1',
-            type: 'enrollment',
           },
         },
       },
@@ -302,7 +474,29 @@ export default {
       id: '3',
       type: 'meetingParticipant',
       attributes: {
-        participation: 'present',
+        participation: 'absent',
+        contactType: 'class',
+      },
+      relationships: {
+        meeting: {
+          data: {
+            id: '1',
+            type: 'meeting',
+          },
+        },
+        enrollment: {
+          data: {
+            id: '7',
+            type: 'enrollment',
+          },
+        },
+      },
+    },
+    {
+      id: '6',
+      type: 'meetingParticipant',
+      attributes: {
+        participation: 'absent',
         contactType: 'class',
       },
       relationships: {
@@ -314,17 +508,17 @@ export default {
         },
         enrollment: {
           data: {
-            id: '1',
+            id: '7',
             type: 'enrollment',
           },
         },
       },
     },
     {
-      id: '5',
+      id: '9',
       type: 'meetingParticipant',
       attributes: {
-        participation: 'present',
+        participation: 'absent',
         contactType: 'class',
       },
       relationships: {
@@ -336,17 +530,17 @@ export default {
         },
         enrollment: {
           data: {
-            id: '1',
+            id: '7',
             type: 'enrollment',
           },
         },
       },
     },
     {
-      id: '7',
+      id: '12',
       type: 'meetingParticipant',
       attributes: {
-        participation: 'present',
+        participation: 'absent',
         contactType: 'class',
       },
       relationships: {
@@ -358,17 +552,17 @@ export default {
         },
         enrollment: {
           data: {
-            id: '1',
+            id: '7',
             type: 'enrollment',
           },
         },
       },
     },
     {
-      id: '9',
+      id: '15',
       type: 'meetingParticipant',
       attributes: {
-        participation: 'present',
+        participation: 'absent',
         contactType: 'class',
       },
       relationships: {
@@ -380,31 +574,31 @@ export default {
         },
         enrollment: {
           data: {
-            id: '1',
+            id: '7',
             type: 'enrollment',
           },
         },
       },
     },
     {
-      id: '26',
+      id: '13',
       type: 'user',
       attributes: {
-        firstName: 'Eli',
-        lastName: 'Monahan',
+        firstName: 'Bernice',
+        lastName: 'Yundt',
         nickname: null,
         dateActive: '2018-08-01',
-        dateInactive: null,
-        districtId: '3891854733',
+        dateInactive: '2019-10-01',
+        districtId: '5621269128',
         districtGrade: 12,
         email: null,
-        status: 'active',
+        status: 'inactive',
         role: 'student',
       },
       relationships: {
         coordinator: {
           data: {
-            id: '22',
+            id: '8',
             type: 'user',
           },
         },
@@ -412,6 +606,6 @@ export default {
     },
   ],
   meta: {
-    count: 2,
+    count: 3,
   },
 };

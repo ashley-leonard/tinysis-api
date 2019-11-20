@@ -6,6 +6,7 @@
         value={{pojo.name}}
         name="name"
         type="text"
+        onchange={{action "onChange"}}
       >
     {{/form-input}}
   </p>
@@ -26,11 +27,12 @@
   <p>
     {{#form-input error=errors.name showError=showErrors}}
       Reporting
-      {{t-select
+      <TSelect
         name="reporting"
-        value=pojo.reporting
-        options=reportingOptions
-      }}
+        @value={{pojo.reporting}}
+        @optionsList={{reportingOptions}}
+        @onchange={{action "onChange"}}
+      />
     {{/form-input}}
   </p>
   <p>
@@ -53,6 +55,7 @@
         type="number"
         name="sequence"
         value={{pojo.sequence}}
+        onchange={{action "onChange"}}
       >
     {{/form-input}}
   </p>

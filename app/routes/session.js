@@ -1,19 +1,22 @@
 import Route from '@ember/routing/route';
-import { inject as service } from '@ember/service';
+import {
+  getTokenFromHash,
+  setSessionData,
+  getIntendedUrl,
+  clearIntendedUrl,
+} from '../utils/session-utils';
 
 export default Route.extend({
-  session: service(),
   async redirect() {
-    const { session } = this;
-    const jwt = await session.getTokenFromHash();
-    this.session.setSessionData(jwt);
+    const jwt = await getTokenFromHash();
+    setSessionData(jwt);
 
-    let redirectUrl = session.getIntendedUrl();
+    let redirectUrl = getIntendedUrl();
     if (redirectUrl) {
-      this.session.clearIntendedUrl();
+      clearIntendedUrl();
     } else {
       redirectUrl = '/tiny';
     }
-    this.transitionTo(redirectUrl);
+    window.location.href = redirectUrl;
   },
 });

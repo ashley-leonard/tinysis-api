@@ -1,10 +1,10 @@
-// GET /api/terms/3
+// GET /api/terms/7
 export default {
   data: {
-    id: '3',
+    id: '7',
     type: 'term',
     attributes: {
-      name: 'Progressive 24/7 orchestration',
+      name: 'Seamless contextually-based encoding',
       schoolYear: 2019,
       creditDate: '2020-01-31',
       months: [

@@ -1,12 +1,14 @@
 import _fetch from 'fetch';
-import { Promise } from 'rsvp';
-import { getSessionData } from './session-utils';
+import { Promise, reject } from 'rsvp';
+import { getSessionData, AuthError } from './session-utils';
 
 export default function fetch(_url, callerOptions = {}) {
   const urlObj = new URL(`${window.location.origin}${_url}`);
   const params = callerOptions.params || {};
   const session = getSessionData();
   const headers = callerOptions.headers || {};
+
+  if (!session) return reject(new AuthError());
 
   Object.keys(params).forEach(key => urlObj.searchParams.append(key, params[key]));
   const url = `${urlObj.pathname}${urlObj.search}`;
@@ -19,7 +21,7 @@ export default function fetch(_url, callerOptions = {}) {
     headers,
   };
 
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve, rej) => {
     _fetch(url, options)
       .then((response) => {
         if (response.ok) {
@@ -30,6 +32,10 @@ export default function fetch(_url, callerOptions = {}) {
           return resolve(response.json());
         }
 
+        if (response.status === 401) {
+          return reject(new AuthError());
+        }
+
         const err = new Error(response.statusText);
         Object.assign(err, {
           url,
@@ -38,10 +44,11 @@ export default function fetch(_url, callerOptions = {}) {
 
         return response.json()
           .then((json) => {
-            reject(Object.assign(json, err));
+            rej(Object.assign(json, err));
           }).catch(() => {
-            reject(err);
+            rej(err);
           });
-      });
+      })
+      .catch(e => rej(e));
   });
 }

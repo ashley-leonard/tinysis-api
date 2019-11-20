@@ -1,23 +1,23 @@
-// auth for user 25
+// auth for user 10
 export default {
   data: {
-    email: 'pamelia@blanda.biz',
+    email: 'simon@watermith.name',
     email_verified: false,
     updated_at: '2019-06-23T23:44:29.877Z',
-    user_id: 'auth0|c180051490e7438cb9bd032883a9c96f',
-    name: 'Jarrett Kuphal',
+    user_id: 'auth0|47cb004b7739e905cc2c43f591c25071',
+    name: 'Cleotilde Kohler',
     identities: [
       {
         connection: 'Username-Password-Authentication',
         provider: 'auth0',
-        user_id: 'c180051490e7438cb9bd032883a9c96f',
+        user_id: '47cb004b7739e905cc2c43f591c25071',
         isSocial: false,
       },
     ],
     created_at: '2019-05-25T00:24:18.815Z',
     last_password_reset: '2019-06-10T04:09:05.883Z',
-    given_name: 'Jarrett',
-    family_name: 'Kuphal',
+    given_name: 'Cleotilde',
+    family_name: 'Kohler',
     nickname: null,
     last_login: '2019-06-23T23:44:29.877Z',
     last_ip: '208.100.155.216',

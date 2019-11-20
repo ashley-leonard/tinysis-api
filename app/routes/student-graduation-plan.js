@@ -6,19 +6,19 @@ export default Route.extend({
   async beforeModel() {
     this.requirements = await this.tinyData.fetch('/api/graduation-plan-requirements?status=active');
   },
-  model(params, transition) {
-    const { student } = transition.data;
+  model() {
+    const student = this.modelFor('student').data;
     this.student = student;
     return this.tinyData.fetch(`/api/graduation-plan-mappings/${student.id}`);
   },
-  async afterModel(params, transition) {
-    this.creditAssignments = await this.tinyData.fetch(`/api/credit-assignments?studentIds=${transition.data.student.id}&includeFulfilledAttributes=true`);
-  },
-  setupController(controller, model) {
-    this._super(controller, model);
-    controller.setProperties({
+  setupController(ctrl, model) {
+    this._super(ctrl, model);
+
+    const creditAssignments = model.included.filter(inc => inc.type === 'creditAssignment');
+
+    ctrl.setProperties({
       student: this.student,
-      creditAssignments: this.creditAssignments.data,
+      creditAssignments,
       requirements: this.requirements.data,
       mappings: model.data,
     });

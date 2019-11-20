@@ -106,17 +106,18 @@ export default Component.extend({
     async createLogin(user) {
       this.set('updating', true);
       const updatedLogin = await this.createLogin(user);
+
       if (!this.isDestroyed) {
         this.setProperties({
           updating: false,
-          login: updatedLogin,
+          login: updatedLogin.data,
         });
       }
     },
 
-    async destroyLogin(login) {
+    async destroyLogin(user, login) {
       this.set('updating', true);
-      await this.destroyLogin(login);
+      await this.destroyLogin(user, login);
       if (!this.isDestroyed) {
         this.setProperties({
           updating: false,

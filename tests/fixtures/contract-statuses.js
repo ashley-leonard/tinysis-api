@@ -1,4 +1,4 @@
-// GET /api/statuses?enrollmentIds=2,1
+// GET /api/statuses?enrollmentIds=5,6,7
 export default {
   data: [
     {
@@ -17,13 +17,13 @@ export default {
       relationships: {
         creator: {
           data: {
-            id: '22',
+            id: '7',
             type: 'creator',
           },
         },
         statusable: {
           data: {
-            id: '1',
+            id: '5',
             type: 'enrollment',
           },
         },
@@ -45,13 +45,13 @@ export default {
       relationships: {
         creator: {
           data: {
-            id: '22',
+            id: '7',
             type: 'creator',
           },
         },
         statusable: {
           data: {
-            id: '1',
+            id: '5',
             type: 'enrollment',
           },
         },
@@ -73,13 +73,13 @@ export default {
       relationships: {
         creator: {
           data: {
-            id: '22',
+            id: '7',
             type: 'creator',
           },
         },
         statusable: {
           data: {
-            id: '1',
+            id: '5',
             type: 'enrollment',
           },
         },
@@ -101,13 +101,13 @@ export default {
       relationships: {
         creator: {
           data: {
-            id: '22',
+            id: '7',
             type: 'creator',
           },
         },
         statusable: {
           data: {
-            id: '2',
+            id: '6',
             type: 'enrollment',
           },
         },
@@ -129,13 +129,13 @@ export default {
       relationships: {
         creator: {
           data: {
-            id: '22',
+            id: '7',
             type: 'creator',
           },
         },
         statusable: {
           data: {
-            id: '2',
+            id: '6',
             type: 'enrollment',
           },
         },
@@ -157,13 +157,97 @@ export default {
       relationships: {
         creator: {
           data: {
-            id: '22',
+            id: '7',
             type: 'creator',
           },
         },
         statusable: {
           data: {
-            id: '2',
+            id: '6',
+            type: 'enrollment',
+          },
+        },
+      },
+    },
+    {
+      id: '7',
+      type: 'status',
+      attributes: {
+        month: '2019-09-01',
+        createdAt: '2019-11-15T00:00:00.000Z',
+        updatedAt: '2019-11-15T00:00:00.000Z',
+        fteHours: 25,
+        metFteRequirements: true,
+        heldPeriodicCheckins: true,
+        academicStatus: 'satisfactory',
+        attendanceStatus: 'satisfactory',
+      },
+      relationships: {
+        creator: {
+          data: {
+            id: '7',
+            type: 'creator',
+          },
+        },
+        statusable: {
+          data: {
+            id: '7',
+            type: 'enrollment',
+          },
+        },
+      },
+    },
+    {
+      id: '8',
+      type: 'status',
+      attributes: {
+        month: '2019-10-01',
+        createdAt: '2019-11-15T00:00:00.000Z',
+        updatedAt: '2019-11-15T00:00:00.000Z',
+        fteHours: 25,
+        metFteRequirements: true,
+        heldPeriodicCheckins: true,
+        academicStatus: 'satisfactory',
+        attendanceStatus: 'satisfactory',
+      },
+      relationships: {
+        creator: {
+          data: {
+            id: '7',
+            type: 'creator',
+          },
+        },
+        statusable: {
+          data: {
+            id: '7',
+            type: 'enrollment',
+          },
+        },
+      },
+    },
+    {
+      id: '9',
+      type: 'status',
+      attributes: {
+        month: '2019-11-01',
+        createdAt: '2019-11-15T00:00:00.000Z',
+        updatedAt: '2019-11-15T00:00:00.000Z',
+        fteHours: 25,
+        metFteRequirements: true,
+        heldPeriodicCheckins: true,
+        academicStatus: 'satisfactory',
+        attendanceStatus: 'satisfactory',
+      },
+      relationships: {
+        creator: {
+          data: {
+            id: '7',
+            type: 'creator',
+          },
+        },
+        statusable: {
+          data: {
+            id: '7',
             type: 'enrollment',
           },
         },
@@ -172,17 +256,17 @@ export default {
   ],
   included: [
     {
-      id: '22',
+      id: '7',
       type: 'user',
       attributes: {
-        firstName: 'Hoyt',
-        lastName: 'Sauer',
+        firstName: 'Dominic',
+        lastName: 'Collier',
         nickname: null,
         dateActive: '2012-09-01',
         dateInactive: null,
         districtId: null,
         districtGrade: 12,
-        email: 'serita@bartoletti.net',
+        email: 'janelle@rathskiles.net',
         status: 'active',
         role: 'staff',
       },
@@ -190,7 +274,7 @@ export default {
         coordinatees: {
           data: [
             {
-              id: '26',
+              id: '11',
               type: 'user',
             },
           ],
@@ -199,6 +283,6 @@ export default {
     },
   ],
   meta: {
-    count: 6,
+    count: 9,
   },
 };

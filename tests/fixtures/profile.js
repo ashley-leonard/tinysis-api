@@ -1,17 +1,17 @@
 // GET /api/profile
 export default {
   data: {
-    id: '25',
+    id: '10',
     type: 'user',
     attributes: {
-      firstName: 'Jarrett',
-      lastName: 'Kuphal',
+      firstName: 'Cleotilde',
+      lastName: 'Kohler',
       nickname: null,
       dateActive: '2011-07-01',
       dateInactive: null,
       districtId: null,
       districtGrade: 12,
-      email: 'pamelia@blanda.biz',
+      email: 'simon@watermith.name',
       status: 'active',
       role: 'administrator',
     },
@@ -25,8 +25,11 @@ export default {
   },
   meta: {
     permissions: [
-      'get:config',
+      'manage:all-reporting',
       'manage:config',
+      'manage:own-reporting',
+      'read:config',
+      'read:reporting',
     ],
   },
 };

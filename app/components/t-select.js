@@ -3,11 +3,9 @@ import { get, computed } from '@ember/object';
 import { capitalize } from '../helpers/titleize';
 
 export default Component.extend({
-  tagName: 'select',
+  tagName: '',
   optionValuePath: 'value',
   optionNamePath: 'name',
-  attributeBindings: ['name', 'disabled'],
-  bubbles: true,
   onchange: () => {},
 
   /**
@@ -16,14 +14,14 @@ export default Component.extend({
    * changes are handled by the native control. So we don't
    * recompute this on value changes.
    */
-  optionSelections: computed('options', 'optionValuePath', 'optionNamePath', function () {
+  optionSelections: computed('optionsList', 'optionValuePath', 'optionNamePath', function () {
     const {
-      options,
+      optionsList,
       optionValuePath,
       optionNamePath,
     } = this;
 
-    return options
+    return optionsList
       .map((option) => {
         let opt;
         if (typeof option !== 'object') {
@@ -42,14 +40,14 @@ export default Component.extend({
       });
   }),
 
-  change(event) {
-    const select = event.target;
-    const { name } = select;
-    const [option] = select.selectedOptions;
-    const value = option && option.value;
+  actions: {
+    onChange(event) {
+      const select = event.target;
+      const { name } = select;
+      const [option] = select.selectedOptions;
+      const value = option && option.value;
 
-    this.onchange(value, name, event);
-
-    return this.bubbles;
+      this.onchange(value, name, event);
+    },
   },
 });

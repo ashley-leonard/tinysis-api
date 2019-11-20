@@ -1,0 +1,43 @@
+{{#check-empty
+  count=viewModels.length
+  noResultsMessage="There are no credits to approve."
+}}
+  {{count-paragraph
+    count=viewModels.length
+    name="credit"
+  }}
+  <p class="flex">
+    <TLink
+      data-test-combine-credits
+      @action={{action "combineCredits"}}
+      @disabled={{combineLinkDisabled}}
+    >
+      <span class="fa fa-object-group no-underline mr-2" />
+      Combine selected credits
+    </TLink>
+  </p>
+  <table class="t-table w-full" data-test-credits-worksheet>
+    <thead>
+      <tr>
+        <th></th>
+        <th>Credit</th>
+        <th>Term</th>
+        <th class="text-right">Credits</th>
+        <th class="text-right">Completed</th>
+        <th class="text-right">Approved</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each viewModels as |viewModel|}}
+        {{credits-worksheet/item
+          creditAssignment=viewModel.creditAssignment
+          credit=viewModel.credit
+          splitCredit=(action "splitCredit")
+          selectCredit=(action "selectCredit")
+          approveCredit=(action "approveCredit")
+        }}
+      {{/each}}
+    </tbody>
+  </table>
+{{/check-empty}}

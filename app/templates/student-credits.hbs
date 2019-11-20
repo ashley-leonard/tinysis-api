@@ -1,0 +1,39 @@
+<h2>Credits</h2>
+
+<ul>
+  <li>credits with children include a split button with confirmation popup</li>
+</ul>
+
+<h3>Available credits to approve</h3>
+
+<CreditsWorksheet
+  @student={{student}}
+  @creditAssignments={{creditAssignments}}
+  @selectedCredits={{selectedCredits}}
+  @showCombine={{action "showCombine"}}
+  @splitCredit={{action "splitCredit"}}
+  @approveCredit={{action "approveCredit"}}
+/>
+
+<h3>Credits finalized and sent to district</h3>
+
+<CreditsFinalized
+  @student={{student}}
+  @creditAssignments={{creditAssignments}}
+/>
+
+{{#if showCombineDialog}}
+  {{#modal-dialog
+    onClose=(action "hideCombine")  
+    translucentOverlay=true
+  }}
+    <CreditsCombine
+      @availableCredits={{availableCredits}}
+      @creditAssignments={{creditsToCombine}}
+      @today={{today}}
+      @terms={{terms}}
+      @save={{action "combineCredits"}}
+      @close={{action (mut showCombineDialog) false}}
+    />
+  {{/modal-dialog}}
+{{/if}}

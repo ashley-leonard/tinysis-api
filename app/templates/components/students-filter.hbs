@@ -11,57 +11,57 @@
   </li>
   {{#if showRole}}
     <li class="filter-item" data-test-role>
-      {{t-select
-        options=roleOptions
-        value=queryParams.role
+      <TSelect
+        @optionsList={{roleOptions}}
+        @value={{queryParams.role}}
         name="role"
-        prompt="All roles"
-        onchange=(action "onSelect")
-      }}
+        @prompt="All roles"
+        @onchange={{action "onSelect"}}
+      />
     </li>
   {{/if}}
   {{#if showStatus}}
     <li class="filter-item" data-test-status>
-      {{t-select
-        options=statusOptions
-        value=queryParams.status
+      <TSelect
+        @optionsList={{statusOptions}}
+        @value={{queryParams.status}}
         name="status"
-        prompt="Any status"
-        onchange=(action "onSelect")
-      }}
+        @prompt="Any status"
+        @onchange={{action "onSelect"}}
+      />
     </li>
   {{/if}}
   <li class="filter-item" data-test-coordinator>
-    {{t-select
-      options=coordinatorOptions
-      value=queryParams.coordinator
+    <TSelect
+      @optionsList={{coordinatorOptions}}
+      @value={{queryParams.coordinator}}
       name="coordinator"
-      prompt="All coordinators"
-      optionValuePath="id"
-      optionNamePath="name"
-      disabled=isStaff
-      onchange=(action "onSelect")
-    }}
+      @prompt="All coordinators"
+      @optionValuePath="id"
+      @optionNamePath="name"
+      disabled={{isStaff}}
+      @onchange={{action "onSelect"}}
+    />
   </li>
   <li class="filter-item" data-test-grade>
-    {{t-select
-      options=grades
-      value=queryParams.grade
+    <TSelect
+      @optionsList={{grades}}
+      @value={{queryParams.grade}}
       name="grade"
-      prompt="Any grade"
-      disabled=isStaff
-      onchange=(action "onSelect")
-    }}
+      @prompt="Any grade"
+      disabled={{isStaff}}
+      @onchange={{action "onSelect"}}
+    />
   </li>
   <li class="filter-item" data-test-year>
-    {{t-select
-      options=schoolYearsReversed
-      value=queryParams.schoolYear
+    <TSelect
+      @optionsList={{schoolYearsReversed}}
+      @value={{queryParams.schoolYear}}
       name="schoolYear"
       prompt="Any year"
-      disabled=isStaff
-      onchange=(action "onSelect")
-    }}
+      @disabled={{isStaff}}
+      @onchange={{action "onSelect"}}
+    />
   </li>
   <li class="filter-item" data-test-submit>
     <button type="submit" class="btn">

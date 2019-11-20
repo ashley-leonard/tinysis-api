@@ -39,8 +39,8 @@ module('Integration | Component | tiny-toolbar', (hooks) => {
       {{tiny-toolbar
         user=user
         permissions=user.permissions
-        signin=signin
-        signout=signout
+        signIn=signin
+        signOut=signout
       }}
     `);
 
@@ -69,8 +69,8 @@ module('Integration | Component | tiny-toolbar', (hooks) => {
       {{tiny-toolbar
         user=user
         permissions=user.permissions
-        signin=signin
-        signout=signout
+        signIn=signin
+        signOut=signout
       }}
     `);
     assert.ok(find('[data-test-route="status-all-coordinators.index"]'), 'coordinators link is exposed');
@@ -93,8 +93,8 @@ module('Integration | Component | tiny-toolbar', (hooks) => {
       {{tiny-toolbar
         user=user
         permissions=user.permissions
-        signin=signin
-        signout=signout
+        signIn=signin
+        signOut=signout
       }}
     `);
 

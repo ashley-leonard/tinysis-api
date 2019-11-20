@@ -1,12 +1,19 @@
-{{#each creditAssignments as |creditAssignment|}}
-  {{#credit-assignments/item
-    creditAssignment=creditAssignment as |cai|
-  }}
-    {{yield 
-      (hash
-        creditAssignment=creditAssignment
-        credit=cai.credit
-      )
-    }}
-  {{/credit-assignments/item}}
-{{/each}}
+{{#check-empty
+  count=creditAssignments.length
+  noResultsMessage="No credits assigned"
+}}
+  <ul class="list-reset credit-assignments">
+    {{#each creditAssignmentsList as |creditAssignment|}}
+      {{#credit-assignments/item
+        creditAssignment=creditAssignment as |cai|
+      }}
+        {{yield 
+          (hash
+            creditAssignment=creditAssignment
+            credit=cai.credit
+          )
+        }}
+      {{/credit-assignments/item}}
+    {{/each}}
+  </ul>
+{{/check-empty}}

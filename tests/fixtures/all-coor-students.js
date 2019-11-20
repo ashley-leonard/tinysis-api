@@ -2,15 +2,61 @@
 export default {
   data: [
     {
-      id: '28',
+      id: '11',
       type: 'user',
       attributes: {
-        firstName: 'Bonnie',
-        lastName: 'Auer',
+        firstName: 'Leatrice',
+        lastName: 'Bednar',
+        nickname: null,
+        dateActive: '2018-08-01',
+        dateInactive: null,
+        districtId: '2870279804',
+        districtGrade: 12,
+        status: 'active',
+        role: 'student',
+      },
+      relationships: {
+        coordinator: {
+          data: {
+            id: '7',
+            type: 'user',
+          },
+        },
+      },
+    },
+    {
+      id: '12',
+      type: 'user',
+      attributes: {
+        firstName: 'Garry',
+        lastName: 'Pollich',
+        nickname: null,
+        dateActive: '2018-08-01',
+        dateInactive: null,
+        districtId: '1780983772',
+        districtGrade: 12,
+        status: 'active',
+        role: 'student',
+      },
+      relationships: {
+        coordinator: {
+          data: {
+            id: '8',
+            type: 'user',
+          },
+        },
+      },
+    },
+    {
+      id: '13',
+      type: 'user',
+      attributes: {
+        firstName: 'Bernice',
+        lastName: 'Yundt',
         nickname: null,
         dateActive: '2018-08-01',
         dateInactive: '2019-10-01',
-        districtId: '4905452447',
+        districtId: '5621269128',
         districtGrade: 12,
         status: 'inactive',
         role: 'student',
@@ -18,53 +64,7 @@ export default {
       relationships: {
         coordinator: {
           data: {
-            id: '23',
-            type: 'user',
-          },
-        },
-      },
-    },
-    {
-      id: '27',
-      type: 'user',
-      attributes: {
-        firstName: 'Erica',
-        lastName: 'Bechtelar',
-        nickname: null,
-        dateActive: '2018-08-01',
-        dateInactive: null,
-        districtId: '945359679',
-        districtGrade: 12,
-        status: 'active',
-        role: 'student',
-      },
-      relationships: {
-        coordinator: {
-          data: {
-            id: '23',
-            type: 'user',
-          },
-        },
-      },
-    },
-    {
-      id: '26',
-      type: 'user',
-      attributes: {
-        firstName: 'Eli',
-        lastName: 'Monahan',
-        nickname: null,
-        dateActive: '2018-08-01',
-        dateInactive: null,
-        districtId: '3891854733',
-        districtGrade: 12,
-        status: 'active',
-        role: 'student',
-      },
-      relationships: {
-        coordinator: {
-          data: {
-            id: '22',
+            id: '8',
             type: 'user',
           },
         },
