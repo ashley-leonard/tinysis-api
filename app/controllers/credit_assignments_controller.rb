@@ -120,6 +120,18 @@ class CreditAssignmentsController < ApplicationController
     render json: CreditAssignmentSerializer.new(credit_assignment, { params: { forFulfilled: true } })
   end
 
+  def update
+    credit_assignment = CreditAssignment.find params[:id]
+    credit_relation = get_relation(:credit)
+    attributes = get_attributes
+
+    credit_assignment.credit = Credit.find credit_relation[:id]
+    credit_assignment.update_attributes attributes
+    credit_assignment.save!
+
+    render json: CreditAssignmentSerializer.new(credit_assignment, { params: { forFulfilled: true } })
+  end
+
   def destroy
     credit_assignment = CreditAssignment.find params[:id]
 

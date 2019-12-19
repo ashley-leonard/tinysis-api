@@ -17,6 +17,8 @@ RSpec.describe 'Credit assignments API', type: :request do
     @credit_assignment_4 = create :credit_assignment, credit: @credit1, user: @student2, contract_term: contract_term
     @credit_assignment_5 = create :credit_assignment, credit: @credit2, user: @student2, contract_term: contract_term
     @credit_assignment_6 = create :credit_assignment, credit: @credit2, user: @student2, contract_term: contract_term
+
+    @credit_assignment_7 = create :credit_assignment, credit: @credit2, enrollment: @enrollment1, credit_hours: 1
   end
 
   describe 'GET /api/credit-assignments' do
@@ -25,8 +27,8 @@ RSpec.describe 'Credit assignments API', type: :request do
 
       expect(response).to have_http_status(200)
       expect(json).not_to be_empty
-      expect(json['meta']['count']).to eq(6)
-      expect(json['data'].length).to eq(6)
+      expect(json['meta']['count']).to eq(7)
+      expect(json['data'].length).to eq(7)
     end
 
     it 'returns a 200 for a single credit assignment' do
@@ -101,6 +103,43 @@ RSpec.describe 'Credit assignments API', type: :request do
       expect(json['data']['relationships']['credit']['data']['id']).to eq(@credit1.id.to_s)
       expect(json['data']['relationships']['childCreditAssignments']['data'][0]['id']).to eq(@credit_assignment_1.id.to_s)
       expect(json['data']['relationships']['childCreditAssignments']['data'][1]['id']).to eq(@credit_assignment_2.id.to_s)
+    end
+  end
+
+  describe 'PUT credit_assignments/:id' do
+    it 'returns 200 with an updated credit with valid updates' do
+      body = {
+        data: {
+          attributes: {
+            creditHours: 2.45
+          },
+          relationships: {
+            credit: { data: { id: @credit1.id } },
+            enrollment: { data: { id: @enrollment1.id } },
+          }
+        }
+      }
+    
+      expect(@credit_assignment_7.credit.id).to eq(@credit2.id)
+      expect(@credit_assignment_7.enrollment.id).to eq(@enrollment1.id)
+      expect(@credit_assignment_7.credit_hours).to eq(1)
+
+      put "/api/credit-assignments/#{@credit_assignment_7.id}", params: body.to_json, headers: json_request_headers
+
+      expect(response).to have_http_status(200)
+      expect(json).not_to be_empty
+      expect(json['data']['id']).to eq(@credit_assignment_7.id.to_s)
+
+      expect(json['data']['attributes']['creditHours']).to eq(body[:data][:attributes][:creditHours])
+      expect(json['data']['attributes']['overrideHours']).to eq(nil)
+      expect(json['data']['relationships']['credit']['data']['id']).to eq(@credit1.id.to_s)
+      expect(json['data']['relationships']['enrollment']['data']['id']).to eq(@enrollment1.id.to_s)
+
+      @credit_assignment_7.reload
+
+      expect(@credit_assignment_7.credit.id).to eq(@credit1.id)
+      expect(@credit_assignment_7.enrollment.id).to eq(@enrollment1.id)
+      expect(@credit_assignment_7.credit_hours).to eq(body[:data][:attributes][:creditHours])
     end
   end
 end

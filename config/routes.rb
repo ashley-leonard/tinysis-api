@@ -17,12 +17,15 @@ Rails.application.routes.draw do
     post '/enrollments/:enrollment_id/credit-assignments', to: 'credit_assignments#create_for_enrollment'
     post '/contracts/:contract_id/credit-assignments', to: 'credit_assignments#create_for_contract'
     delete '/credit-assignments/:id', to: 'credit_assignments#destroy'
+    put '/credit-assignments/:id', to: 'credit_assignments#update'
 
     get '/students', to: 'students#index'
     get '/students/:id', to: 'students#show'
   
     get '/enrollments', to: 'enrollments#index'
     get '/enrollments/:id', to: 'enrollments#show'
+    patch '/enrollments/:id/:command', to: 'enrollments#update'
+    delete '/enrollments/:id', to: 'enrollments#destroy'
   
     get '/notes', to: 'notes#index'
     post '/notes/:notable_type/:notable_id', to: 'notes#create'
