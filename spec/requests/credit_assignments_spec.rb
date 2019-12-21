@@ -108,18 +108,19 @@ RSpec.describe 'Credit assignments API', type: :request do
 
   describe 'PUT credit_assignments/:id' do
     it 'returns 200 with an updated credit with valid updates' do
+      note_text = Faker::Lorem.sentence
       body = {
         data: {
           attributes: {
-            creditHours: 2.45
+            creditHours: 2.45,
+            note: note_text
           },
           relationships: {
             credit: { data: { id: @credit1.id } },
-            enrollment: { data: { id: @enrollment1.id } },
           }
         }
       }
-    
+
       expect(@credit_assignment_7.credit.id).to eq(@credit2.id)
       expect(@credit_assignment_7.enrollment.id).to eq(@enrollment1.id)
       expect(@credit_assignment_7.credit_hours).to eq(1)
@@ -134,12 +135,15 @@ RSpec.describe 'Credit assignments API', type: :request do
       expect(json['data']['attributes']['overrideHours']).to eq(nil)
       expect(json['data']['relationships']['credit']['data']['id']).to eq(@credit1.id.to_s)
       expect(json['data']['relationships']['enrollment']['data']['id']).to eq(@enrollment1.id.to_s)
+      expect(json['data']['relationships']['notes']['data'].length).to eq(1)
 
       @credit_assignment_7.reload
 
       expect(@credit_assignment_7.credit.id).to eq(@credit1.id)
       expect(@credit_assignment_7.enrollment.id).to eq(@enrollment1.id)
       expect(@credit_assignment_7.credit_hours).to eq(body[:data][:attributes][:creditHours])
+      expect(@credit_assignment_7.notes).not_to be_empty
+      expect(@credit_assignment_7.notes.first.note).to eq(note_text)
     end
   end
 end

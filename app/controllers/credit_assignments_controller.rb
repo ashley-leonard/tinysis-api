@@ -84,6 +84,8 @@ class CreditAssignmentsController < ApplicationController
 
     new_credit_assignment = CreditAssignment.combine(@student, credit[:id], term[:id], attributes[:override_hours], child_credit_assignments, @user)
 
+    update_note new_credit_assignment
+
     render json: CreditAssignmentSerializer.new(new_credit_assignment, { params: { forFulfilled: true } })
   end
   
@@ -100,6 +102,8 @@ class CreditAssignmentsController < ApplicationController
     new_credit_assignment.contract = contract
     new_credit_assignment.credit = credit
     new_credit_assignment.save!
+
+    update_note new_credit_assignment
 
     render json: CreditAssignmentSerializer.new(new_credit_assignment)
   end
@@ -129,6 +133,8 @@ class CreditAssignmentsController < ApplicationController
     credit_assignment.update_attributes attributes
     credit_assignment.save!
 
+    update_note credit_assignment
+
     render json: CreditAssignmentSerializer.new(credit_assignment, { params: { forFulfilled: true } })
   end
 
@@ -145,6 +151,16 @@ class CreditAssignmentsController < ApplicationController
   end
 
 protected
+
+  def update_note credit_assignment
+    note_text = get_note
+    return if note_text.blank?
+
+    note = credit_assignment.notes.first || credit_assignment.notes.create
+    note.update_attributes note: note_text, creator: @user
+    note.save!
+  end
+
   def entitle_student
     # TBI
     true
@@ -164,7 +180,13 @@ protected
   def get_attributes
     params.require(:data)
       .require(:attributes)
-      .permit(:note, :credit_hours, :override_hours)
+      .permit(:credit_hours, :override_hours)
+  end
+
+  def get_note
+    params.require(:data)
+      .require(:attributes)
+      .dig(:note)
   end
 
   def get_relation(relation)
