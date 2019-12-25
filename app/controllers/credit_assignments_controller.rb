@@ -156,9 +156,7 @@ protected
     note_text = get_note
     return if note_text.blank?
 
-    note = credit_assignment.notes.first || credit_assignment.notes.create
-    note.update_attributes note: note_text, creator: @user
-    note.save!
+    note = credit_assignment.notes.create! note: note_text, creator: @user
   end
 
   def entitle_student
