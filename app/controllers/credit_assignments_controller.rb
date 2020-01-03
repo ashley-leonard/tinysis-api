@@ -88,7 +88,7 @@ class CreditAssignmentsController < ApplicationController
 
     render json: CreditAssignmentSerializer.new(new_credit_assignment, { params: { forFulfilled: true } })
   end
-  
+
   def create_for_contract
     credit_relation = get_relation(:credit)
     contract_relation = get_relation(:contract)

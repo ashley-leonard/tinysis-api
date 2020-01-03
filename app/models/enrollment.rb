@@ -36,8 +36,10 @@ public
   ROLE_FACILITATOR = 2
 
   # Name constants for role values
-  ROLE_NAMES = { ROLE_STUDENT => "Student",
-    ROLE_INSTRUCTOR => "Instructor" }
+  ROLE_NAMES = {
+    ROLE_STUDENT => 'Student',
+    ROLE_INSTRUCTOR => 'Instructor',
+  }
 
   # Note, these are in ascending order of accessibility. 
   # Any enrollment_status >= STATUS_ENROLLED indicates accessibility.
