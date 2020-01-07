@@ -1,5 +1,8 @@
 class EnrollmentsController < ApplicationController
 
+  before_action :get_enrollment, only: [:show, :destroy, :update]
+  before_action :entitle_enrollment, only: [:destroy, :update]
+
   def index
     limit = params[:limit] || Rails.configuration.constants[:DEFAULT_LIMIT]
 
@@ -50,28 +53,54 @@ class EnrollmentsController < ApplicationController
   end
 
   def show
-    enrollment = Enrollment.find(params[:id])
-
     included_models = self.get_includes params[:include]
 
     options = {
       include: included_models || []
     }
 
-    render json: EnrollmentSerializer.new(enrollment, options), status: 200
+    render json: EnrollmentSerializer.new(@enrollment, options), status: 200
   end
 
-  protected
-
-    PERMITTED_INCLUDES = %w{contract contract.facilitator contract.term credit_assignments credit_assignments.credit participant turnins turnins.assignment meeting_participants meeting_participants.meeting}
-
-    def get_includes include_params
-      return nil if include_params.nil?
-
-      val = include_params
-        .split(',')
-        .map(&:underscore) & EnrollmentsController::PERMITTED_INCLUDES
-
-      val
+  def update
+    case params[:command]
+    when 'cancel'
+      @enrollment.set_closed Enrollment::COMPLETION_CANCELED, @user
+    when 'fulfill'
+      @enrollment.set_closed Enrollment::COMPLETION_FULFILLED, @user
+    when 'reinstate'
+      @enrollment.set_active @user
+    else
+      raise TinyException.new("Invalid update command") 
     end
+
+    show
+  end
+
+  def destroy
+    @enrollment.destroy
+
+    render nothing: true, status: 204
+  end
+
+protected
+  PERMITTED_INCLUDES = %w{contract contract.facilitator contract.term credit_assignments credit_assignments.credit participant turnins turnins.assignment meeting_participants meeting_participants.meeting}
+
+  def get_includes include_params
+    return nil if include_params.nil?
+
+    val = include_params
+      .split(',')
+      .map(&:underscore) & EnrollmentsController::PERMITTED_INCLUDES
+
+    val
+  end
+
+  def get_enrollment
+    @enrollment = Enrollment.find(params[:id])
+  end
+
+  def entitle_enrollment
+    true
+  end
 end

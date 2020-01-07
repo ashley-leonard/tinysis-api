@@ -36,8 +36,10 @@ public
   ROLE_FACILITATOR = 2
 
   # Name constants for role values
-  ROLE_NAMES = { ROLE_STUDENT => "Student",
-    ROLE_INSTRUCTOR => "Instructor" }
+  ROLE_NAMES = {
+    ROLE_STUDENT => 'Student',
+    ROLE_INSTRUCTOR => 'Instructor',
+  }
 
   # Note, these are in ascending order of accessibility. 
   # Any enrollment_status >= STATUS_ENROLLED indicates accessibility.
@@ -142,25 +144,6 @@ public
     true
   end
   
-  
-  # destroys the enrollment. 
-  # You must have edit privileges, or be a staff member, or be the
-  # student who enrolled himself. 
-  
-  def set_dropped(user)
-    privs = privileges(user)
-
-    # check privileges
-    unless (self.enrollment_status == STATUS_PROPOSED and (privs[:edit] or user.id == participant.id)) or 
-      (self.enrollment_status == STATUS_CLOSED and privs[:edit])
-      raise TinyException, TinyException::MESSAGES[TinyException::NOPRIVILEGES]
-    end
-    
-    destroy
-    true
-  end
-  
-  
   # sets enrollment closed
 
   def set_closed(completion_status, user, date = Time.now.gmtime)
@@ -174,21 +157,6 @@ public
     self.finalized_on = nil
     save!
     true
-  end
-  
-  # change to specified role
-  def set_role(role, user)
-    privs = privileges(user)
-    unless privs[:edit]
-      raise TinyException, TinyException::MESSAGES[TinyException::NOPRIVILEGES]
-    end
-    
-    case role
-    when "student"
-      update_attribute(:role, Enrollment::ROLE_STUDENT)
-    when "instructor"
-      update_attribute(:role, Enrollment::ROLE_INSTRUCTOR)
-    end
   end
   
   def set_finalized(user, date = Time.now.gmtime)
