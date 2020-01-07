@@ -31,7 +31,7 @@ export default Controller.extend({
   save(data) {
     return this.tinyData.fetch(`/api/admin/contract-categories/${data.id}`, {
       method: 'PUT',
-      body: JSON.stringify({ data }),
+      data,
     });
   },
 

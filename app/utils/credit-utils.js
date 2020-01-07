@@ -15,3 +15,22 @@ export function getCourseName(creditAssignment, credit) {
     || creditAssignment.attributes.creditCourseName
     || creditAssignment.attributes.contractName;
 }
+
+/*
+ * Returns a safe new credit assignment model for a creditable
+ */
+export function getNewCreditAssignmentForCreditable(creditable) {
+  return {
+    attributes: {
+      creditHours: 0.5,
+    },
+    relationships: {
+      [creditable.type]: {
+        data: {
+          id: creditable.id,
+          type: creditable.type,
+        },
+      },
+    },
+  };
+}

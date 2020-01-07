@@ -1,8 +1,8 @@
 import Route from '@ember/routing/route';
 import { inject as service } from '@ember/service';
 import { all } from 'rsvp';
+import fetch from 'fetch';
 import {
-  availableYears,
   sortedCategories,
   sortedPeople,
 } from '../utils/contract-utils';
@@ -14,32 +14,30 @@ export default Route.extend({
   //
   model() {
     return all([
-      this.tinyData.fetch('/api/terms'),
+      fetch('/api/settings/years').then(r => r.json()),
       this.tinyData.fetch('/api/categories'),
       this.tinyData.fetch('/api/staff', {
-        params: {
+        data: {
           status: 'active',
         },
+        limit: -1,
       }),
     ]);
   },
 
-  setupController(controller, contracts) {
-    const {
-      tinyData,
-    } = this;
+  setupController(controller, result) {
+    const [
+      schoolYears,
+      categories,
+      staff,
+    ] = result;
 
-    const terms = tinyData.get('term');
-
-    this._super(controller, contracts);
-
-    const staff = tinyData.get('user').filter(user => /staff|admin/.test(user.attributes.role));
+    this._super(controller, result);
 
     controller.setProperties({
-      contracts,
-      schoolYears: availableYears(terms),
-      categories: sortedCategories(tinyData.get('category') || []),
-      facilitators: sortedPeople(staff),
+      schoolYears: schoolYears.sort((y1, y2) => y2 - y1),
+      categories: sortedCategories(categories.data),
+      facilitators: sortedPeople(staff.data),
     });
   },
 });

@@ -1,10 +1,9 @@
 import Big from 'big.js';
 import { schedule } from '@ember/runloop';
-import { computed } from '@ember/object';
-import { inject as service } from '@ember/service';
-import TForm from './t-form';
-import clone from '../utils/clone';
-import Validator from '../utils/validator';
+import CreditAssignmentsCreateEditDialog, {
+  creditsRegex,
+} from './create-edit-dialog';
+import Validator from '../../utils/validator';
 
 const validateRelationships = new Validator({
   contractTerm: { type: 'required' },
@@ -14,7 +13,6 @@ const validateRelationships = new Validator({
 // credits allow a number followed by an optional, constrained decimal fraction,
 // or a decimal with no whole number
 //
-const creditsRegex = /(^\d+(\.(75|5|25))?$)|(^\.(75|5|25)$)/;
 const validator = new Validator({
   creditHours: {
     type: 'format',
@@ -30,17 +28,12 @@ const validator = new Validator({
   },
 });
 
-export default TForm.extend({
-  tinyData: service(),
+export default CreditAssignmentsCreateEditDialog.extend({
   validator,
-  creditOptions: computed('availableCredits', function () {
-    const { availableCredits } = this;
-    return availableCredits.map(credit => ({
-      name: credit.attributes.courseName,
-      value: credit.id,
-    }));
-  }),
+  validateRelationships,
   didReceiveAttrs() {
+    if (this.didInit) return this._super();
+
     const { creditAssignments, tinyData } = this;
     const creditHours = creditAssignments
       .reduce(
@@ -51,6 +44,7 @@ export default TForm.extend({
     const [firstCredit] = creditAssignments;
     const creditCandidate = tinyData.get('credit', firstCredit.relationships.credit.data.id);
     const termCandidate = tinyData.get('term', firstCredit.relationships.contractTerm.data.id);
+    const defaultCredit = creditCandidate.attributes.status === 'active' ? { id: creditCandidate.id } : null;
 
     this.model = {
       attributes: {
@@ -60,7 +54,7 @@ export default TForm.extend({
       },
       relationships: {
         contractTerm: { data: termCandidate.attributes.status === 'active' ? { id: termCandidate.id } : null },
-        credit: { data: creditCandidate.attributes.status === 'active' ? { id: creditCandidate.id } : null },
+        credit: { data: defaultCredit },
         childCreditAssignments: {
           data: creditAssignments.map(ca => ({
             id: ca.id,
@@ -70,32 +64,11 @@ export default TForm.extend({
       },
     };
 
-    this.relationships = clone(this.model.relationships);
+    this.set('didInit', true);
 
-    this._super();
+    return this._super();
   },
   actions: {
-    close() {
-      this.close();
-    },
-    updateRelationship(attrKey, type, value) {
-      let newValue;
-      if (value) {
-        newValue = {
-          id: value,
-          type,
-        };
-      } else {
-        newValue = null;
-      }
-      const newRelationships = {
-        ...this.relationships,
-        [attrKey]: newValue,
-      };
-
-      this.set('relationships', newRelationships);
-      this.validate();
-    },
     toggleOverride() {
       const enableOverride = !this.pojo.enableOverride;
       this.updatePojo({ enableOverride });
@@ -107,6 +80,9 @@ export default TForm.extend({
         });
       }
     },
+    updateTerm(term) {
+      this.updateRelationship('contractTerm', term);
+    },
   },
   serializeModel(pojo, _model, relationships) {
     const model = this._super(pojo, _model, relationships);
@@ -115,22 +91,5 @@ export default TForm.extend({
     }
     delete model.attributes.enableOverride;
     return model;
-  },
-  validate() {
-    const { relationships } = this;
-
-    const attributesResult = this._super();
-
-    const relationshipsResult = validateRelationships.validate(relationships);
-
-    const result = {
-      isInvalid: attributesResult.isInvalid || relationshipsResult.isInvalid,
-      errors: {
-        ...relationshipsResult.errors,
-        ...attributesResult.errors,
-      },
-    };
-
-    this.setProperties(result);
   },
 });

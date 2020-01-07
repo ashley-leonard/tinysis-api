@@ -7,24 +7,24 @@ export default Controller.extend({
   actions: {
     updateRoll(meetingParticipant) {
       const { tinyData } = this;
-      const body = { data: meetingParticipant };
+      const data = { data: meetingParticipant };
 
       if (meetingParticipant.id) {
         return tinyData.fetch(`/api/meeting_participants/${meetingParticipant.id}`, {
           method: 'PUT',
-          body: JSON.stringify(body),
+          data,
         });
       }
 
       return tinyData.fetch('/api/meeting_participants', {
         method: 'POST',
-        body: JSON.stringify(body),
+        data,
       });
     },
 
     updateAllRolls(contactType, participation) {
       const { meeting, tinyData } = this;
-      const body = {
+      const data = {
         data: {
           attributes: {
             contactType,
@@ -34,7 +34,7 @@ export default Controller.extend({
       };
       return tinyData.fetch(`/api/meetings/${meeting.id}/update_roll`, {
         method: 'PATCH',
-        body: JSON.stringify(body),
+        data,
       });
     },
   },

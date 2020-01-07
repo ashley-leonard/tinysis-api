@@ -11,7 +11,7 @@ export default Route.extend({
     this.schoolYear = params.schoolYear || this.currentSchoolYear;
 
     return tinyData.fetch('/api/terms', {
-      params: {
+      data: {
         type: 'coor',
         status: 'active',
         schoolYear: this.schoolYear,

@@ -63,8 +63,7 @@
       </p>
       <fieldset>
         <p>
-          {{#form-input error=errors.notes showError=showErrors}}
-            Notes
+          {{#form-input error=errors.notes showError=showErrors label="Notes"}}
             <textarea
               name="notes"
               value={{form.pojo.notes}}
@@ -75,8 +74,7 @@
           {{/form-input}}
         </p>
         <p class="w-1/4">
-          {{#form-input error=errors.completionDate showError=showErrors}}
-            Completion date
+          {{#form-input error=errors.completionDate showError=showErrors label="Completion date"}}
             {{t-pikaday
               value=form.pojo.dateCompleted
               popup=true

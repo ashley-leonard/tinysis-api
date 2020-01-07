@@ -1,15 +1,21 @@
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import {
-  render, find, click, fillIn,
+  render,
+  find,
+  click,
+  fillIn,
+  waitFor,
 } from '@ember/test-helpers';
 import { Interactor } from '@bigtest/interactor';
 import { resolve } from 'rsvp';
 import hbs from 'htmlbars-inline-precompile';
-import studentCreditAssignmentsFixture from '../../fixtures/student-credit-assignments';
-import creditsFixture from '../../fixtures/credits-index';
-import termsFixture from '../../fixtures/terms';
-import { stubTinyData } from '../../helpers/stub-tiny-data';
+import { stubCreditAssignment } from 'tinysis-ui/services/credit-assignment';
+
+import studentCreditAssignmentsFixture from '../../../fixtures/student-credit-assignments';
+import creditsFixture from '../../../fixtures/credits-index';
+import termsFixture from '../../../fixtures/terms';
+import { stubTinyData } from '../../../helpers/stub-tiny-data';
 
 let tinyData;
 let creditAssignments;
@@ -18,10 +24,12 @@ let terms;
 let creditsToCombine;
 let requests;
 
-module('Integration | Component | credits-combine', (hooks) => {
+module('Integration | Component | CreditAssignments::CombineDialog', (hooks) => {
   setupRenderingTest(hooks);
 
   hooks.beforeEach(function () {
+    this.owner.register('service:credit-assignment', stubCreditAssignment);
+
     tinyData = stubTinyData();
     tinyData.addResult(studentCreditAssignmentsFixture);
     tinyData.addResult(creditsFixture);
@@ -30,6 +38,8 @@ module('Integration | Component | credits-combine', (hooks) => {
     credits = tinyData.get('credit');
     creditAssignments = tinyData.get('creditAssignment');
     terms = tinyData.get('term');
+
+    this.owner.lookup('service:credit-assignment').mockTinyData(tinyData);
 
     creditsToCombine = creditAssignments
       .filter(ca => ca.relationships.user.data)
@@ -57,8 +67,7 @@ module('Integration | Component | credits-combine', (hooks) => {
 
   test('it renders and can post through a default combined credit', async (assert) => {
     await render(hbs`
-      <CreditsCombine
-        @availableCredits={{credits}}
+      <CreditAssignments::CombineDialog
         @creditAssignments={{creditsToCombine}}
         @today={{today}}
         @terms={{terms}}
@@ -71,23 +80,22 @@ module('Integration | Component | credits-combine', (hooks) => {
     assert.ok(find('form'), 'the form rendered');
 
     const termSelect = find('select[name="contractTerm"]');
-    const creditSelect = find('select[name="credit"]');
+    const creditSelect = find('t-type-ahead[name="credit"]');
     const hoursSpan = find('span[data-test-credit-hours]');
 
-    assert.ok(termSelect, 'rendered term select');
-    assert.ok(creditSelect, 'rendered term select');
+    assert.ok(termSelect, 'rendered term input');
+    assert.ok(creditSelect, 'rendered credit input');
     assert.ok(hoursSpan, 'rendered hours span');
 
     const [firstCredit] = creditsToCombine;
 
     const expectedTermOption = find(`select[name="contractTerm"] option[value="${firstCredit.relationships.contractTerm.data.id}"]`);
-    const expectedCreditOption = find(`select[name="credit"] option[value="${firstCredit.relationships.credit.data.id}"]`);
+    const expectedCreditOption = find(`t-type-ahead[name="credit"] t-type-ahead-result[data-test-value="${firstCredit.relationships.credit.data.id}"]`);
 
     assert.ok(expectedTermOption, 'found expected term selection');
     assert.ok(expectedCreditOption, 'found expected credit selection');
 
     assert.ok(expectedTermOption.selected, 'expected term option is selected');
-    assert.ok(expectedCreditOption.selected, 'expected credit option is selected');
 
     const computedCredits = creditsToCombine.reduce((sum, ca) => {
       sum = ca.attributes.creditHours + sum;
@@ -121,14 +129,14 @@ module('Integration | Component | credits-combine', (hooks) => {
 
   test('it renders a combined credit and then reports and recovers from validation failure', async (assert) => {
     await render(hbs`
-      <CreditsCombine
-        @availableCredits={{credits}}
+      <CreditAssignments::CombineDialog
         @creditAssignments={{creditsToCombine}}
         @today={{today}}
         @terms={{terms}}
         @save={{this.save}}
         @close={{this.close}}
         @reportError={{this.reportError}}
+
       />
     `);
 
@@ -137,10 +145,9 @@ module('Integration | Component | credits-combine', (hooks) => {
     await click('[data-test-toggle-override]');
     await fillIn('[data-test-credit-hours]', '');
     const termInteractor = new Interactor('select[name="contractTerm"]');
-    const creditInteractor = new Interactor('select[name="credit"]');
-
     await termInteractor.select('Select a term');
-    await creditInteractor.select('Select a course');
+
+    await click('t-type-ahead[name="credit"] [data-test-clear-result]');
 
     await click('button[type="submit"]');
 
@@ -156,7 +163,12 @@ module('Integration | Component | credits-combine', (hooks) => {
     });
 
     await termInteractor.select(terms[0].attributes.name);
-    await creditInteractor.select(credits[0].attributes.courseName);
+    await fillIn('t-type-ahead input', 'ding');
+    await waitFor('ul.search-results');
+
+    const [selectCredit] = credits;
+    await click(`ul.search-results [data-test-value="${selectCredit.id}"]`);
+
     await fillIn('[data-test-credit-hours]', '0.5');
 
     await click('button[type="submit"]');
@@ -173,8 +185,7 @@ module('Integration | Component | credits-combine', (hooks) => {
     });
 
     await render(hbs`
-      <CreditsCombine
-        @availableCredits={{credits}}
+      <CreditAssignments::CombineDialog
         @creditAssignments={{creditsToCombine}}
         @today={{today}}
         @terms={{terms}}

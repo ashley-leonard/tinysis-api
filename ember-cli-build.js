@@ -13,10 +13,10 @@ module.exports = function (defaults) {
       compile: {
         enabled: true,
         plugins: [
+          { module: postcssPresetEnv },
           { module: postcssImport },
           { module: postcssNested },
           { module: tailwindcss, options: './config/tailwind.js' },
-          { module: postcssPresetEnv },
         ],
       },
     },

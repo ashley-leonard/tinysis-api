@@ -16,7 +16,7 @@ export default Controller.extend({
         try {
           userResult = await this.tinyData.fetch('/api/admin/users', {
             method: 'POST',
-            body: JSON.stringify({ data }),
+            data,
           });
 
           if (!isStaffRole(userResult.data.attributes.role)) {
@@ -36,7 +36,7 @@ export default Controller.extend({
         try {
           await this.tinyData.fetch('/api/admin/login', {
             method: 'POST',
-            body: JSON.stringify({ data: authPostBody }),
+            data: { data: authPostBody },
           });
 
           this.redirectSuccess(userResult);

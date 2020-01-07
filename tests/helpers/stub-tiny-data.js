@@ -18,6 +18,5 @@ export function stubTinyData(overrides = {}) {
 
   owner.register('service:tiny-service-mock', Service.extend(tinyDataServiceMock));
   owner.inject('component', 'tinyData', 'service:tiny-service-mock');
-
   return getTinyData();
 }

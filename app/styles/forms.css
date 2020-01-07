@@ -11,13 +11,14 @@
     }
   }
 
-  label {
+  label span.label-text {
     @apply font-semibold;
   }
 }
 
 .ember-modal-dialog .t-form {
   @apply p-4;
+  width: 40rem;
 }
 
 t-help {

@@ -8,7 +8,7 @@ import activeRequirementsFixture from '../../fixtures/admin-graduation-plan-requ
 let tinyDataServiceMock;
 let requests;
 
-module('Integration | Component | graduation-plan-requirements-list', (hooks) => {
+module('Integration | Component | GraduationPlanRequirementsList', (hooks) => {
   setupRenderingTest(hooks);
 
   hooks.beforeEach(function () {
@@ -27,11 +27,11 @@ module('Integration | Component | graduation-plan-requirements-list', (hooks) =>
 
   test('it renders with credit requirements', async (assert) => {
     await render(hbs`
-      {{GraduationPlanRequirementsList
-        graduationPlanRequirements=graduationPlanRequirements
-        updateRequirement=updateRequirement
-        requirementType="credit"
-      }}
+      <GraduationPlanRequirementsList
+        @graduationPlanRequirements={{graduationPlanRequirements}}
+        @updateRequirement={{updateRequirement}}
+        @requirementType="credit"
+      />
     `);
 
     const graduationPlanRequirements = tinyDataServiceMock.get('graduationPlanRequirement');

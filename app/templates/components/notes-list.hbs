@@ -1,17 +1,17 @@
-<a href="#" class="action-icon add-note" onClick={{action "doAdd"}}>
-  +
-</a>
-{{#if hasNotes}}
-  <a href="#" class="action-icon expand-notes" data-test-notes-count={{notes.length}} onClick={{action "doExpand"}}>
-    {{#each notesIcons}}
-      <span class="fas fa-square" />
-    {{/each}}
-  </a>
-{{/if}}
-<ul class={{expanded}}>
-  {{#if expanded}}
-    {{#each sortedNotes as |note|}}
-      {{notes-list/item note=note}}
-    {{/each}}
-  {{/if}}
+<ul>
+  {{#each sortedNotes as |note|}}
+    <NotesList::Item
+      @note={{note}}
+      @expanded={{true}}
+    />
+  {{/each}}
 </ul>
+{{#unless disabled}}
+  <a
+    href="#"
+    class="action-icon add-note"
+    onClick={{action "doAdd"}}
+  >
+    +
+  </a>
+{{/unless}}

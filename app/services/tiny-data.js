@@ -74,7 +74,7 @@ export const tinyDataService = {
         if (err instanceof AuthError) {
           return doSigninRedirect(window.location.href);
         }
-        return err;
+        throw err;
       });
   },
 
@@ -142,10 +142,10 @@ export const tinyDataService = {
 
       if (id) return clone(records[id]);
 
-      return clone(Object.keys(records).map(key => clone(records[key])));
+      return clone(Object.values(records));
     } catch (e) {
-      warn('JSON-API-STORE', 'no entity matching', type, id);
-      throw new Error(`No ${type} matching id "${id}"`);
+      warn('JSON-API-STORE', 'no entity matching?', type, id);
+      throw e;
     }
   },
 

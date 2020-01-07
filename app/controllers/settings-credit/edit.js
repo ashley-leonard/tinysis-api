@@ -19,7 +19,7 @@ export default Controller.extend({
 
       const result = await this.tinyData.fetch(url, {
         method,
-        body: JSON.stringify({ data }),
+        data,
       });
 
       this.flashMessages.success('Credit was successfully saved.');

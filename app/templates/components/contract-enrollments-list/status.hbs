@@ -1,0 +1,63 @@
+{{#unless canEdit}}
+  {{titleize enrollmentStatus}}
+{{/unless}}
+
+{{#if canEdit}}
+  {{#if isClosed}}
+    <li>
+      <TLink
+        @action={{action "update" "reinstate"}}
+        disabled={{disabled}}
+        data-test-command="reinstate"
+      >
+        Reinstate
+      </TLink>
+    </li>
+    {{#if isCanceled}}
+      <li>
+        <TLink
+          @action={{action "delete"}}
+          disabled={{disabled}}
+          data-test-command="delete"
+        >
+          Delete
+        </TLink>
+      </li>
+    {{/if}}
+  {{/if}}
+
+  {{#if isEnrolled}}
+    <li>
+      <TLink
+        @action={{action "update" "fulfill"}}
+        disabled={{disabled}}
+        data-test-command="fulfill"
+      >
+        Fulfill
+      </TLink>
+    </li>
+    <li>
+      <TLink
+        @action={{action "update" "cancel"}}
+        disabled={{disabled}}
+        data-test-command="cancel"
+      >
+        Cancel
+      </TLink>
+    </li>
+  {{/if}}
+
+  {{#if isFinalized}}
+    {{#if isCanceled}}
+      <li>
+        <TLink
+          @action={{action "update" "reinstate"}}
+          disabled={{disabled}}
+          data-test-command="reinstate"
+        >
+          Reinstate
+        </TLink>
+      </li>
+    {{/if}}
+  {{/if}}
+{{/if}}

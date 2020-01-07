@@ -69,7 +69,7 @@ export default Route.extend({
     this.qp = { ...params };
 
     return tinyData.fetch('/api/admin/users', {
-      params: requestParams,
+      data: requestParams,
     });
   },
 

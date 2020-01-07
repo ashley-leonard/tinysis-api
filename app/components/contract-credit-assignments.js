@@ -4,14 +4,16 @@ import { computed } from '@ember/object';
 
 export default Component.extend({
   tinyData: service(),
-  classNames: ['contract-enrollments-default-credits', 'callout-box'],
   creditAssignments: computed('contract', function () {
-    const { contract } = this;
+    const {
+      contract,
+      tinyData,
+    } = this;
 
     return contract
       .relationships
       .creditAssignments
       .data
-      .map(creditAssignment => this.tinyData.get('creditAssignment', creditAssignment.id));
+      .map(creditAssignment => tinyData.get('creditAssignment', creditAssignment.id));
   }),
 });

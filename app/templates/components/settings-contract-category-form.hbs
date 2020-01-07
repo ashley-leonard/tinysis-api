@@ -1,7 +1,6 @@
 <fieldset>
   <p>
-    {{#form-input error=errors.name showError=showErrors}}
-      Category name
+    {{#form-input error=errors.name showError=showErrors label="Category name"}}
       <input
         value={{pojo.name}}
         name="name"
@@ -25,8 +24,7 @@
     {{/form-input}}
   </p>
   <p>
-    {{#form-input error=errors.name showError=showErrors}}
-      Reporting
+    {{#form-input error=errors.name showError=showErrors label="Reporting"}}
       <TSelect
         name="reporting"
         @value={{pojo.reporting}}
@@ -48,8 +46,7 @@
     {{/form-input}}
   </p>
   <p>
-    {{#form-input error=errors.sequence showError=showErrors}}
-      Sequence group
+    {{#form-input error=errors.sequence showError=showErrors label="Sequence group"}}
       <t-help>Use this number to group related categories together</t-help>
       <input
         type="number"

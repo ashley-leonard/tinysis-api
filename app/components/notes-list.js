@@ -5,13 +5,13 @@ import { log } from '../utils/logger';
 
 export default Component.extend({
   classNames: 'notes-list',
-  classNameBindings: ['expanded'],
   hasNotes: bool('count'),
   count: alias('notes.length'),
   pluralNotes: computed('notes', function () {
     const { notes } = this;
     return notes && (notes.length === 1) ? 'note' : 'notes';
   }),
+
   sortedNotes: computed('notes', function () {
     const { notes } = this;
     return (notes || [])
@@ -23,22 +23,9 @@ export default Component.extend({
   }),
 
   actions: {
-    doExpand(event) {
-      event.preventDefault();
-      this.setExpanded();
-    },
     doAdd(event) {
       event.preventDefault();
       log('do add');
     },
-  },
-
-  setExpanded(expanded) {
-    if (expanded === undefined) {
-      this.toggleProperty('expanded');
-      return;
-    }
-
-    this.set('expanded', expanded);
   },
 });

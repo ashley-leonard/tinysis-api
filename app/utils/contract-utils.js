@@ -1,3 +1,7 @@
+export const STATUS_CLOSED = 'closed';
+export const STATUS_PROPOSED = 'proposed';
+export const STATUS_APPROVED = 'approved';
+
 export function availableYears(terms) {
   const available = terms
     .reduce((memo, term) => {

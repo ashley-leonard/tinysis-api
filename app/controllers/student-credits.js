@@ -18,9 +18,9 @@ export default Controller.extend(NotesMixin, {
 
       const newCreditAssignment = await this.tinyData.fetch(url, {
         method: 'POST',
-        body: JSON.stringify({
+        data: {
           data: combineModel,
-        }),
+        },
       });
 
       const note = (combineModel.attributes.note || '').trim();
@@ -74,13 +74,13 @@ export default Controller.extend(NotesMixin, {
 
       const newCreditAssignment = await this.tinyData.fetch(url, {
         method: 'PUT',
-        body: JSON.stringify({
+        data: {
           data: {
             attributes: {
               districtFinalizeApprovedOn,
             },
           },
-        }),
+        },
       });
 
       const { creditAssignments } = this;

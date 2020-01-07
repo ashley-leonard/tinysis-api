@@ -1,7 +1,10 @@
 <fieldset>
   <p>
-    {{#form-input error=errors.name showError=showErrors}}
-      Name
+    {{#form-input
+      error=errors.name
+      showError=showErrors
+      label="Name"
+    }}
       <input
         type="text"
         name="name"
@@ -12,8 +15,11 @@
     {{/form-input}}
   </p>
   <p>
-    {{#form-input error=errors.schoolYear showError=showErrors}}
-      School year
+    {{#form-input
+      error=errors.schoolYear
+      showError=showErrors
+      label="School year"
+    }}
       <TSelect
         name="schoolYear"
         @value={{pojo.schoolYear}}
@@ -23,8 +29,11 @@
     {{/form-input}}
   </p>
   <p>
-    {{#form-input error=errors.creditDate showError=showErrors}}
-      Credit date
+    {{#form-input
+      error=errors.creditDate
+      showError=showErrors
+      label="Credit date"
+    }}
       {{t-pikaday
         popup=true
         name="creditDate"

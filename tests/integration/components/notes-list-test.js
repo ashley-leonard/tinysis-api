@@ -1,7 +1,7 @@
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import {
-  render, find, findAll, click,
+  render, find, findAll,
 } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 
@@ -32,30 +32,15 @@ module('Integration | Component | notes-list', (hooks) => {
     this.notes = notableHash[this.notable.id];
   });
 
-  test('it renders expanded', async function (assert) {
+  test('it renders', async function (assert) {
     await render(hbs`
-      {{notes-list
-        notes=notes
-        notable=status
-        expanded=true
-      }}
+      <NotesList
+        @notes={{notes}}
+        @notable={{status}}
+      />
     `);
 
     assert.matches(find('ul').textContent, new RegExp(this.notes[0].attributes.note));
     assert.equal(findAll('li.notes-list-item').length, this.notes.length, 'expected correct number of list items');
-  });
-
-  test('it renders collapsed and is then expanded', async function (assert) {
-    await render(hbs`
-      {{notes-list
-        notes=notes
-        notable=status
-        expanded=false
-      }}
-    `);
-
-    assert.equal(findAll('li').length, 0, 'list items are not rendered in collapsed state');
-    await click('.expand-notes');
-    assert.equal(findAll('li.notes-list-item').length, this.notes.length, 'expanded, see the expected number of list items');
   });
 });

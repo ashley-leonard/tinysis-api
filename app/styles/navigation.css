@@ -33,15 +33,11 @@ ul.filter {
   }
 }
 
-a, t-link {
+a, t-link[enabled] {
   text-decoration: none;
   cursor: pointer;
   &:hover {
     text-decoration: underline;
-  }
-
-  &[disabled] {
-    @apply text-gray-500;
   }
 }
 
@@ -52,7 +48,7 @@ a, t-link {
   width: 30rem;
   margin-left: -15rem;
 
-  &.alert-alert {
+  &.alert {
     @apply bg-red-500;
   }
 }

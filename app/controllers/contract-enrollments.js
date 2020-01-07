@@ -1,22 +1,46 @@
 import Controller from '@ember/controller';
-import fetch from '../utils/fetch';
+import { inject as service } from '@ember/service';
+import { computed } from '@ember/object';
+import { replaceModel } from '../utils/json-api';
+import { STATUS_CLOSED } from '../utils/contract-utils';
 
 export default Controller.extend({
+  tinyData: service(),
+  user: service(),
+
+  contractIsDisabled: computed('contract', function () {
+    const { contract } = this;
+
+    if (contract.attributes.status === STATUS_CLOSED) {
+      return true;
+    }
+
+    return !this.user.canEdit(contract);
+  }),
+
   actions: {
-    async searchUsers(name) {
-      const results = await fetch('/api/students', {
-        params: {
-          name,
-          status: 'active',
-          limit: 10,
-          order: 'lastName,firstName',
-        },
+    showAddEnrollment(show = true) {
+      this.set('showAddEnrollment', show);
+    },
+
+    addEnrollment(enrollment) {
+      throw new Error(enrollment);
+    },
+
+    async updateEnrollment(enrollment, command) {
+      const response = await this.tinyData.fetch(`/api/enrollments/${enrollment.id}/${command}`, {
+        method: 'PATCH',
       });
 
-      return results.data.map(user => ({ name: `${user.attributes.lastName}, ${user.attributes.firstName}`, value: user.id }));
+      this.set('enrollments', replaceModel(this.enrollments, response.data));
     },
-    selectUser(/* userToSelect */) {
-      // NYI
+
+    async deleteEnrollment(enrollment) {
+      await this.tinyData.fetch(`/api/enrollments/${enrollment.id}`, {
+        method: 'DELETE',
+      });
+
+      this.set('enrollments', this.enrollments.filter(e => e.id !== enrollment.id));
     },
   },
 });

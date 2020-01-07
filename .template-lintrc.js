@@ -1,7 +1,8 @@
 'use strict';
 
 module.exports = {
-  extends: 'recommended',
+  extends: 'octane',
+
   rules: {
     'table-groups': false,
 

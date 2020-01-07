@@ -227,7 +227,7 @@ export default {
   ],
   meta: {
     count: 10,
-    params: {
+    data: {
       status: null,
     },
   },

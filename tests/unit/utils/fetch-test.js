@@ -41,7 +41,13 @@ module('Unit | Utility | fetch', (hooks) => {
   });
 
   test('exercising /fetch with error', async function (assert) {
-    this.pretender.get(api, () => [404, {}, JSON.stringify({ message: 'not found' })]);
+    const errBody = {
+      status: 422,
+      message: 'Validation error',
+      error: 'param is missing or the value is empty: contract',
+    };
+
+    this.pretender.get(api, () => [errBody.status, {}, JSON.stringify(errBody)]);
 
     let err;
     const result = await fetch(api)
@@ -51,7 +57,9 @@ module('Unit | Utility | fetch', (hooks) => {
 
     assert.notOk(result, 'got no response');
     assert.ok(err, 'got an error');
-    assert.equal(err.message, 'not found', 'API error shape intact');
-    assert.equal(err.status, 404, 'API error staus intact');
+    assert.equal(err.message, 'Unprocessable Entity', 'correctly processed message field');
+    assert.equal(err.status, errBody.status, 'correctly processed status field');
+    assert.equal(err.body.message, errBody.message, 'correctly processed message field from body');
+    assert.equal(err.body.error, errBody.error, 'correctly processed error field from body');
   });
 });

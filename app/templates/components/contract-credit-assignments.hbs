@@ -1,3 +1,6 @@
-<h2>Default credits</h2>
-
-{{credit-assignments creditAssignments=creditAssignments}}
+<h3>Default credits</h3>
+<CreditAssignments
+  @creditable={{contract}}
+  @creditAssignments={{creditAssignments}}
+  @disabled={{disabled}}
+/>

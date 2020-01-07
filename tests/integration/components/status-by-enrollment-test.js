@@ -59,7 +59,7 @@ module('Integration | Component | status-by-enrollment', (hooks) => {
 
     assert.ok(find('table'), 'container rendered');
     assert.equal(findAll('tr[data-test-month]').length, statuses.length + 1, 'rows rendered for each statusable month');
-    assert.equal(findAll('[data-test-notes-count]').length, statuses.length, 'notes rendered for each status');
+    assert.equal(findAll('.notes-list-item').length, statuses.length, 'notes rendered for each status');
     assert.equal(findAll('[data-test-no-status]').length, 3, 'the no-status row with three cels was rendered');
   });
 

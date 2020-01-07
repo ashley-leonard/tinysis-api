@@ -1,6 +1,6 @@
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { render, findAll } from '@ember/test-helpers';
+import { render, find, findAll } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 import { resolve } from 'rsvp';
 import { stubTinyData } from '../../helpers/stub-tiny-data';
@@ -21,7 +21,7 @@ module('Integration | Component | contract-enrollments-list', (hooks) => {
     this.getNotes = () => resolve(contractEnrollmentsNotes);
   });
 
-  test('it renders', async (assert) => {
+  test('it renders with enrollments and notes', async function (assert) {
     await render(hbs`
       {{contract-enrollments-list
         enrollments=enrollments
@@ -29,7 +29,14 @@ module('Integration | Component | contract-enrollments-list', (hooks) => {
       }}
     `);
 
-    assert.equal(findAll('tbody').length, contractEnrollments.data.length, 'expected number of tbodies rendered');
-    assert.equal(findAll('tr.notes-row').length, contractEnrollments.data.length, 'expected number of note rows rendered');
+    assert.equal(findAll('tbody tr').length, contractEnrollments.data.length, 'expected number of tbodies rendered');
+
+    const [enrollment] = this.enrollments;
+    const notes = contractEnrollmentsNotes.data.filter(note => note.relationships.notable.data.id === enrollment.id);
+
+    const enrollmentRow = find(`tbody tr[data-test-enrollment-id="${enrollment.id}"]`);
+    assert.ok(enrollmentRow, 'the row for the first enrollment rendered');
+    assert.ok(enrollmentRow.querySelector('.notes-list'), 'notes list rendered in this row');
+    assert.equal(notes.length, enrollmentRow.querySelectorAll('.notes-list li').length, 'expected count of notes were rendered');
   });
 });

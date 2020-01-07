@@ -19,7 +19,7 @@ export default Controller.extend({
   updateModel(data) {
     return this.tinyData.fetch(`/api/admin/terms/${data.id}`, {
       method: 'PUT',
-      body: JSON.stringify({ data }),
+      data: { data },
     });
   },
 });

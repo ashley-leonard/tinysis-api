@@ -1,7 +1,6 @@
 <fieldset>
   <p>
-    {{#form-input error=errors.courseName showError=showErrors}}
-      Course name
+    {{#form-input error=errors.courseName showError=showErrors label="Course name"}}
       <input
         type="text"
         name="courseName"
@@ -13,8 +12,7 @@
     {{/form-input}}
   </p>
   <p>
-    {{#form-input error=errors.courseId showError=showErrors}}
-      Course ID
+    {{#form-input error=errors.courseId showError=showErrors abel="Course ID"}}
       <input
         type="text"
         name="courseId"
@@ -25,8 +23,7 @@
   </p>
 
   <p>
-    {{#form-input error=errors.courseType showError=showErrors}}
-      Course type
+    {{#form-input error=errors.courseType showError=showErrors label="Course type"}}
       <TSelect
         @value={{pojo.courseType}}
         @prompt="Select a course type"
@@ -38,8 +35,7 @@
   </p>
 
   <p>
-    {{#form-input error=errors.status showError=showErrors}}
-      Status
+    {{#form-input error=errors.status showError=showErrors label="Status"}}
       <TSelect
         @value={{pojo.status}}
         @optionsList={{statusOptions}}

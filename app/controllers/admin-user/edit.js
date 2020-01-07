@@ -53,7 +53,7 @@ export default Controller.extend({
 
       return fetch('/api/admin/login', {
         method: 'POST',
-        body: JSON.stringify({ data }),
+        data,
       });
     },
 
@@ -62,7 +62,7 @@ export default Controller.extend({
         try {
           const result = await this.tinyData.fetch(`/api/admin/users/${data.id}`, {
             method: 'PUT',
-            body: JSON.stringify({ data }),
+            data,
           });
 
           const postSaveAction = await this.syncLogin(data, this.login);
@@ -125,15 +125,15 @@ export default Controller.extend({
 
   // TODO should this reset the local user state? upon success?
   //
-  saveLogin(data, login, changedKeys = AUTH_USER_KEYS) {
-    const body = changedKeys.reduce((memo, key) => {
-      memo[key] = data.attributes[key];
+  saveLogin(updates, login, changedKeys = AUTH_USER_KEYS) {
+    const data = changedKeys.reduce((memo, key) => {
+      memo[key] = updates.attributes[key];
       return memo;
     }, {});
 
     return fetch(`/api/admin/login/${login.user_id}`, {
       method: 'PATCH',
-      body: JSON.stringify({ data: body }),
+      data,
     });
   },
 });

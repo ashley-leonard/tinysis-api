@@ -24,7 +24,7 @@ module('Unit | Service | tiny-data', (hooks) => {
       fetches.push({
         method: pretenderRequest.method,
         url: pretenderRequest.url,
-        params: pretenderRequest.params,
+        data: pretenderRequest.params,
         queryParams: pretenderRequest.queryParams,
         requestBody: pretenderRequest.requestBody && JSON.parse(pretenderRequest.requestBody),
       });
@@ -59,7 +59,7 @@ module('Unit | Service | tiny-data', (hooks) => {
   test('it handles query params', function (assert) {
     const service = this.owner.lookup('service:tiny-data');
     service.fetch(api, {
-      params: {
+      data: {
         bee: 1,
         boo: 'boo',
       },
@@ -78,7 +78,7 @@ module('Unit | Service | tiny-data', (hooks) => {
   test('it handles a mix of query params', function (assert) {
     const service = this.owner.lookup('service:tiny-data');
     service.fetch(`${api}?foo=bar`, {
-      params: {
+      data: {
         bee: 1,
         boo: 'boo',
       },

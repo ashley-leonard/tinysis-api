@@ -1,7 +1,6 @@
 <fieldset>
   <p>
-    {{#form-input error=errors.firstName showError=showErrors}}
-      First name
+    {{#form-input error=errors.firstName showError=showErrors label="First name"}}
       <input
         type="text"
         name="firstName"
@@ -12,8 +11,7 @@
     {{/form-input}}
   </p>
   <p>
-    {{#form-input error=errors.lastName showError=showErrors}}
-      Last name
+    {{#form-input error=errors.lastName showError=showErrors label="Last name"}}
       <input
         type="text"
         name="lastName"
@@ -23,8 +21,7 @@
     {{/form-input}}
   </p>
   <p>
-    {{#form-input error=errors.nickname showError=showErrors}}
-      Nickname
+    {{#form-input error=errors.nickname showError=showErrors label="Nickname"}}
       <input
         type="text"
         name="nickname"
@@ -38,8 +35,7 @@
 <fieldset>
   <h3>Account Privileges and Status</h3>
   <p>
-    {{#form-input error=errors.role showError=showErrors}}
-      User type
+    {{#form-input error=errors.role showError=showErrors label="User type"}}
       <TSelect
         @value={{pojo.role}}
         @prompt="Select a user type"
@@ -54,8 +50,7 @@
 {{#if isStaff}}
   <fieldset>
     <p>
-      {{#form-input error=errors.email showError=showErrors}}
-        Email
+      {{#form-input error=errors.email showError=showErrors label="Email"}}
         <input
           type="email"
           name="email"
@@ -96,8 +91,7 @@
     </div>
   </p>
   <p>
-    {{#form-input error=errors.dateActive showError=showErrors}}
-      Date active
+    {{#form-input error=errors.dateActive showError=showErrors label="Date active"}}
       {{t-pikaday
         popup=true
         name="dateActive"
@@ -107,8 +101,7 @@
     {{/form-input}}
   </p>
   <p>
-    {{#form-input error=errors.dateInactive showError=showErrors}}
-      Date inactive
+    {{#form-input error=errors.dateInactive showError=showErrors label="Date inactive"}}
       {{t-pikaday
         popup=true
         name="dateInactive"
@@ -123,8 +116,7 @@
   <fieldset>
     <h3>Student Settings</h3>
     <p>
-      {{#form-input error=errors.coordinator showError=showErrors}}
-        Coordinator
+      {{#form-input error=errors.coordinator showError=showErrors label="Coordinator"}}
         <TSelect
           @prompt="None assigned"
           @value={{pojo.coordinatorId}}
@@ -136,8 +128,7 @@
       {{/form-input}}
     </p>
     <p>
-      {{#form-input error=errors.districtId showError=showErrors}}
-        District ID
+      {{#form-input error=errors.districtId showError=showErrors label="District ID"}}
         <input
           type="text"
           name="districtId"
@@ -147,8 +138,7 @@
       {{/form-input}}
     </p>
     <p>
-      {{#form-input error=errors.districtGrade showError=showErrors}}
-        Grade level
+      {{#form-input error=errors.districtGrade showError=showErrors label="Grade level"}}
         <TSelect
           @prompt="None assigned"
           @value={{pojo.districtGrade}}

@@ -38,7 +38,7 @@ export default Route.extend({
     });
 
     return tinyData.fetch('/api/terms', {
-      params: requestParams,
+      data: requestParams,
     });
   },
 

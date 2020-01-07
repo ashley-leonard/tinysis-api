@@ -1,7 +1,6 @@
 <fieldset>
   <p>
-    {{#form-input error=errors.name showError=showErrors}}
-      Name
+    {{#form-input error=errors.name showError=showErrors label="Name"}}
       <input
         type="text"
         name="name"
@@ -12,8 +11,7 @@
     {{/form-input}}
   </p>
   <p>
-    {{#form-input}}
-      Status
+    {{#form-input label="Status"}}
       <TSelect
         @optionsList={{statusOptions}}
         @value={{pojo.status}}
@@ -23,8 +21,7 @@
     {{/form-input}}
   </p>
   <p>
-    {{#form-input error=errors.notes showError=showErrors}}
-      Notes
+    {{#form-input error=errors.notes showError=showErrors label="Notes"}}
       <textarea
         name="notes"
         value={{pojo.notes}}
@@ -33,8 +30,7 @@
     {{/form-input}}
   </p>
   <p>
-    {{#form-input}}
-      Requirement type
+    {{#form-input label="Requirement type"}}
       <TSelect
         @optionsList={{requirementTypeOptions}}
         @value={{requirementType}}
@@ -47,8 +43,7 @@
 
 <fieldset>
   <p>
-    {{#form-input error=errors.parent showError=showErrors}}
-      Parent requirement
+    {{#form-input error=errors.parent showError=showErrors label="Parent requirement"}}
       <TSelect
         @value={{parentId}}
         @prompt="Select a requirement"
@@ -62,7 +57,7 @@
 
 {{#t-form-actions-row
   disabled=disabled
-}}action (mut parentId)
+}}
   {{#link-to "settings-graduation-plan-requirements" class="btn btn-clear"}}
     Cancel
   {{/link-to}}

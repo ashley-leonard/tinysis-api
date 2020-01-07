@@ -28,7 +28,7 @@ export default Controller.extend({
 
     return this.tinyData.fetch(url, {
       method,
-      body: JSON.stringify({ data }),
+      data,
     });
   },
 });

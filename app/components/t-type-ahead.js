@@ -1,12 +1,17 @@
 import Component from '@ember/component';
 import { computed } from '@ember/object';
 import { schedule } from '@ember/runloop';
+import { resolve } from 'rsvp';
+
+function onSearch() {
+  resolve([]);
+}
 
 export default Component.extend({
-  tagName: '',
+  tagName: 't-type-ahead',
 
+  onSearch,
   onChange() {},
-  onSearch() {},
 
   hasResults: computed('results', function () {
     return this.results && this.results.length;
@@ -14,16 +19,17 @@ export default Component.extend({
 
   didReceiveAttrs() {
     const {
+      hasResults,
       results,
       value,
     } = this;
 
-    if (!(results && value)) return;
+    if (!(hasResults && value)) return;
 
     const index = results.findIndex(r => r.value === value);
     if (index === -1) return;
 
-    this.doChange(index, results[index]);
+    this.doChange(index, results[index], true);
   },
 
   actions: {
@@ -31,10 +37,11 @@ export default Component.extend({
       const searchValue = event.target.value.trim();
       this.set('searchValue', searchValue);
       let results;
+
       if (searchValue) {
         results = await this.onSearch(searchValue);
       } else {
-        results = null;
+        results = [];
       }
 
       if (!Array.isArray(results)) throw new Error('Array result required for search');
@@ -83,9 +90,12 @@ export default Component.extend({
       this.setProperties({
         clearedResult: result,
         result: null,
+        value: null,
       });
 
       schedule('afterRender', this, () => this.element.querySelector('input').focus());
+
+      this.onChange(null, this.name);
     },
 
     doMouseOverSearchResult(index) {
@@ -93,14 +103,16 @@ export default Component.extend({
     },
   },
 
-  doChange(index, result) {
+  doChange(index, result, initOnly = false) {
     this.setProperties({
       index,
       result,
       showResults: false,
     });
 
-    this.onChange(result);
+    if (!initOnly) {
+      this.onChange(result.value, this.element.getAttribute('name'), result);
+    }
   },
 
   incrementSelection() {

@@ -1,22 +1,30 @@
 <h2>Enrollments</h2>
 
-{{contract-credit-assignments contract=contract}}
-
-<TTypeAhead
-  @onSearch={{action "searchUsers"}}
-  @onChange={{action "selectUser"}}
+<ContractCreditAssignments
+  @contract={{contract}}
+  @disabled={{disabled}}
 />
 
-{{#check-empty
-  count=model.meta.count
-  noResultsMessage="No enrollments as of yet"
-}}
-  {{count-paragraph
-    result=model
-    name="enrollment"
-  }}
-  {{contract-enrollments-list
-    enrollments=enrollments
-    getNotes=(route-action "getNotes" enrollments)
-  }}
-{{/check-empty}}
+<TLink action="showAddEnrollment">
+  Add enrollment
+</TLink>
+
+<CheckEmpty
+  @count={{model.meta.count}}
+  @noResultsMessage="No enrollments as of yet"
+>
+  <CountParagraph
+    @result={{model}}
+    @name="enrollment"
+  />
+
+  <ContractEnrollmentsList
+    @enrollments={{enrollments}}
+    @contractIsDisabled={{contractIsDisabled}}
+    @deleteEnrollment={{action "deleteEnrollment"}}
+    @updateEnrollment={{action "updateEnrollment"}}
+    @getNotes={{route-action "getNotes" enrollments}}
+  />
+
+</CheckEmpty>
+

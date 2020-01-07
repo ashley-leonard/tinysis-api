@@ -9,14 +9,14 @@ export default Route.extend({
     const coordinator = this.getCoordinator();
     return all([
       this.tinyData.fetch('/api/students', {
-        params: {
+        data: {
           coordinatorIds: coordinator.id,
           status: 'reportable',
           order: 'lastName, firstName',
         },
       }),
       this.tinyData.fetch('/api/terms', {
-        params: {
+        data: {
           type: 'coor',
           status: 'active',
           schoolYear: this.tinyData.getSchoolYear(),
@@ -34,7 +34,7 @@ export default Route.extend({
     this.term = term;
 
     return this.tinyData.fetch('/api/statuses', {
-      params: {
+      data: {
         studentIds: this.students.data.map(student => student.id),
         months: this.term.attributes.months,
         type: 'student',

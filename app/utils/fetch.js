@@ -2,53 +2,72 @@ import _fetch from 'fetch';
 import { Promise, reject } from 'rsvp';
 import { getSessionData, AuthError } from './session-utils';
 
-export default function fetch(_url, callerOptions = {}) {
-  const urlObj = new URL(`${window.location.origin}${_url}`);
-  const params = callerOptions.params || {};
-  const session = getSessionData();
-  const headers = callerOptions.headers || {};
+/* Build error object from a Rails API response.
+ * @param {Object} response | response from fetch
+ * @returns {Object} Object with fields:
+ * @attribute {String} message
+ * @attribute {Number} status
+ * @attribute {String} responseText
+ * @attribute {Object} body
+ */
+export async function buildError(url, response) {
+  const err = new Error(response.statusText);
 
+  err.url = url;
+  err.status = response.status;
+
+  const body = await response.text();
+  try {
+    err.responseText = body;
+    err.body = JSON.parse(body);
+    return err;
+  } catch (e) {
+    return err;
+  }
+}
+
+export default async function fetch(_url, callerOptions = {}) {
+  const session = getSessionData();
   if (!session) return reject(new AuthError());
 
-  Object.keys(params).forEach(key => urlObj.searchParams.append(key, params[key]));
+  const urlObj = new URL(`${window.location.origin}${_url}`);
+  const headers = callerOptions.headers || {};
+  const { data } = callerOptions;
+  const options = {
+    method: 'GET',
+    ...callerOptions,
+    headers,
+    data: null,
+  };
+
+  if (data) {
+    if (options.method === 'GET' || options.method === 'DELETE') {
+      Object.keys(data).forEach(key => urlObj.searchParams.append(key, data[key]));
+    } else {
+      options.body = JSON.stringify(data);
+    }
+  }
+
   const url = `${urlObj.pathname}${urlObj.search}`;
 
   headers['Content-Type'] = 'application/json';
   headers.Authorization = `Bearer ${session.accessToken}`;
 
-  const options = {
-    ...callerOptions,
-    headers,
-  };
+  return new Promise(async (resolve, rej) => {
+    const response = await _fetch(url, options);
 
-  return new Promise((resolve, rej) => {
-    _fetch(url, options)
-      .then((response) => {
-        if (response.ok) {
-          if (response.status === 204) {
-            return resolve();
-          }
+    if (response.ok) {
+      if (response.status === 204) {
+        return resolve();
+      }
 
-          return resolve(response.json());
-        }
+      return resolve(response.json());
+    }
 
-        if (response.status === 401) {
-          return reject(new AuthError());
-        }
+    if (response.status === 401) {
+      return reject(new AuthError());
+    }
 
-        const err = new Error(response.statusText);
-        Object.assign(err, {
-          url,
-          status: response.status,
-        });
-
-        return response.json()
-          .then((json) => {
-            rej(Object.assign(json, err));
-          }).catch(() => {
-            rej(err);
-          });
-      })
-      .catch(e => rej(e));
+    return rej(await buildError(url, response));
   });
 }

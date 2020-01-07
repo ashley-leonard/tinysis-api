@@ -63,7 +63,7 @@ export default Route.extend({
     });
 
     return tinyData.fetch('/api/contracts', {
-      params: requestParams,
+      data: requestParams,
     });
   },
 

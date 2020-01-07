@@ -26,6 +26,10 @@ module.exports = function (environment) {
       timeout: 5000,
       preventDuplicates: true,
     },
+
+    fontawesome: {
+      defaultPrefix: 'fa',
+    },
   };
 
   if (environment === 'development') {

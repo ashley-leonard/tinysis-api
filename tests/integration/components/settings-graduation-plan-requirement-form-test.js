@@ -34,12 +34,12 @@ module('Integration | Component | settings-graduation-plan-requirement-form', (h
 
   test('it renders and submits round-trip', async (assert) => {
     await render(hbs`
-      {{SettingsGraduationPlanRequirementForm
-        model=requirement
-        graduationPlanRequirements=requirements
-        save=save
-        reportError=reportError
-      }}
+      <SettingsGraduationPlanRequirementForm
+        @model={{requirement}}
+        @graduationPlanRequirements={{requirements}}
+        @save={{save}}
+        @reportError={{reportError}}
+      />
     `);
 
     await click('.submit-row button');

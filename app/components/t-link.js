@@ -1,7 +1,11 @@
 import Component from '@ember/component';
+import { computed } from '@ember/object';
 
 export default Component.extend({
   tagName: '',
+  enabled: computed('disabled', function () {
+    return !this.disabled;
+  }),
   actions: {
     async onClick(event) {
       const {

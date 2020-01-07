@@ -12,7 +12,7 @@ export default Mixin.create({
     const notableType = firstNotable.type;
     const notableIds = notables.map(notable => notable.id);
     return this.tinyData.fetch('/api/notes', {
-      params: {
+      data: {
         notableType,
         notableIds: notableIds.join(','),
       },
@@ -26,13 +26,13 @@ export default Mixin.create({
     } = notable;
     return this.tinyData.fetch(`/api/notes/${dasherize(type)}/${id}`, {
       method: 'POST',
-      body: JSON.stringify({
+      data: {
         data: {
           attributes: {
             note,
           },
         },
-      }),
+      },
     });
   },
 });

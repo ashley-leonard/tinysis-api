@@ -13,8 +13,8 @@
         {{#form-input
           error=form.errors.current_year
           showError=form.showErrors
+          label="Current school year"
         }}
-          Current school year
           <t-help>This is the year in which the Fall term begins. By default, screens show terms for the current year only</t-help>
           <TSelect
             @optionsList={{yearOptions}}
@@ -30,8 +30,8 @@
         {{#form-input
           error=form.errors.reporting_base_month
           showError=form.showErrors
+          label="First month of school year"
         }}
-          First month of school year
           <t-help>COOR status reporting begins at the starting month</t-help>
           <TSelect
             @optionsList={{monthOptions}}
@@ -47,8 +47,8 @@
         {{#form-input
           error=form.errors.reporting_end_month
           showError=form.showErrors
+          label="Last month of school year"
         }}
-          Last month of school year
           <t-help>COOR status reporting ends on the ending month</t-help>
           <TSelect
             @optionsList={{monthOptions}}
@@ -63,8 +63,9 @@
 
     <fieldset>
       <p>
-        {{#form-input}}
-          Default term for new contracts
+        {{#form-input
+          label="Default term for new contracts"
+        }}
           <t-help>COOR status reporting ends on the ending month</t-help>
           <TermSelect
             name="new_contract_term_default"

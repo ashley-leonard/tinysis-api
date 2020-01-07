@@ -2,9 +2,13 @@
 
 module.exports = {
   root: true,
+  parser: 'babel-eslint',
   parserOptions: {
     ecmaVersion: 2018,
     sourceType: 'module',
+    ecmaFeatures: {
+      legacyDecorators: true,
+    },
   },
   plugins: [
     'ember',
@@ -25,6 +29,8 @@ module.exports = {
     'ember/order-in-controllers': 1,
     'ember/order-in-models': 1,
     'ember/order-in-routes': 1,
+    'ember/no-arrow-function-computed-properties': 0,
+    'ember/no-new-mixins': 0,
 
     'comma-dangle': ['error', {
       arrays: 'always-multiline',

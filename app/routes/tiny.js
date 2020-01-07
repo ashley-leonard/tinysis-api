@@ -66,7 +66,7 @@ export default Route.extend({
       const notableType = firstNotable.type;
       const notableIds = notables.map(notable => notable.id);
       return this.tinyData.fetch('/api/notes', {
-        params: {
+        data: {
           notableType,
           notableIds: notableIds.join(','),
         },

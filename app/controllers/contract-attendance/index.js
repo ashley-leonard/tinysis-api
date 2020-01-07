@@ -16,7 +16,7 @@ export default Controller.extend({
 
       const result = await tinyData.fetch('/api/meetings', {
         method: 'POST',
-        body: JSON.stringify({ data: newMeeting }),
+        data: { data: newMeeting },
       });
       this.transitionToRoute('contract-attendance-roll', result.data.id);
     },

@@ -54,7 +54,7 @@ export default Route.extend({
     });
 
     return tinyData.fetch('/api/students', {
-      params: requestParams,
+      data: requestParams,
     });
   },
 

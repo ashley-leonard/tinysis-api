@@ -1,26 +1,32 @@
 <h3>Combine credits</h3>
-{{credit-assignments
-  creditAssignments=creditAssignments
-}}
+<CreditAssignments
+  @creditAssignments={{creditAssignments}}
+  @disabled={{true}}
+/>
 <fieldset>
   <p>
-    {{#form-input error=errors.credit showError=showErrors}}
-      Course
-      <TSelect
+    <FormInput
+      @error={{errors.credit}}
+      @showError={{showErrors}}
+      @label="Course"
+    >
+      <TTypeAhead
         name="credit"
-        @prompt="Select a course"
+        prompt="Type a course name or course code to match"t
+        @autofocusInput={{true}}
         @value={{relationships.credit.id}}
-        @onchange={{action "updateRelationship" "credit" "credit"}}
-        @optionsList={{creditOptions}}
+        @results={{creditResult}}
+        @onSearch={{action "searchCredits"}}
+        @onChange={{action "onChangeCredit"}}
       />
-    {{/form-input}}
+    </FormInput>
   </p>
 </fieldset>
 <fieldset>
   <p>
     {{#form-input error=errors.creditHours showError=showErrors}}
       <div class="flex justify-between">
-        <span>
+        <span class="font-semibold">
           Credit hours
         </span>
         <span>
@@ -54,22 +60,20 @@
 </fieldset>
 <fieldset>
   <p>
-    {{#form-input error=errors.contractTerm showError=showErrors}}
-      Term
+    {{#form-input error=errors.contractTerm showError=showErrors label="Term"}}
       <TermSelect
         name="contractTerm"
         @value={{relationships.contractTerm.id}}
         @prompt="Select a term"
         @terms={{terms}}
-        @onchange={{action "updateRelationship" "contractTerm" "term"}}
+        @onchange={{action "updateTerm"}}
       />
     {{/form-input}}
   </p>
 </fieldset>
 <fieldset>
   <p>
-    {{#form-input error=errors.note showError=showErrors}}
-      Notes
+    {{#form-input error=errors.note showError=showErrors label="Notes"}}
       <textarea
         value={{pojo.note}}
         name="note"

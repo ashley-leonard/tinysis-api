@@ -53,8 +53,7 @@ module('Integration | Component | status-by-student-enrollments', (hooks) => {
     const rows = findAll('tbody');
 
     assert.equal(rows.length, this.enrollments.length, 'expected number of enrollments rendered');
-
-    assert.equal(findAll('.expand-notes').length, 2, 'expected count of populated notes rows rendered');
+    assert.equal(findAll('.notes-list').length, 2, 'expected count of populated notes rows rendered');
 
     const enrollmentRow = find(`[data-test-enrollment-id="${enrollment.id}"`);
     assert.ok(enrollmentRow, 'enrollment row was found');

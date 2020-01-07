@@ -46,14 +46,22 @@ export default Component.extend({
     onChange(value, name) {
       this.handleChange(name, value, 'pojo');
     },
-
-    onChangeRelationship(value, name) {
-      this.handleChange(name, value, 'relationships');
-    },
   },
 
   normalizeModel(model) {
     return clone(model.attributes);
+  },
+
+  /* Helper function callable by forms to update a relationship
+   */
+  updateRelationship(key, id, dataObjectExtensions = {}) {
+    if (typeof key !== 'string') throw new Error('Requires relationship key for first argument');
+
+    if (id) {
+      return this.handleChange(key, { id, ...dataObjectExtensions }, 'relationships');
+    }
+
+    return this.handleChange(key, null, 'relationships');
   },
 
   /*
@@ -75,9 +83,12 @@ export default Component.extend({
 
     const relationships = Object.keys(modelRelationships)
       .reduce((memo, key) => {
-        memo[key] = modelRelationships[key].data;
+        const relation = modelRelationships[key];
+        if (!relation) throw new Error(`Malformed relationship: "${key}"`);
+        memo[key] = relation.data;
         return memo;
       }, {});
+
     return relationships;
   },
 

@@ -27,8 +27,7 @@
     onClose=(action "hideCombine")  
     translucentOverlay=true
   }}
-    <CreditsCombine
-      @availableCredits={{availableCredits}}
+    <CreditAssignments::CombineDialog
       @creditAssignments={{creditsToCombine}}
       @today={{today}}
       @terms={{terms}}

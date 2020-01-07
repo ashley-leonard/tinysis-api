@@ -8,14 +8,14 @@ export default Route.extend({
   beforeModel() {
     return all([
       this.tinyData.fetch('/api/students', {
-        params: {
+        data: {
           status: 'reportable',
           order: 'lastName, firstName',
           limit: -1,
         },
       }),
       this.tinyData.fetch('/api/terms', {
-        params: {
+        data: {
           type: 'coor',
           status: 'active',
           schoolYear: this.tinyData.getSchoolYear(),
@@ -32,7 +32,7 @@ export default Route.extend({
 
     return all([
       this.tinyData.fetch('/api/staff', {
-        params: {
+        data: {
           status: 'active',
           coordinators: true,
           order: 'lastName, firstName',
@@ -41,7 +41,7 @@ export default Route.extend({
       }),
 
       this.tinyData.fetch('/api/statuses', {
-        params: {
+        data: {
           studentIds: this.students.data.map(student => student.id),
           months: term.attributes.months,
           type: 'student',

@@ -13,7 +13,7 @@ let desiredResult;
 let requests;
 let resultFixture;
 
-module('Integration | Component | t-type-ahead', (hooks) => {
+module('Integration | Component | TTypeAhead', (hooks) => {
   setupRenderingTest(hooks);
 
   hooks.beforeEach(function () {
@@ -36,8 +36,13 @@ module('Integration | Component | t-type-ahead', (hooks) => {
         requests.push({ type: 'search', search });
         return resolve(resultFixture);
       },
-      onChange(result) {
-        requests.push({ type: 'change', result });
+      onChange(value, name, result) {
+        requests.push({
+          type: 'change',
+          value,
+          name,
+          result,
+        });
       },
       results: resultFixture,
       value: '3',
@@ -47,6 +52,7 @@ module('Integration | Component | t-type-ahead', (hooks) => {
   test('it renders and displays a value', async (assert) => {
     await render(hbs`
       <TTypeAhead
+        name="myboo"
         @value={{value}}
         @onSearch={{onSearch}}
         @onChange={{onChange}}
@@ -59,10 +65,11 @@ module('Integration | Component | t-type-ahead', (hooks) => {
     assert.ok(result, 'a result is present');
     assert.equal(result.textContent.trim(), desiredResult.name);
 
-    const container = find('t-type-ahead');
-    assert.ok(container, 'expected container rendered');
+    const containerElement = find('t-type-ahead');
+    assert.ok(containerElement, 'expected container rendered');
 
-    assert.equal(container.dataset.testValue, desiredResult.value, 'value placed into data-value attribute');
+    const resultElement = find('t-type-ahead-result');
+    assert.equal(resultElement.dataset.testValue, desiredResult.value, 'value placed into data-value attribute');
   });
 
   test('it renders with no initial value', async function (assert) {
@@ -70,6 +77,7 @@ module('Integration | Component | t-type-ahead', (hooks) => {
 
     await render(hbs`
       <TTypeAhead
+        name="myboo"
         @value={{value}}
         @onSearch={{onSearch}}
         @onChange={{onChange}}
@@ -87,6 +95,7 @@ module('Integration | Component | t-type-ahead', (hooks) => {
 
     await render(hbs`
       <TTypeAhead
+        name="myboo"
         @value={{value}}
         @onSearch={{onSearch}}
         @onChange={{onChange}}
@@ -114,7 +123,9 @@ module('Integration | Component | t-type-ahead', (hooks) => {
 
     request = requests.pop();
     assert.equal(request.type, 'change', 'was a change request');
-    assert.equal(request.result, desiredResult, 'the result we expected was sent');
+    assert.equal(request.value, desiredResult.value, 'the value we expected was sent as first argument');
+    assert.equal(request.name, 'myboo', 'the name was passed as the second argument');
+    assert.equal(request.result, desiredResult, 'the result was passed as third argument');
 
     const resultOverlay = find('t-type-ahead-result');
 

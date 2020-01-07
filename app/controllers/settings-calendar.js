@@ -61,7 +61,7 @@ export default Controller.extend({
       try {
         await this.tinyData.fetch('/api/admin/settings', {
           method: 'PUT',
-          body: JSON.stringify({ data }),
+          data,
         });
 
         this.flashMessages.info('Settings updates completed');

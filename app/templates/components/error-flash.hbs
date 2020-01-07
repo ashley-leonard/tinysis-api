@@ -1,0 +1,13 @@
+{{#if this.errorSummary}} 
+  <div class="flash-message alert">
+    {{this.errorSummary}}
+    <span class="cursor-pointer pl-2" onclick={{action "clear"}}>
+      <FaIcon
+        @icon="times"
+        @prefix="fas"
+        @size="1x"
+        class="text-white"
+      />
+    </span>
+  </div>
+{{/if}}
