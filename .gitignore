@@ -27,3 +27,6 @@
 /.project
 
 config/secrets.yml
+
+# terraform
+.terraform
