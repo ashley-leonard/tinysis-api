@@ -1,4 +1,4 @@
-class MeetingsController < ApplicationController
+class MeetingsController < ApiBaseController
   PERMITTED_INCLUDES = %w{meeting_participants}
 
   def create

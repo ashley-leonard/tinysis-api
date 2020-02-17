@@ -1,4 +1,4 @@
-class TermsController < ApplicationController
+class TermsController < ApiBaseController
   ALLOWED_ORDER_BY = %w{name schoolYear}
 
   def index

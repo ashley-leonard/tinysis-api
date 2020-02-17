@@ -1,4 +1,4 @@
-class ProfilesController < ApplicationController
+class ProfilesController < ApiBaseController
   def index
     options = {
       meta: {

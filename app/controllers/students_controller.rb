@@ -1,4 +1,4 @@
-class StudentsController < ApplicationController
+class StudentsController < ApiBaseController
   include UserControllerMethods
 
 protected

@@ -1,4 +1,4 @@
-class ContractsController < ApplicationController
+class ContractsController < ApiBaseController
   PERMITTED_INCLUDES = %w{category facilitator assignments meetings credit_assignments credit_assignments.credit term ealrs}
 
   def index

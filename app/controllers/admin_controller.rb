@@ -1,4 +1,4 @@
-class AdminController < ApplicationController
+class AdminController < ApiBaseController
 
   before_action :check_admin
 

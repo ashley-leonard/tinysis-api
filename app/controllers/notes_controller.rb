@@ -1,4 +1,4 @@
-class NotesController < ApplicationController
+class NotesController < ApiBaseController
 
   def index
     limit = params[:limit] || Rails.configuration.constants[:DEFAULT_LIMIT]

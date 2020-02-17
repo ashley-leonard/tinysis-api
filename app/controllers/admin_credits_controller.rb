@@ -1,4 +1,4 @@
-class AdminCreditsController < ApplicationController
+class AdminCreditsController < AdminController
   def create
     credit = Credit.new
     update_attributes credit
