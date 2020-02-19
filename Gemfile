@@ -11,7 +11,7 @@ gem 'mysql2'
 gem 'fast_jsonapi', '>= 1.5.0', require: true
 
 # Use Puma as the app server
-gem 'puma', '~> 3.12.1'
+gem 'puma', '~> 3.12.2'
 
 gem 'jwt'
 gem 'auth0'
