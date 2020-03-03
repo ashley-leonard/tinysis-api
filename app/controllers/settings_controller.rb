@@ -1,4 +1,4 @@
-class SettingsController < ApplicationController
+class SettingsController < ApiBaseController
   def index
     result = Setting.where('name <> "periods"')
 

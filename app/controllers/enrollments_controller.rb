@@ -1,4 +1,4 @@
-class EnrollmentsController < ApplicationController
+class EnrollmentsController < ApiBaseController
 
   before_action :get_enrollment, only: [:show, :destroy, :update]
   before_action :entitle_enrollment, only: [:destroy, :update]

@@ -1,4 +1,4 @@
-class AssignmentsController < ApplicationController
+class AssignmentsController < ApiBaseController
 
   def index
     limit = params[:limit] || Rails.configuration.constants[:DEFAULT_LIMIT]

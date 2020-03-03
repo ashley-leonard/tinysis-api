@@ -1,4 +1,4 @@
-class CreditAssignmentsController < ApplicationController
+class CreditAssignmentsController < ApiBaseController
 
   before_action :get_student, only: [:approve, :unapprove, :create_for_student]
   before_action :entitle_student, only: [:destroy, :create_for_student]

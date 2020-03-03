@@ -1,4 +1,4 @@
-class GraduationPlanMappingsController < ApplicationController
+class GraduationPlanMappingsController < ApiBaseController
   before_action :get_graduation_plan
 
   def index

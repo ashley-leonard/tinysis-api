@@ -1,4 +1,4 @@
-class CategoriesController < ApplicationController
+class CategoriesController < ApiBaseController
   def index
 
     limit = params[:limit] || Rails.configuration.constants[:DEFAULT_LIMIT]

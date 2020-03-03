@@ -1,4 +1,4 @@
-class MeetingParticipantsController < ApplicationController
+class MeetingParticipantsController < ApiBaseController
   def create
     meeting_id = meeting_participant_meeting_id
     enrollment_id = meeting_participant_enrollment_id

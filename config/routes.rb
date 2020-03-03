@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
-
-  get 'credits/index'
+  get '/up', to: 'uptime#index'
   namespace :admin do
     get 'credits/create'
     get 'credits/update'

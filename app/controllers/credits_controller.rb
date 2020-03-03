@@ -1,4 +1,4 @@
-class CreditsController < ApplicationController
+class CreditsController < ApiBaseController
   def index
     limit = params[:limit] || Rails.configuration.constants[:DEFAULT_LIMIT]
     limit = nil if limit == "-1"

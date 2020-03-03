@@ -1,4 +1,4 @@
-class StaffController < ApplicationController
+class StaffController < ApiBaseController
   include UserControllerMethods
 
 protected

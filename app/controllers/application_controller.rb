@@ -4,8 +4,6 @@ class ApplicationController < ActionController::API
   rescue_from ActionController::ParameterMissing, with: :render_parameter_missing_response
   rescue_from TinyException, with: :render_custom_response
 
-  include Secured
-
 private
   def expand_month month
     month.sub(/^\d{4}-\d{2}$/, '\0-01')
