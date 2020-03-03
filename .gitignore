@@ -27,3 +27,8 @@
 /.project
 
 config/secrets.yml
+
+# terraform
+.terraform
+config/production-secrets.yml
+config/credentials.yml.enc

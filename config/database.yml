@@ -1,16 +1,18 @@
 default: &default
   adapter: 'mysql2'
 
-development:
+development: &development
   <<: *default
-  database: 'nova_development'
-  username: 'nova_development'
-  password: 'nova_development'
-  host: 'localhost'
+  host: <%= ENV['DB_HOST'] %>
+  database: <%= ENV['DB_DATABASE'] %>
+  username: <%= ENV['DB_USER'] %>
+  password: <%= ENV['DB_PASSWORD'] %>
 
 test:
   <<: *default
   database: 'nova_test'
   username: 'nova_test'
   password: 'nova_test'
-  host: 'localhost'
+
+production:
+  <<: *development

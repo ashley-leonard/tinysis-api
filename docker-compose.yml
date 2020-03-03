@@ -1,0 +1,30 @@
+version: '3'
+services:
+  db:
+    build: ./db
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=tinysis
+    ports:
+      - 3316:3306
+    restart: always
+  web:
+    build: .
+    command: bash -c "rm -f tmp/pids/server.pid && echo 'boodig' && rails s"
+    volumes:
+      - .:/api
+    ports:
+      - 3000:3000
+    links:
+      - db
+    environment:
+      - DB_HOST=db
+      - DB_DATABASE=tinysis
+      - DB_USER=tinysis
+      - DB_PASSWORD=tinysis
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - "8080:8080"
