@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreditTransmittalBatchSerializer < ApplicationSerializer
   set_type :credit_transmittal_batch
 

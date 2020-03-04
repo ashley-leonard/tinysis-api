@@ -26,41 +26,41 @@ def write_fixture(request, file)
   response
 end
 
-def write_login_fixture user, file
+def write_login_fixture(user, file)
   user_id = Digest::MD5.hexdigest user.email
   fixture = {
     "data": {
       "email": user.email,
       "email_verified": false,
-      "updated_at": "2019-06-23T23:44:29.877Z",
+      "updated_at": '2019-06-23T23:44:29.877Z',
       "user_id": "auth0|#{user_id}",
       "name": user.full_name,
       "identities": [
         {
-          "connection": "Username-Password-Authentication",
-          "provider": "auth0",
+          "connection": 'Username-Password-Authentication',
+          "provider": 'auth0',
           "user_id": user_id,
           "isSocial": false
         }
       ],
-      "created_at": "2019-05-25T00:24:18.815Z",
-      "last_password_reset": "2019-06-10T04:09:05.883Z",
+      "created_at": '2019-05-25T00:24:18.815Z',
+      "last_password_reset": '2019-06-10T04:09:05.883Z',
       "given_name": user.first_name,
       "family_name": user.last_name,
       "nickname": user.nickname,
-      "last_login": "2019-06-23T23:44:29.877Z",
-      "last_ip": "208.100.155.216",
+      "last_login": '2019-06-23T23:44:29.877Z',
+      "last_ip": '208.100.155.216',
       "logins_count": 38,
       "roles": [
         {
-          "id": "rol_7B7Ic4uF67wTTC1W",
+          "id": 'rol_7B7Ic4uF67wTTC1W',
           "name": User::PRIVILEGE_NAMES[user.privilege].downcase,
-          "description": "Manage all data, access admin settings",
+          "description": 'Manage all data, access admin settings',
           "sources": [
             {
-              "source_id": "",
-              "source_type": "DIRECT",
-              "source_name": ""
+              "source_id": '',
+              "source_type": 'DIRECT',
+              "source_name": ''
             }
           ]
         }
@@ -88,7 +88,6 @@ LAST_YEAR = CURRENT_YEAR - 1
 RSpec.describe 'Ember fixtures script', type: :request do
   before(:each) do
     travel_to Date.new(CURRENT_YEAR, 11, 15) do
-
       # clear our global settings from the test db
       Setting.destroy_all
 
@@ -160,11 +159,11 @@ RSpec.describe 'Ember fixtures script', type: :request do
       end
       @contract1_current.save!
 
-      @student1 = create :user, privilege: User::PRIVILEGE_STUDENT, district_id: Random.rand(10 ** 10).to_s, coordinator: @staff1, date_active: Date.new(LAST_YEAR, 8, 1)
-      @student2 = create :user, privilege: User::PRIVILEGE_STUDENT, district_id: Random.rand(10 ** 10).to_s, coordinator: @staff2, date_active: Date.new(LAST_YEAR, 8, 1)
-      @student3 = create :user, privilege: User::PRIVILEGE_STUDENT, district_id: Random.rand(10 ** 10).to_s, coordinator: @staff2, status: User::STATUS_INACTIVE, date_active: Date.new(LAST_YEAR, 8, 1), date_inactive: Date.new(CURRENT_YEAR, 10, 1)
+      @student1 = create :user, privilege: User::PRIVILEGE_STUDENT, district_id: Random.rand(10**10).to_s, coordinator: @staff1, date_active: Date.new(LAST_YEAR, 8, 1)
+      @student2 = create :user, privilege: User::PRIVILEGE_STUDENT, district_id: Random.rand(10**10).to_s, coordinator: @staff2, date_active: Date.new(LAST_YEAR, 8, 1)
+      @student3 = create :user, privilege: User::PRIVILEGE_STUDENT, district_id: Random.rand(10**10).to_s, coordinator: @staff2, status: User::STATUS_INACTIVE, date_active: Date.new(LAST_YEAR, 8, 1), date_inactive: Date.new(CURRENT_YEAR, 10, 1)
       @students = [@student1, @student2, @student3]
-      
+
       # current contracts should have active enrollments. reporting as if we are three months into
       # the current contracts.
       [@contract1_current, @contract2_current].each do |contract|
@@ -182,7 +181,7 @@ RSpec.describe 'Ember fixtures script', type: :request do
           end
         end
       end
-    
+
       finalized_credits = []
 
       # closed contracts should have fulfilled enrollments and finalized credits
@@ -207,7 +206,7 @@ RSpec.describe 'Ember fixtures script', type: :request do
       end
 
       # create a batch with just the 0.25 credits
-      CreditTransmittalBatch.create_batch_from_credits_list @admin1, finalized_credits.filter{|ca| ca.credit_hours == 0.25 }
+      CreditTransmittalBatch.create_batch_from_credits_list @admin1, finalized_credits.filter { |ca| ca.credit_hours == 0.25 }
 
       # coor statuses for all months of the last coor
       @term_coor_last.months.each do |month|
@@ -227,14 +226,14 @@ RSpec.describe 'Ember fixtures script', type: :request do
       end
 
       # create five assignments and turnins for the contract 1 current
-      enrollment = @contract1_current.enrollments.find{|e| e.participant == @student1}
+      enrollment = @contract1_current.enrollments.find { |e| e.participant == @student1 }
       (1..5).each do |assignment_number|
         assignment = create :assignment, contract: @contract1_current, creator: @contract1_current.facilitator, name: "Assignment #{assignment_number}", description: "Here is assignment number #{assignment_number}", due_date: @term1_current.months[0] + assignment_number.days
         turnin = create :turnin, enrollment: enrollment, assignment: assignment, status: :complete
         create :note,
-          notable: turnin,
-          creator: @contract1_current.facilitator,
-          note: "Note by #{@contract1_current.facilitator.last_name} for student #{@student1.last_name} / assignment #{assignment_number}"
+               notable: turnin,
+               creator: @contract1_current.facilitator,
+               note: "Note by #{@contract1_current.facilitator.last_name} for student #{@student1.last_name} / assignment #{assignment_number}"
       end
 
       # for contract 1, define 5 meetings which are attended only by student 1
@@ -242,17 +241,17 @@ RSpec.describe 'Ember fixtures script', type: :request do
         meeting = create :meeting, contract: @contract1_current, meeting_date: @contract1_current.term.months.first + meeting_number.days
 
         @contract1_current.enrollments.each do |enrollment|
-          attendance = if enrollment.participant.id == @student1.id then
-            MeetingParticipant::PRESENT
-          else
-            MeetingParticipant::ABSENT
+          attendance = if enrollment.participant.id == @student1.id
+                         MeetingParticipant::PRESENT
+                       else
+                         MeetingParticipant::ABSENT
           end
 
           meeting_participant = create :meeting_participant, meeting: meeting, enrollment: enrollment, participation: attendance
           create :note,
-            notable: meeting_participant,
-            creator: @contract1_current.facilitator,
-            note: "Note by #{@contract1_current.facilitator.last_name} for student #{enrollment.participant.last_name} / meeting #{meeting_number}"
+                 notable: meeting_participant,
+                 creator: @contract1_current.facilitator,
+                 note: "Note by #{@contract1_current.facilitator.last_name} for student #{enrollment.participant.last_name} / meeting #{meeting_number}"
         end
       end
 
@@ -268,7 +267,7 @@ RSpec.describe 'Ember fixtures script', type: :request do
       gradService1 = create :graduation_plan_requirement, name: 'Service1', requirement_type: 'service', position: 1
       create :graduation_plan_requirement, name: 'Service2', requirement_type: 'service', position: 2
 
-      credit_assignments = @student2.credit_assignments.filter {|ca| ca.facilitator_approved? }
+      credit_assignments = @student2.credit_assignments.filter { |ca| ca.facilitator_approved? }
 
       graduation_plan = create :graduation_plan, user: @student2
 
@@ -293,11 +292,11 @@ RSpec.describe 'Ember fixtures script', type: :request do
 
         # general
         #
-        write_fixture "/api/admin/users/#{@admin1.id}", "user-admin.js"
-        write_login_fixture @admin1, "login-admin.js"
-        write_fixture "/api/admin/users/#{@staff1.id}", "user-staff.js"
-        write_login_fixture @staff1, "login-staff.js"
-        write_fixture "/api/admin/users/#{@student1.id}", "user-student.js"
+        write_fixture "/api/admin/users/#{@admin1.id}", 'user-admin.js'
+        write_login_fixture @admin1, 'login-admin.js'
+        write_fixture "/api/admin/users/#{@staff1.id}", 'user-staff.js'
+        write_login_fixture @staff1, 'login-staff.js'
+        write_fixture "/api/admin/users/#{@student1.id}", 'user-student.js'
 
         # years
         write_fixture '/api/settings/years', 'years.js'
@@ -317,8 +316,8 @@ RSpec.describe 'Ember fixtures script', type: :request do
         # notes for the contract assignment turnins
         contract_enrollments_response = JSON.parse(response.body)
         turnin_ids = contract_enrollments_response['included']
-          .select{ |include| include['type'] == 'turnin' }
-          .map{ |include| include['id'] }
+                     .select { |include| include['type'] == 'turnin' }
+                     .map { |include| include['id'] }
         write_fixture "/api/notes?notableType=Turnin&notableIds=#{turnin_ids.join(',')}", 'notes-contract-assignments.js'
 
         # contract attendance roll page
@@ -326,7 +325,7 @@ RSpec.describe 'Ember fixtures script', type: :request do
         write_fixture "/api/enrollments?contractIds=#{@contract1_current.id}&include=participant", 'contract-attendance-roll-enrollments.js'
         meeting_response = JSON.parse(response.body)
         meeting_participants = meeting_response['data']['relationships']['meetingParticipants']['data']
-          .map{|record| record['id']}
+                               .map { |record| record['id'] }
         write_fixture "/api/notes?notableType=meetingParticipant&notableIds=#{meeting_participants.join(',')}", 'contract-attendance-roll-notes.js'
 
         # contract attendance list page
@@ -335,8 +334,8 @@ RSpec.describe 'Ember fixtures script', type: :request do
         enrollments_response = JSON.parse(response.body)
 
         meeting_participants = enrollments_response['included']
-          .filter{|record| record['type'] == "meetingParticipant"}
-          .map{|record| record['id']}
+                               .filter { |record| record['type'] == 'meetingParticipant' }
+                               .map { |record| record['id'] }
         write_fixture "/api/notes?notableType=meetingParticipant&notableIds=#{meeting_participants.join(',')}", 'contract-attendance-notes.js'
 
         # contract enrollment status detail
@@ -348,7 +347,7 @@ RSpec.describe 'Ember fixtures script', type: :request do
 
         # notes for the contract enrollments
         contract_enrollments_response = JSON.parse(response.body)
-        enrollment_ids = contract_enrollments_response["data"].map{|enrollment| enrollment["id"]}
+        enrollment_ids = contract_enrollments_response['data'].map { |enrollment| enrollment['id'] }
         write_fixture "/api/notes?notableType=Enrollment&notableIds=#{enrollment_ids.join(',')}", 'notes-contract-enrollments.js'
 
         # status by contract enrollments
@@ -356,7 +355,7 @@ RSpec.describe 'Ember fixtures script', type: :request do
 
         # notes for the contract enrollment statuses
         contract_status_response = JSON.parse(response.body)
-        status_ids = contract_status_response["data"].map{|status| status["id"]}
+        status_ids = contract_status_response['data'].map { |status| status['id'] }
         write_fixture "/api/notes?notableType=Status&notableIds=#{status_ids.join(',')}", 'notes-contract-statuses.js'
 
         # students for a coordinator
@@ -382,7 +381,7 @@ RSpec.describe 'Ember fixtures script', type: :request do
 
         # notes for a coor status
         coor_status_response = JSON.parse(response.body)
-        statusable_ids = coor_status_response["data"].map{|status| status["id"]}
+        statusable_ids = coor_status_response['data'].map { |status| status['id'] }
         write_fixture "/api/notes?notableType=Status&notableIds=#{statusable_ids.join(',')}", 'notes-coor-statuses.js'
 
         # student detail
@@ -393,12 +392,12 @@ RSpec.describe 'Ember fixtures script', type: :request do
 
         # statuses for enrollments
         student_enrollments_response = JSON.parse(response.body)
-        student_enrollment_ids = student_enrollments_response['data'].map{|enrollment| enrollment["id"]}
+        student_enrollment_ids = student_enrollments_response['data'].map { |enrollment| enrollment['id'] }
         response = write_fixture "/api/statuses?enrollmentIds=#{student_enrollment_ids.join(',')}", 'student-enrollments-statuses.js'
 
         # notes for statuses for enrollments
         student_enrollments_status_response = JSON.parse(response.body)
-        status_ids = student_enrollments_status_response["data"].map{|status| status["id"]}
+        status_ids = student_enrollments_status_response['data'].map { |status| status['id'] }
         write_fixture "/api/notes?notableType=Status&notableIds=#{status_ids.join(',')}", 'notes-student-enrollment-statuses.js'
 
         # statuses for coor
@@ -407,33 +406,33 @@ RSpec.describe 'Ember fixtures script', type: :request do
 
         # notes for coor statuses
         student_status_response = JSON.parse(response.body)
-        status_ids = student_status_response["data"].map{|status| status["id"]}
+        status_ids = student_status_response['data'].map { |status| status['id'] }
         write_fixture "/api/notes?notableType=Status&notableIds=#{status_ids.join(',')}", 'notes-student-statuses.js'
 
         # admin terms - all
-        write_fixture "/api/terms?limit=20&order=name&include=usage", "admin-terms-list.js"
-        write_fixture "/api/terms/#{@term1_current.id}", "admin-term-detail.js"
+        write_fixture '/api/terms?limit=20&order=name&include=usage', 'admin-terms-list.js'
+        write_fixture "/api/terms/#{@term1_current.id}", 'admin-term-detail.js'
 
         # graduation plan requirements - all
-        write_fixture "/api/graduation-plan-requirements", "graduation-plan-requirements-list-all.js"
+        write_fixture '/api/graduation-plan-requirements', 'graduation-plan-requirements-list-all.js'
 
         # credit assignments
-        write_fixture "/api/credit-assignments?studentIds=#{@student2.id}&includeFulfilledAttributes=true&include=credit,contractTerm,contractFacilitator,contract", "student-credit-assignments.js"
+        write_fixture "/api/credit-assignments?studentIds=#{@student2.id}&includeFulfilledAttributes=true&include=credit,contractTerm,contractFacilitator,contract", 'student-credit-assignments.js'
 
         # graduation plan mappings
-        write_fixture "/api/graduation-plan-mappings/#{@student2.id}", "graduation-plan-mappings.js"
+        write_fixture "/api/graduation-plan-mappings/#{@student2.id}", 'graduation-plan-mappings.js'
 
         # credits
-        write_fixture "/api/credits", "credits-index.js"
+        write_fixture '/api/credits', 'credits-index.js'
 
         # credit
         credit = Credit.first
-        write_fixture "/api/credits/#{credit.id}", "credit-detail.js"
+        write_fixture "/api/credits/#{credit.id}", 'credit-detail.js'
 
         # combine two credits
         student2_credits = @student2.credit_assignments[0..1]
         CreditAssignment.combine @student2, student2_credits.first.credit.id, student2_credits.first.contract_term.id, nil, student2_credits, @admin0
-        write_fixture "/api/credit-assignments?studentIds=#{@student2.id}&includeFulfilledAttributes=true&include=credit,contractTerm,contractFacilitator,contract", "student-credit-assignments-with-combined.js"
+        write_fixture "/api/credit-assignments?studentIds=#{@student2.id}&includeFulfilledAttributes=true&include=credit,contractTerm,contractFacilitator,contract", 'student-credit-assignments-with-combined.js'
       end
     end
   end

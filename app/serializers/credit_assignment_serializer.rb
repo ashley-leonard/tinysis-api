@@ -1,19 +1,21 @@
+# frozen_string_literal: true
+
 class CreditAssignmentSerializer < ApplicationSerializer
   set_type :credit_assignment
 
   attributes :credit_hours
 
   attributes :enrollment_finalized_on,
-    :contract_name,
-    :contract_facilitator_name,
-    :district_finalize_approved_by,
-    :district_finalize_approved_on,
-    :district_transmitted_on,
-    :override_hours,
-    :override_by,
-  if: Proc.new { |record, params|
-    params && params[:forFulfilled]
-  }
+             :contract_name,
+             :contract_facilitator_name,
+             :district_finalize_approved_by,
+             :district_finalize_approved_on,
+             :district_transmitted_on,
+             :override_hours,
+             :override_by,
+             if: proc { |_record, params|
+               params && params[:forFulfilled]
+             }
 
   belongs_to :credit
   has_one :graduation_plan_mapping

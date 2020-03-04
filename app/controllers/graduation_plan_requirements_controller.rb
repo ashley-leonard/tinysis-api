@@ -1,15 +1,17 @@
+# frozen_string_literal: true
+
 class GraduationPlanRequirementsController < ApiBaseController
   def index
     limit = params[:limit] || Rails.configuration.constants[:DEFAULT_LIMIT]
 
-    limit = nil if limit == "-1"
+    limit = nil if limit == '-1'
 
     order = 'position,name'
 
     result = GraduationPlanRequirement
-      .includes(:children)
-      .order(Arel.sql(order))
-      .limit(limit)
+             .includes(:children)
+             .order(Arel.sql(order))
+             .limit(limit)
 
     count = GraduationPlanRequirement.count
 
@@ -27,7 +29,7 @@ class GraduationPlanRequirementsController < ApiBaseController
 
   def show
     requirement = GraduationPlanRequirement.find params[:id]
-    
+
     render json: GraduationPlanRequirementSerializer.new(requirement)
   end
 end

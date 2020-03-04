@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TurninSerializer < ApplicationSerializer
   set_type :turnin
 

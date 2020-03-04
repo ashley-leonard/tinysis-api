@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 class Note < ApplicationRecord
   include StripTagsValidator
 
-  belongs_to :notable, :polymorphic => true
+  belongs_to :notable, polymorphic: true
   belongs_to :creator, class_name: 'User'
 
   PRIVILEGE_NONE = 0
@@ -24,39 +26,35 @@ class Note < ApplicationRecord
   # is returned.
 
   def privileges(user, parent_priv = nil)
-    if user.admin?
+    return PRIVILEGE_EDIT if user.admin?
+    if creator_id.nil? && user.privilege >= User::PRIVILEGE_STAFF
       return PRIVILEGE_EDIT
     end
-    if self.creator_id.nil? && user.privilege >= User::PRIVILEGE_STAFF
-      return PRIVILEGE_EDIT
-    end 
-    if self.creator_id == user.id
-      return PRIVILEGE_EDIT
-    end
-    
-    parent_priv ||= self.notable.privileges(user)
-    
+    return PRIVILEGE_EDIT if creator_id == user.id
+
+    parent_priv ||= notable.privileges(user)
+
     return PRIVILEGE_EDIT if parent_priv[:edit_note]
     return PRIVILEGE_VIEW if parent_priv[:view_note]
-    return PRIVILEGE_NONE
+
+    PRIVILEGE_NONE
   end
 
   def dom_id
     "view_note_#{id}"
   end
-  
-  def Note.notes_hash(coll)
+
+  def self.notes_hash(coll)
     result = {}
-    
+
     return result if coll.empty?
-    
-    notes=Note.find(:all, :conditions => ["notable_type = ? and notable_id in (?)", coll.first.class.to_s, coll.collect{|c| c.id}], :include=>:author)
+
+    notes = Note.find(:all, conditions: ['notable_type = ? and notable_id in (?)', coll.first.class.to_s, coll.collect { |c| c.id }], include: :author)
     notes.each do |note|
       result[note.notable_id] ||= []
       result[note.notable_id] << note
     end
     result.default = []
-    return result
+    result
   end
-    
 end

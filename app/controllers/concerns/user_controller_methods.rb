@@ -1,23 +1,24 @@
+# frozen_string_literal: true
+
 module UserControllerMethods
   extend ActiveSupport::Concern
 
   included do
     unless const_defined?(:ALLOWED_ORDER_COLUMNS)
-      ALLOWED_ORDER_COLUMNS = %w{first_name last_name nickname} 
-      ALLOWED_INCLUDES = %w{coordinator}
+      ALLOWED_ORDER_COLUMNS = %w[first_name last_name nickname].freeze
+      ALLOWED_INCLUDES = %w[coordinator].freeze
     end
   end
 
   def index
-
     limit = params[:limit] || Rails.configuration.constants[:DEFAULT_LIMIT]
 
-    limit = nil if limit == "-1"
+    limit = nil if limit == '-1'
 
     order = (params[:order] || '')
-      .split(',')
-      .map(&:strip)
-      .map(&:underscore)
+            .split(',')
+            .map(&:strip)
+            .map(&:underscore)
 
     order &= ALLOWED_ORDER_COLUMNS
 
@@ -29,9 +30,7 @@ module UserControllerMethods
 
     additional_conditions = nil
 
-    if params[:grade]
-      conditions[:district_grade] = params[:grade]
-    end
+    conditions[:district_grade] = params[:grade] if params[:grade]
 
     coordinators_join = nil
     if params[:coordinators] == 'true'
@@ -39,43 +38,43 @@ module UserControllerMethods
     end
 
     conditions[:privilege] = case params[:role]
-    when 'administrator'
-      User::PRIVILEGE_ADMIN
-    when 'staff'
-      [User::PRIVILEGE_STAFF, User::PRIVILEGE_ADMIN]
-    when 'student'
-      User::PRIVILEGE_STUDENT
-    when nil
-      nil
-    else
-      return render json: { message: 'invalid role parameter' }, status: 400
+                             when 'administrator'
+                               User::PRIVILEGE_ADMIN
+                             when 'staff'
+                               [User::PRIVILEGE_STAFF, User::PRIVILEGE_ADMIN]
+                             when 'student'
+                               User::PRIVILEGE_STUDENT
+                             when nil
+                               nil
+                             else
+                               return render json: { message: 'invalid role parameter' }, status: 400
     end
     conditions.delete(:privilege) unless conditions[:privilege]
 
     conditions[:status] = case params[:status]
-    when 'active'
-      User::STATUS_ACTIVE
-    when 'inactive'
-      User::STATUS_INACTIVE
-    when 'reportable'
-    when 'all'
-    when nil
-      nil
-    else
-      return render json: { message: 'invalid status parameter' }, status: 400
+                          when 'active'
+                            User::STATUS_ACTIVE
+                          when 'inactive'
+                            User::STATUS_INACTIVE
+                          when 'reportable'
+                          when 'all'
+                          when nil
+                            nil
+                          else
+                            return render json: { message: 'invalid status parameter' }, status: 400
     end
 
     case params[:status]
-      when nil
-        conditions.delete :status
-      when 'reportable'
-        conditions.delete :status
-        term = Term.coor
-        additional_conditions = [
-          "(status = #{User::STATUS_ACTIVE}) OR ((status = #{User::STATUS_INACTIVE}) AND ((date_inactive >= ?) AND (date_inactive <= ?)))",
-          term.months.first,
-          term.months.last.end_of_month
-        ]
+    when nil
+      conditions.delete :status
+    when 'reportable'
+      conditions.delete :status
+      term = Term.coor
+      additional_conditions = [
+        "(status = #{User::STATUS_ACTIVE}) OR ((status = #{User::STATUS_INACTIVE}) AND ((date_inactive >= ?) AND (date_inactive <= ?)))",
+        term.months.first,
+        term.months.last.end_of_month
+      ]
     end
 
     if params[:coordinatorIds]
@@ -84,42 +83,42 @@ module UserControllerMethods
 
     if params[:name]
       name_like = "%#{params[:name]}%"
-      name_conditions = ['first_name LIKE :name OR last_name LIKE :name OR nickname LIKE :name', { name: name_like } ]
+      name_conditions = ['first_name LIKE :name OR last_name LIKE :name OR nickname LIKE :name', { name: name_like }]
     end
 
     year_conditions = nil
     if params[:schoolYear]
       start_month, end_month = Term.reporting_dates_for_year(params[:schoolYear])
-      year_conditions = ['(date_active <= :start_date) AND (date_inactive IS NULL OR date_inactive >= :end_date)', { start_date: start_month, end_date: end_month.end_of_month  }]
+      year_conditions = ['(date_active <= :start_date) AND (date_inactive IS NULL OR date_inactive >= :end_date)', { start_date: start_month, end_date: end_month.end_of_month }]
     end
 
     result = User
-      .where(conditions)
-      .where(role_conditions)
-      .where(additional_conditions)
-      .where(year_conditions)
-      .where(name_conditions)
-      .includes(:coordinator)
-      .joins(coordinators_join)
-      .limit(limit)
-      .order(Arel.sql(order))
+             .where(conditions)
+             .where(role_conditions)
+             .where(additional_conditions)
+             .where(year_conditions)
+             .where(name_conditions)
+             .includes(:coordinator)
+             .joins(coordinators_join)
+             .limit(limit)
+             .order(Arel.sql(order))
 
     count = User
-      .where(conditions)
-      .where(role_conditions)
-      .where(additional_conditions)
-      .where(year_conditions)
-      .where(name_conditions)
-      .includes(:coordinator)
-      .joins(coordinators_join)
-      .count
+            .where(conditions)
+            .where(role_conditions)
+            .where(additional_conditions)
+            .where(year_conditions)
+            .where(name_conditions)
+            .includes(:coordinator)
+            .joins(coordinators_join)
+            .count
 
     options = {
       meta: {
-        count: count,
+        count: count
       },
       fields: get_allowed_fields,
-      include: get_includes,
+      include: get_includes
     }
 
     render json: UserSerializer.new(result, options), status: 200
@@ -127,28 +126,30 @@ module UserControllerMethods
 
   def show
     result = User
-      .where(get_role_conditions)
-      .where({
-        id: params[:id],
-      });
+             .where(get_role_conditions)
+             .where(
+               id: params[:id]
+             )
 
-    raise ActiveRecord::NotFound if result.size == 0
+    raise ActiveRecord::NotFound if result.empty?
 
     options = {
       fields: get_allowed_fields,
-      include: get_includes,
+      include: get_includes
     }
 
     render json: UserSerializer.new(result.first, options)
   end
 
-protected
+  protected
+
   def get_allowed_fields
     { user: allowed_fields }
   end
 
   def get_includes
     return [] unless params[:include]
-    return params[:include].split(',') & ALLOWED_INCLUDES
+
+    params[:include].split(',') & ALLOWED_INCLUDES
   end
 end

@@ -1,13 +1,16 @@
+# frozen_string_literal: true
+
 class StaffController < ApiBaseController
   include UserControllerMethods
 
-protected
+  protected
+
   def allowed_fields
-    [
-      :firstName,
-      :lastName,
-      :nickname,
-      :coordinatees,
+    %i[
+      firstName
+      lastName
+      nickname
+      coordinatees
     ]
   end
 

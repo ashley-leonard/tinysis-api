@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 class StatusController < ApiBaseController
   def index
     limit = params[:limit] || Rails.configuration.constants[:DEFAULT_LIMIT]
 
-    limit = nil if limit == "-1"
+    limit = nil if limit == '-1'
 
     joins = []
 
@@ -10,12 +12,12 @@ class StatusController < ApiBaseController
     selects = ['statuses.*']
     if params[:months]
       conditions[:month] = params[:months]
-        .split(',')
-        .collect{|month| expand_month(month) }
+                           .split(',')
+                           .collect { |month| expand_month(month) }
     end
 
     if params[:enrollmentIds] && params[:studentIds]
-      return render json: { message: 'conflicting request; must fetch enrollment or student status separately', }, status: 400
+      return render json: { message: 'conflicting request; must fetch enrollment or student status separately' }, status: 400
     end
 
     if params[:type]
@@ -34,7 +36,7 @@ class StatusController < ApiBaseController
     emptyResult = {
       data: [],
       meta: {
-        count: 0,
+        count: 0
       }
     }
 
@@ -60,15 +62,15 @@ class StatusController < ApiBaseController
     end
 
     result = Status
-      .where(conditions)
-      .joins(joins.join(' '))
-      .select(selects.join(','))
-      .limit(limit)
+             .where(conditions)
+             .joins(joins.join(' '))
+             .select(selects.join(','))
+             .limit(limit)
     count = Status.where(conditions).count
 
     options = {
       meta: {
-        count: count,
+        count: count
       },
       include: [:creator]
     }

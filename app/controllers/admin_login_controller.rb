@@ -1,33 +1,30 @@
+# frozen_string_literal: true
+
 require './lib/auth0_management'
 
 class AdminLoginController < AdminController
-
   def create
     user = @client.activate_user user_attributes
 
     user_with_roles = @client.get_user user['user_id']
 
     render json: { data: user_with_roles }
-
-  rescue AuthManagementError => error
-    render_error error
-
-  rescue => error
-    Rails.logger.error "Error creating user"
-    Rails.logger.error error
-    render json: { message: error }, status: 500
+  rescue AuthManagementError => e
+    render_error e
+  rescue StandardError => e
+    Rails.logger.error 'Error creating user'
+    Rails.logger.error e
+    render json: { message: e }, status: 500
   end
 
   def destroy
     @client.delete_user params[:id]
 
     render nothing: true, status: 204
-
-  rescue AuthManagementError => error
-    render_error error
-
-  rescue => error
-    render json: { message: error }, status: 500
+  rescue AuthManagementError => e
+    render_error e
+  rescue StandardError => e
+    render json: { message: e }, status: 500
   end
 
   def show
@@ -35,15 +32,15 @@ class AdminLoginController < AdminController
 
     user = @client.find_user email
 
-    render(json: { error: 'User not found with provided email' }, status: 404) and return unless user
+    unless user
+      render(json: { error: 'User not found with provided email' }, status: 404) && return
+    end
 
     render json: { data: user }
-
-  rescue AuthManagementError => error
-    render_error error
-
-  rescue => error
-    render json: { message: error }, status: 500
+  rescue AuthManagementError => e
+    render_error e
+  rescue StandardError => e
+    render json: { message: e }, status: 500
   end
 
   def update
@@ -54,15 +51,14 @@ class AdminLoginController < AdminController
     user = @client.get_user user_id
 
     render json: { data: user }
-
-  rescue AuthManagementError => error
-    render_error error
-
-  rescue => error
-    render json: { message: error }, status: 500
+  rescue AuthManagementError => e
+    render_error e
+  rescue StandardError => e
+    render json: { message: e }, status: 500
   end
 
-private
+  private
+
   before_action do
     @client = AuthManagement.new Rails.application.secrets.auth0_management
     @client.get_access_token
@@ -70,16 +66,15 @@ private
 
   def user_attributes
     attrs = params
-      .require(:data)
-      .permit(:first_name, :last_name, :nickname, :email, :password, :id, :role)
+            .require(:data)
+            .permit(:first_name, :last_name, :nickname, :email, :password, :id, :role)
 
-    return attrs
+    attrs
   end
 
-  def render_error error
+  def render_error(error)
     Rails.logger.error error.exception || error
-    
+
     render json: (error.body || {}), status: error.code || 500
   end
-
 end

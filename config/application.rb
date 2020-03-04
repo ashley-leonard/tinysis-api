@@ -1,17 +1,19 @@
+# frozen_string_literal: true
+
 require_relative 'boot'
 
-require "rails"
+require 'rails'
 # Pick the frameworks you want:
-require "active_model/railtie"
-require "active_job/railtie"
-require "active_record/railtie"
-require "active_storage/engine"
-require "action_controller/railtie"
-require "action_mailer/railtie"
-require "action_view/railtie"
-require "action_cable/engine"
+require 'active_model/railtie'
+require 'active_job/railtie'
+require 'active_record/railtie'
+require 'active_storage/engine'
+require 'action_controller/railtie'
+require 'action_mailer/railtie'
+require 'action_view/railtie'
+require 'action_cable/engine'
 # require "sprockets/railtie"
-require "rails/test_unit/railtie"
+require 'rails/test_unit/railtie'
 
 Dir['./lib/mixins/*.rb'].each { |f| require f }
 
@@ -37,10 +39,10 @@ module TinysisApi
     config.constants = {
       MAX_TITLE: 255,
       MIN_TITLE: 4,
-      DEFAULT_LIMIT: 30,
+      DEFAULT_LIMIT: 30
     }
 
-    # TODO should move these into app tree
+    # TODO: should move these into app tree
     config.autoload_paths << Rails.root.join('lib')
   end
 end

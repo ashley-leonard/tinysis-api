@@ -1,20 +1,23 @@
+# frozen_string_literal: true
+
 class StudentsController < ApiBaseController
   include UserControllerMethods
 
-protected
+  protected
+
   def allowed_fields
-    [
-      :firstName,
-      :lastName,
-      :nickname,
-      :dateActive,
-      :dateInactive,
-      :districtId,
-      :districtGrade,
-      :isActive,
-      :status,
-      :coordinator,
-      :role,
+    %i[
+      firstName
+      lastName
+      nickname
+      dateActive
+      dateInactive
+      districtId
+      districtGrade
+      isActive
+      status
+      coordinator
+      role
     ]
   end
 

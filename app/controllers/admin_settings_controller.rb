@@ -1,5 +1,6 @@
-class AdminSettingsController < AdminController
+# frozen_string_literal: true
 
+class AdminSettingsController < AdminController
   def update
     settings = settings_attributes
     settings.keys.each do |key|
@@ -14,12 +15,11 @@ class AdminSettingsController < AdminController
     render json: SettingSerializer.new(Setting.where(name: settings.keys)), status: 200
   end
 
-private
+  private
 
   def settings_attributes
     params.require(:data)
-      .require(:attributes)
-      .permit(:current_year, :reporting_base_month, :reporting_end_month, :new_contract_term_default)
+          .require(:attributes)
+          .permit(:current_year, :reporting_base_month, :reporting_end_month, :new_contract_term_default)
   end
-
 end

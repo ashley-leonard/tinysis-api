@@ -1,28 +1,36 @@
+# frozen_string_literal: true
+
 class MeetingsController < ApiBaseController
-  PERMITTED_INCLUDES = %w{meeting_participants}
+  PERMITTED_INCLUDES = %w[meeting_participants].freeze
 
   def create
     contract_id = meeting_contract_id
 
-    return render json: { message: 'missing contract relation id' }, status: :bad_request if contract_id.nil?
+    if contract_id.nil?
+      return render json: { message: 'missing contract relation id' }, status: :bad_request
+    end
 
     meeting_date = meeting_date_attribute
-    return render json: { message: 'missing meeting date' }, status: :bad_request if meeting_date.nil?
+    if meeting_date.nil?
+      return render json: { message: 'missing meeting date' }, status: :bad_request
+    end
 
     meeting = Meeting.find_by_contract_id_and_meeting_date contract_id, meeting_date
-    return render json: { message: 'duplicate entity' }, status: :bad_request if meeting
+    if meeting
+      return render json: { message: 'duplicate entity' }, status: :bad_request
+    end
 
     meeting = Meeting.new meeting_attributes
     meeting.contract = Contract.find(contract_id)
     meeting.save!
 
-    return render json: MeetingSerializer.new(meeting)
+    render json: MeetingSerializer.new(meeting)
   end
 
   def index
     limit = params[:limit] || Rails.configuration.constants[:DEFAULT_LIMIT]
 
-    limit = nil if limit == "-1"
+    limit = nil if limit == '-1'
 
     conditions = {}
 
@@ -31,8 +39,8 @@ class MeetingsController < ApiBaseController
     end
 
     result = Meeting
-      .where(conditions)
-      .limit(limit)
+             .where(conditions)
+             .limit(limit)
 
     count = Meeting.where(conditions).count
 
@@ -42,9 +50,9 @@ class MeetingsController < ApiBaseController
 
     options = {
       meta: {
-        count: count,
+        count: count
       },
-      include: included_models,
+      include: included_models
     }
 
     render json: MeetingSerializer.new(result, options), status: :ok
@@ -58,7 +66,7 @@ class MeetingsController < ApiBaseController
     end
 
     options = {
-      include: included_models,
+      include: included_models
     }
 
     render json: MeetingSerializer.new(meeting, options), status: :ok
@@ -66,18 +74,17 @@ class MeetingsController < ApiBaseController
 
   def update_roll
     meeting = Meeting
-      .includes(:contract => :enrollments)
-      .includes(:meeting_participants)
-      .find(params[:id])
+              .includes(contract: :enrollments)
+              .includes(:meeting_participants)
+              .find(params[:id])
 
     updates = []
 
     meeting.contract.enrollments.each do |enrollment|
       next unless enrollment.enrolled?
-      meeting_participant = meeting.meeting_participants.find {|mp| mp.enrollment == enrollment}
-      unless meeting_participant
-        meeting_participant = MeetingParticipant.new enrollment: enrollment, meeting: meeting
-      end
+
+      meeting_participant = meeting.meeting_participants.find { |mp| mp.enrollment == enrollment }
+      meeting_participant ||= MeetingParticipant.new enrollment: enrollment, meeting: meeting
 
       meeting_participant.update_attributes! update_roll_attributes
       updates.push meeting_participant
@@ -86,17 +93,18 @@ class MeetingsController < ApiBaseController
     render json: MeetingParticipantSerializer.new(updates), status: :ok
   end
 
-private
+  private
+
   def meeting_attributes
     params.require(:data)
-      .require(:attributes)
-      .permit(:meeting_date)
+          .require(:attributes)
+          .permit(:meeting_date)
   end
 
   def update_roll_attributes
     params.require(:data)
-      .require(:attributes)
-      .permit(:contact_type, :participation)
+          .require(:attributes)
+          .permit(:contact_type, :participation)
   end
 
   def meeting_date_attribute
@@ -105,9 +113,7 @@ private
 
   def meeting_contract_id
     params.dig :data, :relationships, :contract, :data, :id
-  rescue
+  rescue StandardError
     nil
   end
 end
-
-

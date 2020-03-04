@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe 'Credit assignments API', type: :request do
-
   before(:each) do
     setup_contract
 
@@ -23,7 +24,7 @@ RSpec.describe 'Credit assignments API', type: :request do
 
   describe 'GET /api/credit-assignments' do
     it 'returns a 200 with all assignments' do
-      get "/api/credit-assignments", headers: json_request_headers
+      get '/api/credit-assignments', headers: json_request_headers
 
       expect(response).to have_http_status(200)
       expect(json).not_to be_empty
@@ -54,18 +55,17 @@ RSpec.describe 'Credit assignments API', type: :request do
       expect(response.body).to be_empty
     end
   end
-  
+
   describe 'POST credit-assignments' do
     it 'returns a 200 with successful creation of a credit assignment bound to an enrollment' do
-      body = {params: body.to_json, 
-        data: {
-          attributes: { creditHours: 0.25 },
-          relationships: {
-            enrollment: { data: { id: @enrollment1.id } },
-            credit: { data: { id: @credit1.id } },
-          }
-        }
-      }
+      body = { params: body.to_json,
+               data: {
+                 attributes: { creditHours: 0.25 },
+                 relationships: {
+                   enrollment: { data: { id: @enrollment1.id } },
+                   credit: { data: { id: @credit1.id } }
+                 }
+               } }
 
       post "/api/enrollments/#{@enrollment1.id}/credit-assignments", params: body.to_json, headers: json_request_headers
 
@@ -81,12 +81,12 @@ RSpec.describe 'Credit assignments API', type: :request do
       body = {
         data: {
           attributes: {
-            overrideHours: 5.0,
+            overrideHours: 5.0
           },
           relationships: {
             credit: { data: { id: @credit1.id } },
-            childCreditAssignments: { data: [ { id: @credit_assignment_1.id }, { id: @credit_assignment_2.id }] },
-            contractTerm: { data: { id: @enrollment1.contract.term.id }},
+            childCreditAssignments: { data: [{ id: @credit_assignment_1.id }, { id: @credit_assignment_2.id }] },
+            contractTerm: { data: { id: @enrollment1.contract.term.id } }
           }
         }
       }
@@ -116,7 +116,7 @@ RSpec.describe 'Credit assignments API', type: :request do
             note: note_text
           },
           relationships: {
-            credit: { data: { id: @credit1.id } },
+            credit: { data: { id: @credit1.id } }
           }
         }
       }

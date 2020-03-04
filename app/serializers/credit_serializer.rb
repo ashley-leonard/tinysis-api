@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreditSerializer < ApplicationSerializer
   set_type :credit
 

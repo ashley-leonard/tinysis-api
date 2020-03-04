@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'faker'
 
 CURRENT_YEAR = 2019
@@ -49,7 +51,7 @@ def make_contract(attributes = {})
     competencies: Faker::Lorem.sentence(5, 0),
     evaluation_methods: Faker::Lorem.sentence(5, 0),
     instructional_materials: Faker::Lorem.sentence(5, 0),
-    location: Faker::Lorem.sentence(5, 0),
+    location: Faker::Lorem.sentence(5, 0)
   )
   contract.update_attributes attributes
   contract.save!
@@ -87,9 +89,9 @@ Ealr.all.each do |ealr|
 end
 @contract1_current.save!
 
-@student1 = User.create! privilege: User::PRIVILEGE_STUDENT, status: User::STATUS_ACTIVE, first_name: Faker::Name.first_name, last_name: Faker::Name.first_name, district_id: Random.rand(10 ** 10).to_s, coordinator: @staff1, date_active: Date.new(LAST_YEAR, 8, 1)
-@student2 = User.create! privilege: User::PRIVILEGE_STUDENT, status: User::STATUS_ACTIVE, first_name: Faker::Name.first_name, last_name: Faker::Name.first_name, district_id: Random.rand(10 ** 10).to_s, coordinator: @staff2, date_active: Date.new(LAST_YEAR, 8, 1)
-@student3 = User.create! privilege: User::PRIVILEGE_STUDENT, status: User::STATUS_INACTIVE, first_name: Faker::Name.first_name, last_name: Faker::Name.first_name, district_id: Random.rand(10 ** 10).to_s, coordinator: @staff2, date_active: Date.new(LAST_YEAR, 8, 1), date_inactive: Date.new(CURRENT_YEAR, 10, 1)
+@student1 = User.create! privilege: User::PRIVILEGE_STUDENT, status: User::STATUS_ACTIVE, first_name: Faker::Name.first_name, last_name: Faker::Name.first_name, district_id: Random.rand(10**10).to_s, coordinator: @staff1, date_active: Date.new(LAST_YEAR, 8, 1)
+@student2 = User.create! privilege: User::PRIVILEGE_STUDENT, status: User::STATUS_ACTIVE, first_name: Faker::Name.first_name, last_name: Faker::Name.first_name, district_id: Random.rand(10**10).to_s, coordinator: @staff2, date_active: Date.new(LAST_YEAR, 8, 1)
+@student3 = User.create! privilege: User::PRIVILEGE_STUDENT, status: User::STATUS_INACTIVE, first_name: Faker::Name.first_name, last_name: Faker::Name.first_name, district_id: Random.rand(10**10).to_s, coordinator: @staff2, date_active: Date.new(LAST_YEAR, 8, 1), date_inactive: Date.new(CURRENT_YEAR, 10, 1)
 @students = [@student1, @student2, @student3]
 
 # current contracts should have active enrollments. reporting as if we are three months into
@@ -135,7 +137,7 @@ finalized_credits.each do |credit_assignment|
 end
 
 # create a batch with just the 0.25 credits
-CreditTransmittalBatch.create_batch_from_credits_list @admin1, finalized_credits.filter{|ca| ca.credit_hours == 0.25 }
+CreditTransmittalBatch.create_batch_from_credits_list @admin1, finalized_credits.filter { |ca| ca.credit_hours == 0.25 }
 
 # coor statuses for all months of the last coor
 @term_coor_last.months.each do |month|
@@ -155,7 +157,7 @@ months.each do |month|
 end
 
 # create five assignments and turnins for the contract 1 current
-enrollment = @contract1_current.enrollments.find{|e| e.participant == @student1}
+enrollment = @contract1_current.enrollments.find { |e| e.participant == @student1 }
 (1..5).each do |assignment_number|
   assignment = Assignment.create! contract: @contract1_current, creator: @contract1_current.facilitator, name: "Assignment #{assignment_number}", description: "Here is assignment number #{assignment_number}", due_date: @term1_current.months[0] + assignment_number.days
   turnin = Turnin.create! enrollment: enrollment, assignment: assignment, status: :complete
@@ -167,10 +169,10 @@ end
   meeting = Meeting.create contract: @contract1_current, meeting_date: @contract1_current.term.months.first + meeting_number.days
 
   @contract1_current.enrollments.each do |enrollment|
-    attendance = if enrollment.participant.id == @student1.id then
-      MeetingParticipant::PRESENT
-    else
-      MeetingParticipant::ABSENT
+    attendance = if enrollment.participant.id == @student1.id
+                   MeetingParticipant::PRESENT
+                 else
+                   MeetingParticipant::ABSENT
     end
 
     meeting_participant = MeetingParticipant.create meeting: meeting, enrollment: enrollment, participation: attendance
@@ -190,7 +192,7 @@ GraduationPlanRequirement.create! name: 'General2', requirement_type: 'general',
 gradService1 = GraduationPlanRequirement.create! name: 'Service1', requirement_type: 'service', position: 1
 GraduationPlanRequirement.create! name: 'Service2', requirement_type: 'service', position: 2
 
-credit_assignments = @student2.credit_assignments.filter {|ca| ca.facilitator_approved? }
+credit_assignments = @student2.credit_assignments.filter { |ca| ca.facilitator_approved? }
 
 graduation_plan = GraduationPlan.create! user: @student2
 

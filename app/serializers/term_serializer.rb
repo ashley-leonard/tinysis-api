@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TermSerializer < ApplicationSerializer
   set_type :term
 
@@ -13,8 +15,8 @@ class TermSerializer < ApplicationSerializer
 
   meta do |term, params|
     if params[:usage]
-      term_entry = params[:usage].find{|meta| meta[:id] == term.id}
-      term_entry.attributes.reject{|a| a == "id"}
+      term_entry = params[:usage].find { |meta| meta[:id] == term.id }
+      term_entry.attributes.reject { |a| a == 'id' }
     end
   end
 end

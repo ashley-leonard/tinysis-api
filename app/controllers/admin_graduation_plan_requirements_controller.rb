@@ -1,5 +1,6 @@
-class AdminGraduationPlanRequirementsController < AdminController
+# frozen_string_literal: true
 
+class AdminGraduationPlanRequirementsController < AdminController
   def create
     requirement = GraduationPlanRequirement.new requirements_attributes
 
@@ -13,13 +14,13 @@ class AdminGraduationPlanRequirementsController < AdminController
   def update
     requirement = GraduationPlanRequirement.find params[:id]
 
-    return unless check_assign_parent(requirement)    
+    return unless check_assign_parent(requirement)
 
     requirement.update_attributes! requirements_attributes
 
     render json: GraduationPlanRequirementSerializer.new(requirement)
   end
-  
+
   def sort
     requirements = []
     params[:data].each_with_index do |req, i|
@@ -31,12 +32,15 @@ class AdminGraduationPlanRequirementsController < AdminController
     render json: GraduationPlanRequirementSerializer.new(requirements)
   end
 
-private
-  def check_assign_parent requirement
+  private
+
+  def check_assign_parent(requirement)
     parent = requirement_parent_attributes
     if parent
       parent = GraduationPlanRequirement.find parent[:id]
-      render_unprocessable_entity_response(new Error('unacceptable parent reference')) and return false unless parent and parent.parent.nil?
+      unless parent && parent.parent.nil?
+        render_unprocessable_entity_response(new(Error('unacceptable parent reference'))) && (return false)
+      end
     end
     requirement.parent = parent
     true
@@ -44,12 +48,11 @@ private
 
   def requirements_attributes
     params.require(:data)
-      .require(:attributes)
-      .permit(:name, :notes, :position, :requirement_type, :status)
+          .require(:attributes)
+          .permit(:name, :notes, :position, :requirement_type, :status)
   end
 
   def requirement_parent_attributes
     params.dig(:data, :relationships, :parent, :data)
   end
-
 end

@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 class AdminTermsController < AdminController
   def create
     term = Term.new
     update_attributes term
     term.save!
 
-    return render json: TermSerializer.new(term)
+    render json: TermSerializer.new(term)
   end
 
   def update
@@ -12,22 +14,23 @@ class AdminTermsController < AdminController
     update_attributes term
     term.save!
 
-    return render json: TermSerializer.new(term)
+    render json: TermSerializer.new(term)
   end
 
-private
-  def update_attributes model
+  private
+
+  def update_attributes(model)
     attrs = term_attributes
 
     # will just leave months alone if parsing fails
     begin
       if attrs[:months]
-        attrs[:months] = attrs[:months].split(',').map{|m| Date.parse(m)}
+        attrs[:months] = attrs[:months].split(',').map { |m| Date.parse(m) }
       end
-    rescue StandardError => error
-      Rails.logger.error error
+    rescue StandardError => e
+      Rails.logger.error e
     end
-    
+
     if attrs[:status]
       attrs[:active] = attrs[:status] == 'active'
       attrs.delete :status
@@ -38,7 +41,7 @@ private
 
   def term_attributes
     params.require(:data)
-      .require(:attributes)
-      .permit(:name, :school_year, :status, :credit_date, months: [])
+          .require(:attributes)
+          .permit(:name, :school_year, :status, :credit_date, months: [])
   end
 end

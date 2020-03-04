@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class UserSerializer < ApplicationSerializer
   attributes :first_name
   attributes :last_name
@@ -23,6 +25,6 @@ class UserSerializer < ApplicationSerializer
     User::PRIVILEGE_NAMES[object.privilege].downcase
   end
 
-  has_many :coordinatees, record_type: :user, if: Proc.new { |record| record.staff? }
-  belongs_to :coordinator, record_type: :user, if: Proc.new{ |record| record.student? }
+  has_many :coordinatees, record_type: :user, if: proc { |record| record.staff? }
+  belongs_to :coordinator, record_type: :user, if: proc { |record| record.student? }
 end

@@ -1,13 +1,15 @@
+# frozen_string_literal: true
+
 class Absence < ApplicationRecord
   belongs_to :enrollment
-  has_many :notes, :as => :notable, :dependent => :destroy
+  has_many :notes, as: :notable, dependent: :destroy
 
   REASON_UNKNOWN = 0
   REASON_EXCUSED = 1
   REASON_NAMES = {
-    REASON_UNKNOWN => "Unknown",
-    REASON_EXCUSED => "Excused"
-  }
+    REASON_UNKNOWN => 'Unknown',
+    REASON_EXCUSED => 'Excused'
+  }.freeze
 
   attr_accessor :absent, :note
 
@@ -15,6 +17,6 @@ class Absence < ApplicationRecord
   # on this absence
   #
   def privileges(user)
-    return enrollment.privileges(user)
+    enrollment.privileges(user)
   end
 end
