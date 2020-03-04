@@ -126,7 +126,7 @@ public
         [STATUS_PROPOSED, STATUS_CLOSED].include?(self.enrollment_status) || 
         (self.enrollment_status==STATUS_FINALIZED && self.completion_status==COMPLETION_CANCELED)
       )
-      raise TinyException, TinyException::MESSAGES[TinyException::NOPRIVILEGES]
+      raise TinyException, 'You lack sufficient privileges'
     end
 
     if finalized? # assume it was canceled and is being reinstated. set credits back to unfinalized state.
@@ -148,9 +148,14 @@ public
 
   def set_closed(completion_status, user, date = Time.now.gmtime)
     privs = privileges(user)
-    unless self.enrollment_status == STATUS_ENROLLED and privs[:edit]
-      raise TinyException, TinyException::MESSAGES[TinyException::NOPRIVILEGES]
+    Rails.logger.info "privileges!!!"
+    Rails.logger.info privs.inspect
+    Rails.logger.info "!!!!!!!!!!!!!"
+
+    unless enrollment_status == STATUS_ENROLLED && privs[:edit]
+      raise TinyException.new 'Insufficient privileges'
     end
+
     self.completion_date = date
     self.completion_status = completion_status
     self.enrollment_status = STATUS_CLOSED
@@ -163,24 +168,25 @@ public
     return false if self.enrollment_status != Enrollment::STATUS_CLOSED
 
     unless user.admin?
-      raise TinyException, TinyException::MESSAGES[TinyException::NOPRIVILEGES]
+      raise TinyException.new 'Insufficient privileges'
     end
+
     # if self.finalized_on?
     #   UserMailer.deliver_trouble_report "Finalizing enrollment that already has a finalized_on stamp", user, {:enrollment => self, :student => self.participant, :contract => self.contract}
     # end
-    update_attributes(:enrollment_status => STATUS_FINALIZED, :finalized_on => date)
+    update_attributes(enrollment_status: STATUS_FINALIZED, finalized_on: date)
 
     # fixup the credits
     credit_assignments.each do |ca|
-      ca.enrollment_finalize(self.completion_status, participant, contract, date)
+      ca.enrollment_finalize(completion_status, participant, contract, date)
     end 
 
     return true
   end
-  
+
   # performs a student enrollment, setting the enrollment_status 
   # appropriately depending on the enrolling user's privileges.
-
+  #
   def Enrollment.enroll_student(contract, student, user, privs=nil)
 
     # Bail out if we can't get authentication

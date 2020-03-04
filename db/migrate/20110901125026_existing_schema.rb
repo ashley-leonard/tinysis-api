@@ -1,4 +1,4 @@
-class CreateUsers < ActiveRecord::Migration[5.2]
+class ExistingSchema < ActiveRecord::Migration[5.2]
   def change
     create_table "assignments", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
       t.integer "contract_id"

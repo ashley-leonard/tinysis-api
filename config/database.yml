@@ -3,16 +3,16 @@ default: &default
 
 development: &development
   <<: *default
-  host: <%= ENV['DB_HOST'] %>
-  database: <%= ENV['DB_DATABASE'] %>
-  username: <%= ENV['DB_USER'] %>
-  password: <%= ENV['DB_PASSWORD'] %>
+  host: <%= ENV['TINYSIS_HOST'] %>
+  database: <%= ENV['TINYSIS_DATABASE'] %>
+  username: <%= ENV['TINYSIS_USER'] %>
+  password: <%= ENV['TINYSIS_PASSWORD'] %>
 
 test:
   <<: *default
-  database: 'nova_test'
-  username: 'nova_test'
-  password: 'nova_test'
+  database: 'tinysis_test'
+  username: 'tinysis_test'
+  password: 'tinysis_test'
 
 production:
   <<: *development
