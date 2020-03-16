@@ -12,12 +12,42 @@ This project will provide an API server that serves JSON data feeds and basic CR
 
 A future project will implement a modern, single-page UX consuming these APIs.
 
+## Prerequisites
+
+To run natively, you need Ruby 2.6 and mysql server.
+
+To run using the docker setup, you need to install docker and docker-compose.
+
+You may need libmysqlclient:
+
+    apt install libmysqlclient-dev
+
 ## Config
 
-The secrets-template.yml file needs to be copied over and modified. Values are retrievable from the
-Auth0 dashboard.
+The secrets.yml file can be downloaded from AWS using the command `./tiny-utils.sh getApiSecrets`.
 
-## Running the server
+## Is the server up?
+
+    http://localhost:3000/up
+
+## Running using docker-compose
+
+Use the util script:
+
+    ./tiny-utils startApi
+
+Run the script without arguments to see other commands.
+
+## Native setup
+
+To run the system on your local machine, you must first install the necessary gems, init the database,
+and then run the server.
+
+    1. `bundle install`
+    2. `rake db:create`
+    3. `rake db:migrate`
+    
+### Running the server natively
 
     rails s
 
@@ -25,8 +55,9 @@ Running only some tests (filter by name)
 
     bundle exec rspec --example "Statuses"
 
-## Running tests
+### Running tests
 
+    rake db:test:prepare
     bundle exec rspec
 
 Running only some tests (filter by name)
@@ -48,31 +79,3 @@ Running only some tests (filter by name)
     GRANT ALL PRIVILEGES ON nova_development.* to `nova_development`@`localhost`;
 
     rake db:test:prepare
-
-## mysql
-
-You may need to
-
-    apt install libmysqlclient-dev
-
-## Credit assignment notes
-
-  1. Enrollment credit
-  2. Enrollment finalized
-     1. Capture contract details on credit assignment
-        - Facilitator name, id
-        - Term id
-     2. If enrollment completed
-        1. Enrollment_finalized_on date set
-        2. Assigned to user
-     3. If enrollment canceled
-         1. denormalize (cache course_name, course_id)
-         2. Note that it might be reinstated if the enrollment is reactivated
-  3. User credit
-  4. Facilitator can combine with other credits to create a new credit assignment
-  5. Facilitator approves for district transmittal
-    - set approved by (denormalized name)
-    - set approved on date
-    - denormalize (cache course_name, course_id)
-    - denormalize all child credits and save
-    - (Can be unapproved until transmitted)
