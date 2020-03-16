@@ -1,7 +1,9 @@
-class CreditsController < ApplicationController
+# frozen_string_literal: true
+
+class CreditsController < ApiBaseController
   def index
     limit = params[:limit] || Rails.configuration.constants[:DEFAULT_LIMIT]
-    limit = nil if limit == "-1"
+    limit = nil if limit == '-1'
 
     order = (params[:order] || '').split(',').map(&:underscore).join(',')
 
@@ -9,24 +11,22 @@ class CreditsController < ApplicationController
     search = []
 
     if params[:search]
-      search << "(course_name LIKE ?) OR (course_id LIKE ?)"
+      search << '(course_name LIKE ?) OR (course_id LIKE ?)'
       search << "%#{params[:search]}%"
       search << "%#{params[:search]}%"
     end
 
-    if params[:status]
-      conditions[:status] = params[:status]
-    end
+    conditions[:status] = params[:status] if params[:status]
 
     result = Credit
-      .where(conditions)
-      .where(search)
-      .order(Arel.sql(order))
-      .limit(limit)
+             .where(conditions)
+             .where(search)
+             .order(Arel.sql(order))
+             .limit(limit)
     count = Credit
-      .where(conditions)
-      .where(search)
-      .count
+            .where(conditions)
+            .where(search)
+            .count
     options = {
       meta: {
         count: count

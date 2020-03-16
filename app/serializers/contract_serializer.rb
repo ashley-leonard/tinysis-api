@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ContractSerializer < ApplicationSerializer
   set_type :contract
   attributes :name

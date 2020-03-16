@@ -1,0 +1,41 @@
+version: '3'
+services:
+  db:
+    build: ./db
+    command: mysqld --default-authentication-plugin=mysql_native_password
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=tinysis
+    ports:
+      - 3316:3306
+    restart: always
+    volumes:
+      - tinysis_data:/var/lib/mysql
+    networks:
+      - web
+  web:
+    build: .
+    command: bash -c "rm -f tmp/pids/server.pid && rails s"
+    volumes:
+      - .:/api
+    ports:
+      - 3000:3000
+    networks:
+      - web
+    environment:
+      - TINYSIS_HOST=db
+      - TINYSIS_DATABASE=tinysis
+      - TINYSIS_USER=root
+      - TINYSIS_PASSWORD=root
+      - RAILS_MASTER_KEY=${RAILS_MASTER_KEY}
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - "8080:8080"
+    networks:
+      - web
+volumes:
+  tinysis_data:
+networks:
+  web:

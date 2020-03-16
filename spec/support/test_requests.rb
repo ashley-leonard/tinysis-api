@@ -1,5 +1,6 @@
-module TestRequests
+# frozen_string_literal: true
 
+module TestRequests
   def setup_contract
     @staff1 = create :user, privilege: User::PRIVILEGE_STAFF, email: Faker::Internet.email
     @staff2 = create :user, privilege: User::PRIVILEGE_STAFF, email: Faker::Internet.email

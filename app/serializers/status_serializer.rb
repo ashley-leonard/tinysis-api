@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class StatusSerializer < ApplicationSerializer
   set_type :status
 

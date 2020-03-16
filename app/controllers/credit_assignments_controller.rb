@@ -1,12 +1,13 @@
-class CreditAssignmentsController < ApplicationController
+# frozen_string_literal: true
 
-  before_action :get_student, only: [:approve, :unapprove, :create_for_student]
-  before_action :entitle_student, only: [:destroy, :create_for_student]
+class CreditAssignmentsController < ApiBaseController
+  before_action :get_student, only: %i[approve unapprove create_for_student]
+  before_action :entitle_student, only: %i[destroy create_for_student]
 
   def index
     limit = params[:limit] || Rails.configuration.constants[:DEFAULT_LIMIT]
 
-    limit = nil if limit == "-1"
+    limit = nil if limit == '-1'
 
     conditions = {}
 
@@ -18,24 +19,22 @@ class CreditAssignmentsController < ApplicationController
       conditions[:contract_id] = params[:contractIds].split(',')
     end
 
-    if params[:studentIds]
-      conditions[:user_id] = params[:studentIds].split(',')
-    end
+    conditions[:user_id] = params[:studentIds].split(',') if params[:studentIds]
 
     result = CreditAssignment
-      .where(conditions)
-      .includes(:credit)
-      .limit(limit)
+             .where(conditions)
+             .includes(:credit)
+             .limit(limit)
     count = CreditAssignment
-      .where(conditions)
-      .count
+            .where(conditions)
+            .count
 
     options = {
       meta: {
-        count: count,
+        count: count
       },
       params: {
-        forFulfilled: params[:includeFulfilledAttributes] == 'true',
+        forFulfilled: params[:includeFulfilledAttributes] == 'true'
       }
     }
 
@@ -49,7 +48,7 @@ class CreditAssignmentsController < ApplicationController
   def show
     credit_assignment = CreditAssignment.find params[:id]
 
-    render json: CreditAssignmentSerializer.new(credit_assignment, { include: [:notes] })
+    render json: CreditAssignmentSerializer.new(credit_assignment, include: [:notes])
   end
 
   def create_for_enrollment
@@ -78,15 +77,17 @@ class CreditAssignmentsController < ApplicationController
     term = Term.find term_relation['id']
     credit = Credit.find credit_relation['id']
     child_credit_assignments = CreditAssignment
-      .where({id: child_credit_assignment_ids, user_id: @student.id})
+                               .where(id: child_credit_assignment_ids, user_id: @student.id)
 
-    raise ActionController::ParameterMissing.new('childCreditAssignments') if child_credit_assignments.empty?
+    if child_credit_assignments.empty?
+      raise ActionController::ParameterMissing, 'childCreditAssignments'
+    end
 
     new_credit_assignment = CreditAssignment.combine(@student, credit[:id], term[:id], attributes[:override_hours], child_credit_assignments, @user)
 
     update_note new_credit_assignment
 
-    render json: CreditAssignmentSerializer.new(new_credit_assignment, { params: { forFulfilled: true } })
+    render json: CreditAssignmentSerializer.new(new_credit_assignment, params: { forFulfilled: true })
   end
 
   def create_for_contract
@@ -113,7 +114,7 @@ class CreditAssignmentsController < ApplicationController
 
     credit_assignment.district_approve @user, approval_attributes[:district_finalize_approved_on]
 
-    render json: CreditAssignmentSerializer.new(credit_assignment, { params: { forFulfilled: true } })
+    render json: CreditAssignmentSerializer.new(credit_assignment, params: { forFulfilled: true })
   end
 
   def unapprove
@@ -121,7 +122,7 @@ class CreditAssignmentsController < ApplicationController
 
     credit_assignment.district_unapprove
 
-    render json: CreditAssignmentSerializer.new(credit_assignment, { params: { forFulfilled: true } })
+    render json: CreditAssignmentSerializer.new(credit_assignment, params: { forFulfilled: true })
   end
 
   def update
@@ -135,7 +136,7 @@ class CreditAssignmentsController < ApplicationController
 
     update_note credit_assignment
 
-    render json: CreditAssignmentSerializer.new(credit_assignment, { params: { forFulfilled: true } })
+    render json: CreditAssignmentSerializer.new(credit_assignment, params: { forFulfilled: true })
   end
 
   def destroy
@@ -143,16 +144,18 @@ class CreditAssignmentsController < ApplicationController
 
     children = credit_assignment.child_credit_assignments
 
-    raise TinyException.new("Not permitted to delete this credit assignment") unless children.length > 0 and !credit_assignment.transmitted?
+    unless !children.empty? && !credit_assignment.transmitted?
+      raise TinyException, 'Not permitted to delete this credit assignment'
+    end
 
     credit_assignment.uncombine
 
     render nothing: true, status: 204
   end
 
-protected
+  protected
 
-  def update_note credit_assignment
+  def update_note(credit_assignment)
     note_text = get_note
     return if note_text.blank?
 
@@ -171,20 +174,20 @@ protected
 
   def get_approval_attributes
     params.require(:data)
-      .require(:attributes)
-      .permit(:district_finalize_approved_on)
+          .require(:attributes)
+          .permit(:district_finalize_approved_on)
   end
 
   def get_attributes
     params.require(:data)
-      .require(:attributes)
-      .permit(:credit_hours, :override_hours)
+          .require(:attributes)
+          .permit(:credit_hours, :override_hours)
   end
 
   def get_note
     params.require(:data)
-      .require(:attributes)
-      .dig(:note)
+          .require(:attributes)
+          .dig(:note)
   end
 
   def get_relation(relation)

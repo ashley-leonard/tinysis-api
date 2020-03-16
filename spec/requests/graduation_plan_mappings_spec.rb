@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe 'Graduation plan mappings API', type: :request do
-
   before(:each) do
     setup_contract
 
@@ -86,15 +87,15 @@ RSpec.describe 'Graduation plan mappings API', type: :request do
           relationships: {
             graduation_plan_requirement: {
               data: {
-                id: @req2.id,
+                id: @req2.id
               }
-            },
+            }
           },
           attributes: {
             notes: 'When in the course of human events',
-            date_completed: '2018-11-08',
-          },
-        },
+            date_completed: '2018-11-08'
+          }
+        }
       }
 
       post "/api/graduation-plan-mappings/#{@student1.id}", params: body.to_json, headers: json_request_headers
@@ -104,8 +105,8 @@ RSpec.describe 'Graduation plan mappings API', type: :request do
       expect(json['data']['id']).not_to be_empty
       expect(json['data']['attributes']).not_to be_empty
 
-      expect(json['data']['attributes']['notes']).to eq("When in the course of human events")
-      expect(json['data']['attributes']['dateCompleted']).to eq("2018-11-08")
+      expect(json['data']['attributes']['notes']).to eq('When in the course of human events')
+      expect(json['data']['attributes']['dateCompleted']).to eq('2018-11-08')
     end
 
     it 'returns a 422 with duplicate mapping' do

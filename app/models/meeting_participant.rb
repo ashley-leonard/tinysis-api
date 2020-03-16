@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class MeetingParticipant < ApplicationRecord
   OPTIONAL = 0
   PRESENT = 1
@@ -10,18 +12,18 @@ class MeetingParticipant < ApplicationRecord
     PRESENT => 'present',
     ABSENT => 'absent',
     TARDY => 'tardy',
-    EXCUSED => 'excused',
-  }
+    EXCUSED => 'excused'
+  }.freeze
 
-  CONTACT_TYPES = %w{class coor other}
+  CONTACT_TYPES = %w[class coor other].freeze
 
   belongs_to :enrollment
   belongs_to :meeting
 
-  has_many :notes, :as => :notable, :dependent => :destroy
-  
+  has_many :notes, as: :notable, dependent: :destroy
+
   def privileges(user)
-    return meeting.privileges(user)
+    meeting.privileges(user)
   end
 
   def participation_name
@@ -29,19 +31,21 @@ class MeetingParticipant < ApplicationRecord
   end
 
   def participation=(participation)
-    write_attribute :participation, participation and return if participation.is_a? Integer
+    if participation.is_a? Integer
+      write_attribute(:participation, participation) && return
+    end
 
     write_attribute :participation, case participation
-      when PARTICIPATION_NAMES[OPTIONAL]
-        OPTIONAL
-      when PARTICIPATION_NAMES[PRESENT]
-        PRESENT
-      when PARTICIPATION_NAMES[ABSENT]
-        ABSENT
-      when PARTICIPATION_NAMES[TARDY]
-        TARDY
-      when PARTICIPATION_NAMES[EXCUSED]
-        EXCUSED
+                                    when PARTICIPATION_NAMES[OPTIONAL]
+                                      OPTIONAL
+                                    when PARTICIPATION_NAMES[PRESENT]
+                                      PRESENT
+                                    when PARTICIPATION_NAMES[ABSENT]
+                                      ABSENT
+                                    when PARTICIPATION_NAMES[TARDY]
+                                      TARDY
+                                    when PARTICIPATION_NAMES[EXCUSED]
+                                      EXCUSED
       end
   end
 end

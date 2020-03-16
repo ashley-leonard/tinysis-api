@@ -1,12 +1,13 @@
-class EnrollmentsController < ApplicationController
+# frozen_string_literal: true
 
-  before_action :get_enrollment, only: [:show, :destroy, :update]
-  before_action :entitle_enrollment, only: [:destroy, :update]
+class EnrollmentsController < ApiBaseController
+  before_action :get_enrollment, only: %i[show destroy update]
+  before_action :entitle_enrollment, only: %i[destroy update]
 
   def index
     limit = params[:limit] || Rails.configuration.constants[:DEFAULT_LIMIT]
 
-    limit = nil if limit == "-1"
+    limit = nil if limit == '-1'
 
     conditions = {}
 
@@ -18,27 +19,27 @@ class EnrollmentsController < ApplicationController
       conditions[:contract_id] = params[:contractIds].split(',')
     end
 
-    included_models = self.get_includes params[:include]
+    included_models = get_includes params[:include]
 
     case params[:status]
-      when 'enrolled'
-        conditions[:enrollment_status] = Enrollment::STATUS_ENROLLED
-      when 'closed'
-        conditions[:enrollment_status] = Enrollment::STATUS_CLOSED
-      when 'fulfilled'
-        conditions[:enrollment_status] = Enrollment::STATUS_FULFILLED
-      when 'all'
-      when nil
-        # skip
-      else
-        return render json: { message: 'invalid enrollment_status parameter' }, status: 400
+    when 'enrolled'
+      conditions[:enrollment_status] = Enrollment::STATUS_ENROLLED
+    when 'closed'
+      conditions[:enrollment_status] = Enrollment::STATUS_CLOSED
+    when 'fulfilled'
+      conditions[:enrollment_status] = Enrollment::STATUS_FULFILLED
+    when 'all'
+    when nil
+    # skip
+    else
+      return render json: { message: 'invalid enrollment_status parameter' }, status: 400
     end
 
     result = Enrollment
-      .where(conditions)
-      .limit(limit)
-      .joins('LEFT OUTER JOIN users AS participants ON participants.id = enrollments.participant_id')
-      .order('participants.last_name, participants.first_name');
+             .where(conditions)
+             .limit(limit)
+             .joins('LEFT OUTER JOIN users AS participants ON participants.id = enrollments.participant_id')
+             .order('participants.last_name, participants.first_name')
 
     count = Enrollment.where(conditions).count
 
@@ -53,7 +54,7 @@ class EnrollmentsController < ApplicationController
   end
 
   def show
-    included_models = self.get_includes params[:include]
+    included_models = get_includes params[:include]
 
     options = {
       include: included_models || []
@@ -71,7 +72,7 @@ class EnrollmentsController < ApplicationController
     when 'reinstate'
       @enrollment.set_active @user
     else
-      raise TinyException.new("Invalid update command") 
+      raise TinyException, 'Invalid update command'
     end
 
     show
@@ -83,15 +84,16 @@ class EnrollmentsController < ApplicationController
     render nothing: true, status: 204
   end
 
-protected
-  PERMITTED_INCLUDES = %w{contract contract.facilitator contract.term credit_assignments credit_assignments.credit participant turnins turnins.assignment meeting_participants meeting_participants.meeting}
+  protected
 
-  def get_includes include_params
+  PERMITTED_INCLUDES = %w[contract contract.facilitator contract.term credit_assignments credit_assignments.credit participant turnins turnins.assignment meeting_participants meeting_participants.meeting].freeze
+
+  def get_includes(include_params)
     return nil if include_params.nil?
 
     val = include_params
-      .split(',')
-      .map(&:underscore) & EnrollmentsController::PERMITTED_INCLUDES
+          .split(',')
+          .map(&:underscore) & EnrollmentsController::PERMITTED_INCLUDES
 
     val
   end

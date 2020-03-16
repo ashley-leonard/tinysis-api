@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class NoteSerializer < ApplicationSerializer
   set_type :note
 

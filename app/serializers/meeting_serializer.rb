@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class MeetingSerializer < ApplicationSerializer
   set_type :meeting
 

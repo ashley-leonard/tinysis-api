@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe 'Notes API', type: :request do
-
   before(:each) do
     setupEnrollments
 
@@ -17,7 +18,7 @@ RSpec.describe 'Notes API', type: :request do
 
   describe 'GET /api/notes' do
     it 'returns a 200 with all notes' do
-      get "/api/notes", headers: json_request_headers
+      get '/api/notes', headers: json_request_headers
 
       expect(response).to have_http_status(200)
 
@@ -34,7 +35,7 @@ RSpec.describe 'Notes API', type: :request do
           attributes: {
             note: Faker::Lorem.paragraph
           }
-        },
+        }
       }
       post "/api/notes/credit-assignment/#{@credit_assignment_1.id}", params: body.to_json, headers: json_request_headers
 
@@ -48,5 +49,4 @@ RSpec.describe 'Notes API', type: :request do
       expect(json['data']['relationships']['notable']['data']['type']).to eq('creditAssignment')
     end
   end
-
 end

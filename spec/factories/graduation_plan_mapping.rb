@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # spec/factories/graduation_plan_mapping.rb
 
 FactoryBot.define do

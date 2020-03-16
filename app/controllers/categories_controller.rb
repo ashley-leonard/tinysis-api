@@ -1,22 +1,23 @@
-class CategoriesController < ApplicationController
-  def index
+# frozen_string_literal: true
 
+class CategoriesController < ApiBaseController
+  def index
     limit = params[:limit] || Rails.configuration.constants[:DEFAULT_LIMIT]
 
-    limit = nil if limit == "-1"
+    limit = nil if limit == '-1'
 
     order = (params[:order] || '')
-      .split(',')
-      .map(&:underscore)
-      .join(',')
+            .split(',')
+            .map(&:underscore)
+            .join(',')
 
     result = Category
-      .order(Arel.sql(order))
-      .limit(limit)
+             .order(Arel.sql(order))
+             .limit(limit)
 
     count = Category.count
 
-    options = { meta: { count: count }}
+    options = { meta: { count: count } }
 
     render json: CategorySerializer.new(result, options), status: 200
   end

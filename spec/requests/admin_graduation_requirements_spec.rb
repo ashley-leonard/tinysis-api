@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe 'Admin graduation plan requirements API', type: :request do
-
   before(:each) do
     @grad1 = create :graduation_plan_requirement, name: Faker::Name.name, status: 'active'
     @grad2 = create :graduation_plan_requirement, name: Faker::Name.name, status: 'active'
@@ -22,13 +23,13 @@ RSpec.describe 'Admin graduation plan requirements API', type: :request do
           relationships: {
             parent: {
               data: {
-                id: @grad1.id.to_s,
+                id: @grad1.id.to_s
               }
             }
           }
         }
       }
-      post "/api/admin/graduation-plan-requirements", params: postBody.to_json, headers: json_request_headers
+      post '/api/admin/graduation-plan-requirements', params: postBody.to_json, headers: json_request_headers
 
       expect(response).to have_http_status(200)
       expect(json).not_to be_empty
@@ -36,7 +37,7 @@ RSpec.describe 'Admin graduation plan requirements API', type: :request do
       expect(json['data']['id']).not_to be_empty
 
       attributes = json['data']['attributes']
-      %w{name status requirementType}.each do |key|
+      %w[name status requirementType].each do |key|
         expect(attributes[key]).to eq(postBody[:data][:attributes][key.to_sym])
       end
       expect(json['data']['relationships']['parent']['data']['id']).to eq(@grad1.id.to_s)
@@ -46,11 +47,11 @@ RSpec.describe 'Admin graduation plan requirements API', type: :request do
       postBody = {
         data: {
           attributes: {
-            requirementType: 'general',
-          },
+            requirementType: 'general'
+          }
         }
       }
-      post "/api/admin/graduation-plan-requirements", params: postBody.to_json, headers: json_request_headers
+      post '/api/admin/graduation-plan-requirements', params: postBody.to_json, headers: json_request_headers
 
       expect(response).to have_http_status(422)
 

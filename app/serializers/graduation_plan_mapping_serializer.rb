@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class GraduationPlanMappingSerializer < ApplicationSerializer
   set_type :graduation_plan_mapping
 

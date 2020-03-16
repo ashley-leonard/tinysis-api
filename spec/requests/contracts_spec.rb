@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe 'Contracts API', type: :request do
-
   before(:each) do
     @staff1 = create :user, privilege: User::PRIVILEGE_STAFF, email: Faker::Internet.email
     @staff2 = create :user, privilege: User::PRIVILEGE_STAFF, email: Faker::Internet.email

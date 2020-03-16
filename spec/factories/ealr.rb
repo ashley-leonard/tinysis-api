@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # spec/factories/ealr.rb
 
 FactoryBot.define do

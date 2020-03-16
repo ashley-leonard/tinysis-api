@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe 'Credits API', type: :request do
-
   before(:each) do
     Credit.create! course_name: 'Hello', course_id: '100', status: 'active', course_type: 'course'
     Credit.create! course_name: 'Goodbye', course_id: '200', status: 'active', course_type: 'course'
@@ -10,7 +11,6 @@ RSpec.describe 'Credits API', type: :request do
   end
 
   describe 'GET /api/credits' do
-
     it 'returns all credits by default' do
       get '/api/credits'
       expect(response).to have_http_status(200)
@@ -37,10 +37,9 @@ RSpec.describe 'Credits API', type: :request do
       expect(json['data'].size).to eq(1)
       expect(json['meta']['count']).to eq(1)
     end
-
   end
 
-  describe "GET /api/credits/:id" do
+  describe 'GET /api/credits/:id' do
     it 'can fetch one credit' do
       get "/api/credits/#{@inactive.id}"
       expect(response).to have_http_status(200)
@@ -50,10 +49,10 @@ RSpec.describe 'Credits API', type: :request do
     end
   end
 
-  describe "PUT /api/admin/credits/:id" do
+  describe 'PUT /api/admin/credits/:id' do
     it 'can update one credit' do
-      @inactive.course_name = "altered"
-      body = { data: { attributes: @inactive.attributes }}
+      @inactive.course_name = 'altered'
+      body = { data: { attributes: @inactive.attributes } }
       put "/api/admin/credits/#{@inactive.id}", params: body.to_json, headers: json_request_headers
 
       expect(response).to have_http_status(200)
@@ -64,7 +63,7 @@ RSpec.describe 'Credits API', type: :request do
     end
   end
 
-  describe "POST /api/admin/credits" do
+  describe 'POST /api/admin/credits' do
     it 'can add one credit' do
       body = {
         data: {
@@ -75,7 +74,7 @@ RSpec.describe 'Credits API', type: :request do
           }
         }
       }
-      post "/api/admin/credits", params: body.to_json, headers: json_request_headers
+      post '/api/admin/credits', params: body.to_json, headers: json_request_headers
 
       expect(response).to have_http_status(200)
       expect(json).not_to be_empty
