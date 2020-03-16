@@ -1,5 +1,6 @@
-class AdminContractCategoriesController < AdminController
+# frozen_string_literal: true
 
+class AdminContractCategoriesController < AdminController
   def create
     attributes = categories_attributes
     category = Category.new categories_attributes
@@ -17,12 +18,11 @@ class AdminContractCategoriesController < AdminController
     render json: CategorySerializer.new(category)
   end
 
-private
+  private
 
   def categories_attributes
     params.require(:data)
-      .require(:attributes)
-      .permit(:name, :sequence, :public, :homeroom, :reporting)
+          .require(:attributes)
+          .permit(:name, :sequence, :public, :homeroom, :reporting)
   end
-
 end

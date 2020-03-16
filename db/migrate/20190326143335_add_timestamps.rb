@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 class AddTimestamps < ActiveRecord::Migration[5.2]
   def change
-    default_timestamp = DateTime.new(1900) 
+    default_timestamp = DateTime.new(1900)
     add_timestamps :users, default: default_timestamp
     add_timestamps :categories, default: default_timestamp
     add_timestamps :contract_ealrs, default: default_timestamp

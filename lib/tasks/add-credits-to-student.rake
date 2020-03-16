@@ -1,6 +1,10 @@
+# frozen_string_literal: true
+
 namespace :development do
-  task :addCreditsToStudent, [:studentId, :adminId] => :environment do |t, args|
-    puts "rake development:addCreditsToStudent[:studentId, :adminId]" and return unless args[:studentId]
+  task :addCreditsToStudent, %i[studentId adminId] => :environment do |_t, args|
+    unless args[:studentId]
+      puts('rake development:addCreditsToStudent[:studentId, :adminId]') && return
+    end
     student = User.find args[:studentId]
     admin = User.find args[:adminId] || 1
     puts "updating #{student.full_name} using admin identity #{admin.full_name}"

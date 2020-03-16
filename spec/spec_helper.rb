@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'active_support/testing/time_helpers'
 require_relative '../lib/json_web_token'
 require 'factory_bot_rails'
@@ -52,8 +54,8 @@ RSpec.configure do |config|
 
   config.include ActiveSupport::Testing::TimeHelpers
 
-# The settings below are suggested to provide a good initial experience
-# with RSpec, but feel free to customize to your heart's content.
+  # The settings below are suggested to provide a good initial experience
+  # with RSpec, but feel free to customize to your heart's content.
 
   # This allows you to limit a spec run to individual examples or groups
   # you care about by tagging them with `:focus` metadata. When nothing
@@ -100,5 +102,4 @@ RSpec.configure do |config|
   # test failures related to randomization by passing the same `--seed` value
   # as the one that triggered the failure.
   Kernel.srand config.seed
-
 end

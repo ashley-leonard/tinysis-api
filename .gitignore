@@ -25,5 +25,13 @@
 # Ignore master key for decrypting credentials and more.
 /config/master.key
 /.project
+/.env
 
 config/secrets.yml
+
+# terraform
+.terraform
+
+# 
+config/production-secrets.yml
+config/credentials.yml.enc

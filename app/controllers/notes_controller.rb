@@ -1,32 +1,29 @@
-class NotesController < ApplicationController
+# frozen_string_literal: true
 
+class NotesController < ApiBaseController
   def index
     limit = params[:limit] || Rails.configuration.constants[:DEFAULT_LIMIT]
 
-    limit = nil if limit == "-1"
+    limit = nil if limit == '-1'
 
     conditions = {}
 
-    if params[:notableType]
-      conditions[:notable_type] = params[:notableType]
-    end
+    conditions[:notable_type] = params[:notableType] if params[:notableType]
 
-    if params[:notableIds]
-      conditions[:notable_id] = params[:notableIds]
-    end
+    conditions[:notable_id] = params[:notableIds] if params[:notableIds]
 
     result = Note
-      .where(conditions)
-      .limit(limit)
+             .where(conditions)
+             .limit(limit)
     count = Note
-      .where(conditions)
-      .count
+            .where(conditions)
+            .count
 
     options = {
       meta: {
-        count: count,
+        count: count
       },
-      include: ['creator'],
+      include: ['creator']
     }
 
     render json: NoteSerializer.new(result, options), status: 200
@@ -46,7 +43,8 @@ class NotesController < ApplicationController
     render json: NoteSerializer.new(note)
   end
 
-protected
+  protected
+
   def query_attributes
     params
       .permit(:notable_type, :notable_ids)
@@ -60,8 +58,8 @@ protected
   end
 
   def target_class
-    unless %w{credit-assignment enrollment status turnin assignment}.include? params[:notable_type]
-      raise TinyException.new('Invalid notable type')
+    unless %w[credit-assignment enrollment status turnin assignment].include? params[:notable_type]
+      raise TinyException, 'Invalid notable type'
     end
 
     params[:notable_type]
@@ -69,5 +67,4 @@ protected
       .camelcase
       .constantize
   end
-
 end

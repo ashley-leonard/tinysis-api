@@ -1,8 +1,10 @@
-class AdminController < ApplicationController
+# frozen_string_literal: true
 
+class AdminController < ApiBaseController
   before_action :check_admin
 
-private
+  private
+
   def check_admin
     permissions = get_permissions
 

@@ -1,6 +1,7 @@
 # lib/json_web_token.rb
 
 # frozen_string_literal: true
+
 require 'net/http'
 require 'uri'
 
@@ -33,25 +34,24 @@ class JsonWebToken
     ]
   end
 
-  def self.extract_token http_token, key
+  def self.extract_token(http_token, key)
     decoded_token = JsonWebToken.verify(http_token)
 
-    payload = decoded_token.find{|token| token[key]}
+    payload = decoded_token.find { |token| token[key] }
 
-    raise Exception.new "Failed to extract token #{key}" unless payload
+    raise Exception, "Failed to extract token #{key}" unless payload
 
     payload[key]
   end
 
-
-  def self.extract_permissions http_token
+  def self.extract_permissions(http_token)
     return ['get:config', 'manage:config']
 
     extract_token http_token, 'permissions'
   end
 
-  def self.extract_user_id http_token
-    return "1"
+  def self.extract_user_id(http_token)
+    return '1'
 
     key = "#{Rails.application.secrets.auth0_api_audience.chomp('/')}.databaseId"
     extract_token http_token, key

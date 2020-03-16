@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # app/controllers/concerns/secured.rb
 
 require './lib/json_web_token'
@@ -12,14 +14,14 @@ module Secured
 
   private
 
-  def render_unauthorized message = 'Not authorized'
+  def render_unauthorized(message = 'Not authorized')
     render json: { errors: [message] }, status: :unauthorized
   end
 
   def authenticate_request!
     permissions = get_permissions
 
-    render_unauthorized and return if permissions.empty?
+    render_unauthorized && return if permissions.empty?
 
     user_id = get_user_id
 

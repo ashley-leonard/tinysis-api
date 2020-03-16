@@ -1,14 +1,18 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 require 'database_cleaner'
 
 ENV['RAILS_ENV'] ||= 'test'
 
-require File.expand_path('../../config/environment', __FILE__)
+require File.expand_path('../config/environment', __dir__)
 
 Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
 
 # Prevent database truncation if the environment is production
-abort('The Rails environment is running in production mode!') if Rails.env.production?
+if Rails.env.production?
+  abort('The Rails environment is running in production mode!')
+end
 
 require 'rspec/rails'
 
@@ -42,7 +46,6 @@ Shoulda::Matchers.configure do |config|
     with.library :rails
   end
 end
-
 
 RSpec.configure do |config|
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
@@ -108,5 +111,4 @@ RSpec.configure do |config|
   end
 
   config.include RequestSpecHelper, type: :request
-
 end

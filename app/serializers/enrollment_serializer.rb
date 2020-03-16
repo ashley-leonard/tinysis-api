@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class EnrollmentSerializer < ApplicationSerializer
   set_type :enrollment
 

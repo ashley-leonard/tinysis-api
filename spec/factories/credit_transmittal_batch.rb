@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # spec/factories/credit_transmittal_batch.rb
 
 FactoryBot.define do

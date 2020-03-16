@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # spec/factories/assignment.rb
 
 FactoryBot.define do

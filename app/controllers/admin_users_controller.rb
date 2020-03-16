@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AdminUsersController < AdminController
   include UserControllerMethods
 
@@ -24,24 +26,25 @@ class AdminUsersController < AdminController
     render json: UserSerializer.new(user)
   end
 
-private
+  private
+
   def user_attributes
     params.require(:data)
-      .require(:attributes)
-      .permit(:first_name, :last_name, :nickname, :can_login, :date_active, :date_inactive, :district_id, :district_grade, :status, :role, :login, :email, :new_password)
+          .require(:attributes)
+          .permit(:first_name, :last_name, :nickname, :can_login, :date_active, :date_inactive, :district_id, :district_grade, :status, :role, :login, :email, :new_password)
   end
 
   def user_coordinator_id
     params.dig :data, :relationships, :coordinator, :data, :id
-  rescue
+  rescue StandardError
     nil
   end
 
-  def clean_attributes(attributes) 
-    attributes.reject { |k| ["id", "can_login", "is_active", "role", "coordinator_id"].include?(k) }
+  def clean_attributes(attributes)
+    attributes.reject { |k| %w[id can_login is_active role coordinator_id].include?(k) }
   end
 
-  def update_attributes model
+  def update_attributes(model)
     denormalized = user_attributes
 
     # passthrough of same-named
@@ -57,55 +60,64 @@ private
     model
   end
 
-  def update_coordinator user, coordinator_id
+  def update_coordinator(user, coordinator_id)
     return if coordinator_id.nil?
+
     coordinator = User.find coordinator_id
     if coordinator.privilege < User::PRIVILEGE_STAFF
       raise ActiveRecord::RecordNotFound
     end
+
     user.coordinator = coordinator
   end
 
-  def update_status model, status
+  def update_status(model, status)
     return if status.nil?
-    raise ActiveRecordInvalidException(model, :status, 'should be either "active" or "inactive"') unless %w{active inactive}.include? status
+    unless %w[active inactive].include? status
+      raise ActiveRecordInvalidException(model, :status, 'should be either "active" or "inactive"')
+    end
+
     model.status = case status
-    when 'active'
-      User::STATUS_ACTIVE
-    when 'inactive'
-      User::STATUS_INACTIVE
+                   when 'active'
+                     User::STATUS_ACTIVE
+                   when 'inactive'
+                     User::STATUS_INACTIVE
     end
   end
 
-  def update_privilege model, role
+  def update_privilege(model, role)
     return if role.nil?
-    raise ActiveRecordInvalidException(model, :role, 'allowed values are student, administrator, or staff') unless %w{administrator staff student}.include? role
+    unless %w[administrator staff student].include? role
+      raise ActiveRecordInvalidException(model, :role, 'allowed values are student, administrator, or staff')
+    end
+
     model.privilege = case role
-      when 'student'
-        User::PRIVILEGE_STUDENT
-      when 'administrator'
-        User::PRIVILEGE_ADMIN
-      when 'staff'
-        User::PRIVILEGE_STAFF
+                      when 'student'
+                        User::PRIVILEGE_STUDENT
+                      when 'administrator'
+                        User::PRIVILEGE_ADMIN
+                      when 'staff'
+                        User::PRIVILEGE_STAFF
       end
   end
 
-protected
+  protected
+
   def allowed_fields
-    [
-      :firstName,
-      :lastName,
-      :nickname,
-      :canLogin,
-      :dateActive,
-      :dateInactive,
-      :districtId,
-      :districtGrade,
-      :status,
-      :role,
-      :coordinator,
-      :login,
-      :email,
+    %i[
+      firstName
+      lastName
+      nickname
+      canLogin
+      dateActive
+      dateInactive
+      districtId
+      districtGrade
+      status
+      role
+      coordinator
+      login
+      email
     ]
   end
 
@@ -117,8 +129,6 @@ protected
       ['privilege IN (?)', [User::PRIVILEGE_ADMIN, User::PRIVILEGE_STAFF]]
     when 'admin'
       ['privilege = ?', User::PRIVILEGE_ADMIN]
-    else
-      nil
     end
   end
 end

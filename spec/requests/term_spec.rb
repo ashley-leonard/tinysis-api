@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe 'Terms api', type: :request do
-
   before(:each) do
     @term1 = create :term, name: 'COOR test', school_year: 2018
     @term1.set_dates 2018, [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
@@ -22,11 +23,9 @@ RSpec.describe 'Terms api', type: :request do
     @term5 = create :term, name: 'COOR inactive', school_year: 2017, active: false
     @term5.set_dates 2017, [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
     @term5.save!
-
   end
 
   describe 'GET /api/terms' do
-
     it 'returns all terms by default' do
       get '/api/terms'
       expect(response).to have_http_status(200)
@@ -52,7 +51,7 @@ RSpec.describe 'Terms api', type: :request do
     end
 
     it 'returns active COOR term' do
-      get'/api/terms?type=coor&status=active'
+      get '/api/terms?type=coor&status=active'
       expect(response).to have_http_status(200)
       expect(json).not_to be_empty
       expect(json['data'].size).to eq(1)
@@ -65,7 +64,7 @@ RSpec.describe 'Terms api', type: :request do
     end
 
     it 'returns inactive COOR term' do
-      get'/api/terms?type=coor&status=inactive'
+      get '/api/terms?type=coor&status=inactive'
       expect(response).to have_http_status(200)
       expect(json).not_to be_empty
       expect(json['data'].size).to eq(1)
@@ -75,6 +74,5 @@ RSpec.describe 'Terms api', type: :request do
       expect(term5['attributes']['name']).to eql(@term5.name)
       expect(term5['attributes']['months'].join(',')).to eql('2017-09-01,2017-10-01,2017-11-01,2017-12-01,2018-01-01,2018-02-01,2018-03-01,2018-04-01,2018-05-01,2018-06-01')
     end
-
   end
 end

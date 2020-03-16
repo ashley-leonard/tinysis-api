@@ -1,34 +1,30 @@
-class TermsController < ApplicationController
-  ALLOWED_ORDER_BY = %w{name schoolYear}
+# frozen_string_literal: true
+
+class TermsController < ApiBaseController
+  ALLOWED_ORDER_BY = %w[name schoolYear].freeze
 
   def index
     limit = params[:limit] || Rails.configuration.constants[:DEFAULT_LIMIT]
 
     conditions = {}
 
-    if params[:schoolYear]
-      conditions[:school_year] = params[:schoolYear]
-    end
+    conditions[:school_year] = params[:schoolYear] if params[:schoolYear]
 
     orderBy = []
-    if params[:order]
-      orderBy = params[:order].split(',') & ALLOWED_ORDER_BY
-    end
+    orderBy = params[:order].split(',') & ALLOWED_ORDER_BY if params[:order]
 
     if params[:status]
       conditions[:active] = case params[:status]
-      when 'active'
-        true
-      when 'inactive'
-        false
-      else
-        render json: { message: 'Invalid status parameter'}, status: 400 and return
+                            when 'active'
+                              true
+                            when 'inactive'
+                              false
+                            else
+                              render(json: { message: 'Invalid status parameter' }, status: 400) && return
       end
     end
 
-    if params[:ids]
-      conditions[:id] = params[:ids].split(',')
-    end
+    conditions[:id] = params[:ids].split(',') if params[:ids]
 
     type_conditions = nil
     case params[:type]
@@ -37,23 +33,23 @@ class TermsController < ApplicationController
     end
 
     result = Term
-      .where(conditions)
-      .where(type_conditions)
-      .order(orderBy.join(','))
-      .limit(limit)
+             .where(conditions)
+             .where(type_conditions)
+             .order(orderBy.join(','))
+             .limit(limit)
     count = Term
-      .where(conditions)
-      .where(type_conditions)
-      .count
+            .where(conditions)
+            .where(type_conditions)
+            .count
 
     options = {
       meta: {
-        count: count,
+        count: count
       },
       params: {}
     }
 
-    if (params[:include] == 'usage')
+    if params[:include] == 'usage'
       options[:params][:usage] = Term.enrollments_report(result.map(&:id))
     end
 
