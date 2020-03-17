@@ -50,9 +50,9 @@ removeImages () {
 }
 
 # if this is not working, you need to get your AWS profile set up in 
-# ~/.aws/credentials.
+# ~/.aws/credentials. Contact artzt@juniperswordplay.com for access.
 #
-getApiSecrets () {
+setupApi () {
   aws s3 cp --profile=tinysis-devtest s3://tinysis-devtest/api . --recursive
 }
 
@@ -65,29 +65,26 @@ usage () {
   echo ""
   echo "Commands:"
   echo "---------"
-  echo "startApi      | applies a docker-compose up to start the API stack"
-  echo "resetDb       | deletes the development database and starts over with new test data"
-  echo "resetImages   | deletes the docker images for the API and DB"
-  echo "getApiSecrets | generally one-time S3 download of any dev secrets files not checked in"
+  echo "setupApi    | generally one-time S3 download of any dev secrets files - requires AWS profile and access key"
+  echo "startApi    | applies a docker-compose up to start the API stack"
+  echo "setupDb     | sets up the development database; will delete the existing data if it exists"
+  echo "resetImages | deletes the docker images for the API and DB"
 }
 
 case "$COMMAND" in
+  "setupApi")
+      setupApi
+      ;;
+  "setupDb")
+      resetDb
+      ;;
   "startApi")
       startApi
-      ;;
-  "resetDb")
-      resetDb
       ;;
   "resetImages")
       stopContainers
       removeContainers
       removeImages
-      ;;
-  "resetDb")
-      resetDb
-      ;;
-  "getApiSecrets")
-      getApiSecrets
       ;;
   *)
       usage

@@ -14,17 +14,17 @@ A future project will implement a modern, single-page UX consuming these APIs.
 
 ## Prerequisites
 
-To run natively, you need Ruby 2.6 and mysql server.
+To run using the docker setup (recommended), you need to install docker and docker-compose.
 
-To run using the docker setup, you need to install docker and docker-compose.
-
-You may need libmysqlclient:
-
-    apt install libmysqlclient-dev
+To run natively, you need Ruby 2.6 and mysql server, and possibly, libmysqlclient-dev
 
 ## Config
 
-The secrets.yml file can be downloaded from AWS using the command `./tiny-utils.sh getApiSecrets`.
+You will need AWS credentials to download the secrets. Contact dev@tinysis.org for access.
+
+Then run:
+
+    ./tiny-utils.sh setupApi
 
 ## Is the server up?
 
@@ -32,28 +32,26 @@ The secrets.yml file can be downloaded from AWS using the command `./tiny-utils.
 
 ## Running using docker-compose
 
-Use the util script:
+Create the dev and test databases:
+
+    ./tiny-utils.sh setupDb
+
+Then start the API docker stack:
 
     ./tiny-utils startApi
 
 Run the script without arguments to see other commands.
 
-## Native setup
+## Running the server natively
 
 To run the system on your local machine, you must first install the necessary gems, init the database,
 and then run the server.
 
-    1. `bundle install`
-    2. `rake db:create`
-    3. `rake db:migrate`
-    
-### Running the server natively
-
+    bundle install
+    rake db:create
+    rake db:migrate
+    rake db:seed
     rails s
-
-Running only some tests (filter by name)
-
-    bundle exec rspec --example "Statuses"
 
 ### Running tests
 
