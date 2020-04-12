@@ -11,10 +11,8 @@ development: &development
   password: <%= ENV['TINYSIS_PASSWORD'] %>
 
 test:
-  <<: *default
+  <<: *development
   database: 'tinysis_test'
-  username: 'tinysis_test'
-  password: 'tinysis_test'
 
 production:
   <<: *development

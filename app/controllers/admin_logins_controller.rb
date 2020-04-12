@@ -2,7 +2,7 @@
 
 require './lib/auth0_management'
 
-class AdminLoginController < AdminController
+class AdminLoginsController < AdminController
   def create
     user = @client.activate_user user_attributes
 
@@ -33,10 +33,30 @@ class AdminLoginController < AdminController
     user = @client.find_user email
 
     unless user
-      render(json: { error: 'User not found with provided email' }, status: 404) && return
+      render(json: { error: 'User not found with provided email' }, status: 404)
+      return
     end
 
     render json: { data: user }
+  end
+
+  def index
+    users = @client.list_users query_attribute
+
+    models = users.map do |login|
+      {
+        id: login['user_id'],
+        type: 'Auth0User',
+        attributes: login
+      }
+    end
+
+    render json: {
+      data: models,
+      meta: {
+        count: models.length
+      }
+    }
   rescue AuthManagementError => e
     render_error e
   rescue StandardError => e
@@ -60,7 +80,7 @@ class AdminLoginController < AdminController
   private
 
   before_action do
-    @client = AuthManagement.new Rails.application.secrets.auth0_management
+    @client = AuthManagement.new Rails.application.credentials.auth0_management
     @client.get_access_token
   end
 
@@ -70,6 +90,10 @@ class AdminLoginController < AdminController
             .permit(:first_name, :last_name, :nickname, :email, :password, :id, :role)
 
     attrs
+  end
+
+  def query_attribute
+    params.permit(:q)
   end
 
   def render_error(error)

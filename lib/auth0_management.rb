@@ -24,9 +24,7 @@ class AuthManagement
     @config = config
 
     %i[domain client_secret client_id audience].each do |setting|
-      unless @config[setting]
-        raise AuthManagementError, "Expected #{setting} to be passed in config"
-      end
+      raise AuthManagementError, "Expected #{setting} to be passed in config" unless @config[setting]
     end
 
     @base_url = "https://#{@config[:domain]}"
@@ -50,6 +48,27 @@ class AuthManagement
     @auth
   end
 
+  def list_users(query = nil)
+    url = URI(@base_url)
+
+    Net::HTTP.start(url.host, url.port, use_ssl: true, verify_mode: OpenSSL::SSL::VERIFY_NONE) do |http|
+      headers = {
+        Authorization: "Bearer #{@auth['access_token']}",
+        'content-type': 'application/json'
+      }
+
+      list_users_url = URI("#{@base_url}/api/v2/users")
+
+      list_users_url.query = query.to_query if query
+
+      response = http.get(list_users_url, headers)
+
+      raise AuthManagementError.new('Users fetch failed', response) if response.code != '200'
+
+      return JSON.parse(response.body)
+    end
+  end
+
   def get_user(user_id)
     url = URI(@base_url)
 
@@ -65,9 +84,7 @@ class AuthManagement
 
       response = http.get(get_user_url, headers)
 
-      if response.code != '200'
-        raise AuthManagementError.new('User fetch failed', response)
-      end
+      raise AuthManagementError.new('User fetch failed', response) if response.code != '200'
 
       user = JSON.parse(response.body)
 
@@ -75,9 +92,7 @@ class AuthManagement
 
       response = http.get(get_roles_url, headers)
 
-      if response.code != '200'
-        raise AuthManagementError.new('User roles fetch failed', response)
-      end
+      raise AuthManagementError.new('User roles fetch failed', response) if response.code != '200'
 
       roles = JSON.parse(response.body)
 
@@ -87,9 +102,7 @@ class AuthManagement
 
       response = http.get(get_permissions_url, headers)
 
-      if response.code != '200'
-        raise AuthManagementError.new('User permissions fetch failed', response)
-      end
+      raise AuthManagementError.new('User permissions fetch failed', response) if response.code != '200'
 
       permissions = JSON.parse(response.body)
 
@@ -112,9 +125,7 @@ class AuthManagement
 
       response = http.get(get_user_url, headers)
 
-      if response.code != '200'
-        raise AuthManagementError.new('User fetch failed', response)
-      end
+      raise AuthManagementError.new('User fetch failed', response) if response.code != '200'
 
       user = JSON.parse(response.body).first
 
@@ -126,9 +137,7 @@ class AuthManagement
 
       response = http.get(get_roles_url, headers)
 
-      if response.code != '200'
-        raise AuthManagementError.new('User roles fetch failed', response)
-      end
+      raise AuthManagementError.new('User roles fetch failed', response) if response.code != '200'
 
       roles = JSON.parse(response.body)
 
@@ -153,12 +162,8 @@ class AuthManagement
 
       response = http.get(get_user_url, headers)
 
-      unless %w[200 404].include? response.code
-        raise AuthManagementError.new('User fetch failed', response)
-      end
-      unless response.body == '[]'
-        raise AuthManagementError, 'Auth0 user already created'
-      end
+      raise AuthManagementError.new('User fetch failed', response) unless %w[200 404].include? response.code
+      raise AuthManagementError, 'Auth0 user already created' unless response.body == '[]'
 
       request_body = {
         given_name: attributes[:first_name],
@@ -177,9 +182,7 @@ class AuthManagement
 
       response = http.post("#{@base_url}/api/v2/users", request_body.to_json, headers)
 
-      if response.code.to_i >= 400
-        raise AuthManagementError.new('User creation failed', response)
-      end
+      raise AuthManagementError.new('User creation failed', response) if response.code.to_i >= 400
 
       user = JSON.parse(response.body)
 
@@ -192,9 +195,7 @@ class AuthManagement
 
       response = http.post(roles_url, request_body.to_json, headers)
 
-      if response.code.to_i >= 400
-        raise AuthManagementError.new('User role update failed', response)
-      end
+      raise AuthManagementError.new('User role update failed', response) if response.code.to_i >= 400
     end
 
     user
@@ -213,9 +214,7 @@ class AuthManagement
 
       response = http.delete("#{@base_url}/api/v2/users/#{encoded_user_id}", headers)
 
-      if response.code != '204'
-        raise AuthManagementError.new('User deletion failed', response)
-      end
+      raise AuthManagementError.new('User deletion failed', response) if response.code != '204'
 
       return nil
     end
@@ -237,9 +236,7 @@ class AuthManagement
 
       bodies = []
 
-      if attributes[:last_name] && attributes[:first_name]
-        name = "#{attributes[:first_name]} #{attributes[:last_name]}"
-      end
+      name = "#{attributes[:first_name]} #{attributes[:last_name]}" if attributes[:last_name] && attributes[:first_name]
       bodies.push(
         given_name: attributes[:first_name],
         family_name: attributes[:last_name],
@@ -255,7 +252,7 @@ class AuthManagement
 
       # reject any bodies that are not populated
       bodies = bodies
-               .map { |body| body.compact }
+               .map(&:compact)
                .map { |body| body.transform_values { |value| value == '' ? nil : value } }
                .reject(&:empty?)
 
@@ -265,9 +262,7 @@ class AuthManagement
       # update the bodies with changed values
       bodies.each do |body|
         response = http.patch("#{@base_url}/api/v2/users/#{encoded_user_id}", body.to_json, headers)
-        if response.code != '200'
-          raise AuthManagementError.new("Difficulty updating #{body.keys.join}", response)
-        end
+        raise AuthManagementError.new("Difficulty updating #{body.keys.join}", response) if response.code != '200'
       end
 
       # handle role updates separately
@@ -277,9 +272,7 @@ class AuthManagement
 
         response = http.get(get_roles_url, headers)
 
-        if response.code != '200'
-          raise AuthManagementError.new('User roles fetch failed', response)
-        end
+        raise AuthManagementError.new('User roles fetch failed', response) if response.code != '200'
 
         Rails.logger.info 'got roles'
         Rails.logger.info response.body
@@ -296,9 +289,7 @@ class AuthManagement
 
           Rails.logger.info response
 
-          if response.code != '204'
-            raise AuthManagementError.new('User role flush failed', response)
-          end
+          raise AuthManagementError.new('User role flush failed', response) if response.code != '204'
         end
 
         new_role = getAuth0RoleFromTinySisRole attributes['role']
@@ -308,9 +299,7 @@ class AuthManagement
 
         response = http.post(add_roles_url, request_body.to_json, headers)
 
-        if response.code.to_i >= 400
-          raise AuthManagementError.new('User role update failed', response)
-        end
+        raise AuthManagementError.new('User role update failed', response) if response.code.to_i >= 400
       end
 
       return true
@@ -342,9 +331,7 @@ class AuthManagement
                     .auth0_management[:roles]
                     .find { |role| role[:name] == roleName }
 
-    unless roleData
-      raise AuthManagementError, 'Role designation missing in config'
-    end
+    raise AuthManagementError, 'Role designation missing in config' unless roleData
 
     roleData
   end

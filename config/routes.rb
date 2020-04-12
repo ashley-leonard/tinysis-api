@@ -2,6 +2,8 @@
 
 Rails.application.routes.draw do
   get '/up', to: 'uptime#index'
+  get '/up/db', to: 'uptime#db'
+
   namespace :admin do
     get 'credits/create'
     get 'credits/update'
@@ -72,10 +74,11 @@ Rails.application.routes.draw do
       post '/users', to: 'admin_users#create'
       put '/users/:id', to: 'admin_users#update'
 
-      post '/login', to: 'admin_login#create'
-      get '/login', to: 'admin_login#show'
-      patch '/login/:id', to: 'admin_login#update'
-      delete '/login/:id', to: 'admin_login#destroy'
+      post '/logins', to: 'admin_logins#create'
+      get '/logins', to: 'admin_logins#index'
+      get '/logins/:email', to: 'admin_logins#show', constraints: { email: /.+/ }
+      patch '/logins/:id', to: 'admin_logins#update'
+      delete '/logins/:id', to: 'admin_logins#destroy'
 
       put '/settings', to: 'admin_settings#update'
 
