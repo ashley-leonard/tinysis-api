@@ -1,37 +1,38 @@
 #!/usr/bin/env bash
 
 COMMAND=$1
+WEB=tiny_web_1
 
 createDb () {
-  docker exec api_web_1 rake db:create
+  docker exec $WEB rake db:create
 }
 
 migrateDb () {
-  docker exec api_web_1 rake db:migrate
+  docker exec $WEB rake db:migrate
 }
 
 dropDb () {
-  docker exec -e DISABLE_DATABASE_ENVIRONMENT_CHECK=1 api_web_1 rake db:drop
+  docker exec -e DISABLE_DATABASE_ENVIRONMENT_CHECK=1 $WEB rake db:drop
 }
 
 seedDb () {
-  docker exec api_web_1 rake db:seed
+  docker exec $WEB rake db:seed
 }
 
 testPrepare () {
-  docker exec api_web_1 rake db:test:prepare
+  docker exec $WEB rake db:test:prepare
 }
 
 deleteDbVolume () {
-  docker volume remove api_tinysis_data
+  docker volume remove tiny_tinysis_data
 }
 
 shell () {
-  docker exec -it api_web_1 bash
+  docker exec -it $WEB bash
 } 
 
 server () {
-  docker exec -it api_web_1 rm -rf /api/tmp/pids/server.pid && rails s
+  docker exec -it $WEB rm -rf /api/tmp/pids/server.pid && rails s
 }
 
 initDb () {
@@ -49,18 +50,19 @@ reset () {
 }
 
 stopContainers () {
-  docker stop api_web_1
-  docker stop api_db_1
+  docker stop $WEB
+  docker stop $DB
+  docker stop $ADMINER
 }
 
 removeContainers () {
-  docker rm api_web_1
-  docker rm api_db_1
+  docker rm $WEB
+  docker rm $DB
 }
 
 removeImages () {
-  docker rmi api_web
-  docker rmi api_db
+  docker rmi tiny_web
+  docker rmi tiny_db
 }
 
 # if this is not working, you need to get your AWS profile set up in 
@@ -75,11 +77,15 @@ build () {
 }
 
 log () {
-  docker exec -it api_web_1 tail -f log/*
+  docker exec -it $WEB tail -f log/*
+}
+
+test:api () {
+  docker exec -e RAILS_ENV=test $WEB bundle exec rspec
 }
 
 usage () {
-  echo "tiny-utils <command>"
+  echo "tiny <command>"
   echo ""
   echo "Commands:"
   echo "---------"
@@ -90,10 +96,11 @@ usage () {
   echo "shell      | opens a bash shell on the Rails API container"
   echo "log        | tail the production log"
   echo "reset      | deletes the docker images for the API and DB"
+  echo "test:api   | runs test suite for API"
 }
 
 case "$COMMAND" in
-  "getSecrets"|"initDb"|"build"|"server"|"shell"|"log"|"reset")
+  "getSecrets"|"initDb"|"build"|"server"|"shell"|"log"|"reset"|"test:api")
       $COMMAND
       ;;
   *)
