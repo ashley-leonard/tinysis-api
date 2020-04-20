@@ -9,6 +9,9 @@ class UserSerializer < ApplicationSerializer
   attributes :district_id
   attributes :district_grade
   attributes :email
+  attribute :name do |object|
+    object.name
+  end
 
   attribute :status do |object|
     case object.status
