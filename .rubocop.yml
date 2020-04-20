@@ -1,0 +1,13 @@
+Metrics/LineLength:
+  Max: 200
+
+Layout/LineLength:
+  Max: 200
+
+Metrics/MethodLength:
+  CountComments: false
+  Max: 50
+
+Metrics/ModuleLength:
+  CountComments: false
+  Max: 500

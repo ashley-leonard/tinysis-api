@@ -18,20 +18,34 @@ seedDb () {
   docker exec api_web_1 rake db:seed
 }
 
+testPrepare () {
+  docker exec api_web_1 rake db:test:prepare
+}
+
 deleteDbVolume () {
   docker volume remove api_tinysis_data
 }
 
-resetDb () {
+shell () {
+  docker exec -it api_web_1 bash
+} 
+
+server () {
+  docker exec -it api_web_1 rm -rf /api/tmp/pids/server.pid && rails s
+}
+
+initDb () {
   dropDb
   createDb
   migrateDb
   seedDb
+  testPrepare
 }
 
-resetImages () {
+reset () {
   stopContainers
   removeContainers
+  removeImages
 }
 
 stopContainers () {
@@ -52,12 +66,16 @@ removeImages () {
 # if this is not working, you need to get your AWS profile set up in 
 # ~/.aws/credentials. Contact artzt@juniperswordplay.com for access.
 #
-setupApi () {
+getSecrets () {
   aws s3 cp --profile=tinysis-devtest s3://tinysis-devtest/api . --recursive
 }
 
-startApi () {
+build () {
   docker-compose up
+}
+
+log () {
+  docker exec -it api_web_1 tail -f log/*
 }
 
 usage () {
@@ -65,26 +83,18 @@ usage () {
   echo ""
   echo "Commands:"
   echo "---------"
-  echo "setupApi    | generally one-time S3 download of any dev secrets files - requires AWS profile and access key"
-  echo "startApi    | applies a docker-compose up to start the API stack"
-  echo "setupDb     | sets up the development database; will delete the existing data if it exists"
-  echo "resetImages | deletes the docker images for the API and DB"
+  echo "getSecrets | generally one-time S3 download of any dev secrets files - requires AWS profile and access key"
+  echo "build      | applies docker-compose to start the API stack"
+  echo "initDb     | sets up the development database; will delete the existing data if it exists"
+  echo "server     | starts the development server"
+  echo "shell      | opens a bash shell on the Rails API container"
+  echo "log        | tail the production log"
+  echo "reset      | deletes the docker images for the API and DB"
 }
 
 case "$COMMAND" in
-  "setupApi")
-      setupApi
-      ;;
-  "setupDb")
-      resetDb
-      ;;
-  "startApi")
-      startApi
-      ;;
-  "resetImages")
-      stopContainers
-      removeContainers
-      removeImages
+  "getSecrets"|"initDb"|"build"|"server"|"shell"|"log"|"reset")
+      $COMMAND
       ;;
   *)
       usage

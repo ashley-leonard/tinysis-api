@@ -6,8 +6,6 @@ class AdminUsersController < AdminController
   rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity_response
 
   def create
-    coordinator_id = user_coordinator_id
-
     user = User.new
     update_attributes user
 
@@ -17,8 +15,6 @@ class AdminUsersController < AdminController
   end
 
   def update
-    coordinator_id = user_coordinator_id
-
     user = User.find params[:id]
     update_attributes user
     user.save!

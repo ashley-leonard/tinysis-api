@@ -11,11 +11,11 @@ module UserControllerMethods
   end
 
   def index
-    limit = params[:limit] || Rails.configuration.constants[:DEFAULT_LIMIT]
+    limit = search_conditions[:limit] || Rails.configuration.constants[:DEFAULT_LIMIT]
 
     limit = nil if limit == '-1'
 
-    order = (params[:order] || '')
+    order = (search_conditions[:order] || '')
             .split(',')
             .map(&:strip)
             .map(&:underscore)
@@ -26,32 +26,34 @@ module UserControllerMethods
 
     role_conditions = get_role_conditions
 
+    scope_conditions = get_scope_conditions
+
     conditions = {}
 
     additional_conditions = nil
 
-    conditions[:district_grade] = params[:grade] if params[:grade]
+    conditions[:district_grade] = search_conditions[:grade] if search_conditions[:grade]
 
     coordinators_join = nil
-    if params[:coordinators] == 'true'
+    if search_conditions[:coordinators] == 'true'
       coordinators_join = 'INNER JOIN (SELECT DISTINCT coordinator_id FROM users)  AS coordinators ON users.id = coordinators.coordinator_id'
     end
 
-    conditions[:privilege] = case params[:role]
-                             when 'administrator'
-                               User::PRIVILEGE_ADMIN
-                             when 'staff'
-                               [User::PRIVILEGE_STAFF, User::PRIVILEGE_ADMIN]
-                             when 'student'
-                               User::PRIVILEGE_STUDENT
-                             when nil
-                               nil
-                             else
-                               return render json: { message: 'invalid role parameter' }, status: 400
+    conditions[:privilege] = case search_conditions[:role]
+      when 'administrator'
+        User::PRIVILEGE_ADMIN
+      when 'staff'
+        [User::PRIVILEGE_STAFF, User::PRIVILEGE_ADMIN]
+      when 'student'
+        User::PRIVILEGE_STUDENT
+      when nil
+        nil
+      else
+        return render json: { message: 'invalid role parameter' }, status: 400
     end
     conditions.delete(:privilege) unless conditions[:privilege]
 
-    conditions[:status] = case params[:status]
+    conditions[:status] = case search_conditions[:status]
                           when 'active'
                             User::STATUS_ACTIVE
                           when 'inactive'
@@ -64,7 +66,7 @@ module UserControllerMethods
                             return render json: { message: 'invalid status parameter' }, status: 400
     end
 
-    case params[:status]
+    case search_conditions[:status]
     when nil
       conditions.delete :status
     when 'reportable'
@@ -77,18 +79,18 @@ module UserControllerMethods
       ]
     end
 
-    if params[:coordinatorIds]
-      conditions[:coordinator_id] = params[:coordinatorIds].split(',')
+    if search_conditions[:coordinatorIds]
+      conditions[:coordinator_id] = search_conditions[:coordinatorIds].split(',')
     end
 
-    if params[:name]
-      name_like = "%#{params[:name]}%"
+    if search_conditions[:name]
+      name_like = "%#{search_conditions[:name]}%"
       name_conditions = ['first_name LIKE :name OR last_name LIKE :name OR nickname LIKE :name', { name: name_like }]
     end
 
     year_conditions = nil
-    if params[:schoolYear]
-      start_month, end_month = Term.reporting_dates_for_year(params[:schoolYear])
+    if search_conditions[:schoolYear]
+      start_month, end_month = Term.reporting_dates_for_year(search_conditions[:schoolYear])
       year_conditions = ['(date_active <= :start_date) AND (date_inactive IS NULL OR date_inactive >= :end_date)', { start_date: start_month, end_date: end_month.end_of_month }]
     end
 
@@ -98,6 +100,7 @@ module UserControllerMethods
              .where(additional_conditions)
              .where(year_conditions)
              .where(name_conditions)
+             .where(scope_conditions)
              .includes(:coordinator)
              .joins(coordinators_join)
              .limit(limit)
@@ -108,6 +111,7 @@ module UserControllerMethods
             .where(role_conditions)
             .where(additional_conditions)
             .where(year_conditions)
+            .where(scope_conditions)
             .where(name_conditions)
             .includes(:coordinator)
             .joins(coordinators_join)
@@ -151,5 +155,19 @@ module UserControllerMethods
     return [] unless params[:include]
 
     params[:include].split(',') & ALLOWED_INCLUDES
+  end
+
+  # override
+  def get_role_conditions
+    {}
+  end
+
+  # override
+  def get_scope_conditions
+    {}
+  end
+
+  def search_conditions
+    params.permit(:name, :status, :limit, :order, :grade, :role, :coordinatorIds, :schoolYear, :scope)
   end
 end

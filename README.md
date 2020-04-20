@@ -18,13 +18,24 @@ To run using the docker setup (recommended), you need to install docker and dock
 
 To run natively, you need Ruby 2.6 and mysql server, and possibly, libmysqlclient-dev
 
-## Config
+## General workflow
+
+You can run the API in a container stack. There is a utility, `./tiny`, that includes helpful commands
+for doing most of what you'll need as a developer.
 
 You will need AWS credentials to download the secrets. Contact dev@tinysis.org for access.
 
 Then run:
 
-    ./tiny-utils.sh setupApi
+    ./tiny setupApi
+
+### Config organization and editing
+
+Set env `RAILS_MASTER_KEY` to the contents of the `config/master.key` file downloaded from S3.
+
+To edit/view the credentials file, open a shell on the container using `./tiny shell` and then run:
+
+    EDITOR="code -wait" rails credentials:edit
 
 ## Is the server up?
 
@@ -34,17 +45,17 @@ Then run:
 
 Create the dev and test databases:
 
-    ./tiny-utils.sh setupDb
+    ./tiny setupDb
 
 Then start the API docker stack:
 
-    ./tiny-utils startApi
+    ./tiny startApi
 
-Run the script without arguments to see other commands.
+Run the script without arguments to see other commands. 
 
-## Running the server natively
+# Running the server natively
 
-To run the system on your local machine, you must first install the necessary gems, init the database,
+To run the system on your local machine, you must first install the necessary gems and MYSQL support, init the database,
 and then run the server.
 
     bundle install
@@ -53,7 +64,7 @@ and then run the server.
     rake db:seed
     rails s
 
-### Running tests
+## Running tests
 
     rake db:test:prepare
     bundle exec rspec

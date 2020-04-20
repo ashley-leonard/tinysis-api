@@ -11,31 +11,26 @@ services:
     restart: always
     volumes:
       - tinysis_data:/var/lib/mysql
-    networks:
-      - web
   web:
-    build: .
-    command: bash -c "rm -f tmp/pids/server.pid && rails s"
+    build:
+      context: .
+      dockerfile: Dockerfile.development
+    command: bash -c "rm -f tmp/pids/server.pid && rails s -b 0.0.0.0"
     volumes:
       - .:/api
     ports:
-      - 3000:3000
-    networks:
-      - web
+      - "3000:3000"
     environment:
       - TINYSIS_HOST=db
       - TINYSIS_DATABASE=tinysis
       - TINYSIS_USER=root
       - TINYSIS_PASSWORD=root
       - RAILS_MASTER_KEY=${RAILS_MASTER_KEY}
+      - RAILS_ENV=development
   adminer:
     image: adminer
     restart: always
     ports:
       - "8080:8080"
-    networks:
-      - web
 volumes:
   tinysis_data:
-networks:
-  web:
