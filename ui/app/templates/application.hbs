@@ -1,0 +1,18 @@
+{{tiny-toolbar
+  user=user
+  permissions=user.permissions
+  signIn=(action "signIn")
+  signOut=(action "signOut")
+}}
+{{#each flashMessages.queue as |flash|}}
+  {{flash-message flash=flash}}
+{{/each}}
+
+<div class="mx-auto mt-4 mb-20">
+  {{outlet}}
+
+  <footer class="mt-8 mb-8">
+    tinySIS
+  </footer>
+</div>
+<PageVisit />

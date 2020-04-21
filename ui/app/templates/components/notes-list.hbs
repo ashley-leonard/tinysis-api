@@ -1,0 +1,17 @@
+<ul>
+  {{#each sortedNotes as |note|}}
+    <NotesList::Item
+      @note={{note}}
+      @expanded={{true}}
+    />
+  {{/each}}
+</ul>
+{{#unless disabled}}
+  <a
+    href="#"
+    class="action-icon add-note"
+    onClick={{action "doAdd"}}
+  >
+    +
+  </a>
+{{/unless}}

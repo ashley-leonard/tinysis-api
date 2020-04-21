@@ -1,0 +1,31 @@
+<tr data-test-month={{month}}>
+  <td>
+    {{t-date month "MMM YYYY"}}
+  </td>
+  {{#if status}}
+    <td data-test-academic class="center">
+      {{titleize status.attributes.academicStatus}}
+    </td>
+    <td data-test-attendance class="center">
+      {{titleize status.attributes.attendanceStatus}} 
+    </td>
+    <td data-test-ale class="center">
+      {{#if status.attributes.metFteRequirements}}
+        <FaIcon @icon="check" data-test-ale-met />
+      {{else}}
+        <FaIcon @icon="times" data-test-ale-unmet />
+      {{/if}}
+    </td>
+  {{else}}
+    {{status-missing isActiveMonth}}
+    {{status-missing isActiveMonth}}
+    {{status-missing isActiveMonth}}
+  {{/if}}
+  <td data-test-notes>
+    {{notes-list
+      notes=notes
+      notable=status
+      expanded=true
+    }}
+  </td>
+</tr>

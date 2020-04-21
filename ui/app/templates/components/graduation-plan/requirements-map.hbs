@@ -1,0 +1,13 @@
+<ul class="list-reset mr-4">
+  {{#each filteredRequirements as |requirement|}}
+    {{graduation-plan/requirements-map-item
+      requirement=requirement
+      requirementType=requirementType
+      mappingsHash=mappingsHash
+      draggedCreditAssignment=draggedCreditAssignment
+      editMapping=editMapping
+      addMapping=addMapping
+      removeMapping=removeMapping
+    }}
+  {{/each}}
+</ul>

@@ -1,0 +1,22 @@
+<thead>
+  <th>
+    Month
+  </th>
+  <th>
+    Academic
+  </th>
+  <th>
+    FTE
+  </th>
+  <th>
+    SLP Met
+  </th>
+</thead>
+{{#each months as |month|}}
+  {{status-by-student/row
+    month=month
+    statusHash=statusHash
+    notablesHash=notablesHash
+  }}
+{{/each}}
+{{yield}}

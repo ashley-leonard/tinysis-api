@@ -1,0 +1,11 @@
+<h2>Settings</h2>
+
+<ul class="reset-list">
+  {{#each settingsRoutes as |settingRoute|}}
+    <li>
+      {{#link-to settingRoute.route}}
+        {{settingRoute.title}}
+      {{/link-to}}
+    </li>
+  {{/each}}
+</ul>

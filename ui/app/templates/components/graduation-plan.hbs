@@ -1,0 +1,100 @@
+<div class="flex w-full">
+  
+  <div class="flex-none w-1/2">
+    <h3>Credit Requirements</h3>
+    {{graduation-plan/requirements-map
+      requirementType="credit"
+      mappings=mappings
+      requirements=requirements
+      mappingsHash=mappingsHash
+      draggedCreditAssignment=draggedCreditAssignment
+      editMapping=(action "editMapping")
+      addMapping=(action "addMapping")
+      removeMapping=(action "removeMapping")
+    }}
+
+    <h3>General Requirements</h3>
+    {{graduation-plan/requirements-map
+      requirementType="general"
+      mappings=mappings
+      requirements=requirements
+      mappingsHash=mappingsHash
+      draggedCreditAssignment=draggedCreditAssignment
+      editMapping=(action "editMapping")
+      addMapping=(action "addMapping")
+      removeMapping=(action "removeMapping")
+    }}
+
+    <h3>Service Requirements</h3>
+    {{graduation-plan/requirements-map
+      requirementType="service"
+      mappings=mappings
+      requirements=requirements
+      mappingsHash=mappingsHash
+      draggedCreditAssignment=draggedCreditAssignment
+      editMapping=(action "editMapping")
+      addMapping=(action "addMapping")
+      removeMapping=(action "removeMapping")
+    }}
+  </div>
+
+  <div class="flex-none w-1/2">
+    {{graduation-plan/credits
+      creditAssignments=creditsAvailableToMap
+      onDrag=(action "onDrag")
+    }}
+  </div>
+</div>
+
+{{#if showDialog}}
+  {{#modal-dialog
+    containerClass="w-3/4 lg:w-1/2 xl:w-5/12"
+    onClose=(action "cancelDialog")  
+    translucentOverlay=true
+  }}
+    {{#t-form
+      model=mappingToEdit
+      save=(action "saveMapping")
+      as |form|
+    }}
+      <p>
+        {{full-name student "first-last"}}: 
+        {{requirementToEdit.attributes.name}}
+      </p>
+      <fieldset>
+        <p>
+          {{#form-input error=errors.notes showError=showErrors label="Notes"}}
+            <textarea
+              name="notes"
+              value={{form.pojo.notes}}
+              maxlength="255"
+              class="resize-none w-full h-16"
+              autofocus
+            />
+          {{/form-input}}
+        </p>
+        <p class="w-1/4">
+          {{#form-input error=errors.completionDate showError=showErrors label="Completion date"}}
+            {{t-pikaday
+              value=form.pojo.dateCompleted
+              popup=true
+              onchange=(action "onChange" target=form)
+              name="dateCompleted"
+            }}
+          {{/form-input}}
+        </p>
+      </fieldset>
+      {{#t-form-actions-row
+        disabled=disabled
+      }}
+        <a
+          {{action "cancelDialog"}}
+          class="btn btn-clear"
+          href="#"
+        >
+          Cancel
+        </a>
+      {{/t-form-actions-row}}
+    {{/t-form}}
+  {{/modal-dialog}}
+{{/if}}

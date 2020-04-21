@@ -1,0 +1,10 @@
+<h2>Credit: {{credit.attributes.courseName}}</h2>
+<p>
+  {{#link-to "settings-credits.index" class="btn btn-clear"}}
+    Return to list of credits
+  {{/link-to}}
+</p>
+{{credit-form
+  model=credit
+  save=(action "saveCredit")
+}}

@@ -1,0 +1,14 @@
+<h2>Credits</h2>
+
+{{credits-filter
+  queryParams=qp
+  updateSearch=(action "updateSearch")
+}}
+
+<p>
+  {{#link-to "settings-credit.new" class="btn"}}
+    Add a credit
+  {{/link-to}}
+</p>
+
+{{outlet}}

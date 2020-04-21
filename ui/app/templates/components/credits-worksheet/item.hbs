@@ -1,0 +1,69 @@
+<tr
+  data-test-credit-id={{creditAssignment.id}}
+>
+  <td class="align-center">
+    <input
+      type="checkbox"
+      checked={{selected}}
+      onchange={{action "selectCredit"}}
+      disabled={{selectionDisabled}}
+    >
+  </td>
+  <td>
+    <TLink
+      class="no-underline-not-working"
+      @action={{action "selectCredit"}}
+    >
+      {{courseName}}
+    </TLink>
+    {{#if hasChildren}}
+      <CreditAssignments
+        @creditAssignments={{childCreditAssignments}}
+      />
+    {{/if}}
+    <NotesList
+      @notes={{notes}}
+      @notable={{creditAssignment}}
+      @expanded={{true}}
+    />
+  </td>
+  <td>
+    {{term.attributes.name}}
+  </td>
+  <td class="text-right">
+    {{creditHours}}
+  </td>
+  <td class="text-right">
+    {{t-date creditAssignment.attributes.enrollmentFinalizedOn "M/D/YYYY"}}
+  </td>
+  <td
+    class="text-right"
+    title={{creditAssignment.attributes.districtFinalizeApprovedBy}}
+  >
+    {{t-date creditAssignment.attributes.districtFinalizeApprovedOn "M/D/YYYY"}}
+  </td>
+  <td>
+    {{#if showSplit}}
+      <FaIcon @icon="columns" />
+      <TLink
+        data-test-split-link
+        @action={{action "splitCredit"}}
+      >
+        Split
+      </TLink>
+    {{/if}}
+    {{#if showApproveForTransmittal}}
+      <TLink
+        data-test-approve-link
+        @action={{action "approveCredit"}}
+      >
+        {{#if isApproved}}
+          <FaIcon @icon="times" data-test-approved class="text-red-700" />
+        {{else}}
+          <FaIcon @icon="check" data-test-unapproved class="text-green-700" />
+        {{/if}}
+        Approve
+      </TLink>
+    {{/if}}
+  </td>
+</tr>

@@ -1,0 +1,13 @@
+<t-contract-attendance-new class="flex flex-col content-start">
+  <h3>Pick an attendance day</h3>
+  {{t-pikaday
+    value=today
+    disableDay=(action "disableCurrentMeetings")
+    onchange=(action "onChangeDate")
+  }}
+  <footer>
+    <button class="btn" onclick={{action "createMeeting" selectedDate}}>
+      Take attendance
+    </button>
+  </footer>
+</t-contract-attendance-new>

@@ -1,0 +1,37 @@
+<tbody data-test-contract-attendance-list-row data-test-enrollment-id={{enrollment.id}}>
+  <tr>
+    <td>
+      {{full-name student}}
+    </td>
+    <td class="center">
+      {{number-or roll.present "-"}}
+      {{#if roll.tardy}}
+        ({{roll.tardy}}T)
+      {{/if}}
+    </td>
+    <td class="center">
+      {{number-or roll.absent "-"}}
+      {{#if roll.excused}}
+        ({{roll.excused}}E)
+      {{/if}}
+    </td>
+    <td class="center">
+      {{number-or roll.tardy "-"}}
+    </td>
+    {{#each meetings as |meeting|}}
+      {{contract-attendance-list/column
+        meeting=meeting
+        row=row
+        roll=roll
+      }}
+    {{/each}}
+  </tr>
+  <tr class="notes-row {{loadingNotes}}">
+    <td colspan={{columnsCount}}>
+      {{notes-list
+        notes=notes
+        expanded=notesExpanded
+      }}
+    </td>
+  </tr>
+</tbody>

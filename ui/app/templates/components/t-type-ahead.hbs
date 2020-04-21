@@ -1,0 +1,41 @@
+{{#if result}}
+  <t-type-ahead-result class="field cursor-text" data-test-value={{result.value}}>
+    <span class="bg-gray-800 text-gray-200 p-2">
+      {{result.name}}
+      <span class="cursor-pointer pl-2" data-test-clear-result onclick={{action "doClearResult"}}>
+        <FaIcon @icon="times" @prefix="fas" @size="1x" class="text-white" />
+      </span>
+    </span>
+  </t-type-ahead-result>
+{{else}}
+  <input
+    type="text"
+    oninput={{action "doInput"}}
+    onkeydown={{action "doKeyDown"}}
+    disabled={{unless result false}}
+    autofocus={{autofocusInput}}
+  >
+{{/if}}
+{{#if showResults}}
+  <ul
+    class="absolute search-results bg-white border border-black-600 list-reset p-0 z-100"
+  >
+    {{#if results}}
+      {{#each results as |result i|}}
+        <TTypeAhead::Item
+          @result={{result}}
+          @index={{i}}
+          @selection={{index}}
+          @onClick={{action "doSelect" i result}}
+          @onMouseOver={{action "doMouseOverSearchResult" i}}
+        />
+      {{/each}}
+    {{else}}
+      {{#if searchValue}}
+        <li class="list-reset">
+          No matches found
+        </li>
+      {{/if}}
+    {{/if}}
+  </ul>
+{{/if}}

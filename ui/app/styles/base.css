@@ -1,0 +1,92 @@
+@import "./ember-modal-dialog/ember-modal-structure";
+@import "./ember-modal-dialog/ember-modal-appearance";
+
+a {
+  color: theme('colors.blue.500');
+  text-decoration: underline;
+}
+
+html {
+  box-sizing: border-box;
+  @apply text-gray-900 font-normal;
+  font-family: sans-serif;
+  font-size: 14px;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+  color: inherit;
+}
+
+ul {
+  list-style-type: disc;
+  padding-left: theme('padding.4');
+}
+
+ol {
+  list-style-type: decimal;
+  padding-left: theme('padding.4');
+}
+
+.list-reset {
+  list-style-type: none;
+  padding-left: none;
+}
+
+h1, h2, h3, h4 {
+  @apply font-bold;
+}
+
+h1 {
+  @apply mb-4 text-2xl;
+}
+
+h2 {
+  @apply my-4 text-xl;
+}
+
+h3 {
+  @apply my-4 text-lg;
+}
+
+h4 {
+  @apply my-4;
+}
+
+p {
+  @apply mt-2 mb-6;
+}
+
+section {
+  @apply my-8;
+
+  h3:first-of-type {
+    @apply mt-0;
+  }
+}
+
+a, a:visited {
+  color: inherit;
+  @apply cursor-pointer;
+}
+
+a.disabled {
+  @apply text-gray-600 cursor-auto;
+}
+
+.svg-inline--fa {
+  display: inline-block;
+  width: 1.25rem;
+  height: 1.25rem;
+  @apply text-gray-700;
+}
+
+.fa-2x {
+  width: 2rem;
+  height: 2rem;
+}
+
+.fa-3x {
+  width: 3rem;
+  height: 3rem;
+}

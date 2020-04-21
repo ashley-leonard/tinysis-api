@@ -1,0 +1,29 @@
+<tr data-test-enrollment-id="{{enrollment.id}}">
+  <td>
+    {{full-name participant}}
+  </td>
+  <td>
+    {{titleize enrollmentStatus}}
+  </td>
+  <td>
+    <CreditAssignments
+      @creditable={{enrollment}}
+      @creditAssignments={{creditAssignments}}
+      @disabled={{enrollmentIsDisabled}}
+    />
+  </td>
+  <td>
+    <NotesList
+      @notes={{notes}}
+      @notable={{enrollment}}
+    />
+  </td>
+  <td>
+    <ContractEnrollmentsList::Status
+      @disabled={{enrollmentIsDisabled}}
+      @enrollment={{enrollment}}
+      @deleteEnrollment={{action "deleteEnrollment"}}
+      @updateEnrollment={{action "updateEnrollment"}}
+    />
+  </td>
+</tr>

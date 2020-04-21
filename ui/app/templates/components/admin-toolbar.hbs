@@ -1,0 +1,35 @@
+<nav class="toolbar flex items-center mb-4">
+  <ul class="flex list-reset">
+    {{tiny-toolbar/item
+      currentRoute=currentRoute
+      route="admin.index"
+      label="Admin"
+    }}
+    {{tiny-toolbar/item
+      currentRoute=currentRoute
+      route="admin-users"
+      label="Users"
+    }}
+    {{tiny-toolbar/item
+      currentRoute=currentRoute
+      route="admin-terms"
+      label="Terms"
+    }}
+    {{tiny-toolbar/item
+      currentRoute=currentRoute
+      route="admin-credit-batches"
+      label="Credit batches"
+    }}
+    {{tiny-toolbar/item
+      currentRoute=currentRoute
+      route="admin-reports"
+      label="Reports"
+    }}
+    {{tiny-toolbar/item
+      currentRoute=currentRoute
+      route="admin-settings.index"
+      label="Settings"
+      disabled=disabled
+    }}
+  </ul>
+</nav>

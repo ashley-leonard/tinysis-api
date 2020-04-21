@@ -1,0 +1,22 @@
+<thead>
+  <tr>
+    <th>Coordinator</th>
+    {{#each term.attributes.months as |month|}}
+      <th data-test-term-month class="center" title={{t-date month "compactTermMonth"}}>{{t-date month "MMM"}}</th>
+    {{/each}}
+  </tr>
+</thead>
+<tbody>
+  {{#each coordinators.data as |coordinator|}}
+    {{status-all-coordinators/row
+      coordinator=coordinator
+      coordinatorsHash=coordinatorsHash
+      months=months
+      term=term
+    }}
+  {{else}}
+    <tr class="no-results">
+      <td>No coordinators</td>
+    </tr>
+  {{/each}}
+</tbody>
