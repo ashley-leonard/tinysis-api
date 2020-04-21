@@ -87,7 +87,10 @@ export default Component.extend({
     const { user } = this;
     const { email } = user.attributes;
 
-    if (!email) return;
+    if (!email) {
+      this.set('loading', false);
+      return;
+    }
 
     let response;
     try {

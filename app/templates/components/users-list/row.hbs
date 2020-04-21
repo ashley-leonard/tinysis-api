@@ -11,8 +11,8 @@
     {{titleize user.attributes.status}}
   </td>
   <td class="text-center">
-    {{#if user.attributes.canLogin}}
-      <span class="fas fa-check" />
+    {{#if hasLogin}}
+      <FaIcon @icon="check" data-test-has-login />
     {{/if}}
   </td>
   <td>

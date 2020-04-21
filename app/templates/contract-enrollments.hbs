@@ -5,7 +5,7 @@
   @disabled={{disabled}}
 />
 
-<TLink action="showAddEnrollment">
+<TLink @action={{action "showAddEnrollment"}}>
   Add enrollment
 </TLink>
 
@@ -28,3 +28,14 @@
 
 </CheckEmpty>
 
+{{#if showAddEnrollment}}
+  {{#modal-dialog
+    onClose=(action "showAddEnrollment" false)  
+    translucentOverlay=true
+  }}
+    <ContractEnrollmentsAdd
+      @createEnrollment={{action "addEnrollment"}}
+      @contract={{contract}}
+    />
+  {{/modal-dialog}}
+{{/if}}

@@ -44,7 +44,7 @@
   </td>
   <td>
     {{#if showSplit}}
-      <span class="fas fa-columns" />
+      <FaIcon @icon="columns" />
       <TLink
         data-test-split-link
         @action={{action "splitCredit"}}
@@ -58,15 +58,9 @@
         @action={{action "approveCredit"}}
       >
         {{#if isApproved}}
-          <span
-            data-test-approved
-            class="fas fa-times text-red-700"
-          />
+          <FaIcon @icon="times" data-test-approved class="text-red-700" />
         {{else}}
-          <span
-            data-test-unapproved
-            class="fas fa-check text-green-700"
-          />
+          <FaIcon @icon="check" data-test-unapproved class="text-green-700" />
         {{/if}}
         Approve
       </TLink>

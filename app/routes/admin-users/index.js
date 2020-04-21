@@ -73,15 +73,34 @@ export default Route.extend({
     });
   },
 
+  async afterModel(result) {
+    const emails = result.data
+      .filter(user => user.attributes.email)
+      .map(user => user.attributes.email);
+
+    const emailsFilter = emails
+      .map(email => `"${email}"`)
+      .join(' OR ');
+    const loginsResult = await this.tinyData.fetch('/api/admin/logins', {
+      data: {
+        q: `email:(${emailsFilter})`,
+      },
+    });
+
+    this.loginsResult = loginsResult;
+  },
+
   setupController(controller, users) {
     const {
       qp: queryParams,
+      loginsResult,
     } = this;
 
     this._super(controller, users);
 
     controller.setProperties(Object.assign({}, queryParams, {
       users: users.data,
+      logins: loginsResult.data,
     }));
 
     const usersController = this.controllerFor('admin-users');

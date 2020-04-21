@@ -1,7 +1,6 @@
 import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
 import { Promise } from 'rsvp';
-import fetch from '../../utils/fetch';
 import { getChangedKeys } from '../../utils/json-api';
 import { summarizeValidationError } from '../../utils/response-utils';
 import { AUTH_USER_KEYS, isStaffRole, isActive } from '../../utils/user-utils';
@@ -12,7 +11,7 @@ export default Controller.extend({
   actions: {
     getLogin(email) {
       const encEmail = encodeURIComponent(email);
-      return fetch(`/api/admin/login?email=${encEmail}`);
+      return this.tinyData.fetch(`/api/admin/logins/${encEmail}`);
     },
 
     updateLogin(data, login, attributesChanged) {
@@ -24,7 +23,7 @@ export default Controller.extend({
     },
 
     destroyLogin(user, login) {
-      return fetch(`/api/admin/login/${login.user_id}`, {
+      return this.tinyData.fetch(`/api/admin/logins/${login.user_id}`, {
         method: 'DELETE',
       }).then((result) => {
         this.flashMessages.success(`Successfully removed access for user ${user.attributes.firstName} ${user.attributes.lastName}.`);
@@ -42,7 +41,7 @@ export default Controller.extend({
         email,
         role,
       } = user.attributes;
-      const data = {
+      const model = {
         firstName,
         lastName,
         nickname,
@@ -51,21 +50,21 @@ export default Controller.extend({
         id,
       };
 
-      return fetch('/api/admin/login', {
+      return this.tinyData.fetch('/api/admin/logins', {
         method: 'POST',
-        data,
+        data: { data: model },
       });
     },
 
-    async saveUser(data) {
+    async saveUser(model) {
       return new Promise(async (resolve, reject) => {
         try {
-          const result = await this.tinyData.fetch(`/api/admin/users/${data.id}`, {
+          const result = await this.tinyData.fetch(`/api/admin/users/${model.id}`, {
             method: 'PUT',
-            data,
+            data: { data: model },
           });
 
-          const postSaveAction = await this.syncLogin(data, this.login);
+          const postSaveAction = await this.syncLogin(model, this.login);
 
           switch (postSaveAction.action) {
             case 'redirect':
@@ -95,15 +94,15 @@ export default Controller.extend({
     },
   },
 
-  async syncLogin(data, login) {
+  async syncLogin(model, login) {
     const user = this.get('user');
-    const changedKeys = getChangedKeys(user, data);
+    const changedKeys = getChangedKeys(user, model);
     const actionRedirect = { action: 'redirect' };
     const actionPrompt = { action: 'prompt' };
 
     if (login) {
       if (['firstName', 'lastName', 'nickname', 'email'].find(value => changedKeys.includes(value))) {
-        await this.saveLogin(data, login, changedKeys);
+        await this.saveLogin(model, login, changedKeys);
       }
     }
 
@@ -126,14 +125,14 @@ export default Controller.extend({
   // TODO should this reset the local user state? upon success?
   //
   saveLogin(updates, login, changedKeys = AUTH_USER_KEYS) {
-    const data = changedKeys.reduce((memo, key) => {
+    const model = changedKeys.reduce((memo, key) => {
       memo[key] = updates.attributes[key];
       return memo;
     }, {});
 
-    return fetch(`/api/admin/login/${login.user_id}`, {
+    return this.tinyData.fetch(`/api/admin/logins/${login.user_id}`, {
       method: 'PATCH',
-      data,
+      data: { data: model },
     });
   },
 });

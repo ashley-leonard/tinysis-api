@@ -10,13 +10,13 @@ export default Controller.extend({
   tinyData: service(),
   flashMessages: service(),
   actions: {
-    async saveUser(data) {
+    async saveUser(model) {
       return new Promise(async (resolve, reject) => {
         let userResult;
         try {
           userResult = await this.tinyData.fetch('/api/admin/users', {
             method: 'POST',
-            data,
+            data: { data: model },
           });
 
           if (!isStaffRole(userResult.data.attributes.role)) {
@@ -34,7 +34,7 @@ export default Controller.extend({
         }, {});
 
         try {
-          await this.tinyData.fetch('/api/admin/login', {
+          await this.tinyData.fetch('/api/admin/logins', {
             method: 'POST',
             data: { data: authPostBody },
           });

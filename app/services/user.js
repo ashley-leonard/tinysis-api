@@ -23,24 +23,25 @@ export default Service.extend({
    * @param {string} options.status | credit status - default is 'active', pass 'all' to see all
    * @param {number} options.limit | limit
    * @param {string} options.order | order string; default is 'name'
-   * @param {string} options.search | search string
+   * @param {string} options.name | search string to match against name components
+   * @param {string} options.scope | data scope; currently, only 'contract:contractId' permitted
    * @returns {Promise} fetch promise
    */
-  searchUsers({
+  searchStudents({
     status = 'active',
     limit = 10,
     order = 'lastName, firstName',
-    role = 'student',
-    search = null,
+    name = null,
+    scope = null,
   }) {
     const { tinyData } = this;
-    return tinyData.fetch('/api/users', {
+    return tinyData.fetch('/api/students', {
       data: {
-        search,
+        name,
         status,
+        scope,
         limit,
         order,
-        role,
       },
     });
   },

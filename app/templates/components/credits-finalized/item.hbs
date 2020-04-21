@@ -1,7 +1,10 @@
 <tr>
   <td class="text-center">
     {{#if creditAssignment.relationships.creditTransmittalBatch.data.id}}
-      <span class="fas fa-check" data-test-credit-transmittal-batch-id={{creditAssignment.relationships.creditTransmittalBatch.data.id}} />
+      <FaIcon
+        @icon="check"
+        data-test-credit-transmittal-batch-id={{creditAssignment.relationships.creditTransmittalBatch.data.id}}
+      />
     {{/if}}
   </td>
   <td>

@@ -11,9 +11,9 @@
     </td>
     <td data-test-ale class="center">
       {{#if status.attributes.metFteRequirements}}
-        <span class="fas fa-check" />
+        <FaIcon @icon="check" data-test-ale-met />
       {{else}}
-        <span class="fas fa-times" />
+        <FaIcon @icon="times" data-test-ale-unmet />
       {{/if}}
     </td>
   {{else}}

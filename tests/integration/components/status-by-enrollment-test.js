@@ -79,7 +79,7 @@ module('Integration | Component | status-by-enrollment', (hooks) => {
 
     assert.matches(tr.querySelector('[data-test-academic]').textContent, 'Satisfactory', 'academic status correctly reported as satisfactory');
     assert.matches(tr.querySelector('[data-test-attendance]').textContent, 'Satisfactory', 'attendance status correctly reported as satisfactory');
-    assert.ok(tr.querySelector('[data-test-ale] span.fa-check'), 'SLP marked as met');
+    assert.ok(tr.querySelector('[data-test-ale] [data-test-ale-met]'), 'SLP marked as met');
   });
 
   test('it renders correctly formed row for unsatisfactory', async (assert) => {
@@ -105,6 +105,6 @@ module('Integration | Component | status-by-enrollment', (hooks) => {
 
     assert.matches(tr.querySelector('[data-test-academic]').textContent, 'Unsatisfactory', 'academic status correctly reported as satisfactory');
     assert.matches(tr.querySelector('[data-test-attendance]').textContent, 'Unsatisfactory', 'attendance status correctly reported as satisfactory');
-    assert.ok(tr.querySelector('[data-test-ale] span.fa-times'), 'SLP marked as unmet');
+    assert.ok(tr.querySelector('[data-test-ale] [data-test-ale-unmet]'), 'SLP marked as unmet');
   });
 });

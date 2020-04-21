@@ -30,7 +30,9 @@
           Credit hours
         </span>
         <span>
-          {{#if pojo.enableOverride}}<span class="inline no-underline fas fa-check text-orange-500 mr-2" />{{/if}}
+          {{#if pojo.enableOverride}}
+            <FaIcon @icon="check" class="inline no-underline text-orange-500 mr-2" />
+          {{/if}}
           <TLink
             class="font-normal"
             data-test-toggle-override

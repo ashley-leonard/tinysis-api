@@ -23,8 +23,8 @@ export default Controller.extend({
       this.set('showAddEnrollment', show);
     },
 
-    addEnrollment(enrollment) {
-      throw new Error(enrollment);
+    addEnrollment(/* enrollment */) {
+      throw new Error('todo');
     },
 
     async updateEnrollment(enrollment, command) {

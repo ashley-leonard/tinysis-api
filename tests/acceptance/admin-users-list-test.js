@@ -10,6 +10,8 @@ import MockServer, { provisionTinySisBootstrapRoutes } from '../helpers/mock-ser
 import { MockLocalStorage } from '../helpers/test-utils';
 
 import adminUsersFixtures from '../fixtures/admin-users';
+import adminUsersLoginsFixtures from '../fixtures/admin-users-logins';
+
 import staffFixture from '../fixtures/staff';
 
 let server;
@@ -26,6 +28,7 @@ module('Acceptance | admin users list', (hooks) => {
 
     server.addRequest('get', '/api/staff', staffFixture);
     server.addRequest('get', '/api/admin/users', adminUsersFixtures);
+    server.addRequest('get', '/api/admin/logins', adminUsersLoginsFixtures);
 
     // this should always be done with mocks.
     // prevents test from hanging for minutes when Pretender crashes.

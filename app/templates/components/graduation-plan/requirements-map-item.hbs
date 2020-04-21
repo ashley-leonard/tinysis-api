@@ -22,7 +22,7 @@
         {{#if requirementHash.mapping}}
           {{#if requirementHash.mapping.attributes.dateCompleted}}
             <span class="font-semibold text-purple-500">
-              <i class="fas fa-check" /> 
+              <FaIcon @icon="check" />
               {{t-date requirementHash.mapping.attributes.dateCompleted "M/D/YY"}}
             </span>
           {{/if}}
@@ -58,7 +58,7 @@
         href="#"
         class="only-drop-target-excluded"
       >
-        <span class="far fa-times-circle"/>
+        <FaIcon @icon="circle"/>
       </a>
     {{/credit-assignments}}
   {{/if}}
