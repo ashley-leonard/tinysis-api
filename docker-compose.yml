@@ -38,6 +38,8 @@ services:
       dockerfile: Dockerfile
     volumes:
       - ./ui:/ui
+      - /ui/node_modules
+      - /ui/tmp
     command: npx ember serve --proxy=http://web:3000 --port=3001
     ports:
       - "3001:3001"

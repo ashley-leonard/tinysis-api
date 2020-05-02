@@ -1,38 +1,51 @@
 #!/usr/bin/env bash
 
+set -x
+
 COMMAND=$1
-WEB=tiny_web_1
+
+PROJECT=tiny-ale
+API=${PROJECT}_web_1
+UI=${PROJECT}_ux_1
+DB=${PROJECT}_db_1
+ADMINER=${PROJECT}_adminer_1
+
+set COMPOSE_PROJECT_NAME=$PROJECT
 
 createDb () {
-  docker exec $WEB rake db:create
+  docker exec $API rake db:create
 }
 
 migrateDb () {
-  docker exec $WEB rake db:migrate
+  docker exec $API rake db:migrate
 }
 
 dropDb () {
-  docker exec -e DISABLE_DATABASE_ENVIRONMENT_CHECK=1 $WEB rake db:drop
+  docker exec -e DISABLE_DATABASE_ENVIRONMENT_CHECK=1 $API rake db:drop
 }
 
 seedDb () {
-  docker exec $WEB rake db:seed
+  docker exec $API rake db:seed
 }
 
 testPrepare () {
-  docker exec $WEB rake db:test:prepare
+  docker exec $API rake db:test:prepare
 }
 
 deleteDbVolume () {
-  docker volume remove tiny_tinysis_data
+  docker volume remove $PROJECT_tinysis_data
 }
 
-shell () {
-  docker exec -it $WEB bash
+shell:api () {
+  docker exec -it $API bash
 } 
 
+shell:ui () {
+  docker exec -it $UI bash
+}
+
 server () {
-  docker exec -it $WEB rm -rf /api/tmp/pids/server.pid && rails s
+  docker exec -it $API rm -rf /api/tmp/pids/server.pid && rails s
 }
 
 initDb () {
@@ -50,38 +63,34 @@ reset () {
 }
 
 stopContainers () {
-  docker stop $WEB
-  docker stop $DB
-  docker stop $ADMINER
+  docker stop $API $DB $ADMINER $UI
 }
 
 removeContainers () {
-  docker rm $WEB
-  docker rm $DB
+  docker rm $API $DB $ADMINER $UI
 }
 
 removeImages () {
-  docker rmi tiny_web
-  docker rmi tiny_db
+  docker rmi ${PROJECT}_web ${PROJECT}_db ${PROJECT}_adminer ${PROJECT}_ux
 }
 
 # if this is not working, you need to get your AWS profile set up in 
 # ~/.aws/credentials. Contact artzt@juniperswordplay.com for access.
 #
 getSecrets () {
-  aws s3 cp --profile=tinysis-devtest s3://tinysis-devtest/api . --recursive
+  aws s3 cp --profile=tinysis-devtest s3://tinysis-devtest/api api --recursive
 }
 
 build () {
-  docker-compose up
+  docker-compose -p $PROJECT up --build
 }
 
 log () {
-  docker exec -it $WEB tail -f log/*
+  docker exec -it $API tail -f log/*
 }
 
 test:api () {
-  docker exec -e RAILS_ENV=test $WEB bundle exec rspec
+  docker exec -e RAILS_ENV=test $API bundle exec rspec
 }
 
 usage () {
@@ -100,7 +109,7 @@ usage () {
 }
 
 case "$COMMAND" in
-  "getSecrets"|"initDb"|"build"|"server"|"shell"|"log"|"reset"|"test:api")
+  "getSecrets"|"initDb"|"build"|"server"|"shell:ui"|"shell:api"|"log"|"reset"|"test:api")
       $COMMAND
       ;;
   *)

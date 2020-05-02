@@ -1,6 +1,7 @@
 FROM node:12
 
 RUN mkdir /ui
+
 WORKDIR /ui
 
 # Watchman
@@ -17,6 +18,8 @@ RUN set -ex \
   && rm -rf /var/lib/apt/lists/* \
   && rm -rf /tmp/*
 
+COPY package.json .
+COPY package-lock.json .
 RUN npm install
 
 # App and live-reload ports
