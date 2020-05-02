@@ -1,0 +1,16 @@
+<h2>Assignments</h2>
+
+{{#check-empty
+  count=model.meta.count
+  noResultsMessage="No assignments as of yet"
+}}
+  {{count-paragraph
+    result=model
+    name="assignment"
+  }}
+  {{contract-assignments-list
+    assignments=assignments
+    enrollments=enrollments
+    getNotes=(route-action "getNotes")
+  }}
+{{/check-empty}}

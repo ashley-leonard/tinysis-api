@@ -1,0 +1,71 @@
+<ul class="filter">
+  <li class="filter-item" data-test-name>
+    <input
+      name="name"
+      type="text"
+      placeholder="Name"
+      value={{queryParams.name}}
+      autocomplete="off"
+      onchange={{action "inputChange"}}
+    >
+  </li>
+  {{#if showRole}}
+    <li class="filter-item" data-test-role>
+      <TSelect
+        @optionsList={{roleOptions}}
+        @value={{queryParams.role}}
+        name="role"
+        @prompt="All roles"
+        @onchange={{action "onSelect"}}
+      />
+    </li>
+  {{/if}}
+  {{#if showStatus}}
+    <li class="filter-item" data-test-status>
+      <TSelect
+        @optionsList={{statusOptions}}
+        @value={{queryParams.status}}
+        name="status"
+        @prompt="Any status"
+        @onchange={{action "onSelect"}}
+      />
+    </li>
+  {{/if}}
+  <li class="filter-item" data-test-coordinator>
+    <TSelect
+      @optionsList={{coordinatorOptions}}
+      @value={{queryParams.coordinator}}
+      name="coordinator"
+      @prompt="All coordinators"
+      @optionValuePath="id"
+      @optionNamePath="name"
+      disabled={{isStaff}}
+      @onchange={{action "onSelect"}}
+    />
+  </li>
+  <li class="filter-item" data-test-grade>
+    <TSelect
+      @optionsList={{grades}}
+      @value={{queryParams.grade}}
+      name="grade"
+      @prompt="Any grade"
+      disabled={{isStaff}}
+      @onchange={{action "onSelect"}}
+    />
+  </li>
+  <li class="filter-item" data-test-year>
+    <TSelect
+      @optionsList={{schoolYearsReversed}}
+      @value={{queryParams.schoolYear}}
+      name="schoolYear"
+      prompt="Any year"
+      @disabled={{isStaff}}
+      @onchange={{action "onSelect"}}
+    />
+  </li>
+  <li class="filter-item" data-test-submit>
+    <button type="submit" class="btn">
+      Find
+    </button>
+  </li>
+</ul>

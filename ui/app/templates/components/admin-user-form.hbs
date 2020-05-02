@@ -1,0 +1,159 @@
+<fieldset>
+  <p>
+    {{#form-input error=errors.firstName showError=showErrors label="First name"}}
+      <input
+        type="text"
+        name="firstName"
+        value={{pojo.firstName}}
+        autofocus
+        onchange={{action "onChange"}}
+      >
+    {{/form-input}}
+  </p>
+  <p>
+    {{#form-input error=errors.lastName showError=showErrors label="Last name"}}
+      <input
+        type="text"
+        name="lastName"
+        value={{pojo.lastName}}
+        onchange={{action "onChange"}}
+      >
+    {{/form-input}}
+  </p>
+  <p>
+    {{#form-input error=errors.nickname showError=showErrors label="Nickname"}}
+      <input
+        type="text"
+        name="nickname"
+        value={{pojo.nickname}}
+        onchange={{action "onChange"}}
+      >
+    {{/form-input}}
+  </p>
+</fieldset>
+
+<fieldset>
+  <h3>Account Privileges and Status</h3>
+  <p>
+    {{#form-input error=errors.role showError=showErrors label="User type"}}
+      <TSelect
+        @value={{pojo.role}}
+        @prompt="Select a user type"
+        @optionsList={{roleOptions}}
+        name="role"
+        @onchange={{action "onChange"}}
+      />
+    {{/form-input}}
+  </p>
+</fieldset>
+
+{{#if isStaff}}
+  <fieldset>
+    <p>
+      {{#form-input error=errors.email showError=showErrors label="Email"}}
+        <input
+          type="email"
+          name="email"
+          value={{pojo.email}}
+          onchange={{action "onChange"}}
+        >
+      {{/form-input}}
+    </p>
+  </fieldset>
+{{/if}}
+
+<fieldset>
+  <p>
+    <label>
+      Status
+    </label>
+    <div class="inputs-horizontal">
+      <label>
+        <input
+          type="radio"
+          value="active"
+          checked={{if isActive true false}}
+          name="status"
+          onchange={{action "onChange"}}
+        >
+        Active
+      </label>
+      <label>
+        <input
+          type="radio"
+          value="inactive"
+          checked={{if isActive false true}}
+          name="status"
+          onchange={{action "onChange"}}
+        >
+        Inactive
+      </label>
+    </div>
+  </p>
+  <p>
+    {{#form-input error=errors.dateActive showError=showErrors label="Date active"}}
+      {{t-pikaday
+        popup=true
+        name="dateActive"
+        value=pojo.dateActive
+        onchange=(action "updateDate")
+      }}
+    {{/form-input}}
+  </p>
+  <p>
+    {{#form-input error=errors.dateInactive showError=showErrors label="Date inactive"}}
+      {{t-pikaday
+        popup=true
+        name="dateInactive"
+        value=pojo.dateInactive
+        onchange=(action "updateDate")
+        showClear=true
+      }}
+    {{/form-input}}
+  </p>
+</fieldset>
+{{#if isStudent}}
+  <fieldset>
+    <h3>Student Settings</h3>
+    <p>
+      {{#form-input error=errors.coordinator showError=showErrors label="Coordinator"}}
+        <TSelect
+          @prompt="None assigned"
+          @value={{pojo.coordinatorId}}
+          @optionsList={{coordinatorOptions}}
+          @optionValuePath="id"
+          name="coordinator"
+          @onchange={{action "handleCoordinatorChange"}}
+        />
+      {{/form-input}}
+    </p>
+    <p>
+      {{#form-input error=errors.districtId showError=showErrors label="District ID"}}
+        <input
+          type="text"
+          name="districtId"
+          value={{pojo.districtId}}
+          onchange={{action "onChange"}}
+        >
+      {{/form-input}}
+    </p>
+    <p>
+      {{#form-input error=errors.districtGrade showError=showErrors label="Grade level"}}
+        <TSelect
+          @prompt="None assigned"
+          @value={{pojo.districtGrade}}
+          @optionsList={{grades}}
+          name="districtGrade"
+          @onchange={{action "onChange"}}
+        />
+      {{/form-input}}
+    </p>
+  </fieldset>
+{{/if}}
+{{#t-form-actions-row
+  disabled=disabled
+}}
+  {{#link-to "admin-users" class="btn btn-clear"}}
+    Cancel
+  {{/link-to}}
+{{/t-form-actions-row}}

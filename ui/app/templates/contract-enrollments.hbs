@@ -1,0 +1,41 @@
+<h2>Enrollments</h2>
+
+<ContractCreditAssignments
+  @contract={{contract}}
+  @disabled={{disabled}}
+/>
+
+<TLink @action={{action "showAddEnrollment"}}>
+  Add enrollment
+</TLink>
+
+<CheckEmpty
+  @count={{model.meta.count}}
+  @noResultsMessage="No enrollments as of yet"
+>
+  <CountParagraph
+    @result={{model}}
+    @name="enrollment"
+  />
+
+  <ContractEnrollmentsList
+    @enrollments={{enrollments}}
+    @contractIsDisabled={{contractIsDisabled}}
+    @deleteEnrollment={{action "deleteEnrollment"}}
+    @updateEnrollment={{action "updateEnrollment"}}
+    @getNotes={{route-action "getNotes" enrollments}}
+  />
+
+</CheckEmpty>
+
+{{#if showAddEnrollment}}
+  {{#modal-dialog
+    onClose=(action "showAddEnrollment" false)  
+    translucentOverlay=true
+  }}
+    <ContractEnrollmentsAdd
+      @createEnrollment={{action "addEnrollment"}}
+      @contract={{contract}}
+    />
+  {{/modal-dialog}}
+{{/if}}

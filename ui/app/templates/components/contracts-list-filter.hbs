@@ -1,0 +1,52 @@
+<ul class="filter">
+  <li class="filter-item">
+    <TSelect
+      @optionsList={{schoolYears}}
+      @value={{queryParams.schoolYear}}
+      name="schoolYear"
+      @onchange={{action "onSelect"}}
+    />
+  </li>
+  <li class="filter-item">
+    <TSelect
+      @optionsList={{terms}}
+      @value={{queryParams.term}}
+      name="term"
+      @prompt={{termsPrompt}}
+      @optionValuePath="id"
+      @optionNamePath="attributes.name"
+      @onchange={{action "onSelect"}}
+    />
+  </li>
+  <li class="filter-item">
+    <TSelect
+      @optionsList={{facilitatorOptions}}
+      @value={{queryParams.facilitator}}
+      name="facilitator"
+      @prompt="All facilitators"
+      @optionValuePath="id"
+      @optionNamePath="name"
+      @onchange={{action "onSelect"}}
+    />
+  </li>
+  <li class="filter-item">
+    <TSelect
+      @optionsList={{categories}}
+      @value={{queryParams.category}}
+      name="category"
+      @prompt="All categories"
+      @optionValuePath="id"
+      @optionNamePath="attributes.name"
+      @onchange={{action "onSelect"}}
+    />
+  </li>
+  <li class="filter-item">
+    <TSelect
+      @optionsList={{statuses}}
+      @value={{queryParams.status}}
+      name="status"
+      @prompt="Any status"
+      @onchange={{action "onSelect"}}
+    />
+  </li>
+</ul>

@@ -1,0 +1,69 @@
+<h3>Add credit assignment</h3>
+<ErrorFlash
+  @error={{@saveCreditAssignmentError}}
+  @defaultMessage="Failed to save credit assignment"
+/>
+<p>For {{titleize creditable.type}}</p>
+<fieldset>
+  <p>
+    <FormInput
+      @error={{errors.credit}}
+      @showError={{showErrors}}
+      @label="Course"
+    >
+      <TTypeAhead
+        name="credit"
+        prompt="Type a course name or course code to match"
+        @autofocusInput={{true}}
+        @value={{relationships.credit.id}}
+        @results={{creditResult}}
+        @onSearch={{action "searchCredits"}}
+        @onChange={{action "onChangeCredit"}}
+      />
+    </FormInput>
+  </p>
+</fieldset>
+<fieldset>
+  <p>
+    <FormInput
+      @error={{errors.creditHours}}
+      @showError={{showErrors}}
+      @label="Credits"
+    >
+      <input
+        type="number"
+        step="0.25"
+        min="0"
+        name="creditHours"
+        data-test-credit-hours
+        value={{pojo.creditHours}}
+        onchange={{action "onChange"}}
+      >
+    </FormInput>
+  </p>
+</fieldset>
+<fieldset>
+  <p>
+    <FormInput
+      @error={{errors.note}}
+      @showError={{showErrors}}
+      @label="Notes"
+    >
+      <textarea
+        value={{pojo.note}}
+        name="note"
+        onchange={{action "onChange"}}
+      />
+    </FormInput>
+  </p>
+</fieldset>
+<footer>
+  <button class="btn" type="submit">
+    Save
+  </button>
+  <TLink
+    @action={{action "close"}}
+  >
+    Cancel
+  </TLink>
+</footer>

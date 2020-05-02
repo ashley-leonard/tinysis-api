@@ -1,0 +1,23 @@
+<fieldset>
+  <p>
+    {{#form-input error=errors.participant showError=showErrors label="Participant"}}
+      <TTypeAhead
+        name="participant"
+        prompt="Search for a student to enroll"
+        @autofocusInput={{true}}
+        @onSearch={{action "onSearchCandidates"}}
+        @onChange={{action "onChangeCandidate"}}
+      />
+    {{/form-input}}
+  </p>
+</fieldset>
+
+<TFormActionsRow
+  @submitCaption="Add enrollment"
+>
+  <TLink
+    @onclick={{onClose}}
+  >
+    Close
+  </TLink>
+</TFormActionsRow>

@@ -1,0 +1,14 @@
+<tr>
+  <td>{{t-date month "termMonth"}}</td>
+  <td>{{academic}}</td>
+  <td>{{status.attributes.fteHours}}</td>
+  <td>{{heldPeriodicCheckins}}</td>
+</tr>
+<tr class="notes-row {{loadingNotes}}">
+  <td colspan="4">
+    {{notes-list
+      notes=notes
+      notable=status
+    }}
+  </td>
+</tr>

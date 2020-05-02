@@ -1,0 +1,35 @@
+<p>
+  <button
+    class="btn"
+    onclick={{action "toggleNew"}}
+  >
+    Take attendance
+  </button>
+</p>
+
+{{#if showNew}}
+  {{#modal-dialog
+    onClose=(action "toggleNew")  
+    translucentOverlay=true
+  }}
+    {{contract-attendance-new
+      meetings=meetings
+      today=today
+      createMeeting=(action "createMeeting")
+    }}
+  {{/modal-dialog}}
+{{/if}}
+
+{{#check-empty
+  count=model.meta.count
+  noResultsMessage="No attendance taken as of yet"
+}}
+  {{count-paragraph
+    result=model
+    name="meeting"
+  }}
+  {{contract-attendance-list
+    meetings=meetings
+    enrollments=enrollments
+  }}
+{{/check-empty}}

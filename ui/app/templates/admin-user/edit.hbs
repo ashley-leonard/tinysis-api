@@ -1,0 +1,19 @@
+<h2>{{full-name user}} ({{titleize user.attributes.role}})</h2>
+
+<div class="flex hb-4">
+  {{admin-user-form
+    staff=staff
+    model=user
+    save=(action "saveUser")
+    reportError=(action "reportError")
+    updateLogin=(action "updateLogin")
+  }}
+
+  {{admin-user-login
+    user=user
+    createLogin=(action "createLogin")
+    updateLogin=(action "updateLogin")
+    destroyLogin=(action "destroyLogin")
+    getLogin=(action "getLogin")
+  }}
+</div>

@@ -1,0 +1,64 @@
+<fieldset>
+  <p>
+    {{#form-input error=errors.name showError=showErrors label="Name"}}
+      <input
+        type="text"
+        name="name"
+        value={{pojo.name}}
+        autofocus
+        onchange={{action "onChange"}}
+      >
+    {{/form-input}}
+  </p>
+  <p>
+    {{#form-input label="Status"}}
+      <TSelect
+        @optionsList={{statusOptions}}
+        @value={{pojo.status}}
+        name="status"
+        @onchange={{action "onChange"}}
+      />
+    {{/form-input}}
+  </p>
+  <p>
+    {{#form-input error=errors.notes showError=showErrors label="Notes"}}
+      <textarea
+        name="notes"
+        value={{pojo.notes}}
+        onchange={{action "onChange"}}
+      />
+    {{/form-input}}
+  </p>
+  <p>
+    {{#form-input label="Requirement type"}}
+      <TSelect
+        @optionsList={{requirementTypeOptions}}
+        @value={{requirementType}}
+        name="requirementType"
+        @onchange={{action (mut pojo.requirementType)}}
+      />
+    {{/form-input}}
+  </p>
+</fieldset>
+
+<fieldset>
+  <p>
+    {{#form-input error=errors.parent showError=showErrors label="Parent requirement"}}
+      <TSelect
+        @value={{parentId}}
+        @prompt="Select a requirement"
+        @optionsList={{parentOptions}}
+        name="parentId"
+        @onchange={{action (mut parentId)}}
+      />
+    {{/form-input}}
+  </p>
+</fieldset>
+
+{{#t-form-actions-row
+  disabled=disabled
+}}
+  {{#link-to "settings-graduation-plan-requirements" class="btn btn-clear"}}
+    Cancel
+  {{/link-to}}
+{{/t-form-actions-row}}

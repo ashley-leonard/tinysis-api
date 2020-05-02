@@ -1,0 +1,16 @@
+<h3>
+  {{meeting.attributes.title}}
+</h3>
+
+<p>
+  {{#link-to "contract-attendance" contract.id}}
+    Return to all meetings
+  {{/link-to}}
+</p>
+
+{{contract-attendance-roll
+  contract=contract
+  meeting=meeting
+  updateRoll=(action "updateRoll")
+  updateAllRolls=(action "updateAllRolls")
+}}

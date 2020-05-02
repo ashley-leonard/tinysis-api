@@ -1,0 +1,14 @@
+<td class="text-center {{if isException "text-red-500"}}" data-test-month={{month}} data-test-status-id={{status.id}}>
+  {{#if showStatus}}
+    {{#link-to "status-by-enrollment" enrollment.id (query-params month=month)}}
+      {{statusAbbreviation}}
+      {{#if status}}
+        {{#if status.attributes.metFteRequirements}}
+          M
+        {{else}}
+          U
+        {{/if}}
+      {{/if}}
+    {{/link-to}}
+  {{/if}}
+</td>

@@ -1,0 +1,31 @@
+<tr>
+  <td class="text-center">
+    {{#if creditAssignment.relationships.creditTransmittalBatch.data.id}}
+      <FaIcon
+        @icon="check"
+        data-test-credit-transmittal-batch-id={{creditAssignment.relationships.creditTransmittalBatch.data.id}}
+      />
+    {{/if}}
+  </td>
+  <td>
+    {{courseName}}
+    {{#if childCreditAssignments}}
+      {{credit-assignments creditAssignments=childCreditAssignments}}
+    {{/if}}
+  </td>
+  <td>
+    {{term.attributes.name}}
+  </td>
+  <td class="text-right">
+    {{creditHours}}
+  </td>
+  <td class="text-right">
+    {{t-date creditAssignment.attributes.enrollmentFinalizedOn "M/D/YYYY"}}
+  </td>
+  <td
+    class="text-right"
+    title={{creditAssignment.attributes.districtFinalizeApprovedBy}}
+  >
+    {{t-date creditAssignment.attributes.districtFinalizeApprovedOn "M/D/YYYY"}}
+  </td>
+</tr>

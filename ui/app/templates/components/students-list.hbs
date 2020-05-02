@@ -1,0 +1,15 @@
+<table class="t-table w-full" data-test-students-list>
+  <thead>
+    <tr>
+      <th>Student</th>
+      <th>Coordinator</th>
+      <th class="text-center">Grade</th>
+      <th>Links</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each students as |student|}}
+      {{students-list/row student=student}}
+    {{/each}}
+  </tbody>
+</table>

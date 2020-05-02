@@ -1,0 +1,30 @@
+<dt>Status</dt>
+<dd data-test-enrollment-status>{{enrollmentStatus}}</dd>
+<dt>Credits</dt>
+<dd>
+  {{credit-assignments
+    creditAssignments=creditAssignments
+  }}
+</dd>
+<dt>Assignments</dt>
+<dd data-test-assignments-status>
+  {{#if assignments}}
+    Completed
+    {{completedAssignments.length}}
+    of
+    {{assignments.length}}
+  {{else}}
+    No assignments defined for this contract.
+  {{/if}}
+</dd>
+<dt>Attendance</dt>
+<dd data-test-attendance-status>
+  {{#if meetings}}
+    Attended
+    {{attendedMeetings.length}}
+    of
+    {{meetings.length}}
+  {{else}}
+    No attendance defined for this contract.
+  {{/if}}
+</dd>

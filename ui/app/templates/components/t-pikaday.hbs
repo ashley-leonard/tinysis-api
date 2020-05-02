@@ -1,0 +1,11 @@
+<input
+  type={{fieldType}}
+  value={{todayString}}
+  name={{name}}
+  onchange={{action "inputChanged"}}
+>
+{{#if showClear}}
+  <a href="#" class="block flex items-center justify-center no-underline" data-test-clear {{action "clear"}}>
+    <FaIcon @icon="times-circle" class="block ml-2" />
+  </a>
+{{/if}}

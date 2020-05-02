@@ -1,0 +1,10 @@
+<td>{{full-name student}}</td>
+<td>{{studentStatus}}</td>
+{{#each months as |month|}}
+  {{status-by-coordinator/column
+    student=student
+    month=month
+    term=term
+    studentHash=studentHash
+  }}
+{{/each}}

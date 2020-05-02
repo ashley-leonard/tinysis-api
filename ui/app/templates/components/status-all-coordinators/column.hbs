@@ -1,0 +1,7 @@
+{{#if showStatus}}
+  {{#link-to "status-by-coordinator" coordinator.id
+    title=entryStatusText
+  }}
+    {{entryStatusAbbreviation}}
+  {{/link-to}}
+{{/if}}

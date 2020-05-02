@@ -1,0 +1,23 @@
+<li data-test-credit-assignment-id={{creditAssignment.id}}>
+  <TLink
+    @action={{editCreditAssignment}}
+    @disabled={{disabled}}
+  >
+    {{courseName}}
+    /
+    {{hours}}
+  </TLink>
+  {{#if creditAssignment.attributes.overrideBy}}
+    <note
+      title="was {{creditAssignment.attributes.creditHours}}; by {{creditAssignment.attributes.overrideBy}}"
+    >
+      (O)
+    </note>
+  {{/if}}
+  {{yield
+    (hash
+      creditAssignment=creditAssignment
+      credit=credit
+    )
+  }}
+</li>

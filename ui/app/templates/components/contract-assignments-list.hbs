@@ -1,0 +1,21 @@
+<thead class="rotated-headings">
+  <tr>
+    <th>
+      Participant
+    </th>
+    {{#each sortedAssignments as |assignment|}}
+      {{contract-assignments-list/assignment-header
+        assignment=assignment
+      }}
+    {{/each}}
+  </tr>
+</thead>
+{{#each participants as |participant|}}
+  {{contract-assignments-list/row
+    student=participant.student
+    enrollment=participant.enrollment
+    assignments=sortedAssignments
+    notablesHash=notablesHash
+    notesExpanded=notesExpanded
+  }}
+{{/each}}

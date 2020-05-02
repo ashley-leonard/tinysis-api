@@ -1,0 +1,13 @@
+<label class={{if hasErrorToShow "error"}}>
+  {{#if label}}
+    <span data-test-label class="font-semibold">
+      {{label}}
+    </span>
+  {{/if}}
+  {{yield}}
+  {{t-form-error-message
+    message=error
+    show=showError
+    className="static absolute -mt-px"
+  }}
+</label>

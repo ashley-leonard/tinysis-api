@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>TinysisUi</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    {{content-for "head"}}
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400" rel="stylesheet">
+    <link integrity="" rel="stylesheet" href="{{rootURL}}assets/tinysis-ui.css">
+
+    {{content-for "head-footer"}}
+  </head>
+  <body class="mx-16">
+    {{content-for "body"}}
+
+    <script src="{{rootURL}}assets/vendor.js"></script>
+    <script src="{{rootURL}}assets/tinysis-ui.js"></script>
+
+    {{content-for "body-footer"}}
+  </body>
+</html>

@@ -1,0 +1,47 @@
+{{#unless disabled}}
+  <TLink
+    @action={{action "showEdit" creditable}}
+  >
+    +
+  </TLink>
+{{/unless}}
+{{#check-empty
+  count=creditAssignments.length
+  noResultsMessage="No credits assigned"
+}}
+  <ul class="list-reset credit-assignments">
+    {{#each creditAssignmentsList as |creditAssignment|}}
+      <CreditAssignments::Item
+        @creditAssignment={{creditAssignment}}
+        @editCreditAssignment={{action "showEdit" creditable creditAssignment}}
+        @disabled={{disabled}}
+        as |cai|
+      >
+        {{yield 
+          (hash
+            creditAssignment=creditAssignment
+            credit=cai.credit
+            disabled=disabled
+          )
+        }}
+      </CreditAssignments::Item>
+    {{/each}}
+  </ul>
+{{/check-empty}}
+
+{{#if showDialog}}
+  <ModalDialog
+    @containerClass="pointer-events-auto"
+    @translucentOverlay={{true}}
+    @overlayClass="pointer-events-none"
+  >
+    <CreditAssignments::CreateEditDialog
+      @model={{editCreditAssignment}}
+      @creditable={{editCreditable}}
+      @searchCredits={{action "searchCredits"}}
+      @save={{action "saveCreditAssignment" target=this}}
+      @saveCreditAssignmentError={{saveCreditAssignmentError}}
+      @close={{action (mut showDialog) false}}
+    />
+  </ModalDialog>
+{{/if}}

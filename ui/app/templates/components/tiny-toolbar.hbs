@@ -1,0 +1,64 @@
+<nav class="toolbar flex flex-row items-center mb-4">
+  {{#link-to "tiny" class="block no-underline pr-8"}}
+    Nova
+  {{/link-to}}
+  {{#if user}}
+    <ul class="flex list-reset">
+      {{tiny-toolbar/item
+        currentRoute=currentRoute
+        route="status-all-coordinators.index"
+        label="Coordinators"
+        disabled=disabled
+      }}
+      {{tiny-toolbar/item
+        currentRoute=currentRoute
+        route="contracts.index"
+        label="Contracts"
+        disabled=disabled
+      }}
+      {{tiny-toolbar/item
+        currentRoute=currentRoute
+        route="students.index"
+        label="Students"
+        disabled=disabled
+      }}
+      {{#if userIsAdmin}}
+        {{tiny-toolbar/item
+          currentRoute=currentRoute
+          route="admin"
+          label="Admin"
+          disabled=disabled
+        }}
+      {{/if}}    
+    </ul>
+  {{/if}}
+  <ul class="flex list-reset flex-grow flex-row justify-end">
+    {{#if user}}
+      <li>
+        {{#link-to "user-settings"}}
+          {{full-name user "first-last"}}
+        {{/link-to}}
+      </li>
+      <li class="ml-6">
+        <a
+          data-test-signout
+          role="button"
+          onclick={{action "signOut"}}
+          title="Sign out"
+        >
+          <FaIcon @icon="power-off" @size="1x" />
+        </a>
+      </li>
+    {{else}}
+      <li>
+        <a
+          data-test-signin
+          role="button"
+          onclick={{action "signIn"}}
+        >
+          Sign in
+        </a>
+      </li>
+    {{/if}}
+  </ul>
+</nav>

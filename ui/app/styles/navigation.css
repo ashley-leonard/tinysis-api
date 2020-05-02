@@ -1,0 +1,62 @@
+nav.toolbar {
+  li { 
+    @apply mx-2; 
+
+    .toolbar-btn {
+      @apply block no-underline py-2 px-4;
+
+      &:hover {
+        @apply bg-gray-500;
+
+        &.disabled {
+          background-color: inherit;
+        }
+      }
+
+      &.active {
+        @apply bg-gray-100 cursor-default;
+      }
+    }
+  }
+}
+
+
+ul.filter {
+  @apply flex list-reset my-4;
+}
+
+.filter-item {
+  @apply inline-block mr-4 flex;
+
+  label {
+    @apply pr-2;
+  }
+}
+
+a, t-link[enabled] {
+  text-decoration: none;
+  cursor: pointer;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.flash-message {
+  @apply flex fixed items-center bg-blue-500 text-white text-sm font-bold px-4 py-3;
+  left: 50%;
+  top: 5vh;
+  width: 30rem;
+  margin-left: -15rem;
+
+  &.alert {
+    @apply bg-red-500;
+  }
+}
+
+.ember-modal-dialog h3 {
+  margin: 0 0 1rem 0;
+}
+
+.notice .notice-indicator {
+  min-height: 4rem;
+}

@@ -1,0 +1,32 @@
+<tr data-test-student-id={{student.attributes.id}} data-test-students-list-row>
+  <td data-test-student-name>
+    {{#link-to "status-by-student" student.id}}
+      {{full-name student}}
+    {{/link-to}}
+  </td>
+  <td data-test-coordinator-name>
+    {{full-name coordinator "first-last"}}
+  </td>
+  <td data-test-district-grade class="text-center">
+    {{student.attributes.districtGrade}}
+  </td>
+  <td>
+    <ul class="actions-list">
+      <li class="actions-list-item">
+        {{#link-to "status-by-student" student.id}}COOR report{{/link-to}}
+      </li>
+      <li class="actions-list-item">
+        {{#link-to "student-transcript" student.id}}Status{{/link-to}}
+      </li>
+      <li class="actions-list-item">
+        {{#link-to "student-learning-plan" student.id}}Learning plan{{/link-to}}
+      </li>
+      <li class="actions-list-item">
+        {{#link-to "student-credits" student.id}}Credits{{/link-to}}
+      </li>
+      <li class="actions-list-item">
+        {{#link-to "student-graduation-plan" student.id}}Graduation plan{{/link-to}}
+      </li>
+    </ul>
+  </td>
+</tr>

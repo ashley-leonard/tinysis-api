@@ -1,0 +1,24 @@
+{{#check-empty
+  count=requirementsList.length
+  noResultsMessage="None of this type matching current filters"
+}}
+  <table class="t-table w-full" data-graduation-plan-requirements-list>
+    <thead>
+      <tr>
+        <th></th>
+        <th>Requirement</th>
+        <th>Status</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    {{#each requirementsList as |requirement|}}
+      {{graduation-plan-requirements-list/primary-item
+        requirement=requirement
+        status=status
+        dropTarget=dropTarget
+        setDrop=(action (mut dropTarget))
+        onDrop=(action "onDrop")
+      }}
+    {{/each}}
+  </table>
+{{/check-empty}}
