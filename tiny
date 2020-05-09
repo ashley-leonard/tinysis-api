@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
 
-set -x
+# stop on errors
+set -e
+
+# to echo
+# set -x
 
 COMMAND=$1
 
@@ -10,11 +14,10 @@ UI=${PROJECT}_ux_1
 DB=${PROJECT}_db_1
 ADMINER=${PROJECT}_adminer_1
 
-set COMPOSE_PROJECT_NAME=$PROJECT
-
 createDb () {
   docker exec $API rake db:create
 }
+
 
 migrateDb () {
   docker exec $API rake db:migrate

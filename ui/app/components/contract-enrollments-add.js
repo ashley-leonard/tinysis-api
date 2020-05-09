@@ -1,7 +1,7 @@
-import Component from '@ember/component';
+import TinyForm from '../components/t-form';
 import { inject as service } from '@ember/service';
 
-export default Component.extend({
+export default TinyForm.extend({
   user: service(),
   actions: {
     async onSearchCandidates(name) {
